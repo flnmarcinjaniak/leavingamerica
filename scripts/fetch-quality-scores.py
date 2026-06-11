@@ -42,7 +42,32 @@ COUNTRIES = {
     "France": "france",
     "Argentina": "argentina",
     "Ecuador": "ecuador",
-    "Morocco": "morocco"
+    "Morocco": "morocco",
+    "Switzerland": "switzerland",
+    "Norway": "norway",
+    "Denmark": "denmark",
+    "Sweden": "sweden",
+    "Belgium": "belgium",
+    "Austria": "austria",
+    "Finland": "finland",
+    "United Kingdom": "united-kingdom",
+    "Singapore": "singapore",
+    "United Arab Emirates": "united-arab-emirates",
+    "Qatar": "qatar",
+    "Saudi Arabia": "saudi-arabia",
+    "Iceland": "iceland",
+    "India": "india",
+    "Philippines": "philippines",
+    "China": "china",
+    "Georgia": "georgia",
+    "Serbia": "serbia",
+    "Kenya": "kenya",
+    "Peru": "peru",
+    "Brazil": "brazil",
+    "Chile": "chile",
+    "Albania": "albania",
+    "Sri Lanka": "sri-lanka",
+    "Egypt": "egypt"
 }
 
 # ISO3 codes for OWID happiness CSV
@@ -56,7 +81,16 @@ OWID_CODES = {
     "vietnam": "VNM", "japan": "JPN", "south-korea": "KOR",
     "australia": "AUS", "new-zealand": "NZL", "canada": "CAN",
     "ireland": "IRL", "netherlands": "NLD", "france": "FRA",
-    "argentina": "ARG", "ecuador": "ECU", "morocco": "MAR"
+    "argentina": "ARG", "ecuador": "ECU", "morocco": "MAR",
+    "switzerland": "CHE", "norway": "NOR", "denmark": "DNK",
+    "sweden": "SWE", "belgium": "BEL", "austria": "AUT",
+    "finland": "FIN", "united-kingdom": "GBR", "singapore": "SGP",
+    "united-arab-emirates": "ARE", "qatar": "QAT", "saudi-arabia": "SAU",
+    "iceland": "ISL", "india": "IND", "philippines": "PHL",
+    "china": "CHN", "georgia": "GEO", "serbia": "SRB",
+    "kenya": "KEN", "peru": "PER", "brazil": "BRA",
+    "chile": "CHL", "albania": "ALB", "sri-lanka": "LKA",
+    "egypt": "EGY"
 }
 
 # ISO2 codes for World Bank API
@@ -70,7 +104,16 @@ WORLD_BANK_CODES = {
     "vietnam": "VN", "japan": "JP", "south-korea": "KR",
     "australia": "AU", "new-zealand": "NZ", "canada": "CA",
     "ireland": "IE", "netherlands": "NL", "france": "FR",
-    "argentina": "AR", "ecuador": "EC", "morocco": "MA"
+    "argentina": "AR", "ecuador": "EC", "morocco": "MA",
+    "switzerland": "CH", "norway": "NO", "denmark": "DK",
+    "sweden": "SE", "belgium": "BE", "austria": "AT",
+    "finland": "FI", "united-kingdom": "GB", "singapore": "SG",
+    "united-arab-emirates": "AE", "qatar": "QA", "saudi-arabia": "SA",
+    "iceland": "IS", "india": "IN", "philippines": "PH",
+    "china": "CN", "georgia": "GE", "serbia": "RS",
+    "kenya": "KE", "peru": "PE", "brazil": "BR",
+    "chile": "CL", "albania": "AL", "sri-lanka": "LK",
+    "egypt": "EG"
 }
 
 # Wikipedia country name variations to match our slugs
@@ -105,7 +148,32 @@ WIKIPEDIA_NAMES = {
     "France": "france",
     "Argentina": "argentina",
     "Ecuador": "ecuador",
-    "Morocco": "morocco"
+    "Morocco": "morocco",
+    "Switzerland": "switzerland",
+    "Norway": "norway",
+    "Denmark": "denmark",
+    "Sweden": "sweden",
+    "Belgium": "belgium",
+    "Austria": "austria",
+    "Finland": "finland",
+    "United Kingdom": "united-kingdom",
+    "Singapore": "singapore",
+    "United Arab Emirates": "united-arab-emirates",
+    "Qatar": "qatar",
+    "Saudi Arabia": "saudi-arabia",
+    "Iceland": "iceland",
+    "India": "india",
+    "Philippines": "philippines",
+    "China": "china",
+    "Georgia": "georgia",
+    "Serbia": "serbia",
+    "Kenya": "kenya",
+    "Peru": "peru",
+    "Brazil": "brazil",
+    "Chile": "chile",
+    "Albania": "albania",
+    "Sri Lanka": "sri-lanka",
+    "Egypt": "egypt"
 }
 
 def safety_to_score(value):
@@ -216,25 +284,30 @@ def parse_numbeo_rankings(url):
     return results
 
 def fetch_world_bank_indicator(indicator_code):
-    iso_codes = ";".join(WORLD_BANK_CODES.values())
-    url = (f"https://api.worldbank.org/v2/country/{iso_codes}"
-           f"/indicator/{indicator_code}"
-           f"?format=json&mrv=1&per_page=35")
-    print(f"Fetching World Bank: {indicator_code}")
-    response = requests.get(url, timeout=15)
-    response.raise_for_status()
-    data = response.json()
-    if not data[1]:
-        print(f"WARNING: No data for {indicator_code}")
-        return {}
+    # Split into two batches to avoid timeout with 55 countries
+    all_codes = list(WORLD_BANK_CODES.values())
+    mid = len(all_codes) // 2
+    batch1 = ";".join(all_codes[:mid])
+    batch2 = ";".join(all_codes[mid:])
+
     results = {}
-    for item in data[1]:
-        if item["value"] is not None:
-            iso2 = item["country"]["id"]
-            for slug, code in WORLD_BANK_CODES.items():
-                if code == iso2:
-                    results[slug] = item["value"]
-                    break
+    for iso_codes in [batch1, batch2]:
+        url = (f"https://api.worldbank.org/v2/country/{iso_codes}"
+               f"/indicator/{indicator_code}"
+               f"?format=json&mrv=1&per_page=35")
+        print(f"Fetching World Bank: {indicator_code} (batch)")
+        response = requests.get(url, timeout=60)
+        response.raise_for_status()
+        data = response.json()
+        if not data[1]:
+            continue
+        for item in data[1]:
+            if item["value"] is not None:
+                iso2 = item["country"]["id"]
+                for slug, code in WORLD_BANK_CODES.items():
+                    if code == iso2:
+                        results[slug] = item["value"]
+                        break
     return results
 
 def fetch_happiness_owid():

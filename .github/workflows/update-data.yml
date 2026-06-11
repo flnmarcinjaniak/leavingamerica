@@ -1,0 +1,45 @@
+name: Quarterly Data Update
+
+on:
+  schedule:
+    # Runs on 1st day of January, April, July, October at 6:00 UTC
+    - cron: '0 6 1 1,4,7,10 *'
+    # Runs on 28th December at 6:00 UTC (BEA publishes December data by then)
+    - cron: '0 6 28 12 *'
+  workflow_dispatch:
+    # Allows manual trigger from GitHub Actions tab
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install requests beautifulsoup4
+
+      - name: Run city RPP update (December only)
+        if: github.event_name == 'schedule' && contains(github.event.schedule, '28 12')
+        run: |
+          python scripts/fetch-city-rpp.py
+
+      - name: Run quality scores update
+        run: |
+          python scripts/fetch-quality-scores.py
+
+      - name: Commit and push if data changed
+        run: |
+          git config --global user.email "github-actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git add src/data/quality-scores.json
+          git add src/data/city-rpp.json
+          git diff --staged --quiet || git commit -m "Auto: quarterly data update $(date +'%Y-%m-%d')"
+          git push

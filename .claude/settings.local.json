@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create *)",
+      "Bash(cp -r virtual-velocity/. .)",
+      "Bash(rm -rf virtual-velocity)",
+      "Bash(npm run *)",
+      "Bash(mkdir -p src/data src/components src/layouts src/pages/tools src/pages/move-to src/pages/compare public/images)",
+      "Bash(touch src/data/.gitkeep src/components/.gitkeep src/layouts/.gitkeep src/pages/tools/.gitkeep src/pages/move-to/.gitkeep src/pages/compare/.gitkeep public/images/.gitkeep)",
+      "Bash(node -e \"const d = require\\('./src/data/countries.json'\\); console.log\\('Total countries:', d.length\\); d.forEach\\(c => console.log\\(c.id, '-', c.name\\)\\);\")",
+      "Bash(node -e \"const d = require\\('./src/data/us-cities.json'\\); console.log\\('Total cities:', d.length\\); d.forEach\\(\\(c,i\\) => console.log\\(\\(i+1\\)+'.',c.name+',',c.state,'| costIndex:',c.costIndex,'| rent: $'+c.rentOneBedroomAverage\\)\\);\")",
+      "Bash(pip install *)",
+      "Bash(python -m pip install requests beautifulsoup4)"
+    ]
+  }
+}

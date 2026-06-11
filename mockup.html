@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeavingAmerica — Cost of Living Arbitrage for Americans</title>
+    
+    <!-- Typography: Inter (similar to Geist/Manrope, geometrically precise) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CORE VARIABLES & RESET --- */
+        :root {
+            /* Palette: Dark, Precise, Confident */
+            --bg-base: #07091A;
+            --bg-surface: rgba(255, 255, 255, 0.04);
+            --border: rgba(255, 255, 255, 0.08);
+            
+            --text-primary: #F1F5F9;
+            --text-muted: #64748B;
+            
+            /* Accent: 2025 Electric Cyan */
+            --accent: #00F0FF;
+            --accent-glow: rgba(0, 240, 255, 0.3);
+            
+            /* Logic: Success Green */
+            --success: #4ADE80;
+            --success-glow: rgba(74, 222, 128, 0.4);
+
+            /* Typography Scale */
+            --font-main: 'Inter', sans-serif;
+            --lh-body: 1.7;
+
+            /* Effects */
+            --glass: blur(20px) saturate(180%);
+            --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; outline: none; }
+        
+        html {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body { overflow-x: hidden; width: 100%; }
+
+        /* --- LAYOUT UTILITIES (CSS GRID) --- */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 20px;
+        }
+
+        section {
+            position: relative;
+            padding: 140px 0;
+            width: 100%;
+        }
+
+        /* --- COMMON ELEMENTS & MICRO-INTERACTIONS --- */
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        
+        .label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        h2.section-title {
+            grid-column: span 12;
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 60px;
+            color: var(--text-primary);
+        }
+
+        /* Pill CTA Button */
+        .btn-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 28px;
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-pill-primary {
+            background: linear-gradient(135deg, var(--accent) 0%, #0077FF 100%);
+            color: #000;
+        }
+
+        /* Micro-animation: Button hover (scale + gradient shift) */
+        .btn-pill-primary:hover {
+            transform: scale(1.03) translateY(-1px);
+            box-shadow: 0 10px 30px var(--accent-glow);
+        }
+
+        .btn-pill-primary::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, #0077FF 0%, var(--accent) 100%);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .btn-pill-primary:hover::after { opacity: 1; }
+        .btn-pill-primary span { z-index: 1; position: relative; }
+
+        /* Glassmorphism Card Base */
+        .glass-card {
+            background: var(--bg-surface);
+            backdrop-filter: var(--glass);
+            -webkit-backdrop-filter: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 40px;
+            transition: var(--transition);
+        }
+
+        /* Hover animation: subtle lift + glow */
+        .glass-card:hover {
+            border-color: rgba(255,255,255,0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        /* --- AOI: ANIMATION ON INTERSECTION --- */
+        .aoi {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+        }
+
+        .aoi.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- NAVIGATION (MINIMAL, TRANSPARENT/BLUR) --- */
+        nav {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            height: 80px;
+            z-index: 1000;
+            transition: background var(--transition), backdrop-filter var(--transition);
+            border-bottom: 1px solid transparent;
+        }
+
+        /* Blurred background when scrolled */
+        nav.scrolled {
+            background: rgba(7, 9, 26, 0.8);
+            backdrop-filter: var(--glass);
+            -webkit-backdrop-filter: var(--glass);
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav .container {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Logo: Geometric monogram "LA" */
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: 800;
+            font-size: 16px;
+            border-radius: 4px; /* Slight round for precision */
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a:not(.btn-pill) {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+        }
+
+        .nav-links a:not(.btn-pill):hover {
+            color: var(--text-primary);
+        }
+
+        /* Micro-animation: Nav blur transition (implicit in CSS, handled by JS class) */
+
+        /* --- HERO SECTION (FULL VIEWPORT, ANIMATED) --- */
+        #hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        /* Background: Subtle gradient mesh (CSS only) */
+        #hero::before {
+            content: '';
+            position: absolute;
+            width: 140%; height: 140%;
+            top: -20%; left: -20%;
+            background-image: 
+                radial-gradient(at 10% 10%, rgba(0, 240, 255, 0.08) 0px, transparent 50%),
+                radial-gradient(at 90% 90%, rgba(0, 119, 255, 0.06) 0px, transparent 50%),
+                radial-gradient(at 50% 50%, rgba(7, 9, 26, 1) 0px, transparent 80%);
+            animation: meshGradient 20s ease infinite alternate;
+            z-index: -1;
+        }
+
+        @keyframes meshGradient {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(5%, 5%) rotate(3deg); }
+        }
+
+        #hero .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 900px;
+        }
+
+        /* Massive Typography Headline */
+        #hero h1 {
+            font-size: 96px; /* 80-100px range */
+            font-weight: 800;
+            letter-spacing: -0.05em;
+            line-height: 0.95;
+            color: var(--text-primary);
+            margin-bottom: 40px;
+        }
+
+        #hero h1 span {
+            display: block;
+        }
+
+        #hero h1 .weight-thin {
+            font-weight: 400; /* Contrast weight */
+            color: var(--text-muted);
+        }
+
+        /* Hero counter: Americans who moved */
+        .hero-counter {
+            margin-top: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-counter .count-wrapper {
+            font-size: 80px;
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: -0.04em;
+            line-height: 1;
+        }
+
+        .hero-counter .count-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-top: 10px;
+        }
+
+        /* Hero AOI delay */
+        #hero .aoi:nth-child(1) { transition-delay: 0.1s; }
+        #hero .aoi:nth-child(2) { transition-delay: 0.3s; }
+        #hero .aoi:nth-child(3) { transition-delay: 0.5s; }
+
+        /* --- SOCIAL PROOF BAR --- */
+        #social-proof {
+            padding: 60px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            background: rgba(255,255,255,0.01);
+        }
+
+        #social-proof .container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .stat-item .stat-source {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+        }
+
+        /* --- CALCULATOR SECTION (LIFESTYLE ARBITRAGE) --- */
+        #calculator .container {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            align-items: start;
+        }
+
+        #calculator .calc-inputs {
+            grid-column: span 5;
+        }
+
+        #calculator .calc-display {
+            grid-column: 7 / span 6;
+            position: sticky;
+            top: 120px;
+        }
+
+        /* Input styling: minimal, underline */
+        .input-group {
+            margin-bottom: 35px;
+            position: relative;
+        }
+
+        .input-group label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .input-underline {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid var(--border);
+            padding: 10px 0;
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--text-primary);
+            transition: var(--transition);
+        }
+
+        .input-underline:focus {
+            border-bottom-color: var(--accent);
+        }
+
+        /* Focus glow effect on input */
+        .input-group::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; width: 0%; height: 2px;
+            background: var(--accent);
+            box-shadow: 0 0 10px var(--accent-glow);
+            transition: width 0.4s var(--ease-out);
+        }
+
+        .input-group:focus-within::after {
+            width: 100%;
+        }
+
+        /* Result display: Glass card */
+        .calc-result-card {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .result-item .result-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+
+        /* Massive result numbers with animated count-up */
+        .result-item .result-value {
+            font-size: 64px;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            color: var(--text-primary);
+            line-height: 1;
+        }
+
+        /* Green glow on positive savings */
+        .result-item.savings .result-value {
+            color: var(--success);
+            text-shadow: 0 0 25px var(--success-glow);
+        }
+
+        .calc-actions {
+            margin-top: 20px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+        }
+
+        .btn-outline:hover {
+            border-color: rgba(255,255,255,0.2);
+            color: var(--text-primary);
+            background: rgba(255,255,255,0.03);
+        }
+
+        /* --- HOW IT WORKS (3 STEPS, MINIMAL) --- */
+        #how-it-works .steps-grid {
+            grid-column: span 12;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .step-card {
+            position: relative;
+            padding-top: 60px;
+        }
+
+        /* Minimal Icons (CSS draw) */
+        .step-icon {
+            position: absolute;
+            top: 40px; left: 40px;
+            width: 24px; height: 24px;
+            color: var(--accent);
+        }
+
+        .step-number {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--accent);
+            opacity: 0.5;
+            margin-bottom: 15px;
+        }
+
+        .step-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .step-card p {
+            font-size: 16px;
+            color: var(--text-muted);
+            line-height: var(--lh-body);
+        }
+
+        /* Step Card AOI delay */
+        .step-card:nth-child(1) { transition-delay: 0.1s; }
+        .step-card:nth-child(2) { transition-delay: 0.2s; }
+        .step-card:nth-child(3) { transition-delay: 0.3s; }
+
+        /* --- TOP DESTINATIONS GRID (6 CARDS) --- */
+        #destinations .dest-grid {
+            grid-column: span 12;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .dest-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 280px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Gradient Border on Key Elements (Hover state) */
+        .dest-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 12px;
+            padding: 1px; /* Border thickness */
+            background: linear-gradient(135deg, transparent 50%, var(--accent) 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .dest-card:hover::before {
+            opacity: 1;
+        }
+
+        .dest-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dest-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .dest-flag {
+            font-size: 24px;
+        }
+
+        .dest-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .dest-stat .d-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .dest-stat .d-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .dest-stat.savings .d-value {
+            color: var(--success);
+        }
+
+        /* Destination Card AOI delay (grid stagger) */
+        .dest-card:nth-child(1) { transition-delay: 0.05s; }
+        .dest-card:nth-child(2) { transition-delay: 0.10s; }
+        .dest-card:nth-child(3) { transition-delay: 0.15s; }
+        .dest-card:nth-child(4) { transition-delay: 0.20s; }
+        .dest-card:nth-child(5) { transition-delay: 0.25s; }
+        .dest-card:nth-child(6) { transition-delay: 0.30s; }
+
+
+        /* --- FOOTER (MINIMAL, DARK) --- */
+        footer {
+            padding: 80px 0;
+            border-top: 1px solid var(--border);
+            background: rgba(0,0,0,0.2);
+        }
+
+        footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        /* --- RESPONSIVE ADJUSTMENTS --- */
+        @media (max-width: 1024px) {
+            #hero h1 { font-size: 72px; }
+            #calculator .calc-inputs, #calculator .calc-display { grid-column: span 12; }
+            #calculator .calc-display { position: static; margin-top: 50px; }
+            #destinations .dest-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 0 20px; }
+            #hero h1 { font-size: 48px; }
+            #social-proof .container { grid-template-columns: 1fr; gap: 20px; }
+            #how-it-works .steps-grid, #destinations .dest-grid { grid-template-columns: 1fr; }
+            .nav-links:not(.btn-wrapper) { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav id="main-nav">
+        <div class="container">
+            <a href="#" class="logo-wrapper">
+                <div class="logo">LA</div>
+            </a>
+            <div class="nav-links">
+                <a href="#calculator">Calculator</a>
+                <a href="#how-it-works">Protocol</a>
+                <a href="#destinations">Destinations</a>
+                <div class="btn-wrapper">
+                    <a href="#calculator" class="btn-pill btn-pill-primary"><span>Get Access</span></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="hero">
+        <div class="container">
+            <h1 class="aoi">
+                <span>Navigate your</span>
+                <span class="weight-thin">financial escape.</span>
+            </h1>
+            <p class="aoi" style="color: var(--text-muted); max-width: 500px; margin-bottom: 40px; line-height: 1.6;">
+                Calculate precisely how much wealth you retain by moving your life, remote work, or business abroad. Lifestyle arbitrage, quantified.
+            </p>
+            <div class="aoi btn-wrap">
+                <a href="#calculator" class="btn-pill btn-pill-primary"><span>Calculate Your Escape</span></a>
+            </div>
+            
+            <div class="hero-counter aoi">
+                <div class="count-wrapper">
+                    <span class="count-up" data-target="182400">0</span>+
+                </div>
+                <div class="count-label">Americans moved abroad recently</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOCIAL PROOF BAR -->
+    <section id="social-proof">
+        <div class="container aoi">
+            <div class="stat-item">
+                <div class="stat-value">Top 10% of Earners</div>
+                <div class="stat-source">Primary Demographic — Brookings</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">16% Seriously Considering</div>
+                <div class="stat-source">Moving Permanently — Gallup</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">58% Remote Capable</div>
+                <div class="stat-source">US Workforce — McKinsey</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CALCULATOR SECTION -->
+    <section id="calculator">
+        <div class="container">
+            <h2 class="section-title aoi">Lifestyle Arbitrage<br>Calculator</h2>
+            
+            <div class="calc-inputs aoi">
+                <span class="label">Your US Baseline</span>
+                
+                <div class="input-group">
+                    <label>Current Annual Income (USD)</label>
+                    <input type="number" class="input-underline" id="in-income" value="150000" step="1000">
+                </div>
+                
+                <div class="input-group">
+                    <label>Current US Location (Zip Code or State)</label>
+                    <input type="text" class="input-underline" id="in-location" value="California" placeholder="e.g., New York">
+                </div>
+
+                <div class="input-group">
+                    <label>Monthly Core Expenses (Housing, Food, Tax Est.)</label>
+                    <input type="number" class="input-underline" id="in-expenses" value="6500" step="100">
+                </div>
+
+                <span class="label" style="margin-top: 50px;">Target Profile</span>
+                <div class="input-group">
+                    <label>Desired Destination</label>
+                    <input type="text" class="input-underline" id="in-destination" value="Portugal (Lisbon)" placeholder="e.g., Medellin, Tokyo">
+                </div>
+                
+                <p style="color: var(--text-muted); font-size: 14px; line-height: 1.6; max-width: 400px;">
+                    We use real-time Numbeo data, tax treaty analysis, and local cost indices to generate precise projections.
+                </p>
+            </div>
+
+            <div class="calc-display aoi">
+                <div class="glass-card calc-result-card">
+                    <div class="result-item">
+                        <div class="result-label">Projected Annual Savings</div>
+                        <div class="result-value count-up" data-target="41280" data-prefix="$" id="res-savings">$0</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Lifestyle Surplus (Disposable Income Increase)</div>
+                        <div class="result-value count-up" data-target="65" data-suffix="%" id="res-surplus">0%</div>
+                    </div>
+                    <div class="result-item savings">
+                        <div class="result-label">10-Year Wealth Projection (Difference)</div>
+                        <div class="result-value count-up" data-target="685000" data-prefix="$" id="res-wealth">$0</div>
+                    </div>
+                    <div class="calc-actions">
+                        <button class="btn-pill btn-pill-primary"><span>Detailed Report</span></button>
+                        <button class="btn-pill btn-outline"><span>Share Result</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how-it-works">
+        <div class="container">
+            <h2 class="section-title aoi">The LeavingAmerica<br>Protocol</h2>
+            
+            <div class="steps-grid">
+                <!-- Step 1 -->
+                <div class="glass-card step-card aoi">
+                    <!-- Minimal CSS Icon: Data Points -->
+                    <svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
+                    <div class="step-number">01 / Data Aggregation</div>
+                    <h3>Ingest Financial Profile</h3>
+                    <p>We analyze your income, US tax liability, current cost of living, and spending patterns against global benchmarks.</p>
+                </div>
+                <!-- Step 2 -->
+                <div class="glass-card step-card aoi">
+                    <!-- Minimal CSS Icon: Algorithm/Compute -->
+                    <svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="15" x2="23" y2="15"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="15" x2="4" y2="15"></line></svg>
+                    <div class="step-number">02 / Arbitrage Model</div>
+                    <h3>Apply Geo-Arbitrage Engine</h3>
+                    <p>Our algorithm simulates relocation to over 150 optimized destinations, factoring in local COL, FEIE tax savings, and treaties.</p>
+                </div>
+                <!-- Step 3 -->
+                <div class="glass-card step-card aoi">
+                    <!-- Minimal CSS Icon: Report/Output -->
+                    <svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2 v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    <div class="step-number">03 / Precision Output</div>
+                    <h3>Generate Wealth Report</h3>
+                    <p>Receive a comprehensive digital dossier quantifying your savings, lifestyle upgrade, and long-term wealth trajectory.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TOP DESTINATIONS GRID -->
+    <section id="destinations">
+        <div class="container">
+            <h2 class="section-title aoi">Optimized<br>Destinations</h2>
+            
+            <div class="dest-grid">
+                <!-- Card 1 -->
+                <div class="glass-card dest-card aoi">
+                    <div class="dest-header">
+                        <div class="dest-name">Lisbon, Portugal</div>
+                        <div class="dest-flag">🇵🇹</div>
+                    </div>
+                    <div class="dest-stats">
+                        <div class="dest-stat savings"><div class="d-label">Avg. Savings</div><div class="d-value">48%</div></div>
+                        <div class="dest-stat"><div class="d-label">COL Index</div><div class="d-value">46.2</div></div>
+                        <div class="dest-stat"><div class="d-label">Tax Rating</div><div class="d-value">A-</div></div>
+                        <div class="dest-stat"><div class="d-label">Internet</div><div class="d-value">120 Mbps</div></div>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="glass-card dest-card aoi">
+                    <div class="dest-header">
+                        <div class="dest-name">Medellín, Colombia</div>
+                        <div class="dest-flag">🇨🇴</div>
+                    </div>
+                    <div class="dest-stats">
+                        <div class="dest-stat savings"><div class="d-label">Avg. Savings</div><div class="d-value">65%</div></div>
+                        <div class="dest-stat"><div class="d-label">COL Index</div><div class="d-value">28.9</div></div>
+                        <div class="dest-stat"><div class="d-label">Tax Rating</div><div class="d-value">B+</div></div>
+                        <div class="dest-stat"><div class="d-label">Internet</div><div class="d-value">85 Mbps</div></div>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="glass-card dest-card aoi">
+                    <div class="dest-header">
+                        <div class="dest-name">Bangkok, Thailand</div>
+                        <div class="dest-flag">🇹🇭</div>
+                    </div>
+                    <div class="dest-stats">
+                        <div class="dest-stat savings"><div class="d-label">Avg. Savings</div><div class="d-value">55%</div></div>
+                        <div class="dest-stat"><div class="d-label">COL Index</div><div class="d-value">38.1</div></div>
+                        <div class="dest-stat"><div class="d-label">Tax Rating</div><div class="d-value">A</div></div>
+                        <div class="dest-stat"><div class="d-label">Internet</div><div class="d-value">200 Mbps</div></div>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div class="glass-card dest-card aoi">
+                    <div class="dest-header">
+                        <div class="dest-name">Mexico City, MX</div>
+                        <div class="dest-flag">🇲🇽</div>
+                    </div>
+                    <div class="dest-stats">
+                        <div class="dest-stat savings"><div class="d-label">Avg. Savings</div><div class="d-value">42%</div></div>
+                        <div class="dest-stat"><div class="d-label">COL Index</div><div class="d-value">51.3</div></div>
+                        <div class="dest-stat"><div class="d-label">Tax Rating</div><div class="d-value">B</div></div>
+                        <div class="dest-stat"><div class="d-label">Internet</div><div class="d-value">100 Mbps</div></div>
+                    </div>
+                </div>
+                <!-- Card 5 -->
+                <div class="glass-card dest-card aoi">
+                    <div class="dest-header">
+                        <div class="dest-name">Tallinn, Estonia</div>
+                        <div class="dest-flag">🇪🇪</div>
+                    </div>
+                    <div class="dest-stats">
+                        <div class="dest-stat savings"><div class="d-label">Avg. Savings</div><div class="d-value">35%</div></div>
+                        <div class="dest-stat"><div class="d-label">COL Index</div><div class="d-value">60.5</div></div>
+                        <div class="dest-stat"><div class="d-label">Tax Rating</div><div class="d-value">A+</div></div>
+                        <div class="dest-stat"><div class="d-label">Internet</div><div class="d-value">150 Mbps</div></div>
+                    </div>
+                </div>
+                <!-- Card 6 -->
+                <div class="glass-card dest-card aoi">
+                    <div class="dest-header">
+                        <div class="dest-name">Bali, Indonesia</div>
+                        <div class="dest-flag">🇮🇩</div>
+                    </div>
+                    <div class="dest-stats">
+                        <div class="dest-stat savings"><div class="d-label">Avg. Savings</div><div class="d-value">70%</div></div>
+                        <div class="dest-stat"><div class="d-label">COL Index</div><div class="d-value">25.0</div></div>
+                        <div class="dest-stat"><div class="d-label">Tax Rating</div><div class="d-value">B-</div></div>
+                        <div class="dest-stat"><div class="d-label">Internet</div><div class="d-value">60 Mbps</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER (MINIMAL, DARK) -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo">
+                <div class="logo" style="width: 24px; height: 24px; font-size: 11px;">LA</div>
+                LeavingAmerica&trade;
+            </div>
+            <div class="footer-links">
+                <a href="#">Data Methodology</a>
+                <a href="#">Privacy</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="copyright">&copy; 2025 LA Technologies, Inc.</div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT: ANIMATIONS, COUNTERS, CALCULATOR LOGIC -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- 1. Navigation Scroll Effect ---
+            const nav = document.getElementById('main-nav');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+            });
+
+            // --- 2. Animation On Intersection (Scroll Trigger) ---
+            const aoiElements = document.querySelectorAll('.aoi');
+            
+            const aoiObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                        
+                        // If this element has a counter, trigger it
+                        const counter = entry.target.querySelector('.count-up');
+                        if (counter) {
+                            startCounter(counter);
+                        } else if (entry.target.classList.contains('count-up')) {
+                             startCounter(entry.target);
+                        }
+
+                        // Also check for children counters (e.g. calculator result card)
+                        entry.target.querySelectorAll('.count-up').forEach(c => startCounter(c));
+
+                        // observer.unobserve(entry.target); // Optional: animate only once
+                    }
+                });
+            }, { threshold: 0.1 }); // Trigger when 10% visible
+
+            aoiElements.forEach(el => aoiObserver.observe(el));
+
+
+            // --- 3. Animated Counter (Counts up when in viewport) ---
+            function startCounter(counterEl) {
+                if (counterEl.classList.contains('counted')) return; // Already counted
+                counterEl.classList.add('counted');
+
+                const target = parseInt(counterEl.getAttribute('data-target'));
+                const prefix = counterEl.getAttribute('data-prefix') || '';
+                const suffix = counterEl.getAttribute('data-suffix') || '';
+                const duration = 2000; // 2 seconds
+                const frameRate = 1000 / 60; // 60 fps
+                const totalFrames = Math.round(duration / frameRate);
+                
+                let currentFrame = 0;
+                
+                // Ease Out Expo function for smooth slowdown
+                const easeOutExpo = (t) => t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+
+                const animate = () => {
+                    currentFrame++;
+                    const progress = currentFrame / totalFrames;
+                    const easedProgress = easeOutExpo(progress);
+                    const currentValue = Math.round(target * easedProgress);
+                    
+                    // Format number with commas (e.g., 182,400)
+                    counterEl.textContent = prefix + currentValue.toLocaleString() + suffix;
+                    
+                    if (currentFrame < totalFrames) {
+                        requestAnimationFrame(animate);
+                    } else {
+                        counterEl.textContent = prefix + target.toLocaleString() + suffix; // Ensure exact final value
+                    }
+                };
+                
+                requestAnimationFrame(animate);
+            }
+
+            // --- 4. Simplistic Calculator Logic & Micro-animations ---
+            const inputs = document.querySelectorAll('.input-underline');
+            const resSavings = document.getElementById('res-savings');
+            const resSurplus = document.getElementById('res-surplus');
+            const resWealth = document.getElementById('res-wealth');
+
+            function updateCalculator() {
+                const income = parseFloat(document.getElementById('in-income').value) || 0;
+                const expensesUs = parseFloat(document.getElementById('in-expenses').value) || 0;
+                
+                // Deterministic simplification for mockup. Real logic is complex.
+                // Portugal assumption: COL is ~50% cheaper, FEIE takes effect.
+                const factorCol = 0.52; // Portugal is ~48% cheaper
+                const factorTax = 0.85; // Simplistic FEIE + Portugal NHR effective reduction
+
+                const expensesDest = expensesUs * factorCol;
+                const disposableUs = (income / 12) - expensesUs;
+                
+                // Simplified disposable income increase
+                const disposableDest = ((income * factorTax) / 12) - expensesDest;
+
+                const annualSavings = (expensesUs - expensesDest) * 12;
+                const surplusPercent = disposableUs > 0 ? Math.round(((disposableDest - disposableUs) / disposableUs) * 100) : 100;
+                const wealth10Yr = annualSavings * 10; // Simple, non-compounded diff
+
+                // Update data-targets for counters
+                resSavings.setAttribute('data-target', annualSavings);
+                resSurplus.setAttribute('data-target', surplusPercent);
+                resWealth.setAttribute('data-target', wealth10Yr);
+
+                // Trigger count-up animation on results (reset class first)
+                [resSavings, resSurplus, resWealth].forEach(el => {
+                    el.classList.remove('counted');
+                    startCounter(el);
+                });
+            }
+
+            // Listen for input changes
+            inputs.forEach(input => {
+                input.addEventListener('input', updateCalculator);
+            });
+
+            // Run once on load to populate
+            // (Wait slightly for hero to show first)
+            setTimeout(updateCalculator, 1000);
+
+            // --- 5. Page Load Initial Animation Stagger ---
+            // Hero elements handle this via AOI delay classes in CSS.
+
+        });
+    </script>
+</body>
+</html>

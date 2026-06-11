@@ -1,0 +1,1366 @@
+[
+  {
+    "id": "portugal",
+    "name": "Portugal",
+    "capital": "Lisbon",
+    "slug": "portugal",
+    "flag": "🇵🇹",
+    "continent": "Europe",
+    "languages": ["Portuguese"],
+    "englishLevel": 8,
+    "costOfLiving": {
+      "singleMonthly": 1800,
+      "familyMonthly": 3200,
+      "rentOneBedroomCenter": 950,
+      "rentThreeBedroomCenter": 1600,
+      "groceriesMonthly": 300,
+      "restaurantMealAverage": 12
+    },
+    "quality": {
+      "safety": 8,
+      "healthcare": 8,
+      "internet": 7,
+      "climate": "Mediterranean",
+      "airQuality": 8
+    },
+    "visas": [
+      {
+        "type": "Digital Nomad Visa (D8)",
+        "duration": "1 year, renewable",
+        "minIncome": 3280,
+        "processingTime": "2-3 months",
+        "officialLink": "https://vistos.mne.gov.pt"
+      },
+      {
+        "type": "D7 Passive Income Visa",
+        "duration": "2 years, renewable",
+        "minIncome": 760,
+        "processingTime": "2-4 months",
+        "officialLink": "https://vistos.mne.gov.pt"
+      }
+    ],
+    "popularAmericanCities": ["New York", "San Francisco", "Boston"],
+    "description": "Portugal offers European lifestyle at a fraction of US costs with excellent weather, safety, and one of the most welcoming digital nomad visa programs in the world.",
+    "pros": ["Low cost of living", "Safe", "English widely spoken", "Great weather", "Easy visa options", "EU access"],
+    "cons": ["Bureaucracy can be slow", "Housing prices rising fast in Lisbon", "Lower salaries if working locally"]
+  },
+  {
+    "id": "spain",
+    "name": "Spain",
+    "capital": "Madrid",
+    "slug": "spain",
+    "flag": "🇪🇸",
+    "continent": "Europe",
+    "languages": ["Spanish"],
+    "englishLevel": 6,
+    "costOfLiving": {
+      "singleMonthly": 2000,
+      "familyMonthly": 3600,
+      "rentOneBedroomCenter": 1100,
+      "rentThreeBedroomCenter": 1900,
+      "groceriesMonthly": 350,
+      "restaurantMealAverage": 13
+    },
+    "quality": {
+      "safety": 7,
+      "healthcare": 8,
+      "internet": 8,
+      "climate": "Mediterranean",
+      "airQuality": 7
+    },
+    "visas": [
+      {
+        "type": "Digital Nomad Visa",
+        "duration": "1 year, renewable up to 5 years",
+        "minIncome": 2646,
+        "processingTime": "1-2 months",
+        "officialLink": "https://www.exteriores.gob.es"
+      },
+      {
+        "type": "Non-Lucrative Residence Visa",
+        "duration": "1 year, renewable",
+        "minIncome": 2259,
+        "processingTime": "1-3 months",
+        "officialLink": "https://www.exteriores.gob.es"
+      }
+    ],
+    "popularAmericanCities": ["New York", "Chicago", "Miami"],
+    "description": "Spain blends vibrant culture, world-class food, and affordable Mediterranean living with a strong expat community across Barcelona, Madrid, and Valencia.",
+    "pros": ["Rich culture and food scene", "Excellent healthcare", "Warm climate", "Strong expat networks", "Vibrant nightlife and arts"],
+    "cons": ["Language barrier outside tourist areas", "Rising rents in major cities", "Siesta culture can be frustrating", "High unemployment affects local economy"]
+  },
+  {
+    "id": "mexico",
+    "name": "Mexico",
+    "capital": "Mexico City",
+    "slug": "mexico",
+    "flag": "🇲🇽",
+    "continent": "North America",
+    "languages": ["Spanish"],
+    "englishLevel": 5,
+    "costOfLiving": {
+      "singleMonthly": 1200,
+      "familyMonthly": 2200,
+      "rentOneBedroomCenter": 600,
+      "rentThreeBedroomCenter": 1100,
+      "groceriesMonthly": 200,
+      "restaurantMealAverage": 6
+    },
+    "quality": {
+      "safety": 5,
+      "healthcare": 7,
+      "internet": 7,
+      "climate": "Tropical/Varied",
+      "airQuality": 5
+    },
+    "visas": [
+      {
+        "type": "Temporary Resident Visa",
+        "duration": "1-4 years",
+        "minIncome": 1620,
+        "processingTime": "4-8 weeks",
+        "officialLink": "https://consulmex.sre.gob.mx"
+      },
+      {
+        "type": "Permanent Resident Visa",
+        "duration": "Permanent",
+        "minIncome": 2700,
+        "processingTime": "2-4 months",
+        "officialLink": "https://consulmex.sre.gob.mx"
+      }
+    ],
+    "popularAmericanCities": ["Los Angeles", "Houston", "Chicago"],
+    "description": "Mexico's proximity to the US, low cost of living, rich culture, and warm climate make it the top choice for American expats and digital nomads seeking affordability without flying far.",
+    "pros": ["Very affordable", "Close to the US", "Diverse climates and regions", "Amazing food", "Large expat community in CDMX and Oaxaca"],
+    "cons": ["Safety concerns in some areas", "Air pollution in Mexico City", "Bureaucracy can be complex", "Infrastructure quality varies by region"]
+  },
+  {
+    "id": "germany",
+    "name": "Germany",
+    "capital": "Berlin",
+    "slug": "germany",
+    "flag": "🇩🇪",
+    "continent": "Europe",
+    "languages": ["German"],
+    "englishLevel": 8,
+    "costOfLiving": {
+      "singleMonthly": 2500,
+      "familyMonthly": 4500,
+      "rentOneBedroomCenter": 1200,
+      "rentThreeBedroomCenter": 2200,
+      "groceriesMonthly": 400,
+      "restaurantMealAverage": 15
+    },
+    "quality": {
+      "safety": 8,
+      "healthcare": 9,
+      "internet": 8,
+      "climate": "Temperate",
+      "airQuality": 8
+    },
+    "visas": [
+      {
+        "type": "Freelancer Visa",
+        "duration": "3 months to 3 years",
+        "minIncome": 2500,
+        "processingTime": "1-3 months",
+        "officialLink": "https://www.make-it-in-germany.com"
+      },
+      {
+        "type": "Job Seeker Visa",
+        "duration": "6 months",
+        "minIncome": 0,
+        "processingTime": "4-8 weeks",
+        "officialLink": "https://www.make-it-in-germany.com"
+      }
+    ],
+    "popularAmericanCities": ["New York", "San Francisco", "Seattle"],
+    "description": "Germany offers world-class infrastructure, a strong economy, and excellent quality of life. Berlin is a hub for tech startups and creative professionals from around the world.",
+    "pros": ["Strong economy and job market", "Excellent public healthcare", "Central EU location", "Great public transport", "Strong workers' rights"],
+    "cons": ["Language barrier", "Cold winters", "High tax rates", "Intense bureaucracy", "Housing shortage in major cities"]
+  },
+  {
+    "id": "italy",
+    "name": "Italy",
+    "capital": "Rome",
+    "slug": "italy",
+    "flag": "🇮🇹",
+    "continent": "Europe",
+    "languages": ["Italian"],
+    "englishLevel": 6,
+    "costOfLiving": {
+      "singleMonthly": 2000,
+      "familyMonthly": 3500,
+      "rentOneBedroomCenter": 1000,
+      "rentThreeBedroomCenter": 1700,
+      "groceriesMonthly": 300,
+      "restaurantMealAverage": 13
+    },
+    "quality": {
+      "safety": 7,
+      "healthcare": 8,
+      "internet": 7,
+      "climate": "Mediterranean",
+      "airQuality": 7
+    },
+    "visas": [
+      {
+        "type": "Digital Nomad Visa",
+        "duration": "1 year, renewable",
+        "minIncome": 2700,
+        "processingTime": "2-3 months",
+        "officialLink": "https://vistoperitalia.esteri.it"
+      },
+      {
+        "type": "Elective Residency Visa",
+        "duration": "1 year, renewable",
+        "minIncome": 3100,
+        "processingTime": "2-4 months",
+        "officialLink": "https://vistoperitalia.esteri.it"
+      }
+    ],
+    "popularAmericanCities": ["New York", "San Francisco", "Boston"],
+    "description": "Italy offers unmatched cultural heritage, world-famous cuisine, and a relaxed Mediterranean lifestyle. Southern Italy programs actively incentivize remote workers to relocate to depopulating villages.",
+    "pros": ["Incredible food and wine", "Rich history and culture", "Beautiful landscapes", "Affordable south and rural areas", "Art and architecture everywhere"],
+    "cons": ["Bureaucracy is notoriously slow", "Language barrier", "Limited job market for foreigners", "North-south economic divide", "Aging infrastructure in the south"]
+  },
+  {
+    "id": "greece",
+    "name": "Greece",
+    "capital": "Athens",
+    "slug": "greece",
+    "flag": "🇬🇷",
+    "continent": "Europe",
+    "languages": ["Greek"],
+    "englishLevel": 7,
+    "costOfLiving": {
+      "singleMonthly": 1500,
+      "familyMonthly": 2800,
+      "rentOneBedroomCenter": 700,
+      "rentThreeBedroomCenter": 1200,
+      "groceriesMonthly": 250,
+      "restaurantMealAverage": 10
+    },
+    "quality": {
+      "safety": 7,
+      "healthcare": 7,
+      "internet": 7,
+      "climate": "Mediterranean",
+      "airQuality": 7
+    },
+    "visas": [
+      {
+        "type": "Digital Nomad Visa",
+        "duration": "1 year, renewable",
+        "minIncome": 3500,
+        "processingTime": "4-8 weeks",
+        "officialLink": "https://www.mfa.gr"
+      },
+      {
+        "type": "Golden Visa",
+        "duration": "5 years, renewable",
+        "minIncome": 0,
+        "processingTime": "2-4 months",
+        "officialLink": "https://www.mfa.gr"
+      }
+    ],
+    "popularAmericanCities": ["New York", "Chicago", "Baltimore"],
+    "description": "Greece offers sun-soaked Mediterranean living, ancient history, stunning islands, and one of the most affordable costs of living in Western Europe.",
+    "pros": ["Affordable for EU", "Stunning natural beauty", "Rich history and culture", "Excellent fresh food", "Warm and welcoming locals"],
+    "cons": ["Economic instability history", "Slow bureaucracy", "Limited job opportunities", "Healthcare quality varies by location", "Island infrastructure limited off-season"]
+  },
+  {
+    "id": "costa-rica",
+    "name": "Costa Rica",
+    "capital": "San José",
+    "slug": "costa-rica",
+    "flag": "🇨🇷",
+    "continent": "North America",
+    "languages": ["Spanish"],
+    "englishLevel": 6,
+    "costOfLiving": {
+      "singleMonthly": 1800,
+      "familyMonthly": 3200,
+      "rentOneBedroomCenter": 700,
+      "rentThreeBedroomCenter": 1300,
+      "groceriesMonthly": 300,
+      "restaurantMealAverage": 10
+    },
+    "quality": {
+      "safety": 7,
+      "healthcare": 8,
+      "internet": 7,
+      "climate": "Tropical",
+      "airQuality": 8
+    },
+    "visas": [
+      {
+        "type": "Digital Nomad Visa",
+        "duration": "1 year, renewable",
+        "minIncome": 3000,
+        "processingTime": "4-8 weeks",
+        "officialLink": "https://www.migracion.go.cr"
+      },
+      {
+        "type": "Pensionado Visa",
+        "duration": "2 years, renewable",
+        "minIncome": 1000,
+        "processingTime": "2-4 months",
+        "officialLink": "https://www.migracion.go.cr"
+      },
+      {
+        "type": "Rentista Visa",
+        "duration": "2 years, renewable",
+        "minIncome": 2500,
+        "processingTime": "2-4 months",
+        "officialLink": "https://www.migracion.go.cr"
+      }
+    ],
+    "popularAmericanCities": ["Los Angeles", "Miami", "New York"],
+    "description": "Costa Rica is the top Central American destination for American expats, known for its Pura Vida lifestyle, biodiversity, strong democracy, and affordable national healthcare system.",
+    "pros": ["Political stability", "Excellent national healthcare (CAJA)", "Biodiversity and natural beauty", "Expat-friendly", "Close to the US"],
+    "cons": ["Not the cheapest in Latin America", "Roads can be poor outside cities", "Intense rainy season", "Limited public transport", "Petty crime in urban areas"]
+  },
+  {
+    "id": "panama",
+    "name": "Panama",
+    "capital": "Panama City",
+    "slug": "panama",
+    "flag": "🇵🇦",
+    "continent": "North America",
+    "languages": ["Spanish"],
+    "englishLevel": 6,
+    "costOfLiving": {
+      "singleMonthly": 1800,
+      "familyMonthly": 3000,
+      "rentOneBedroomCenter": 900,
+      "rentThreeBedroomCenter": 1600,
+      "groceriesMonthly": 300,
+      "restaurantMealAverage": 10
+    },
+    "quality": {
+      "safety": 6,
+      "healthcare": 7,
+      "internet": 7,
+      "climate": "Tropical",
+      "airQuality": 6
+    },
+    "visas": [
+      {
+        "type": "Pensionado Visa",
+        "duration": "Permanent (with conditions)",
+        "minIncome": 1000,
+        "processingTime": "3-6 months",
+        "officialLink": "https://www.migracion.gob.pa"
+      },
+      {
+        "type": "Friendly Nations Visa",
+        "duration": "2 years, renewable",
+        "minIncome": 0,
+        "processingTime": "2-4 months",
+        "officialLink": "https://www.migracion.gob.pa"
+      },
+      {
+        "type": "Short Stay Nomad Visa",
+        "duration": "9 months, non-renewable",
+        "minIncome": 3000,
+        "processingTime": "4-8 weeks",
+        "officialLink": "https://www.migracion.gob.pa"
+      }
+    ],
+    "popularAmericanCities": ["Miami", "New York", "Houston"],
+    "description": "Panama uses the US dollar, has world-class banking, a retiree-friendly Pensionado program, and modern infrastructure that makes it one of the easiest Central American countries for Americans.",
+    "pros": ["Uses US dollar", "Pensionado discounts program", "Modern infrastructure", "No taxes on foreign income", "Strategic location"],
+    "cons": ["High humidity and heat", "Traffic congestion in Panama City", "Stark income inequality", "Limited cultural activities outside capital", "Safety concerns in some neighborhoods"]
+  },
+  {
+    "id": "thailand",
+    "name": "Thailand",
+    "capital": "Bangkok",
+    "slug": "thailand",
+    "flag": "🇹🇭",
+    "continent": "Asia",
+    "languages": ["Thai"],
+    "englishLevel": 5,
+    "costOfLiving": {
+      "singleMonthly": 1200,
+      "familyMonthly": 2200,
+      "rentOneBedroomCenter": 500,
+      "rentThreeBedroomCenter": 900,
+      "groceriesMonthly": 200,
+      "restaurantMealAverage": 4
+    },
+    "quality": {
+      "safety": 6,
+      "healthcare": 7,
+      "internet": 7,
+      "climate": "Tropical",
+      "airQuality": 5
+    },
+    "visas": [
+      {
+        "type": "Long-Term Resident (LTR) Visa",
+        "duration": "10 years",
+        "minIncome": 6667,
+        "processingTime": "4-8 weeks",
+        "officialLink": "https://ltr.boi.go.th"
+      },
+      {
+        "type": "Thailand Elite Visa",
+        "duration": "5-20 years",
+        "minIncome": 0,
+        "processingTime": "2-4 weeks",
+        "officialLink": "https://www.thailandelite.com"
+      }
+    ],
+    "popularAmericanCities": ["Los Angeles", "New York", "San Francisco"],
+    "description": "Thailand is Asia's premier expat destination with low living costs, world-class street food, Buddhist temples, tropical beaches, and a booming digital nomad scene in Chiang Mai and Bangkok.",
+    "pros": ["Very affordable", "Incredible food", "Warm weather year-round", "Friendly culture", "Excellent private hospitals in Bangkok"],
+    "cons": ["Air quality issues during burning season", "Language barrier", "Visa rules have historically been complex", "Heavy Bangkok traffic", "Political instability periods"]
+  },
+  {
+    "id": "malaysia",
+    "name": "Malaysia",
+    "capital": "Kuala Lumpur",
+    "slug": "malaysia",
+    "flag": "🇲🇾",
+    "continent": "Asia",
+    "languages": ["Malay", "English"],
+    "englishLevel": 8,
+    "costOfLiving": {
+      "singleMonthly": 1200,
+      "familyMonthly": 2200,
+      "rentOneBedroomCenter": 500,
+      "rentThreeBedroomCenter": 900,
+      "groceriesMonthly": 200,
+      "restaurantMealAverage": 5
+    },
+    "quality": {
+      "safety": 7,
+      "healthcare": 8,
+      "internet": 8,
+      "climate": "Tropical",
+      "airQuality": 6
+    },
+    "visas": [
+      {
+        "type": "MM2H (Malaysia My Second Home)",
+        "duration": "5 years, renewable",
+        "minIncome": 10000,
+        "processingTime": "3-6 months",
+        "officialLink": "https://www.mm2h.gov.my"
+      },
+      {
+        "type": "DE Rantau Digital Nomad Pass",
+        "duration": "3-12 months, renewable",
+        "minIncome": 2400,
+        "processingTime": "2-4 weeks",
+        "officialLink": "https://derantau.mdec.my"
+      }
+    ],
+    "popularAmericanCities": ["Los Angeles", "San Francisco", "New York"],
+    "description": "Malaysia is an underrated expat gem offering an English-speaking environment, world-class private healthcare, diverse multicultural food scene, and one of the lowest costs of living in Southeast Asia.",
+    "pros": ["English widely spoken", "Multicultural food paradise", "Low cost of living", "Excellent private healthcare", "Good internet infrastructure"],
+    "cons": ["MM2H visa requirements increased significantly", "Haze from regional fires", "Hot and humid year-round", "Traffic in KL", "Limited alcohol availability in some areas"]
+  },
+  {
+    "id": "indonesia",
+    "name": "Indonesia (Bali)",
+    "capital": "Jakarta",
+    "slug": "indonesia",
+    "flag": "🇮🇩",
+    "continent": "Asia",
+    "languages": ["Indonesian"],
+    "englishLevel": 5,
+    "costOfLiving": {
+      "singleMonthly": 1000,
+      "familyMonthly": 2000,
+      "rentOneBedroomCenter": 400,
+      "rentThreeBedroomCenter": 800,
+      "groceriesMonthly": 150,
+      "restaurantMealAverage": 4
+    },
+    "quality": {
+      "safety": 6,
+      "healthcare": 5,
+      "internet": 6,
+      "climate": "Tropical",
+      "airQuality": 5
+    },
+    "visas": [
+      {
+        "type": "Digital Nomad Visa (E33G)",
+        "duration": "6 months, extendable to 12",
+        "minIncome": 2000,
+        "processingTime": "2-4 weeks",
+        "officialLink": "https://molina.imigrasi.go.id"
+      },
+      {
+        "type": "B211A Social-Cultural Visa",
+        "duration": "60 days, extendable to 180",
+        "minIncome": 0,
+        "processingTime": "1-2 weeks",
+        "officialLink": "https://molina.imigrasi.go.id"
+      }
+    ],
+    "popularAmericanCities": ["Los Angeles", "San Francisco", "New York"],
+    "description": "Bali remains Asia's most iconic digital nomad destination with a spiritual atmosphere, stunning rice terraces, surf culture, and an ultra-affordable lifestyle centered around Canggu and Ubud.",
+    "pros": ["Very low cost of living", "Beautiful natural scenery", "Vibrant nomad community", "Spiritual and wellness culture", "Warm year-round"],
+    "cons": ["Healthcare limited outside major cities", "Internet can be unreliable", "Overcrowding in tourist areas", "Complex visa situation", "Traffic in Canggu and Kuta"]
+  },
+  {
+    "id": "colombia",
+    "name": "Colombia",
+    "capital": "Bogotá",
+    "slug": "colombia",
+    "flag": "🇨🇴",
+    "continent": "South America",
+    "languages": ["Spanish"],
+    "englishLevel": 4,
+    "costOfLiving": {
+      "singleMonthly": 1100,
+      "familyMonthly": 2000,
+      "rentOneBedroomCenter": 450,
+      "rentThreeBedroomCenter": 800,
+      "groceriesMonthly": 200,
+      "restaurantMealAverage": 5
+    },
+    "quality": {
+      "safety": 5,
+      "healthcare": 7,
+      "internet": 7,
+      "climate": "Varied",
+      "airQuality": 6
+    },
+    "visas": [
+      {
+        "type": "Digital Nomad Visa (M Visa)",
+        "duration": "2 years, renewable",
+        "minIncome": 1300,
+        "processingTime": "4-8 weeks",
+        "officialLink": "https://www.cancilleria.gov.co"
+      },
+      {
+        "type": "Pensioner Visa (R Visa)",
+        "duration": "3 years, renewable",
+        "minIncome": 700,
+        "processingTime": "2-4 months",
+        "officialLink": "https://www.cancilleria.gov.co"
+      }
+    ],
+    "popularAmericanCities": ["Miami", "New York", "Los Angeles"],
+    "description": "Colombia has transformed dramatically — cities like Medellín and Bogotá now attract thousands of American expats with spring-like climates, vibrant culture, and extremely low costs of living.",
+    "pros": ["Eternal spring climate in Medellín", "Very affordable", "Improving safety in major cities", "Vibrant nightlife and food scene", "Large expat community"],
+    "cons": ["Safety still a concern in some areas", "Language barrier", "Occasional political instability", "Healthcare quality varies by region", "Chaotic driving"]
+  },
+  {
+    "id": "croatia",
+    "name": "Croatia",
+    "capital": "Zagreb",
+    "slug": "croatia",
+    "flag": "🇭🇷",
+    "continent": "Europe",
+    "languages": ["Croatian"],
+    "englishLevel": 7,
+    "costOfLiving": {
+      "singleMonthly": 1800,
+      "familyMonthly": 3200,
+      "rentOneBedroomCenter": 800,
+      "rentThreeBedroomCenter": 1400,
+      "groceriesMonthly": 280,
+      "restaurantMealAverage": 11
+    },
+    "quality": {
+      "safety": 8,
+      "healthcare": 7,
+      "internet": 7,
+      "climate": "Mediterranean",
+      "airQuality": 8
+    },
+    "visas": [
+      {
+        "type": "Digital Nomad Visa",
+        "duration": "1 year, non-renewable consecutively",
+        "minIncome": 2539,
+        "processingTime": "4-8 weeks",
+        "officialLink": "https://mup.gov.hr"
+      }
+    ],
+    "popularAmericanCities": ["New York", "Chicago", "Los Angeles"],
+    "description": "Croatia offers stunning Adriatic coastline, medieval walled cities, crystal-clear waters, and one of the first EU digital nomad visas, making it a top pick for remote workers seeking beauty and safety.",
+    "pros": ["Stunning coastline and islands", "Safe and stable", "EU member state", "Rich history and culture", "Mediterranean diet and cuisine"],
+    "cons": ["Smaller country with fewer urban options", "Language is challenging", "Prices rising due to tourism boom", "Cold winters inland", "Limited job market for foreigners"]
+  },
+  {
+    "id": "czech-republic",
+    "name": "Czech Republic",
+    "capital": "Prague",
+    "slug": "czech-republic",
+    "flag": "🇨🇿",
+    "continent": "Europe",
+    "languages": ["Czech"],
+    "englishLevel": 7,
+    "costOfLiving": {
+      "singleMonthly": 1800,
+      "familyMonthly": 3200,
+      "rentOneBedroomCenter": 900,
+      "rentThreeBedroomCenter": 1500,
+      "groceriesMonthly": 300,
+      "restaurantMealAverage": 10
+    },
+    "quality": {
+      "safety": 8,
+      "healthcare": 8,
+      "internet": 8,
+      "climate": "Temperate",
+      "airQuality": 7
+    },
+    "visas": [
+      {
+        "type": "Long Stay Visa (D Visa)",
+        "duration": "1 year, renewable",
+        "minIncome": 1500,
+        "processingTime": "2-4 months",
+        "officialLink": "https://www.mzv.cz"
+      },
+      {
+        "type": "Freelancer Trade License Visa",
+        "duration": "2 years, renewable",
+        "minIncome": 0,
+        "processingTime": "2-4 months",
+        "officialLink": "https://www.mzv.cz"
+      }
+    ],
+    "popularAmericanCities": ["New York", "Chicago", "San Francisco"],
+    "description": "Prague is one of Europe's most beautiful and affordable capitals, offering excellent beer culture, a central EU location, a growing tech scene, and well-preserved medieval architecture.",
+    "pros": ["Stunning architecture", "Affordable for Central Europe", "Safe and clean", "Central European location", "Excellent beer and food culture"],
+    "cons": ["Language is very difficult", "Cold winters", "Bureaucracy for non-EU citizens", "Prague housing costs rising fast", "Limited nightlife outside Prague"]
+  },
+  {
+    "id": "poland",
+    "name": "Poland",
+    "capital": "Warsaw",
+    "slug": "poland",
+    "flag": "🇵🇱",
+    "continent": "Europe",
+    "languages": ["Polish"],
+    "englishLevel": 7,
+    "costOfLiving": {
+      "singleMonthly": 1500,
+      "familyMonthly": 2800,
+      "rentOneBedroomCenter": 700,
+      "rentThreeBedroomCenter": 1200,
+      "groceriesMonthly": 250,
+      "restaurantMealAverage": 8
+    },
+    "quality": {
+      "safety": 8,
+      "healthcare": 7,
+      "internet": 8,
+      "climate": "Temperate",
+      "airQuality": 6
+    },
+    "visas": [
+      {
+        "type": "Temporary Residence Permit",
+        "duration": "1-3 years, renewable",
+        "minIncome": 1200,
+        "processingTime": "2-4 months",
+        "officialLink": "https://www.gov.pl/web/mswia"
+      },
+      {
+        "type": "National Visa (D Visa)",
+        "duration": "1 year",
+        "minIncome": 1000,
+        "processingTime": "4-8 weeks",
+        "officialLink": "https://www.gov.pl/web/mswia"
+      }
+    ],
+    "popularAmericanCities": ["Chicago", "New York", "Detroit"],
+    "description": "Poland is emerging as a top destination for expats with very affordable living, a booming economy, warm hospitality, and cities like Kraków and Warsaw offering excellent quality of life.",
+    "pros": ["Very affordable", "Rich history and culture", "Safe cities", "Strong and growing economy", "Good internet infrastructure"],
+    "cons": ["Air quality poor in winter (smog)", "Language is very difficult", "Cold grey winters", "Non-EU citizens face bureaucracy", "Political climate has been unpredictable"]
+  },
+  {
+    "id": "hungary",
+    "name": "Hungary",
+    "capital": "Budapest",
+    "slug": "hungary",
+    "flag": "🇭🇺",
+    "continent": "Europe",
+    "languages": ["Hungarian"],
+    "englishLevel": 6,
+    "costOfLiving": {
+      "singleMonthly": 1500,
+      "familyMonthly": 2600,
+      "rentOneBedroomCenter": 700,
+      "rentThreeBedroomCenter": 1200,
+      "groceriesMonthly": 250,
+      "restaurantMealAverage": 8
+    },
+    "quality": {
+      "safety": 7,
+      "healthcare": 7,
+      "internet": 8,
+      "climate": "Temperate",
+      "airQuality": 6
+    },
+    "visas": [
+      {
+        "type": "White Card (Digital Nomad Visa)",
+        "duration": "1 year, renewable once",
+        "minIncome": 2000,
+        "processingTime": "4-8 weeks",
+        "officialLink": "https://enterthehungary.gov.hu"
+      },
+      {
+        "type": "Guest Self-Employment Permit",
+        "duration": "2 years",
+        "minIncome": 1500,
+        "processingTime": "4-8 weeks",
+        "officialLink": "https://enterthehungary.gov.hu"
+      }
+    ],
+    "popularAmericanCities": ["New York", "Chicago", "Los Angeles"],
+    "description": "Budapest is one of Europe's most underrated cities, offering thermal baths, stunning architecture, vibrant nightlife, and affordable living within the EU at prices well below Western Europe.",
+    "pros": ["Incredibly beautiful capital", "Affordable EU living", "Schengen zone access", "Thermal bath culture", "Vibrant arts and nightlife"],
+    "cons": ["Language is extremely difficult", "Political environment concerns", "Cold winters", "Healthcare below Western EU standards", "Limited English outside Budapest"]
+  },
+  {
+    "id": "romania",
+    "name": "Romania",
+    "capital": "Bucharest",
+    "slug": "romania",
+    "flag": "🇷🇴",
+    "continent": "Europe",
+    "languages": ["Romanian"],
+    "englishLevel": 7,
+    "costOfLiving": {
+      "singleMonthly": 1200,
+      "familyMonthly": 2200,
+      "rentOneBedroomCenter": 500,
+      "rentThreeBedroomCenter": 900,
+      "groceriesMonthly": 200,
+      "restaurantMealAverage": 6
+    },
+    "quality": {
+      "safety": 7,
+      "healthcare": 6,
+      "internet": 9,
+      "climate": "Temperate",
+      "airQuality": 6
+    },
+    "visas": [
+      {
+        "type": "Digital Nomad Visa",
+        "duration": "1 year, renewable",
+        "minIncome": 3300,
+        "processingTime": "4-8 weeks",
+        "officialLink": "https://evisa.mae.ro"
+      },
+      {
+        "type": "Long Stay Visa (D Visa)",
+        "duration": "1 year, renewable",
+        "minIncome": 1200,
+        "processingTime": "4-8 weeks",
+        "officialLink": "https://evisa.mae.ro"
+      }
+    ],
+    "popularAmericanCities": ["New York", "Chicago", "Los Angeles"],
+    "description": "Romania is Europe's best-kept secret for digital nomads — ultra-fast internet, very low costs, beautiful medieval towns, and a young English-speaking tech-savvy population.",
+    "pros": ["Among the fastest internet in the EU", "Very affordable", "Beautiful medieval towns like Cluj and Brasov", "Young tech-savvy population", "Rich natural landscapes including Carpathian Mountains"],
+    "cons": ["Healthcare quality below EU average", "Infrastructure still developing outside cities", "Brain drain affecting services", "Cold winters", "Bureaucracy for residency permits"]
+  },
+  {
+    "id": "bulgaria",
+    "name": "Bulgaria",
+    "capital": "Sofia",
+    "slug": "bulgaria",
+    "flag": "🇧🇬",
+    "continent": "Europe",
+    "languages": ["Bulgarian"],
+    "englishLevel": 6,
+    "costOfLiving": {
+      "singleMonthly": 1100,
+      "familyMonthly": 2000,
+      "rentOneBedroomCenter": 450,
+      "rentThreeBedroomCenter": 800,
+      "groceriesMonthly": 180,
+      "restaurantMealAverage": 6
+    },
+    "quality": {
+      "safety": 7,
+      "healthcare": 6,
+      "internet": 8,
+      "climate": "Temperate",
+      "airQuality": 6
+    },
+    "visas": [
+      {
+        "type": "Long Stay Visa (Type D)",
+        "duration": "1 year",
+        "minIncome": 1000,
+        "processingTime": "4-8 weeks",
+        "officialLink": "https://www.mvr.bg"
+      },
+      {
+        "type": "Temporary Residence Permit",
+        "duration": "1-5 years, renewable",
+        "minIncome": 1200,
+        "processingTime": "2-3 months",
+        "officialLink": "https://www.mvr.bg"
+      }
+    ],
+    "popularAmericanCities": ["New York", "Chicago", "Los Angeles"],
+    "description": "Bulgaria is the EU's most affordable destination, combining a flat 10% income tax, Black Sea beaches, ski resorts, and a growing expat and digital nomad community in Sofia.",
+    "pros": ["Lowest cost of living in EU", "Flat 10% income tax", "EU member state", "Black Sea beaches and ski resorts", "Growing nomad community in Bansko"],
+    "cons": ["Language uses Cyrillic alphabet", "Healthcare below EU average", "Infrastructure still developing", "Cold winters in Sofia", "Limited entertainment outside Sofia"]
+  },
+  {
+    "id": "vietnam",
+    "name": "Vietnam",
+    "capital": "Hanoi",
+    "slug": "vietnam",
+    "flag": "🇻🇳",
+    "continent": "Asia",
+    "languages": ["Vietnamese"],
+    "englishLevel": 4,
+    "costOfLiving": {
+      "singleMonthly": 900,
+      "familyMonthly": 1700,
+      "rentOneBedroomCenter": 400,
+      "rentThreeBedroomCenter": 700,
+      "groceriesMonthly": 150,
+      "restaurantMealAverage": 3
+    },
+    "quality": {
+      "safety": 7,
+      "healthcare": 5,
+      "internet": 7,
+      "climate": "Tropical",
+      "airQuality": 4
+    },
+    "visas": [
+      {
+        "type": "E-Visa",
+        "duration": "90 days, single or multiple entry",
+        "minIncome": 0,
+        "processingTime": "3-5 business days",
+        "officialLink": "https://evisa.xuatnhapcanh.gov.vn"
+      },
+      {
+        "type": "Business Visa (DN)",
+        "duration": "Up to 12 months",
+        "minIncome": 0,
+        "processingTime": "1-2 weeks",
+        "officialLink": "https://evisa.xuatnhapcanh.gov.vn"
+      }
+    ],
+    "popularAmericanCities": ["Los Angeles", "San Jose", "Houston"],
+    "description": "Vietnam is one of the most affordable countries in Asia with incredible street food, warm hospitality, and booming expat scenes in Ho Chi Minh City, Hanoi, and Da Nang.",
+    "pros": ["Extremely affordable", "Amazing street food", "Warm and welcoming culture", "Beautiful scenery", "Fast-growing economy"],
+    "cons": ["No dedicated long-term nomad visa", "Air quality poor in Hanoi and HCMC", "Intense traffic", "Language barrier", "Healthcare quality limited outside major cities"]
+  },
+  {
+    "id": "japan",
+    "name": "Japan",
+    "capital": "Tokyo",
+    "slug": "japan",
+    "flag": "🇯🇵",
+    "continent": "Asia",
+    "languages": ["Japanese"],
+    "englishLevel": 4,
+    "costOfLiving": {
+      "singleMonthly": 2200,
+      "familyMonthly": 4000,
+      "rentOneBedroomCenter": 900,
+      "rentThreeBedroomCenter": 1600,
+      "groceriesMonthly": 350,
+      "restaurantMealAverage": 12
+    },
+    "quality": {
+      "safety": 9,
+      "healthcare": 9,
+      "internet": 9,
+      "climate": "Temperate",
+      "airQuality": 8
+    },
+    "visas": [
+      {
+        "type": "Digital Nomad Visa",
+        "duration": "6 months, non-renewable",
+        "minIncome": 6667,
+        "processingTime": "2-4 weeks",
+        "officialLink": "https://www.mofa.go.jp"
+      },
+      {
+        "type": "Highly Skilled Professional Visa",
+        "duration": "3-5 years",
+        "minIncome": 3000,
+        "processingTime": "1-3 months",
+        "officialLink": "https://www.mofa.go.jp"
+      }
+    ],
+    "popularAmericanCities": ["Los Angeles", "New York", "Seattle"],
+    "description": "Japan offers a unique blend of ancient tradition and cutting-edge technology with exceptional safety, world-class cuisine, impeccable public transit, and a uniquely fascinating culture.",
+    "pros": ["Extremely safe", "World-class healthcare and infrastructure", "Incredible food culture", "Clean and organized", "Unique and fascinating culture"],
+    "cons": ["Language barrier is significant", "Not cheap in Tokyo", "Digital nomad visa limited to 6 months", "Difficult to integrate long-term", "Earthquake risk"]
+  },
+  {
+    "id": "south-korea",
+    "name": "South Korea",
+    "capital": "Seoul",
+    "slug": "south-korea",
+    "flag": "🇰🇷",
+    "continent": "Asia",
+    "languages": ["Korean"],
+    "englishLevel": 5,
+    "costOfLiving": {
+      "singleMonthly": 2000,
+      "familyMonthly": 3500,
+      "rentOneBedroomCenter": 800,
+      "rentThreeBedroomCenter": 1500,
+      "groceriesMonthly": 350,
+      "restaurantMealAverage": 10
+    },
+    "quality": {
+      "safety": 8,
+      "healthcare": 9,
+      "internet": 10,
+      "climate": "Temperate",
+      "airQuality": 5
+    },
+    "visas": [
+      {
+        "type": "Digital Nomad Visa (F-1-D)",
+        "duration": "1-2 years",
+        "minIncome": 3000,
+        "processingTime": "4-8 weeks",
+        "officialLink": "https://www.immigration.go.kr"
+      },
+      {
+        "type": "D-10 Job Seeker Visa",
+        "duration": "6 months, extendable",
+        "minIncome": 0,
+        "processingTime": "2-4 weeks",
+        "officialLink": "https://www.immigration.go.kr"
+      }
+    ],
+    "popularAmericanCities": ["Los Angeles", "New York", "San Francisco"],
+    "description": "South Korea dazzles with the world's fastest internet, K-culture phenomenon, outstanding affordable healthcare, hyper-efficient public transport, and a unique blend of tradition and modernity.",
+    "pros": ["World's fastest internet", "Excellent and affordable healthcare", "Safe and modern cities", "Rich food and pop culture scene", "Efficient public transport"],
+    "cons": ["Air quality issues from yellow dust and pollution", "Language barrier", "Intense work culture expectations", "High social conformity pressure", "Limited English outside central Seoul"]
+  },
+  {
+    "id": "australia",
+    "name": "Australia",
+    "capital": "Canberra",
+    "slug": "australia",
+    "flag": "🇦🇺",
+    "continent": "Oceania",
+    "languages": ["English"],
+    "englishLevel": 10,
+    "costOfLiving": {
+      "singleMonthly": 3000,
+      "familyMonthly": 5500,
+      "rentOneBedroomCenter": 1500,
+      "rentThreeBedroomCenter": 2500,
+      "groceriesMonthly": 450,
+      "restaurantMealAverage": 18
+    },
+    "quality": {
+      "safety": 8,
+      "healthcare": 9,
+      "internet": 7,
+      "climate": "Varied",
+      "airQuality": 8
+    },
+    "visas": [
+      {
+        "type": "Skilled Independent Visa (subclass 189)",
+        "duration": "Permanent",
+        "minIncome": 0,
+        "processingTime": "12-24 months",
+        "officialLink": "https://immi.homeaffairs.gov.au"
+      },
+      {
+        "type": "Global Talent Visa (subclass 858)",
+        "duration": "Permanent",
+        "minIncome": 0,
+        "processingTime": "2-4 months",
+        "officialLink": "https://immi.homeaffairs.gov.au"
+      }
+    ],
+    "popularAmericanCities": ["Los Angeles", "New York", "San Francisco"],
+    "description": "Australia offers an English-speaking paradise with stunning natural wonders, a multicultural society, excellent Medicare healthcare, and one of the highest standards of living in the world.",
+    "pros": ["English-speaking", "High standard of living", "Excellent healthcare (Medicare)", "Beautiful natural environment", "Multicultural and welcoming"],
+    "cons": ["Very high cost of living", "Far from the US and Europe", "Strict immigration requirements", "Wildfires and extreme weather", "Internet can be slow outside cities"]
+  },
+  {
+    "id": "new-zealand",
+    "name": "New Zealand",
+    "capital": "Wellington",
+    "slug": "new-zealand",
+    "flag": "🇳🇿",
+    "continent": "Oceania",
+    "languages": ["English"],
+    "englishLevel": 10,
+    "costOfLiving": {
+      "singleMonthly": 2800,
+      "familyMonthly": 5000,
+      "rentOneBedroomCenter": 1400,
+      "rentThreeBedroomCenter": 2300,
+      "groceriesMonthly": 400,
+      "restaurantMealAverage": 17
+    },
+    "quality": {
+      "safety": 8,
+      "healthcare": 8,
+      "internet": 7,
+      "climate": "Temperate",
+      "airQuality": 9
+    },
+    "visas": [
+      {
+        "type": "Skilled Migrant Category",
+        "duration": "Permanent residence",
+        "minIncome": 0,
+        "processingTime": "12-24 months",
+        "officialLink": "https://www.immigration.govt.nz"
+      },
+      {
+        "type": "Accredited Employer Work Visa",
+        "duration": "Up to 3 years",
+        "minIncome": 0,
+        "processingTime": "2-3 months",
+        "officialLink": "https://www.immigration.govt.nz"
+      }
+    ],
+    "popularAmericanCities": ["Los Angeles", "San Francisco", "Seattle"],
+    "description": "New Zealand combines dramatic landscapes from fjords to beaches with a relaxed Kiwi culture, pristine air quality, and a stable democracy attracting Americans seeking a quieter quality life.",
+    "pros": ["Pristine natural environment", "English-speaking", "Safe and stable", "Outdoor lifestyle paradise", "Welcoming and friendly culture"],
+    "cons": ["Very high cost of living", "Extremely remote location", "Limited job market", "Housing affordability crisis", "Infrastructure outside cities can be limited"]
+  },
+  {
+    "id": "canada",
+    "name": "Canada",
+    "capital": "Ottawa",
+    "slug": "canada",
+    "flag": "🇨🇦",
+    "continent": "North America",
+    "languages": ["English", "French"],
+    "englishLevel": 10,
+    "costOfLiving": {
+      "singleMonthly": 2800,
+      "familyMonthly": 5000,
+      "rentOneBedroomCenter": 1500,
+      "rentThreeBedroomCenter": 2400,
+      "groceriesMonthly": 400,
+      "restaurantMealAverage": 16
+    },
+    "quality": {
+      "safety": 8,
+      "healthcare": 8,
+      "internet": 8,
+      "climate": "Varied",
+      "airQuality": 8
+    },
+    "visas": [
+      {
+        "type": "Express Entry (Federal Skilled Worker)",
+        "duration": "Permanent residence",
+        "minIncome": 0,
+        "processingTime": "6-12 months",
+        "officialLink": "https://www.canada.ca/en/immigration-refugees-citizenship.html"
+      },
+      {
+        "type": "Provincial Nominee Program (PNP)",
+        "duration": "Permanent residence",
+        "minIncome": 0,
+        "processingTime": "12-18 months",
+        "officialLink": "https://www.canada.ca/en/immigration-refugees-citizenship.html"
+      }
+    ],
+    "popularAmericanCities": ["New York", "Seattle", "Los Angeles"],
+    "description": "Canada is the most natural choice for Americans seeking a familiar culture with universal healthcare, diverse immigration pathways, and world-class cities like Toronto, Vancouver, and Montreal.",
+    "pros": ["Similar culture to the US", "Universal healthcare", "Safe and multicultural", "Strong immigration pathways", "Beautiful nature across all provinces"],
+    "cons": ["Cold winters especially in central provinces", "High cost of living in Toronto and Vancouver", "Immigration becoming more competitive", "High taxes", "Housing affordability crisis in major cities"]
+  },
+  {
+    "id": "ireland",
+    "name": "Ireland",
+    "capital": "Dublin",
+    "slug": "ireland",
+    "flag": "🇮🇪",
+    "continent": "Europe",
+    "languages": ["English", "Irish"],
+    "englishLevel": 10,
+    "costOfLiving": {
+      "singleMonthly": 2800,
+      "familyMonthly": 5000,
+      "rentOneBedroomCenter": 1800,
+      "rentThreeBedroomCenter": 2800,
+      "groceriesMonthly": 400,
+      "restaurantMealAverage": 16
+    },
+    "quality": {
+      "safety": 8,
+      "healthcare": 7,
+      "internet": 8,
+      "climate": "Temperate",
+      "airQuality": 8
+    },
+    "visas": [
+      {
+        "type": "Critical Skills Employment Permit",
+        "duration": "2 years",
+        "minIncome": 32000,
+        "processingTime": "4-8 weeks",
+        "officialLink": "https://www.irishimmigration.ie"
+      },
+      {
+        "type": "Stamp 0 (Independent Means)",
+        "duration": "1 year, renewable",
+        "minIncome": 3500,
+        "processingTime": "2-4 months",
+        "officialLink": "https://www.irishimmigration.ie"
+      }
+    ],
+    "popularAmericanCities": ["New York", "Boston", "Chicago"],
+    "description": "Ireland is the natural English-speaking gateway to the EU, with deep American cultural ties, a booming tech sector anchored by US multinationals, and stunning Atlantic coastal scenery.",
+    "pros": ["English-speaking EU country", "Strong US cultural connections", "Gateway to rest of Europe", "Friendly and welcoming people", "Booming tech and pharma job market"],
+    "cons": ["Extremely expensive housing in Dublin", "Grey and rainy weather", "Healthcare system under strain", "High general cost of living", "Rental market severely constrained"]
+  },
+  {
+    "id": "netherlands",
+    "name": "Netherlands",
+    "capital": "Amsterdam",
+    "slug": "netherlands",
+    "flag": "🇳🇱",
+    "continent": "Europe",
+    "languages": ["Dutch"],
+    "englishLevel": 9,
+    "costOfLiving": {
+      "singleMonthly": 2600,
+      "familyMonthly": 4500,
+      "rentOneBedroomCenter": 1500,
+      "rentThreeBedroomCenter": 2400,
+      "groceriesMonthly": 380,
+      "restaurantMealAverage": 16
+    },
+    "quality": {
+      "safety": 8,
+      "healthcare": 9,
+      "internet": 9,
+      "climate": "Temperate",
+      "airQuality": 7
+    },
+    "visas": [
+      {
+        "type": "DAFT Visa (Dutch-American Friendship Treaty)",
+        "duration": "2 years, renewable",
+        "minIncome": 0,
+        "processingTime": "2-4 months",
+        "officialLink": "https://ind.nl"
+      },
+      {
+        "type": "Highly Skilled Migrant Visa",
+        "duration": "3 years",
+        "minIncome": 4840,
+        "processingTime": "2-4 weeks",
+        "officialLink": "https://ind.nl"
+      }
+    ],
+    "popularAmericanCities": ["New York", "San Francisco", "Chicago"],
+    "description": "The Netherlands has a unique friendship treaty with the US (DAFT) making it one of the easiest EU countries for Americans to settle in, with near-universal English and excellent work-life balance.",
+    "pros": ["DAFT visa uniquely available to Americans", "Near-universal English proficiency", "Excellent work-life balance", "Central European location", "World-class cycling infrastructure"],
+    "cons": ["Very high cost of living", "Severe housing shortage", "Grey and rainy climate", "High income taxes", "Dutch directness can feel blunt"]
+  },
+  {
+    "id": "france",
+    "name": "France",
+    "capital": "Paris",
+    "slug": "france",
+    "flag": "🇫🇷",
+    "continent": "Europe",
+    "languages": ["French"],
+    "englishLevel": 6,
+    "costOfLiving": {
+      "singleMonthly": 2200,
+      "familyMonthly": 4000,
+      "rentOneBedroomCenter": 1200,
+      "rentThreeBedroomCenter": 2000,
+      "groceriesMonthly": 350,
+      "restaurantMealAverage": 15
+    },
+    "quality": {
+      "safety": 7,
+      "healthcare": 9,
+      "internet": 8,
+      "climate": "Varied",
+      "airQuality": 7
+    },
+    "visas": [
+      {
+        "type": "Talent Passport (Passeport Talent)",
+        "duration": "4 years, renewable",
+        "minIncome": 2200,
+        "processingTime": "2-3 months",
+        "officialLink": "https://france-visas.gouv.fr"
+      },
+      {
+        "type": "Long Stay Visitor Visa (VLS-TS)",
+        "duration": "1 year, renewable",
+        "minIncome": 1200,
+        "processingTime": "2-4 weeks",
+        "officialLink": "https://france-visas.gouv.fr"
+      }
+    ],
+    "popularAmericanCities": ["New York", "Los Angeles", "San Francisco"],
+    "description": "France offers a uniquely high quality of life with world-renowned cuisine, fashion, art, stunning countryside from Provence to Alsace, and exceptional healthcare — though French language skills are essential.",
+    "pros": ["World-class healthcare", "Exceptional cuisine and wine", "Rich cultural and intellectual life", "Beautiful regions beyond Paris", "Strong workers' rights and benefits"],
+    "cons": ["Language barrier is significant", "Challenging bureaucracy", "Paris is very expensive", "High taxes", "Strikes and social unrest can disrupt daily life"]
+  },
+  {
+    "id": "argentina",
+    "name": "Argentina",
+    "capital": "Buenos Aires",
+    "slug": "argentina",
+    "flag": "🇦🇷",
+    "continent": "South America",
+    "languages": ["Spanish"],
+    "englishLevel": 5,
+    "costOfLiving": {
+      "singleMonthly": 800,
+      "familyMonthly": 1500,
+      "rentOneBedroomCenter": 350,
+      "rentThreeBedroomCenter": 650,
+      "groceriesMonthly": 150,
+      "restaurantMealAverage": 5
+    },
+    "quality": {
+      "safety": 5,
+      "healthcare": 7,
+      "internet": 6,
+      "climate": "Varied",
+      "airQuality": 6
+    },
+    "visas": [
+      {
+        "type": "Rentista Visa",
+        "duration": "1 year, renewable",
+        "minIncome": 1500,
+        "processingTime": "2-4 months",
+        "officialLink": "https://cancilleria.gob.ar"
+      },
+      {
+        "type": "Pensionado Visa",
+        "duration": "1 year, renewable",
+        "minIncome": 1000,
+        "processingTime": "2-4 months",
+        "officialLink": "https://cancilleria.gob.ar"
+      }
+    ],
+    "popularAmericanCities": ["Miami", "New York", "Los Angeles"],
+    "description": "Buenos Aires is one of the world's great cities offering European-style architecture, world-class beef and wine, tango culture, and one of the most affordable big-city lifestyles on earth for USD earners.",
+    "pros": ["Very affordable for USD earners", "European-style culture", "World-class food and nightlife", "Rich arts and theatre scene", "Patagonia and natural wonders nearby"],
+    "cons": ["Economic and currency instability", "Historically very high inflation", "Safety concerns in some BA neighborhoods", "Political uncertainty", "Bureaucracy for residency is complex"]
+  },
+  {
+    "id": "ecuador",
+    "name": "Ecuador",
+    "capital": "Quito",
+    "slug": "ecuador",
+    "flag": "🇪🇨",
+    "continent": "South America",
+    "languages": ["Spanish"],
+    "englishLevel": 4,
+    "costOfLiving": {
+      "singleMonthly": 1200,
+      "familyMonthly": 2200,
+      "rentOneBedroomCenter": 500,
+      "rentThreeBedroomCenter": 900,
+      "groceriesMonthly": 200,
+      "restaurantMealAverage": 6
+    },
+    "quality": {
+      "safety": 5,
+      "healthcare": 6,
+      "internet": 6,
+      "climate": "Varied/Andean",
+      "airQuality": 7
+    },
+    "visas": [
+      {
+        "type": "Rentista Visa",
+        "duration": "2 years, renewable",
+        "minIncome": 800,
+        "processingTime": "4-8 weeks",
+        "officialLink": "https://www.cancilleria.gob.ec"
+      },
+      {
+        "type": "Pensioner Visa",
+        "duration": "2 years, renewable",
+        "minIncome": 800,
+        "processingTime": "4-8 weeks",
+        "officialLink": "https://www.cancilleria.gob.ec"
+      },
+      {
+        "type": "Professional Visa",
+        "duration": "2 years, renewable",
+        "minIncome": 1200,
+        "processingTime": "6-10 weeks",
+        "officialLink": "https://www.cancilleria.gob.ec"
+      }
+    ],
+    "popularAmericanCities": ["Miami", "New York", "Los Angeles"],
+    "description": "Ecuador uses the US dollar, offering price stability in one of the most biodiverse countries on earth. Cuenca is consistently ranked a top retirement destination for Americans.",
+    "pros": ["Uses US dollar", "Very affordable", "Exceptional biodiversity", "Cuenca is a top retirement city", "Galapagos Islands access"],
+    "cons": ["Safety concerns have increased since 2023", "Language barrier", "Healthcare infrastructure limited outside Quito and Cuenca", "Occasional political instability", "Limited entertainment options"]
+  },
+  {
+    "id": "morocco",
+    "name": "Morocco",
+    "capital": "Rabat",
+    "slug": "morocco",
+    "flag": "🇲🇦",
+    "continent": "Africa",
+    "languages": ["Arabic", "French", "Berber"],
+    "englishLevel": 4,
+    "costOfLiving": {
+      "singleMonthly": 1000,
+      "familyMonthly": 1900,
+      "rentOneBedroomCenter": 350,
+      "rentThreeBedroomCenter": 650,
+      "groceriesMonthly": 180,
+      "restaurantMealAverage": 5
+    },
+    "quality": {
+      "safety": 6,
+      "healthcare": 6,
+      "internet": 6,
+      "climate": "Mediterranean",
+      "airQuality": 6
+    },
+    "visas": [
+      {
+        "type": "Long Stay Visa",
+        "duration": "1 year, renewable",
+        "minIncome": 1000,
+        "processingTime": "4-8 weeks",
+        "officialLink": "https://www.consulat.ma"
+      },
+      {
+        "type": "Carte de Séjour (Residency Card)",
+        "duration": "1 year, renewable",
+        "minIncome": 800,
+        "processingTime": "2-3 months",
+        "officialLink": "https://www.consulat.ma"
+      }
+    ],
+    "popularAmericanCities": ["New York", "Los Angeles", "Washington D.C."],
+    "description": "Morocco captivates with ancient medinas, Sahara Desert adventures, Atlantic and Mediterranean coastlines, affordable living, and a unique blend of Arab, Berber, and French cultural influences.",
+    "pros": ["Very affordable", "Rich and unique culture", "Close to Europe (1hr flight to Spain)", "Beautiful medinas and desert landscapes", "Mild Mediterranean climate in the north"],
+    "cons": ["Language barrier (Arabic and French dominant)", "Healthcare quality is limited", "Conservative social norms in some areas", "Slow internet outside major cities", "Safety awareness needed in crowded medinas"]
+  }
+]

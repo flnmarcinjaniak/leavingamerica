@@ -1,0 +1,607 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import qualityScores from '../../data/quality-scores.json';
+import cityRpp from '../../data/city-rpp.json';
+---
+
+<BaseLayout
+  title="Lifestyle Arbitrage Calculator — LeavingAmerica"
+  description="Calculate exactly how much you save by moving abroad. Powered by World Bank PPP and BEA Regional Price Parity data."
+>
+  <section class="section-white">
+    <div class="container">
+      <div class="calc-grid">
+
+        <!-- LEFT COLUMN: Form -->
+        <div class="calc-form">
+          <h1 class="calc-title">Lifestyle Arbitrage Calculator</h1>
+          <div class="data-badges">
+            <span>World Bank PPP 2024</span>
+            <span>BEA Regional Data 2024</span>
+          </div>
+
+          <!-- Field 1: City -->
+          <div class="field-group">
+            <label for="citySelect">Current US City</label>
+            <select id="citySelect">
+              <option value="" disabled selected>Select your city...</option>
+              {Object.entries(cityRpp.cities).map(([id, rpp]) => (
+                <option value={id} data-rpp={rpp}>
+                  {id.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <!-- Field 2: Income -->
+          <div class="field-group">
+            <label for="incomeInput">Annual Income (USD)</label>
+            <input
+              id="incomeInput"
+              type="number"
+              placeholder="e.g. 85000"
+              min="20000"
+              max="500000"
+            />
+          </div>
+
+          <!-- Field 3: Remote checkbox -->
+          <div class="field-group">
+            <div class="checkbox-field">
+              <input id="remoteCheck" type="checkbox" checked />
+              <span>I work remotely and keep my US income after moving</span>
+            </div>
+          </div>
+
+          <!-- Field 4: Country -->
+          <div class="field-group">
+            <label for="countrySelect">Target Country</label>
+            <select id="countrySelect">
+              <option value="" disabled selected>Select destination...</option>
+              <option value="PT">Portugal</option>
+              <option value="ES">Spain</option>
+              <option value="MX">Mexico</option>
+              <option value="DE">Germany</option>
+              <option value="IT">Italy</option>
+              <option value="GR">Greece</option>
+              <option value="CR">Costa Rica</option>
+              <option value="PA">Panama</option>
+              <option value="TH">Thailand</option>
+              <option value="MY">Malaysia</option>
+              <option value="ID">Indonesia</option>
+              <option value="CO">Colombia</option>
+              <option value="HR">Croatia</option>
+              <option value="CZ">Czech Republic</option>
+              <option value="PL">Poland</option>
+              <option value="HU">Hungary</option>
+              <option value="RO">Romania</option>
+              <option value="BG">Bulgaria</option>
+              <option value="VN">Vietnam</option>
+              <option value="JP">Japan</option>
+              <option value="KR">South Korea</option>
+              <option value="AU">Australia</option>
+              <option value="NZ">New Zealand</option>
+              <option value="CA">Canada</option>
+              <option value="IE">Ireland</option>
+              <option value="NL">Netherlands</option>
+              <option value="FR">France</option>
+              <option value="AR">Argentina</option>
+              <option value="EC">Ecuador</option>
+              <option value="MA">Morocco</option>
+            </select>
+          </div>
+
+          <button id="calcBtn" class="btn-pill btn-pill-primary">Calculate My Savings →</button>
+
+          <div id="loadingState" style="display:none; text-align:center; padding:16px;">
+            <p style="color:#475569;">Fetching live World Bank PPP data...</p>
+          </div>
+
+          <div id="errorState" style="display:none; text-align:center; padding:16px;">
+            <p style="color:#DC2626;">Could not fetch data. Please try again.</p>
+          </div>
+
+          <p class="disclaimer">
+            Based on World Bank PPP 2024 and BEA Regional Price Parities 2024.
+            Estimates may vary 15-25% from actual costs.
+          </p>
+        </div>
+
+        <!-- RIGHT COLUMN: Results -->
+        <div class="calc-results">
+
+          <div id="resultsEmpty">
+            <div class="empty-icon">→</div>
+            <p style="color:#94A3B8; font-size:15px; margin-top:24px;">
+              Enter your details and click Calculate to see your personalized savings report
+            </p>
+          </div>
+
+          <div id="resultsData" style="display:none;">
+            <div class="results-stack">
+
+              <!-- Card 1: Annual Savings -->
+              <div class="white-card">
+                <span class="result-label">Annual Savings</span>
+                <p id="annualSavings" class="result-value">—</p>
+                <p id="monthlySavings" class="result-sub">—</p>
+              </div>
+
+              <!-- Card 2: Purchasing Power -->
+              <div class="white-card">
+                <span class="result-label">Purchasing Power</span>
+                <p id="purchasingPower" style="font-size:28px; font-weight:700; margin-bottom:4px;">—</p>
+                <p id="purchasingPowerSub" style="font-size:14px; color:#475569;">—</p>
+              </div>
+
+              <!-- Card 3: FIRE -->
+              <div class="white-card">
+                <span class="result-label">Years to Financial Independence</span>
+                <p id="yearsToFire" style="font-size:28px; font-weight:700; margin-bottom:4px;">—</p>
+                <p style="font-size:14px; color:#475569;">Based on 25x annual expenses (FIRE method)</p>
+              </div>
+
+              <!-- Card 4: Quality of Life -->
+              <div class="white-card">
+                <span class="result-label">Quality of Life</span>
+
+                <div class="progress-row">
+                  <span class="progress-label">Safety</span>
+                  <span id="safetyScore" class="progress-score">—</span>
+                </div>
+                <div class="progress-track">
+                  <div id="safetyBar" class="progress-bar" style="width:0%"></div>
+                </div>
+
+                <div class="progress-row">
+                  <span class="progress-label">Healthcare</span>
+                  <span id="healthScore" class="progress-score">—</span>
+                </div>
+                <div class="progress-track">
+                  <div id="healthBar" class="progress-bar" style="width:0%"></div>
+                </div>
+
+                <div class="progress-row">
+                  <span class="progress-label">Internet</span>
+                  <span id="internetScore" class="progress-score">—</span>
+                </div>
+                <div class="progress-track">
+                  <div id="internetBar" class="progress-bar" style="width:0%"></div>
+                </div>
+
+                <div class="progress-row">
+                  <span class="progress-label">Air Quality</span>
+                  <span id="airScore" class="progress-score">—</span>
+                </div>
+                <div class="progress-track">
+                  <div id="airBar" class="progress-bar" style="width:0%"></div>
+                </div>
+
+                <p class="data-source-note">
+                  Quality: Numbeo 2025, Speedtest 2025, IQAir 2024.
+                  PPP: World Bank 2024. City costs: BEA 2024.
+                </p>
+              </div>
+
+              <!-- Card 5: Share -->
+              <div class="white-card">
+                <p style="font-size:14px; color:#475569; margin-bottom:16px;">Share your result</p>
+                <div class="share-buttons">
+                  <button id="shareBtn" class="btn-outline">Share on X</button>
+                  <button id="copyBtn" class="btn-outline">Copy Result</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script id="quality-data" type="application/json" set:html={JSON.stringify(qualityScores.countries)} />
+  <script id="city-rpp-data" type="application/json" set:html={JSON.stringify(cityRpp.cities)} />
+
+</BaseLayout>
+
+<script>
+  const QUALITY = JSON.parse(
+    document.getElementById('quality-data')!.textContent!
+  );
+  const CITY_RPP = JSON.parse(
+    document.getElementById('city-rpp-data')!.textContent!
+  );
+
+  const COUNTRY_SLUGS: Record<string, string> = {
+    "PT": "portugal",  "ES": "spain",       "MX": "mexico",
+    "DE": "germany",   "IT": "italy",        "GR": "greece",
+    "CR": "costa-rica","PA": "panama",       "TH": "thailand",
+    "MY": "malaysia",  "ID": "indonesia",    "CO": "colombia",
+    "HR": "croatia",   "CZ": "czech-republic","PL": "poland",
+    "HU": "hungary",   "RO": "romania",      "BG": "bulgaria",
+    "VN": "vietnam",   "JP": "japan",        "KR": "south-korea",
+    "AU": "australia", "NZ": "new-zealand",  "CA": "canada",
+    "IE": "ireland",   "NL": "netherlands",  "FR": "france",
+    "AR": "argentina", "EC": "ecuador",      "MA": "morocco",
+  };
+
+  const citySelect    = document.getElementById('citySelect');
+  const incomeInput   = document.getElementById('incomeInput');
+  const remoteCheck   = document.getElementById('remoteCheck');
+  const countrySelect = document.getElementById('countrySelect');
+  const calcBtn       = document.getElementById('calcBtn');
+  const loadingState      = document.getElementById('loadingState');
+  const errorState        = document.getElementById('errorState');
+  const resultsEmpty      = document.getElementById('resultsEmpty');
+  const resultsData       = document.getElementById('resultsData');
+  const annualSavingsEl   = document.getElementById('annualSavings');
+  const monthlySavingsEl  = document.getElementById('monthlySavings');
+  const purchasingPowerEl    = document.getElementById('purchasingPower');
+  const purchasingPowerSubEl = document.getElementById('purchasingPowerSub');
+  const yearsToFireEl     = document.getElementById('yearsToFire');
+  const safetyScore   = document.getElementById('safetyScore');
+  const safetyBar     = document.getElementById('safetyBar');
+  const healthScore   = document.getElementById('healthScore');
+  const healthBar     = document.getElementById('healthBar');
+  const internetScore = document.getElementById('internetScore');
+  const internetBar   = document.getElementById('internetBar');
+  const airScore      = document.getElementById('airScore');
+  const airBar        = document.getElementById('airBar');
+  const shareBtn      = document.getElementById('shareBtn');
+  const copyBtn       = document.getElementById('copyBtn');
+
+  calcBtn.addEventListener('click', async () => {
+    const cityId   = citySelect.value;
+    const income   = parseInt(incomeInput.value);
+    const isRemote = remoteCheck.checked;
+    const iso2     = countrySelect.value;
+
+    if (!cityId || !income || !iso2) {
+      alert('Please fill in all fields');
+      return;
+    }
+    if (income < 20000 || income > 500000) {
+      alert('Please enter income between $20,000 and $500,000');
+      return;
+    }
+
+    loadingState.style.display = 'block';
+    resultsEmpty.style.display = 'none';
+    errorState.style.display   = 'none';
+    calcBtn.disabled           = true;
+
+    const COUNTRY_CURRENCIES = {
+      "PT":"EUR","ES":"EUR","MX":"MXN","DE":"EUR",
+      "IT":"EUR","GR":"EUR","CR":"CRC","PA":"USD",
+      "TH":"THB","MY":"MYR","ID":"IDR","CO":"COP",
+      "HR":"EUR","CZ":"CZK","PL":"PLN","HU":"HUF",
+      "RO":"RON","BG":"BGN","VN":"VND","JP":"JPY",
+      "KR":"KRW","AU":"AUD","NZ":"NZD","CA":"CAD",
+      "IE":"EUR","NL":"EUR","FR":"EUR","AR":"ARS",
+      "EC":"USD","MA":"MAD"
+    };
+
+    try {
+      const currency    = COUNTRY_CURRENCIES[iso2];
+      const cityRPP     = CITY_RPP[cityId];
+      const countryName = countrySelect.options[countrySelect.selectedIndex].text;
+      const cityName    = citySelect.options[citySelect.selectedIndex].text;
+
+      // Fetch World Bank PPP and exchange rate in parallel
+      const [pppRes, fxRes] = await Promise.all([
+        fetch(`https://api.worldbank.org/v2/country/${iso2}/indicator/PA.NUS.PRVT.PP?format=json&mrv=1&per_page=1`),
+        fetch('https://open.er-api.com/v6/latest/USD')
+      ]);
+
+      const pppData = await pppRes.json();
+      const fxData  = await fxRes.json();
+
+      const countryPPP = pppData[1][0].value;
+      if (!countryPPP) throw new Error('No PPP data available');
+
+      // Exchange rate: how many local currency units per 1 USD
+      const exchangeRate = currency === 'USD' ? 1 : fxData.rates[currency];
+      if (!exchangeRate) throw new Error('No exchange rate for ' + currency);
+
+      // Price level ratio: how expensive country is vs US average (1.0 = same as US)
+      // countryPPP is LCU per international dollar
+      // exchangeRate is LCU per USD
+      // priceLevel = countryPPP / exchangeRate
+      const priceLevel = countryPPP / exchangeRate;
+
+      // How much further money goes: 1 / priceLevel
+      // Adjusted for city being more/less expensive than US average
+      const adjustedMultiplier = (1 / priceLevel) * cityRPP;
+
+      // Equivalent income needed in target country
+      const equivalentIncome = Math.round(income / adjustedMultiplier);
+
+      let annualSavings  = 0;
+      let monthlySavings = 0;
+      if (isRemote) {
+        annualSavings  = income - equivalentIncome;
+        monthlySavings = Math.round(annualSavings / 12);
+      }
+
+      // FIRE: 25x annual expenses
+      const fireTarget     = equivalentIncome * 25;
+      const yearsToFireNum = (isRemote && annualSavings > 0)
+        ? Math.round(fireTarget / annualSavings)
+        : null;
+
+      // Update results
+      if (isRemote && annualSavings > 0) {
+        annualSavingsEl.textContent  = '$' + annualSavings.toLocaleString();
+        annualSavingsEl.style.color  = '#16A34A';
+        monthlySavingsEl.textContent = 'You save $' + monthlySavings.toLocaleString() + ' every month';
+      } else if (isRemote && annualSavings <= 0) {
+        annualSavingsEl.textContent  = 'Higher cost destination';
+        annualSavingsEl.style.color  = '#DC2626';
+        monthlySavingsEl.textContent = 'Cost of living higher than ' + cityName;
+      } else {
+        annualSavingsEl.textContent  = '$' + equivalentIncome.toLocaleString();
+        annualSavingsEl.style.color  = '#2563EB';
+        monthlySavingsEl.textContent = 'Equivalent income needed in ' + countryName;
+      }
+
+      purchasingPowerEl.textContent    = adjustedMultiplier.toFixed(2) + 'x';
+      purchasingPowerSubEl.textContent = 'Your $' + income.toLocaleString() + ' from ' + cityName + ' has the purchasing power of $' + Math.round(income * adjustedMultiplier).toLocaleString() + ' in ' + countryName;
+
+      if (yearsToFireNum && yearsToFireNum > 0 && yearsToFireNum < 100) {
+        yearsToFireEl.textContent = yearsToFireNum + ' years';
+      } else {
+        yearsToFireEl.textContent = 'N/A';
+      }
+
+      const slug = COUNTRY_SLUGS[iso2];
+      const q    = QUALITY[slug];
+      safetyScore.textContent   = q.safety     + '/10';
+      safetyBar.style.width     = (q.safety     * 10) + '%';
+      healthScore.textContent   = q.healthcare  + '/10';
+      healthBar.style.width     = (q.healthcare * 10) + '%';
+      internetScore.textContent = q.internet    + '/10';
+      internetBar.style.width   = (q.internet   * 10) + '%';
+      airScore.textContent      = q.air         + '/10';
+      airBar.style.width        = (q.air        * 10) + '%';
+
+      const shareText = (isRemote && annualSavings > 0)
+        ? 'Moving from ' + cityName + ' to ' + countryName + ' could save me $' + annualSavings.toLocaleString() + '/year. Calculate yours: leavingamerica.co/tools/salary'
+        : 'My $' + income.toLocaleString() + ' salary has ' + adjustedMultiplier.toFixed(1) + 'x more purchasing power in ' + countryName + '. Calculate yours: leavingamerica.co/tools/salary';
+
+      shareBtn.onclick = () => window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(shareText));
+      copyBtn.onclick  = () => navigator.clipboard.writeText(shareText);
+
+      loadingState.style.display  = 'none';
+      resultsData.style.display   = 'block';
+      resultsData.style.animation = 'fadeIn 0.4s ease';
+
+    } catch (err) {
+      console.error(err);
+      loadingState.style.display = 'none';
+      errorState.style.display   = 'block';
+    } finally {
+      calcBtn.disabled = false;
+    }
+  });
+</script>
+
+<style>
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .calc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+    padding: 80px 0;
+  }
+
+  .calc-title {
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    color: #0f172a;
+  }
+
+  .data-badges {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+
+  .data-badges span {
+    font-size: 11px;
+    font-weight: 600;
+    color: #16a34a;
+    background: #ecfdf5;
+    border: 0.5px solid #a7f3d0;
+    border-radius: 100px;
+    padding: 4px 12px;
+  }
+
+  .field-group {
+    margin-bottom: 24px;
+  }
+
+  .field-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #475569;
+    margin-bottom: 8px;
+  }
+
+  .field-group select,
+  .field-group input[type="number"] {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: 'Manrope', sans-serif;
+    color: #0f172a;
+    background: white;
+    transition: border-color 0.2s;
+    appearance: none;
+  }
+
+  .field-group select:focus,
+  .field-group input[type="number"]:focus {
+    border-color: #2563eb;
+    outline: none;
+  }
+
+  .checkbox-field {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: #f8fafc;
+    border-radius: 8px;
+    border: 1.5px solid #e2e8f0;
+    font-size: 14px;
+    color: #475569;
+    cursor: pointer;
+  }
+
+  input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #2563eb;
+    flex-shrink: 0;
+  }
+
+  #calcBtn {
+    width: 100%;
+    margin-top: 8px;
+    justify-content: center;
+  }
+
+  .disclaimer {
+    font-size: 12px;
+    color: #94a3b8;
+    text-align: center;
+    margin-top: 16px;
+    line-height: 1.6;
+  }
+
+  .results-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .result-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #475569;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .result-value {
+    font-size: 56px;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .result-sub {
+    font-size: 15px;
+    color: #475569;
+    line-height: 1.5;
+  }
+
+  .progress-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+
+  .progress-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #0f172a;
+  }
+
+  .progress-score {
+    font-size: 13px;
+    font-weight: 700;
+    color: #2563eb;
+  }
+
+  .progress-track {
+    height: 6px;
+    background: #f1f5f9;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+
+  .progress-bar {
+    height: 100%;
+    background: #2563eb;
+    border-radius: 3px;
+    transition: width 0.8s ease;
+  }
+
+  .share-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .btn-outline {
+    border: 1.5px solid #e2e8f0;
+    background: white;
+    color: #0f172a;
+    font-family: 'Manrope', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-outline:hover {
+    border-color: #2563eb;
+    color: #2563eb;
+  }
+
+  #resultsEmpty {
+    text-align: center;
+    padding: 60px 40px;
+  }
+
+  .empty-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #f1f5f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    font-size: 32px;
+    color: #cbd5e1;
+  }
+
+  .data-source-note {
+    font-size: 11px;
+    color: #94a3b8;
+    margin-top: 16px;
+    line-height: 1.6;
+  }
+</style>

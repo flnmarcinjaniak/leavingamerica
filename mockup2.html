@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeavingAmerica — Oblicz swoje oszczędności za granicą</title>
+    
+    <!-- Typografia: Manrope (Sans-serif, profesjonalna i nowoczesna) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- RESET & ZMIENNE CORE --- */
+        :root {
+            /* Palette: Jasna, Profesjonalna, Ufna */
+            --bg-base: #FFFFFF;
+            --bg-alt: #F8FAFC;
+            --border: #E2E8F0;
+            
+            --text-main: #0F172A;
+            --text-muted: #475569;
+            
+            /* Akcenty */
+            --accent: #2563EB; /* Trustworthy Blue */
+            --accent-hover: #1D4ED8;
+            --success: #16A34A; /* Green for savings */
+
+            /* Typografia */
+            --font-main: 'Manrope', sans-serif;
+            --lh-body: 1.6;
+
+            /* Efekty */
+            --shadow-card: 0 4px 24px rgba(0,0,0,0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; outline: none; }
+        
+        html {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            font-size: 16px;
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body { overflow-x: hidden; width: 100%; }
+
+        /* --- UKŁAD & KONTENERY --- */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        section {
+            position: relative;
+            padding: 100px 0;
+            width: 100%;
+        }
+
+        /* --- WSPÓLNE ELEMENTY --- */
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        
+        /* Pill CTA Button (Główny) */
+        .btn-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-pill-primary {
+            background-color: var(--accent);
+            color: #FFFFFF;
+        }
+
+        .btn-pill-primary:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-1px);
+        }
+
+        /* Karta Kalkulatora (Biała z cieniem) */
+        .white-card {
+            background: #FFFFFF;
+            border-radius: 12px;
+            box-shadow: var(--shadow-card);
+            padding: 40px;
+            transition: var(--transition);
+        }
+
+        /* Sekcje naprzemienne */
+        .section-alt { background-color: var(--bg-alt); }
+        .section-white { background-color: var(--bg-base); }
+
+        /* --- NAWIGACJA (BIAŁA, STICKY) --- */
+        nav {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            height: 80px;
+            background-color: #FFFFFF;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav .container {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* LOGO */
+        .logo-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background-color: var(--accent);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+            font-size: 18px; /* Dla ikony samolotu/kompasu */
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-wordmark {
+            font-size: 18px;
+            color: #0F172A;
+        }
+
+        .word-leaving { font-weight: 400; }
+        .word-america { font-weight: 700; }
+
+        .logo-tagline {
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-top: -2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 500;
+            color: #475569;
+        }
+
+        .nav-links a:not(.btn-pill):hover {
+            color: var(--accent);
+        }
+
+        /* --- HERO SECTION (SPLIT, OBRAZ LIZBONY) --- */
+        #hero {
+            height: 100vh;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            margin-top: 80px; /* Dla sticky nav */
+        }
+
+        #hero .container {
+            display: grid;
+            grid-template-columns: 4fr 6fr; /* Left 40%, Right 60% */
+            align-items: center;
+            height: 100%;
+            padding: 0;
+            max-width: 100%;
+        }
+
+        /* Left Side: Tekst na białym tle */
+        .hero-text {
+            background-color: #FFFFFF;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 80px 0 40px; /* Custom padding */
+        }
+
+        #hero h1 {
+            font-size: 64px;
+            line-height: 1.1;
+            color: #0F172A;
+            margin-bottom: 24px;
+        }
+
+        #hero h1 span {
+            display: block;
+        }
+
+        #hero h1 .weight-thin {
+            font-weight: 400;
+        }
+
+        #hero h1 .weight-bold {
+            font-weight: 800;
+        }
+
+        .hero-subtext {
+            font-size: 18px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 40px;
+            max-width: 480px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 40px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .hero-stat-item strong {
+            color: #0F172A;
+            font-weight: 700;
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .hero-secondary-link {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--accent);
+        }
+
+        .hero-secondary-link:hover {
+            color: var(--accent-hover);
+        }
+
+        /* Right Side: Obraz fotorealistyczny */
+        .hero-image-container {
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Kinowy obraz Lizbony */
+        .hero-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Można dodać filtry dla cinematic feel */
+        }
+
+        /* Gradient Overlay (fades to white at the bottom where text content begins) */
+        .hero-image-overlay {
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 30%; /* Overlay covers bottom 30% */
+            background: linear-gradient(to bottom, transparent 0%, #FFFFFF 100%);
+        }
+
+        /* --- BAR ZE STATYSTYKAMI --- */
+        #stats-bar {
+            padding: 60px 0;
+        }
+
+        #stats-bar .container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-bar-item .stat-value {
+            font-size: 32px;
+            font-weight: 800;
+            color: #0F172A;
+            margin-bottom: 8px;
+        }
+
+        .stat-bar-item .stat-label {
+            font-size: 14px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- SEKTSJA KALKULATORA --- */
+        #calculator .container {
+            display: grid;
+            grid-template-columns: 6fr 6fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .calc-description h2 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .calc-card {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        /* Inputy: minimal, light gray border, blue focus */
+        .input-group label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .input-field:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        /* Wynik: Large, 800 weight, Green */
+        .calc-result .result-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .calc-result .result-value {
+            font-size: 56px;
+            font-weight: 800;
+            color: var(--success);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .calc-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-green {
+            background-color: var(--success);
+            color: #FFFFFF;
+        }
+
+        .btn-green:hover {
+            background-color: #15803D;
+        }
+
+        /* --- JAK TO DZIAŁA (3 KROKI, IKONY) --- */
+        #how-it-works .container {
+            text-align: center;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .step-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .step-icon {
+            width: 64px; height: 64px;
+            background-color: rgba(37, 99, 235, 0.05); /* Light blue bg */
+            color: var(--accent);
+            border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px;
+        }
+
+        .step-item h3 { font-size: 20px; font-weight: 700; }
+        .step-item p { font-size: 14px; color: var(--text-muted); max-width: 300px; }
+
+        /* --- TOP MIEJSCA (GRID KART, BIAŁE) --- */
+        .dest-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .dest-card {
+            padding: 30px;
+        }
+
+        .dest-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .dest-name { font-size: 18px; font-weight: 700; }
+        .dest-flag { font-size: 24px; }
+
+        .dest-stats { font-size: 13px; color: var(--text-muted); }
+        .dest-stats strong { color: #0F172A; }
+
+        /* --- STOPKA (CIEMNA, MINIMAL) --- */
+        footer {
+            padding: 80px 0;
+            background-color: #07091A;
+            color: rgba(255,255,255,0.6);
+            font-size: 12px;
+        }
+
+        footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-logo-text { color: #FFFFFF; font-weight: 700; font-size: 16px; }
+
+        .footer-links { display: flex; gap: 30px; }
+        .footer-links a:hover { color: #FFFFFF; }
+
+        /* --- RESPONSIVE ADJUSTMENTS --- */
+        @media (max-width: 1024px) {
+            #hero h1 { font-size: 48px; }
+            #hero .container { grid-template-columns: 1fr; }
+            .hero-text { padding: 80px 40px; }
+            .hero-image-container { display: none; } /* Hide image on tablet/mobile for simplicity */
+            #calculator .container, .steps-grid, .dest-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAWIGACJA -->
+    <nav>
+        <div class="container">
+            <a href="#" class="logo-wrapper">
+                <div class="logo-icon">✈</div> <!-- Ikona samolotu (Forward, optimistic direction) -->
+                <div class="logo-text">
+                    <span class="logo-wordmark"><strong class="word-leaving">Leaving</strong><strong class="word-america">America</strong></span>
+                    <span class="logo-tagline">Calculate Your Next Chapter</span>
+                </div>
+            </a>
+            <div class="nav-links">
+                <a href="#destinations">Destinations</a>
+                <a href="#how-it-works">How it Works</a>
+                <a href="#resources">Resources</a>
+                <a href="#calculator" class="btn-pill btn-pill-primary">Calculate Free</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="hero">
+        <div class="container">
+            <!-- Left Side: Tekst -->
+            <div class="hero-text">
+                <h1>
+                    <span class="weight-thin">Your $90,000 salary</span>
+                    <span class="weight-bold">is worth $200,000 in Lisbon</span>
+                </h1>
+                <p class="hero-subtext">1 in 5 Americans want to move abroad. Find out how much further your money goes.</p>
+                
+                <div class="hero-stats">
+                    <div class="hero-stat-item"><strong>180,000</strong> Americans emigrated in 2025</div>
+                    <div class="hero-stat-item"><strong>$52,000/year</strong> average savings for remote workers</div>
+                </div>
+
+                <div class="hero-actions">
+                    <a href="#calculator" class="btn-pill btn-pill-primary">Calculate My Savings →</a>
+                    <a href="#destinations" class="hero-secondary-link">See top destinations</a>
+                </div>
+            </div>
+            
+            <!-- Right Side: Obraz -->
+            <div class="hero-image-container">
+                <!-- Kinowy obraz Lizbony przy zachodzie słońca -->
+                <img src="https://images.unsplash.com/photo-1543783207-ec64e4d95325?q=80&w=2670&auto=format&fit=crop" alt="Rooftops of Lisbon, Portugal at golden hour">
+                
+                <!-- Laptop z makietą kalkulatora (uproszczony obraz, można zastąpić lepszym zasobem) -->
+                <div style="position: absolute; bottom: 10%; left: 10%; width: 50%; transform: rotate(-5deg); filter: drop-shadow(0 20px 40px rgba(0,0,0,0.3));">
+                    <img src="https://images.unsplash.com/photo-1587614382231-d1590b002956?q=80&w=1000&auto=format&fit=crop" alt="Laptop open with calculator interface (blurred)" style="border-radius: 8px; transform: scale(1.1); filter: blur(1.5px);">
+                </div>
+
+                <div class="hero-image-overlay"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BAR ZE STATYSTYKAMI -->
+    <section id="stats-bar" class="section-alt">
+        <div class="container">
+            <div class="stat-bar-item">
+                <div class="stat-value">1,200+</div>
+                <div class="stat-label">Cities Tracked</div>
+            </div>
+            <div class="stat-bar-item">
+                <div class="stat-value">15+</div>
+                <div class="stat-label">Data Points</div>
+            </div>
+            <div class="stat-bar-item">
+                <div class="stat-value">Real-time</div>
+                <div class="stat-label">Currency Updated</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEKTSJA KALKULATORA -->
+    <section id="calculator" class="section-white">
+        <div class="container">
+            <div class="calc-description">
+                <h2>Calculate Your New Reality</h2>
+                <p style="color: var(--text-muted); max-width: 480px;">Enter your baseline and desired lifestyle to see the precise Geo-Arbitrage effect on your finances.</p>
+            </div>
+            <div class="calc-card white-card">
+                <div class="input-group">
+                    <label>Current Annual Income (USD)</label>
+                    <input type="number" class="input-field" value="90000" id="in-income">
+                </div>
+                <div class="input-group">
+                    <label>Current US Location (e.g., California)</label>
+                    <input type="text" class="input-field" value="New York" id="in-location">
+                </div>
+                <div class="input-group">
+                    <label>Desired Destination</label>
+                    <input type="text" class="input-field" value="Portugal (Lisbon)" id="in-destination">
+                </div>
+                
+                <div class="calc-result">
+                    <div class="result-label">Projected Annual Savings</div>
+                    <div class="result-value count-up" data-target="110000" data-prefix="$">$0</div>
+                    <p style="font-size: 11px; color: var(--text-muted);">Calculated based on current data for remote work and a family of four.</p>
+                </div>
+                
+                <div class="calc-actions">
+                    <button class="btn-pill btn-green">Calculate Detailed Report</button>
+                    <button class="btn-pill btn-secondary" style="border: 1px solid var(--border);">Share</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- JAK TO DZIAŁA -->
+    <section id="how-it-works" class="section-alt">
+        <div class="container">
+            <h2 style="font-size: 48px; font-weight: 700;">The LeavingAmerica Protocol</h2>
+            <p style="color: var(--text-muted); max-width: 480px; margin: 0 auto;">Our methodology relies on deep data ingestion and tax treaty analysis.</p>
+            
+            <div class="steps-grid">
+                <div class="step-item">
+                    <div class="step-icon">📋</div> <!-- Ikona listy/danych -->
+                    <h3>1. Data Input</h3>
+                    <p>Enter your financial baseline and lifestyle requirements.</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-icon">⚙</div> <!-- Ikona zębatki/algorytmu -->
+                    <h3>2. Analysis</h3>
+                    <p>Our algorithm simulates relocation to your chosen destination.</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-icon">📊</div> <!-- Ikona raportu/wykresu -->
+                    <h3>3. Report</h3>
+                    <p>Receive a comprehensive digital dossier quantifying your savings.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TOP MIEJSCA -->
+    <section id="destinations" class="section-white">
+        <div class="container">
+            <h2 style="font-size: 48px; font-weight: 700; text-align: center;">Top Optimized Destinations</h2>
+            
+            <div class="dest-grid">
+                <!-- Karta 1: Lisbon -->
+                <div class="dest-card white-card">
+                    <div class="dest-header">
+                        <div class="dest-name">Lisbon</div>
+                        <div class="dest-flag">🇵🇹</div>
+                    </div>
+                    <div class="dest-stats">
+                        COL Score: <strong>46.2</strong><br>
+                        Tax Treaty: <strong>NHR available</strong><br>
+                        Avg. Remote Savings: <strong>$58k/yr</strong>
+                    </div>
+                </div>
+                <!-- Karta 2: Berlin -->
+                <div class="dest-card white-card">
+                    <div class="dest-header">
+                        <div class="dest-name">Berlin</div>
+                        <div class="dest-flag">🇩🇪</div>
+                    </div>
+                    <div class="dest-stats">
+                        COL Score: <strong>65.1</strong><br>
+                        Tax Treaty: <strong>Available</strong><br>
+                        Avg. Remote Savings: <strong>$42k/yr</strong>
+                    </div>
+                </div>
+                <!-- Karta 3: Medellín -->
+                <div class="dest-card white-card">
+                    <div class="dest-header">
+                        <div class="dest-name">Medellín</div>
+                        <div class="dest-flag">🇨🇴</div>
+                    </div>
+                    <div class="dest-stats">
+                        COL Score: <strong>28.9</strong><br>
+                        Tax Treaty: <strong>In negotiation</strong><br>
+                        Avg. Remote Savings: <strong>$65k/yr</strong>
+                    </div>
+                </div>
+                <!-- Dodaj więcej kart miejsc, jeśli potrzeba -->
+            </div>
+        </div>
+    </section>
+
+    <!-- STOPKA -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo">
+                <span class="logo-icon" style="width: 24px; height: 24px; font-size: 12px; border-radius: 6px;">✈</span>
+                <span class="footer-logo-text">LeavingAmerica&trade;</span>
+            </div>
+            <div class="footer-links">
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Support</a>
+            </div>
+            <div class="copyright">&copy; 2025 LA Technologies, Inc. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT: ANIMOWANY LICZNIK -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const counters = document.querySelectorAll('.count-up');
+            
+            const startCounter = (counterEl) => {
+                const target = parseInt(counterEl.getAttribute('data-target'));
+                const prefix = counterEl.getAttribute('data-prefix') || '';
+                const suffix = counterEl.getAttribute('data-suffix') || '';
+                const duration = 2500; // Czas trwania 2.5 sekundy
+                const frameRate = 1000 / 60; // 60 klatek na sekundę
+                const totalFrames = Math.round(duration / frameRate);
+                
+                let currentFrame = 0;
+                
+                // Funkcja Ease Out Expo dla płynnego spowolnienia na końcu
+                const easeOutExpo = (t) => t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+
+                const animate = () => {
+                    currentFrame++;
+                    const progress = currentFrame / totalFrames;
+                    const easedProgress = easeOutExpo(progress);
+                    const currentValue = Math.round(target * easedProgress);
+                    
+                    counterEl.textContent = prefix + currentValue.toLocaleString() + suffix;
+                    
+                    if (currentFrame < totalFrames) {
+                        requestAnimationFrame(animate);
+                    } else {
+                        counterEl.textContent = prefix + target.toLocaleString() + suffix; // Upewnij się, że kończy na dokładnej wartości
+                    }
+                };
+                
+                requestAnimationFrame(animate);
+            };
+
+            // Użyj Intersection Observer, aby uruchomić licznik, gdy element jest widoczny
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+                        entry.target.classList.add('counted');
+                        startCounter(entry.target);
+                        // observer.unobserve(entry.target); // Możesz przestać obserwować po pierwszym uruchomieniu
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            counters.forEach(counter => observer.observe(counter));
+        });
+    </script>
+</body>
+</html>

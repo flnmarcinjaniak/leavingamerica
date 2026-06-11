@@ -1,0 +1,615 @@
+{
+  "lastUpdated": "2026-06-11",
+  "source": {
+    "safety": "Numbeo Safety Index (latest available) - numbeo.com",
+    "healthcare": "Numbeo Health Care Index (latest available) - numbeo.com",
+    "pollution": "Numbeo Pollution Index (latest available) - numbeo.com",
+    "traffic": "Numbeo Traffic Index (latest available) - numbeo.com",
+    "unemployment": "World Bank ILO Unemployment (latest available) - data.worldbank.org",
+    "gdpGrowth": "World Bank GDP Growth (latest available) - data.worldbank.org",
+    "happiness": "World Happiness Report via Our World in Data (latest available) - ourworldindata.org",
+    "internet": "Speedtest Global Index via Wikipedia (latest available) - en.wikipedia.org/wiki/List_of_countries_by_Internet_connection_speeds"
+  },
+  "countries": {
+    "portugal": {
+      "safety": 7,
+      "healthcare": 9,
+      "pollution": 8,
+      "traffic": 8,
+      "unemployment": 8,
+      "gdpGrowth": 7,
+      "happiness": 6,
+      "internet": 9,
+      "raw": {
+        "safety": 67.0,
+        "healthcare": 130.8,
+        "pollution": 48.0,
+        "traffic": 3618.6,
+        "unemployment": 6.16,
+        "gdpGrowth": 2.14,
+        "happiness": 6.029,
+        "internet": 243.84
+      }
+    },
+    "spain": {
+      "safety": 6,
+      "healthcare": 9,
+      "pollution": 8,
+      "traffic": 9,
+      "unemployment": 6,
+      "gdpGrowth": 8,
+      "happiness": 7,
+      "internet": 10,
+      "raw": {
+        "safety": 62.4,
+        "healthcare": 141.7,
+        "pollution": 56.8,
+        "traffic": 2814.6,
+        "unemployment": 10.38,
+        "gdpGrowth": 3.46,
+        "happiness": 6.54,
+        "internet": 277.98
+      }
+    },
+    "mexico": {
+      "safety": 5,
+      "healthcare": 9,
+      "pollution": 5,
+      "traffic": 5,
+      "unemployment": 10,
+      "gdpGrowth": 6,
+      "happiness": 7,
+      "internet": 7,
+      "raw": {
+        "safety": 47.1,
+        "healthcare": 130.3,
+        "pollution": 98.8,
+        "traffic": 6850.9,
+        "unemployment": 2.67,
+        "gdpGrowth": 1.43,
+        "happiness": 6.972,
+        "internet": 104.25
+      }
+    },
+    "germany": {
+      "safety": 6,
+      "healthcare": 9,
+      "pollution": 8,
+      "traffic": 9,
+      "unemployment": 9,
+      "gdpGrowth": 4,
+      "happiness": 7,
+      "internet": 7,
+      "raw": {
+        "safety": 61.6,
+        "healthcare": 131.7,
+        "pollution": 45.3,
+        "traffic": 2343.4,
+        "unemployment": 3.71,
+        "gdpGrowth": -0.5,
+        "happiness": 6.882,
+        "internet": 103.72
+      }
+    },
+    "italy": {
+      "safety": 5,
+      "healthcare": 8,
+      "pollution": 5,
+      "traffic": 7,
+      "unemployment": 8,
+      "gdpGrowth": 5,
+      "happiness": 7,
+      "internet": 7,
+      "raw": {
+        "safety": 52.7,
+        "healthcare": 117.3,
+        "pollution": 90.0,
+        "traffic": 4065.8,
+        "unemployment": 6.39,
+        "gdpGrowth": 0.69,
+        "happiness": 6.574,
+        "internet": 117.11
+      }
+    },
+    "greece": {
+      "safety": 5,
+      "healthcare": 7,
+      "pollution": 6,
+      "traffic": 7,
+      "unemployment": 7,
+      "gdpGrowth": 7,
+      "happiness": 6,
+      "internet": 7,
+      "raw": {
+        "safety": 53.8,
+        "healthcare": 105.2,
+        "pollution": 85.8,
+        "traffic": 4305.0,
+        "unemployment": 8.54,
+        "gdpGrowth": 2.09,
+        "happiness": 5.697,
+        "internet": 94.29
+      }
+    },
+    "costa-rica": {
+      "safety": 5,
+      "healthcare": 8,
+      "pollution": 7,
+      "traffic": 3,
+      "unemployment": 8,
+      "gdpGrowth": 9,
+      "happiness": 7,
+      "internet": 8,
+      "raw": {
+        "safety": 46.1,
+        "healthcare": 117.1,
+        "pollution": 70.4,
+        "traffic": 9516.5,
+        "unemployment": 6.84,
+        "gdpGrowth": 4.32,
+        "happiness": 7.439,
+        "internet": 169.03
+      }
+    },
+    "panama": {
+      "safety": 6,
+      "healthcare": 7,
+      "pollution": 5,
+      "traffic": 5,
+      "unemployment": 7,
+      "gdpGrowth": 7,
+      "happiness": 7,
+      "internet": 9,
+      "raw": {
+        "safety": 57.2,
+        "healthcare": 108.5,
+        "pollution": 97.0,
+        "traffic": 6953.3,
+        "unemployment": 8.36,
+        "gdpGrowth": 2.75,
+        "happiness": 6.547,
+        "internet": 219.49
+      }
+    },
+    "thailand": {
+      "safety": 6,
+      "healthcare": 9,
+      "pollution": 4,
+      "traffic": 5,
+      "unemployment": 10,
+      "gdpGrowth": 7,
+      "happiness": 6,
+      "internet": 10,
+      "raw": {
+        "safety": 63.4,
+        "healthcare": 141.1,
+        "pollution": 133.0,
+        "traffic": 6704.0,
+        "unemployment": 0.78,
+        "gdpGrowth": 2.54,
+        "happiness": 6.296,
+        "internet": 279.65
+      }
+    },
+    "malaysia": {
+      "safety": 5,
+      "healthcare": 8,
+      "pollution": 5,
+      "traffic": 4,
+      "unemployment": 9,
+      "gdpGrowth": 10,
+      "happiness": 6,
+      "internet": 8,
+      "raw": {
+        "safety": 52.0,
+        "healthcare": 127.5,
+        "pollution": 103.2,
+        "traffic": 7710.3,
+        "unemployment": 3.76,
+        "gdpGrowth": 5.11,
+        "happiness": 6.005,
+        "internet": 168.07
+      }
+    },
+    "indonesia": {
+      "safety": 5,
+      "healthcare": 7,
+      "pollution": 4,
+      "traffic": 5,
+      "unemployment": 9,
+      "gdpGrowth": 10,
+      "happiness": 6,
+      "internet": 5,
+      "raw": {
+        "safety": 53.6,
+        "healthcare": 108.6,
+        "pollution": 117.6,
+        "traffic": 6920.1,
+        "unemployment": 3.24,
+        "gdpGrowth": 5.03,
+        "happiness": 5.617,
+        "internet": 45.91
+      }
+    },
+    "colombia": {
+      "safety": 4,
+      "healthcare": 8,
+      "pollution": 5,
+      "traffic": 6,
+      "unemployment": 7,
+      "gdpGrowth": 6,
+      "happiness": 6,
+      "internet": 9,
+      "raw": {
+        "safety": 38.7,
+        "healthcare": 123.9,
+        "pollution": 109.7,
+        "traffic": 5013.1,
+        "unemployment": 8.29,
+        "gdpGrowth": 1.6,
+        "happiness": 6.04,
+        "internet": 214.3
+      }
+    },
+    "croatia": {
+      "safety": 8,
+      "healthcare": 8,
+      "pollution": 8,
+      "traffic": 9,
+      "unemployment": 8,
+      "gdpGrowth": 8,
+      "happiness": 6,
+      "internet": 8,
+      "raw": {
+        "safety": 75.7,
+        "healthcare": 118.7,
+        "pollution": 52.2,
+        "traffic": 2741.4,
+        "unemployment": 5.0,
+        "gdpGrowth": 3.83,
+        "happiness": 6.009,
+        "internet": 136.75
+      }
+    },
+    "czech-republic": {
+      "safety": 7,
+      "healthcare": 9,
+      "pollution": 8,
+      "traffic": 10,
+      "unemployment": 10,
+      "gdpGrowth": 6,
+      "happiness": 7,
+      "internet": 7,
+      "raw": {
+        "safety": 73.6,
+        "healthcare": 139.4,
+        "pollution": 55.6,
+        "traffic": 1817.6,
+        "unemployment": 2.83,
+        "gdpGrowth": 1.23,
+        "happiness": 6.821,
+        "internet": 92.71
+      }
+    },
+    "poland": {
+      "safety": 7,
+      "healthcare": 7,
+      "pollution": 5,
+      "traffic": 8,
+      "unemployment": 10,
+      "gdpGrowth": 8,
+      "happiness": 7,
+      "internet": 9,
+      "raw": {
+        "safety": 71.3,
+        "healthcare": 103.1,
+        "pollution": 98.2,
+        "traffic": 3245.8,
+        "unemployment": 2.98,
+        "gdpGrowth": 3.03,
+        "happiness": 6.768,
+        "internet": 223.25
+      }
+    },
+    "hungary": {
+      "safety": 7,
+      "healthcare": 6,
+      "pollution": 6,
+      "traffic": 9,
+      "unemployment": 9,
+      "gdpGrowth": 5,
+      "happiness": 6,
+      "internet": 10,
+      "raw": {
+        "safety": 66.5,
+        "healthcare": 97.5,
+        "pollution": 80.0,
+        "traffic": 2776.9,
+        "unemployment": 4.52,
+        "gdpGrowth": 0.56,
+        "happiness": 5.937,
+        "internet": 251.72
+      }
+    },
+    "romania": {
+      "safety": 7,
+      "healthcare": 7,
+      "pollution": 5,
+      "traffic": 8,
+      "unemployment": 8,
+      "gdpGrowth": 5,
+      "happiness": 7,
+      "internet": 10,
+      "raw": {
+        "safety": 67.2,
+        "healthcare": 99.5,
+        "pollution": 99.7,
+        "traffic": 3613.6,
+        "unemployment": 5.99,
+        "gdpGrowth": 0.92,
+        "happiness": 6.629,
+        "internet": 283.06
+      }
+    },
+    "bulgaria": {
+      "safety": 6,
+      "healthcare": 7,
+      "pollution": 4,
+      "traffic": 9,
+      "unemployment": 9,
+      "gdpGrowth": 8,
+      "happiness": 6,
+      "internet": 7,
+      "raw": {
+        "safety": 64.5,
+        "healthcare": 103.6,
+        "pollution": 112.7,
+        "traffic": 2708.7,
+        "unemployment": 3.54,
+        "gdpGrowth": 3.39,
+        "happiness": 5.703,
+        "internet": 94.44
+      }
+    },
+    "vietnam": {
+      "safety": 6,
+      "healthcare": 7,
+      "pollution": 3,
+      "traffic": 8,
+      "unemployment": 10,
+      "gdpGrowth": 10,
+      "happiness": 6,
+      "internet": 10,
+      "raw": {
+        "safety": 59.9,
+        "healthcare": 109.5,
+        "pollution": 149.5,
+        "traffic": 3388.9,
+        "unemployment": 1.52,
+        "gdpGrowth": 7.09,
+        "happiness": 6.428,
+        "internet": 281.72
+      }
+    },
+    "japan": {
+      "safety": 8,
+      "healthcare": 10,
+      "pollution": 7,
+      "traffic": 9,
+      "unemployment": 10,
+      "gdpGrowth": 5,
+      "happiness": 6,
+      "internet": 10,
+      "raw": {
+        "safety": 77.2,
+        "healthcare": 145.9,
+        "pollution": 60.8,
+        "traffic": 2121.6,
+        "unemployment": 2.45,
+        "gdpGrowth": 0.1,
+        "happiness": 6.13,
+        "internet": 255.27
+      }
+    },
+    "south-korea": {
+      "safety": 7,
+      "healthcare": 10,
+      "pollution": 5,
+      "traffic": 9,
+      "unemployment": 10,
+      "gdpGrowth": 7,
+      "happiness": 6,
+      "internet": 10,
+      "raw": {
+        "safety": 71.0,
+        "healthcare": 151.7,
+        "pollution": 102.5,
+        "traffic": 2721.6,
+        "unemployment": 2.68,
+        "gdpGrowth": 2.0,
+        "happiness": 6.04,
+        "internet": 257.76
+      }
+    },
+    "australia": {
+      "safety": 5,
+      "healthcare": 9,
+      "pollution": 9,
+      "traffic": 5,
+      "unemployment": 9,
+      "gdpGrowth": 6,
+      "happiness": 7,
+      "internet": 8,
+      "raw": {
+        "safety": 52.5,
+        "healthcare": 130.3,
+        "pollution": 44.6,
+        "traffic": 6468.9,
+        "unemployment": 4.09,
+        "gdpGrowth": 1.37,
+        "happiness": 6.916,
+        "internet": 154.09
+      }
+    },
+    "new-zealand": {
+      "safety": 5,
+      "healthcare": 8,
+      "pollution": 9,
+      "traffic": 6,
+      "unemployment": 8,
+      "gdpGrowth": 6,
+      "happiness": 7,
+      "internet": 9,
+      "raw": {
+        "safety": 51.2,
+        "healthcare": 123.3,
+        "pollution": 44.8,
+        "traffic": 5531.0,
+        "unemployment": 5.08,
+        "gdpGrowth": 1.29,
+        "happiness": 6.995,
+        "internet": 201.91
+      }
+    },
+    "canada": {
+      "safety": 5,
+      "healthcare": 8,
+      "pollution": 8,
+      "traffic": 6,
+      "unemployment": 8,
+      "gdpGrowth": 6,
+      "happiness": 7,
+      "internet": 10,
+      "raw": {
+        "safety": 54.4,
+        "healthcare": 125.9,
+        "pollution": 48.4,
+        "traffic": 5370.2,
+        "unemployment": 6.91,
+        "gdpGrowth": 1.55,
+        "happiness": 6.741,
+        "internet": 277.7
+      }
+    },
+    "ireland": {
+      "safety": 5,
+      "healthcare": 6,
+      "pollution": 8,
+      "traffic": 7,
+      "unemployment": 9,
+      "gdpGrowth": 7,
+      "happiness": 7,
+      "internet": 9,
+      "raw": {
+        "safety": 51.0,
+        "healthcare": 93.1,
+        "pollution": 57.7,
+        "traffic": 4272.1,
+        "unemployment": 4.63,
+        "gdpGrowth": 2.6,
+        "happiness": 6.928,
+        "internet": 220.71
+      }
+    },
+    "netherlands": {
+      "safety": 7,
+      "healthcare": 10,
+      "pollution": 9,
+      "traffic": 10,
+      "unemployment": 9,
+      "gdpGrowth": 6,
+      "happiness": 7,
+      "internet": 9,
+      "raw": {
+        "safety": 74.5,
+        "healthcare": 149.4,
+        "pollution": 33.1,
+        "traffic": 1852.4,
+        "unemployment": 3.87,
+        "gdpGrowth": 1.08,
+        "happiness": 7.223,
+        "internet": 237.66
+      }
+    },
+    "france": {
+      "safety": 4,
+      "healthcare": 9,
+      "pollution": 7,
+      "traffic": 8,
+      "unemployment": 7,
+      "gdpGrowth": 6,
+      "happiness": 7,
+      "internet": 10,
+      "raw": {
+        "safety": 44.2,
+        "healthcare": 140.5,
+        "pollution": 72.6,
+        "traffic": 3374.8,
+        "unemployment": 7.54,
+        "gdpGrowth": 1.19,
+        "happiness": 6.586,
+        "internet": 352.35
+      }
+    },
+    "argentina": {
+      "safety": 4,
+      "healthcare": 8,
+      "pollution": 6,
+      "traffic": 7,
+      "unemployment": 7,
+      "gdpGrowth": 3,
+      "happiness": 6,
+      "internet": 7,
+      "raw": {
+        "safety": 36.8,
+        "healthcare": 122.7,
+        "pollution": 85.8,
+        "traffic": 4181.1,
+        "unemployment": 7.14,
+        "gdpGrowth": -1.34,
+        "happiness": 6.43,
+        "internet": 111.54
+      }
+    },
+    "ecuador": {
+      "safety": 4,
+      "healthcare": 9,
+      "pollution": 5,
+      "traffic": 6,
+      "unemployment": 9,
+      "gdpGrowth": 3,
+      "happiness": 6,
+      "internet": 8,
+      "raw": {
+        "safety": 38.1,
+        "healthcare": 141.0,
+        "pollution": 100.9,
+        "traffic": 5670.5,
+        "unemployment": 3.31,
+        "gdpGrowth": -2.0,
+        "happiness": 6.144,
+        "internet": 169.66
+      }
+    },
+    "morocco": {
+      "safety": 5,
+      "healthcare": 5,
+      "pollution": 4,
+      "traffic": 8,
+      "unemployment": 6,
+      "gdpGrowth": 8,
+      "happiness": 5,
+      "internet": 5,
+      "raw": {
+        "safety": 53.0,
+        "healthcare": 80.2,
+        "pollution": 118.9,
+        "traffic": 3530.3,
+        "unemployment": 9,
+        "gdpGrowth": 3.79,
+        "happiness": 4.646,
+        "internet": 56.22
+      }
+    }
+  }
+}

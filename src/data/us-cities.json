@@ -1,0 +1,502 @@
+[
+  {
+    "id": "new-york",
+    "name": "New York City",
+    "state": "New York",
+    "costIndex": 187,
+    "averageSalary": 85000,
+    "rentOneBedroomAverage": 3500,
+    "monthlyExpensesSingle": 4200,
+    "popularDestinations": ["Portugal", "Spain", "Italy", "France", "Ireland"]
+  },
+  {
+    "id": "los-angeles",
+    "name": "Los Angeles",
+    "state": "California",
+    "costIndex": 173,
+    "averageSalary": 78000,
+    "rentOneBedroomAverage": 2800,
+    "monthlyExpensesSingle": 3800,
+    "popularDestinations": ["Mexico", "Spain", "Portugal", "Japan", "Thailand"]
+  },
+  {
+    "id": "chicago",
+    "name": "Chicago",
+    "state": "Illinois",
+    "costIndex": 107,
+    "averageSalary": 70000,
+    "rentOneBedroomAverage": 1800,
+    "monthlyExpensesSingle": 2800,
+    "popularDestinations": ["Portugal", "Poland", "Italy", "Spain", "Germany"]
+  },
+  {
+    "id": "houston",
+    "name": "Houston",
+    "state": "Texas",
+    "costIndex": 95,
+    "averageSalary": 72000,
+    "rentOneBedroomAverage": 1350,
+    "monthlyExpensesSingle": 2500,
+    "popularDestinations": ["Mexico", "Colombia", "Costa Rica", "Portugal", "Spain"]
+  },
+  {
+    "id": "phoenix",
+    "name": "Phoenix",
+    "state": "Arizona",
+    "costIndex": 103,
+    "averageSalary": 63000,
+    "rentOneBedroomAverage": 1450,
+    "monthlyExpensesSingle": 2600,
+    "popularDestinations": ["Mexico", "Costa Rica", "Portugal", "Spain", "Colombia"]
+  },
+  {
+    "id": "philadelphia",
+    "name": "Philadelphia",
+    "state": "Pennsylvania",
+    "costIndex": 108,
+    "averageSalary": 68000,
+    "rentOneBedroomAverage": 1700,
+    "monthlyExpensesSingle": 2700,
+    "popularDestinations": ["Portugal", "Italy", "Spain", "Ireland", "France"]
+  },
+  {
+    "id": "san-antonio",
+    "name": "San Antonio",
+    "state": "Texas",
+    "costIndex": 89,
+    "averageSalary": 58000,
+    "rentOneBedroomAverage": 1200,
+    "monthlyExpensesSingle": 2300,
+    "popularDestinations": ["Mexico", "Spain", "Costa Rica", "Colombia", "Portugal"]
+  },
+  {
+    "id": "san-diego",
+    "name": "San Diego",
+    "state": "California",
+    "costIndex": 155,
+    "averageSalary": 75000,
+    "rentOneBedroomAverage": 2500,
+    "monthlyExpensesSingle": 3500,
+    "popularDestinations": ["Mexico", "Spain", "Portugal", "Costa Rica", "Colombia"]
+  },
+  {
+    "id": "dallas",
+    "name": "Dallas",
+    "state": "Texas",
+    "costIndex": 102,
+    "averageSalary": 70000,
+    "rentOneBedroomAverage": 1600,
+    "monthlyExpensesSingle": 2700,
+    "popularDestinations": ["Mexico", "Portugal", "Spain", "Colombia", "Costa Rica"]
+  },
+  {
+    "id": "san-jose",
+    "name": "San Jose",
+    "state": "California",
+    "costIndex": 185,
+    "averageSalary": 120000,
+    "rentOneBedroomAverage": 2900,
+    "monthlyExpensesSingle": 4000,
+    "popularDestinations": ["Japan", "Portugal", "South Korea", "Spain", "Thailand"]
+  },
+  {
+    "id": "austin",
+    "name": "Austin",
+    "state": "Texas",
+    "costIndex": 118,
+    "averageSalary": 78000,
+    "rentOneBedroomAverage": 1900,
+    "monthlyExpensesSingle": 2900,
+    "popularDestinations": ["Mexico", "Portugal", "Spain", "Colombia", "Costa Rica"]
+  },
+  {
+    "id": "jacksonville",
+    "name": "Jacksonville",
+    "state": "Florida",
+    "costIndex": 92,
+    "averageSalary": 58000,
+    "rentOneBedroomAverage": 1300,
+    "monthlyExpensesSingle": 2400,
+    "popularDestinations": ["Mexico", "Costa Rica", "Portugal", "Colombia", "Spain"]
+  },
+  {
+    "id": "fort-worth",
+    "name": "Fort Worth",
+    "state": "Texas",
+    "costIndex": 97,
+    "averageSalary": 63000,
+    "rentOneBedroomAverage": 1400,
+    "monthlyExpensesSingle": 2500,
+    "popularDestinations": ["Mexico", "Spain", "Portugal", "Colombia", "Costa Rica"]
+  },
+  {
+    "id": "columbus",
+    "name": "Columbus",
+    "state": "Ohio",
+    "costIndex": 96,
+    "averageSalary": 62000,
+    "rentOneBedroomAverage": 1200,
+    "monthlyExpensesSingle": 2300,
+    "popularDestinations": ["Germany", "Portugal", "Spain", "Italy", "Mexico"]
+  },
+  {
+    "id": "charlotte",
+    "name": "Charlotte",
+    "state": "North Carolina",
+    "costIndex": 103,
+    "averageSalary": 68000,
+    "rentOneBedroomAverage": 1500,
+    "monthlyExpensesSingle": 2600,
+    "popularDestinations": ["Portugal", "Spain", "Mexico", "Colombia", "Costa Rica"]
+  },
+  {
+    "id": "indianapolis",
+    "name": "Indianapolis",
+    "state": "Indiana",
+    "costIndex": 90,
+    "averageSalary": 60000,
+    "rentOneBedroomAverage": 1100,
+    "monthlyExpensesSingle": 2200,
+    "popularDestinations": ["Portugal", "Germany", "Spain", "Italy", "Mexico"]
+  },
+  {
+    "id": "san-francisco",
+    "name": "San Francisco",
+    "state": "California",
+    "costIndex": 198,
+    "averageSalary": 125000,
+    "rentOneBedroomAverage": 3200,
+    "monthlyExpensesSingle": 4500,
+    "popularDestinations": ["Japan", "Portugal", "Spain", "Thailand", "South Korea"]
+  },
+  {
+    "id": "seattle",
+    "name": "Seattle",
+    "state": "Washington",
+    "costIndex": 160,
+    "averageSalary": 105000,
+    "rentOneBedroomAverage": 2400,
+    "monthlyExpensesSingle": 3600,
+    "popularDestinations": ["Japan", "Portugal", "Spain", "Canada", "South Korea"]
+  },
+  {
+    "id": "denver",
+    "name": "Denver",
+    "state": "Colorado",
+    "costIndex": 128,
+    "averageSalary": 75000,
+    "rentOneBedroomAverage": 2000,
+    "monthlyExpensesSingle": 3000,
+    "popularDestinations": ["Mexico", "Portugal", "Spain", "Colombia", "Costa Rica"]
+  },
+  {
+    "id": "nashville",
+    "name": "Nashville",
+    "state": "Tennessee",
+    "costIndex": 110,
+    "averageSalary": 63000,
+    "rentOneBedroomAverage": 1750,
+    "monthlyExpensesSingle": 2700,
+    "popularDestinations": ["Portugal", "Spain", "Mexico", "Italy", "Costa Rica"]
+  },
+  {
+    "id": "oklahoma-city",
+    "name": "Oklahoma City",
+    "state": "Oklahoma",
+    "costIndex": 85,
+    "averageSalary": 56000,
+    "rentOneBedroomAverage": 950,
+    "monthlyExpensesSingle": 2100,
+    "popularDestinations": ["Mexico", "Costa Rica", "Portugal", "Spain", "Colombia"]
+  },
+  {
+    "id": "el-paso",
+    "name": "El Paso",
+    "state": "Texas",
+    "costIndex": 83,
+    "averageSalary": 48000,
+    "rentOneBedroomAverage": 950,
+    "monthlyExpensesSingle": 2000,
+    "popularDestinations": ["Mexico", "Spain", "Portugal", "Colombia", "Costa Rica"]
+  },
+  {
+    "id": "washington-dc",
+    "name": "Washington D.C.",
+    "state": "District of Columbia",
+    "costIndex": 152,
+    "averageSalary": 95000,
+    "rentOneBedroomAverage": 2600,
+    "monthlyExpensesSingle": 3800,
+    "popularDestinations": ["Portugal", "France", "Spain", "Italy", "Morocco"]
+  },
+  {
+    "id": "las-vegas",
+    "name": "Las Vegas",
+    "state": "Nevada",
+    "costIndex": 107,
+    "averageSalary": 58000,
+    "rentOneBedroomAverage": 1500,
+    "monthlyExpensesSingle": 2600,
+    "popularDestinations": ["Mexico", "Portugal", "Spain", "Thailand", "Colombia"]
+  },
+  {
+    "id": "louisville",
+    "name": "Louisville",
+    "state": "Kentucky",
+    "costIndex": 88,
+    "averageSalary": 58000,
+    "rentOneBedroomAverage": 1050,
+    "monthlyExpensesSingle": 2100,
+    "popularDestinations": ["Portugal", "Spain", "Mexico", "Costa Rica", "Colombia"]
+  },
+  {
+    "id": "memphis",
+    "name": "Memphis",
+    "state": "Tennessee",
+    "costIndex": 85,
+    "averageSalary": 52000,
+    "rentOneBedroomAverage": 1000,
+    "monthlyExpensesSingle": 2100,
+    "popularDestinations": ["Mexico", "Portugal", "Spain", "Costa Rica", "Colombia"]
+  },
+  {
+    "id": "portland",
+    "name": "Portland",
+    "state": "Oregon",
+    "costIndex": 132,
+    "averageSalary": 72000,
+    "rentOneBedroomAverage": 1800,
+    "monthlyExpensesSingle": 3000,
+    "popularDestinations": ["Portugal", "Spain", "Japan", "Mexico", "Thailand"]
+  },
+  {
+    "id": "baltimore",
+    "name": "Baltimore",
+    "state": "Maryland",
+    "costIndex": 108,
+    "averageSalary": 68000,
+    "rentOneBedroomAverage": 1500,
+    "monthlyExpensesSingle": 2700,
+    "popularDestinations": ["Portugal", "Spain", "Italy", "France", "Morocco"]
+  },
+  {
+    "id": "milwaukee",
+    "name": "Milwaukee",
+    "state": "Wisconsin",
+    "costIndex": 95,
+    "averageSalary": 58000,
+    "rentOneBedroomAverage": 1100,
+    "monthlyExpensesSingle": 2300,
+    "popularDestinations": ["Germany", "Poland", "Portugal", "Spain", "Italy"]
+  },
+  {
+    "id": "albuquerque",
+    "name": "Albuquerque",
+    "state": "New Mexico",
+    "costIndex": 90,
+    "averageSalary": 55000,
+    "rentOneBedroomAverage": 1050,
+    "monthlyExpensesSingle": 2200,
+    "popularDestinations": ["Mexico", "Spain", "Portugal", "Colombia", "Costa Rica"]
+  },
+  {
+    "id": "tucson",
+    "name": "Tucson",
+    "state": "Arizona",
+    "costIndex": 92,
+    "averageSalary": 52000,
+    "rentOneBedroomAverage": 1000,
+    "monthlyExpensesSingle": 2200,
+    "popularDestinations": ["Mexico", "Spain", "Portugal", "Colombia", "Costa Rica"]
+  },
+  {
+    "id": "fresno",
+    "name": "Fresno",
+    "state": "California",
+    "costIndex": 95,
+    "averageSalary": 52000,
+    "rentOneBedroomAverage": 1100,
+    "monthlyExpensesSingle": 2300,
+    "popularDestinations": ["Mexico", "Portugal", "Spain", "Italy", "Colombia"]
+  },
+  {
+    "id": "sacramento",
+    "name": "Sacramento",
+    "state": "California",
+    "costIndex": 128,
+    "averageSalary": 70000,
+    "rentOneBedroomAverage": 1800,
+    "monthlyExpensesSingle": 2900,
+    "popularDestinations": ["Mexico", "Portugal", "Japan", "Spain", "Thailand"]
+  },
+  {
+    "id": "kansas-city",
+    "name": "Kansas City",
+    "state": "Missouri",
+    "costIndex": 90,
+    "averageSalary": 60000,
+    "rentOneBedroomAverage": 1100,
+    "monthlyExpensesSingle": 2200,
+    "popularDestinations": ["Mexico", "Portugal", "Spain", "Colombia", "Costa Rica"]
+  },
+  {
+    "id": "mesa",
+    "name": "Mesa",
+    "state": "Arizona",
+    "costIndex": 100,
+    "averageSalary": 60000,
+    "rentOneBedroomAverage": 1350,
+    "monthlyExpensesSingle": 2400,
+    "popularDestinations": ["Mexico", "Portugal", "Spain", "Costa Rica", "Colombia"]
+  },
+  {
+    "id": "atlanta",
+    "name": "Atlanta",
+    "state": "Georgia",
+    "costIndex": 108,
+    "averageSalary": 72000,
+    "rentOneBedroomAverage": 1800,
+    "monthlyExpensesSingle": 2800,
+    "popularDestinations": ["Portugal", "Spain", "Mexico", "Colombia", "Costa Rica"]
+  },
+  {
+    "id": "omaha",
+    "name": "Omaha",
+    "state": "Nebraska",
+    "costIndex": 87,
+    "averageSalary": 60000,
+    "rentOneBedroomAverage": 1050,
+    "monthlyExpensesSingle": 2100,
+    "popularDestinations": ["Mexico", "Portugal", "Spain", "Germany", "Colombia"]
+  },
+  {
+    "id": "colorado-springs",
+    "name": "Colorado Springs",
+    "state": "Colorado",
+    "costIndex": 105,
+    "averageSalary": 62000,
+    "rentOneBedroomAverage": 1450,
+    "monthlyExpensesSingle": 2500,
+    "popularDestinations": ["Mexico", "Portugal", "Spain", "Costa Rica", "Colombia"]
+  },
+  {
+    "id": "raleigh",
+    "name": "Raleigh",
+    "state": "North Carolina",
+    "costIndex": 107,
+    "averageSalary": 72000,
+    "rentOneBedroomAverage": 1600,
+    "monthlyExpensesSingle": 2600,
+    "popularDestinations": ["Portugal", "Spain", "Italy", "France", "Germany"]
+  },
+  {
+    "id": "long-beach",
+    "name": "Long Beach",
+    "state": "California",
+    "costIndex": 160,
+    "averageSalary": 72000,
+    "rentOneBedroomAverage": 2400,
+    "monthlyExpensesSingle": 3600,
+    "popularDestinations": ["Mexico", "Japan", "Portugal", "Spain", "Thailand"]
+  },
+  {
+    "id": "virginia-beach",
+    "name": "Virginia Beach",
+    "state": "Virginia",
+    "costIndex": 100,
+    "averageSalary": 62000,
+    "rentOneBedroomAverage": 1400,
+    "monthlyExpensesSingle": 2500,
+    "popularDestinations": ["Portugal", "Spain", "Italy", "France", "Costa Rica"]
+  },
+  {
+    "id": "minneapolis",
+    "name": "Minneapolis",
+    "state": "Minnesota",
+    "costIndex": 112,
+    "averageSalary": 72000,
+    "rentOneBedroomAverage": 1600,
+    "monthlyExpensesSingle": 2700,
+    "popularDestinations": ["Portugal", "Germany", "Spain", "Mexico", "Netherlands"]
+  },
+  {
+    "id": "tampa",
+    "name": "Tampa",
+    "state": "Florida",
+    "costIndex": 105,
+    "averageSalary": 63000,
+    "rentOneBedroomAverage": 1700,
+    "monthlyExpensesSingle": 2700,
+    "popularDestinations": ["Portugal", "Spain", "Mexico", "Colombia", "Costa Rica"]
+  },
+  {
+    "id": "new-orleans",
+    "name": "New Orleans",
+    "state": "Louisiana",
+    "costIndex": 98,
+    "averageSalary": 55000,
+    "rentOneBedroomAverage": 1500,
+    "monthlyExpensesSingle": 2500,
+    "popularDestinations": ["France", "Mexico", "Spain", "Portugal", "Colombia"]
+  },
+  {
+    "id": "arlington",
+    "name": "Arlington",
+    "state": "Texas",
+    "costIndex": 95,
+    "averageSalary": 65000,
+    "rentOneBedroomAverage": 1400,
+    "monthlyExpensesSingle": 2500,
+    "popularDestinations": ["Mexico", "Portugal", "Spain", "Colombia", "Costa Rica"]
+  },
+  {
+    "id": "bakersfield",
+    "name": "Bakersfield",
+    "state": "California",
+    "costIndex": 100,
+    "averageSalary": 55000,
+    "rentOneBedroomAverage": 1150,
+    "monthlyExpensesSingle": 2300,
+    "popularDestinations": ["Mexico", "Portugal", "Spain", "Colombia", "Costa Rica"]
+  },
+  {
+    "id": "honolulu",
+    "name": "Honolulu",
+    "state": "Hawaii",
+    "costIndex": 180,
+    "averageSalary": 72000,
+    "rentOneBedroomAverage": 2800,
+    "monthlyExpensesSingle": 4000,
+    "popularDestinations": ["Japan", "South Korea", "Thailand", "Australia", "Indonesia (Bali)"]
+  },
+  {
+    "id": "anaheim",
+    "name": "Anaheim",
+    "state": "California",
+    "costIndex": 162,
+    "averageSalary": 68000,
+    "rentOneBedroomAverage": 2400,
+    "monthlyExpensesSingle": 3500,
+    "popularDestinations": ["Mexico", "Japan", "Portugal", "Spain", "Thailand"]
+  },
+  {
+    "id": "aurora",
+    "name": "Aurora",
+    "state": "Colorado",
+    "costIndex": 115,
+    "averageSalary": 66000,
+    "rentOneBedroomAverage": 1700,
+    "monthlyExpensesSingle": 2700,
+    "popularDestinations": ["Mexico", "Portugal", "Spain", "Colombia", "Costa Rica"]
+  },
+  {
+    "id": "santa-ana",
+    "name": "Santa Ana",
+    "state": "California",
+    "costIndex": 162,
+    "averageSalary": 60000,
+    "rentOneBedroomAverage": 2200,
+    "monthlyExpensesSingle": 3200,
+    "popularDestinations": ["Mexico", "Spain", "Portugal", "Colombia", "Costa Rica"]
+  }
+]

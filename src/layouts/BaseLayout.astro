@@ -1,0 +1,231 @@
+---
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav class="nav">
+      <div class="container nav-inner">
+        <a href="/" class="nav-logo">
+          <span class="nav-logo-icon">✈</span>
+          <span class="nav-logo-wordmark">
+            <span class="nav-logo-leaving">Leaving</span><span class="nav-logo-america">America</span>
+          </span>
+        </a>
+
+        <div class="nav-links">
+          <a href="/tools/salary" class="nav-link">Calculator</a>
+          <a href="/tools/visa" class="nav-link">Visa Explorer</a>
+          <a href="/tools/quiz" class="nav-link">Quiz</a>
+          <a href="/countries" class="nav-link">Countries</a>
+        </div>
+
+        <a href="/tools/salary" class="btn-pill btn-pill-primary">Calculate Free</a>
+      </div>
+    </nav>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>© 2026 LeavingAmerica. For informational purposes only. Not legal, tax, or financial advice.</p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --bg-base: #ffffff;
+    --bg-alt: #f8fafc;
+    --border: #e2e8f0;
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    --accent: #2563eb;
+    --accent-hover: #1d4ed8;
+    --success: #16a34a;
+    --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.08);
+    --transition: all 0.3s ease;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    font-family: 'Manrope', sans-serif;
+    background: white;
+    color: #0f172a;
+    scroll-behavior: smooth;
+  }
+
+  .container {
+    max-width: 1280px;
+    margin: auto;
+    padding: 0 40px;
+  }
+
+  .btn-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 24px;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+    font-family: 'Manrope', sans-serif;
+  }
+
+  .btn-pill-primary {
+    background: #2563eb;
+    color: white;
+  }
+
+  .btn-pill-primary:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+  }
+
+  .white-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow-card);
+    padding: 40px;
+  }
+
+  .section-alt {
+    background: #f8fafc;
+  }
+
+  .section-white {
+    background: #ffffff;
+  }
+
+  section {
+    padding: 100px 0;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+</style>
+
+<style>
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: white;
+    border-bottom: 1px solid var(--border);
+    z-index: 1000;
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 40px;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .nav-logo-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: var(--accent);
+    border-radius: 8px;
+    font-size: 18px;
+    color: white;
+    line-height: 1;
+  }
+
+  .nav-logo-wordmark {
+    font-size: 17px;
+    color: var(--text-main);
+  }
+
+  .nav-logo-leaving {
+    font-weight: 400;
+  }
+
+  .nav-logo-america {
+    font-weight: 700;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    margin-left: auto;
+  }
+
+  .nav-link {
+    font-size: 13px;
+    font-weight: 500;
+    color: #475569;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    text-decoration: none;
+    transition: var(--transition);
+  }
+
+  .nav-link:hover {
+    color: var(--accent);
+  }
+
+  main {
+    margin-top: 80px;
+  }
+
+  .footer {
+    background: #07091a;
+    color: white;
+    padding: 60px 0;
+    text-align: center;
+  }
+
+  .footer p {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
+  }
+</style>

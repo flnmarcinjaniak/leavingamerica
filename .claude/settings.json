@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:4321/)",
+      "PowerShell(cd \"c:\\\\Users\\\\marci\\\\Desktop\\\\moje strony\\\\leavingamerica\"; $proc = Start-Process -FilePath \"node.exe\" -ArgumentList \"node_modules\\\\.bin\\\\astro dev --port 4321\" -PassThru -NoNewWindow -RedirectStandardOutput \"$env:TEMP\\\\astro_out.txt\" -RedirectStandardError \"$env:TEMP\\\\astro_err.txt\"; Start-Sleep -Seconds 8; $proc.Kill\\(\\); Get-Content \"$env:TEMP\\\\astro_out.txt\",\"$env:TEMP\\\\astro_err.txt\" -ErrorAction SilentlyContinue | Select-Object -Last 30)",
+      "PowerShell(cd \"c:\\\\Users\\\\marci\\\\Desktop\\\\moje strony\\\\leavingamerica\"; $job = Start-Job -ScriptBlock { Set-Location \"c:\\\\Users\\\\marci\\\\Desktop\\\\moje strony\\\\leavingamerica\"; npm run dev 2>&1 }; Start-Sleep -Seconds 12; $output = Receive-Job $job; Stop-Job $job; Remove-Job $job; $output | Select-Object -Last 20)"
+    ]
+  }
+}

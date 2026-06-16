@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-11",
+  "lastUpdated": "2026-06-16",
   "source": {
     "safety": "Numbeo Safety Index (latest available) - numbeo.com",
     "healthcare": "Numbeo Health Care Index (latest available) - numbeo.com",
@@ -20,6 +20,11 @@
       "gdpGrowth": 7,
       "happiness": 6,
       "internet": 9,
+      "english": 612.0,
+      "visa_days": 90,
+      "visa_info": "90",
+      "tax_system": "worldwide",
+      "nomad_visa": true,
       "raw": {
         "safety": 67.0,
         "healthcare": 130.8,
@@ -28,7 +33,9 @@
         "unemployment": 6.16,
         "gdpGrowth": 2.14,
         "happiness": 6.029,
-        "internet": 243.84
+        "internet": 243.84,
+        "english": 612.0,
+        "visa_days": 90
       }
     },
     "spain": {
@@ -40,6 +47,11 @@
       "gdpGrowth": 8,
       "happiness": 7,
       "internet": 10,
+      "english": 540.0,
+      "visa_days": 90,
+      "visa_info": "90",
+      "tax_system": "worldwide",
+      "nomad_visa": true,
       "raw": {
         "safety": 62.4,
         "healthcare": 141.7,
@@ -48,7 +60,9 @@
         "unemployment": 10.38,
         "gdpGrowth": 3.46,
         "happiness": 6.54,
-        "internet": 277.98
+        "internet": 277.98,
+        "english": 540.0,
+        "visa_days": 90
       }
     },
     "mexico": {
@@ -60,6 +74,11 @@
       "gdpGrowth": 6,
       "happiness": 7,
       "internet": 7,
+      "english": 440.0,
+      "visa_days": 180,
+      "visa_info": "180",
+      "tax_system": "worldwide",
+      "nomad_visa": true,
       "raw": {
         "safety": 47.1,
         "healthcare": 130.3,
@@ -68,7 +87,9 @@
         "unemployment": 2.67,
         "gdpGrowth": 1.43,
         "happiness": 6.972,
-        "internet": 104.25
+        "internet": 104.25,
+        "english": 440.0,
+        "visa_days": 180
       }
     },
     "germany": {
@@ -80,6 +101,11 @@
       "gdpGrowth": 4,
       "happiness": 7,
       "internet": 7,
+      "english": 615.0,
+      "visa_days": 90,
+      "visa_info": "90",
+      "tax_system": "worldwide",
+      "nomad_visa": true,
       "raw": {
         "safety": 61.6,
         "healthcare": 131.7,
@@ -88,7 +114,9 @@
         "unemployment": 3.71,
         "gdpGrowth": -0.5,
         "happiness": 6.882,
-        "internet": 103.72
+        "internet": 103.72,
+        "english": 615.0,
+        "visa_days": 90
       }
     },
     "italy": {
@@ -100,6 +128,11 @@
       "gdpGrowth": 5,
       "happiness": 7,
       "internet": 7,
+      "english": 513.0,
+      "visa_days": 90,
+      "visa_info": "90",
+      "tax_system": "worldwide",
+      "nomad_visa": true,
       "raw": {
         "safety": 52.7,
         "healthcare": 117.3,
@@ -108,7 +141,9 @@
         "unemployment": 6.39,
         "gdpGrowth": 0.69,
         "happiness": 6.574,
-        "internet": 117.11
+        "internet": 117.11,
+        "english": 513.0,
+        "visa_days": 90
       }
     },
     "greece": {
@@ -120,6 +155,11 @@
       "gdpGrowth": 7,
       "happiness": 6,
       "internet": 7,
+      "english": 592.0,
+      "visa_days": 90,
+      "visa_info": "90",
+      "tax_system": "worldwide",
+      "nomad_visa": true,
       "raw": {
         "safety": 53.8,
         "healthcare": 105.2,
@@ -128,7 +168,9 @@
         "unemployment": 8.54,
         "gdpGrowth": 2.09,
         "happiness": 5.697,
-        "internet": 94.29
+        "internet": 94.29,
+        "english": 592.0,
+        "visa_days": 90
       }
     },
     "costa-rica": {
@@ -140,6 +182,11 @@
       "gdpGrowth": 9,
       "happiness": 7,
       "internet": 8,
+      "english": 516.0,
+      "visa_days": 180,
+      "visa_info": "180",
+      "tax_system": "territorial",
+      "nomad_visa": true,
       "raw": {
         "safety": 46.1,
         "healthcare": 117.1,
@@ -148,7 +195,9 @@
         "unemployment": 6.84,
         "gdpGrowth": 4.32,
         "happiness": 7.439,
-        "internet": 169.03
+        "internet": 169.03,
+        "english": 516.0,
+        "visa_days": 180
       }
     },
     "panama": {
@@ -160,6 +209,11 @@
       "gdpGrowth": 7,
       "happiness": 7,
       "internet": 9,
+      "english": 491.0,
+      "visa_days": 180,
+      "visa_info": "180",
+      "tax_system": "territorial",
+      "nomad_visa": true,
       "raw": {
         "safety": 57.2,
         "healthcare": 108.5,
@@ -168,7 +222,9 @@
         "unemployment": 8.36,
         "gdpGrowth": 2.75,
         "happiness": 6.547,
-        "internet": 219.49
+        "internet": 219.49,
+        "english": 491.0,
+        "visa_days": 180
       }
     },
     "thailand": {
@@ -180,6 +236,11 @@
       "gdpGrowth": 7,
       "happiness": 6,
       "internet": 10,
+      "english": 402.0,
+      "visa_days": 60,
+      "visa_info": "60",
+      "tax_system": "territorial",
+      "nomad_visa": true,
       "raw": {
         "safety": 63.4,
         "healthcare": 141.1,
@@ -188,7 +249,9 @@
         "unemployment": 0.78,
         "gdpGrowth": 2.54,
         "happiness": 6.296,
-        "internet": 279.65
+        "internet": 279.65,
+        "english": 402.0,
+        "visa_days": 60
       }
     },
     "malaysia": {
@@ -200,6 +263,11 @@
       "gdpGrowth": 10,
       "happiness": 6,
       "internet": 8,
+      "english": 581.0,
+      "visa_days": 180,
+      "visa_info": "visa free",
+      "tax_system": "territorial",
+      "nomad_visa": true,
       "raw": {
         "safety": 52.0,
         "healthcare": 127.5,
@@ -208,7 +276,9 @@
         "unemployment": 3.76,
         "gdpGrowth": 5.11,
         "happiness": 6.005,
-        "internet": 168.07
+        "internet": 168.07,
+        "english": 581.0,
+        "visa_days": 180
       }
     },
     "indonesia": {
@@ -220,6 +290,11 @@
       "gdpGrowth": 10,
       "happiness": 6,
       "internet": 5,
+      "english": 471.0,
+      "visa_days": 30,
+      "visa_info": "visa on arrival",
+      "tax_system": "worldwide",
+      "nomad_visa": true,
       "raw": {
         "safety": 53.6,
         "healthcare": 108.6,
@@ -228,7 +303,9 @@
         "unemployment": 3.24,
         "gdpGrowth": 5.03,
         "happiness": 5.617,
-        "internet": 45.91
+        "internet": 45.91,
+        "english": 471.0,
+        "visa_days": 30
       }
     },
     "colombia": {
@@ -240,6 +317,11 @@
       "gdpGrowth": 6,
       "happiness": 6,
       "internet": 9,
+      "english": 480.0,
+      "visa_days": 180,
+      "visa_info": "visa free",
+      "tax_system": "worldwide",
+      "nomad_visa": true,
       "raw": {
         "safety": 38.7,
         "healthcare": 123.9,
@@ -248,7 +330,9 @@
         "unemployment": 8.29,
         "gdpGrowth": 1.6,
         "happiness": 6.04,
-        "internet": 214.3
+        "internet": 214.3,
+        "english": 480.0,
+        "visa_days": 180
       }
     },
     "croatia": {
@@ -260,6 +344,11 @@
       "gdpGrowth": 8,
       "happiness": 6,
       "internet": 8,
+      "english": 617.0,
+      "visa_days": 90,
+      "visa_info": "90",
+      "tax_system": "worldwide",
+      "nomad_visa": true,
       "raw": {
         "safety": 75.7,
         "healthcare": 118.7,
@@ -268,7 +357,9 @@
         "unemployment": 5.0,
         "gdpGrowth": 3.83,
         "happiness": 6.009,
-        "internet": 136.75
+        "internet": 136.75,
+        "english": 617.0,
+        "visa_days": 90
       }
     },
     "czech-republic": {
@@ -280,6 +371,11 @@
       "gdpGrowth": 6,
       "happiness": 7,
       "internet": 7,
+      "english": 582.0,
+      "visa_days": 90,
+      "visa_info": "90",
+      "tax_system": "worldwide",
+      "nomad_visa": true,
       "raw": {
         "safety": 73.6,
         "healthcare": 139.4,
@@ -288,7 +384,9 @@
         "unemployment": 2.83,
         "gdpGrowth": 1.23,
         "happiness": 6.821,
-        "internet": 92.71
+        "internet": 92.71,
+        "english": 582.0,
+        "visa_days": 90
       }
     },
     "poland": {
@@ -300,6 +398,11 @@
       "gdpGrowth": 8,
       "happiness": 7,
       "internet": 9,
+      "english": 600.0,
+      "visa_days": 90,
+      "visa_info": "90",
+      "tax_system": "worldwide",
+      "nomad_visa": false,
       "raw": {
         "safety": 71.3,
         "healthcare": 103.1,
@@ -308,7 +411,9 @@
         "unemployment": 2.98,
         "gdpGrowth": 3.03,
         "happiness": 6.768,
-        "internet": 223.25
+        "internet": 223.25,
+        "english": 600.0,
+        "visa_days": 90
       }
     },
     "hungary": {
@@ -320,6 +425,11 @@
       "gdpGrowth": 5,
       "happiness": 6,
       "internet": 10,
+      "english": 590.0,
+      "visa_days": 90,
+      "visa_info": "90",
+      "tax_system": "worldwide",
+      "nomad_visa": true,
       "raw": {
         "safety": 66.5,
         "healthcare": 97.5,
@@ -328,7 +438,9 @@
         "unemployment": 4.52,
         "gdpGrowth": 0.56,
         "happiness": 5.937,
-        "internet": 251.72
+        "internet": 251.72,
+        "english": 590.0,
+        "visa_days": 90
       }
     },
     "romania": {
@@ -340,6 +452,11 @@
       "gdpGrowth": 5,
       "happiness": 7,
       "internet": 10,
+      "english": 605.0,
+      "visa_days": 90,
+      "visa_info": "90",
+      "tax_system": "worldwide",
+      "nomad_visa": true,
       "raw": {
         "safety": 67.2,
         "healthcare": 99.5,
@@ -348,7 +465,9 @@
         "unemployment": 5.99,
         "gdpGrowth": 0.92,
         "happiness": 6.629,
-        "internet": 283.06
+        "internet": 283.06,
+        "english": 605.0,
+        "visa_days": 90
       }
     },
     "bulgaria": {
@@ -360,6 +479,11 @@
       "gdpGrowth": 8,
       "happiness": 6,
       "internet": 7,
+      "english": 594.0,
+      "visa_days": 90,
+      "visa_info": "90",
+      "tax_system": "worldwide",
+      "nomad_visa": true,
       "raw": {
         "safety": 64.5,
         "healthcare": 103.6,
@@ -368,7 +492,9 @@
         "unemployment": 3.54,
         "gdpGrowth": 3.39,
         "happiness": 5.703,
-        "internet": 94.44
+        "internet": 94.44,
+        "english": 594.0,
+        "visa_days": 90
       }
     },
     "vietnam": {
@@ -380,6 +506,11 @@
       "gdpGrowth": 10,
       "happiness": 6,
       "internet": 10,
+      "english": 500.0,
+      "visa_days": 90,
+      "visa_info": "e-visa",
+      "tax_system": "worldwide",
+      "nomad_visa": true,
       "raw": {
         "safety": 59.9,
         "healthcare": 109.5,
@@ -388,7 +519,9 @@
         "unemployment": 1.52,
         "gdpGrowth": 7.09,
         "happiness": 6.428,
-        "internet": 281.72
+        "internet": 281.72,
+        "english": 500.0,
+        "visa_days": 90
       }
     },
     "japan": {
@@ -400,6 +533,11 @@
       "gdpGrowth": 5,
       "happiness": 6,
       "internet": 10,
+      "english": 446.0,
+      "visa_days": 90,
+      "visa_info": "90",
+      "tax_system": "worldwide",
+      "nomad_visa": true,
       "raw": {
         "safety": 77.2,
         "healthcare": 145.9,
@@ -408,7 +546,9 @@
         "unemployment": 2.45,
         "gdpGrowth": 0.1,
         "happiness": 6.13,
-        "internet": 255.27
+        "internet": 255.27,
+        "english": 446.0,
+        "visa_days": 90
       }
     },
     "south-korea": {
@@ -420,6 +560,11 @@
       "gdpGrowth": 7,
       "happiness": 6,
       "internet": 10,
+      "english": 522.0,
+      "visa_days": 90,
+      "visa_info": "90",
+      "tax_system": "worldwide",
+      "nomad_visa": true,
       "raw": {
         "safety": 71.0,
         "healthcare": 151.7,
@@ -428,7 +573,9 @@
         "unemployment": 2.68,
         "gdpGrowth": 2.0,
         "happiness": 6.04,
-        "internet": 257.76
+        "internet": 257.76,
+        "english": 522.0,
+        "visa_days": 90
       }
     },
     "australia": {
@@ -440,6 +587,11 @@
       "gdpGrowth": 6,
       "happiness": 7,
       "internet": 8,
+      "english": 999,
+      "visa_days": 90,
+      "visa_info": "eta",
+      "tax_system": "worldwide",
+      "nomad_visa": true,
       "raw": {
         "safety": 52.5,
         "healthcare": 130.3,
@@ -448,7 +600,9 @@
         "unemployment": 4.09,
         "gdpGrowth": 1.37,
         "happiness": 6.916,
-        "internet": 154.09
+        "internet": 154.09,
+        "english": 999,
+        "visa_days": 90
       }
     },
     "new-zealand": {
@@ -460,6 +614,11 @@
       "gdpGrowth": 6,
       "happiness": 7,
       "internet": 9,
+      "english": 999,
+      "visa_days": 90,
+      "visa_info": "eta",
+      "tax_system": "worldwide",
+      "nomad_visa": true,
       "raw": {
         "safety": 51.2,
         "healthcare": 123.3,
@@ -468,7 +627,9 @@
         "unemployment": 5.08,
         "gdpGrowth": 1.29,
         "happiness": 6.995,
-        "internet": 201.91
+        "internet": 201.91,
+        "english": 999,
+        "visa_days": 90
       }
     },
     "canada": {
@@ -480,6 +641,11 @@
       "gdpGrowth": 6,
       "happiness": 7,
       "internet": 10,
+      "english": 999,
+      "visa_days": 180,
+      "visa_info": "180",
+      "tax_system": "worldwide",
+      "nomad_visa": false,
       "raw": {
         "safety": 54.4,
         "healthcare": 125.9,
@@ -488,7 +654,9 @@
         "unemployment": 6.91,
         "gdpGrowth": 1.55,
         "happiness": 6.741,
-        "internet": 277.7
+        "internet": 277.7,
+        "english": 999,
+        "visa_days": 180
       }
     },
     "ireland": {
@@ -500,6 +668,11 @@
       "gdpGrowth": 7,
       "happiness": 7,
       "internet": 9,
+      "english": 999,
+      "visa_days": 90,
+      "visa_info": "90",
+      "tax_system": "worldwide",
+      "nomad_visa": true,
       "raw": {
         "safety": 51.0,
         "healthcare": 93.1,
@@ -508,7 +681,9 @@
         "unemployment": 4.63,
         "gdpGrowth": 2.6,
         "happiness": 6.928,
-        "internet": 220.71
+        "internet": 220.71,
+        "english": 999,
+        "visa_days": 90
       }
     },
     "netherlands": {
@@ -520,6 +695,11 @@
       "gdpGrowth": 6,
       "happiness": 7,
       "internet": 9,
+      "english": 624.0,
+      "visa_days": 90,
+      "visa_info": "90",
+      "tax_system": "worldwide",
+      "nomad_visa": true,
       "raw": {
         "safety": 74.5,
         "healthcare": 149.4,
@@ -528,7 +708,9 @@
         "unemployment": 3.87,
         "gdpGrowth": 1.08,
         "happiness": 7.223,
-        "internet": 237.66
+        "internet": 237.66,
+        "english": 624.0,
+        "visa_days": 90
       }
     },
     "france": {
@@ -540,6 +722,11 @@
       "gdpGrowth": 6,
       "happiness": 7,
       "internet": 10,
+      "english": 539.0,
+      "visa_days": 90,
+      "visa_info": "90",
+      "tax_system": "worldwide",
+      "nomad_visa": true,
       "raw": {
         "safety": 44.2,
         "healthcare": 140.5,
@@ -548,7 +735,9 @@
         "unemployment": 7.54,
         "gdpGrowth": 1.19,
         "happiness": 6.586,
-        "internet": 352.35
+        "internet": 352.35,
+        "english": 539.0,
+        "visa_days": 90
       }
     },
     "argentina": {
@@ -560,6 +749,11 @@
       "gdpGrowth": 3,
       "happiness": 6,
       "internet": 7,
+      "english": 575.0,
+      "visa_days": 90,
+      "visa_info": "90",
+      "tax_system": "worldwide",
+      "nomad_visa": true,
       "raw": {
         "safety": 36.8,
         "healthcare": 122.7,
@@ -568,7 +762,9 @@
         "unemployment": 7.14,
         "gdpGrowth": -1.34,
         "happiness": 6.43,
-        "internet": 111.54
+        "internet": 111.54,
+        "english": 575.0,
+        "visa_days": 90
       }
     },
     "ecuador": {
@@ -580,6 +776,11 @@
       "gdpGrowth": 3,
       "happiness": 6,
       "internet": 8,
+      "english": 466.0,
+      "visa_days": 90,
+      "visa_info": "90",
+      "tax_system": "worldwide",
+      "nomad_visa": true,
       "raw": {
         "safety": 38.1,
         "healthcare": 141.0,
@@ -588,7 +789,9 @@
         "unemployment": 3.31,
         "gdpGrowth": -2.0,
         "happiness": 6.144,
-        "internet": 169.66
+        "internet": 169.66,
+        "english": 466.0,
+        "visa_days": 90
       }
     },
     "morocco": {
@@ -600,6 +803,11 @@
       "gdpGrowth": 8,
       "happiness": 5,
       "internet": 5,
+      "english": 492.0,
+      "visa_days": 90,
+      "visa_info": "90",
+      "tax_system": "worldwide",
+      "nomad_visa": true,
       "raw": {
         "safety": 53.0,
         "healthcare": 80.2,
@@ -608,7 +816,9 @@
         "unemployment": 9,
         "gdpGrowth": 3.79,
         "happiness": 4.646,
-        "internet": 56.22
+        "internet": 56.22,
+        "english": 492.0,
+        "visa_days": 90
       }
     },
     "switzerland": {
@@ -620,6 +830,11 @@
       "gdpGrowth": 6,
       "happiness": 7,
       "internet": 10,
+      "english": 564.0,
+      "visa_days": 90,
+      "visa_info": "90",
+      "tax_system": "worldwide",
+      "nomad_visa": true,
       "raw": {
         "safety": 72.6,
         "healthcare": 132.8,
@@ -628,7 +843,9 @@
         "unemployment": 4.87,
         "gdpGrowth": 1.3,
         "happiness": 7.018,
-        "internet": 292.56
+        "internet": 292.56,
+        "english": 564.0,
+        "visa_days": 90
       }
     },
     "norway": {
@@ -640,6 +857,11 @@
       "gdpGrowth": 7,
       "happiness": 7,
       "internet": 8,
+      "english": 613.0,
+      "visa_days": 90,
+      "visa_info": "90",
+      "tax_system": "worldwide",
+      "nomad_visa": true,
       "raw": {
         "safety": 66.7,
         "healthcare": 138.2,
@@ -648,7 +870,9 @@
         "unemployment": 4.64,
         "gdpGrowth": 2.1,
         "happiness": 7.242,
-        "internet": 177.11
+        "internet": 177.11,
+        "english": 613.0,
+        "visa_days": 90
       }
     },
     "denmark": {
@@ -660,6 +884,11 @@
       "gdpGrowth": 8,
       "happiness": 8,
       "internet": 10,
+      "english": 611.0,
+      "visa_days": 90,
+      "visa_info": "90",
+      "tax_system": "worldwide",
+      "nomad_visa": false,
       "raw": {
         "safety": 73.8,
         "healthcare": 141.7,
@@ -668,7 +897,9 @@
         "unemployment": 5.53,
         "gdpGrowth": 3.48,
         "happiness": 7.539,
-        "internet": 291.6
+        "internet": 291.6,
+        "english": 611.0,
+        "visa_days": 90
       }
     },
     "sweden": {
@@ -680,6 +911,11 @@
       "gdpGrowth": 5,
       "happiness": 7,
       "internet": 9,
+      "english": 609.0,
+      "visa_days": 90,
+      "visa_info": "90",
+      "tax_system": "worldwide",
+      "nomad_visa": false,
       "raw": {
         "safety": 52.1,
         "healthcare": 124.9,
@@ -688,7 +924,9 @@
         "unemployment": 8.69,
         "gdpGrowth": 0.82,
         "happiness": 7.255,
-        "internet": 213.29
+        "internet": 213.29,
+        "english": 609.0,
+        "visa_days": 90
       }
     },
     "belgium": {
@@ -700,6 +938,11 @@
       "gdpGrowth": 6,
       "happiness": 7,
       "internet": 8,
+      "english": 608.0,
+      "visa_days": 90,
+      "visa_info": "90",
+      "tax_system": "worldwide",
+      "nomad_visa": false,
       "raw": {
         "safety": 50.8,
         "healthcare": 138.9,
@@ -708,7 +951,9 @@
         "unemployment": 5.91,
         "gdpGrowth": 1.07,
         "happiness": 6.926,
-        "internet": 140.97
+        "internet": 140.97,
+        "english": 608.0,
+        "visa_days": 90
       }
     },
     "austria": {
@@ -720,6 +965,11 @@
       "gdpGrowth": 4,
       "happiness": 7,
       "internet": 7,
+      "english": 616.0,
+      "visa_days": 90,
+      "visa_info": "90",
+      "tax_system": "worldwide",
+      "nomad_visa": false,
       "raw": {
         "safety": 71.5,
         "healthcare": 144.0,
@@ -728,7 +978,9 @@
         "unemployment": 5.58,
         "gdpGrowth": -0.66,
         "happiness": 6.845,
-        "internet": 114.0
+        "internet": 114.0,
+        "english": 616.0,
+        "visa_days": 90
       }
     },
     "finland": {
@@ -740,6 +992,11 @@
       "gdpGrowth": 5,
       "happiness": 8,
       "internet": 9,
+      "english": 603.0,
+      "visa_days": 90,
+      "visa_info": "90",
+      "tax_system": "worldwide",
+      "nomad_visa": false,
       "raw": {
         "safety": 73.5,
         "healthcare": 141.6,
@@ -748,7 +1005,9 @@
         "unemployment": 9.46,
         "gdpGrowth": 0.42,
         "happiness": 7.764,
-        "internet": 180.47
+        "internet": 180.47,
+        "english": 603.0,
+        "visa_days": 90
       }
     },
     "united-kingdom": {
@@ -760,6 +1019,11 @@
       "gdpGrowth": 6,
       "happiness": 7,
       "internet": 8,
+      "english": 526.0,
+      "visa_days": 90,
+      "visa_info": "90",
+      "tax_system": "worldwide",
+      "nomad_visa": false,
       "raw": {
         "safety": 51.7,
         "healthcare": 133.3,
@@ -768,7 +1032,9 @@
         "unemployment": 4.75,
         "gdpGrowth": 1.13,
         "happiness": 6.694,
-        "internet": 172.24
+        "internet": 172.24,
+        "english": 526.0,
+        "visa_days": 90
       }
     },
     "singapore": {
@@ -780,6 +1046,11 @@
       "gdpGrowth": 9,
       "happiness": 7,
       "internet": 10,
+      "english": 999,
+      "visa_days": 180,
+      "visa_info": "visa free",
+      "tax_system": "territorial",
+      "nomad_visa": false,
       "raw": {
         "safety": 77.5,
         "healthcare": 133.4,
@@ -788,7 +1059,9 @@
         "unemployment": 2.82,
         "gdpGrowth": 4.39,
         "happiness": 6.585,
-        "internet": 425.46
+        "internet": 425.46,
+        "english": 999,
+        "visa_days": 180
       }
     },
     "united-arab-emirates": {
@@ -800,6 +1073,11 @@
       "gdpGrowth": 8,
       "happiness": 7,
       "internet": 10,
+      "english": 487.0,
+      "visa_days": 30,
+      "visa_info": "30",
+      "tax_system": "zero",
+      "nomad_visa": true,
       "raw": {
         "safety": 86.0,
         "healthcare": 130.3,
@@ -808,7 +1086,9 @@
         "unemployment": 2.17,
         "gdpGrowth": 3.99,
         "happiness": 6.821,
-        "internet": 384.51
+        "internet": 384.51,
+        "english": 487.0,
+        "visa_days": 30
       }
     },
     "qatar": {
@@ -820,6 +1100,11 @@
       "gdpGrowth": 7,
       "happiness": 6,
       "internet": 9,
+      "english": 469.0,
+      "visa_days": 90,
+      "visa_info": "90",
+      "tax_system": "zero",
+      "nomad_visa": false,
       "raw": {
         "safety": 84.8,
         "healthcare": 134.2,
@@ -828,7 +1113,9 @@
         "unemployment": 0.13,
         "gdpGrowth": 2.36,
         "happiness": 6.374,
-        "internet": 211.97
+        "internet": 211.97,
+        "english": 469.0,
+        "visa_days": 90
       }
     },
     "saudi-arabia": {
@@ -840,6 +1127,11 @@
       "gdpGrowth": 6,
       "happiness": 7,
       "internet": 8,
+      "english": 404.0,
+      "visa_days": 30,
+      "visa_info": "visa on arrival",
+      "tax_system": "zero",
+      "nomad_visa": false,
       "raw": {
         "safety": 76.7,
         "healthcare": 110.9,
@@ -848,7 +1140,9 @@
         "unemployment": 3.04,
         "gdpGrowth": 2.0,
         "happiness": 6.817,
-        "internet": 167.93
+        "internet": 167.93,
+        "english": 404.0,
+        "visa_days": 30
       }
     },
     "iceland": {
@@ -860,6 +1154,11 @@
       "gdpGrowth": 4,
       "happiness": 8,
       "internet": 10,
+      "english": 999,
+      "visa_days": 90,
+      "visa_info": "90",
+      "tax_system": "worldwide",
+      "nomad_visa": true,
       "raw": {
         "safety": 74.5,
         "healthcare": 126.0,
@@ -868,7 +1167,9 @@
         "unemployment": 3.62,
         "gdpGrowth": -0.97,
         "happiness": 7.54,
-        "internet": 347.3
+        "internet": 347.3,
+        "english": 999,
+        "visa_days": 90
       }
     },
     "india": {
@@ -880,6 +1181,11 @@
       "gdpGrowth": 10,
       "happiness": 5,
       "internet": 6,
+      "english": 484.0,
+      "visa_days": 90,
+      "visa_info": "e-visa",
+      "tax_system": "worldwide",
+      "nomad_visa": true,
       "raw": {
         "safety": 55.8,
         "healthcare": 117.2,
@@ -888,7 +1194,9 @@
         "unemployment": 4.22,
         "gdpGrowth": 6.49,
         "happiness": 4.536,
-        "internet": 60.85
+        "internet": 60.85,
+        "english": 484.0,
+        "visa_days": 90
       }
     },
     "philippines": {
@@ -900,6 +1208,11 @@
       "gdpGrowth": 10,
       "happiness": 6,
       "internet": 7,
+      "english": 569.0,
+      "visa_days": 30,
+      "visa_info": "30",
+      "tax_system": "worldwide",
+      "nomad_visa": true,
       "raw": {
         "safety": 56.5,
         "healthcare": 119.4,
@@ -908,7 +1221,9 @@
         "unemployment": 2.23,
         "gdpGrowth": 5.69,
         "happiness": 6.206,
-        "internet": 109.86
+        "internet": 109.86,
+        "english": 569.0,
+        "visa_days": 30
       }
     },
     "china": {
@@ -920,6 +1235,11 @@
       "gdpGrowth": 9,
       "happiness": 6,
       "internet": 9,
+      "english": 464.0,
+      "visa_days": 90,
+      "visa_info": "e-visa",
+      "tax_system": "worldwide",
+      "nomad_visa": false,
       "raw": {
         "safety": 76.9,
         "healthcare": 124.6,
@@ -928,7 +1248,9 @@
         "unemployment": 4.62,
         "gdpGrowth": 4.98,
         "happiness": 6.074,
-        "internet": 206.91
+        "internet": 206.91,
+        "english": 464.0,
+        "visa_days": 90
       }
     },
     "georgia": {
@@ -940,6 +1262,11 @@
       "gdpGrowth": 10,
       "happiness": 6,
       "internet": 5,
+      "english": 541.0,
+      "visa_days": 360,
+      "visa_info": "360",
+      "tax_system": "territorial",
+      "nomad_visa": true,
       "raw": {
         "safety": 73.8,
         "healthcare": 98.3,
@@ -948,7 +1275,9 @@
         "unemployment": 12.1,
         "gdpGrowth": 9.68,
         "happiness": 5.517,
-        "internet": 44.73
+        "internet": 44.73,
+        "english": 541.0,
+        "visa_days": 360
       }
     },
     "serbia": {
@@ -960,6 +1289,11 @@
       "gdpGrowth": 8,
       "happiness": 7,
       "internet": 7,
+      "english": 579.0,
+      "visa_days": 90,
+      "visa_info": "90",
+      "tax_system": "worldwide",
+      "nomad_visa": true,
       "raw": {
         "safety": 63.0,
         "healthcare": 93.4,
@@ -968,7 +1302,9 @@
         "unemployment": 7.12,
         "gdpGrowth": 3.95,
         "happiness": 6.691,
-        "internet": 102.35
+        "internet": 102.35,
+        "english": 579.0,
+        "visa_days": 90
       }
     },
     "kenya": {
@@ -980,6 +1316,11 @@
       "gdpGrowth": 9,
       "happiness": 5,
       "internet": 5,
+      "english": 593.0,
+      "visa_days": 90,
+      "visa_info": "eta",
+      "tax_system": "worldwide",
+      "nomad_visa": false,
       "raw": {
         "safety": 44.9,
         "healthcare": 110.7,
@@ -988,7 +1329,9 @@
         "unemployment": 5.45,
         "gdpGrowth": 4.72,
         "happiness": 4.674,
-        "internet": 16.48
+        "internet": 16.48,
+        "english": 593.0,
+        "visa_days": 90
       }
     },
     "peru": {
@@ -1000,6 +1343,11 @@
       "gdpGrowth": 8,
       "happiness": 6,
       "internet": 10,
+      "english": 519.0,
+      "visa_days": 180,
+      "visa_info": "180",
+      "tax_system": "worldwide",
+      "nomad_visa": true,
       "raw": {
         "safety": 33.1,
         "healthcare": 99.7,
@@ -1008,7 +1356,9 @@
         "unemployment": 5.12,
         "gdpGrowth": 3.3,
         "happiness": 5.974,
-        "internet": 258.37
+        "internet": 258.37,
+        "english": 519.0,
+        "visa_days": 180
       }
     },
     "brazil": {
@@ -1020,6 +1370,11 @@
       "gdpGrowth": 8,
       "happiness": 7,
       "internet": 9,
+      "english": 482.0,
+      "visa_days": 90,
+      "visa_info": "90",
+      "tax_system": "worldwide",
+      "nomad_visa": true,
       "raw": {
         "safety": 36.0,
         "healthcare": 105.4,
@@ -1028,7 +1383,9 @@
         "unemployment": 5.97,
         "gdpGrowth": 3.42,
         "happiness": 6.634,
-        "internet": 221.53
+        "internet": 221.53,
+        "english": 482.0,
+        "visa_days": 90
       }
     },
     "chile": {
@@ -1040,6 +1397,11 @@
       "gdpGrowth": 7,
       "happiness": 6,
       "internet": 10,
+      "english": 517.0,
+      "visa_days": 90,
+      "visa_info": "90",
+      "tax_system": "worldwide",
+      "nomad_visa": false,
       "raw": {
         "safety": 39.3,
         "healthcare": 115.9,
@@ -1048,7 +1410,9 @@
         "unemployment": 8.97,
         "gdpGrowth": 2.64,
         "happiness": 6.302,
-        "internet": 334.99
+        "internet": 334.99,
+        "english": 517.0,
+        "visa_days": 90
       }
     },
     "albania": {
@@ -1060,6 +1424,11 @@
       "gdpGrowth": 9,
       "happiness": 6,
       "internet": 7,
+      "english": 532.0,
+      "visa_days": 360,
+      "visa_info": "360",
+      "tax_system": "worldwide",
+      "nomad_visa": true,
       "raw": {
         "safety": 55.9,
         "healthcare": 83.6,
@@ -1068,7 +1437,9 @@
         "unemployment": 10.93,
         "gdpGrowth": 4.05,
         "happiness": 5.662,
-        "internet": 93.64
+        "internet": 93.64,
+        "english": 532.0,
+        "visa_days": 360
       }
     },
     "sri-lanka": {
@@ -1080,6 +1451,11 @@
       "gdpGrowth": 10,
       "happiness": 4,
       "internet": 5,
+      "english": 486.0,
+      "visa_days": 30,
+      "visa_info": "visa on arrival",
+      "tax_system": "worldwide",
+      "nomad_visa": true,
       "raw": {
         "safety": 57.6,
         "healthcare": 127.4,
@@ -1088,7 +1464,9 @@
         "unemployment": 4.0,
         "gdpGrowth": 5.01,
         "happiness": 4.013,
-        "internet": 38.61
+        "internet": 38.61,
+        "english": 486.0,
+        "visa_days": 30
       }
     },
     "egypt": {
@@ -1100,6 +1478,11 @@
       "gdpGrowth": 7,
       "happiness": 4,
       "internet": 7,
+      "english": 459.0,
+      "visa_days": 30,
+      "visa_info": "visa on arrival",
+      "tax_system": "worldwide",
+      "nomad_visa": true,
       "raw": {
         "safety": 53.6,
         "healthcare": 82.3,
@@ -1108,7 +1491,9 @@
         "unemployment": 6.78,
         "gdpGrowth": 2.4,
         "happiness": 3.862,
-        "internet": 92.5
+        "internet": 92.5,
+        "english": 459.0,
+        "visa_days": 30
       }
     }
   }

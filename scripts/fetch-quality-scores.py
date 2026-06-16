@@ -4,12 +4,142 @@ import json
 import time
 import csv
 import io
+import re
 from datetime import date
 import sys
 sys.stdout.reconfigure(encoding='utf-8')
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+}
+
+COUNTRY_ALIASES = {
+    "Albania": ["Albania"],
+    "Argentina": ["Argentina"],
+    "Australia": ["Australia"],
+    "Austria": ["Austria"],
+    "Belgium": ["Belgium"],
+    "Brazil": ["Brazil"],
+    "Bulgaria": ["Bulgaria"],
+    "Chile": ["Chile"],
+    "China": ["China", "People's Republic of China"],
+    "Colombia": ["Colombia"],
+    "Costa Rica": ["Costa Rica"],
+    "Croatia": ["Croatia"],
+    "Czech Republic": ["Czech Republic", "Czechia"],
+    "Denmark": ["Denmark"],
+    "Ecuador": ["Ecuador"],
+    "Egypt": ["Egypt", "Egypt, Arab Rep."],
+    "Finland": ["Finland"],
+    "France": ["France"],
+    "Georgia": ["Georgia"],
+    "Germany": ["Germany"],
+    "Greece": ["Greece"],
+    "Hungary": ["Hungary"],
+    "Iceland": ["Iceland"],
+    "India": ["India"],
+    "Indonesia": ["Indonesia"],
+    "Ireland": ["Ireland"],
+    "Italy": ["Italy"],
+    "Japan": ["Japan"],
+    "Kenya": ["Kenya"],
+    "Malaysia": ["Malaysia"],
+    "Mexico": ["Mexico"],
+    "Morocco": ["Morocco"],
+    "Netherlands": ["Netherlands"],
+    "New Zealand": ["New Zealand"],
+    "Norway": ["Norway"],
+    "Panama": ["Panama"],
+    "Peru": ["Peru"],
+    "Philippines": ["Philippines"],
+    "Poland": ["Poland"],
+    "Portugal": ["Portugal"],
+    "Qatar": ["Qatar"],
+    "Romania": ["Romania"],
+    "Saudi Arabia": ["Saudi Arabia"],
+    "Serbia": ["Serbia"],
+    "Singapore": ["Singapore"],
+    "South Korea": ["South Korea", "Korea, Republic of",
+                    "Korea, Rep."],
+    "Spain": ["Spain"],
+    "Sri Lanka": ["Sri Lanka"],
+    "Sweden": ["Sweden"],
+    "Switzerland": ["Switzerland"],
+    "Thailand": ["Thailand"],
+    "United Arab Emirates": ["United Arab Emirates", "UAE"],
+    "United Kingdom": ["United Kingdom", "UK"],
+    "Vietnam": ["Vietnam", "Viet Nam"]
+}
+
+def match_country(country_name, source_name):
+    """Check if source_name matches country_name or its aliases"""
+    aliases = COUNTRY_ALIASES.get(country_name, [country_name])
+    source_lower = source_name.lower().strip()
+    for alias in aliases:
+        if alias.lower() == source_lower:
+            return True
+        if alias.lower() in source_lower:
+            return True
+        if source_lower in alias.lower():
+            return True
+    return False
+
+TAX_SYSTEMS = {
+    "Albania": "worldwide",
+    "Argentina": "worldwide",
+    "Australia": "worldwide",
+    "Austria": "worldwide",
+    "Belgium": "worldwide",
+    "Brazil": "worldwide",
+    "Bulgaria": "worldwide",
+    "Chile": "worldwide",
+    "Canada": "worldwide",
+    "China": "worldwide",
+    "Colombia": "worldwide",
+    "Costa Rica": "territorial",
+    "Croatia": "worldwide",
+    "Czech Republic": "worldwide",
+    "Denmark": "worldwide",
+    "Ecuador": "worldwide",
+    "Egypt": "worldwide",
+    "Finland": "worldwide",
+    "France": "worldwide",
+    "Georgia": "territorial",
+    "Germany": "worldwide",
+    "Greece": "worldwide",
+    "Hungary": "worldwide",
+    "Iceland": "worldwide",
+    "India": "worldwide",
+    "Indonesia": "worldwide",
+    "Ireland": "worldwide",
+    "Italy": "worldwide",
+    "Japan": "worldwide",
+    "Kenya": "worldwide",
+    "Malaysia": "territorial",
+    "Mexico": "worldwide",
+    "Morocco": "worldwide",
+    "Netherlands": "worldwide",
+    "New Zealand": "worldwide",
+    "Norway": "worldwide",
+    "Panama": "territorial",
+    "Peru": "worldwide",
+    "Philippines": "worldwide",
+    "Poland": "worldwide",
+    "Portugal": "worldwide",
+    "Qatar": "zero",
+    "Romania": "worldwide",
+    "Saudi Arabia": "zero",
+    "Serbia": "worldwide",
+    "Singapore": "territorial",
+    "South Korea": "worldwide",
+    "Spain": "worldwide",
+    "Sri Lanka": "worldwide",
+    "Sweden": "worldwide",
+    "Switzerland": "worldwide",
+    "Thailand": "territorial",
+    "United Arab Emirates": "zero",
+    "United Kingdom": "worldwide",
+    "Vietnam": "worldwide"
 }
 
 COUNTRIES = {
@@ -397,6 +527,176 @@ def fetch_internet_wikipedia():
                 pass
     return results
 
+def fetch_english_proficiency():
+    """Fetch EF English Proficiency Index from Wikipedia"""
+    print("\n--- Step 9: English Proficiency (EF EPI / Wikipedia) ---")
+    url = "https://en.wikipedia.org/wiki/EF_English_Proficiency_Index"
+    response = requests.get(url, timeout=30, headers={
+        'User-Agent': 'Mozilla/5.0 (compatible; research bot)'
+    })
+    response.raise_for_status()
+    soup = BeautifulSoup(response.text, 'html.parser')
+
+    results = {}
+    tables = soup.find_all('table', class_='wikitable')
+    for table in tables:
+        rows = table.find_all('tr')
+        for row in rows:
+            cells = row.find_all('td')
+            if len(cells) < 3:
+                continue
+            try:
+                # Try each cell as potential score (200-700 range)
+                country = None
+                score = None
+                for i, cell in enumerate(cells):
+                    text = cell.get_text(strip=True)
+                    try:
+                        val = float(text.replace(',', '.'))
+                        if 200 <= val <= 700:
+                            score = val
+                            # Country is likely the previous cell
+                            if i > 0:
+                                country = cells[i-1].get_text(
+                                    strip=True
+                                )
+                            break
+                    except ValueError:
+                        continue
+                if country and score:
+                    # Clean country name
+                    country = re.sub(r'\[.*?\]', '', country).strip()
+                    if 2 < len(country) < 50:
+                        results[country] = score
+            except Exception:
+                continue
+
+    print(f"  Found {len(results)} countries")
+    return results
+
+
+def fetch_visa_requirements():
+    """Fetch US passport visa requirements from Passport Index CSV"""
+    print("\n--- Step 10: Visa Requirements (Passport Index / GitHub) ---")
+    url = ("https://raw.githubusercontent.com/"
+           "ilyankou/passport-index-dataset/master/"
+           "passport-index-tidy.csv")
+    response = requests.get(url, timeout=30)
+    response.raise_for_status()
+
+    content = response.text
+    reader = csv.DictReader(io.StringIO(content))
+
+    # Debug: show actual column names
+    fieldnames = reader.fieldnames
+    print(f"  CSV columns: {fieldnames}")
+
+    results = {}
+    # Handle both capitalized and lowercase column names
+    passport_col = None
+    dest_col = None
+    req_col = None
+
+    if fieldnames:
+        for col in fieldnames:
+            col_lower = col.lower().strip()
+            if 'passport' in col_lower:
+                passport_col = col
+            elif 'destination' in col_lower or 'dest' in col_lower:
+                dest_col = col
+            elif 'requirement' in col_lower or 'req' in col_lower:
+                req_col = col
+
+    if not all([passport_col, dest_col, req_col]):
+        print(f"  WARNING: Could not find required columns. "
+              f"Found: {fieldnames}")
+        return results
+
+    # Debug: show first 5 passport values
+    reader2 = csv.DictReader(io.StringIO(content))
+    sample = []
+    for i, row in enumerate(reader2):
+        if i < 5:
+            sample.append(row.get(passport_col, ''))
+    print(f"  Sample passport values: {sample}")
+
+    # Re-read with correct column names
+    reader = csv.DictReader(io.StringIO(content))
+    for row in reader:
+        passport = row.get(passport_col, '').strip().upper()
+        if passport in ['US', 'UNITED STATES',
+                        'United States', 'USA']:
+            destination = row.get(dest_col, '').strip()
+            requirement = row.get(req_col, '').strip()
+            if destination:
+                results[destination] = requirement
+
+    print(f"  Found {len(results)} destinations for US passport")
+    return results
+
+
+def fetch_nomad_visas():
+    """Fetch digital nomad visa availability from Citizen Remote"""
+    print("\n--- Step 11: Digital Nomad Visas (Citizen Remote) ---")
+    url = ("https://citizenremote.com/blog/"
+           "digital-nomad-visa-countries/")
+    response = requests.get(url, timeout=30, headers={
+        'User-Agent': 'Mozilla/5.0 (compatible; research bot)'
+    })
+    response.raise_for_status()
+    soup = BeautifulSoup(response.text, 'html.parser')
+
+    nomad_countries = set()
+
+    # Known countries with digital nomad visas
+    # as fallback if scraping fails
+    known_nomad_countries = {
+        "Albania", "Brazil", "Chile", "Colombia",
+        "Costa Rica", "Croatia", "Czech Republic",
+        "Ecuador", "Georgia", "Germany", "Greece",
+        "Hungary", "Iceland", "Indonesia", "Italy",
+        "Japan", "Malaysia", "Mexico", "Netherlands",
+        "Norway", "Panama", "Peru", "Philippines",
+        "Portugal", "Romania", "Saudi Arabia",
+        "Serbia", "Singapore", "South Korea", "Spain",
+        "Sri Lanka", "Thailand", "United Arab Emirates",
+        "United Kingdom", "Vietnam"
+    }
+
+    # Try to scrape headings
+    headings = soup.find_all(['h2', 'h3'])
+    found_via_scraping = False
+
+    for heading in headings:
+        text = heading.get_text(strip=True)
+        # Remove footnotes and clean
+        text = re.sub(r'\[.*?\]', '', text).strip()
+
+        # Skip navigation/section headings
+        skip_words = [
+            'intro', 'what is', 'why', 'how to',
+            'requirement', 'tax', 'europe', 'asia',
+            'america', 'africa', 'caribbean',
+            'digital nomad visa', 'conclusion', 'faq',
+            'table of contents', 'overview', 'guide'
+        ]
+        if any(skip in text.lower() for skip in skip_words):
+            continue
+
+        if 2 < len(text) < 60:
+            nomad_countries.add(text)
+            found_via_scraping = True
+
+    if not found_via_scraping or len(nomad_countries) < 10:
+        print("  WARNING: Scraping returned few results, "
+              "using known list as fallback")
+        nomad_countries = known_nomad_countries
+
+    print(f"  Found {len(nomad_countries)} countries "
+          f"with nomad visas")
+    return nomad_countries
+
+
 # STEP 1 - Numbeo Safety
 print("\n--- Step 1: Safety Index (Numbeo) ---")
 safety_data = parse_numbeo_rankings(
@@ -453,11 +753,17 @@ print("\n--- Step 8: Internet Speeds (Wikipedia/Speedtest) ---")
 internet_data = fetch_internet_wikipedia()
 print(f"Found {len(internet_data)} countries")
 
+english_data = fetch_english_proficiency()
+visa_data = fetch_visa_requirements()
+nomad_data = fetch_nomad_visas()
+
 # BUILD RESULTS
 print("\n--- Building results ---")
 results = {}
 
 for numbeo_name, slug in COUNTRIES.items():
+    country_name = numbeo_name
+
     safety_val = safety_data.get(numbeo_name)
     health_val = health_data.get(numbeo_name)
     pollution_val = pollution_data.get(numbeo_name)
@@ -466,6 +772,67 @@ for numbeo_name, slug in COUNTRIES.items():
     gdp_val = gdp_data.get(slug)
     happiness_val = happiness_data.get(slug)
     internet_val = internet_data.get(slug)
+
+    # English proficiency
+    english_score = None
+    english_raw = None
+    for source_country, en_score in english_data.items():
+        if match_country(country_name, source_country):
+            english_score = round(en_score, 1)
+            english_raw = round(en_score, 1)
+            print(f"  {country_name}: english={english_score}")
+            break
+
+    NATIVE_ENGLISH = {
+        'Australia', 'New Zealand', 'Canada',
+        'Ireland', 'Singapore', 'United Kingdom',
+        'United States', 'Iceland'
+    }
+    if english_score is None and country_name in NATIVE_ENGLISH:
+        english_score = 999
+        english_raw = 999
+
+    # Visa requirements
+    visa_info = None
+    visa_days = None
+    for dest_country, requirement in visa_data.items():
+        if match_country(country_name, dest_country):
+            visa_info = requirement
+            # Extract days using regex
+            m = re.search(r'(\d+)', requirement)
+            if m:
+                visa_days = int(m.group(1))
+            elif any(x in requirement.lower() for x in [
+                'visa free', 'visa-free', 'freedom of movement'
+            ]):
+                visa_days = 180
+            elif any(x in requirement.lower() for x in [
+                'visa on arrival', 'on arrival'
+            ]):
+                visa_days = 30
+            elif requirement.lower() in ['eta', 'evisa',
+                                          'e-visa', 'electronic']:
+                visa_days = 90
+            elif requirement.lower() == 'visa required':
+                visa_days = 0
+            break
+
+    VISA_OVERRIDES = {
+        "Romania": 90,
+    }
+    if visa_days is not None and country_name in VISA_OVERRIDES:
+        visa_days = VISA_OVERRIDES[country_name]
+        visa_info = str(VISA_OVERRIDES[country_name])
+
+    # Tax system from static dictionary
+    tax_system = TAX_SYSTEMS.get(country_name)
+
+    # Digital nomad visa
+    has_nomad_visa = False
+    for nomad_country in nomad_data:
+        if match_country(country_name, nomad_country):
+            has_nomad_visa = True
+            break
 
     results[slug] = {
         "safety": safety_to_score(safety_val),
@@ -476,6 +843,11 @@ for numbeo_name, slug in COUNTRIES.items():
         "gdpGrowth": gdp_growth_to_score(gdp_val),
         "happiness": happiness_to_score(happiness_val),
         "internet": internet_to_score(internet_val),
+        "english": english_score,
+        "visa_days": visa_days,
+        "visa_info": visa_info,
+        "tax_system": tax_system,
+        "nomad_visa": has_nomad_visa,
         "raw": {
             "safety": round(safety_val, 1) if safety_val else None,
             "healthcare": round(health_val, 1) if health_val else None,
@@ -484,19 +856,19 @@ for numbeo_name, slug in COUNTRIES.items():
             "unemployment": round(unemp_val, 2) if unemp_val else None,
             "gdpGrowth": round(gdp_val, 2) if gdp_val else None,
             "happiness": round(happiness_val, 3) if happiness_val else None,
-            "internet": round(internet_val, 2) if internet_val else None
+            "internet": round(internet_val, 2) if internet_val else None,
+            "english": english_raw,
+            "visa_days": visa_days,
         }
     }
 
-    print(f"[OK] {numbeo_name}: "
+    print(f"[OK] {country_name}: "
           f"safety={results[slug]['safety']}, "
           f"health={results[slug]['healthcare']}, "
-          f"pollution={results[slug]['pollution']}, "
-          f"traffic={results[slug]['traffic']}, "
-          f"unemp={results[slug]['unemployment']}, "
-          f"gdp={results[slug]['gdpGrowth']}, "
-          f"happy={results[slug]['happiness']}, "
-          f"net={results[slug]['internet']}")
+          f"english={results[slug]['english']}, "
+          f"visa={results[slug]['visa_days']}, "
+          f"tax={results[slug]['tax_system']}, "
+          f"nomad={results[slug]['nomad_visa']}")
 
 # SAVE
 output = {

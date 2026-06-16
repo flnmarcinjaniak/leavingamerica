@@ -16,19 +16,14 @@ const { title, description } = Astro.props;
     <title>{title}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons@7.2.3/css/flag-icons.min.css"/>
   </head>
   <body>
-    <nav class="nav">
+    <nav class="nav" id="main-nav">
       <div class="container nav-inner">
         <a href="/" class="nav-logo">
-          <span class="nav-logo-icon">✈</span>
-          <span class="nav-logo-wordmark">
-            <span class="nav-logo-leaving">Leaving</span><span class="nav-logo-america">America</span>
-          </span>
+          <img src="/images/logo.webp" alt="LeavingAmerica" height="48" style="display:block;"/>
         </a>
 
         <div class="nav-links">
@@ -38,9 +33,25 @@ const { title, description } = Astro.props;
           <a href="/countries" class="nav-link">Countries</a>
         </div>
 
-        <a href="/tools/salary" class="btn-pill btn-pill-primary">Calculate Free</a>
+        <a href="/tools/salary" class="btn-pill btn-pill-primary nav-cta">Calculate Free</a>
+
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </nav>
+
+    <div class="mobile-menu" id="mobile-menu">
+      <div class="mobile-menu-inner">
+        <a href="/tools/salary" class="mobile-nav-link">Calculator</a>
+        <a href="/tools/visa" class="mobile-nav-link">Visa Explorer</a>
+        <a href="/tools/quiz" class="mobile-nav-link">Quiz</a>
+        <a href="/countries" class="mobile-nav-link">Countries</a>
+        <a href="/tools/salary" class="btn-pill btn-pill-primary mobile-nav-cta">Calculate Free →</a>
+      </div>
+    </div>
 
     <main>
       <slot />
@@ -51,6 +62,30 @@ const { title, description } = Astro.props;
         <p>© 2026 LeavingAmerica. For informational purposes only. Not legal, tax, or financial advice.</p>
       </div>
     </footer>
+
+    <script>
+      const nav = document.getElementById('main-nav');
+      window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 20);
+      }, { passive: true });
+
+      const hamburger = document.getElementById('hamburger');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      hamburger.addEventListener('click', () => {
+        const open = hamburger.classList.toggle('open');
+        mobileMenu.classList.toggle('open', open);
+        document.body.style.overflow = open ? 'hidden' : '';
+      });
+
+      document.querySelectorAll('.mobile-nav-link, .mobile-nav-cta').forEach(el => {
+        el.addEventListener('click', () => {
+          hamburger.classList.remove('open');
+          mobileMenu.classList.remove('open');
+          document.body.style.overflow = '';
+        });
+      });
+    </script>
   </body>
 </html>
 
@@ -68,13 +103,7 @@ const { title, description } = Astro.props;
     --transition: all 0.3s ease;
   }
 
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   html {
     font-family: 'Manrope', sans-serif;
@@ -83,11 +112,7 @@ const { title, description } = Astro.props;
     scroll-behavior: smooth;
   }
 
-  .container {
-    max-width: 1280px;
-    margin: auto;
-    padding: 0 40px;
-  }
+  .container { max-width: 1280px; margin: auto; padding: 0 40px; }
 
   .btn-pill {
     display: inline-flex;
@@ -103,39 +128,38 @@ const { title, description } = Astro.props;
     font-family: 'Manrope', sans-serif;
   }
 
-  .btn-pill-primary {
-    background: #2563eb;
-    color: white;
+  .btn-pill-primary { background: #2563eb; color: white; }
+  .btn-pill-primary:hover { background: #1d4ed8; transform: translateY(-1px); }
+
+  .footer-link,
+  .footer-link:focus,
+  .footer-link:focus-visible,
+  .footer-link:active {
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    -webkit-tap-highlight-color: transparent;
   }
 
-  .btn-pill-primary:hover {
-    background: #1d4ed8;
-    transform: translateY(-1px);
+  .nav-cta { outline: none !important; box-shadow: none !important; }
+
+  .nav-cta:focus,
+  .nav-cta:focus-visible,
+  a.nav-cta:focus,
+  a.nav-cta:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
   }
 
-  .white-card {
-    background: white;
-    border-radius: 12px;
-    box-shadow: var(--shadow-card);
-    padding: 40px;
-  }
+  .white-card { background: white; border-radius: 12px; box-shadow: var(--shadow-card); padding: 40px; }
 
-  .section-alt {
-    background: #f8fafc;
-  }
+  .section-alt { background: #f8fafc; }
+  .section-white { background: #ffffff; }
 
-  .section-white {
-    background: #ffffff;
-  }
+  section { padding: 100px 0; }
 
-  section {
-    padding: 100px 0;
-  }
-
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
+  a { text-decoration: none; color: inherit; }
 </style>
 
 <style>
@@ -145,9 +169,18 @@ const { title, description } = Astro.props;
     left: 0;
     right: 0;
     height: 80px;
-    background: white;
+    background: rgba(255, 255, 255, 1);
     border-bottom: 1px solid var(--border);
     z-index: 1000;
+    transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .nav.scrolled {
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom-color: rgba(226, 232, 240, 0.5);
+    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.08);
   }
 
   .nav-inner {
@@ -178,18 +211,9 @@ const { title, description } = Astro.props;
     line-height: 1;
   }
 
-  .nav-logo-wordmark {
-    font-size: 17px;
-    color: var(--text-main);
-  }
-
-  .nav-logo-leaving {
-    font-weight: 400;
-  }
-
-  .nav-logo-america {
-    font-weight: 700;
-  }
+  .nav-logo-wordmark { font-size: 17px; color: var(--text-main); }
+  .nav-logo-leaving { font-weight: 400; }
+  .nav-logo-america { font-weight: 700; }
 
   .nav-links {
     display: flex;
@@ -208,13 +232,75 @@ const { title, description } = Astro.props;
     transition: var(--transition);
   }
 
-  .nav-link:hover {
-    color: var(--accent);
+  .nav-link:hover { color: var(--accent); }
+
+  .nav-cta { margin-left: 8px; }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    margin-left: auto;
+    width: 40px;
+    height: 40px;
   }
 
-  main {
-    margin-top: 80px;
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: #0f172a;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    transform-origin: center;
   }
+
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mobile-menu {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: white;
+    z-index: 999;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .mobile-menu.open { transform: translateX(0); }
+
+  .mobile-menu-inner {
+    padding: 32px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .mobile-nav-link {
+    display: block;
+    font-size: 18px;
+    font-weight: 500;
+    color: #475569;
+    padding: 14px 0;
+    border-bottom: 1px solid #f1f5f9;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .mobile-nav-link:hover { color: var(--accent); }
+
+  .mobile-nav-cta { margin-top: 24px; align-self: flex-start; }
+
+  main { margin-top: 80px; }
 
   .footer {
     background: #07091a;
@@ -223,9 +309,13 @@ const { title, description } = Astro.props;
     text-align: center;
   }
 
-  .footer p {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.6);
-    line-height: 1.6;
+  .footer p { font-size: 14px; color: rgba(255, 255, 255, 0.5); line-height: 1.6; }
+
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .container { padding: 0 24px; }
+    section { padding: 60px 0; }
   }
 </style>

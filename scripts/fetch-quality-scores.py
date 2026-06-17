@@ -10,7 +10,11 @@ import sys
 sys.stdout.reconfigure(encoding='utf-8')
 
 HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.5",
+    "Accept-Encoding": "gzip, deflate, br",
+    "Connection": "keep-alive",
 }
 
 COUNTRY_ALIASES = {
@@ -315,8 +319,17 @@ def safety_to_score(value):
 def healthcare_to_score(value):
     if value is None:
         return None
-    score = round(float(value) / 15)
-    return max(1, min(10, score))
+    v = float(value)
+    if v >= 130: return 10
+    elif v >= 110: return 9
+    elif v >= 90:  return 8
+    elif v >= 75:  return 7
+    elif v >= 60:  return 6
+    elif v >= 45:  return 5
+    elif v >= 35:  return 4
+    elif v >= 25:  return 3
+    elif v >= 15:  return 2
+    else:          return 1
 
 def pollution_to_score(value):
     if value is None:
@@ -444,8 +457,13 @@ def fetch_happiness_owid():
     url = ("https://ourworldindata.org/grapher/"
            "happiness-cantril-ladder.csv?v=1&csvType=full")
     print(f"Fetching: {url}")
-    response = requests.get(url, headers=HEADERS, timeout=30)
+    response = requests.get(url, timeout=30, headers={
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'text/csv,application/csv,text/plain,*/*',
+    })
     response.raise_for_status()
+    if 'text/html' in response.headers.get('Content-Type', ''):
+        raise ValueError('OWID returned HTML instead of CSV')
     results = {}
     # Find latest score for each country
     latest = {}
@@ -483,7 +501,17 @@ def fetch_internet_wikipedia():
     url = ("https://en.wikipedia.org/wiki/"
            "List_of_countries_by_Internet_connection_speeds")
     print(f"Fetching: {url}")
-    response = requests.get(url, headers=HEADERS, timeout=15)
+    import time
+    time.sleep(2)
+    session = requests.Session()
+    session.headers.update({
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+        'Accept-Language': 'en-US,en;q=0.5',
+        'Connection': 'keep-alive',
+        'Upgrade-Insecure-Requests': '1',
+    })
+    response = session.get(url, timeout=30)
     response.raise_for_status()
     soup = BeautifulSoup(response.text, 'html.parser')
     results = {}
@@ -531,9 +559,7 @@ def fetch_english_proficiency():
     """Fetch EF English Proficiency Index from Wikipedia"""
     print("\n--- Step 9: English Proficiency (EF EPI / Wikipedia) ---")
     url = "https://en.wikipedia.org/wiki/EF_English_Proficiency_Index"
-    response = requests.get(url, timeout=30, headers={
-        'User-Agent': 'Mozilla/5.0 (compatible; research bot)'
-    })
+    response = requests.get(url, timeout=30, headers=HEADERS)
     response.raise_for_status()
     soup = BeautifulSoup(response.text, 'html.parser')
 
@@ -640,9 +666,7 @@ def fetch_nomad_visas():
     print("\n--- Step 11: Digital Nomad Visas (Citizen Remote) ---")
     url = ("https://citizenremote.com/blog/"
            "digital-nomad-visa-countries/")
-    response = requests.get(url, timeout=30, headers={
-        'User-Agent': 'Mozilla/5.0 (compatible; research bot)'
-    })
+    response = requests.get(url, timeout=30, headers=HEADERS)
     response.raise_for_status()
     soup = BeautifulSoup(response.text, 'html.parser')
 
@@ -786,11 +810,18 @@ for numbeo_name, slug in COUNTRIES.items():
     NATIVE_ENGLISH = {
         'Australia', 'New Zealand', 'Canada',
         'Ireland', 'Singapore', 'United Kingdom',
-        'United States', 'Iceland'
+        'United States'
     }
-    if english_score is None and country_name in NATIVE_ENGLISH:
+    if country_name in NATIVE_ENGLISH:
         english_score = 999
         english_raw = 999
+
+    ENGLISH_OVERRIDES = {
+        'Iceland': 630.0,
+    }
+    if english_score is None and country_name in ENGLISH_OVERRIDES:
+        english_score = ENGLISH_OVERRIDES[country_name]
+        english_raw = ENGLISH_OVERRIDES[country_name]
 
     # Visa requirements
     visa_info = None
@@ -849,14 +880,14 @@ for numbeo_name, slug in COUNTRIES.items():
         "tax_system": tax_system,
         "nomad_visa": has_nomad_visa,
         "raw": {
-            "safety": round(safety_val, 1) if safety_val else None,
-            "healthcare": round(health_val, 1) if health_val else None,
-            "pollution": round(pollution_val, 1) if pollution_val else None,
-            "traffic": round(traffic_val, 1) if traffic_val else None,
-            "unemployment": round(unemp_val, 2) if unemp_val else None,
-            "gdpGrowth": round(gdp_val, 2) if gdp_val else None,
-            "happiness": round(happiness_val, 3) if happiness_val else None,
-            "internet": round(internet_val, 2) if internet_val else None,
+            "safety": round(safety_val, 1) if safety_val is not None else None,
+            "healthcare": round(health_val, 1) if health_val is not None else None,
+            "pollution": round(pollution_val, 1) if pollution_val is not None else None,
+            "traffic": round(traffic_val, 1) if traffic_val is not None else None,
+            "unemployment": round(unemp_val, 2) if unemp_val is not None else None,
+            "gdpGrowth": round(gdp_val, 2) if gdp_val is not None else None,
+            "happiness": round(happiness_val, 3) if happiness_val is not None else None,
+            "internet": round(internet_val, 2) if internet_val is not None else None,
             "english": english_raw,
             "visa_days": visa_days,
         }

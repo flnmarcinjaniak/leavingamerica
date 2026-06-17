@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-16",
+  "lastUpdated": "2026-06-17",
   "source": {
     "safety": "Numbeo Safety Index (latest available) - numbeo.com",
     "healthcare": "Numbeo Health Care Index (latest available) - numbeo.com",
@@ -13,7 +13,7 @@
   "countries": {
     "portugal": {
       "safety": 7,
-      "healthcare": 9,
+      "healthcare": 10,
       "pollution": 8,
       "traffic": 8,
       "unemployment": 8,
@@ -40,7 +40,7 @@
     },
     "spain": {
       "safety": 6,
-      "healthcare": 9,
+      "healthcare": 10,
       "pollution": 8,
       "traffic": 9,
       "unemployment": 6,
@@ -67,7 +67,7 @@
     },
     "mexico": {
       "safety": 5,
-      "healthcare": 9,
+      "healthcare": 10,
       "pollution": 5,
       "traffic": 5,
       "unemployment": 10,
@@ -94,7 +94,7 @@
     },
     "germany": {
       "safety": 6,
-      "healthcare": 9,
+      "healthcare": 10,
       "pollution": 8,
       "traffic": 9,
       "unemployment": 9,
@@ -121,7 +121,7 @@
     },
     "italy": {
       "safety": 5,
-      "healthcare": 8,
+      "healthcare": 9,
       "pollution": 5,
       "traffic": 7,
       "unemployment": 8,
@@ -148,7 +148,7 @@
     },
     "greece": {
       "safety": 5,
-      "healthcare": 7,
+      "healthcare": 8,
       "pollution": 6,
       "traffic": 7,
       "unemployment": 7,
@@ -175,7 +175,7 @@
     },
     "costa-rica": {
       "safety": 5,
-      "healthcare": 8,
+      "healthcare": 9,
       "pollution": 7,
       "traffic": 3,
       "unemployment": 8,
@@ -202,7 +202,7 @@
     },
     "panama": {
       "safety": 6,
-      "healthcare": 7,
+      "healthcare": 8,
       "pollution": 5,
       "traffic": 5,
       "unemployment": 7,
@@ -229,7 +229,7 @@
     },
     "thailand": {
       "safety": 6,
-      "healthcare": 9,
+      "healthcare": 10,
       "pollution": 4,
       "traffic": 5,
       "unemployment": 10,
@@ -256,7 +256,7 @@
     },
     "malaysia": {
       "safety": 5,
-      "healthcare": 8,
+      "healthcare": 9,
       "pollution": 5,
       "traffic": 4,
       "unemployment": 9,
@@ -283,7 +283,7 @@
     },
     "indonesia": {
       "safety": 5,
-      "healthcare": 7,
+      "healthcare": 8,
       "pollution": 4,
       "traffic": 5,
       "unemployment": 9,
@@ -310,7 +310,7 @@
     },
     "colombia": {
       "safety": 4,
-      "healthcare": 8,
+      "healthcare": 9,
       "pollution": 5,
       "traffic": 6,
       "unemployment": 7,
@@ -337,7 +337,7 @@
     },
     "croatia": {
       "safety": 8,
-      "healthcare": 8,
+      "healthcare": 9,
       "pollution": 8,
       "traffic": 9,
       "unemployment": 8,
@@ -364,7 +364,7 @@
     },
     "czech-republic": {
       "safety": 7,
-      "healthcare": 9,
+      "healthcare": 10,
       "pollution": 8,
       "traffic": 10,
       "unemployment": 10,
@@ -391,7 +391,7 @@
     },
     "poland": {
       "safety": 7,
-      "healthcare": 7,
+      "healthcare": 8,
       "pollution": 5,
       "traffic": 8,
       "unemployment": 10,
@@ -418,7 +418,7 @@
     },
     "hungary": {
       "safety": 7,
-      "healthcare": 6,
+      "healthcare": 8,
       "pollution": 6,
       "traffic": 9,
       "unemployment": 9,
@@ -445,7 +445,7 @@
     },
     "romania": {
       "safety": 7,
-      "healthcare": 7,
+      "healthcare": 8,
       "pollution": 5,
       "traffic": 8,
       "unemployment": 8,
@@ -472,7 +472,7 @@
     },
     "bulgaria": {
       "safety": 6,
-      "healthcare": 7,
+      "healthcare": 8,
       "pollution": 4,
       "traffic": 9,
       "unemployment": 9,
@@ -483,7 +483,7 @@
       "visa_days": 90,
       "visa_info": "90",
       "tax_system": "worldwide",
-      "nomad_visa": true,
+      "nomad_visa": false,
       "raw": {
         "safety": 64.5,
         "healthcare": 103.6,
@@ -499,7 +499,7 @@
     },
     "vietnam": {
       "safety": 6,
-      "healthcare": 7,
+      "healthcare": 8,
       "pollution": 3,
       "traffic": 8,
       "unemployment": 10,
@@ -580,7 +580,7 @@
     },
     "australia": {
       "safety": 5,
-      "healthcare": 9,
+      "healthcare": 10,
       "pollution": 9,
       "traffic": 5,
       "unemployment": 9,
@@ -591,7 +591,7 @@
       "visa_days": 90,
       "visa_info": "eta",
       "tax_system": "worldwide",
-      "nomad_visa": true,
+      "nomad_visa": false,
       "raw": {
         "safety": 52.5,
         "healthcare": 130.3,
@@ -607,7 +607,7 @@
     },
     "new-zealand": {
       "safety": 5,
-      "healthcare": 8,
+      "healthcare": 9,
       "pollution": 9,
       "traffic": 6,
       "unemployment": 8,
@@ -618,7 +618,7 @@
       "visa_days": 90,
       "visa_info": "eta",
       "tax_system": "worldwide",
-      "nomad_visa": true,
+      "nomad_visa": false,
       "raw": {
         "safety": 51.2,
         "healthcare": 123.3,
@@ -634,7 +634,7 @@
     },
     "canada": {
       "safety": 5,
-      "healthcare": 8,
+      "healthcare": 9,
       "pollution": 8,
       "traffic": 6,
       "unemployment": 8,
@@ -661,7 +661,7 @@
     },
     "ireland": {
       "safety": 5,
-      "healthcare": 6,
+      "healthcare": 8,
       "pollution": 8,
       "traffic": 7,
       "unemployment": 9,
@@ -672,7 +672,7 @@
       "visa_days": 90,
       "visa_info": "90",
       "tax_system": "worldwide",
-      "nomad_visa": true,
+      "nomad_visa": false,
       "raw": {
         "safety": 51.0,
         "healthcare": 93.1,
@@ -715,7 +715,7 @@
     },
     "france": {
       "safety": 4,
-      "healthcare": 9,
+      "healthcare": 10,
       "pollution": 7,
       "traffic": 8,
       "unemployment": 7,
@@ -726,7 +726,7 @@
       "visa_days": 90,
       "visa_info": "90",
       "tax_system": "worldwide",
-      "nomad_visa": true,
+      "nomad_visa": false,
       "raw": {
         "safety": 44.2,
         "healthcare": 140.5,
@@ -742,7 +742,7 @@
     },
     "argentina": {
       "safety": 4,
-      "healthcare": 8,
+      "healthcare": 9,
       "pollution": 6,
       "traffic": 7,
       "unemployment": 7,
@@ -753,7 +753,7 @@
       "visa_days": 90,
       "visa_info": "90",
       "tax_system": "worldwide",
-      "nomad_visa": true,
+      "nomad_visa": false,
       "raw": {
         "safety": 36.8,
         "healthcare": 122.7,
@@ -769,7 +769,7 @@
     },
     "ecuador": {
       "safety": 4,
-      "healthcare": 9,
+      "healthcare": 10,
       "pollution": 5,
       "traffic": 6,
       "unemployment": 9,
@@ -796,7 +796,7 @@
     },
     "morocco": {
       "safety": 5,
-      "healthcare": 5,
+      "healthcare": 7,
       "pollution": 4,
       "traffic": 8,
       "unemployment": 6,
@@ -807,7 +807,7 @@
       "visa_days": 90,
       "visa_info": "90",
       "tax_system": "worldwide",
-      "nomad_visa": true,
+      "nomad_visa": false,
       "raw": {
         "safety": 53.0,
         "healthcare": 80.2,
@@ -823,7 +823,7 @@
     },
     "switzerland": {
       "safety": 7,
-      "healthcare": 9,
+      "healthcare": 10,
       "pollution": 9,
       "traffic": 8,
       "unemployment": 9,
@@ -834,7 +834,7 @@
       "visa_days": 90,
       "visa_info": "90",
       "tax_system": "worldwide",
-      "nomad_visa": true,
+      "nomad_visa": false,
       "raw": {
         "safety": 72.6,
         "healthcare": 132.8,
@@ -850,7 +850,7 @@
     },
     "norway": {
       "safety": 7,
-      "healthcare": 9,
+      "healthcare": 10,
       "pollution": 9,
       "traffic": 9,
       "unemployment": 9,
@@ -877,7 +877,7 @@
     },
     "denmark": {
       "safety": 7,
-      "healthcare": 9,
+      "healthcare": 10,
       "pollution": 9,
       "traffic": 10,
       "unemployment": 8,
@@ -904,7 +904,7 @@
     },
     "sweden": {
       "safety": 5,
-      "healthcare": 8,
+      "healthcare": 9,
       "pollution": 10,
       "traffic": 9,
       "unemployment": 7,
@@ -931,7 +931,7 @@
     },
     "belgium": {
       "safety": 5,
-      "healthcare": 9,
+      "healthcare": 10,
       "pollution": 6,
       "traffic": 7,
       "unemployment": 8,
@@ -985,7 +985,7 @@
     },
     "finland": {
       "safety": 7,
-      "healthcare": 9,
+      "healthcare": 10,
       "pollution": 10,
       "traffic": 10,
       "unemployment": 6,
@@ -1012,18 +1012,18 @@
     },
     "united-kingdom": {
       "safety": 5,
-      "healthcare": 9,
+      "healthcare": 10,
       "pollution": 7,
       "traffic": 7,
       "unemployment": 9,
       "gdpGrowth": 6,
       "happiness": 7,
       "internet": 8,
-      "english": 526.0,
+      "english": 999,
       "visa_days": 90,
       "visa_info": "90",
       "tax_system": "worldwide",
-      "nomad_visa": false,
+      "nomad_visa": true,
       "raw": {
         "safety": 51.7,
         "healthcare": 133.3,
@@ -1033,13 +1033,13 @@
         "gdpGrowth": 1.13,
         "happiness": 6.694,
         "internet": 172.24,
-        "english": 526.0,
+        "english": 999,
         "visa_days": 90
       }
     },
     "singapore": {
       "safety": 8,
-      "healthcare": 9,
+      "healthcare": 10,
       "pollution": 8,
       "traffic": 9,
       "unemployment": 10,
@@ -1050,7 +1050,7 @@
       "visa_days": 180,
       "visa_info": "visa free",
       "tax_system": "territorial",
-      "nomad_visa": false,
+      "nomad_visa": true,
       "raw": {
         "safety": 77.5,
         "healthcare": 133.4,
@@ -1066,7 +1066,7 @@
     },
     "united-arab-emirates": {
       "safety": 9,
-      "healthcare": 9,
+      "healthcare": 10,
       "pollution": 6,
       "traffic": 4,
       "unemployment": 10,
@@ -1093,7 +1093,7 @@
     },
     "qatar": {
       "safety": 8,
-      "healthcare": 9,
+      "healthcare": 10,
       "pollution": 5,
       "traffic": 4,
       "unemployment": 10,
@@ -1120,7 +1120,7 @@
     },
     "saudi-arabia": {
       "safety": 8,
-      "healthcare": 7,
+      "healthcare": 9,
       "pollution": 5,
       "traffic": 4,
       "unemployment": 9,
@@ -1131,7 +1131,7 @@
       "visa_days": 30,
       "visa_info": "visa on arrival",
       "tax_system": "zero",
-      "nomad_visa": false,
+      "nomad_visa": true,
       "raw": {
         "safety": 76.7,
         "healthcare": 110.9,
@@ -1147,14 +1147,14 @@
     },
     "iceland": {
       "safety": 7,
-      "healthcare": 8,
+      "healthcare": 9,
       "pollution": 10,
       "traffic": 8,
       "unemployment": 9,
       "gdpGrowth": 4,
       "happiness": 8,
       "internet": 10,
-      "english": 999,
+      "english": 630.0,
       "visa_days": 90,
       "visa_info": "90",
       "tax_system": "worldwide",
@@ -1168,13 +1168,13 @@
         "gdpGrowth": -0.97,
         "happiness": 7.54,
         "internet": 347.3,
-        "english": 999,
+        "english": 630.0,
         "visa_days": 90
       }
     },
     "india": {
       "safety": 6,
-      "healthcare": 8,
+      "healthcare": 9,
       "pollution": 4,
       "traffic": 5,
       "unemployment": 9,
@@ -1185,7 +1185,7 @@
       "visa_days": 90,
       "visa_info": "e-visa",
       "tax_system": "worldwide",
-      "nomad_visa": true,
+      "nomad_visa": false,
       "raw": {
         "safety": 55.8,
         "healthcare": 117.2,
@@ -1201,7 +1201,7 @@
     },
     "philippines": {
       "safety": 6,
-      "healthcare": 8,
+      "healthcare": 9,
       "pollution": 4,
       "traffic": 6,
       "unemployment": 10,
@@ -1228,7 +1228,7 @@
     },
     "china": {
       "safety": 8,
-      "healthcare": 8,
+      "healthcare": 9,
       "pollution": 3,
       "traffic": 8,
       "unemployment": 9,
@@ -1255,7 +1255,7 @@
     },
     "georgia": {
       "safety": 7,
-      "healthcare": 7,
+      "healthcare": 8,
       "pollution": 4,
       "traffic": 9,
       "unemployment": 5,
@@ -1282,7 +1282,7 @@
     },
     "serbia": {
       "safety": 6,
-      "healthcare": 6,
+      "healthcare": 8,
       "pollution": 4,
       "traffic": 8,
       "unemployment": 7,
@@ -1309,7 +1309,7 @@
     },
     "kenya": {
       "safety": 4,
-      "healthcare": 7,
+      "healthcare": 9,
       "pollution": 4,
       "traffic": 4,
       "unemployment": 8,
@@ -1336,7 +1336,7 @@
     },
     "peru": {
       "safety": 3,
-      "healthcare": 7,
+      "healthcare": 8,
       "pollution": 3,
       "traffic": 5,
       "unemployment": 8,
@@ -1363,7 +1363,7 @@
     },
     "brazil": {
       "safety": 4,
-      "healthcare": 7,
+      "healthcare": 8,
       "pollution": 6,
       "traffic": 6,
       "unemployment": 8,
@@ -1390,7 +1390,7 @@
     },
     "chile": {
       "safety": 4,
-      "healthcare": 8,
+      "healthcare": 9,
       "pollution": 3,
       "traffic": 8,
       "unemployment": 7,
@@ -1401,7 +1401,7 @@
       "visa_days": 90,
       "visa_info": "90",
       "tax_system": "worldwide",
-      "nomad_visa": false,
+      "nomad_visa": true,
       "raw": {
         "safety": 39.3,
         "healthcare": 115.9,
@@ -1417,7 +1417,7 @@
     },
     "albania": {
       "safety": 6,
-      "healthcare": 6,
+      "healthcare": 7,
       "pollution": 3,
       "traffic": 10,
       "unemployment": 6,
@@ -1444,7 +1444,7 @@
     },
     "sri-lanka": {
       "safety": 6,
-      "healthcare": 8,
+      "healthcare": 9,
       "pollution": 5,
       "traffic": 4,
       "unemployment": 9,
@@ -1471,7 +1471,7 @@
     },
     "egypt": {
       "safety": 5,
-      "healthcare": 5,
+      "healthcare": 7,
       "pollution": 3,
       "traffic": 3,
       "unemployment": 8,
@@ -1482,7 +1482,7 @@
       "visa_days": 30,
       "visa_info": "visa on arrival",
       "tax_system": "worldwide",
-      "nomad_visa": true,
+      "nomad_visa": false,
       "raw": {
         "safety": 53.6,
         "healthcare": 82.3,

@@ -36,7 +36,25 @@
         "internet": 243.84,
         "english": 612.0,
         "visa_days": 90
-      }
+      },
+      "budget_single": 2000,
+      "budget_couple": 3100,
+      "cost_index": 54,
+      "us_comparison": "approximately 34% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Porto",
+          "monthly_usd": 1550
+        },
+        {
+          "name": "Lisbon",
+          "monthly_usd": 1750
+        },
+        {
+          "name": "Coimbra",
+          "monthly_usd": 2250
+        }
+      ]
     },
     "spain": {
       "safety": 6,
@@ -63,7 +81,25 @@
         "internet": 277.98,
         "english": 540.0,
         "visa_days": 90
-      }
+      },
+      "budget_single": 2200,
+      "budget_couple": 3400,
+      "cost_index": 60,
+      "us_comparison": "approximately 27% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Seville",
+          "monthly_usd": 1400
+        },
+        {
+          "name": "Valencia",
+          "monthly_usd": 1550
+        },
+        {
+          "name": "Madrid",
+          "monthly_usd": 1900
+        }
+      ]
     },
     "mexico": {
       "safety": 5,
@@ -90,7 +126,25 @@
         "internet": 104.25,
         "english": 440.0,
         "visa_days": 180
-      }
+      },
+      "budget_single": 1400,
+      "budget_couple": 2150,
+      "cost_index": 38,
+      "us_comparison": "approximately 54% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Merida",
+          "monthly_usd": 800
+        },
+        {
+          "name": "Guadalajara",
+          "monthly_usd": 900
+        },
+        {
+          "name": "Mexico City",
+          "monthly_usd": 1000
+        }
+      ]
     },
     "germany": {
       "safety": 6,
@@ -117,7 +171,25 @@
         "internet": 103.72,
         "english": 615.0,
         "visa_days": 90
-      }
+      },
+      "budget_single": 2500,
+      "budget_couple": 3900,
+      "cost_index": 68,
+      "us_comparison": "approximately 17% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Berlin",
+          "monthly_usd": 1850
+        },
+        {
+          "name": "Munich",
+          "monthly_usd": 2400
+        },
+        {
+          "name": "Cologne",
+          "monthly_usd": 2450
+        }
+      ]
     },
     "italy": {
       "safety": 5,
@@ -144,7 +216,25 @@
         "internet": 117.11,
         "english": 513.0,
         "visa_days": 90
-      }
+      },
+      "budget_single": 2300,
+      "budget_couple": 3550,
+      "cost_index": 63,
+      "us_comparison": "approximately 23% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Rome",
+          "monthly_usd": 2000
+        },
+        {
+          "name": "Turin",
+          "monthly_usd": 2100
+        },
+        {
+          "name": "Milan",
+          "monthly_usd": 2250
+        }
+      ]
     },
     "greece": {
       "safety": 5,
@@ -171,7 +261,25 @@
         "internet": 94.29,
         "english": 592.0,
         "visa_days": 90
-      }
+      },
+      "budget_single": 1900,
+      "budget_couple": 2950,
+      "cost_index": 52,
+      "us_comparison": "approximately 37% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Athens",
+          "monthly_usd": 1400
+        },
+        {
+          "name": "Heraklion",
+          "monthly_usd": 2050
+        },
+        {
+          "name": "Patras",
+          "monthly_usd": 2150
+        }
+      ]
     },
     "costa-rica": {
       "safety": 5,
@@ -198,7 +306,25 @@
         "internet": 169.03,
         "english": 516.0,
         "visa_days": 180
-      }
+      },
+      "budget_single": 1700,
+      "budget_couple": 2650,
+      "cost_index": 46,
+      "us_comparison": "approximately 44% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "San Jose",
+          "monthly_usd": 1400
+        },
+        {
+          "name": "Alajuela",
+          "monthly_usd": 1850
+        },
+        {
+          "name": "Heredia",
+          "monthly_usd": 1950
+        }
+      ]
     },
     "panama": {
       "safety": 6,
@@ -225,7 +351,25 @@
         "internet": 219.49,
         "english": 491.0,
         "visa_days": 180
-      }
+      },
+      "budget_single": 1550,
+      "budget_couple": 2400,
+      "cost_index": 43,
+      "us_comparison": "approximately 48% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Panama City",
+          "monthly_usd": 1650
+        },
+        {
+          "name": "Santiago",
+          "monthly_usd": 2050
+        },
+        {
+          "name": "Colon",
+          "monthly_usd": 2150
+        }
+      ]
     },
     "thailand": {
       "safety": 6,
@@ -252,7 +396,25 @@
         "internet": 279.65,
         "english": 402.0,
         "visa_days": 60
-      }
+      },
+      "budget_single": 1000,
+      "budget_couple": 1550,
+      "cost_index": 28,
+      "us_comparison": "approximately 66% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Chiang Mai",
+          "monthly_usd": 550
+        },
+        {
+          "name": "Bangkok",
+          "monthly_usd": 900
+        },
+        {
+          "name": "Phuket",
+          "monthly_usd": 1150
+        }
+      ]
     },
     "malaysia": {
       "safety": 5,
@@ -279,7 +441,25 @@
         "internet": 168.07,
         "english": 581.0,
         "visa_days": 180
-      }
+      },
+      "budget_single": 1050,
+      "budget_couple": 1650,
+      "cost_index": 29,
+      "us_comparison": "approximately 65% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Kuala Lumpur",
+          "monthly_usd": 900
+        },
+        {
+          "name": "Penang",
+          "monthly_usd": 1000
+        },
+        {
+          "name": "Kota Kinabalu",
+          "monthly_usd": 1550
+        }
+      ]
     },
     "indonesia": {
       "safety": 5,
@@ -306,7 +486,25 @@
         "internet": 45.91,
         "english": 471.0,
         "visa_days": 30
-      }
+      },
+      "budget_single": 1000,
+      "budget_couple": 1550,
+      "cost_index": 28,
+      "us_comparison": "approximately 66% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Surabaya",
+          "monthly_usd": 900
+        },
+        {
+          "name": "Jakarta",
+          "monthly_usd": 1100
+        },
+        {
+          "name": "Denpasar",
+          "monthly_usd": 1100
+        }
+      ]
     },
     "colombia": {
       "safety": 4,
@@ -333,7 +531,25 @@
         "internet": 214.3,
         "english": 480.0,
         "visa_days": 180
-      }
+      },
+      "budget_single": 1000,
+      "budget_couple": 1550,
+      "cost_index": 28,
+      "us_comparison": "approximately 66% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Medellin",
+          "monthly_usd": 650
+        },
+        {
+          "name": "Bogota",
+          "monthly_usd": 800
+        },
+        {
+          "name": "Cartagena",
+          "monthly_usd": 1150
+        }
+      ]
     },
     "croatia": {
       "safety": 8,
@@ -360,7 +576,25 @@
         "internet": 136.75,
         "english": 617.0,
         "visa_days": 90
-      }
+      },
+      "budget_single": 1500,
+      "budget_couple": 2350,
+      "cost_index": 41,
+      "us_comparison": "approximately 50% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Zagreb",
+          "monthly_usd": 1750
+        },
+        {
+          "name": "Split",
+          "monthly_usd": 1900
+        },
+        {
+          "name": "Osijek",
+          "monthly_usd": 2000
+        }
+      ]
     },
     "czech-republic": {
       "safety": 7,
@@ -387,7 +621,25 @@
         "internet": 92.71,
         "english": 582.0,
         "visa_days": 90
-      }
+      },
+      "budget_single": 1600,
+      "budget_couple": 2500,
+      "cost_index": 44,
+      "us_comparison": "approximately 46% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Ostrava",
+          "monthly_usd": 1300
+        },
+        {
+          "name": "Prague",
+          "monthly_usd": 1650
+        },
+        {
+          "name": "Plzen",
+          "monthly_usd": 2200
+        }
+      ]
     },
     "poland": {
       "safety": 7,
@@ -414,7 +666,25 @@
         "internet": 223.25,
         "english": 600.0,
         "visa_days": 90
-      }
+      },
+      "budget_single": 1300,
+      "budget_couple": 2000,
+      "cost_index": 35,
+      "us_comparison": "approximately 57% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Krakow",
+          "monthly_usd": 1400
+        },
+        {
+          "name": "Warsaw",
+          "monthly_usd": 1450
+        },
+        {
+          "name": "Gdansk",
+          "monthly_usd": 2050
+        }
+      ]
     },
     "hungary": {
       "safety": 7,
@@ -441,7 +711,25 @@
         "internet": 251.72,
         "english": 590.0,
         "visa_days": 90
-      }
+      },
+      "budget_single": 1450,
+      "budget_couple": 2250,
+      "cost_index": 39,
+      "us_comparison": "approximately 52% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Budapest",
+          "monthly_usd": 1150
+        },
+        {
+          "name": "Pecs",
+          "monthly_usd": 1800
+        },
+        {
+          "name": "Szeged",
+          "monthly_usd": 1900
+        }
+      ]
     },
     "romania": {
       "safety": 7,
@@ -468,7 +756,25 @@
         "internet": 283.06,
         "english": 605.0,
         "visa_days": 90
-      }
+      },
+      "budget_single": 1150,
+      "budget_couple": 1800,
+      "cost_index": 31,
+      "us_comparison": "approximately 62% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Bucharest",
+          "monthly_usd": 1300
+        },
+        {
+          "name": "Iasi",
+          "monthly_usd": 1550
+        },
+        {
+          "name": "Timisoara",
+          "monthly_usd": 1650
+        }
+      ]
     },
     "bulgaria": {
       "safety": 6,
@@ -495,7 +801,25 @@
         "internet": 94.44,
         "english": 594.0,
         "visa_days": 90
-      }
+      },
+      "budget_single": 1150,
+      "budget_couple": 1800,
+      "cost_index": 32,
+      "us_comparison": "approximately 61% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Sofia",
+          "monthly_usd": 750
+        },
+        {
+          "name": "Burgas",
+          "monthly_usd": 1350
+        },
+        {
+          "name": "Varna",
+          "monthly_usd": 1450
+        }
+      ]
     },
     "vietnam": {
       "safety": 6,
@@ -522,7 +846,25 @@
         "internet": 281.72,
         "english": 500.0,
         "visa_days": 90
-      }
+      },
+      "budget_single": 900,
+      "budget_couple": 1400,
+      "cost_index": 24,
+      "us_comparison": "approximately 71% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Da Nang",
+          "monthly_usd": 450
+        },
+        {
+          "name": "Ho Chi Minh City",
+          "monthly_usd": 650
+        },
+        {
+          "name": "Hanoi",
+          "monthly_usd": 750
+        }
+      ]
     },
     "japan": {
       "safety": 8,
@@ -549,7 +891,25 @@
         "internet": 255.27,
         "english": 446.0,
         "visa_days": 90
-      }
+      },
+      "budget_single": 2700,
+      "budget_couple": 4200,
+      "cost_index": 74,
+      "us_comparison": "approximately 10% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Osaka",
+          "monthly_usd": 2000
+        },
+        {
+          "name": "Fukuoka",
+          "monthly_usd": 2000
+        },
+        {
+          "name": "Tokyo",
+          "monthly_usd": 2250
+        }
+      ]
     },
     "south-korea": {
       "safety": 7,
@@ -576,7 +936,25 @@
         "internet": 257.76,
         "english": 522.0,
         "visa_days": 90
-      }
+      },
+      "budget_single": 2250,
+      "budget_couple": 3500,
+      "cost_index": 62,
+      "us_comparison": "approximately 24% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Busan",
+          "monthly_usd": 1750
+        },
+        {
+          "name": "Seoul",
+          "monthly_usd": 2100
+        },
+        {
+          "name": "Daejeon",
+          "monthly_usd": 2500
+        }
+      ]
     },
     "australia": {
       "safety": 5,
@@ -603,7 +981,25 @@
         "internet": 154.09,
         "english": 999,
         "visa_days": 90
-      }
+      },
+      "budget_single": 3350,
+      "budget_couple": 5200,
+      "cost_index": 91,
+      "us_comparison": "approximately 11% more expensive than the United States",
+      "affordable_cities": [
+        {
+          "name": "Perth",
+          "monthly_usd": 2550
+        },
+        {
+          "name": "Brisbane",
+          "monthly_usd": 2650
+        },
+        {
+          "name": "Melbourne",
+          "monthly_usd": 2800
+        }
+      ]
     },
     "new-zealand": {
       "safety": 5,
@@ -630,7 +1026,25 @@
         "internet": 201.91,
         "english": 999,
         "visa_days": 90
-      }
+      },
+      "budget_single": 2950,
+      "budget_couple": 4550,
+      "cost_index": 80,
+      "us_comparison": "approximately 2% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Hamilton",
+          "monthly_usd": 2550
+        },
+        {
+          "name": "Auckland",
+          "monthly_usd": 2650
+        },
+        {
+          "name": "Christchurch",
+          "monthly_usd": 2650
+        }
+      ]
     },
     "canada": {
       "safety": 5,
@@ -657,7 +1071,25 @@
         "internet": 277.7,
         "english": 999,
         "visa_days": 180
-      }
+      },
+      "budget_single": 2850,
+      "budget_couple": 4400,
+      "cost_index": 78,
+      "us_comparison": "approximately 5% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Montreal",
+          "monthly_usd": 2400
+        },
+        {
+          "name": "Calgary",
+          "monthly_usd": 2650
+        },
+        {
+          "name": "Toronto",
+          "monthly_usd": 2850
+        }
+      ]
     },
     "ireland": {
       "safety": 5,
@@ -684,7 +1116,25 @@
         "internet": 220.71,
         "english": 999,
         "visa_days": 90
-      }
+      },
+      "budget_single": 3350,
+      "budget_couple": 5200,
+      "cost_index": 91,
+      "us_comparison": "approximately 11% more expensive than the United States",
+      "affordable_cities": [
+        {
+          "name": "Dublin",
+          "monthly_usd": 2750
+        },
+        {
+          "name": "Limerick",
+          "monthly_usd": 2750
+        },
+        {
+          "name": "Galway",
+          "monthly_usd": 2850
+        }
+      ]
     },
     "netherlands": {
       "safety": 7,
@@ -711,7 +1161,25 @@
         "internet": 237.66,
         "english": 624.0,
         "visa_days": 90
-      }
+      },
+      "budget_single": 2750,
+      "budget_couple": 4250,
+      "cost_index": 75,
+      "us_comparison": "approximately 9% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Amsterdam",
+          "monthly_usd": 2500
+        },
+        {
+          "name": "Utrecht",
+          "monthly_usd": 2500
+        },
+        {
+          "name": "Rotterdam",
+          "monthly_usd": 2650
+        }
+      ]
     },
     "france": {
       "safety": 4,
@@ -738,7 +1206,25 @@
         "internet": 352.35,
         "english": 539.0,
         "visa_days": 90
-      }
+      },
+      "budget_single": 2450,
+      "budget_couple": 3800,
+      "cost_index": 67,
+      "us_comparison": "approximately 18% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Lyon",
+          "monthly_usd": 1900
+        },
+        {
+          "name": "Nantes",
+          "monthly_usd": 2250
+        },
+        {
+          "name": "Paris",
+          "monthly_usd": 2550
+        }
+      ]
     },
     "argentina": {
       "safety": 4,
@@ -765,7 +1251,25 @@
         "internet": 111.54,
         "english": 575.0,
         "visa_days": 90
-      }
+      },
+      "budget_single": 1150,
+      "budget_couple": 1800,
+      "cost_index": 32,
+      "us_comparison": "approximately 61% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Buenos Aires",
+          "monthly_usd": 750
+        },
+        {
+          "name": "Mendoza",
+          "monthly_usd": 1550
+        },
+        {
+          "name": "Rosario",
+          "monthly_usd": 1650
+        }
+      ]
     },
     "ecuador": {
       "safety": 4,
@@ -792,7 +1296,25 @@
         "internet": 169.66,
         "english": 466.0,
         "visa_days": 90
-      }
+      },
+      "budget_single": 1350,
+      "budget_couple": 2100,
+      "cost_index": 37,
+      "us_comparison": "approximately 55% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Quito",
+          "monthly_usd": 1100
+        },
+        {
+          "name": "Manta",
+          "monthly_usd": 1250
+        },
+        {
+          "name": "Cuenca",
+          "monthly_usd": 1350
+        }
+      ]
     },
     "morocco": {
       "safety": 5,
@@ -819,7 +1341,25 @@
         "internet": 56.22,
         "english": 492.0,
         "visa_days": 90
-      }
+      },
+      "budget_single": 1300,
+      "budget_couple": 2000,
+      "cost_index": 35,
+      "us_comparison": "approximately 57% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Casablanca",
+          "monthly_usd": 1150
+        },
+        {
+          "name": "Tangier",
+          "monthly_usd": 1150
+        },
+        {
+          "name": "Rabat",
+          "monthly_usd": 1300
+        }
+      ]
     },
     "switzerland": {
       "safety": 7,
@@ -846,7 +1386,25 @@
         "internet": 292.56,
         "english": 564.0,
         "visa_days": 90
-      }
+      },
+      "budget_single": 4000,
+      "budget_couple": 6200,
+      "cost_index": 109,
+      "us_comparison": "approximately 33% more expensive than the United States",
+      "affordable_cities": [
+        {
+          "name": "Bern",
+          "monthly_usd": 3200
+        },
+        {
+          "name": "Basel",
+          "monthly_usd": 3500
+        },
+        {
+          "name": "Zurich",
+          "monthly_usd": 3600
+        }
+      ]
     },
     "norway": {
       "safety": 7,
@@ -873,7 +1431,25 @@
         "internet": 177.11,
         "english": 613.0,
         "visa_days": 90
-      }
+      },
+      "budget_single": 3500,
+      "budget_couple": 5450,
+      "cost_index": 95,
+      "us_comparison": "approximately 16% more expensive than the United States",
+      "affordable_cities": [
+        {
+          "name": "Stavanger",
+          "monthly_usd": 3050
+        },
+        {
+          "name": "Trondheim",
+          "monthly_usd": 3200
+        },
+        {
+          "name": "Bergen",
+          "monthly_usd": 3350
+        }
+      ]
     },
     "denmark": {
       "safety": 7,
@@ -900,7 +1476,25 @@
         "internet": 291.6,
         "english": 611.0,
         "visa_days": 90
-      }
+      },
+      "budget_single": 3200,
+      "budget_couple": 4950,
+      "cost_index": 88,
+      "us_comparison": "approximately 7% more expensive than the United States",
+      "affordable_cities": [
+        {
+          "name": "Aalborg",
+          "monthly_usd": 2850
+        },
+        {
+          "name": "Odense",
+          "monthly_usd": 2950
+        },
+        {
+          "name": "Aarhus",
+          "monthly_usd": 3150
+        }
+      ]
     },
     "sweden": {
       "safety": 5,
@@ -927,7 +1521,25 @@
         "internet": 213.29,
         "english": 609.0,
         "visa_days": 90
-      }
+      },
+      "budget_single": 3050,
+      "budget_couple": 4750,
+      "cost_index": 84,
+      "us_comparison": "approximately 2% more expensive than the United States",
+      "affordable_cities": [
+        {
+          "name": "Uppsala",
+          "monthly_usd": 2750
+        },
+        {
+          "name": "Malmo",
+          "monthly_usd": 2850
+        },
+        {
+          "name": "Stockholm",
+          "monthly_usd": 3000
+        }
+      ]
     },
     "belgium": {
       "safety": 5,
@@ -954,7 +1566,25 @@
         "internet": 140.97,
         "english": 608.0,
         "visa_days": 90
-      }
+      },
+      "budget_single": 2650,
+      "budget_couple": 4100,
+      "cost_index": 72,
+      "us_comparison": "approximately 12% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Ghent",
+          "monthly_usd": 2400
+        },
+        {
+          "name": "Antwerp",
+          "monthly_usd": 2500
+        },
+        {
+          "name": "Bruges",
+          "monthly_usd": 2500
+        }
+      ]
     },
     "austria": {
       "safety": 7,
@@ -981,7 +1611,25 @@
         "internet": 114.0,
         "english": 616.0,
         "visa_days": 90
-      }
+      },
+      "budget_single": 2650,
+      "budget_couple": 4100,
+      "cost_index": 72,
+      "us_comparison": "approximately 12% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Graz",
+          "monthly_usd": 2200
+        },
+        {
+          "name": "Vienna",
+          "monthly_usd": 2500
+        },
+        {
+          "name": "Linz",
+          "monthly_usd": 2650
+        }
+      ]
     },
     "finland": {
       "safety": 7,
@@ -1008,7 +1656,25 @@
         "internet": 180.47,
         "english": 603.0,
         "visa_days": 90
-      }
+      },
+      "budget_single": 2950,
+      "budget_couple": 4550,
+      "cost_index": 80,
+      "us_comparison": "approximately 2% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Turku",
+          "monthly_usd": 2800
+        },
+        {
+          "name": "Helsinki",
+          "monthly_usd": 2850
+        },
+        {
+          "name": "Tampere",
+          "monthly_usd": 2900
+        }
+      ]
     },
     "united-kingdom": {
       "safety": 5,
@@ -1035,7 +1701,25 @@
         "internet": 172.24,
         "english": 999,
         "visa_days": 90
-      }
+      },
+      "budget_single": 2900,
+      "budget_couple": 4500,
+      "cost_index": 79,
+      "us_comparison": "approximately 4% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Manchester",
+          "monthly_usd": 2000
+        },
+        {
+          "name": "Edinburgh",
+          "monthly_usd": 2100
+        },
+        {
+          "name": "London",
+          "monthly_usd": 2650
+        }
+      ]
     },
     "singapore": {
       "safety": 8,
@@ -1062,7 +1746,25 @@
         "internet": 425.46,
         "english": 999,
         "visa_days": 180
-      }
+      },
+      "budget_single": 2250,
+      "budget_couple": 3500,
+      "cost_index": 61,
+      "us_comparison": "approximately 26% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Tampines",
+          "monthly_usd": 2950
+        },
+        {
+          "name": "Jurong East",
+          "monthly_usd": 3000
+        },
+        {
+          "name": "Woodlands",
+          "monthly_usd": 3050
+        }
+      ]
     },
     "united-arab-emirates": {
       "safety": 9,
@@ -1089,7 +1791,25 @@
         "internet": 384.51,
         "english": 487.0,
         "visa_days": 30
-      }
+      },
+      "budget_single": 2150,
+      "budget_couple": 3350,
+      "cost_index": 59,
+      "us_comparison": "approximately 28% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Abu Dhabi",
+          "monthly_usd": 2250
+        },
+        {
+          "name": "Dubai",
+          "monthly_usd": 2400
+        },
+        {
+          "name": "Ajman",
+          "monthly_usd": 2600
+        }
+      ]
     },
     "qatar": {
       "safety": 8,
@@ -1116,7 +1836,25 @@
         "internet": 211.97,
         "english": 469.0,
         "visa_days": 90
-      }
+      },
+      "budget_single": 2200,
+      "budget_couple": 3400,
+      "cost_index": 60,
+      "us_comparison": "approximately 27% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Doha",
+          "monthly_usd": 2550
+        },
+        {
+          "name": "Lusail",
+          "monthly_usd": 2650
+        },
+        {
+          "name": "Al Khor",
+          "monthly_usd": 2750
+        }
+      ]
     },
     "saudi-arabia": {
       "safety": 8,
@@ -1143,7 +1881,25 @@
         "internet": 167.93,
         "english": 404.0,
         "visa_days": 30
-      }
+      },
+      "budget_single": 1550,
+      "budget_couple": 2400,
+      "cost_index": 43,
+      "us_comparison": "approximately 48% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Mecca",
+          "monthly_usd": 1700
+        },
+        {
+          "name": "Jeddah",
+          "monthly_usd": 1750
+        },
+        {
+          "name": "Dammam",
+          "monthly_usd": 1800
+        }
+      ]
     },
     "iceland": {
       "safety": 7,
@@ -1170,7 +1926,25 @@
         "internet": 347.3,
         "english": 630.0,
         "visa_days": 90
-      }
+      },
+      "budget_single": 3600,
+      "budget_couple": 5600,
+      "cost_index": 99,
+      "us_comparison": "approximately 21% more expensive than the United States",
+      "affordable_cities": [
+        {
+          "name": "Akureyri",
+          "monthly_usd": 3150
+        },
+        {
+          "name": "Hafnarfjordur",
+          "monthly_usd": 3250
+        },
+        {
+          "name": "Reykjavik",
+          "monthly_usd": 3350
+        }
+      ]
     },
     "india": {
       "safety": 6,
@@ -1197,7 +1971,25 @@
         "internet": 60.85,
         "english": 484.0,
         "visa_days": 90
-      }
+      },
+      "budget_single": 750,
+      "budget_couple": 1150,
+      "cost_index": 21,
+      "us_comparison": "approximately 74% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Hyderabad",
+          "monthly_usd": 900
+        },
+        {
+          "name": "Bangalore",
+          "monthly_usd": 900
+        },
+        {
+          "name": "Delhi",
+          "monthly_usd": 1000
+        }
+      ]
     },
     "philippines": {
       "safety": 6,
@@ -1224,7 +2016,25 @@
         "internet": 109.86,
         "english": 569.0,
         "visa_days": 30
-      }
+      },
+      "budget_single": 1150,
+      "budget_couple": 1800,
+      "cost_index": 32,
+      "us_comparison": "approximately 61% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Manila",
+          "monthly_usd": 1000
+        },
+        {
+          "name": "Quezon City",
+          "monthly_usd": 1050
+        },
+        {
+          "name": "Davao City",
+          "monthly_usd": 1150
+        }
+      ]
     },
     "china": {
       "safety": 8,
@@ -1251,7 +2061,25 @@
         "internet": 206.91,
         "english": 464.0,
         "visa_days": 90
-      }
+      },
+      "budget_single": 1850,
+      "budget_couple": 2850,
+      "cost_index": 50,
+      "us_comparison": "approximately 39% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Chengdu",
+          "monthly_usd": 1600
+        },
+        {
+          "name": "Beijing",
+          "monthly_usd": 1900
+        },
+        {
+          "name": "Shanghai",
+          "monthly_usd": 2000
+        }
+      ]
     },
     "georgia": {
       "safety": 7,
@@ -1278,7 +2106,25 @@
         "internet": 44.73,
         "english": 541.0,
         "visa_days": 360
-      }
+      },
+      "budget_single": 850,
+      "budget_couple": 1300,
+      "cost_index": 23,
+      "us_comparison": "approximately 72% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Batumi",
+          "monthly_usd": 350
+        },
+        {
+          "name": "Tbilisi",
+          "monthly_usd": 550
+        },
+        {
+          "name": "Rustavi",
+          "monthly_usd": 1150
+        }
+      ]
     },
     "serbia": {
       "safety": 6,
@@ -1305,7 +2151,25 @@
         "internet": 102.35,
         "english": 579.0,
         "visa_days": 90
-      }
+      },
+      "budget_single": 1200,
+      "budget_couple": 1850,
+      "cost_index": 33,
+      "us_comparison": "approximately 60% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Belgrade",
+          "monthly_usd": 800
+        },
+        {
+          "name": "Kragujevac",
+          "monthly_usd": 1450
+        },
+        {
+          "name": "Nis",
+          "monthly_usd": 1550
+        }
+      ]
     },
     "kenya": {
       "safety": 4,
@@ -1332,7 +2196,25 @@
         "internet": 16.48,
         "english": 593.0,
         "visa_days": 90
-      }
+      },
+      "budget_single": 1100,
+      "budget_couple": 1700,
+      "cost_index": 30,
+      "us_comparison": "approximately 63% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Mombasa",
+          "monthly_usd": 900
+        },
+        {
+          "name": "Nairobi",
+          "monthly_usd": 1100
+        },
+        {
+          "name": "Nakuru",
+          "monthly_usd": 1100
+        }
+      ]
     },
     "peru": {
       "safety": 3,
@@ -1359,7 +2241,25 @@
         "internet": 258.37,
         "english": 519.0,
         "visa_days": 180
-      }
+      },
+      "budget_single": 1350,
+      "budget_couple": 2100,
+      "cost_index": 37,
+      "us_comparison": "approximately 55% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Lima",
+          "monthly_usd": 1150
+        },
+        {
+          "name": "Trujillo",
+          "monthly_usd": 1250
+        },
+        {
+          "name": "Cusco",
+          "monthly_usd": 1350
+        }
+      ]
     },
     "brazil": {
       "safety": 4,
@@ -1386,7 +2286,25 @@
         "internet": 221.53,
         "english": 482.0,
         "visa_days": 90
-      }
+      },
+      "budget_single": 1300,
+      "budget_couple": 2000,
+      "cost_index": 35,
+      "us_comparison": "approximately 57% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Curitiba",
+          "monthly_usd": 1300
+        },
+        {
+          "name": "Brasilia",
+          "monthly_usd": 1450
+        },
+        {
+          "name": "Rio de Janeiro",
+          "monthly_usd": 1450
+        }
+      ]
     },
     "chile": {
       "safety": 4,
@@ -1413,7 +2331,25 @@
         "internet": 334.99,
         "english": 517.0,
         "visa_days": 90
-      }
+      },
+      "budget_single": 1650,
+      "budget_couple": 2550,
+      "cost_index": 45,
+      "us_comparison": "approximately 45% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Santiago",
+          "monthly_usd": 1550
+        },
+        {
+          "name": "La Serena",
+          "monthly_usd": 2000
+        },
+        {
+          "name": "Concepcion",
+          "monthly_usd": 2100
+        }
+      ]
     },
     "albania": {
       "safety": 6,
@@ -1440,7 +2376,25 @@
         "internet": 93.64,
         "english": 532.0,
         "visa_days": 360
-      }
+      },
+      "budget_single": 1250,
+      "budget_couple": 1950,
+      "cost_index": 34,
+      "us_comparison": "approximately 59% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Tirana",
+          "monthly_usd": 450
+        },
+        {
+          "name": "Shkoder",
+          "monthly_usd": 1150
+        },
+        {
+          "name": "Vlore",
+          "monthly_usd": 1300
+        }
+      ]
     },
     "sri-lanka": {
       "safety": 6,
@@ -1467,7 +2421,25 @@
         "internet": 38.61,
         "english": 486.0,
         "visa_days": 30
-      }
+      },
+      "budget_single": 750,
+      "budget_couple": 1150,
+      "cost_index": 21,
+      "us_comparison": "approximately 74% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Colombo",
+          "monthly_usd": 800
+        },
+        {
+          "name": "Jaffna",
+          "monthly_usd": 950
+        },
+        {
+          "name": "Galle",
+          "monthly_usd": 1050
+        }
+      ]
     },
     "egypt": {
       "safety": 5,
@@ -1494,7 +2466,26 @@
         "internet": 92.5,
         "english": 459.0,
         "visa_days": 30
-      }
+      },
+      "budget_single": 700,
+      "budget_couple": 1100,
+      "cost_index": 19,
+      "us_comparison": "approximately 77% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Cairo",
+          "monthly_usd": 800
+        },
+        {
+          "name": "Sharm El Sheikh",
+          "monthly_usd": 950
+        },
+        {
+          "name": "Giza",
+          "monthly_usd": 1050
+        }
+      ]
     }
-  }
+  },
+  "budget_data_source": "WhereNext (getwherenext.com), CC BY 4.0, World Bank ICP + Eurostat"
 }

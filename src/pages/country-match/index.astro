@@ -1,0 +1,582 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Country Match | Find Your Best Country Abroad | LeavingAmerica.co"
+  description="Answer 8 questions and get a personalized ranking of countries that match your financial goals, lifestyle, and priorities. 55 countries analyzed.">
+
+<style is:global>
+* { box-sizing: border-box; }
+
+.cm-landing {
+  background: #fff;
+  font-family: 'Manrope', sans-serif;
+}
+
+/* ─── Hero ───────────────────────────────────── */
+.cm-hero {
+  background: linear-gradient(160deg, #081325 0%, #0F2244 55%, #081325 100%);
+  padding: 72px 24px 68px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cm-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 70% at 20% 50%, rgba(37,99,235,0.22) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 55% at 82% 38%, rgba(14,165,233,0.15) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+.cm-hero-inner {
+  position: relative;
+  max-width: 660px;
+  margin: 0 auto;
+}
+
+.cm-hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #60A5FA;
+  margin-bottom: 22px;
+}
+
+.cm-eyebrow-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #3B82F6;
+  animation: cmPulse 2.2s ease-in-out infinite;
+}
+
+@keyframes cmPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.65); }
+}
+
+.cm-hero h1 {
+  font-size: clamp(30px, 5.5vw, 52px);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.15;
+  margin-bottom: 18px;
+  letter-spacing: -0.5px;
+}
+
+.cm-hero h1 em {
+  font-style: normal;
+  background: linear-gradient(90deg, #60A5FA, #38BDF8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.cm-hero-sub {
+  font-size: 17px;
+  color: #94A3B8;
+  line-height: 1.65;
+  margin-bottom: 32px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cm-hero-meta {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+  margin-bottom: 36px;
+}
+
+.cm-meta-item {
+  font-size: 13px;
+  color: #64748B;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cm-meta-check {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(37,99,235,0.25);
+  color: #60A5FA;
+  font-size: 8px;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cm-btn-primary {
+  display: inline-block;
+  background: linear-gradient(135deg, #2563EB, #0EA5E9);
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 16px 40px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-family: 'Manrope', sans-serif;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 8px 28px rgba(37,99,235,0.38);
+}
+
+.cm-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgba(37,99,235,0.48);
+}
+
+/* ─── Shared section ─────────────────────────── */
+.cm-section { padding: 72px 24px; }
+.cm-inner { max-width: 960px; margin: 0 auto; }
+
+.cm-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #2563EB;
+  margin-bottom: 10px;
+}
+
+.cm-title {
+  font-size: clamp(22px, 3.5vw, 32px);
+  font-weight: 800;
+  color: #0F172A;
+  margin-bottom: 10px;
+  line-height: 1.25;
+  letter-spacing: -0.3px;
+}
+
+.cm-sub {
+  font-size: 16px;
+  color: #64748B;
+  line-height: 1.65;
+  max-width: 540px;
+  margin-bottom: 48px;
+}
+
+/* ─── Section A: Why ─────────────────────────── */
+.cm-why { background: #F8FAFC; }
+
+.cm-why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.cm-why-card {
+  background: white;
+  border-radius: 16px;
+  padding: 28px 24px;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.cm-why-card:hover {
+  box-shadow: 0 8px 28px rgba(37,99,235,0.10);
+  border-color: #BFDBFE;
+  transform: translateY(-2px);
+}
+
+.cm-why-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #EFF6FF, #DBEAFE);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  font-size: 20px;
+}
+
+.cm-why-card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0F172A;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.cm-why-card-desc {
+  font-size: 14px;
+  color: #64748B;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ─── Section B: How ─────────────────────────── */
+.cm-how { background: white; }
+
+.cm-steps {
+  display: grid;
+  grid-template-columns: 1fr 44px 1fr 44px 1fr;
+  align-items: start;
+}
+
+.cm-step { text-align: center; }
+
+.cm-step-num {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2563EB, #0EA5E9);
+  color: white;
+  font-size: 18px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  box-shadow: 0 4px 16px rgba(37,99,235,0.32);
+}
+
+.cm-step-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0F172A;
+  margin-bottom: 8px;
+}
+
+.cm-step-desc {
+  font-size: 13px;
+  color: #64748B;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.cm-connector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 26px;
+  color: #CBD5E1;
+  font-size: 22px;
+}
+
+/* ─── Section C: Preview ─────────────────────── */
+.cm-preview-section { background: #F8FAFC; }
+
+.cm-preview-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.cm-preview-card {
+  background: white;
+  border-radius: 20px;
+  padding: 28px;
+  border: 1.5px solid #BFDBFE;
+  box-shadow: 0 4px 28px rgba(37,99,235,0.12);
+  position: relative;
+  overflow: hidden;
+}
+
+.cm-preview-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #2563EB, #0EA5E9);
+}
+
+.cm-preview-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 4px 12px;
+  border-radius: 100px;
+  background: #1E40AF;
+  color: #fff;
+  margin-bottom: 12px;
+}
+
+.cm-preview-country {
+  font-size: 28px;
+  font-weight: 800;
+  color: #0F172A;
+  margin-bottom: 8px;
+  letter-spacing: -0.3px;
+}
+
+.cm-preview-score-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.cm-preview-score-pct {
+  font-size: 30px;
+  font-weight: 800;
+  color: #2563EB;
+  line-height: 1;
+}
+
+.cm-preview-score-label { font-size: 13px; color: #64748B; }
+
+.cm-preview-meter {
+  height: 6px;
+  background: #EFF6FF;
+  border-radius: 100px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.cm-preview-meter-fill {
+  height: 100%;
+  width: 93%;
+  background: linear-gradient(90deg, #2563EB, #0EA5E9);
+  border-radius: 100px;
+}
+
+.cm-preview-reasons { display: flex; flex-direction: column; gap: 9px; }
+
+.cm-preview-reason {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: #374151;
+}
+
+.cm-preview-check {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #DCFCE7;
+  color: #16A34A;
+  font-size: 9px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cm-preview-caption {
+  font-size: 11px;
+  color: #94A3B8;
+  text-align: center;
+  margin-top: 14px;
+}
+
+/* ─── Section D: Final CTA ───────────────────── */
+.cm-final {
+  background: linear-gradient(160deg, #081325 0%, #0F2244 100%);
+  padding: 80px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cm-final::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(37,99,235,0.18) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.cm-final-inner {
+  position: relative;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.cm-final h2 {
+  font-size: clamp(24px, 4vw, 38px);
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 14px;
+  line-height: 1.2;
+  letter-spacing: -0.3px;
+}
+
+.cm-final p {
+  font-size: 16px;
+  color: #94A3B8;
+  margin-bottom: 36px;
+  line-height: 1.65;
+}
+
+/* ─── Responsive ─────────────────────────────── */
+@media (max-width: 768px) {
+  .cm-why-grid { grid-template-columns: 1fr; gap: 12px; }
+  .cm-steps { grid-template-columns: 1fr; gap: 32px; }
+  .cm-connector { display: none; }
+  .cm-preview-grid { grid-template-columns: 1fr; gap: 28px; }
+  .cm-section { padding: 52px 20px; }
+}
+
+@media (max-width: 600px) {
+  .cm-hero { padding: 52px 20px 48px; }
+}
+</style>
+
+<div class="cm-landing">
+
+  <!-- Hero -->
+  <section class="cm-hero">
+    <div class="cm-hero-inner">
+      <p class="cm-hero-eyebrow">
+        <span class="cm-eyebrow-dot"></span>
+        Country Match
+      </p>
+      <h1>Find the country that<br/><em>fits your life</em></h1>
+      <p class="cm-hero-sub">
+        Answer 8 questions and get a personalized ranking of countries that match your financial goals, lifestyle, and priorities.
+      </p>
+      <div class="cm-hero-meta">
+        <span class="cm-meta-item"><span class="cm-meta-check">✓</span> 8 questions</span>
+        <span class="cm-meta-item"><span class="cm-meta-check">✓</span> About 2 minutes</span>
+        <span class="cm-meta-item"><span class="cm-meta-check">✓</span> 55 countries analyzed</span>
+        <span class="cm-meta-item"><span class="cm-meta-check">✓</span> No signup required</span>
+      </div>
+      <a href="/country-match/quiz" class="cm-btn-primary">
+        Start Country Match →
+      </a>
+    </div>
+  </section>
+
+  <!-- Section A: Why -->
+  <section class="cm-section cm-why">
+    <div class="cm-inner">
+      <p class="cm-label">Why it matters</p>
+      <h2 class="cm-title">More than a list of cheap countries</h2>
+      <p class="cm-sub">We compare 55 countries across 8 quality-of-life dimensions and weight them against your specific priorities.</p>
+      <div class="cm-why-grid">
+        <div class="cm-why-card">
+          <div class="cm-why-icon">📊</div>
+          <div class="cm-why-card-title">Go beyond cost of living</div>
+          <p class="cm-why-card-desc">Compare healthcare, safety, happiness, English proficiency, internet quality, and more — not just prices.</p>
+        </div>
+        <div class="cm-why-card">
+          <div class="cm-why-icon">💰</div>
+          <div class="cm-why-card-title">Discover where your money goes further</div>
+          <p class="cm-why-card-desc">See where your current income provides a significantly higher quality of life than it does in the US.</p>
+        </div>
+        <div class="cm-why-card">
+          <div class="cm-why-icon">🎯</div>
+          <div class="cm-why-card-title">Get personalized recommendations</div>
+          <p class="cm-why-card-desc">Receive tailored country matches based on your life stage, financial goals, and deal-breakers — not a generic list.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section B: How It Works -->
+  <section class="cm-section cm-how">
+    <div class="cm-inner">
+      <p class="cm-label">How it works</p>
+      <h2 class="cm-title">Three steps to your match</h2>
+      <p class="cm-sub">A data-driven process built on publicly available economic and quality-of-life research.</p>
+      <div class="cm-steps">
+        <div class="cm-step">
+          <div class="cm-step-num">1</div>
+          <div class="cm-step-title">Answer 8 questions</div>
+          <p class="cm-step-desc">Tell us about your lifestyle, finances, priorities, and timeline. No account required.</p>
+        </div>
+        <div class="cm-connector">→</div>
+        <div class="cm-step">
+          <div class="cm-step-num">2</div>
+          <div class="cm-step-title">We analyze 55 countries</div>
+          <p class="cm-step-desc">Your answers are scored against data from the World Bank, Numbeo, and EF English Proficiency Index.</p>
+        </div>
+        <div class="cm-connector">→</div>
+        <div class="cm-step">
+          <div class="cm-step-num">3</div>
+          <div class="cm-step-title">Receive your top matches</div>
+          <p class="cm-step-desc">Get a personalized ranked list with explanations of why each country fits your specific profile.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section C: Example Result -->
+  <section class="cm-section cm-preview-section">
+    <div class="cm-inner">
+      <div class="cm-preview-grid">
+        <div>
+          <p class="cm-label">What you'll receive</p>
+          <h2 class="cm-title" style="font-size: clamp(20px, 3vw, 28px);">A result that explains itself</h2>
+          <p class="cm-sub" style="margin-bottom: 28px;">Each match comes with a compatibility score and a breakdown of exactly why that country fits your answers — not a generic ranking.</p>
+          <a href="/country-match/quiz" class="cm-btn-primary" style="font-size:15px; padding: 14px 32px;">
+            See Your Match →
+          </a>
+        </div>
+        <div>
+          <div class="cm-preview-card">
+            <div class="cm-preview-badge">Top Match · Example</div>
+            <div class="cm-preview-country">Portugal</div>
+            <div class="cm-preview-score-row">
+              <span class="cm-preview-score-pct">93%</span>
+              <span class="cm-preview-score-label">Match Score</span>
+            </div>
+            <div class="cm-preview-meter">
+              <div class="cm-preview-meter-fill"></div>
+            </div>
+            <div class="cm-preview-reasons">
+              <div class="cm-preview-reason">
+                <span class="cm-preview-check">✓</span>
+                Healthcare rated 9/10 — universal coverage
+              </div>
+              <div class="cm-preview-reason">
+                <span class="cm-preview-check">✓</span>
+                Very high English proficiency (617 EF EPI)
+              </div>
+              <div class="cm-preview-reason">
+                <span class="cm-preview-check">✓</span>
+                Digital Nomad Visa available
+              </div>
+              <div class="cm-preview-reason">
+                <span class="cm-preview-check">✓</span>
+                Strong purchasing power advantage vs the US
+              </div>
+              <div class="cm-preview-reason">
+                <span class="cm-preview-check">✓</span>
+                180 days visa-free on a US passport
+              </div>
+            </div>
+          </div>
+          <p class="cm-preview-caption">Sample result — your result will reflect your specific answers</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section D: Final CTA -->
+  <section class="cm-final">
+    <div class="cm-final-inner">
+      <h2>Ready to find your best country match?</h2>
+      <p>Answer 8 questions and discover where your lifestyle, finances, and priorities align best.</p>
+      <a href="/country-match/quiz" class="cm-btn-primary">
+        Start Country Match →
+      </a>
+    </div>
+  </section>
+
+</div>
+
+</BaseLayout>

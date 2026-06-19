@@ -5,8 +5,14 @@ import cityRpp from '../data/city-rpp.json';
 
 function computeScore(q: Record<string, number>) {
   const weights: Record<string, number> = {
-    safety: 0.25, healthcare: 0.15, happiness: 0.15, gdpGrowth: 0.15,
-    pollution: 0.10, unemployment: 0.10, internet: 0.05, traffic: 0.05,
+    safety:       0.25,
+    healthcare:   0.20,
+    happiness:    0.15,
+    gdpGrowth:    0.05,
+    pollution:    0.10,
+    unemployment: 0.10,
+    internet:     0.10,
+    traffic:      0.05,
   };
   let total = 0, totalWeight = 0;
   for (const [m, w] of Object.entries(weights)) {
@@ -19,13 +25,13 @@ function computeScore(q: Record<string, number>) {
 }
 
 const featuredCountries = [
-  { name: "Portugal",       flag: '<span class="fi fi-pt fis"></span>', iso2: "PT", slug: "portugal",        ppp: "1.8×" },
-  { name: "Spain",          flag: '<span class="fi fi-es fis"></span>', iso2: "ES", slug: "spain",            ppp: "1.7×" },
-  { name: "Poland",         flag: '<span class="fi fi-pl fis"></span>', iso2: "PL", slug: "poland",           ppp: "2.1×" },
-  { name: "Mexico",         flag: '<span class="fi fi-mx fis"></span>', iso2: "MX", slug: "mexico",           ppp: "2.8×" },
-  { name: "Thailand",       flag: '<span class="fi fi-th fis"></span>', iso2: "TH", slug: "thailand",         ppp: "3.1×" },
-  { name: "Vietnam",        flag: '<span class="fi fi-vn fis"></span>', iso2: "VN", slug: "vietnam",          ppp: "3.4×" },
-  { name: "Czech Republic", flag: '<span class="fi fi-cz fis"></span>', iso2: "CZ", slug: "czech-republic",   ppp: "2.0×" },
+  { name: "Portugal",       flag: '<span class="fi fi-pt fis"></span>', iso2: "PT", slug: "portugal",        ppp: "1.8×", badge: "Most Popular",          featured: true },
+  { name: "Spain",          flag: '<span class="fi fi-es fis"></span>', iso2: "ES", slug: "spain",            ppp: "1.7×", badge: "Editor's Pick",         featured: false },
+  { name: "Poland",         flag: '<span class="fi fi-pl fis"></span>', iso2: "PL", slug: "poland",           ppp: "2.1×", badge: "Best Value Europe",      featured: false },
+  { name: "Mexico",         flag: '<span class="fi fi-mx fis"></span>', iso2: "MX", slug: "mexico",           ppp: "2.8×", badge: "Best Value Americas",    featured: false },
+  { name: "Thailand",       flag: '<span class="fi fi-th fis"></span>', iso2: "TH", slug: "thailand",         ppp: "3.1×", badge: "Digital Nomad Favorite", featured: false },
+  { name: "Vietnam",        flag: '<span class="fi fi-vn fis"></span>', iso2: "VN", slug: "vietnam",          ppp: "3.4×", badge: null,                     featured: false },
+  { name: "Czech Republic", flag: '<span class="fi fi-cz fis"></span>', iso2: "CZ", slug: "czech-republic",   ppp: "2.0×", badge: null,                     featured: false },
 ];
 
 const qs = qualityScores.countries as Record<string, any>;
@@ -40,23 +46,6 @@ const qs = qualityScores.countries as Record<string, any>;
   <div class="bg-orb bg-orb-1"></div>
   <div class="bg-orb bg-orb-2"></div>
   <div class="bg-orb bg-orb-3"></div>
-
-  <div id="sticky-result" style="display:none">
-    <div class="sticky-result-inner">
-      <span id="sticky-flag"></span>
-      <span id="sticky-country"></span>
-      <span class="sticky-divider">·</span>
-      <span id="sticky-savings"></span>
-      <span class="sticky-divider">·</span>
-      <span id="sticky-grade"></span>
-      <span class="sticky-divider">·</span>
-      <span id="sticky-power"></span>
-      <button class="sticky-recalculate"
-        onclick="document.getElementById('calculator').scrollIntoView({behavior:'smooth'})">
-        Recalculate →
-      </button>
-    </div>
-  </div>
 
   <!-- SECTION 2: HERO -->
   <section id="hero">
@@ -133,9 +122,18 @@ const qs = qualityScores.countries as Record<string, any>;
           Your $90,000 Salary<br>Could Feel Like<br><span class="hero-h1-accent">$180,000 Abroad</span>
         </h1>
         <p class="hero-sub">
-          See exactly how much further your money goes — powered by live World Bank PPP data and 8 quality-of-life metrics.
+          See exactly how much further your money goes — powered by live World Bank PPP data, 8 quality-of-life metrics, plus 4 mobility metrics: English level, visa access, tax system, and nomad visa.
         </p>
-        <a href="#calculator" class="hero-cta">Calculate Your Escape →</a>
+        <a href="#calculator" class="hero-cta">See Where Your Salary Goes Furthest →</a>
+        <div class="hero-example">
+          <span class="hero-example-label">Example</span>
+          <span class="hero-example-text">
+            New York $90k
+            <span class="hero-example-arrow">→</span>
+            $156,336 buying power in Portugal
+            <span class="hero-example-save">· Save $38,188/yr</span>
+          </span>
+        </div>
       </div>
 
     </div>
@@ -145,14 +143,14 @@ const qs = qualityScores.countries as Record<string, any>;
   <section id="calculator" class="section-white">
     <div class="container">
       <div class="calc-section-header reveal">
-        <h2 class="section-h2">Calculate Your Escape</h2>
-        <p class="section-sub">Live data. 55 countries. 8 quality metrics.</p>
+        <h2 class="section-h2">See How Far Your Salary Goes Abroad</h2>
+        <p class="calc-subtitle">Enter your city and income — we'll show you exactly how much further your money goes in 55 countries.</p>
       </div>
 
       <div class="calc-grid">
 
         <!-- LEFT: Form -->
-        <div class="calc-form calc-form-panel">
+        <div class="calc-form calc-form-panel reveal-left">
 
           <div class="field-group">
             <label for="citySelect">Current US City</label>
@@ -259,7 +257,7 @@ const qs = qualityScores.countries as Record<string, any>;
         </div>
 
         <!-- RIGHT: Results -->
-        <div class="calc-results">
+        <div class="calc-results reveal-right">
 
           <div id="resultsEmpty">
             <div class="trust-sidebar">
@@ -267,20 +265,20 @@ const qs = qualityScores.countries as Record<string, any>;
 
               <div class="trust-stats-grid">
                 <div class="trust-stat" data-count="180" data-suffix="K+">
-                  <span class="trust-stat-number" id="stat-calculations">0</span>
+                  <span class="trust-stat-number" id="stat-calculations" data-count="180000" data-suffix="K+">0</span>
                   <span class="trust-stat-desc">Calculations run</span>
                 </div>
                 <div class="trust-stat" data-count="47" data-prefix="$" data-suffix="K">
-                  <span class="trust-stat-number" id="stat-savings">$0</span>
+                  <span class="trust-stat-number" id="stat-savings" data-count="47" data-suffix="K">$0</span>
                   <span class="trust-stat-desc">Average annual savings</span>
                 </div>
                 <div class="trust-stat" data-count="55" data-suffix="">
-                  <span class="trust-stat-number" id="stat-countries">0</span>
+                  <span class="trust-stat-number" id="stat-countries" data-count="55" data-suffix="">0</span>
                   <span class="trust-stat-desc">Countries analyzed</span>
                 </div>
-                <div class="trust-stat" data-count="8" data-suffix="">
-                  <span class="trust-stat-number" id="stat-metrics">0</span>
-                  <span class="trust-stat-desc">Quality metrics</span>
+                <div class="trust-stat" data-count="12" data-suffix="">
+                  <span class="trust-stat-number" id="stat-metrics" data-count="12" data-suffix="">0</span>
+                  <span class="trust-stat-desc">Data metrics tracked</span>
                 </div>
               </div>
 
@@ -560,6 +558,27 @@ const qs = qualityScores.countries as Record<string, any>;
                       <span class="source-desc">Purchasing power — live data</span>
                     </div>
                   </a>
+                  <a href="https://www.ef.com/epi" target="_blank" class="source-badge">
+                    <img src="/images/logo-efpi.webp" alt="EF EPI" class="source-logo"/>
+                    <div>
+                      <span class="source-name">EF English Proficiency Index</span>
+                      <span class="source-desc">English level — latest available</span>
+                    </div>
+                  </a>
+                  <a href="https://github.com/ilyankou/passport-index-dataset" target="_blank" class="source-badge">
+                    <img src="/images/logo-passportindex.webp" alt="Passport Index" class="source-logo"/>
+                    <div>
+                      <span class="source-name">Passport Index</span>
+                      <span class="source-desc">US visa requirements — latest available</span>
+                    </div>
+                  </a>
+                  <a href="https://citizenremote.com" target="_blank" class="source-badge">
+                    <img src="/images/logo-citizenremote.webp" alt="Citizen Remote" class="source-logo"/>
+                    <div>
+                      <span class="source-name">Citizen Remote</span>
+                      <span class="source-desc">Digital nomad visas — latest available</span>
+                    </div>
+                  </a>
                 </div>
               </div>
 
@@ -616,14 +635,17 @@ const qs = qualityScores.countries as Record<string, any>;
     <div class="container">
       <div class="section-header reveal">
         <h2 class="section-h2">Top Destinations for Americans</h2>
-        <p class="section-sub">Click any country to see your personalized savings</p>
+        <p class="destinations-subtitle">
+          Ranked by purchasing power, quality of life
+          and popularity among American expats
+        </p>
       </div>
       <div class="countries-grid">
-        {featuredCountries.map(({ name, flag, iso2, slug, ppp }) => {
+        {featuredCountries.map(({ name, flag, iso2, slug, ppp, badge, featured }) => {
           const q = qs[slug] || {};
           const { pct, grade } = computeScore(q);
           return (
-            <div class="country-card reveal" data-iso2={iso2}>
+            <div class={`country-card reveal${featured ? ' card-featured' : ''}`} data-iso2={iso2}>
               <div class="country-card-header">
                 <div class="country-card-top">
                   <div class="country-flag" set:html={flag}></div>
@@ -658,6 +680,7 @@ const qs = qualityScores.countries as Record<string, any>;
                   </div>
                 </div>
               </div>
+              {badge && <span class="country-badge">{badge}</span>}
             </div>
           );
         })}
@@ -698,7 +721,44 @@ const qs = qualityScores.countries as Record<string, any>;
               </div>
             </div>
           </div>
+          <span class="country-badge">Strong Economy</span>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="quiz-promo">
+    <div class="qp-orb qp-orb-1"></div>
+    <div class="qp-orb qp-orb-2"></div>
+    <div class="qp-orb qp-orb-3"></div>
+    <div class="qp-grid"></div>
+    <div class="quiz-promo-inner">
+      <div class="quiz-promo-content">
+        <p class="quiz-promo-eyebrow">
+          <span class="qp-dot"></span>
+          COUNTRY MATCH QUIZ
+        </p>
+        <h2 class="quiz-promo-title">
+          Find Your Best<br/>Country Match
+        </h2>
+        <p class="quiz-promo-text">
+          Answer 8 quick questions about your
+          goals, lifestyle, and priorities to
+          discover the countries that fit
+          you best.
+        </p>
+        <div class="quiz-promo-meta">
+          <span class="qp-check">✓ No signup required</span>
+          <span class="qp-check">✓ 55 countries analyzed</span>
+          <span class="qp-check">✓ Personalized results</span>
+        </div>
+      </div>
+      <div class="quiz-promo-cta">
+        <a href="/country-match/quiz" class="quiz-promo-btn">
+          <span class="qp-btn-shine"></span>
+          Start Country Match →
+        </a>
+        <p class="quiz-promo-time">Takes about 2 minutes</p>
       </div>
     </div>
   </section>
@@ -731,7 +791,7 @@ const qs = qualityScores.countries as Record<string, any>;
           <div class="step-icon"><img src="/images/icon-chart.webp" alt="Chart" width="56" height="56"/></div>
           <div class="step-num">Step 3</div>
           <h3>Get Your Full Analysis</h3>
-          <p>See your savings, purchasing power, FIRE timeline, and an overall quality score from 8 metrics.</p>
+          <p>See your savings, purchasing power, FIRE timeline, and an overall quality score from 8 metrics — plus 4 mobility metrics: English level, visa access, tax system, and nomad visa.</p>
         </div>
       </div>
     </div>
@@ -804,6 +864,42 @@ const qs = qualityScores.countries as Record<string, any>;
           <p class="trust-source-desc">Fixed broadband speeds via Wikipedia</p>
           <a href="https://www.speedtest.net/global-index" target="_blank" class="trust-source-link">speedtest.net →</a>
         </div>
+
+        <div class="trust-source-card reveal reveal-delay-1"
+             data-color="#0EA5E9">
+          <div class="trust-source-logo">
+            <img src="/images/logo-efpi.webp"
+                 alt="EF English Proficiency Index"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <span class="trust-source-fallback">EF EPI</span>
+          </div>
+          <p class="trust-source-desc">English proficiency — 123 countries</p>
+          <a href="https://www.ef.com/epi" target="_blank" class="trust-source-link">ef.com/epi →</a>
+        </div>
+
+        <div class="trust-source-card reveal reveal-delay-2"
+             data-color="#8B5CF6">
+          <div class="trust-source-logo">
+            <img src="/images/logo-passportindex.webp"
+                 alt="Passport Index"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <span class="trust-source-fallback">Passport Index</span>
+          </div>
+          <p class="trust-source-desc">US visa requirements — 199 countries</p>
+          <a href="https://github.com/ilyankou/passport-index-dataset" target="_blank" class="trust-source-link">github.com →</a>
+        </div>
+
+        <div class="trust-source-card reveal reveal-delay-3"
+             data-color="#10B981">
+          <div class="trust-source-logo">
+            <img src="/images/logo-citizenremote.webp"
+                 alt="Citizen Remote"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+            <span class="trust-source-fallback">Citizen Remote</span>
+          </div>
+          <p class="trust-source-desc">Digital nomad visas — 70+ countries</p>
+          <a href="https://citizenremote.com" target="_blank" class="trust-source-link">citizenremote.com →</a>
+        </div>
       </div>
     </div>
   </section>
@@ -812,49 +908,63 @@ const qs = qualityScores.countries as Record<string, any>;
   <section id="faq" class="section-white">
     <div class="container">
       <div class="section-header reveal">
-        <h2 class="section-h2">Frequently Asked Questions</h2>
+        <h2 class="section-h2">Frequently Asked Questions About Living Abroad</h2>
       </div>
       <div class="faq-list">
 
         <div class="faq-item">
+          <button class="faq-question">Is this calculator free? <span class="faq-icon">+</span></button>
+          <div class="faq-answer">
+            <p>Yes, completely free. No account required, no paywalls, no hidden fees. We cover our costs through a small commission if you choose to use one of our affiliate links, at no extra cost to you.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
           <button class="faq-question">How accurate are these calculations? <span class="faq-icon">+</span></button>
           <div class="faq-answer">
-            <p>We use live PPP data from the World Bank combined with BEA regional price data for 50 US cities — both official government sources updated regularly. Results reflect purchasing power differences and may vary based on individual lifestyle and spending habits.</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question">What is Purchasing Power Parity (PPP)? <span class="faq-icon">+</span></button>
-          <div class="faq-answer">
-            <p>PPP measures how far your money goes in different countries. A PPP of 2x means your $50,000 has the buying power of $100,000 locally.</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question">Do I need a visa to move to these countries? <span class="faq-icon">+</span></button>
-          <div class="faq-answer">
-            <p>Americans can visit most countries visa-free for 30–90 days. Long-term residency requires different visas — we recommend consulting an immigration lawyer.</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question">How often is the data updated? <span class="faq-icon">+</span></button>
-          <div class="faq-answer">
-            <p>World Bank PPP and unemployment data updates annually. Numbeo quality metrics update quarterly. Exchange rates update daily via live API.</p>
+            <p>The calculator uses live purchasing power parity data from the World Bank and regional price data from the US Bureau of Economic Analysis. Quality scores draw on Numbeo, the World Happiness Report, Speedtest, and the EF English Proficiency Index. Results show cost-of-living differences based on standardized economic data — both authoritative public data sources. Actual costs vary by city, lifestyle, and personal circumstances.</p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question">Does this account for taxes? <span class="faq-icon">+</span></button>
           <div class="faq-answer">
-            <p>The calculator shows gross purchasing power based on PPP. Tax obligations depend on your citizenship, residency, and income source. Consult a tax professional.</p>
+            <p>The calculator shows gross purchasing power based on PPP data and does not factor in taxes. US citizens are required to file federal taxes regardless of where they live, though the Foreign Earned Income Exclusion (FEIE) may reduce or eliminate US tax liability on foreign-earned income up to a certain threshold. State tax obligations vary. We strongly recommend consulting a tax professional who specializes in expat taxation before making any decisions.</p>
           </div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-question">Is this calculator free? <span class="faq-icon">+</span></button>
+          <button class="faq-question">Can Americans keep US citizenship if they move abroad? <span class="faq-icon">+</span></button>
           <div class="faq-answer">
-            <p>Yes, completely free. We earn a small commission if you use our affiliate links, at no extra cost to you.</p>
+            <p>Yes. Moving abroad does not affect US citizenship. Americans can live in another country indefinitely while retaining full US citizenship, including the right to vote in federal elections, hold a US passport, and return to the United States at any time. Renouncing citizenship is a separate, irreversible legal process that requires deliberate action.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">Do I need a visa to move to these countries? <span class="faq-icon">+</span></button>
+          <div class="faq-answer">
+            <p>Americans can visit most countries visa-free for 30 to 90 days on a US passport. Long-term residency requires a separate visa or residence permit. Many countries now offer digital nomad visas specifically for remote workers. Visa requirements, processing times, and income thresholds vary significantly by country. We recommend reviewing official immigration requirements and consulting a qualified immigration professional when needed.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">Which countries offer digital nomad visas? <span class="faq-icon">+</span></button>
+          <div class="faq-answer">
+            <p>Over 50 countries now offer some form of digital nomad visa or remote work permit for foreigners earning income outside the country. Popular options include Portugal, Spain, Greece, Germany, Costa Rica, Panama, Georgia, and Thailand. Each program has its own income requirements, application process, and permitted stay duration. Our calculator flags countries with dedicated nomad visa programs in the Can I Move There section.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">Can I collect Social Security while living abroad? <span class="faq-icon">+</span></button>
+          <div class="faq-answer">
+            <p>In most cases, yes. US citizens living abroad can generally collect Social Security retirement benefits, with payments sent directly to a foreign bank account or a US account. However, there are exceptions for certain countries where the Social Security Administration does not send payments. Medicare does not cover medical care outside the United States. We recommend checking the SSA official guidance and consulting a financial advisor familiar with expat retirement planning.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">What is Purchasing Power Parity? <span class="faq-icon">+</span></button>
+          <div class="faq-answer">
+            <p>Purchasing power parity is an economic measure that compares how much a given amount of money can buy in different countries. A multiplier of 2x means your dollar buys twice as much locally as it does in the US. We use World Bank PPP data combined with BEA regional price data to estimate how far your specific US city salary would stretch in each destination country.</p>
           </div>
         </div>
 
@@ -862,45 +972,7 @@ const qs = qualityScores.countries as Record<string, any>;
     </div>
   </section>
 
-  <!-- SECTION 9: FOOTER (multi-column) -->
-  <div class="footer-main">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-col">
-          <a href="/" class="footer-logo">
-            <img src="/images/logo2.webp" alt="LeavingAmerica" height="40" style="display:block;"/>
-          </a>
-          <p class="footer-tagline">Financial clarity for Americans moving abroad.</p>
-        </div>
-        <div class="footer-col">
-          <div class="footer-col-title">Product</div>
-          <a href="/" class="footer-link" onclick="event.preventDefault();document.getElementById('calculator').scrollIntoView({behavior:'smooth'})">Calculator</a>
-          <a href="/countries" class="footer-link">Countries</a>
-          <a href="/tools/visa" class="footer-link">Visa Explorer</a>
-          <a href="/tools/salary" class="footer-link">Cost of Living</a>
-        </div>
-        <div class="footer-col">
-          <div class="footer-col-title">Resources</div>
-          <a href="#" class="footer-link">Methodology</a>
-          <a href="#trust" class="footer-link">Data Sources</a>
-          <a href="#faq" class="footer-link">FAQ</a>
-          <a href="#" class="footer-link">Privacy Policy</a>
-        </div>
-        <div class="footer-col">
-          <div class="footer-col-title">Data From</div>
-          <a href="https://data.worldbank.org" target="_blank" rel="noopener" class="footer-link">World Bank</a>
-          <a href="https://www.bea.gov" target="_blank" rel="noopener" class="footer-link">BEA</a>
-          <a href="https://numbeo.com" target="_blank" rel="noopener" class="footer-link">Numbeo</a>
-          <a href="https://ourworldindata.org" target="_blank" rel="noopener" class="footer-link">Our World in Data</a>
-          <a href="https://speedtest.net" target="_blank" rel="noopener" class="footer-link">Speedtest</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>© 2026 LeavingAmerica. For informational purposes only. Not legal, tax, or financial advice.</p>
-      </div>
-    </div>
-  </div>
-
+  <!-- SECTION 9: FOOTER -->
 
 </BaseLayout>
 
@@ -1035,8 +1107,8 @@ const qs = qualityScores.countries as Record<string, any>;
       alert('Please fill in all fields');
       return;
     }
-    if (income < 20000 || income > 500000) {
-      alert('Please enter income between $20,000 and $500,000');
+    if (income < 15000 || income > 1000000) {
+      alert('Please enter income between $15,000 and $1,000,000');
       return;
     }
 
@@ -1472,38 +1544,6 @@ const qs = qualityScores.countries as Record<string, any>;
         };
       }
 
-      // Sticky bar
-      const stickyEl = document.getElementById('sticky-result');
-      const stickyFlag = document.getElementById('sticky-flag');
-      const stickyCountry = document.getElementById('sticky-country');
-      const stickySavings = document.getElementById('sticky-savings');
-      const stickyGrade = document.getElementById('sticky-grade');
-      const stickyPower = document.getElementById('sticky-power');
-
-      if (stickyFlag) stickyFlag.textContent = flagEmoji;
-      if (stickyCountry) stickyCountry.textContent = countryName;
-      if (stickySavings) {
-        stickySavings.textContent = (isRemote && annualSavings > 0)
-          ? 'Save $' + annualSavings.toLocaleString() + '/yr'
-          : adjustedMultiplier.toFixed(1) + 'x purchasing power';
-      }
-      if (stickyGrade) stickyGrade.textContent = 'Grade ' + overallScore.grade;
-      if (stickyPower) stickyPower.textContent = adjustedMultiplier.toFixed(1) + 'x PPP';
-
-      if (stickyEl) {
-        stickyEl.style.display = '';
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(e => {
-            if (e.isIntersecting) {
-              stickyEl.classList.remove('visible');
-            } else {
-              stickyEl.classList.add('visible');
-            }
-          });
-        }, { threshold: 0.1 });
-        observer.observe(resultsData);
-      }
-
       // ── END NEW JS BLOCK ──────────────────────────────────────────────────
 
       loadingState.style.display  = 'none';
@@ -1582,6 +1622,104 @@ const qs = qualityScores.countries as Record<string, any>;
     } catch(e) {
       // silent fail
     }
+  })();
+
+  // Reveal left/right scroll animation
+  (function() {
+    const revealEls = document.querySelectorAll('.reveal-left, .reveal-right');
+    if (!revealEls.length) return;
+
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry, i) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              entry.target.classList.add('visible');
+            }, i * 150);
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    revealEls.forEach(el => revealObserver.observe(el));
+  })();
+
+  // Count-up for trust numbers
+  (function() {
+    function countUp(el, target, suffix, duration) {
+      const startTime = performance.now();
+      function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = Math.round(eased * target);
+        el.textContent = current.toLocaleString() + suffix;
+        if (progress < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    }
+
+    const trustObserver2 = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const stats = entry.target.querySelectorAll('[data-count]');
+          stats.forEach((stat, i) => {
+            setTimeout(() => {
+              const target = parseInt(stat.dataset.count);
+              const suffix = stat.dataset.suffix || '';
+              countUp(stat, target, suffix, 1500);
+            }, i * 150);
+          });
+          trustObserver2.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    const trustSection = document.querySelector(
+      '.calc-trust-stats, .trust-stats, .calc-stats'
+    );
+    if (trustSection) trustObserver2.observe(trustSection);
+  })();
+
+  // Progress bar animation on scroll
+  (function() {
+    const bars = document.querySelectorAll(
+      '.country-card .progress-bar, ' +
+      '.country-card .mini-bar-fill'
+    );
+    if (!bars.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const bar = entry.target as HTMLElement;
+            const width = bar.dataset.width ||
+                          bar.style.width;
+            bar.style.width = '0%';
+            setTimeout(() => {
+              bar.style.transition =
+                'width 0.8s cubic-bezier(0.25,0.46,0.45,0.94)';
+              bar.style.width = width;
+            }, 100);
+            observer.unobserve(bar);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    bars.forEach(bar => {
+      const b = bar as HTMLElement;
+      const currentWidth = b.style.width ||
+        getComputedStyle(b).width;
+      b.dataset.width = currentWidth;
+      observer.observe(b);
+    });
   })();
 
   // Country card click → pre-select in calculator
@@ -1919,8 +2057,6 @@ const qs = qualityScores.countries as Record<string, any>;
 </script>
 
 <style is:global>
-  footer.footer { display: none !important; }
-
   .lifestyle-item {
     display: flex;
     align-items: center;
@@ -2227,6 +2363,43 @@ const qs = qualityScores.countries as Record<string, any>;
     box-shadow: 0 8px 32px rgba(37, 99, 235, 0.4);
   }
 
+  .hero-example {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 16px;
+    padding: 10px 16px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    backdrop-filter: blur(8px);
+    max-width: fit-content;
+  }
+  .hero-example-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.5);
+    flex-shrink: 0;
+  }
+  .hero-example-text {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.9);
+  }
+  .hero-example-arrow {
+    color: #60A5FA;
+    margin: 0 4px;
+  }
+  .hero-example-save {
+    color: #34D399;
+    margin-left: 4px;
+  }
+
+  @media (max-width: 768px) {
+    .hero-example { max-width: 100%; }
+  }
 
   /* ── SHARED SECTION HEADER ── */
   .section-header {
@@ -2254,6 +2427,17 @@ const qs = qualityScores.countries as Record<string, any>;
   .calc-section-header {
     text-align: center;
     margin-bottom: 56px;
+  }
+
+  .calc-subtitle {
+    font-size: 16px;
+    color: #64748B;
+    margin-top: 8px;
+    margin-bottom: 32px;
+    line-height: 1.6;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .calc-grid {
@@ -2332,6 +2516,23 @@ const qs = qualityScores.countries as Record<string, any>;
     font-size: 16px !important;
     cursor: pointer !important;
     transition: all 0.2s ease !important;
+  }
+
+  #calcBtn:hover,
+  .btn-calculate:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 12px 32px rgba(37,99,235,0.35);
+  }
+
+  #citySelect:focus,
+  #incomeInput:focus,
+  #countrySelect:focus {
+    outline: none;
+    border-color: #2563EB;
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.12),
+                0 0 20px rgba(37,99,235,0.08);
+    background: #FAFCFF;
+    transition: all 0.2s ease;
   }
 
   .disclaimer {
@@ -2715,57 +2916,6 @@ const qs = qualityScores.countries as Record<string, any>;
   .share-copy { background: white; color: #0F172A; border: 1.5px solid #E2E8F0; }
   .share-copy:hover { border-color: #2563EB; color: #2563EB; transform: translateY(-1px); }
 
-  /* STICKY BAR */
-  #sticky-result {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 9990;
-    background: rgba(15,23,42,0.95);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(37,99,235,0.3);
-    padding: 10px 24px;
-    transform: translateY(-100%);
-    transition: transform 0.3s ease;
-  }
-  #sticky-result.visible {
-    transform: translateY(0);
-  }
-  .sticky-result-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 14px;
-    font-weight: 600;
-    color: #F8FAFC;
-    flex-wrap: wrap;
-  }
-  .sticky-divider { color: #475569; }
-  #sticky-flag { font-size: 18px; }
-  #sticky-savings { color: #10B981; }
-  #sticky-grade { color: #60A5FA; }
-  #sticky-power { color: #94A3B8; }
-  .sticky-recalculate {
-    margin-left: auto;
-    background: #2563EB;
-    color: white;
-    border: none;
-    padding: 6px 16px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 700;
-    cursor: pointer;
-    font-family: 'Manrope', sans-serif;
-    transition: background 0.2s;
-  }
-  .sticky-recalculate:hover { background: #1D4ED8; }
-  @media (max-width: 768px) {
-    .sticky-recalculate { display: none; }
-  }
-
   /* LEGACY — keep for backwards compatibility */
   .btn-outline {
     border: 1.5px solid #e2e8f0;
@@ -2878,9 +3028,64 @@ const qs = qualityScores.countries as Record<string, any>;
   }
 
   .country-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 48px rgba(37,99,235,0.13);
-    border-color: #BFDBFE;
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(37,99,235,0.15);
+    background: linear-gradient(135deg, #F8FAFF 0%, #EEF4FF 100%);
+  }
+
+  .country-card::after {
+    content: 'See your savings →';
+    position: absolute;
+    bottom: 16px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: #2563EB;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  .country-card:hover::after {
+    opacity: 1;
+  }
+  .country-card {
+    position: relative;
+    padding-bottom: 40px;
+  }
+
+  .destinations-subtitle {
+    font-size: 15px;
+    color: #64748B;
+    margin-top: 8px;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+
+  .country-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #2563EB, #7C3AED);
+    color: white;
+    z-index: 2;
+  }
+
+  .card-featured {
+    border: 2px solid rgba(37,99,235,0.3);
+    box-shadow: 0 4px 20px rgba(37,99,235,0.1),
+                0 0 0 1px rgba(37,99,235,0.05);
+  }
+  .card-featured:hover {
+    box-shadow: 0 20px 50px rgba(37,99,235,0.2),
+                0 0 0 2px rgba(37,99,235,0.15);
   }
 
   .country-card-header {
@@ -2920,6 +3125,7 @@ const qs = qualityScores.countries as Record<string, any>;
     color: #2563EB;
     letter-spacing: -1px;
     line-height: 1;
+    text-shadow: 0 0 20px rgba(37,99,235,0.25);
   }
 
   .country-ppp-label {
@@ -3015,8 +3221,8 @@ const qs = qualityScores.countries as Record<string, any>;
   /* ── TRUST SECTION ── */
   .trust-sources-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 16px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
     margin-top: 48px;
   }
 
@@ -3097,6 +3303,19 @@ const qs = qualityScores.countries as Record<string, any>;
     opacity: 1;
   }
 
+  .trust-source-card:nth-child(6):hover {
+    border-color: #0EA5E9;
+    background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%);
+  }
+  .trust-source-card:nth-child(7):hover {
+    border-color: #8B5CF6;
+    background: linear-gradient(135deg, #FAF5FF 0%, #EDE9FE 100%);
+  }
+  .trust-source-card:nth-child(8):hover {
+    border-color: #10B981;
+    background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%);
+  }
+
   /* ── FAQ ── */
   .faq-list {
     max-width: 720px;
@@ -3152,92 +3371,11 @@ const qs = qualityScores.countries as Record<string, any>;
     line-height: 1.7;
   }
 
-  /* ── FOOTER MAIN ── */
-  .footer-main {
-    background: #07091a;
-    padding: 80px 0 0;
-  }
-
-  .footer-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 60px;
-    padding-bottom: 56px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  }
-
-  .footer-logo {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-    margin-bottom: 16px;
-  }
-
-  .footer-logo-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    background: #2563EB;
-    border-radius: 8px;
-    font-size: 18px;
-    color: white;
-    flex-shrink: 0;
-  }
-
-  .footer-logo-wordmark {
-    font-size: 17px;
-    color: white;
-  }
-
-  .footer-tagline {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.4);
-    line-height: 1.6;
-    max-width: 240px;
-  }
-
-  .footer-col-title {
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: rgba(255, 255, 255, 0.35);
-    margin-bottom: 18px;
-  }
-
-  .footer-link {
-    display: block;
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.55);
-    margin-bottom: 12px;
-    text-decoration: none;
-    transition: color 0.2s;
-    outline: none;
-    background: transparent;
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  .footer-link:hover { color: white; }
-
-  .footer-bottom {
-    padding: 24px 0;
-    text-align: center;
-  }
-
-  .footer-bottom p {
-    font-size: 13px;
-    color: rgba(255, 255, 255, 0.3);
-  }
-
   /* ── RESPONSIVE ── */
   @media (max-width: 1024px) {
     .hero-h1 { font-size: 48px; }
     .countries-grid { grid-template-columns: repeat(2, 1fr); }
-    .trust-sources-grid { grid-template-columns: repeat(3, 1fr); }
-    .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+    .trust-sources-grid { grid-template-columns: repeat(4, 1fr); }
   }
 
   @media (max-width: 768px) {
@@ -3267,13 +3405,11 @@ const qs = qualityScores.countries as Record<string, any>;
     .mobility-grid { grid-template-columns: 1fr; }
     .share-buttons { flex-direction: column; }
     .score-header { flex-direction: column; align-items: flex-start; gap: 4px; }
-    .sticky-result-inner { gap: 6px; font-size: 12px; }
     .fire-tooltip-content { left: auto; right: 0; top: 28px; transform: none; width: 220px; }
     .steps-grid { grid-template-columns: 1fr; }
     .steps-arrow-between { display: none; }
     .steps-line-container { display: none; }
     .trust-sources-grid { grid-template-columns: repeat(2, 1fr); }
-    .footer-grid { grid-template-columns: 1fr; gap: 32px; }
   }
 
   @media (max-width: 640px) {
@@ -3402,6 +3538,29 @@ const qs = qualityScores.countries as Record<string, any>;
     position: relative;
   }
 
+  @media (max-width: 768px) {
+    .steps-grid {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      position: relative;
+    }
+    .steps-grid::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(
+        180deg,
+        #2563EB 0%,
+        #22D3EE 100%
+      );
+      transform: translateX(-50%);
+      z-index: 0;
+    }
+  }
+
   .steps-line-container {
     position: absolute;
     top: 50%;
@@ -3423,6 +3582,12 @@ const qs = qualityScores.countries as Record<string, any>;
     position: relative;
   }
 
+  @media (max-width: 768px) {
+    .steps-line {
+      display: none;
+    }
+  }
+
   .steps-arrow-between {
     display: flex;
     align-items: center;
@@ -3440,6 +3605,15 @@ const qs = qualityScores.countries as Record<string, any>;
 
   .steps-arrow-between.visible {
     opacity: 1;
+  }
+
+  @media (max-width: 768px) {
+    .steps-arrow-between {
+      transform: rotate(90deg);
+      width: auto;
+      height: 32px;
+      align-self: center;
+    }
   }
 
   .step-card {
@@ -3476,6 +3650,22 @@ const qs = qualityScores.countries as Record<string, any>;
   .country-card {
     transition: transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.3s ease, border-color 0.3s ease;
     position: relative;
+  }
+
+  .reveal-left {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal-right {
+    opacity: 0;
+    transform: translateX(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal-left.visible,
+  .reveal-right.visible {
+    opacity: 1;
+    transform: translateX(0);
   }
 
   /* 15. Affiliate cards hover glow */
@@ -3738,6 +3928,10 @@ const qs = qualityScores.countries as Record<string, any>;
     padding: 8px 0;
   }
 
+  .calc-trust { gap: 16px; }
+  .calc-trust-header { margin-bottom: 8px; }
+  .calc-checklist { margin-top: 8px; }
+
   .trust-sidebar-label {
     font-size: 10px;
     font-weight: 700;
@@ -3802,6 +3996,11 @@ const qs = qualityScores.countries as Record<string, any>;
   .trust-stat:hover .trust-stat-number {
     transform: scale(1.05);
   }
+
+  .trust-stat:nth-child(1) .trust-stat-number { font-size: 48px; }
+  .trust-stat:nth-child(2) .trust-stat-number { font-size: 40px; }
+  .trust-stat:nth-child(3) .trust-stat-number,
+  .trust-stat:nth-child(4) .trust-stat-number { font-size: 32px; }
 
   .trust-stat-desc {
     display: block;
@@ -3878,5 +4077,231 @@ const qs = qualityScores.countries as Record<string, any>;
   @keyframes checkPulse {
     0%, 100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); }
     50% { box-shadow: 0 0 0 4px rgba(16,185,129,0.15); }
+  }
+
+  /* ── Quiz Promo: ultra-premium ── */
+  .quiz-promo {
+    background: #050C18;
+    padding: 68px 24px;
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  /* glowing orbs */
+  .qp-orb {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .qp-orb-1 {
+    top: -140px;
+    right: 6%;
+    width: 720px;
+    height: 720px;
+    background: radial-gradient(circle, rgba(37,99,235,0.22) 0%, rgba(37,99,235,0.04) 50%, transparent 70%);
+  }
+  .qp-orb-2 {
+    bottom: -180px;
+    left: -4%;
+    width: 620px;
+    height: 620px;
+    background: radial-gradient(circle, rgba(6,182,212,0.18) 0%, rgba(6,182,212,0.04) 50%, transparent 70%);
+  }
+  .qp-orb-3 {
+    top: 50%;
+    left: 42%;
+    transform: translate(-50%, -50%);
+    width: 900px;
+    height: 500px;
+    background: radial-gradient(ellipse, rgba(99,102,241,0.07) 0%, transparent 65%);
+  }
+
+  /* subtle dot-grid overlay */
+  .qp-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size: 36px 36px;
+    pointer-events: none;
+    mask-image: radial-gradient(ellipse 90% 90% at 50% 50%, black 30%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 90% 90% at 50% 50%, black 30%, transparent 100%);
+  }
+
+  .quiz-promo-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 64px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+
+  .quiz-promo-content {
+    flex: 1;
+    min-width: 300px;
+  }
+
+  /* eyebrow with pulsing live dot */
+  .quiz-promo-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    color: #60A5FA;
+    margin-bottom: 22px;
+  }
+  .qp-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #2563EB;
+    flex-shrink: 0;
+    animation: qpDotPulse 2.2s ease-in-out infinite;
+  }
+  @keyframes qpDotPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(37,99,235,0.7), 0 0 8px rgba(37,99,235,0.5); }
+    50%       { box-shadow: 0 0 0 5px rgba(37,99,235,0), 0 0 18px rgba(37,99,235,0.8); }
+  }
+
+  .quiz-promo-title {
+    font-size: 52px;
+    font-weight: 800;
+    color: #F1F5F9;
+    margin-bottom: 20px;
+    line-height: 1.08;
+    letter-spacing: -2px;
+    font-family: 'Manrope', sans-serif;
+  }
+
+  .quiz-promo-text {
+    font-size: 17px;
+    color: #64748B;
+    line-height: 1.75;
+    margin-bottom: 28px;
+    max-width: 440px;
+  }
+
+  .quiz-promo-meta {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px 20px;
+    flex-wrap: wrap;
+  }
+  .qp-check {
+    font-size: 13px;
+    color: #475569;
+    font-weight: 600;
+    letter-spacing: 0.1px;
+    white-space: nowrap;
+  }
+
+  /* CTA column */
+  .quiz-promo-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+  }
+
+  /* button with shimmer + glow pulse */
+  .quiz-promo-btn {
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
+    color: #fff;
+    font-size: 17px;
+    font-weight: 700;
+    padding: 20px 48px;
+    border-radius: 14px;
+    text-decoration: none;
+    white-space: nowrap;
+    font-family: 'Manrope', sans-serif;
+    transition: transform 0.22s ease;
+    animation: qpBtnGlow 3s ease-in-out infinite;
+  }
+  .quiz-promo-btn:hover {
+    transform: translateY(-3px);
+  }
+  .quiz-promo-btn:hover .qp-btn-shine {
+    animation: qpShine 0.65s ease forwards;
+  }
+
+  /* shimmer span */
+  .qp-btn-shine {
+    position: absolute;
+    top: 0;
+    left: -90%;
+    width: 55%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,0.30),
+      transparent
+    );
+    transform: skewX(-18deg);
+    pointer-events: none;
+  }
+  @keyframes qpShine {
+    to { left: 150%; }
+  }
+
+  /* ambient glow pulse on the button */
+  @keyframes qpBtnGlow {
+    0%, 100% {
+      box-shadow:
+        0 0 0 1px rgba(37,99,235,0.45),
+        0 4px 20px rgba(37,99,235,0.40),
+        0 12px 48px rgba(37,99,235,0.18);
+    }
+    50% {
+      box-shadow:
+        0 0 0 1px rgba(37,99,235,0.65),
+        0 4px 32px rgba(37,99,235,0.65),
+        0 16px 64px rgba(37,99,235,0.32);
+    }
+  }
+
+  .quiz-promo-time {
+    font-size: 13px;
+    color: #64748B;
+    font-weight: 500;
+    letter-spacing: 0.1px;
+  }
+
+  @media (max-width: 768px) {
+    .quiz-promo { padding: 52px 20px; }
+    .quiz-promo-inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 32px;
+    }
+    .quiz-promo-title {
+      font-size: 34px;
+      letter-spacing: -1.2px;
+    }
+    .quiz-promo-text { font-size: 15px; }
+    .quiz-promo-meta { flex-direction: column; gap: 8px; }
+    .quiz-promo-cta { width: 100%; }
+    .quiz-promo-btn {
+      width: 100%;
+      padding: 18px 32px;
+      font-size: 16px;
+    }
   }
 </style>

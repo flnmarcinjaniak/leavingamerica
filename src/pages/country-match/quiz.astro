@@ -1,0 +1,1527 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import qualityScores from '../../data/quality-scores.json';
+---
+
+<BaseLayout
+  title="Country Match Quiz | LeavingAmerica.co"
+  description="Answer 8 questions and discover which country best fits your goals, lifestyle, and finances. 55 countries analyzed.">
+
+<style is:global>
+* { box-sizing: border-box; }
+
+.quiz-page {
+  min-height: 100vh;
+  background: #F8FAFC;
+  padding: 0 24px 88px;
+  font-family: 'Manrope', sans-serif;
+}
+
+/* Top bar */
+.quiz-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0 24px;
+  margin-bottom: 8px;
+}
+
+.quiz-topbar-back {
+  font-size: 13px;
+  font-weight: 600;
+  color: #64748B;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.15s;
+}
+
+.quiz-topbar-back:hover { color: #1E293B; }
+
+.quiz-topbar-brand {
+  font-size: 13px;
+  font-weight: 700;
+  color: #2563EB;
+  letter-spacing: 0.5px;
+}
+
+.quiz-container {
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+/* Progress — segmented steps */
+.quiz-progress { margin-bottom: 28px; }
+
+.quiz-progress-steps {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 8px;
+}
+
+.qp-step {
+  flex: 1;
+  height: 4px;
+  border-radius: 100px;
+  background: #E2E8F0;
+  transition: background 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.qp-step.done { background: #2563EB; }
+
+.qp-step.active { background: #DBEAFE; }
+
+.qp-step.active::after {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 55%;
+  background: #2563EB;
+  border-radius: 100px;
+  animation: stepGrow 0.45s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
+}
+
+@keyframes stepGrow {
+  from { width: 0; }
+  to { width: 55%; }
+}
+
+.quiz-progress-label {
+  font-size: 12px;
+  color: #94A3B8;
+  font-weight: 600;
+}
+
+.question-screen { display: none; }
+
+.question-screen.active {
+  display: block;
+  animation: fadeUp 0.35s ease;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.question-card {
+  background: white;
+  border-radius: 20px;
+  padding: 40px 44px;
+  box-shadow: 0 2px 24px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.04);
+  margin-bottom: 16px;
+  border: 1px solid rgba(226,232,240,0.8);
+}
+
+.question-number {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #2563EB;
+  margin-bottom: 14px;
+}
+
+.question-text {
+  font-size: 22px;
+  font-weight: 700;
+  color: #0F172A;
+  line-height: 1.35;
+  margin-bottom: 24px;
+  letter-spacing: -0.2px;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.options-grid.single-col { grid-template-columns: 1fr; }
+
+.option-card {
+  position: relative;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s, transform 0.12s;
+  background: white;
+  text-align: left;
+  font-family: 'Manrope', sans-serif;
+}
+
+.option-card:hover {
+  border-color: #93C5FD;
+  background: #F8FAFF;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37,99,235,0.08);
+}
+
+.option-card.selected {
+  border-color: #2563EB;
+  background: linear-gradient(135deg, #EFF6FF, #DBEAFE);
+  box-shadow: 0 0 0 1px #2563EB, 0 4px 16px rgba(37,99,235,0.12);
+}
+
+.option-card.selected::after {
+  content: '✓';
+  position: absolute;
+  top: 10px;
+  right: 11px;
+  width: 18px;
+  height: 18px;
+  background: #2563EB;
+  color: white;
+  border-radius: 50%;
+  font-size: 9px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.option-card .option-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0F172A;
+  display: block;
+  margin-bottom: 3px;
+  padding-right: 24px;
+}
+
+.option-card .option-desc {
+  font-size: 11.5px;
+  color: #94A3B8;
+  line-height: 1.45;
+}
+
+.quiz-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.btn-back {
+  background: none;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #64748B;
+  cursor: pointer;
+  font-family: 'Manrope', sans-serif;
+  transition: all 0.2s ease;
+}
+
+.btn-back:hover { border-color: #94A3B8; color: #0F172A; }
+
+.btn-next {
+  background: linear-gradient(135deg, #2563EB, #0EA5E9);
+  border: none;
+  border-radius: 10px;
+  padding: 14px 32px;
+  font-size: 15px;
+  font-weight: 700;
+  color: white;
+  cursor: pointer;
+  font-family: 'Manrope', sans-serif;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  flex: 1;
+  max-width: 300px;
+  box-shadow: 0 4px 14px rgba(37,99,235,0.25);
+}
+
+.btn-next:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(37,99,235,0.35);
+}
+
+.btn-next:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* ─── Results ────────────────────────────────── */
+.results-screen { display: none; }
+
+.results-screen.active {
+  display: block;
+  animation: fadeUp 0.5s ease;
+}
+
+.results-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.results-header h2 {
+  font-size: 30px;
+  font-weight: 800;
+  color: #0F172A;
+  margin-bottom: 10px;
+  letter-spacing: -0.3px;
+}
+
+.results-header p {
+  font-size: 15px;
+  color: #64748B;
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.65;
+}
+
+.top-match {
+  background: white;
+  border-radius: 20px;
+  padding: 36px;
+  box-shadow: 0 4px 32px rgba(37,99,235,0.12);
+  border: 1.5px solid #BFDBFE;
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.top-match::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #2563EB, #0EA5E9);
+}
+
+.match-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 5px 12px;
+  border-radius: 100px;
+  background: #1E40AF;
+  color: #fff;
+  margin-bottom: 14px;
+}
+
+.match-country-name {
+  font-size: 36px;
+  font-weight: 800;
+  color: #0F172A;
+  margin-bottom: 16px;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+}
+
+.match-score-meter { margin-bottom: 24px; }
+
+.match-score-top {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.match-percent {
+  font-size: 42px;
+  font-weight: 800;
+  color: #2563EB;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.match-percent-label {
+  font-size: 14px;
+  color: #64748B;
+  font-weight: 500;
+}
+
+.match-meter-track {
+  height: 8px;
+  background: #EFF6FF;
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.match-meter-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #2563EB, #0EA5E9);
+  border-radius: 100px;
+  width: 0%;
+  transition: width 0.9s cubic-bezier(0.34, 1.15, 0.64, 1);
+}
+
+.match-profile-summary {
+  background: #F8FAFC;
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 24px;
+  border: 1px solid #E8EFF7;
+}
+
+.match-profile-title {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.3px;
+  color: #94A3B8;
+  margin-bottom: 10px;
+}
+
+.match-profile-items { display: flex; flex-direction: column; gap: 7px; }
+
+.match-profile-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 13px;
+  color: #374151;
+  line-height: 1.4;
+}
+
+.match-profile-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #DBEAFE;
+  color: #2563EB;
+  font-size: 8px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.match-why-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.3px;
+  color: #94A3B8;
+  margin-bottom: 12px;
+}
+
+.match-reasons { margin-bottom: 24px; }
+
+.match-reason {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid #F1F5F9;
+  font-size: 14px;
+  color: #374151;
+  line-height: 1.55;
+}
+
+.match-reason:last-child { border-bottom: none; }
+
+.match-reason-check {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #DCFCE7;
+  color: #16A34A;
+  font-size: 11px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.btn-calculate {
+  display: block;
+  width: 100%;
+  background: linear-gradient(135deg, #2563EB, #0EA5E9);
+  border: none;
+  border-radius: 12px;
+  padding: 16px;
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+  cursor: pointer;
+  font-family: 'Manrope', sans-serif;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(37,99,235,0.25);
+}
+
+.btn-calculate:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(37,99,235,0.35);
+}
+
+.alt-matches {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.alt-match {
+  background: white;
+  border-radius: 16px;
+  padding: 22px 24px;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.alt-match:hover {
+  border-color: #2563EB;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37,99,235,0.1);
+}
+
+.alt-match-name {
+  font-size: 17px;
+  font-weight: 700;
+  color: #0F172A;
+  margin-bottom: 6px;
+}
+
+.alt-match-score { font-size: 20px; font-weight: 800; color: #2563EB; }
+.alt-match-score-label { font-size: 11px; color: #94A3B8; }
+
+.next-steps {
+  background: white;
+  border-radius: 14px;
+  padding: 22px 24px;
+  border: 1px solid #E2E8F0;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+}
+
+.next-steps-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: #94A3B8;
+  margin-bottom: 12px;
+}
+
+.next-steps-list { display: flex; flex-direction: column; gap: 8px; }
+
+.next-step-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 13px 16px;
+  border-radius: 10px;
+  border: 1px solid #E2E8F0;
+  background: #FAFBFC;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1E293B;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.next-step-link:hover {
+  background: #EFF6FF;
+  border-color: #93C5FD;
+  color: #1D4ED8;
+}
+
+.next-step-link:hover .next-step-arrow { color: #2563EB; }
+
+.next-step-left { display: flex; align-items: center; gap: 12px; }
+
+.next-step-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #DBEAFE;
+  color: #2563EB;
+  font-size: 11px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.next-step-arrow {
+  font-size: 15px;
+  color: #CBD5E1;
+  flex-shrink: 0;
+  transition: color 0.15s;
+}
+
+.affiliate-block {
+  background: white;
+  border-radius: 20px;
+  padding: 28px 32px;
+  border: 1px solid #E2E8F0;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.04);
+}
+
+.affiliate-block h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0F172A;
+  margin-bottom: 4px;
+}
+
+.affiliate-block > p {
+  font-size: 13px;
+  color: #64748B;
+  margin-bottom: 20px;
+}
+
+.affiliate-cards { display: flex; flex-direction: column; gap: 10px; }
+
+.affiliate-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  background: #FAFBFC;
+}
+
+.affiliate-card:hover {
+  border-color: #2563EB;
+  background: #F8FAFF;
+  box-shadow: 0 4px 14px rgba(37,99,235,0.08);
+}
+
+.affiliate-card-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #EFF6FF, #DBEAFE);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 14px;
+  color: #2563EB;
+  flex-shrink: 0;
+}
+
+.affiliate-card-body { flex: 1; min-width: 0; }
+
+.affiliate-card-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0F172A;
+  margin-bottom: 2px;
+}
+
+.affiliate-card-why {
+  font-size: 12px;
+  color: #2563EB;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+.affiliate-card-desc { font-size: 12px; color: #64748B; }
+
+.affiliate-card-cta {
+  font-size: 12px;
+  font-weight: 700;
+  color: #2563EB;
+  flex-shrink: 0;
+  white-space: nowrap;
+  align-self: center;
+  padding-left: 8px;
+}
+
+.quiz-restart { text-align: center; margin-top: 16px; }
+
+.quiz-restart button {
+  background: none;
+  border: none;
+  font-size: 13px;
+  color: #94A3B8;
+  cursor: pointer;
+  font-family: 'Manrope', sans-serif;
+  text-decoration: underline;
+}
+
+.quiz-disclaimer {
+  font-size: 11px;
+  color: #94A3B8;
+  text-align: center;
+  margin-top: 24px;
+  line-height: 1.65;
+}
+
+@media (max-width: 600px) {
+  .question-card { padding: 24px 20px; }
+  .options-grid { grid-template-columns: 1fr; }
+  .alt-matches { grid-template-columns: 1fr; }
+  .question-text { font-size: 18px; }
+  .top-match { padding: 22px 20px; }
+  .match-country-name { font-size: 28px; }
+  .affiliate-block { padding: 20px; }
+  .affiliate-card-cta { display: none; }
+}
+</style>
+
+<div class="quiz-page">
+  <div class="quiz-container">
+
+    <!-- Top bar -->
+    <div class="quiz-topbar">
+      <a href="/country-match" class="quiz-topbar-back">← Country Match</a>
+      <span class="quiz-topbar-brand">Country Match Quiz</span>
+    </div>
+
+    <!-- Progress -->
+    <div class="quiz-progress" id="quizProgress">
+      <div class="quiz-progress-steps" id="progressSteps"></div>
+      <div class="quiz-progress-label">
+        <span id="progressText">Question 1 of 8</span>
+      </div>
+    </div>
+
+    <!-- Q1 -->
+    <div class="question-screen" id="q1">
+      <div class="question-card">
+        <div class="question-number">Question 1 of 8</div>
+        <div class="question-text">What is your biggest frustration<br/>with life in the US right now?</div>
+        <div class="options-grid">
+          <button class="option-card" onclick="selectOption(1,'cost')">
+            <span class="option-label">Cost of living</span>
+            <span class="option-desc">Rent, groceries, and bills consume too much of my income</span>
+          </button>
+          <button class="option-card" onclick="selectOption(1,'healthcare')">
+            <span class="option-label">Healthcare costs</span>
+            <span class="option-desc">Medical bills and insurance premiums are unmanageable</span>
+          </button>
+          <button class="option-card" onclick="selectOption(1,'retirement')">
+            <span class="option-label">Retirement feels out of reach</span>
+            <span class="option-desc">I cannot afford to stop working at a reasonable age</span>
+          </button>
+          <button class="option-card" onclick="selectOption(1,'balance')">
+            <span class="option-label">Work-life balance</span>
+            <span class="option-desc">I work too much and have too little time for what matters</span>
+          </button>
+          <button class="option-card" onclick="selectOption(1,'safety')">
+            <span class="option-label">Safety concerns</span>
+            <span class="option-desc">I no longer feel as safe as I would like</span>
+          </button>
+          <button class="option-card" onclick="selectOption(1,'freedom')">
+            <span class="option-label">I want more freedom and flexibility</span>
+            <span class="option-desc">A different pace of life and more personal autonomy</span>
+          </button>
+        </div>
+      </div>
+      <div class="quiz-nav">
+        <div></div>
+        <button class="btn-next" id="next1" onclick="nextQuestion(1)" disabled>Continue</button>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="question-screen" id="q2">
+      <div class="question-card">
+        <div class="question-number">Question 2 of 8</div>
+        <div class="question-text">Which best describes<br/>your current situation?</div>
+        <div class="options-grid">
+          <button class="option-card" onclick="selectOption(2,'remote')">
+            <span class="option-label">Remote employee</span>
+            <span class="option-desc">I work for a US company remotely</span>
+          </button>
+          <button class="option-card" onclick="selectOption(2,'freelance')">
+            <span class="option-label">Freelancer or contractor</span>
+            <span class="option-desc">I work independently for multiple clients</span>
+          </button>
+          <button class="option-card" onclick="selectOption(2,'business')">
+            <span class="option-label">Business owner</span>
+            <span class="option-desc">I run my own business</span>
+          </button>
+          <button class="option-card" onclick="selectOption(2,'family')">
+            <span class="option-label">Family with children</span>
+            <span class="option-desc">Relocating as a family unit</span>
+          </button>
+          <button class="option-card" onclick="selectOption(2,'preretire')">
+            <span class="option-label">Planning early retirement</span>
+            <span class="option-desc">I want to retire before 65</span>
+          </button>
+          <button class="option-card" onclick="selectOption(2,'retired')">
+            <span class="option-label">Already retired</span>
+            <span class="option-desc">Looking to stretch retirement income abroad</span>
+          </button>
+        </div>
+      </div>
+      <div class="quiz-nav">
+        <button class="btn-back" onclick="prevQuestion(2)">Back</button>
+        <button class="btn-next" id="next2" onclick="nextQuestion(2)" disabled>Continue</button>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="question-screen" id="q3">
+      <div class="question-card">
+        <div class="question-number">Question 3 of 8</div>
+        <div class="question-text">What would financial freedom<br/>look like for you?</div>
+        <div class="options-grid single-col">
+          <button class="option-card" onclick="selectOption(3,'savemore')">
+            <span class="option-label">Saving significantly more each month</span>
+            <span class="option-desc">I want my income to go much further than it does now</span>
+          </button>
+          <button class="option-card" onclick="selectOption(3,'retire')">
+            <span class="option-label">Retiring 10 or more years earlier</span>
+            <span class="option-desc">I want to stop working while I am still young enough to enjoy it</span>
+          </button>
+          <button class="option-card" onclick="selectOption(3,'taxes')">
+            <span class="option-label">Paying significantly less in taxes</span>
+            <span class="option-desc">I want to keep more of what I earn</span>
+          </button>
+          <button class="option-card" onclick="selectOption(3,'lifestyle')">
+            <span class="option-label">Affording a lifestyle I cannot afford in the US</span>
+            <span class="option-desc">Better home, more travel, dining out without guilt</span>
+          </button>
+          <button class="option-card" onclick="selectOption(3,'quality')">
+            <span class="option-label">A better quality of life without spending more</span>
+            <span class="option-desc">Less stress, more time, a calmer and more enjoyable day to day</span>
+          </button>
+        </div>
+      </div>
+      <div class="quiz-nav">
+        <button class="btn-back" onclick="prevQuestion(3)">Back</button>
+        <button class="btn-next" id="next3" onclick="nextQuestion(3)" disabled>Continue</button>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="question-screen" id="q4">
+      <div class="question-card">
+        <div class="question-number">Question 4 of 8</div>
+        <div class="question-text">If you faced a major medical issue tomorrow,<br/>what would concern you most?</div>
+        <div class="options-grid single-col">
+          <button class="option-card" onclick="selectOption(4,'cost')">
+            <span class="option-label">The cost of treatment</span>
+            <span class="option-desc">A serious illness could wipe out my savings or put me in debt</span>
+          </button>
+          <button class="option-card" onclick="selectOption(4,'coverage')">
+            <span class="option-label">Whether my insurance would cover it</span>
+            <span class="option-desc">Navigating what is and is not covered is exhausting</span>
+          </button>
+          <button class="option-card" onclick="selectOption(4,'access')">
+            <span class="option-label">Access to specialists</span>
+            <span class="option-desc">Getting to the right doctor quickly matters most to me</span>
+          </button>
+          <button class="option-card" onclick="selectOption(4,'nothing')">
+            <span class="option-label">Not much — healthcare is not my main concern</span>
+            <span class="option-desc">I have good coverage and am not worried about this</span>
+          </button>
+        </div>
+      </div>
+      <div class="quiz-nav">
+        <button class="btn-back" onclick="prevQuestion(4)">Back</button>
+        <button class="btn-next" id="next4" onclick="nextQuestion(4)" disabled>Continue</button>
+      </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="question-screen" id="q5">
+      <div class="question-card">
+        <div class="question-number">Question 5 of 8</div>
+        <div class="question-text">How comfortable are you building a life<br/>where English is not the main language?</div>
+        <div class="options-grid single-col">
+          <button class="option-card" onclick="selectOption(5,'english_only')">
+            <span class="option-label">I need English-speaking communities around me</span>
+            <span class="option-desc">Daily life in another language would be very stressful</span>
+          </button>
+          <button class="option-card" onclick="selectOption(5,'mostly')">
+            <span class="option-label">I prefer high English proficiency but can manage</span>
+            <span class="option-desc">I would adapt but appreciate being able to communicate easily</span>
+          </button>
+          <button class="option-card" onclick="selectOption(5,'open')">
+            <span class="option-label">I am open to learning a new language</span>
+            <span class="option-desc">A language barrier would not stop me from moving somewhere great</span>
+          </button>
+          <button class="option-card" onclick="selectOption(5,'fluent')">
+            <span class="option-label">I already speak another language</span>
+            <span class="option-desc">English proficiency is not a concern for me</span>
+          </button>
+        </div>
+      </div>
+      <div class="quiz-nav">
+        <button class="btn-back" onclick="prevQuestion(5)">Back</button>
+        <button class="btn-next" id="next5" onclick="nextQuestion(5)" disabled>Continue</button>
+      </div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="question-screen" id="q6">
+      <div class="question-card">
+        <div class="question-number">Question 6 of 8</div>
+        <div class="question-text">What matters most about<br/>your new home country?</div>
+        <div class="options-grid">
+          <button class="option-card" onclick="selectOption(6,'healthcare')">
+            <span class="option-label">Excellent healthcare</span>
+            <span class="option-desc">Quality care that is accessible and affordable</span>
+          </button>
+          <button class="option-card" onclick="selectOption(6,'safety')">
+            <span class="option-label">Personal safety</span>
+            <span class="option-desc">Low crime and a sense of security day to day</span>
+          </button>
+          <button class="option-card" onclick="selectOption(6,'nature')">
+            <span class="option-label">Clean environment</span>
+            <span class="option-desc">Clean air, low pollution, access to nature</span>
+          </button>
+          <button class="option-card" onclick="selectOption(6,'internet')">
+            <span class="option-label">Fast reliable internet</span>
+            <span class="option-desc">Staying connected and working remotely without issues</span>
+          </button>
+          <button class="option-card" onclick="selectOption(6,'economy')">
+            <span class="option-label">Economic stability</span>
+            <span class="option-desc">A growing, stable economy with low unemployment</span>
+          </button>
+          <button class="option-card" onclick="selectOption(6,'traffic')">
+            <span class="option-label">Relaxed pace of life</span>
+            <span class="option-desc">Less congestion, less rush, more time for living</span>
+          </button>
+        </div>
+      </div>
+      <div class="quiz-nav">
+        <button class="btn-back" onclick="prevQuestion(6)">Back</button>
+        <button class="btn-next" id="next6" onclick="nextQuestion(6)" disabled>Continue</button>
+      </div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="question-screen" id="q7">
+      <div class="question-card">
+        <div class="question-number">Question 7 of 8</div>
+        <div class="question-text">How important is a clear path to<br/>long-term residency or a work permit?</div>
+        <div class="options-grid single-col">
+          <button class="option-card" onclick="selectOption(7,'critical')">
+            <span class="option-label">Essential — I need a legal path to stay long-term</span>
+            <span class="option-desc">I want clear residency options or a digital nomad visa</span>
+          </button>
+          <button class="option-card" onclick="selectOption(7,'important')">
+            <span class="option-label">Important but not urgent</span>
+            <span class="option-desc">I want options available but have time to figure it out</span>
+          </button>
+          <button class="option-card" onclick="selectOption(7,'explore')">
+            <span class="option-label">I am just exploring for now</span>
+            <span class="option-desc">Visa is not my immediate concern</span>
+          </button>
+        </div>
+      </div>
+      <div class="quiz-nav">
+        <button class="btn-back" onclick="prevQuestion(7)">Back</button>
+        <button class="btn-next" id="next7" onclick="nextQuestion(7)" disabled>Continue</button>
+      </div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="question-screen" id="q8">
+      <div class="question-card">
+        <div class="question-number">Question 8 of 8</div>
+        <div class="question-text">Where are you in your<br/>decision to move abroad?</div>
+        <div class="options-grid single-col">
+          <button class="option-card" onclick="selectOption(8,'curious')">
+            <span class="option-label">Just curious for now</span>
+            <span class="option-desc">Researching possibilities but no firm plans yet</span>
+          </button>
+          <button class="option-card" onclick="selectOption(8,'twoyears')">
+            <span class="option-label">Thinking about it within the next 2 years</span>
+            <span class="option-desc">I am serious but taking my time to plan</span>
+          </button>
+          <button class="option-card" onclick="selectOption(8,'oneyear')">
+            <span class="option-label">Within the next 12 months</span>
+            <span class="option-desc">Actively planning and researching</span>
+          </button>
+          <button class="option-card" onclick="selectOption(8,'soon')">
+            <span class="option-label">Within the next 6 months</span>
+            <span class="option-desc">Ready to move and working out the details</span>
+          </button>
+        </div>
+      </div>
+      <div class="quiz-nav">
+        <button class="btn-back" onclick="prevQuestion(8)">Back</button>
+        <button class="btn-next" id="next8" onclick="calculateResults()" disabled>See My Matches</button>
+      </div>
+    </div>
+
+    <!-- RESULTS -->
+    <div class="results-screen" id="resultsScreen">
+      <div class="results-header">
+        <h2>Your Country Matches</h2>
+        <p>Based on your answers, these countries align most closely with your goals, lifestyle, and priorities.</p>
+      </div>
+      <div id="topMatchContainer"></div>
+      <div id="nextStepsContainer"></div>
+      <div class="alt-matches" id="altMatchesContainer"></div>
+      <div class="affiliate-block" id="affiliateBlock"></div>
+      <div class="quiz-restart">
+        <button onclick="restartQuiz()">Retake the quiz</button>
+      </div>
+      <p class="quiz-disclaimer">
+        Results are based on publicly available economic and quality-of-life data.
+        Match percentages reflect compatibility with your stated preferences, not a guarantee of experience.
+        Always consult qualified professionals before making relocation decisions.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<script
+  id="quality-data-quiz"
+  type="application/json"
+  set:html={JSON.stringify(qualityScores.countries)}>
+</script>
+
+<script>
+(function() {
+
+const answers = {};
+let currentQ = 0;
+const TOTAL = 8;
+
+const NAMES = {
+  'portugal':'Portugal','spain':'Spain',
+  'poland':'Poland','mexico':'Mexico',
+  'thailand':'Thailand','germany':'Germany',
+  'japan':'Japan','croatia':'Croatia',
+  'czech-republic':'Czech Republic',
+  'hungary':'Hungary','romania':'Romania',
+  'bulgaria':'Bulgaria','vietnam':'Vietnam',
+  'south-korea':'South Korea',
+  'australia':'Australia','new-zealand':'New Zealand',
+  'canada':'Canada','ireland':'Ireland',
+  'netherlands':'Netherlands','france':'France',
+  'argentina':'Argentina','ecuador':'Ecuador',
+  'morocco':'Morocco','switzerland':'Switzerland',
+  'norway':'Norway','denmark':'Denmark',
+  'sweden':'Sweden','belgium':'Belgium',
+  'austria':'Austria','finland':'Finland',
+  'united-kingdom':'United Kingdom',
+  'singapore':'Singapore',
+  'united-arab-emirates':'UAE',
+  'qatar':'Qatar','saudi-arabia':'Saudi Arabia',
+  'iceland':'Iceland','india':'India',
+  'philippines':'Philippines','china':'China',
+  'georgia':'Georgia','serbia':'Serbia',
+  'kenya':'Kenya','peru':'Peru',
+  'brazil':'Brazil','chile':'Chile',
+  'albania':'Albania','sri-lanka':'Sri Lanka',
+  'egypt':'Egypt','indonesia':'Indonesia',
+  'colombia':'Colombia','costa-rica':'Costa Rica',
+  'panama':'Panama','malaysia':'Malaysia',
+  'italy':'Italy','greece':'Greece'
+};
+
+const QUALITY = JSON.parse(
+  document.getElementById('quality-data-quiz').textContent
+);
+
+const EXPENSIVE_COL = new Set([
+  'singapore','switzerland','norway','denmark',
+  'sweden','finland','iceland','netherlands',
+  'ireland','australia','new-zealand',
+  'united-kingdom','austria','belgium',
+  'united-arab-emirates','qatar','saudi-arabia',
+  'france','germany','japan','south-korea',
+  'canada','israel'
+]);
+
+const AFFORDABLE_COL = new Set([
+  'vietnam','thailand','indonesia','philippines',
+  'india','sri-lanka',
+  'georgia','albania','romania','bulgaria',
+  'hungary','serbia','poland','czech-republic','croatia',
+  'egypt','morocco',
+  'colombia','peru','ecuador','mexico',
+  'costa-rica','panama'
+]);
+
+// ── Progress steps ─────────────────────────────
+function buildProgressSteps() {
+  var container = document.getElementById('progressSteps');
+  container.innerHTML = '';
+  for (var i = 1; i <= TOTAL; i++) {
+    var div = document.createElement('div');
+    div.className = 'qp-step';
+    div.id = 'qpstep' + i;
+    container.appendChild(div);
+  }
+}
+
+function updateProgressSteps(q) {
+  for (var i = 1; i <= TOTAL; i++) {
+    var el = document.getElementById('qpstep' + i);
+    if (!el) continue;
+    el.classList.remove('done', 'active');
+    if (i < q) el.classList.add('done');
+    else if (i === q) el.classList.add('active');
+  }
+}
+
+// ── Quiz flow ──────────────────────────────────
+window.selectOption = function(qNum, value) {
+  answers[qNum] = value;
+  var screen = document.getElementById('q' + qNum);
+  screen.querySelectorAll('.option-card').forEach(function(c) {
+    c.classList.remove('selected');
+  });
+  event.currentTarget.classList.add('selected');
+  var nextBtn = document.getElementById('next' + qNum);
+  if (nextBtn) nextBtn.disabled = false;
+};
+
+window.nextQuestion = function(current) {
+  if (!answers[current]) return;
+  showQuestion(current + 1);
+};
+
+window.prevQuestion = function(current) {
+  if (current <= 1) return;
+  showQuestion(current - 1);
+};
+
+function showQuestion(num) {
+  document.querySelectorAll('.question-screen').forEach(function(s) {
+    s.classList.remove('active');
+  });
+  if (num >= 1 && num <= TOTAL) {
+    currentQ = num;
+    document.getElementById('q' + num).classList.add('active');
+    updateProgressSteps(num);
+    document.getElementById('progressText').textContent =
+      'Question ' + num + ' of ' + TOTAL;
+    if (answers[num]) {
+      var nextBtn = document.getElementById('next' + num);
+      if (nextBtn) nextBtn.disabled = false;
+      document.getElementById('q' + num)
+        .querySelectorAll('.option-card').forEach(function(c) {
+          c.classList.remove('selected');
+          var fn = c.getAttribute('onclick');
+          if (fn && fn.indexOf("'" + answers[num] + "'") !== -1) {
+            c.classList.add('selected');
+          }
+        });
+    }
+  }
+}
+
+// ── Scoring ────────────────────────────────────
+window.calculateResults = function() {
+  if (!answers[8]) return;
+  var scores = {};
+
+  Object.entries(QUALITY).forEach(function([slug, q]) {
+    var score = 0;
+    var w = {
+      safety:0.25, healthcare:0.20, happiness:0.15,
+      gdpGrowth:0.05, pollution:0.10, unemployment:0.10,
+      internet:0.10, traffic:0.05
+    };
+    var base = 0, totalW = 0;
+    Object.entries(w).forEach(function([k, weight]) {
+      if (q[k] != null) { base += q[k] * weight; totalW += weight; }
+    });
+    score = totalW > 0 ? (base / totalW) * 5 + 15 : 45;
+
+    if (answers[1] === 'cost') {
+      if (EXPENSIVE_COL.has(slug)) score -= 32;
+      if (AFFORDABLE_COL.has(slug)) score += 22;
+      if (q.unemployment >= 8) score += 10;
+      if (q.gdpGrowth >= 7) score += 5;
+    }
+    if (answers[1] === 'healthcare') { score += (q.healthcare || 5) * 3; }
+    if (answers[1] === 'retirement') {
+      if (q.healthcare >= 8) score += 16;
+      if (q.happiness >= 7) score += 12;
+    }
+    if (answers[1] === 'balance') {
+      if (q.happiness >= 8) score += 16;
+      if (q.traffic >= 7) score += 12;
+      if (q.pollution >= 7) score += 8;
+    }
+    if (answers[1] === 'safety') { score += (q.safety || 5) * 4; }
+    if (answers[1] === 'freedom') {
+      if (q.nomad_visa) score += 18;
+      if (q.happiness >= 7) score += 12;
+      if (q.pollution >= 7) score += 8;
+    }
+
+    if (answers[2] === 'remote' || answers[2] === 'freelance') {
+      if (q.nomad_visa) score += 22;
+      if (q.internet >= 8) score += 12;
+    }
+    if (answers[2] === 'business') {
+      if (q.tax_system === 'zero') score += 28;
+      else if (q.tax_system === 'territorial') score += 18;
+      if (q.internet >= 8) score += 8;
+    }
+    if (answers[2] === 'family') {
+      score += (q.safety || 5) * 3.5;
+      score += (q.healthcare || 5) * 2.5;
+      if (q.english >= 500) score += 14;
+    }
+    if (answers[2] === 'preretire' || answers[2] === 'retired') {
+      score += (q.healthcare || 5) * 3.5;
+      score += (q.safety || 5) * 2.5;
+      if (q.happiness >= 7) score += 14;
+      if (EXPENSIVE_COL.has(slug)) score -= 28;
+      if (AFFORDABLE_COL.has(slug)) score += 20;
+    }
+
+    if (answers[3] === 'savemore') {
+      if (EXPENSIVE_COL.has(slug)) score -= 28;
+      if (AFFORDABLE_COL.has(slug)) score += 20;
+      if (q.unemployment >= 8) score += 10;
+      if (q.gdpGrowth >= 7) score += 6;
+    }
+    if (answers[3] === 'retire') {
+      if (q.healthcare >= 8) score += 18;
+      if (q.happiness >= 7) score += 14;
+    }
+    if (answers[3] === 'taxes') {
+      if (q.tax_system === 'zero') score += 32;
+      else if (q.tax_system === 'territorial') score += 22;
+    }
+    if (answers[3] === 'lifestyle') {
+      if (q.happiness >= 8) score += 16;
+      if (q.pollution >= 7) score += 12;
+    }
+    if (answers[3] === 'quality') {
+      if (q.happiness >= 8) score += 18;
+      if (q.pollution >= 7) score += 12;
+      if (q.traffic >= 7) score += 10;
+    }
+
+    if (answers[4] === 'cost' || answers[4] === 'coverage' || answers[4] === 'access') {
+      score += (q.healthcare || 5) * 4;
+    }
+
+    if (answers[5] === 'english_only') {
+      if (q.english >= 600) score += 28;
+      else if (q.english >= 500) score += 14;
+      else if (q.english < 450) score -= 28;
+    }
+    if (answers[5] === 'mostly') {
+      if (q.english >= 500) score += 14;
+      else if (q.english < 400) score -= 14;
+    }
+
+    if (answers[6] === 'healthcare') score += (q.healthcare || 5) * 4;
+    if (answers[6] === 'safety')     score += (q.safety || 5) * 4;
+    if (answers[6] === 'nature')     score += (q.pollution || 5) * 4;
+    if (answers[6] === 'internet')   score += (q.internet || 5) * 4;
+    if (answers[6] === 'economy') {
+      score += (q.gdpGrowth || 5) * 3;
+      score += (q.unemployment || 5) * 3;
+    }
+    if (answers[6] === 'traffic') score += (q.traffic || 5) * 4;
+
+    if (answers[7] === 'critical') {
+      if (q.nomad_visa) score += 24;
+      if (q.visa_days >= 180) score += 14;
+      else if (q.visa_days >= 90) score += 8;
+    }
+    if (answers[7] === 'important') {
+      if (q.nomad_visa) score += 14;
+    }
+
+    scores[slug] = score;
+  });
+
+  var sorted = Object.entries(scores).sort(function(a, b) { return b[1] - a[1]; });
+  var maxScore = sorted[0][1];
+  var top3 = sorted.slice(0, 3).map(function([slug, s]) {
+    return {
+      slug: slug,
+      score: Math.min(98, Math.round((s / maxScore) * 95) + Math.floor(Math.random() * 4)),
+      data: QUALITY[slug]
+    };
+  });
+
+  showResults(top3);
+};
+
+// ── Reasons ────────────────────────────────────
+function generateReasons(slug, data, userAnswers) {
+  var reasons = [];
+  if (data.healthcare >= 9) {
+    reasons.push('Healthcare rated ' + data.healthcare + '/10 — high-quality care at a fraction of US costs');
+  } else if (data.healthcare >= 7 &&
+    (userAnswers[1] === 'healthcare' || userAnswers[4] !== 'nothing' || userAnswers[6] === 'healthcare')) {
+    reasons.push('Solid healthcare infrastructure rated ' + data.healthcare + '/10');
+  }
+  if (data.safety >= 8) {
+    reasons.push('Ranked ' + data.safety + '/10 for personal safety — well above global average');
+  } else if (data.safety >= 7 && (userAnswers[1] === 'safety' || userAnswers[6] === 'safety')) {
+    reasons.push('Safety rated ' + data.safety + '/10');
+  }
+  if (data.english >= 999) {
+    reasons.push('Native English-speaking country — no language barrier');
+  } else if (data.english >= 600) {
+    reasons.push('Very high English proficiency (' + data.english + ' EF EPI) — easy to navigate daily life');
+  } else if (data.english >= 500 && userAnswers[5] === 'mostly') {
+    reasons.push('High English proficiency in major cities and business settings');
+  }
+  if (data.tax_system === 'zero') {
+    reasons.push('No personal income tax — keep significantly more of what you earn');
+  } else if (data.tax_system === 'territorial' && userAnswers[3] === 'taxes') {
+    reasons.push('Territorial tax system — foreign income generally not taxed locally');
+  }
+  if (data.nomad_visa &&
+    (userAnswers[2] === 'remote' || userAnswers[2] === 'freelance' || userAnswers[7] === 'critical')) {
+    reasons.push('Digital Nomad Visa available — a clear legal path for remote workers');
+  }
+  if (data.visa_days >= 180) {
+    reasons.push(data.visa_days + ' days visa-free on a US passport');
+  } else if (data.visa_days >= 90) {
+    reasons.push('90-day visa-free entry for US passport holders');
+  }
+  if (data.happiness >= 8) {
+    reasons.push('Consistently ranks among the happiest countries in the world');
+  }
+  if (data.internet >= 9 && (userAnswers[2] === 'remote' || userAnswers[6] === 'internet')) {
+    reasons.push('Fast internet infrastructure — ideal for remote work');
+  }
+  if (data.pollution >= 8 && userAnswers[6] === 'nature') {
+    reasons.push('Clean environment rated ' + data.pollution + '/10');
+  }
+  return reasons.slice(0, 5);
+}
+
+// ── Profile summary ────────────────────────────
+function getProfileSummary(userAnswers) {
+  var items = [];
+  var q1map = {
+    cost: 'You prioritize lowering your cost of living',
+    healthcare: 'Healthcare costs are your main frustration',
+    retirement: 'You want to retire earlier than the US allows',
+    balance: 'Work-life balance is a top priority for you',
+    safety: 'Personal safety is a significant concern',
+    freedom: 'You want more freedom and personal autonomy'
+  };
+  var q2map = {
+    remote: 'You work remotely for a US company',
+    freelance: 'You freelance or contract independently',
+    business: 'You run your own business',
+    family: 'You are relocating as a family with children',
+    preretire: 'You are planning early retirement',
+    retired: 'You are already retired'
+  };
+  var q7map = {
+    critical: 'A legal path to long-term residency is essential',
+    important: 'Long-term residency options matter to you',
+    explore: 'You are still in the research phase'
+  };
+  if (q1map[userAnswers[1]]) items.push(q1map[userAnswers[1]]);
+  if (q2map[userAnswers[2]]) items.push(q2map[userAnswers[2]]);
+  if (q7map[userAnswers[7]]) items.push(q7map[userAnswers[7]]);
+  return items;
+}
+
+// ── Affiliates ─────────────────────────────────
+var AFFILIATE_CATALOG = {
+  wise: {
+    name: 'Wise', icon: 'W',
+    desc: 'Multi-currency account — send money abroad at the real exchange rate with no hidden fees',
+    cta: 'Open free account', url: '#', enabled: true,
+    whyFn: function() { return 'You\'ll need to move money internationally once you relocate'; }
+  },
+  wise_business: {
+    name: 'Wise Business', icon: 'W',
+    desc: 'Multi-currency business account built for companies operating across borders',
+    cta: 'Open business account', url: '#', enabled: true,
+    whyFn: function() { return 'Managing international revenue and expenses as a business owner abroad'; }
+  },
+  safetywing: {
+    name: 'SafetyWing', icon: 'S',
+    desc: 'Global health coverage from $45/month — designed for people living outside their home country',
+    cta: 'Get a quote', url: '#', enabled: true,
+    whyFn: function(ans) {
+      if (ans[2] === 'retired' || ans[2] === 'preretire')
+        return 'US health insurance typically won\'t cover you abroad — this fills that gap';
+      return 'Health coverage abroad is essential and often overlooked until you need it';
+    }
+  },
+  nordvpn: {
+    name: 'NordVPN', icon: 'N',
+    desc: 'Keep access to US streaming, banking apps, and secure your connection from anywhere',
+    cta: 'Try free for 30 days', url: '#', enabled: true,
+    whyFn: function() { return 'Maintain access to US banking, streaming, and services from abroad'; }
+  },
+  ivisa: {
+    name: 'iVisa', icon: 'V',
+    desc: 'Simplify your visa applications with guided support and fast processing',
+    cta: 'Check visa requirements', url: '#', enabled: true,
+    whyFn: function() { return 'You\'re planning to move soon — starting the visa process early matters'; }
+  }
+};
+
+function getAffiliates(userAnswers) {
+  var stage    = userAnswers[2];
+  var timeline = userAnswers[8];
+  var showIvisa = AFFILIATE_CATALOG.ivisa.enabled &&
+    (timeline === 'oneyear' || timeline === 'soon');
+  var keys = [];
+  if (stage === 'business') {
+    keys = ['wise_business', 'nordvpn'];
+    if (showIvisa) keys.splice(1, 0, 'ivisa');
+  } else if (stage === 'remote' || stage === 'freelance') {
+    keys = ['wise', 'safetywing', 'nordvpn'];
+    if (showIvisa) keys.splice(2, 0, 'ivisa');
+  } else {
+    keys = ['wise', 'safetywing'];
+    if (showIvisa) keys.push('ivisa');
+  }
+  return keys
+    .filter(function(k) { return AFFILIATE_CATALOG[k] && AFFILIATE_CATALOG[k].enabled; })
+    .slice(0, 4)
+    .map(function(k) { return AFFILIATE_CATALOG[k]; });
+}
+
+// ── Show Results ───────────────────────────────
+function showResults(top3) {
+  document.querySelectorAll('.question-screen').forEach(function(s) {
+    s.classList.remove('active');
+  });
+  document.getElementById('quizProgress').style.display = 'none';
+
+  var topMatch     = top3[0];
+  var countryName  = NAMES[topMatch.slug] || topMatch.slug;
+  var topReasons   = generateReasons(topMatch.slug, topMatch.data, answers);
+  var profileItems = getProfileSummary(answers);
+
+  var profileHTML = '';
+  if (profileItems.length > 0) {
+    profileHTML =
+      '<div class="match-profile-summary">' +
+      '<div class="match-profile-title">Based on your answers</div>' +
+      '<div class="match-profile-items">' +
+      profileItems.map(function(item) {
+        return '<div class="match-profile-item">' +
+          '<div class="match-profile-dot">✓</div>' +
+          '<span>' + item + '</span>' +
+          '</div>';
+      }).join('') +
+      '</div></div>';
+  }
+
+  document.getElementById('topMatchContainer').innerHTML =
+    '<div class="top-match">' +
+    '<div class="match-badge">Top Match</div>' +
+    '<div class="match-country-name">' + countryName + '</div>' +
+    '<div class="match-score-meter">' +
+    '<div class="match-score-top">' +
+    '<span class="match-percent">' + topMatch.score + '%</span>' +
+    '<span class="match-percent-label">Match Score</span>' +
+    '</div>' +
+    '<div class="match-meter-track">' +
+    '<div class="match-meter-fill" id="matchMeterFill"></div>' +
+    '</div></div>' +
+    profileHTML +
+    '<div class="match-why-title">Why ' + countryName + ' Fits You</div>' +
+    '<div class="match-reasons">' +
+    topReasons.map(function(r) {
+      return '<div class="match-reason">' +
+        '<div class="match-reason-check">&#10003;</div>' +
+        '<span>' + r + '</span></div>';
+    }).join('') +
+    '</div>' +
+    '<a href="/#calculator" class="btn-calculate" ' +
+    'onclick="prefillCalculator(\'' + topMatch.slug + '\')">' +
+    'Compare My Salary in ' + countryName + ' →</a>' +
+    '</div>';
+
+  setTimeout(function() {
+    var fill = document.getElementById('matchMeterFill');
+    if (fill) fill.style.width = topMatch.score + '%';
+  }, 60);
+
+  function nextRow(href, label, oc) {
+    return '<a href="' + href + '" class="next-step-link"' +
+      (oc ? ' onclick="' + oc + '"' : '') + '>' +
+      '<span class="next-step-left"><span class="next-step-icon">✓</span>' + label + '</span>' +
+      '<span class="next-step-arrow">→</span></a>';
+  }
+
+  document.getElementById('nextStepsContainer').innerHTML =
+    '<div class="next-steps">' +
+    '<div class="next-steps-title">Recommended Next Steps</div>' +
+    '<div class="next-steps-list">' +
+    nextRow('/countries', 'View ' + countryName + ' Country Profile') +
+    nextRow('/#calculator', 'Compare Your Salary in ' + countryName,
+      'prefillCalculator(\'' + topMatch.slug + '\')') +
+    nextRow('/tools/visa', 'Explore Visa Options for ' + countryName) +
+    '</div></div>';
+
+  document.getElementById('altMatchesContainer').innerHTML =
+    top3.slice(1).map(function(m) {
+      var name = NAMES[m.slug] || m.slug;
+      return '<div class="alt-match" onclick="prefillCalculator(\'' + m.slug + '\')">' +
+        '<div class="alt-match-name">' + name + '</div>' +
+        '<div><span class="alt-match-score">' + m.score + '%</span>' +
+        '<span class="alt-match-score-label"> Match</span></div></div>';
+    }).join('');
+
+  var aff = getAffiliates(answers);
+  document.getElementById('affiliateBlock').innerHTML =
+    '<h3>Recommended Resources for Your Move</h3>' +
+    '<p>Selected based on your profile — only the tools most relevant to your situation.</p>' +
+    '<div class="affiliate-cards">' +
+    aff.map(function(a) {
+      var why = a.whyFn ? a.whyFn(answers) : '';
+      return '<a href="' + a.url + '" class="affiliate-card" target="_blank" rel="noopener sponsored">' +
+        '<div class="affiliate-card-icon">' + a.icon + '</div>' +
+        '<div class="affiliate-card-body">' +
+        '<div class="affiliate-card-name">' + a.name + '</div>' +
+        (why ? '<div class="affiliate-card-why">Recommended because: ' + why + '</div>' : '') +
+        '<div class="affiliate-card-desc">' + a.desc + '</div>' +
+        '</div>' +
+        '<div class="affiliate-card-cta">' + a.cta + ' →</div>' +
+        '</a>';
+    }).join('') +
+    '</div>';
+
+  document.getElementById('resultsScreen').classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+window.prefillCalculator = function(slug) {
+  sessionStorage.setItem('quiz_country', slug);
+  window.location.href = '/#calculator';
+};
+
+window.restartQuiz = function() {
+  Object.keys(answers).forEach(function(k) { delete answers[k]; });
+  document.querySelectorAll('.option-card').forEach(function(c) {
+    c.classList.remove('selected');
+  });
+  document.querySelectorAll('.btn-next').forEach(function(b) { b.disabled = true; });
+  document.getElementById('resultsScreen').classList.remove('active');
+  document.getElementById('quizProgress').style.display = 'block';
+  showQuestion(1);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+// Auto-start Q1 on page load
+buildProgressSteps();
+showQuestion(1);
+
+})();
+</script>
+
+</BaseLayout>

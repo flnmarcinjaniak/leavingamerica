@@ -27,13 +27,13 @@ const { title, description } = Astro.props;
         </a>
 
         <div class="nav-links">
-          <a href="/tools/salary" class="nav-link">Calculator</a>
+          <a href="/#calculator" class="nav-link">Salary Arbitrage</a>
+          <a href="/country-match" class="nav-link">Country Match</a>
           <a href="/tools/visa" class="nav-link">Visa Explorer</a>
-          <a href="/tools/quiz" class="nav-link">Quiz</a>
           <a href="/countries" class="nav-link">Countries</a>
         </div>
 
-        <a href="/tools/salary" class="btn-pill btn-pill-primary nav-cta">Calculate Free</a>
+        <a href="/#calculator" class="btn-pill btn-pill-primary nav-cta">Try It Free</a>
 
         <button class="hamburger" id="hamburger" aria-label="Open menu">
           <span></span>
@@ -45,11 +45,11 @@ const { title, description } = Astro.props;
 
     <div class="mobile-menu" id="mobile-menu">
       <div class="mobile-menu-inner">
-        <a href="/tools/salary" class="mobile-nav-link">Calculator</a>
+        <a href="/#calculator" class="mobile-nav-link">Salary Arbitrage</a>
+        <a href="/country-match" class="mobile-nav-link">Country Match</a>
         <a href="/tools/visa" class="mobile-nav-link">Visa Explorer</a>
-        <a href="/tools/quiz" class="mobile-nav-link">Quiz</a>
         <a href="/countries" class="mobile-nav-link">Countries</a>
-        <a href="/tools/salary" class="btn-pill btn-pill-primary mobile-nav-cta">Calculate Free →</a>
+        <a href="/#calculator" class="btn-pill btn-pill-primary mobile-nav-cta">Try It Free →</a>
       </div>
     </div>
 
@@ -58,8 +58,49 @@ const { title, description } = Astro.props;
     </main>
 
     <footer class="footer">
-      <div class="container">
-        <p>© 2026 LeavingAmerica. For informational purposes only. Not legal, tax, or financial advice.</p>
+      <div class="footer-container">
+        <div class="footer-main">
+          <div class="footer-brand">
+            <img src="/images/logo2.webp" alt="LeavingAmerica" height="32" style="display:block; margin-bottom:14px"/>
+            <p class="footer-tagline">Free Salary Arbitrage calculator for Americans exploring life abroad.</p>
+            <p class="footer-affiliate-note">
+              Some links earn us a commission at no extra cost to you.
+              <a href="/affiliate-disclosure">Disclosure →</a>
+            </p>
+          </div>
+          <div class="footer-col">
+            <h4 class="footer-heading">Product</h4>
+            <ul class="footer-links">
+              <li><a href="/#calculator">Salary Arbitrage</a></li>
+              <li><a href="/countries">Countries</a></li>
+              <li><a href="/country-match">Country Match</a></li>
+              <li><a href="/tools/visa">Visa Explorer</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4 class="footer-heading">Resources</h4>
+            <ul class="footer-links">
+              <li><a href="/methodology">Methodology</a></li>
+              <li><a href="/about">About</a></li>
+              <li><a href="/contact">Contact</a></li>
+              <li><a href="/#faq">FAQ</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4 class="footer-heading">Legal</h4>
+            <ul class="footer-links">
+              <li><a href="/privacy">Privacy Policy</a></li>
+              <li><a href="/terms">Terms of Service</a></li>
+              <li><a href="/cookie-policy">Cookie Policy</a></li>
+              <li><a href="/affiliate-disclosure">Affiliate Disclosure</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p class="footer-copyright">&copy; 2026 LeavingAmerica.co. All rights reserved.</p>
+          <p class="footer-data-note">Data sources: World Bank, BEA, Numbeo, OWID, Speedtest and other public datasets.</p>
+          <p class="footer-legal-note">For educational purposes only. Not financial, tax, or legal advice.</p>
+        </div>
       </div>
     </footer>
 
@@ -160,6 +201,116 @@ const { title, description } = Astro.props;
   section { padding: 100px 0; }
 
   a { text-decoration: none; color: inherit; }
+
+  /* ── INFO PAGES (about, methodology, legal, contact) ── */
+  .ip-page {
+    min-height: calc(100vh - 80px);
+    background: #ffffff;
+  }
+  .ip-header {
+    background: #F8FAFC;
+    border-bottom: 1px solid #E2E8F0;
+    padding: 80px 40px 72px;
+  }
+  .ip-wrap {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .ip-label {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #2563EB;
+    margin-bottom: 20px;
+  }
+  .ip-title {
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    color: #0F172A;
+    font-family: 'Manrope', sans-serif;
+    margin-bottom: 24px;
+  }
+  .ip-lead {
+    font-size: 20px;
+    line-height: 1.75;
+    color: #475569;
+    max-width: 720px;
+    margin-bottom: 28px;
+  }
+  .ip-date {
+    font-size: 13px;
+    color: #94A3B8;
+    font-weight: 500;
+  }
+  .ip-body {
+    padding: 72px 40px 120px;
+  }
+  .ip-body h2 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #0F172A;
+    font-family: 'Manrope', sans-serif;
+    letter-spacing: -0.3px;
+    margin-top: 56px;
+    margin-bottom: 16px;
+    padding-top: 56px;
+    border-top: 1px solid #F1F5F9;
+  }
+  .ip-body h2:first-child {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+  }
+  .ip-body h3 {
+    font-size: 17px;
+    font-weight: 700;
+    color: #1E293B;
+    font-family: 'Manrope', sans-serif;
+    margin-top: 32px;
+    margin-bottom: 10px;
+  }
+  .ip-body p {
+    font-size: 17px;
+    color: #475569;
+    line-height: 1.85;
+    margin-bottom: 20px;
+  }
+  .ip-body ul,
+  .ip-body ol {
+    margin: 4px 0 20px 24px;
+  }
+  .ip-body li {
+    font-size: 17px;
+    color: #475569;
+    line-height: 1.8;
+    margin-bottom: 8px;
+  }
+  .ip-body a {
+    color: #2563EB;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(37,99,235,0.2);
+    transition: border-color 0.15s;
+  }
+  .ip-body a:hover {
+    border-color: #2563EB;
+  }
+  .ip-body strong {
+    color: #1E293B;
+    font-weight: 600;
+  }
+  @media (max-width: 768px) {
+    .ip-header { padding: 56px 24px 48px; }
+    .ip-body { padding: 40px 24px 80px; }
+    .ip-title { font-size: 34px; letter-spacing: -0.5px; }
+    .ip-lead { font-size: 17px; }
+    .ip-body h2 { font-size: 22px; padding-top: 40px; margin-top: 40px; }
+    .ip-body h3 { font-size: 16px; }
+    .ip-body p, .ip-body li { font-size: 16px; }
+  }
 </style>
 
 <style>
@@ -302,14 +453,87 @@ const { title, description } = Astro.props;
 
   main { margin-top: 80px; }
 
+  /* ── FOOTER ── */
   .footer {
-    background: #07091a;
-    color: white;
-    padding: 60px 0;
-    text-align: center;
+    background: #0F172A;
+    padding: 56px 24px 36px;
   }
-
-  .footer p { font-size: 14px; color: rgba(255, 255, 255, 0.5); line-height: 1.6; }
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .footer-main {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 32px;
+  }
+  .footer-tagline {
+    font-size: 13px;
+    color: #64748B;
+    line-height: 1.65;
+    margin-bottom: 10px;
+  }
+  .footer-affiliate-note {
+    font-size: 11px;
+    color: #475569;
+    line-height: 1.5;
+  }
+  .footer-affiliate-note a {
+    color: #64748B;
+    text-decoration: none;
+  }
+  .footer-affiliate-note a:hover {
+    color: #94A3B8;
+  }
+  .footer-heading {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #94A3B8;
+    margin-bottom: 16px;
+  }
+  .footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .footer-links a {
+    font-size: 13px;
+    color: #64748B;
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .footer-links a:hover {
+    color: #CBD5E1;
+  }
+  .footer-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 5px;
+  }
+  .footer-copyright {
+    font-size: 12px;
+    color: #64748B;
+    margin-bottom: 2px;
+  }
+  .footer-data-note {
+    font-size: 11px;
+    color: #475569;
+    line-height: 1.5;
+  }
+  .footer-legal-note {
+    font-size: 11px;
+    color: #475569;
+  }
 
   @media (max-width: 768px) {
     .nav-links { display: none; }
@@ -317,5 +541,9 @@ const { title, description } = Astro.props;
     .hamburger { display: flex; }
     .container { padding: 0 24px; }
     section { padding: 60px 0; }
+    .footer { padding: 40px 20px 28px; }
+    .footer-main { grid-template-columns: 1fr 1fr; gap: 28px; margin-bottom: 28px; padding-bottom: 28px; }
+    .footer-brand { grid-column: 1 / -1; }
+    .footer-bottom { gap: 6px; }
   }
 </style>

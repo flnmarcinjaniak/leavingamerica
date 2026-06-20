@@ -90,7 +90,8 @@
         "g7": false,
         "g20": false,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Lisbon sits at the western edge of continental Europe, making Portugal the kind of place that feels like the end of one world and the beginning of another. With just one land border, shared with Spain, the country is surprisingly self-contained for its size, and its Atlantic coastline defines much of daily life. Schengen membership means easy travel across Europe, and the euro removes the currency friction that complicates life in some neighboring countries."
     },
     "spain": {
       "safety": 6,
@@ -179,7 +180,8 @@
         "g7": false,
         "g20": false,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Spain is one of Western Europe's largest countries, covering more than 500,000 square kilometers with Madrid at its center, and its euro-based economy and full Schengen membership mean practical daily life and regional travel feel relatively frictionless for newcomers. Spanish is the dominant language, but Catalan, Basque, Galician, and Aranese all hold official or recognized status in their respective regions, so the linguistic landscape varies considerably depending on where someone settles. With a Gini coefficient of 33.4, income inequality sits at a moderate level by global standards."
     },
     "mexico": {
       "safety": 5,
@@ -263,7 +265,8 @@
         "g7": false,
         "g20": true,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Mexico is one of the largest countries in the Western Hemisphere, and its capital, Mexico City, ranks among the most populous urban centers on earth. With over 134 million people spread across nearly two million square kilometers, life here varies enormously by region, from Pacific beach towns to high-altitude colonial cities. The country's G20 and OECD membership signals a mature, internationally integrated economy, though a Gini coefficient of 42.6 means income inequality remains a meaningful reality of daily life."
     },
     "germany": {
       "safety": 6,
@@ -351,7 +354,8 @@
         "g7": true,
         "g20": true,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Berlin alone makes a compelling case: few capitals anywhere balance that much history, art, and raw creative energy in one place. Germany sits at the center of Europe in every sense, sharing land borders with nine countries, which makes it an extraordinary base for anyone who wants to explore the continent. The Euro, Schengen travel, and one of the more equal income distributions among wealthy nations (a Gini of 33.7) give everyday life here a stability that's genuinely hard to find elsewhere."
     },
     "italy": {
       "safety": 5,
@@ -437,7 +441,8 @@
         "g7": true,
         "g20": true,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Rome may get all the headlines, but Italy's appeal as a place to actually live runs much deeper than its most famous city. With nearly 59 million people spread across a country slightly larger than Arizona, it offers extraordinary regional variety, from the Alps to Sicily, all under one currency and within the Schengen zone for easy European travel. The Gini coefficient of 34.3 suggests a relatively moderate income gap by global standards, which may reassure Americans used to sharper economic divides."
     },
     "greece": {
       "safety": 5,
@@ -520,7 +525,8 @@
         "g7": false,
         "g20": false,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Athens is one of the oldest continuously inhabited cities on earth, and it anchors a country of just under 11 million people spread across a mainland and hundreds of islands in the Aegean and Ionian seas. Greece is a full EU and Eurozone member, so Americans who sort out residency here are living inside the Schengen Area, with easy, borderless access to the rest of continental Europe. The income inequality figure, a Gini of 33.4, sits at a fairly moderate level, suggesting a society that is less economically stratified than many people might expect."
     },
     "costa-rica": {
       "safety": 5,
@@ -601,7 +607,8 @@
         "g7": false,
         "g20": false,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "San José sits at the center of a country that punches well above its weight for a nation of just over five million people. Costa Rica has built a reputation as one of Latin America's most stable democracies, and its recent OECD membership signals the kind of institutional maturity that matters to expats thinking about property rights and rule of law. The catch is a Gini coefficient of 45.5, meaning income inequality remains a real social pressure beneath the peaceful surface."
     },
     "panama": {
       "safety": 6,
@@ -683,7 +690,8 @@
         "g7": false,
         "g20": false,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Panama City is one of the few capital cities in Latin America with a genuine skyline, and the country's use of the U.S. dollar as official currency removes a layer of financial friction that trips up Americans elsewhere. At roughly 4.3 million people spread across a narrow strip of land connecting two continents, Panama punches well above its size in terms of international commerce and expat infrastructure. The Gini coefficient of 49.7 signals real income inequality, though, so the comfortable life many newcomers find here coexists with significant poverty outside the wealthier enclaves."
     },
     "thailand": {
       "safety": 6,
@@ -766,7 +774,8 @@
         "g7": false,
         "g20": false,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Bangkok is one of Southeast Asia's most electric cities, and it sets the tone for a country of nearly 66 million people spread across a surprisingly large 513,120 square kilometers of coastline, jungle, and mountains. Thailand runs on the Thai baht, Thai is the official language, and traffic moves on the left side of the road, which takes some adjustment for Americans. With a Gini coefficient of 33.3, income inequality is relatively moderate by regional standards, meaning the gap between everyday costs and expat salaries can work meaningfully in your favor."
     },
     "malaysia": {
       "safety": 5,
@@ -849,7 +858,8 @@
         "g7": false,
         "g20": false,
         "commonwealth": true
-      }
+      },
+      "quick_facts_paragraph": "Kuala Lumpur sits at the center of one of Southeast Asia's most livable cities for English-speaking expats, given that English functions as a widely spoken second language alongside the official Malay. Malaysia's 34 million people occupy a country split between the Malay Peninsula and the island of Borneo, giving it a geographic variety that few nations its size can match. The ringgit keeps costs genuinely affordable by Western standards, though the Gini coefficient of 40.7 signals real income inequality beneath the modern skyline."
     },
     "indonesia": {
       "safety": 5,
@@ -933,7 +943,8 @@
         "g7": false,
         "g20": true,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Indonesia is the world's fourth most populous country, an archipelago of over 17,000 islands stretching across a stretch of ocean larger than the continental United States. Jakarta serves as the capital, though a new administrative capital is under construction on Borneo, which tells you something about the scale of ambition here. The rupiah is the local currency, Indonesian is the national language, and the country holds a seat at the G20, signaling a serious and growing economy."
     },
     "colombia": {
       "safety": 4,
@@ -1017,7 +1028,8 @@
         "g7": false,
         "g20": false,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Colombia is one of the few countries in South America that has coastline on both the Pacific and the Caribbean, which tells you something about its sheer geographic range. At over 52 million people, it's the third most populous country on the continent, with Bogotá serving as a sprawling, altitude-defying capital that surprises most visitors. The income inequality here is among the highest tracked by any OECD member, something anyone serious about relocating should understand before romanticizing the low cost of living."
     },
     "croatia": {
       "safety": 8,
@@ -1101,7 +1113,8 @@
         "g7": false,
         "g20": false,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Croatia joined the EU and adopted the euro only recently, making it one of the newer entries into the Schengen zone and a compelling option for Americans who want Mediterranean coastline without the price tag of France or Italy. With nearly 4 million people spread across a country smaller than West Virginia, the pace of life is genuinely unhurried, and a Gini coefficient of 30.1 signals a relatively equal society by European standards. Zagreb anchors the interior while the Adriatic coast does most of the postcard work."
     },
     "czech-republic": {
       "safety": 7,
@@ -1185,7 +1198,8 @@
         "g7": false,
         "g20": false,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Prague keeps showing up on \"most livable city\" lists for good reason: the Czech Republic pairs stunning medieval architecture with one of the lowest income inequality rates in the developed world, a Gini coefficient of just 25.7. As a Schengen member and full EU participant, the country offers straightforward travel across Europe, and its 10.9 million residents enjoy strong institutional stability backed by NATO membership. The koruna remains the local currency, not the euro, which has kept costs relatively manageable for newcomers."
     },
     "poland": {
       "safety": 7,
@@ -1271,7 +1285,8 @@
         "g7": false,
         "g20": false,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Poland sits at the crossroads of Europe, sharing land borders with seven countries and offering EU and Schengen access that makes it genuinely practical as a base for continental living. Warsaw has emerged as one of the region's most economically dynamic capitals, and the country's Gini coefficient of 28.5 reflects a notably compressed income distribution, meaning wealth is spread more evenly here than in most Western nations, including the United States."
     },
     "hungary": {
       "safety": 7,
@@ -1357,7 +1372,8 @@
         "g7": false,
         "g20": false,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Budapest is one of Europe's most underrated capitals, a city that consistently surprises Americans who expect something quieter than what they find. Hungary sits at the geographic heart of the continent, sharing borders with seven countries, which makes it an excellent base for anyone who wants to travel widely across Europe. As an EU and Schengen member, movement is easy, and the country's income inequality ranks notably low compared to much of the Western world."
     },
     "romania": {
       "safety": 7,
@@ -1441,7 +1457,8 @@
         "g7": false,
         "g20": false,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Romania joined the EU and NATO over two decades ago, yet it remains one of the more overlooked destinations for Americans thinking seriously about living in Europe. Bucharest, the capital, anchors a country of roughly 19 million people spread across nearly 240,000 square kilometers of terrain that ranges from the Carpathians to the Black Sea coast. Its Gini coefficient of 29.8 signals a relatively equitable income distribution, which tends to reflect in the texture of everyday life."
     },
     "bulgaria": {
       "safety": 6,
@@ -1525,7 +1542,8 @@
         "g7": false,
         "g20": false,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Sofia sits at the crossroads of the Balkans, and Bulgaria's EU and Schengen membership means Americans who settle here gain easy access to the broader European continent. At just over 6.4 million people spread across a country roughly the size of Tennessee, it offers a pace and density that feels genuinely unhurried. The Euro keeps finances straightforward, though a Gini coefficient of 39.5 signals real economic inequality that prospective residents should understand before assuming costs are low across the board."
     },
     "vietnam": {
       "safety": 6,
@@ -1607,7 +1625,8 @@
         "g7": false,
         "g20": false,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Vietnam stretches along nearly 3,500 kilometers of Southeast Asian coastline, a long, narrow country of 102 million people where the northern capital of Hanoi feels worlds apart from the energy of Ho Chi Minh City in the south. The cost of living draws a lot of attention among expats, and the income inequality picture is relatively moderate by regional standards, with a Gini coefficient of 36.1. Life here runs on the Vietnamese đồng, the language is Vietnamese with essentially no official English, and anyone serious about settling in should budget time for the language curve."
     },
     "japan": {
       "safety": 8,
@@ -1685,7 +1704,8 @@
         "g7": true,
         "g20": true,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Tokyo alone holds more people than most countries, and Japan as a whole packs nearly 123 million residents into an island nation not much larger than California. The Gini coefficient of 32.3 signals a relatively equitable society by developed-world standards, which shows up in everyday life as remarkably low crime and consistent public services. Japanese is the only official language, so anyone serious about the move should factor in a steep linguistic learning curve."
     },
     "south-korea": {
       "safety": 7,
@@ -1765,7 +1785,8 @@
         "g7": false,
         "g20": true,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Seoul is one of the most wired, fast-moving capitals on earth, and at 51 million people spread across a peninsula roughly the size of Virginia, South Korea packs an enormous amount of country into a compact space. The Gini coefficient of 32.9 suggests a relatively equitable income distribution by global standards, which tracks with a society that has invested heavily in education and infrastructure. OECD and G20 membership signals a mature, institutional economy, and everyday life runs on the South Korean won in a place where cashless payments and high-speed everything are simply the norm."
     },
     "australia": {
       "safety": 5,
@@ -1850,7 +1871,8 @@
         "g7": false,
         "g20": true,
         "commonwealth": true
-      }
+      },
+      "quick_facts_paragraph": "Australia is vast in a way that genuinely surprises most newcomers. At over 7.6 million square kilometers, it's roughly the size of the contiguous United States, yet fewer than 28 million people live there, keeping large stretches of the country genuinely remote. English is the official language, the economy is a stable G20 member, and a relatively low Gini coefficient of 33.8 suggests wealth is distributed more evenly than in the U.S. The adjustment to driving on the left is real, but most Americans adapt within a week or two."
     },
     "new-zealand": {
       "safety": 5,
@@ -1931,7 +1953,8 @@
         "g7": false,
         "g20": false,
         "commonwealth": true
-      }
+      },
+      "quick_facts_paragraph": "Wellington may be the capital, but Auckland pulls most of the population toward the North Island, leaving the South Island to its glaciers, fjords, and famously uncrowded roads. At just under five million people spread across a country roughly the size of Colorado, New Zealand rewards those who want space. It's an OECD member with stable institutions, English is the dominant language, and the main practical adjustment for Americans is remembering to drive on the left."
     },
     "canada": {
       "safety": 5,
@@ -2017,7 +2040,8 @@
         "g7": true,
         "g20": true,
         "commonwealth": true
-      }
+      },
+      "quick_facts_paragraph": "Canada shares its only land border with the United States, which makes it the most logistically straightforward move an American can make, yet the country feels genuinely distinct. With 41.5 million people spread across nearly 10 million square kilometers, it offers serious breathing room, and its Gini coefficient of 31.5 points to a notably more equal distribution of income than most Americans are used to. Ottawa is the capital, English and French are both official languages, and the Canadian dollar keeps daily finances familiar without being identical."
     },
     "ireland": {
       "safety": 5,
@@ -2098,7 +2122,8 @@
         "g7": false,
         "g20": false,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Dublin punches well above its weight as a capital city, giving Ireland an outsized presence in Europe despite the country covering just 70,273 square kilometers. With a population of around 7.2 million spread across the island, life here tends toward the manageable rather than the overwhelming, and the Gini coefficient of 29 reflects one of the more equitable income distributions among developed nations. Ireland's EU and Eurozone membership means the euro is the currency and cross-border financial life is straightforward, though adjusting to left-side driving is a genuine early hurdle for arriving Americans."
     },
     "netherlands": {
       "safety": 7,
@@ -2179,7 +2204,8 @@
         "g7": false,
         "g20": false,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Amsterdam may be the capital, but the Netherlands as a whole punches well above its weight for a country just slightly larger than Maryland. With 18 million people packed into that compact space, density is real, and cycling infrastructure is how daily life actually functions. The country's Gini coefficient of 25.7 signals genuinely low income inequality, which shows up in quality public services and a middle-class stability that Americans often find striking."
     },
     "france": {
       "safety": 4,
@@ -2279,7 +2305,8 @@
         "g7": true,
         "g20": true,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "France is the kind of place that earns its reputation honestly. Paris alone could anchor a life, but the country's 551,695 square kilometers stretch from Alpine ski towns to Atlantic coastline to Mediterranean beaches, all operating under a single currency and a social contract that keeps income inequality among the lowest in the developed world. As a G7 nation and founding EU member within the Schengen zone, it offers Americans both institutional stability and easy travel across Europe."
     },
     "argentina": {
       "safety": 4,
@@ -2364,7 +2391,8 @@
         "g7": false,
         "g20": true,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Buenos Aires is one of the most culturally dense capitals in the Western Hemisphere, and the country it anchors spans nearly 2.8 million square kilometers, stretching from the subtropical north to the edge of Patagonia. Argentina's 46 million people are largely Spanish-speaking, though Guaraní holds recognized status as well. The peso's volatility is real, and a Gini coefficient of 42.4 signals meaningful income inequality, so financial planning matters more here than in many other expat destinations."
     },
     "ecuador": {
       "safety": 4,
@@ -2446,7 +2474,8 @@
         "g7": false,
         "g20": false,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Ecuador runs the full spectrum from Pacific coastline to Amazon basin to the Galápagos Islands, all packed into a country roughly the size of Nevada. For Americans, one practical reality stands out immediately: Ecuador uses the U.S. dollar as its official currency, which eliminates exchange rate headaches entirely. The income inequality gap is real, with a Gini coefficient of 45.9, and prospective residents do well to research neighborhoods and regions carefully before committing."
     },
     "morocco": {
       "safety": 5,
@@ -2529,7 +2558,8 @@
         "g7": false,
         "g20": false,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Rabat may be the capital, but it's Marrakech and Casablanca that most Americans picture when Morocco comes to mind, which tells you something about how much personality this country carries beyond its seat of government. Spread across 446,550 square kilometers along Africa's Atlantic and Mediterranean coasts, Morocco is a country of 36 million people where Arabic and Tamazight share official status, reflecting a Berber heritage that runs deep alongside Arab influence. The Moroccan dirham is not freely convertible, a practical reality that shapes daily financial life for expats from day one."
     },
     "switzerland": {
       "safety": 7,
@@ -2616,7 +2646,8 @@
         "g7": false,
         "g20": false,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Switzerland packs four official languages, French, Swiss German, Italian, and Romansh, into a landlocked country smaller than West Virginia. Bern serves as the capital, though Zurich and Geneva tend to overshadow it in international conversation. Its Gini coefficient of 33.8 reflects a notably equitable income distribution for such a wealthy nation, and Schengen membership means residents move freely across much of Europe without stopping at a border."
     },
     "norway": {
       "safety": 7,
@@ -2702,7 +2733,8 @@
         "g7": false,
         "g20": false,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Oslo may not have the name recognition of Paris or Lisbon among Americans dreaming of a European move, but Norway rewards the curious. With a population of just 5.6 million spread across 323,000 square kilometers of coastline and fjord country, it offers a kind of breathing room that's genuinely rare. Its Gini coefficient of 26.5 puts it among the most economically equal societies on earth, and NATO and Schengen membership mean institutional stability and easy travel across the continent."
     },
     "denmark": {
       "safety": 7,
@@ -2786,7 +2818,8 @@
         "g7": false,
         "g20": false,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Copenhagen consistently ranks among the world's most livable cities, and the country surrounding it tends to live up to that reputation. Denmark's Gini coefficient of 29.9 reflects one of the more equal income distributions anywhere, which shows up in daily life through strong public services and a general sense of social stability. With just one land border and full Schengen membership, travel across Europe is frictionless for Danish residents."
     },
     "sweden": {
       "safety": 5,
@@ -2867,7 +2900,8 @@
         "g7": false,
         "g20": false,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Stockholm tends to get all the attention, but Sweden itself is a country of striking scale, stretching across 450,295 square kilometers with a population of just over 10.6 million. That relatively low density shapes daily life considerably, offering a kind of breathing room that's genuinely rare in Western Europe. As both an EU and Schengen member, Sweden sits at the center of European institutional life, and its Gini coefficient of 29.3 signals one of the more economically equal societies an American could move to."
     },
     "belgium": {
       "safety": 5,
@@ -2952,7 +2986,8 @@
         "g7": false,
         "g20": false,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Brussels sits at the political center of Europe, hosting NATO headquarters and serving as the effective capital of the EU, which gives Belgium an unusually international character for a country roughly the size of Maryland. With three official languages, German, French, and Dutch, daily life here reflects a genuinely multilingual society rather than a novelty. At a Gini coefficient of 26.8, income inequality is among the lowest measured anywhere, a detail that tends to show up in public services and quality of life in ways Americans often find striking."
     },
     "austria": {
       "safety": 7,
@@ -3039,7 +3074,8 @@
         "g7": false,
         "g20": false,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Vienna regularly tops global quality-of-life rankings, and the surrounding country tends to confirm why. Austria sits at the heart of Europe, sharing borders with eight countries, which makes it an exceptional base for anyone who wants weekend trains to Prague, Munich, or Ljubljana without the fuss of currency exchanges. Its Gini coefficient of 31.2 signals a notably equitable society, and membership in the EU and Schengen zone means institutional stability and freedom of movement across most of the continent."
     },
     "finland": {
       "safety": 7,
@@ -3122,7 +3158,8 @@
         "g7": false,
         "g20": false,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Finland is one of the most equal societies on the planet, with a Gini coefficient of 27.4 that puts most wealthy nations to shame. The country spans 338,424 square kilometers across northern Europe, giving its 5.6 million residents a lot of breathing room, and Helsinki punches well above its weight as a capital, blending Scandinavian design sensibility with a genuinely distinct Finnish character. EU and Schengen membership makes onward travel across Europe straightforward, and the euro means no currency headaches."
     },
     "united-kingdom": {
       "safety": 5,
@@ -3210,7 +3247,8 @@
         "g7": true,
         "g20": true,
         "commonwealth": true
-      }
+      },
+      "quick_facts_paragraph": "London is one of the world's great cities, and for Americans, the language barrier is nonexistent, which removes one of the biggest friction points of relocating abroad. The UK left the EU after Brexit, so Americans won't gain European free movement by settling here, but its G7 standing and deep institutional ties to the US mean the professional and financial infrastructure feels familiar. With a Gini coefficient of 32.4, income inequality is notably lower than in the United States."
     },
     "singapore": {
       "safety": 8,
@@ -3288,7 +3326,8 @@
         "g7": false,
         "g20": false,
         "commonwealth": true
-      }
+      },
+      "quick_facts_paragraph": "Singapore is one of the world's most compact countries, fitting a population of over six million into just 710 square kilometers at the southern tip of the Malay Peninsula. English is an official language alongside Chinese, Malay, and Tamil, which makes daily life surprisingly accessible for Americans, even if the local mix of accents and slang takes some getting used to. As a Commonwealth member, it carries a certain institutional familiarity, though the city-state operates very much on its own terms."
     },
     "united-arab-emirates": {
       "safety": 9,
@@ -3369,7 +3408,8 @@
         "g7": false,
         "g20": false,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Abu Dhabi may be the capital, but Dubai tends to dominate the American imagination, which means most newcomers arrive with a skewed sense of what the UAE actually is. Spread across 83,600 square kilometers on the Arabian Gulf, the country of 11 million is one of the more economically equal societies in the region, with a Gini coefficient of 26.4. Arabic is the official language, though English is widely spoken in business and daily life."
     },
     "qatar": {
       "safety": 8,
@@ -3449,7 +3489,8 @@
         "g7": false,
         "g20": false,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Doha punches well above its weight for a capital city, offering a skyline and infrastructure that would feel at home in any major global hub. Qatar is a small peninsula on the Arabian Gulf, just over 11,500 square kilometers, with a population of roughly 3.2 million and a single land border with Saudi Arabia. The income inequality figure is relatively moderate at 35.1, though daily life here operates under Islamic law and cultural norms that can require genuine adjustment for Western expats."
     },
     "saudi-arabia": {
       "safety": 8,
@@ -3532,7 +3573,8 @@
         "g7": false,
         "g20": true,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Saudi Arabia is one of the largest countries in the Middle East, covering more than 2.1 million square kilometers of desert, coastline, and rapidly modernizing cities, with Riyadh serving as the political and commercial hub of a nation of nearly 34 million people. For Americans considering a move, the transition runs deeper than learning Arabic or adjusting to the Saudi riyal. Social norms, legal expectations, and daily life operate on a fundamentally different framework than most Westerners are accustomed to, and that reality deserves serious research before any decisions are made."
     },
     "iceland": {
       "safety": 7,
@@ -3610,7 +3652,8 @@
         "g7": false,
         "g20": false,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Reykjavik may be one of the world's smallest capitals, but it anchors a country that consistently ranks among the most equal societies on earth, with a Gini coefficient of just 26.8. Iceland sits outside the EU but inside the Schengen zone, so travel across Europe stays relatively frictionless for residents. The catch is real: Icelandic is the official language, the population barely clears 394,000, and the island's remoteness shapes daily life in ways that thrill some Americans and quietly wear on others."
     },
     "india": {
       "safety": 6,
@@ -3697,7 +3740,8 @@
         "g7": false,
         "g20": true,
         "commonwealth": true
-      }
+      },
+      "quick_facts_paragraph": "India is the world's most populous country, home to nearly 1.4 billion people spread across a landmass roughly a third the size of the United States. New Delhi anchors a nation where English remains an official language alongside Hindi and Tamil, which smooths daily life considerably for American arrivals. The Gini coefficient of 25.5 suggests a more compressed income distribution than many expect, though the lived economic reality varies enormously by region."
     },
     "philippines": {
       "safety": 6,
@@ -3776,7 +3820,8 @@
         "g7": false,
         "g20": false,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "The Philippines is an archipelago of more than 7,000 islands spread across Southeast Asia, home to over 112 million people and anchored by the sprawling, chaotic capital of Manila. English is an official language alongside Filipino, which makes daily life and bureaucracy far more accessible for Americans than in most of the region. The country's income inequality sits at a moderate Gini of 39.3, a reminder that prosperity here is unevenly distributed, something worth factoring into any relocation plan."
     },
     "china": {
       "safety": 8,
@@ -3871,7 +3916,8 @@
         "g7": false,
         "g20": true,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "China is the world's most populous country, home to nearly 1.4 billion people across a landmass that stretches from tropical coastlines to Central Asian steppe. Beijing serves as the capital of a nation that shares land borders with 16 countries, a geographic reality that shapes everything from regional cuisines to infrastructure priorities. The official language is Chinese, and while English is increasingly taught in cities, daily life outside major urban centers runs almost entirely in Mandarin."
     },
     "georgia": {
       "safety": 7,
@@ -3954,7 +4000,8 @@
         "g7": false,
         "g20": false,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Tbilisi has been pulling in a certain kind of American expat for years now, drawn by low costs, a genuinely distinct culture, and a city that feels nothing like anywhere else in Europe or Asia. Georgia sits at the crossroads of those two continents, touching the Black Sea to the west and sharing borders with Russia, Turkey, Armenia, and Azerbaijan, which gives it an outsized geopolitical weight for a country of 3.7 million people. The lari keeps everyday life affordable, and an income inequality score of 33.9 puts it in reasonably balanced territory by regional standards."
     },
     "serbia": {
       "safety": 6,
@@ -4041,7 +4088,8 @@
         "g7": false,
         "g20": false,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Belgrade punches well above its weight for a capital city of a landlocked Balkan nation of about 6.5 million people. Serbia shares borders with eight countries, which means surprisingly easy overland access to much of Central and Southeastern Europe, and its income inequality sits at a Gini of 32.8, relatively modest by global standards. The Serbian dinar keeps costs low, and the country rewards those willing to live a little further off the well-worn expat trail."
     },
     "kenya": {
       "safety": 4,
@@ -4126,7 +4174,8 @@
         "g7": false,
         "g20": false,
         "commonwealth": true
-      }
+      },
+      "quick_facts_paragraph": "Nairobi is one of Africa's most consequential cities, and it gives you a sense of what Kenya is at its core: fast-moving, ambitious, and deeply connected to the wider world. With a population of over 53 million spread across a country slightly larger than Texas, Kenya sits at the crossroads of East Africa, sharing land borders with five neighbors and opening onto the Indian Ocean to the southeast. English and Swahili are both official languages, which makes daily life considerably more accessible for American arrivals than in much of the continent."
     },
     "peru": {
       "safety": 3,
@@ -4212,7 +4261,8 @@
         "g7": false,
         "g20": false,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Lima is one of the largest cities in South America, and for many Americans it becomes the entry point into a country far more complex than the Machu Picchu postcards suggest. Peru stretches across 1.28 million square kilometers, with Spanish sharing official status alongside Quechua and Aymara, a linguistic reality that reflects deep Indigenous roots still very much alive in daily life. At a Gini coefficient of 40.1, income inequality is a real part of the social landscape, something relocating Americans tend to notice quickly once they settle in."
     },
     "brazil": {
       "safety": 4,
@@ -4304,7 +4354,8 @@
         "g7": false,
         "g20": true,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Brazil is the largest country in South America and the fifth largest on earth, spanning more than 8.5 million square kilometers from the Amazon basin to the Atlantic coast. That scale means the experience of living there varies enormously depending on the city, the region, and the local economy. One thing consistent across the country is its staggering income inequality, reflected in a Gini coefficient of 50.3, which shapes daily life, neighborhood geography, and the social dynamics that any newcomer will need to understand before settling in."
     },
     "chile": {
       "safety": 4,
@@ -4387,7 +4438,8 @@
         "g7": false,
         "g20": false,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Chile is one of South America's most stable and economically developed countries, a fact underscored by its OECD membership, which puts it in rare company on a continent where institutional reliability can vary wildly. Santiago is a genuinely modern capital with good infrastructure, but the country's income inequality, reflected in a Gini coefficient of 43, means the gap between wealthy and working-class Chileans is still pronounced. Spanish is the only language needed, and the country's dramatic Pacific coastline and sheer geographic length make it unlike anywhere else in the hemisphere."
     },
     "albania": {
       "safety": 6,
@@ -4470,7 +4522,8 @@
         "g7": false,
         "g20": false,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Tirana has been quietly drawing in expats who want southern European lifestyle without southern European price tags. Albania sits on the Adriatic and Ionian coasts, so the beaches are real, and with a population of just over 2.4 million spread across a compact country, it never feels overwhelming. The Gini coefficient of 29.4 signals relatively low income inequality by regional standards, and NATO membership since 2009 gives the country a degree of institutional stability that matters for anyone thinking long-term."
     },
     "sri-lanka": {
       "safety": 6,
@@ -4549,7 +4602,8 @@
         "g7": false,
         "g20": false,
         "commonwealth": true
-      }
+      },
+      "quick_facts_paragraph": "Sri Lanka is an island nation of nearly 22 million people sitting just off the southern tip of India, and its relatively moderate Gini score of 37.7 suggests less economic stratification than many of its regional neighbors. The capital is the somewhat tongue-twisting Sri Jayawardenepura Kotte, though Colombo functions as the commercial heart of the country. A Commonwealth member with left-side driving and two official languages, Sinhala and Tamil, it carries the institutional and cultural imprints of its colonial past into a present that feels very much its own."
     },
     "egypt": {
       "safety": 5,
@@ -4632,7 +4686,8 @@
         "g7": false,
         "g20": false,
         "commonwealth": false
-      }
+      },
+      "quick_facts_paragraph": "Cairo is one of the most densely peopled cities on earth, and that energy sets the tone for life in a country of nearly 108 million people spread across just a fraction of Egypt's vast 1,002,450 square kilometers, most of it desert. Daily life runs on Arabic and Egyptian pounds, and the country's Gini coefficient of 28.5 suggests a relatively compressed income distribution by global standards, which surprises many Westerners who arrive expecting sharper extremes."
     }
   },
   "budget_data_source": "WhereNext (getwherenext.com), CC BY 4.0, World Bank ICP + Eurostat"

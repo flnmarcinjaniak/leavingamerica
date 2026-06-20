@@ -65,10 +65,10 @@ COUNTRY_ISO2 = {
 
 
 def fetch_country_facts(iso2_code):
-    """Fetch area and population for one
-    country from REST Countries v5 using
-    its ISO 3166-1 alpha-2 code — far more
-    reliable than fuzzy name search"""
+    """Fetch area, population, and
+    contextual facts for one country from
+    REST Countries v5 using its ISO 3166-1
+    alpha-2 code"""
     response = requests.get(
         "https://api.restcountries.com/countries/v5",
         params={
@@ -91,13 +91,84 @@ def fetch_country_facts(iso2_code):
         'names', {}
     ).get('common', '')
 
+    capitals = country.get('capitals', [])
+    capital_name = (
+        capitals[0].get('name')
+        if capitals else None
+    )
+
+    currencies = country.get('currencies', [])
+    currency_names = [
+        c.get('name') for c in currencies
+        if c.get('name')
+    ]
+
+    languages = country.get('languages', [])
+    language_names = [
+        l.get('name') for l in languages
+        if l.get('name')
+    ]
+
+    memberships = country.get('memberships', {})
+
+    demonyms = country.get('demonyms', {})
+    demonym_eng = (
+        demonyms.get('eng', {}).get('m')
+        if demonyms.get('eng') else None
+    )
+
+    cars = country.get('cars', {})
+    driving_side = cars.get('driving_side')
+
+    borders = country.get('borders', [])
+
+    timezones = country.get('timezones', [])
+
+    landlocked = country.get('landlocked')
+
+    gini = country.get('economy', {}).get(
+        'gini_coefficient', {}
+    )
+    gini_latest = None
+    if gini:
+        latest_year = max(gini.keys())
+        gini_latest = {
+            'year': latest_year,
+            'value': gini[latest_year]
+        }
+
     return {
+        'returned_name': returned_name,
         'area_km2': area.get('kilometers'),
         'population': country.get('population'),
         'government_type': country.get(
             'government_type'
         ),
-        'returned_name': returned_name,
+        'capital': capital_name,
+        'currencies': currency_names,
+        'languages': language_names,
+        'demonym': demonym_eng,
+        'driving_side': driving_side,
+        'borders': borders,
+        'timezones': timezones,
+        'landlocked': landlocked,
+        'gini': gini_latest,
+        'memberships': {
+            'nato': memberships.get('nato'),
+            'eu': memberships.get('eu'),
+            'eurozone': memberships.get(
+                'eurozone'
+            ),
+            'schengen': memberships.get(
+                'schengen'
+            ),
+            'oecd': memberships.get('oecd'),
+            'g7': memberships.get('g7'),
+            'g20': memberships.get('g20'),
+            'commonwealth': memberships.get(
+                'commonwealth'
+            ),
+        },
     }
 
 
@@ -116,11 +187,26 @@ def fetch_all_facts():
                 pop_str = (
                     f"{pop:,}" if pop else "N/A"
                 )
+                eu = (
+                    "EU" if facts['memberships'].get(
+                        'eu'
+                    ) else ""
+                )
+                nato = (
+                    "NATO" if facts['memberships'].get(
+                        'nato'
+                    ) else ""
+                )
+                tags = ' '.join(
+                    filter(None, [eu, nato])
+                )
                 print(
                     f"  {iso2} -> "
                     f"{facts['returned_name']}: "
-                    f"area={facts['area_km2']} km2, "
-                    f"population={pop_str}"
+                    f"pop={pop_str}, "
+                    f"capital={facts['capital']}, "
+                    f"lang={facts['languages']}, "
+                    f"{tags}"
                 )
             else:
                 print(f"  {iso2}: no data found")
@@ -146,18 +232,21 @@ def merge_into_json(facts_data):
     countries_data = data.get('countries', {})
     updated_count = 0
 
+    fields_to_copy = [
+        'area_km2', 'population',
+        'government_type', 'capital',
+        'currencies', 'languages', 'demonym',
+        'driving_side', 'borders', 'timezones',
+        'landlocked', 'gini', 'memberships'
+    ]
+
     for slug, facts in facts_data.items():
         if slug not in countries_data:
             continue
-        countries_data[slug]['area_km2'] = (
-            facts.get('area_km2')
-        )
-        countries_data[slug]['population'] = (
-            facts.get('population')
-        )
-        countries_data[slug]['government_type'] = (
-            facts.get('government_type')
-        )
+        for field in fields_to_copy:
+            countries_data[slug][field] = (
+                facts.get(field)
+            )
         updated_count += 1
 
     with open(DATA_PATH, 'w', encoding='utf-8') as f:

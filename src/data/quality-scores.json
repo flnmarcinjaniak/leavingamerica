@@ -59,7 +59,38 @@
       "grade_percent": 78,
       "area_km2": 92090,
       "population": 10749635,
-      "government_type": "Unitary semi-presidential republic"
+      "government_type": "Unitary semi-presidential republic",
+      "capital": "Lisbon",
+      "currencies": [
+        "Euro"
+      ],
+      "languages": [
+        "Portuguese"
+      ],
+      "demonym": "Portuguese",
+      "driving_side": "right",
+      "borders": [
+        "ESP"
+      ],
+      "timezones": [
+        "UTC-01:00",
+        "UTC"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2023",
+        "value": 33.9
+      },
+      "memberships": {
+        "nato": true,
+        "eu": true,
+        "eurozone": true,
+        "schengen": true,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      }
     },
     "spain": {
       "safety": 6,
@@ -109,7 +140,46 @@
       "grade_percent": 72,
       "area_km2": 505992,
       "population": 49687120,
-      "government_type": "Unitary parliamentary constitutional monarchy"
+      "government_type": "Unitary parliamentary constitutional monarchy",
+      "capital": "Madrid",
+      "currencies": [
+        "Euro"
+      ],
+      "languages": [
+        "Spanish",
+        "Catalan",
+        "Basque",
+        "Galician",
+        "Aranese"
+      ],
+      "demonym": "Spanish",
+      "driving_side": "right",
+      "borders": [
+        "AND",
+        "FRA",
+        "GIB",
+        "PRT",
+        "MAR"
+      ],
+      "timezones": [
+        "UTC",
+        "UTC+01:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2023",
+        "value": 33.4
+      },
+      "memberships": {
+        "nato": true,
+        "eu": true,
+        "eurozone": true,
+        "schengen": true,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      }
     },
     "mexico": {
       "safety": 5,
@@ -159,7 +229,41 @@
       "grade_percent": 39,
       "area_km2": 1964375,
       "population": 134407258,
-      "government_type": "Federal presidential republic"
+      "government_type": "Federal presidential republic",
+      "capital": "Mexico City",
+      "currencies": [
+        "Mexican peso"
+      ],
+      "languages": [
+        "Spanish"
+      ],
+      "demonym": "Mexican",
+      "driving_side": "right",
+      "borders": [
+        "BLZ",
+        "GTM",
+        "USA"
+      ],
+      "timezones": [
+        "UTC-08:00",
+        "UTC-07:00",
+        "UTC-06:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2024",
+        "value": 42.6
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": true,
+        "g7": false,
+        "g20": true,
+        "commonwealth": false
+      }
     },
     "germany": {
       "safety": 6,
@@ -209,7 +313,45 @@
       "grade_percent": 67,
       "area_km2": 357114,
       "population": 83497147,
-      "government_type": "Federal parliamentary republic"
+      "government_type": "Federal parliamentary republic",
+      "capital": "Berlin",
+      "currencies": [
+        "Euro"
+      ],
+      "languages": [
+        "German"
+      ],
+      "demonym": "German",
+      "driving_side": "right",
+      "borders": [
+        "AUT",
+        "BEL",
+        "CZE",
+        "DNK",
+        "FRA",
+        "LUX",
+        "NLD",
+        "POL",
+        "CHE"
+      ],
+      "timezones": [
+        "UTC+01:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2022",
+        "value": 33.7
+      },
+      "memberships": {
+        "nato": true,
+        "eu": true,
+        "eurozone": true,
+        "schengen": true,
+        "oecd": true,
+        "g7": true,
+        "g20": true,
+        "commonwealth": false
+      }
     },
     "italy": {
       "safety": 5,
@@ -259,7 +401,43 @@
       "grade_percent": 26,
       "area_km2": 301336,
       "population": 58915561,
-      "government_type": "Unitary parliamentary republic"
+      "government_type": "Unitary parliamentary republic",
+      "capital": "Rome",
+      "currencies": [
+        "Euro"
+      ],
+      "languages": [
+        "Italian",
+        "Catalan"
+      ],
+      "demonym": "Italian",
+      "driving_side": "right",
+      "borders": [
+        "AUT",
+        "FRA",
+        "SMR",
+        "SVN",
+        "CHE",
+        "VAT"
+      ],
+      "timezones": [
+        "UTC+01:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2023",
+        "value": 34.3
+      },
+      "memberships": {
+        "nato": true,
+        "eu": true,
+        "eurozone": true,
+        "schengen": true,
+        "oecd": true,
+        "g7": true,
+        "g20": true,
+        "commonwealth": false
+      }
     },
     "greece": {
       "safety": 5,
@@ -309,7 +487,40 @@
       "grade_percent": 15,
       "area_km2": 131990,
       "population": 10718565,
-      "government_type": "Unitary parliamentary republic"
+      "government_type": "Unitary parliamentary republic",
+      "capital": "Athens",
+      "currencies": [
+        "Euro"
+      ],
+      "languages": [
+        "Greek"
+      ],
+      "demonym": "Greek",
+      "driving_side": "right",
+      "borders": [
+        "ALB",
+        "BGR",
+        "TUR",
+        "MKD"
+      ],
+      "timezones": [
+        "UTC+02:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2023",
+        "value": 33.4
+      },
+      "memberships": {
+        "nato": true,
+        "eu": true,
+        "eurozone": true,
+        "schengen": true,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      }
     },
     "costa-rica": {
       "safety": 5,
@@ -359,7 +570,38 @@
       "grade_percent": 37,
       "area_km2": 51100,
       "population": 5160700,
-      "government_type": "Unitary presidential republic"
+      "government_type": "Unitary presidential republic",
+      "capital": "San José",
+      "currencies": [
+        "Costa Rican colón"
+      ],
+      "languages": [
+        "Spanish"
+      ],
+      "demonym": "Costa Rican",
+      "driving_side": "right",
+      "borders": [
+        "NIC",
+        "PAN"
+      ],
+      "timezones": [
+        "UTC-06:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2025",
+        "value": 45.5
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      }
     },
     "panama": {
       "safety": 6,
@@ -409,7 +651,39 @@
       "grade_percent": 33,
       "area_km2": 75417,
       "population": 4337768,
-      "government_type": "Unitary presidential republic"
+      "government_type": "Unitary presidential republic",
+      "capital": "Panama City",
+      "currencies": [
+        "Panamanian balboa",
+        "United States dollar"
+      ],
+      "languages": [
+        "Spanish"
+      ],
+      "demonym": "Panamanian",
+      "driving_side": "right",
+      "borders": [
+        "COL",
+        "CRI"
+      ],
+      "timezones": [
+        "UTC-05:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2024",
+        "value": 49.7
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      }
     },
     "thailand": {
       "safety": 6,
@@ -459,7 +733,40 @@
       "grade_percent": 59,
       "area_km2": 513120,
       "population": 65975198,
-      "government_type": "Unitary parliamentary constitutional monarchy"
+      "government_type": "Unitary parliamentary constitutional monarchy",
+      "capital": "Bangkok",
+      "currencies": [
+        "Thai baht"
+      ],
+      "languages": [
+        "Thai"
+      ],
+      "demonym": "Thai",
+      "driving_side": "left",
+      "borders": [
+        "MMR",
+        "KHM",
+        "LAO",
+        "MYS"
+      ],
+      "timezones": [
+        "UTC+07:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2024",
+        "value": 33.3
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      }
     },
     "malaysia": {
       "safety": 5,
@@ -509,7 +816,40 @@
       "grade_percent": 31,
       "area_km2": 330803,
       "population": 34564810,
-      "government_type": "Federal parliamentary constitutional elective monarchy"
+      "government_type": "Federal parliamentary constitutional elective monarchy",
+      "capital": "Kuala Lumpur",
+      "currencies": [
+        "Malaysian ringgit"
+      ],
+      "languages": [
+        "English",
+        "Malay"
+      ],
+      "demonym": "Malaysian",
+      "driving_side": "left",
+      "borders": [
+        "BRN",
+        "IDN",
+        "THA"
+      ],
+      "timezones": [
+        "UTC+08:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2021",
+        "value": 40.7
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": true
+      }
     },
     "indonesia": {
       "safety": 5,
@@ -559,7 +899,41 @@
       "grade_percent": 9,
       "area_km2": 1904569,
       "population": 288315089,
-      "government_type": "Unitary presidential republic"
+      "government_type": "Unitary presidential republic",
+      "capital": "Jakarta",
+      "currencies": [
+        "Indonesian rupiah"
+      ],
+      "languages": [
+        "Indonesian"
+      ],
+      "demonym": "Indonesian",
+      "driving_side": "left",
+      "borders": [
+        "TLS",
+        "MYS",
+        "PNG"
+      ],
+      "timezones": [
+        "UTC+07:00",
+        "UTC+08:00",
+        "UTC+09:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2025",
+        "value": 34.4
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": true,
+        "commonwealth": false
+      }
     },
     "colombia": {
       "safety": 4,
@@ -609,7 +983,41 @@
       "grade_percent": 13,
       "area_km2": 1141748,
       "population": 52695952,
-      "government_type": "Unitary presidential republic"
+      "government_type": "Unitary presidential republic",
+      "capital": "Bogotá",
+      "currencies": [
+        "Colombian peso"
+      ],
+      "languages": [
+        "Spanish"
+      ],
+      "demonym": "Colombian",
+      "driving_side": "right",
+      "borders": [
+        "BRA",
+        "ECU",
+        "PAN",
+        "PER",
+        "VEN"
+      ],
+      "timezones": [
+        "UTC-05:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2024",
+        "value": 54.4
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      }
     },
     "croatia": {
       "safety": 8,
@@ -659,7 +1067,41 @@
       "grade_percent": 80,
       "area_km2": 56594,
       "population": 3866233,
-      "government_type": "Unitary parliamentary republic"
+      "government_type": "Unitary parliamentary republic",
+      "capital": "Zagreb",
+      "currencies": [
+        "Euro"
+      ],
+      "languages": [
+        "Croatian"
+      ],
+      "demonym": "Croatian",
+      "driving_side": "right",
+      "borders": [
+        "BIH",
+        "HUN",
+        "MNE",
+        "SRB",
+        "SVN"
+      ],
+      "timezones": [
+        "UTC+01:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2023",
+        "value": 30.1
+      },
+      "memberships": {
+        "nato": true,
+        "eu": true,
+        "eurozone": true,
+        "schengen": true,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      }
     },
     "czech-republic": {
       "safety": 7,
@@ -709,7 +1151,41 @@
       "grade_percent": 83,
       "area_km2": 78865,
       "population": 10915839,
-      "government_type": "Unitary parliamentary republic"
+      "government_type": "Unitary parliamentary republic",
+      "capital": "Prague",
+      "currencies": [
+        "Czech koruna"
+      ],
+      "languages": [
+        "Czech",
+        "Slovak"
+      ],
+      "demonym": "Czech",
+      "driving_side": "right",
+      "borders": [
+        "AUT",
+        "DEU",
+        "POL",
+        "SVK"
+      ],
+      "timezones": [
+        "UTC+01:00"
+      ],
+      "landlocked": true,
+      "gini": {
+        "year": "2023",
+        "value": 25.7
+      },
+      "memberships": {
+        "nato": true,
+        "eu": true,
+        "eurozone": false,
+        "schengen": true,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      }
     },
     "poland": {
       "safety": 7,
@@ -759,7 +1235,43 @@
       "grade_percent": 69,
       "area_km2": 312679,
       "population": 37314000,
-      "government_type": "Unitary parliamentary republic"
+      "government_type": "Unitary parliamentary republic",
+      "capital": "Warsaw",
+      "currencies": [
+        "Polish złoty"
+      ],
+      "languages": [
+        "Polish"
+      ],
+      "demonym": "Polish",
+      "driving_side": "right",
+      "borders": [
+        "BLR",
+        "CZE",
+        "DEU",
+        "LTU",
+        "RUS",
+        "SVK",
+        "UKR"
+      ],
+      "timezones": [
+        "UTC+01:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2023",
+        "value": 28.5
+      },
+      "memberships": {
+        "nato": true,
+        "eu": true,
+        "eurozone": false,
+        "schengen": true,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      }
     },
     "hungary": {
       "safety": 7,
@@ -809,7 +1321,43 @@
       "grade_percent": 63,
       "area_km2": 93028,
       "population": 9489000,
-      "government_type": "Unitary parliamentary republic"
+      "government_type": "Unitary parliamentary republic",
+      "capital": "Budapest",
+      "currencies": [
+        "Hungarian forint"
+      ],
+      "languages": [
+        "Hungarian"
+      ],
+      "demonym": "Hungarian",
+      "driving_side": "right",
+      "borders": [
+        "AUT",
+        "HRV",
+        "ROU",
+        "SRB",
+        "SVK",
+        "SVN",
+        "UKR"
+      ],
+      "timezones": [
+        "UTC+01:00"
+      ],
+      "landlocked": true,
+      "gini": {
+        "year": "2017",
+        "value": 30.6
+      },
+      "memberships": {
+        "nato": true,
+        "eu": true,
+        "eurozone": false,
+        "schengen": true,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      }
     },
     "romania": {
       "safety": 7,
@@ -859,7 +1407,41 @@
       "grade_percent": 56,
       "area_km2": 238391,
       "population": 19043151,
-      "government_type": "Unitary semi-presidential republic"
+      "government_type": "Unitary semi-presidential republic",
+      "capital": "Bucharest",
+      "currencies": [
+        "Romanian leu"
+      ],
+      "languages": [
+        "Romanian"
+      ],
+      "demonym": "Romanian",
+      "driving_side": "right",
+      "borders": [
+        "BGR",
+        "HUN",
+        "MDA",
+        "SRB",
+        "UKR"
+      ],
+      "timezones": [
+        "UTC+02:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2023",
+        "value": 29.8
+      },
+      "memberships": {
+        "nato": true,
+        "eu": true,
+        "eurozone": false,
+        "schengen": true,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      }
     },
     "bulgaria": {
       "safety": 6,
@@ -909,7 +1491,41 @@
       "grade_percent": 35,
       "area_km2": 110879,
       "population": 6423207,
-      "government_type": "Unitary parliamentary republic"
+      "government_type": "Unitary parliamentary republic",
+      "capital": "Sofia",
+      "currencies": [
+        "Euro"
+      ],
+      "languages": [
+        "Bulgarian"
+      ],
+      "demonym": "Bulgarian",
+      "driving_side": "right",
+      "borders": [
+        "GRC",
+        "MKD",
+        "ROU",
+        "SRB",
+        "TUR"
+      ],
+      "timezones": [
+        "UTC+02:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2023",
+        "value": 39.5
+      },
+      "memberships": {
+        "nato": true,
+        "eu": true,
+        "eurozone": false,
+        "schengen": true,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      }
     },
     "vietnam": {
       "safety": 6,
@@ -959,7 +1575,39 @@
       "grade_percent": 48,
       "area_km2": 331212,
       "population": 102300000,
-      "government_type": "Unitary communist state"
+      "government_type": "Unitary communist state",
+      "capital": "Hanoi",
+      "currencies": [
+        "Vietnamese đồng"
+      ],
+      "languages": [
+        "Vietnamese"
+      ],
+      "demonym": "Vietnamese",
+      "driving_side": "right",
+      "borders": [
+        "KHM",
+        "CHN",
+        "LAO"
+      ],
+      "timezones": [
+        "UTC+07:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2022",
+        "value": 36.1
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      }
     },
     "japan": {
       "safety": 8,
@@ -1009,7 +1657,35 @@
       "grade_percent": 94,
       "area_km2": 377930,
       "population": 122950000,
-      "government_type": "Unitary parliamentary constitutional monarchy"
+      "government_type": "Unitary parliamentary constitutional monarchy",
+      "capital": "Tokyo",
+      "currencies": [
+        "Japanese yen"
+      ],
+      "languages": [
+        "Japanese"
+      ],
+      "demonym": "Japanese",
+      "driving_side": "left",
+      "borders": [],
+      "timezones": [
+        "UTC+09:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2020",
+        "value": 32.3
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": true,
+        "g7": true,
+        "g20": true,
+        "commonwealth": false
+      }
     },
     "south-korea": {
       "safety": 7,
@@ -1059,7 +1735,37 @@
       "grade_percent": 81,
       "area_km2": 100210,
       "population": 51106229,
-      "government_type": "Unitary presidential republic"
+      "government_type": "Unitary presidential republic",
+      "capital": "Seoul",
+      "currencies": [
+        "South Korean won"
+      ],
+      "languages": [
+        "Korean"
+      ],
+      "demonym": "South Korean",
+      "driving_side": "right",
+      "borders": [
+        "PRK"
+      ],
+      "timezones": [
+        "UTC+09:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2021",
+        "value": 32.9
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": true,
+        "g7": false,
+        "g20": true,
+        "commonwealth": false
+      }
     },
     "australia": {
       "safety": 5,
@@ -1109,7 +1815,42 @@
       "grade_percent": 61,
       "area_km2": 7692024,
       "population": 27724744,
-      "government_type": "Federal parliamentary constitutional monarchy"
+      "government_type": "Federal parliamentary constitutional monarchy",
+      "capital": "Canberra",
+      "currencies": [
+        "Australian dollar"
+      ],
+      "languages": [
+        "English"
+      ],
+      "demonym": "Australian",
+      "driving_side": "left",
+      "borders": [],
+      "timezones": [
+        "UTC+05:00",
+        "UTC+06:30",
+        "UTC+07:00",
+        "UTC+08:00",
+        "UTC+09:30",
+        "UTC+10:00",
+        "UTC+10:30",
+        "UTC+11:30"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2020",
+        "value": 33.8
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": true,
+        "g7": false,
+        "g20": true,
+        "commonwealth": true
+      }
     },
     "new-zealand": {
       "safety": 5,
@@ -1159,7 +1900,38 @@
       "grade_percent": 52,
       "area_km2": 270467,
       "population": 4993923,
-      "government_type": "Unitary parliamentary constitutional monarchy"
+      "government_type": "Unitary parliamentary constitutional monarchy",
+      "capital": "Wellington",
+      "currencies": [
+        "New Zealand dollar"
+      ],
+      "languages": [
+        "English",
+        "Maori",
+        "New Zealand Sign Language"
+      ],
+      "demonym": "New Zealander",
+      "driving_side": "left",
+      "borders": [],
+      "timezones": [
+        "UTC-11:00",
+        "UTC-10:00",
+        "UTC+12:00",
+        "UTC+12:45",
+        "UTC+13:00"
+      ],
+      "landlocked": false,
+      "gini": null,
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": true
+      }
     },
     "canada": {
       "safety": 5,
@@ -1209,7 +1981,43 @@
       "grade_percent": 50,
       "area_km2": 9984670,
       "population": 41575585,
-      "government_type": "Federal parliamentary constitutional monarchy"
+      "government_type": "Federal parliamentary constitutional monarchy",
+      "capital": "Ottawa",
+      "currencies": [
+        "Canadian dollar"
+      ],
+      "languages": [
+        "English",
+        "French"
+      ],
+      "demonym": "Canadian",
+      "driving_side": "right",
+      "borders": [
+        "USA"
+      ],
+      "timezones": [
+        "UTC-08:00",
+        "UTC-07:00",
+        "UTC-06:00",
+        "UTC-05:00",
+        "UTC-04:00",
+        "UTC-03:30"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2022",
+        "value": 31.5
+      },
+      "memberships": {
+        "nato": true,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": true,
+        "g7": true,
+        "g20": true,
+        "commonwealth": true
+      }
     },
     "ireland": {
       "safety": 5,
@@ -1259,7 +2067,38 @@
       "grade_percent": 46,
       "area_km2": 70273,
       "population": 7185600,
-      "government_type": ""
+      "government_type": "",
+      "capital": "Dublin",
+      "currencies": [
+        "Euro"
+      ],
+      "languages": [
+        "English",
+        "Irish"
+      ],
+      "demonym": "Irish",
+      "driving_side": "left",
+      "borders": [
+        "GBR"
+      ],
+      "timezones": [
+        "UTC"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2023",
+        "value": 29
+      },
+      "memberships": {
+        "nato": false,
+        "eu": true,
+        "eurozone": true,
+        "schengen": false,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      }
     },
     "netherlands": {
       "safety": 7,
@@ -1309,7 +2148,38 @@
       "grade_percent": 93,
       "area_km2": 41850,
       "population": 18044027,
-      "government_type": "Unitary parliamentary constitutional monarchy"
+      "government_type": "Unitary parliamentary constitutional monarchy",
+      "capital": "Amsterdam",
+      "currencies": [
+        "Euro"
+      ],
+      "languages": [
+        "Dutch"
+      ],
+      "demonym": "Dutch",
+      "driving_side": "right",
+      "borders": [
+        "BEL",
+        "DEU"
+      ],
+      "timezones": [
+        "UTC+01:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2021",
+        "value": 25.7
+      },
+      "memberships": {
+        "nato": true,
+        "eu": true,
+        "eurozone": true,
+        "schengen": true,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      }
     },
     "france": {
       "safety": 4,
@@ -1359,7 +2229,57 @@
       "grade_percent": 44,
       "area_km2": 551695,
       "population": 69081996,
-      "government_type": "Unitary semi-presidential republic"
+      "government_type": "Unitary semi-presidential republic",
+      "capital": "Paris",
+      "currencies": [
+        "Euro"
+      ],
+      "languages": [
+        "French"
+      ],
+      "demonym": "French",
+      "driving_side": "right",
+      "borders": [
+        "AND",
+        "BEL",
+        "DEU",
+        "ITA",
+        "LUX",
+        "MCO",
+        "ESP",
+        "CHE"
+      ],
+      "timezones": [
+        "UTC-10:00",
+        "UTC-09:30",
+        "UTC-09:00",
+        "UTC-08:00",
+        "UTC-04:00",
+        "UTC-03:00",
+        "UTC+01:00",
+        "UTC+02:00",
+        "UTC+03:00",
+        "UTC+04:00",
+        "UTC+05:00",
+        "UTC+10:00",
+        "UTC+11:00",
+        "UTC+12:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2023",
+        "value": 31.8
+      },
+      "memberships": {
+        "nato": true,
+        "eu": true,
+        "eurozone": true,
+        "schengen": true,
+        "oecd": true,
+        "g7": true,
+        "g20": true,
+        "commonwealth": false
+      }
     },
     "argentina": {
       "safety": 4,
@@ -1409,7 +2329,42 @@
       "grade_percent": 7,
       "area_km2": 2780400,
       "population": 46735004,
-      "government_type": "Federal presidential republic"
+      "government_type": "Federal presidential republic",
+      "capital": "Buenos Aires",
+      "currencies": [
+        "Argentine peso"
+      ],
+      "languages": [
+        "Guarani",
+        "Spanish"
+      ],
+      "demonym": "Argentine",
+      "driving_side": "right",
+      "borders": [
+        "BOL",
+        "BRA",
+        "CHL",
+        "PRY",
+        "URY"
+      ],
+      "timezones": [
+        "UTC-03:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2024",
+        "value": 42.4
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": true,
+        "commonwealth": false
+      }
     },
     "ecuador": {
       "safety": 4,
@@ -1459,7 +2414,39 @@
       "grade_percent": 20,
       "area_km2": 276841,
       "population": 17483326,
-      "government_type": "Unitary presidential republic"
+      "government_type": "Unitary presidential republic",
+      "capital": "Quito",
+      "currencies": [
+        "United States dollar"
+      ],
+      "languages": [
+        "Spanish"
+      ],
+      "demonym": "Ecuadorean",
+      "driving_side": "right",
+      "borders": [
+        "COL",
+        "PER"
+      ],
+      "timezones": [
+        "UTC-06:00",
+        "UTC-05:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2025",
+        "value": 45.9
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      }
     },
     "morocco": {
       "safety": 5,
@@ -1509,7 +2496,40 @@
       "grade_percent": 2,
       "area_km2": 446550,
       "population": 36828330,
-      "government_type": "Unitary parliamentary semi-constitutional monarchy"
+      "government_type": "Unitary parliamentary semi-constitutional monarchy",
+      "capital": "Rabat",
+      "currencies": [
+        "Moroccan dirham"
+      ],
+      "languages": [
+        "Arabic",
+        "Standard Moroccan Tamazight"
+      ],
+      "demonym": "Moroccan",
+      "driving_side": "right",
+      "borders": [
+        "DZA",
+        "ESH",
+        "ESP"
+      ],
+      "timezones": [
+        "UTC"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2013",
+        "value": 39.5
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      }
     },
     "switzerland": {
       "safety": 7,
@@ -1559,7 +2579,44 @@
       "grade_percent": 91,
       "area_km2": 41284,
       "population": 9154242,
-      "government_type": "Federal assembly-independent directorial republic"
+      "government_type": "Federal assembly-independent directorial republic",
+      "capital": "Bern",
+      "currencies": [
+        "Swiss franc"
+      ],
+      "languages": [
+        "French",
+        "Swiss German",
+        "Italian",
+        "Romansh"
+      ],
+      "demonym": "Swiss",
+      "driving_side": "right",
+      "borders": [
+        "AUT",
+        "FRA",
+        "ITA",
+        "LIE",
+        "DEU"
+      ],
+      "timezones": [
+        "UTC+01:00"
+      ],
+      "landlocked": true,
+      "gini": {
+        "year": "2022",
+        "value": 33.8
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": true,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      }
     },
     "norway": {
       "safety": 7,
@@ -1609,7 +2666,43 @@
       "grade_percent": 85,
       "area_km2": 323802,
       "population": 5627400,
-      "government_type": "Unitary parliamentary constitutional monarchy"
+      "government_type": "Unitary parliamentary constitutional monarchy",
+      "capital": "Oslo",
+      "currencies": [
+        "Norwegian krone"
+      ],
+      "languages": [
+        "Norwegian Nynorsk",
+        "Norwegian Bokmål",
+        "Northern Sami",
+        "Lule Sami",
+        "Southern Sami"
+      ],
+      "demonym": "Norwegian",
+      "driving_side": "right",
+      "borders": [
+        "FIN",
+        "SWE",
+        "RUS"
+      ],
+      "timezones": [
+        "UTC+01:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2023",
+        "value": 26.5
+      },
+      "memberships": {
+        "nato": true,
+        "eu": false,
+        "eurozone": false,
+        "schengen": true,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      }
     },
     "denmark": {
       "safety": 7,
@@ -1659,7 +2752,41 @@
       "grade_percent": 98,
       "area_km2": 43094,
       "population": 6001008,
-      "government_type": "Unitary parliamentary constitutional monarchy"
+      "government_type": "Unitary parliamentary constitutional monarchy",
+      "capital": "Copenhagen",
+      "currencies": [
+        "Danish krone"
+      ],
+      "languages": [
+        "Danish"
+      ],
+      "demonym": "Danish",
+      "driving_side": "right",
+      "borders": [
+        "DEU"
+      ],
+      "timezones": [
+        "UTC-04:00",
+        "UTC-03:00",
+        "UTC-01:00",
+        "UTC",
+        "UTC+01:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2023",
+        "value": 29.9
+      },
+      "memberships": {
+        "nato": true,
+        "eu": true,
+        "eurozone": false,
+        "schengen": true,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      }
     },
     "sweden": {
       "safety": 5,
@@ -1709,7 +2836,38 @@
       "grade_percent": 57,
       "area_km2": 450295,
       "population": 10610485,
-      "government_type": "Unitary parliamentary constitutional monarchy"
+      "government_type": "Unitary parliamentary constitutional monarchy",
+      "capital": "Stockholm",
+      "currencies": [
+        "Swedish krona"
+      ],
+      "languages": [
+        "Swedish"
+      ],
+      "demonym": "Swedish",
+      "driving_side": "right",
+      "borders": [
+        "FIN",
+        "NOR"
+      ],
+      "timezones": [
+        "UTC+01:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2023",
+        "value": 29.3
+      },
+      "memberships": {
+        "nato": true,
+        "eu": true,
+        "eurozone": false,
+        "schengen": true,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      }
     },
     "belgium": {
       "safety": 5,
@@ -1759,7 +2917,42 @@
       "grade_percent": 43,
       "area_km2": 30528,
       "population": 11867634,
-      "government_type": "Federal parliamentary constitutional monarchy"
+      "government_type": "Federal parliamentary constitutional monarchy",
+      "capital": "Brussels",
+      "currencies": [
+        "Euro"
+      ],
+      "languages": [
+        "German",
+        "French",
+        "Dutch"
+      ],
+      "demonym": "Belgian",
+      "driving_side": "right",
+      "borders": [
+        "FRA",
+        "DEU",
+        "LUX",
+        "NLD"
+      ],
+      "timezones": [
+        "UTC+01:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2023",
+        "value": 26.8
+      },
+      "memberships": {
+        "nato": true,
+        "eu": true,
+        "eurozone": true,
+        "schengen": true,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      }
     },
     "austria": {
       "safety": 7,
@@ -1809,7 +3002,44 @@
       "grade_percent": 76,
       "area_km2": 83871,
       "population": 9219113,
-      "government_type": "Federal semi-presidential republic"
+      "government_type": "Federal semi-presidential republic",
+      "capital": "Vienna",
+      "currencies": [
+        "Euro"
+      ],
+      "languages": [
+        "German"
+      ],
+      "demonym": "Austrian",
+      "driving_side": "right",
+      "borders": [
+        "CZE",
+        "DEU",
+        "HUN",
+        "ITA",
+        "LIE",
+        "SVK",
+        "SVN",
+        "CHE"
+      ],
+      "timezones": [
+        "UTC+01:00"
+      ],
+      "landlocked": true,
+      "gini": {
+        "year": "2023",
+        "value": 31.2
+      },
+      "memberships": {
+        "nato": false,
+        "eu": true,
+        "eurozone": true,
+        "schengen": true,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      }
     },
     "finland": {
       "safety": 7,
@@ -1859,7 +3089,40 @@
       "grade_percent": 87,
       "area_km2": 338424,
       "population": 5652881,
-      "government_type": "Unitary parliamentary republic"
+      "government_type": "Unitary parliamentary republic",
+      "capital": "Helsinki",
+      "currencies": [
+        "Euro"
+      ],
+      "languages": [
+        "Finnish",
+        "Swedish"
+      ],
+      "demonym": "Finnish",
+      "driving_side": "right",
+      "borders": [
+        "NOR",
+        "SWE",
+        "RUS"
+      ],
+      "timezones": [
+        "UTC+02:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2023",
+        "value": 27.4
+      },
+      "memberships": {
+        "nato": true,
+        "eu": true,
+        "eurozone": true,
+        "schengen": true,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      }
     },
     "united-kingdom": {
       "safety": 5,
@@ -1909,7 +3172,45 @@
       "grade_percent": 54,
       "area_km2": 242900,
       "population": 66912637,
-      "government_type": "Unitary parliamentary constitutional monarchy"
+      "government_type": "Unitary parliamentary constitutional monarchy",
+      "capital": "London",
+      "currencies": [
+        "British pound"
+      ],
+      "languages": [
+        "English"
+      ],
+      "demonym": "British",
+      "driving_side": "left",
+      "borders": [
+        "IRL"
+      ],
+      "timezones": [
+        "UTC-08:00",
+        "UTC-05:00",
+        "UTC-04:00",
+        "UTC-03:00",
+        "UTC-02:00",
+        "UTC",
+        "UTC+01:00",
+        "UTC+02:00",
+        "UTC+06:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2021",
+        "value": 32.4
+      },
+      "memberships": {
+        "nato": true,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": true,
+        "g7": true,
+        "g20": true,
+        "commonwealth": true
+      }
     },
     "singapore": {
       "safety": 8,
@@ -1959,7 +3260,35 @@
       "grade_percent": 100,
       "area_km2": 710,
       "population": 6110200,
-      "government_type": "Unitary parliamentary republic"
+      "government_type": "Unitary parliamentary republic",
+      "capital": "Singapore",
+      "currencies": [
+        "Singapore dollar"
+      ],
+      "languages": [
+        "English",
+        "Chinese",
+        "Malay",
+        "Tamil"
+      ],
+      "demonym": "Singaporean",
+      "driving_side": "left",
+      "borders": [],
+      "timezones": [
+        "UTC+08:00"
+      ],
+      "landlocked": false,
+      "gini": null,
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": true
+      }
     },
     "united-arab-emirates": {
       "safety": 9,
@@ -2009,7 +3338,38 @@
       "grade_percent": 96,
       "area_km2": 83600,
       "population": 11027129,
-      "government_type": "Federal semi-presidential elective semi-constitutional monarchy"
+      "government_type": "Federal semi-presidential elective semi-constitutional monarchy",
+      "capital": "Abu Dhabi",
+      "currencies": [
+        "United Arab Emirates dirham"
+      ],
+      "languages": [
+        "Arabic"
+      ],
+      "demonym": "Emirati",
+      "driving_side": "right",
+      "borders": [
+        "OMN",
+        "SAU"
+      ],
+      "timezones": [
+        "UTC+04:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2018",
+        "value": 26.4
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      }
     },
     "qatar": {
       "safety": 8,
@@ -2059,7 +3419,37 @@
       "grade_percent": 74,
       "area_km2": 11586,
       "population": 3214609,
-      "government_type": "Unitary authoritarian semi-constitutional monarchy"
+      "government_type": "Unitary authoritarian semi-constitutional monarchy",
+      "capital": "Doha",
+      "currencies": [
+        "Qatari riyal"
+      ],
+      "languages": [
+        "Arabic"
+      ],
+      "demonym": "Qatari",
+      "driving_side": "right",
+      "borders": [
+        "SAU"
+      ],
+      "timezones": [
+        "UTC+03:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2017",
+        "value": 35.1
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      }
     },
     "saudi-arabia": {
       "safety": 8,
@@ -2109,7 +3499,40 @@
       "grade_percent": 65,
       "area_km2": 2149690,
       "population": 33702731,
-      "government_type": "Unitary Islamic absolute monarchy"
+      "government_type": "Unitary Islamic absolute monarchy",
+      "capital": "Riyadh",
+      "currencies": [
+        "Saudi riyal"
+      ],
+      "languages": [
+        "Arabic"
+      ],
+      "demonym": "Saudi Arabian",
+      "driving_side": "right",
+      "borders": [
+        "IRQ",
+        "JOR",
+        "KWT",
+        "OMN",
+        "QAT",
+        "ARE",
+        "YEM"
+      ],
+      "timezones": [
+        "UTC+03:00"
+      ],
+      "landlocked": false,
+      "gini": null,
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": true,
+        "commonwealth": false
+      }
     },
     "iceland": {
       "safety": 7,
@@ -2159,7 +3582,35 @@
       "grade_percent": 89,
       "area_km2": 103000,
       "population": 394324,
-      "government_type": "Unitary parliamentary republic"
+      "government_type": "Unitary parliamentary republic",
+      "capital": "Reykjavik",
+      "currencies": [
+        "Icelandic króna"
+      ],
+      "languages": [
+        "Icelandic"
+      ],
+      "demonym": "Icelander",
+      "driving_side": "right",
+      "borders": [],
+      "timezones": [
+        "UTC"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2019",
+        "value": 26.8
+      },
+      "memberships": {
+        "nato": true,
+        "eu": false,
+        "eurozone": false,
+        "schengen": true,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      }
     },
     "india": {
       "safety": 6,
@@ -2209,7 +3660,44 @@
       "grade_percent": 28,
       "area_km2": 3287590,
       "population": 1380004385,
-      "government_type": "Federal parliamentary republic"
+      "government_type": "Federal parliamentary republic",
+      "capital": "New Delhi",
+      "currencies": [
+        "Indian rupee"
+      ],
+      "languages": [
+        "English",
+        "Hindi",
+        "Tamil"
+      ],
+      "demonym": "Indian",
+      "driving_side": "left",
+      "borders": [
+        "BGD",
+        "BTN",
+        "MMR",
+        "CHN",
+        "NPL",
+        "PAK"
+      ],
+      "timezones": [
+        "UTC+05:30"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2022",
+        "value": 25.5
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": true,
+        "commonwealth": true
+      }
     },
     "philippines": {
       "safety": 6,
@@ -2259,7 +3747,36 @@
       "grade_percent": 41,
       "area_km2": 342353,
       "population": 112729484,
-      "government_type": "Unitary presidential republic"
+      "government_type": "Unitary presidential republic",
+      "capital": "Manila",
+      "currencies": [
+        "Philippine peso"
+      ],
+      "languages": [
+        "English",
+        "Filipino"
+      ],
+      "demonym": "Filipino",
+      "driving_side": "right",
+      "borders": [],
+      "timezones": [
+        "UTC+08:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2023",
+        "value": 39.3
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      }
     },
     "china": {
       "safety": 8,
@@ -2309,7 +3826,52 @@
       "grade_percent": 70,
       "area_km2": 9706961,
       "population": 1404890000,
-      "government_type": "Unitary communist state"
+      "government_type": "Unitary communist state",
+      "capital": "Beijing",
+      "currencies": [
+        "Chinese yuan"
+      ],
+      "languages": [
+        "Chinese"
+      ],
+      "demonym": "Chinese",
+      "driving_side": "right",
+      "borders": [
+        "AFG",
+        "BTN",
+        "MMR",
+        "HKG",
+        "IND",
+        "KAZ",
+        "NPL",
+        "PRK",
+        "KGZ",
+        "LAO",
+        "MAC",
+        "MNG",
+        "PAK",
+        "RUS",
+        "TJK",
+        "VNM"
+      ],
+      "timezones": [
+        "UTC+08:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2022",
+        "value": 36
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": true,
+        "commonwealth": false
+      }
     },
     "georgia": {
       "safety": 7,
@@ -2359,7 +3921,40 @@
       "grade_percent": 22,
       "area_km2": 69700,
       "population": 3657000,
-      "government_type": "Unitary parliamentary republic"
+      "government_type": "Unitary parliamentary republic",
+      "capital": "Tbilisi",
+      "currencies": [
+        "lari"
+      ],
+      "languages": [
+        "Georgian"
+      ],
+      "demonym": "Georgian",
+      "driving_side": "right",
+      "borders": [
+        "ARM",
+        "AZE",
+        "RUS",
+        "TUR"
+      ],
+      "timezones": [
+        "UTC+04:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2024",
+        "value": 33.9
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      }
     },
     "serbia": {
       "safety": 6,
@@ -2409,7 +4004,44 @@
       "grade_percent": 30,
       "area_km2": 88361,
       "population": 6567783,
-      "government_type": "Unitary parliamentary republic"
+      "government_type": "Unitary parliamentary republic",
+      "capital": "Belgrade",
+      "currencies": [
+        "Serbian dinar"
+      ],
+      "languages": [
+        "Serbian"
+      ],
+      "demonym": "Serbian",
+      "driving_side": "right",
+      "borders": [
+        "BIH",
+        "BGR",
+        "HRV",
+        "HUN",
+        "UNK",
+        "MKD",
+        "MNE",
+        "ROU"
+      ],
+      "timezones": [
+        "UTC+01:00"
+      ],
+      "landlocked": true,
+      "gini": {
+        "year": "2023",
+        "value": 32.8
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      }
     },
     "kenya": {
       "safety": 4,
@@ -2459,7 +4091,42 @@
       "grade_percent": 4,
       "area_km2": 580367,
       "population": 53330978,
-      "government_type": "Unitary presidential republic"
+      "government_type": "Unitary presidential republic",
+      "capital": "Nairobi",
+      "currencies": [
+        "Kenyan shilling"
+      ],
+      "languages": [
+        "English",
+        "Swahili"
+      ],
+      "demonym": "Kenyan",
+      "driving_side": "left",
+      "borders": [
+        "ETH",
+        "SOM",
+        "SSD",
+        "TZA",
+        "UGA"
+      ],
+      "timezones": [
+        "UTC+03:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2022",
+        "value": 38.5
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": true
+      }
     },
     "peru": {
       "safety": 3,
@@ -2509,7 +4176,43 @@
       "grade_percent": 6,
       "area_km2": 1285216,
       "population": 34352720,
-      "government_type": "Unitary semi-presidential republic"
+      "government_type": "Unitary semi-presidential republic",
+      "capital": "Lima",
+      "currencies": [
+        "Peruvian sol"
+      ],
+      "languages": [
+        "Aymara",
+        "Quechua",
+        "Spanish"
+      ],
+      "demonym": "Peruvian",
+      "driving_side": "right",
+      "borders": [
+        "BOL",
+        "BRA",
+        "CHL",
+        "COL",
+        "ECU"
+      ],
+      "timezones": [
+        "UTC-05:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2024",
+        "value": 40.1
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      }
     },
     "brazil": {
       "safety": 4,
@@ -2559,7 +4262,49 @@
       "grade_percent": 24,
       "area_km2": 8515767,
       "population": 213421037,
-      "government_type": "Federal presidential republic"
+      "government_type": "Federal presidential republic",
+      "capital": "Brasília",
+      "currencies": [
+        "Brazilian real"
+      ],
+      "languages": [
+        "Portuguese"
+      ],
+      "demonym": "Brazilian",
+      "driving_side": "right",
+      "borders": [
+        "ARG",
+        "BOL",
+        "COL",
+        "GUF",
+        "GUY",
+        "PRY",
+        "PER",
+        "SUR",
+        "URY",
+        "VEN"
+      ],
+      "timezones": [
+        "UTC-05:00",
+        "UTC-04:00",
+        "UTC-03:00",
+        "UTC-02:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2024",
+        "value": 50.3
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": true,
+        "commonwealth": false
+      }
     },
     "chile": {
       "safety": 4,
@@ -2609,7 +4354,40 @@
       "grade_percent": 17,
       "area_km2": 756102,
       "population": 19629588,
-      "government_type": "Unitary presidential republic"
+      "government_type": "Unitary presidential republic",
+      "capital": "Santiago",
+      "currencies": [
+        "Chilean peso"
+      ],
+      "languages": [
+        "Spanish"
+      ],
+      "demonym": "Chilean",
+      "driving_side": "right",
+      "borders": [
+        "ARG",
+        "BOL",
+        "PER"
+      ],
+      "timezones": [
+        "UTC-06:00",
+        "UTC-04:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2024",
+        "value": 43
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      }
     },
     "albania": {
       "safety": 6,
@@ -2659,7 +4437,40 @@
       "grade_percent": 11,
       "area_km2": 28748,
       "population": 2402113,
-      "government_type": "Unitary parliamentary republic"
+      "government_type": "Unitary parliamentary republic",
+      "capital": "Tirana",
+      "currencies": [
+        "Albanian lek"
+      ],
+      "languages": [
+        "Albanian"
+      ],
+      "demonym": "Albanian",
+      "driving_side": "right",
+      "borders": [
+        "MNE",
+        "GRC",
+        "MKD",
+        "UNK"
+      ],
+      "timezones": [
+        "UTC+01:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2020",
+        "value": 29.4
+      },
+      "memberships": {
+        "nato": true,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      }
     },
     "sri-lanka": {
       "safety": 6,
@@ -2709,7 +4520,36 @@
       "grade_percent": 19,
       "area_km2": 65610,
       "population": 21756000,
-      "government_type": "Unitary semi-presidential republic"
+      "government_type": "Unitary semi-presidential republic",
+      "capital": "Sri Jayawardenepura Kotte",
+      "currencies": [
+        "Sri Lankan rupee"
+      ],
+      "languages": [
+        "Sinhala",
+        "Tamil"
+      ],
+      "demonym": "Sri Lankan",
+      "driving_side": "left",
+      "borders": [],
+      "timezones": [
+        "UTC+05:30"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2019",
+        "value": 37.7
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": true
+      }
     },
     "egypt": {
       "safety": 5,
@@ -2759,7 +4599,40 @@
       "grade_percent": 0,
       "area_km2": 1002450,
       "population": 107868296,
-      "government_type": "Unitary semi-presidential republic under an authoritarian government"
+      "government_type": "Unitary semi-presidential republic under an authoritarian government",
+      "capital": "Cairo",
+      "currencies": [
+        "Egyptian pound"
+      ],
+      "languages": [
+        "Arabic"
+      ],
+      "demonym": "Egyptian",
+      "driving_side": "right",
+      "borders": [
+        "ISR",
+        "LBY",
+        "PSE",
+        "SDN"
+      ],
+      "timezones": [
+        "UTC+02:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2021",
+        "value": 28.5
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      }
     }
   },
   "budget_data_source": "WhereNext (getwherenext.com), CC BY 4.0, World Bank ICP + Eurostat"

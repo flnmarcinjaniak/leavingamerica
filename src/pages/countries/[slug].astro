@@ -290,7 +290,9 @@ const faqs = [
       ? `Yes, English is the primary language in ${countryName}.`
       : data.english >= 600
       ? `${countryName} has very high English proficiency (EF EPI score of ${data.english}), making daily life and business easy to navigate without learning the local language.`
-      : data.english >= 450
+      : data.english >= 500
+      ? `${countryName} has high English proficiency (EF EPI score of ${data.english}). English is widely understood, especially in cities and business settings, though learning basic local phrases is still useful.`
+      : data.english >= 400
       ? `${countryName} has moderate English proficiency (EF EPI score of ${data.english}). English is commonly understood in cities and tourist areas, but learning basic local phrases is recommended.`
       : `${countryName} has lower English proficiency (EF EPI score of ${data.english}). Learning the local language will significantly improve daily life and integration.`
   }

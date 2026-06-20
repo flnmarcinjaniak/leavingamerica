@@ -194,6 +194,15 @@ if (data.cost_index && data.cost_index > 80) {
     : 'Cost of living is comparable to or higher than many US cities');
 }
 
+if (concernReasons.length < 2) {
+  concernReasons.push(
+    'No destination is perfect for everyone. ' +
+    'Spend time researching specific cities ' +
+    'and neighborhoods, and if possible, visit ' +
+    'before making a long-term commitment.'
+  );
+}
+
 // Quality metrics for display
 const metricConfigs = [
   { key: 'safety', label: 'Safety', raw: data.raw?.safety, unit: 'Numbeo safety index' },
@@ -446,6 +455,12 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
 .preview-cta:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(37,99,235,0.3);
+}
+.cta-microtrust {
+  font-size: 12px;
+  color: #94A3B8;
+  margin-top: 12px;
+  text-align: center;
 }
 
 .section-title {
@@ -707,6 +722,9 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
   color: #94A3B8;
   margin-bottom: 24px;
 }
+.cta-microtrust-dark {
+  color: #94A3B8;
+}
 
 .quick-facts-card {
   background: linear-gradient(
@@ -839,6 +857,9 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
          onclick={`sessionStorage.setItem('quiz_country', '${slug}')`}>
         See exactly how far YOUR salary goes &rarr;
       </a>
+      <p class="cta-microtrust">
+        Free · No signup required · Takes 30 seconds
+      </p>
     </div>
   </div>
 
@@ -990,8 +1011,9 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
     <h2 class="section-title">Day to Day Life</h2>
     <p class="section-sub">
       Internet speeds average {data.raw?.internet} Mbps.
-      {data.raw?.traffic && ` Commuters spend around ${Math.round(data.raw.traffic)} minutes per year in traffic.`}
-      {data.pollution >= 7 ? ' Air quality is generally good.' : ' Air quality varies by region.'}
+      {data.raw?.traffic && ` Commuters spend around ${Math.round(data.raw.traffic).toLocaleString()} minutes per year in traffic.`}
+      {data.raw?.pollution != null &&
+        ` The Numbeo Pollution Index sits at ${data.raw.pollution}${data.pollution >= 7 ? ', among the cleaner readings globally.' : data.pollution >= 4 ? ', a moderate level by global standards.' : ', higher than average and worth researching by city.'}`}
     </p>
   </div>
 
@@ -1036,6 +1058,9 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
          onclick={`sessionStorage.setItem('quiz_country', '${slug}')`}>
         Calculate My Savings in {countryName} &rarr;
       </a>
+      <p class="cta-microtrust cta-microtrust-dark">
+        Free · No signup required · Takes 30 seconds
+      </p>
     </div>
   </div>
 

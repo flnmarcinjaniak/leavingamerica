@@ -1,0 +1,308 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import qualityScoresData from '../../data/quality-scores.json';
+
+const countries = qualityScoresData.countries;
+
+const NAMES = {
+  'portugal':'Portugal','spain':'Spain','poland':'Poland',
+  'mexico':'Mexico','thailand':'Thailand','germany':'Germany',
+  'japan':'Japan','croatia':'Croatia',
+  'czech-republic':'Czech Republic','hungary':'Hungary',
+  'romania':'Romania','bulgaria':'Bulgaria','vietnam':'Vietnam',
+  'south-korea':'South Korea','australia':'Australia',
+  'new-zealand':'New Zealand','canada':'Canada','ireland':'Ireland',
+  'netherlands':'Netherlands','france':'France',
+  'argentina':'Argentina','ecuador':'Ecuador','morocco':'Morocco',
+  'switzerland':'Switzerland','norway':'Norway','denmark':'Denmark',
+  'sweden':'Sweden','belgium':'Belgium','austria':'Austria',
+  'finland':'Finland','united-kingdom':'United Kingdom',
+  'singapore':'Singapore','united-arab-emirates':'UAE',
+  'qatar':'Qatar','saudi-arabia':'Saudi Arabia','iceland':'Iceland',
+  'india':'India','philippines':'Philippines','china':'China',
+  'georgia':'Georgia','serbia':'Serbia','kenya':'Kenya',
+  'peru':'Peru','brazil':'Brazil','chile':'Chile',
+  'albania':'Albania','sri-lanka':'Sri Lanka','egypt':'Egypt',
+  'indonesia':'Indonesia','colombia':'Colombia',
+  'costa-rica':'Costa Rica','panama':'Panama',
+  'malaysia':'Malaysia','italy':'Italy','greece':'Greece'
+};
+
+const ISO2 = {
+  'portugal':'pt','spain':'es','poland':'pl','mexico':'mx',
+  'thailand':'th','germany':'de','japan':'jp','croatia':'hr',
+  'czech-republic':'cz','hungary':'hu','romania':'ro',
+  'bulgaria':'bg','vietnam':'vn','south-korea':'kr',
+  'australia':'au','new-zealand':'nz','canada':'ca',
+  'ireland':'ie','netherlands':'nl','france':'fr',
+  'argentina':'ar','ecuador':'ec','morocco':'ma',
+  'switzerland':'ch','norway':'no','denmark':'dk',
+  'sweden':'se','belgium':'be','austria':'at','finland':'fi',
+  'united-kingdom':'gb','singapore':'sg',
+  'united-arab-emirates':'ae','qatar':'qa',
+  'saudi-arabia':'sa','iceland':'is','india':'in',
+  'philippines':'ph','china':'cn','georgia':'ge',
+  'serbia':'rs','kenya':'ke','peru':'pe','brazil':'br',
+  'chile':'cl','albania':'al','sri-lanka':'lk','egypt':'eg',
+  'indonesia':'id','colombia':'co','costa-rica':'cr',
+  'panama':'pa','malaysia':'my','italy':'it','greece':'gr'
+};
+
+function calculateGrade(q) {
+  if (q.grade !== undefined && q.grade_percent !== undefined) {
+    return { percent: q.grade_percent, grade: q.grade };
+  }
+  const weights = {
+    safety: 0.25, healthcare: 0.20, happiness: 0.15,
+    gdpGrowth: 0.05, pollution: 0.10, unemployment: 0.10,
+    internet: 0.10, traffic: 0.05
+  };
+  let totalScore = 0, totalWeight = 0;
+  for (const [metric, weight] of Object.entries(weights)) {
+    const score = q[metric];
+    if (score !== null && score !== undefined) {
+      totalScore += score * weight;
+      totalWeight += weight;
+    }
+  }
+  const weightedAverage = totalWeight > 0 ? totalScore / totalWeight : 0;
+  const percent = Math.round(weightedAverage * 10);
+  let grade;
+  if (percent >= 85) grade = 'A';
+  else if (percent >= 70) grade = 'B';
+  else if (percent >= 55) grade = 'C';
+  else if (percent >= 40) grade = 'D';
+  else grade = 'F';
+  return { percent, grade };
+}
+
+const countryList = Object.entries(countries)
+  .map(([slug, data]) => ({
+    slug,
+    name: NAMES[slug] || slug,
+    iso2: ISO2[slug] || '',
+    costIndex: data.cost_index,
+    score: calculateGrade(data)
+  }))
+  .sort((a, b) => a.name.localeCompare(b.name));
+
+const browseByGoal = [
+  {
+    slug: 'best-for-retirement',
+    title: 'Best Countries for Retirement',
+    desc: 'Ranked by healthcare quality, safety, and happiness'
+  },
+  {
+    slug: 'remote-work-friendly',
+    title: 'Best Countries for Remote Work',
+    desc: 'Countries with digital nomad visas and fast internet'
+  },
+  {
+    slug: 'lowest-cost-of-living',
+    title: 'Lowest Cost of Living',
+    desc: 'Where your dollar stretches the furthest'
+  },
+  {
+    slug: 'safest-countries',
+    title: 'Safest Countries for Americans',
+    desc: 'Ranked by the Numbeo Safety Index'
+  },
+  {
+    slug: 'english-friendly',
+    title: 'Most English-Friendly Countries',
+    desc: 'Where you can get by without learning a new language'
+  },
+  {
+    slug: 'digital-nomad-visas',
+    title: 'Countries with Digital Nomad Visas',
+    desc: 'A legal path to live and work remotely abroad'
+  }
+];
+
+const pageTitle = 'Compare 55 Countries for Americans Moving Abroad | LeavingAmerica';
+const pageDescription = 'Browse cost of living, safety, healthcare, visa requirements, and tax systems for 55 countries. Find where your salary goes furthest as an American expat.';
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+
+<style>
+* { box-sizing: border-box; }
+
+.hub-page {
+  font-family: 'Manrope', sans-serif;
+  background: #F8FAFC;
+  min-height: 100vh;
+}
+
+.hub-hero {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 100px 24px 40px;
+  text-align: center;
+}
+.hub-hero h1 {
+  font-size: 38px;
+  font-weight: 800;
+  color: #0F172A;
+  margin-bottom: 12px;
+}
+.hub-hero p {
+  font-size: 17px;
+  color: #64748B;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px 56px;
+}
+
+.section-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: #0F172A;
+  margin-bottom: 8px;
+}
+.section-sub {
+  font-size: 14px;
+  color: #64748B;
+  margin-bottom: 24px;
+}
+
+.goal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+}
+.goal-card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  text-decoration: none;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  transition: all 0.2s ease;
+  display: block;
+  border: 1px solid #E2E8F0;
+}
+.goal-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(37,99,235,0.12);
+  border-color: #C7D2FE;
+}
+.goal-card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0F172A;
+  margin-bottom: 6px;
+}
+.goal-card-desc {
+  font-size: 13px;
+  color: #64748B;
+  line-height: 1.5;
+}
+
+.country-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.country-card {
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  text-decoration: none;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #E2E8F0;
+}
+.country-card:hover {
+  border-color: #2563EB;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(37,99,235,0.1);
+}
+.country-flag-icon {
+  width: 28px !important;
+  height: 21px !important;
+  border-radius: 4px !important;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15) !important;
+  border: 1px solid rgba(0,0,0,0.1) !important;
+  flex-shrink: 0;
+}
+.country-card-info {
+  flex: 1;
+  min-width: 0;
+}
+.country-card-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #0F172A;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.country-card-grade {
+  font-size: 11px;
+  color: #64748B;
+}
+
+@media (max-width: 768px) {
+  .goal-grid { grid-template-columns: 1fr; }
+  .country-grid { grid-template-columns: 1fr 1fr; }
+  .hub-hero h1 { font-size: 26px; }
+}
+</style>
+
+<div class="hub-page">
+
+  <div class="hub-hero">
+    <h1>Compare 55 Countries for Americans Moving Abroad</h1>
+    <p>
+      Cost of living, safety, healthcare, visa requirements,
+      and tax systems — based on public economic data,
+      updated quarterly.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Browse by Goal</h2>
+    <p class="section-sub">
+      Jump straight to the countries that match what matters most to you
+    </p>
+    <div class="goal-grid">
+      {browseByGoal.map(goal => (
+        <a href={`/countries/goals/${goal.slug}`} class="goal-card">
+          <div class="goal-card-title">{goal.title}</div>
+          <div class="goal-card-desc">{goal.desc}</div>
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">All 55 Countries</h2>
+    <p class="section-sub">Sorted alphabetically</p>
+    <div class="country-grid">
+      {countryList.map(c => (
+        <a href={`/countries/${c.slug}`} class="country-card">
+          {c.iso2 && (
+            <span class={`fi fi-${c.iso2} country-flag-icon`}></span>
+          )}
+          <div class="country-card-info">
+            <div class="country-card-name">{c.name}</div>
+            <div class="country-card-grade">
+              Grade {c.score.grade} · {c.score.percent}%
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+
+</div>
+
+</BaseLayout>

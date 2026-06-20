@@ -54,7 +54,12 @@
           "name": "Coimbra",
           "monthly_usd": 2250
         }
-      ]
+      ],
+      "grade": "B",
+      "grade_percent": 78,
+      "area_km2": 92090,
+      "population": 10749635,
+      "government_type": "Unitary semi-presidential republic"
     },
     "spain": {
       "safety": 6,
@@ -99,7 +104,12 @@
           "name": "Madrid",
           "monthly_usd": 1900
         }
-      ]
+      ],
+      "grade": "B",
+      "grade_percent": 72,
+      "area_km2": 505992,
+      "population": 49687120,
+      "government_type": "Unitary parliamentary constitutional monarchy"
     },
     "mexico": {
       "safety": 5,
@@ -144,7 +154,12 @@
           "name": "Mexico City",
           "monthly_usd": 1000
         }
-      ]
+      ],
+      "grade": "C",
+      "grade_percent": 39,
+      "area_km2": 1964375,
+      "population": 134407258,
+      "government_type": "Federal presidential republic"
     },
     "germany": {
       "safety": 6,
@@ -189,7 +204,12 @@
           "name": "Cologne",
           "monthly_usd": 2450
         }
-      ]
+      ],
+      "grade": "B",
+      "grade_percent": 67,
+      "area_km2": 357114,
+      "population": 83497147,
+      "government_type": "Federal parliamentary republic"
     },
     "italy": {
       "safety": 5,
@@ -234,7 +254,12 @@
           "name": "Milan",
           "monthly_usd": 2250
         }
-      ]
+      ],
+      "grade": "D",
+      "grade_percent": 26,
+      "area_km2": 301336,
+      "population": 58915561,
+      "government_type": "Unitary parliamentary republic"
     },
     "greece": {
       "safety": 5,
@@ -279,7 +304,12 @@
           "name": "Patras",
           "monthly_usd": 2150
         }
-      ]
+      ],
+      "grade": "D",
+      "grade_percent": 15,
+      "area_km2": 131990,
+      "population": 10718565,
+      "government_type": "Unitary parliamentary republic"
     },
     "costa-rica": {
       "safety": 5,
@@ -324,7 +354,12 @@
           "name": "Heredia",
           "monthly_usd": 1950
         }
-      ]
+      ],
+      "grade": "C",
+      "grade_percent": 37,
+      "area_km2": 51100,
+      "population": 5160700,
+      "government_type": "Unitary presidential republic"
     },
     "panama": {
       "safety": 6,
@@ -369,7 +404,12 @@
           "name": "Colon",
           "monthly_usd": 2150
         }
-      ]
+      ],
+      "grade": "C",
+      "grade_percent": 33,
+      "area_km2": 75417,
+      "population": 4337768,
+      "government_type": "Unitary presidential republic"
     },
     "thailand": {
       "safety": 6,
@@ -414,7 +454,12 @@
           "name": "Phuket",
           "monthly_usd": 1150
         }
-      ]
+      ],
+      "grade": "C",
+      "grade_percent": 59,
+      "area_km2": 513120,
+      "population": 65975198,
+      "government_type": "Unitary parliamentary constitutional monarchy"
     },
     "malaysia": {
       "safety": 5,
@@ -459,7 +504,12 @@
           "name": "Kota Kinabalu",
           "monthly_usd": 1550
         }
-      ]
+      ],
+      "grade": "C",
+      "grade_percent": 31,
+      "area_km2": 330803,
+      "population": 34564810,
+      "government_type": "Federal parliamentary constitutional elective monarchy"
     },
     "indonesia": {
       "safety": 5,
@@ -504,7 +554,12 @@
           "name": "Denpasar",
           "monthly_usd": 1100
         }
-      ]
+      ],
+      "grade": "F",
+      "grade_percent": 9,
+      "area_km2": 1904569,
+      "population": 288315089,
+      "government_type": "Unitary presidential republic"
     },
     "colombia": {
       "safety": 4,
@@ -549,7 +604,12 @@
           "name": "Cartagena",
           "monthly_usd": 1150
         }
-      ]
+      ],
+      "grade": "D",
+      "grade_percent": 13,
+      "area_km2": 1141748,
+      "population": 52695952,
+      "government_type": "Unitary presidential republic"
     },
     "croatia": {
       "safety": 8,
@@ -594,7 +654,12 @@
           "name": "Osijek",
           "monthly_usd": 2000
         }
-      ]
+      ],
+      "grade": "B",
+      "grade_percent": 80,
+      "area_km2": 56594,
+      "population": 3866233,
+      "government_type": "Unitary parliamentary republic"
     },
     "czech-republic": {
       "safety": 7,
@@ -639,7 +704,12 @@
           "name": "Plzen",
           "monthly_usd": 2200
         }
-      ]
+      ],
+      "grade": "B",
+      "grade_percent": 83,
+      "area_km2": 78865,
+      "population": 10915839,
+      "government_type": "Unitary parliamentary republic"
     },
     "poland": {
       "safety": 7,
@@ -684,7 +754,12 @@
           "name": "Gdansk",
           "monthly_usd": 2050
         }
-      ]
+      ],
+      "grade": "B",
+      "grade_percent": 69,
+      "area_km2": 312679,
+      "population": 37314000,
+      "government_type": "Unitary parliamentary republic"
     },
     "hungary": {
       "safety": 7,
@@ -729,7 +804,12 @@
           "name": "Szeged",
           "monthly_usd": 1900
         }
-      ]
+      ],
+      "grade": "B",
+      "grade_percent": 63,
+      "area_km2": 93028,
+      "population": 9489000,
+      "government_type": "Unitary parliamentary republic"
     },
     "romania": {
       "safety": 7,
@@ -774,7 +854,12 @@
           "name": "Timisoara",
           "monthly_usd": 1650
         }
-      ]
+      ],
+      "grade": "C",
+      "grade_percent": 56,
+      "area_km2": 238391,
+      "population": 19043151,
+      "government_type": "Unitary semi-presidential republic"
     },
     "bulgaria": {
       "safety": 6,
@@ -819,7 +904,12 @@
           "name": "Varna",
           "monthly_usd": 1450
         }
-      ]
+      ],
+      "grade": "C",
+      "grade_percent": 35,
+      "area_km2": 110879,
+      "population": 6423207,
+      "government_type": "Unitary parliamentary republic"
     },
     "vietnam": {
       "safety": 6,
@@ -864,7 +954,12 @@
           "name": "Hanoi",
           "monthly_usd": 750
         }
-      ]
+      ],
+      "grade": "C",
+      "grade_percent": 48,
+      "area_km2": 331212,
+      "population": 102300000,
+      "government_type": "Unitary communist state"
     },
     "japan": {
       "safety": 8,
@@ -909,7 +1004,12 @@
           "name": "Tokyo",
           "monthly_usd": 2250
         }
-      ]
+      ],
+      "grade": "A",
+      "grade_percent": 94,
+      "area_km2": 377930,
+      "population": 122950000,
+      "government_type": "Unitary parliamentary constitutional monarchy"
     },
     "south-korea": {
       "safety": 7,
@@ -954,7 +1054,12 @@
           "name": "Daejeon",
           "monthly_usd": 2500
         }
-      ]
+      ],
+      "grade": "B",
+      "grade_percent": 81,
+      "area_km2": 100210,
+      "population": 51106229,
+      "government_type": "Unitary presidential republic"
     },
     "australia": {
       "safety": 5,
@@ -999,7 +1104,12 @@
           "name": "Melbourne",
           "monthly_usd": 2800
         }
-      ]
+      ],
+      "grade": "B",
+      "grade_percent": 61,
+      "area_km2": 7692024,
+      "population": 27724744,
+      "government_type": "Federal parliamentary constitutional monarchy"
     },
     "new-zealand": {
       "safety": 5,
@@ -1044,7 +1154,12 @@
           "name": "Christchurch",
           "monthly_usd": 2650
         }
-      ]
+      ],
+      "grade": "C",
+      "grade_percent": 52,
+      "area_km2": 270467,
+      "population": 4993923,
+      "government_type": "Unitary parliamentary constitutional monarchy"
     },
     "canada": {
       "safety": 5,
@@ -1089,7 +1204,12 @@
           "name": "Toronto",
           "monthly_usd": 2850
         }
-      ]
+      ],
+      "grade": "C",
+      "grade_percent": 50,
+      "area_km2": 9984670,
+      "population": 41575585,
+      "government_type": "Federal parliamentary constitutional monarchy"
     },
     "ireland": {
       "safety": 5,
@@ -1134,7 +1254,12 @@
           "name": "Galway",
           "monthly_usd": 2850
         }
-      ]
+      ],
+      "grade": "C",
+      "grade_percent": 46,
+      "area_km2": 70273,
+      "population": 7185600,
+      "government_type": ""
     },
     "netherlands": {
       "safety": 7,
@@ -1179,7 +1304,12 @@
           "name": "Rotterdam",
           "monthly_usd": 2650
         }
-      ]
+      ],
+      "grade": "A",
+      "grade_percent": 93,
+      "area_km2": 41850,
+      "population": 18044027,
+      "government_type": "Unitary parliamentary constitutional monarchy"
     },
     "france": {
       "safety": 4,
@@ -1224,7 +1354,12 @@
           "name": "Paris",
           "monthly_usd": 2550
         }
-      ]
+      ],
+      "grade": "C",
+      "grade_percent": 44,
+      "area_km2": 551695,
+      "population": 69081996,
+      "government_type": "Unitary semi-presidential republic"
     },
     "argentina": {
       "safety": 4,
@@ -1269,7 +1404,12 @@
           "name": "Rosario",
           "monthly_usd": 1650
         }
-      ]
+      ],
+      "grade": "F",
+      "grade_percent": 7,
+      "area_km2": 2780400,
+      "population": 46735004,
+      "government_type": "Federal presidential republic"
     },
     "ecuador": {
       "safety": 4,
@@ -1314,7 +1454,12 @@
           "name": "Cuenca",
           "monthly_usd": 1350
         }
-      ]
+      ],
+      "grade": "D",
+      "grade_percent": 20,
+      "area_km2": 276841,
+      "population": 17483326,
+      "government_type": "Unitary presidential republic"
     },
     "morocco": {
       "safety": 5,
@@ -1359,7 +1504,12 @@
           "name": "Rabat",
           "monthly_usd": 1300
         }
-      ]
+      ],
+      "grade": "F",
+      "grade_percent": 2,
+      "area_km2": 446550,
+      "population": 36828330,
+      "government_type": "Unitary parliamentary semi-constitutional monarchy"
     },
     "switzerland": {
       "safety": 7,
@@ -1404,7 +1554,12 @@
           "name": "Zurich",
           "monthly_usd": 3600
         }
-      ]
+      ],
+      "grade": "A",
+      "grade_percent": 91,
+      "area_km2": 41284,
+      "population": 9154242,
+      "government_type": "Federal assembly-independent directorial republic"
     },
     "norway": {
       "safety": 7,
@@ -1449,7 +1604,12 @@
           "name": "Bergen",
           "monthly_usd": 3350
         }
-      ]
+      ],
+      "grade": "A",
+      "grade_percent": 85,
+      "area_km2": 323802,
+      "population": 5627400,
+      "government_type": "Unitary parliamentary constitutional monarchy"
     },
     "denmark": {
       "safety": 7,
@@ -1494,7 +1654,12 @@
           "name": "Aarhus",
           "monthly_usd": 3150
         }
-      ]
+      ],
+      "grade": "A",
+      "grade_percent": 98,
+      "area_km2": 43094,
+      "population": 6001008,
+      "government_type": "Unitary parliamentary constitutional monarchy"
     },
     "sweden": {
       "safety": 5,
@@ -1539,7 +1704,12 @@
           "name": "Stockholm",
           "monthly_usd": 3000
         }
-      ]
+      ],
+      "grade": "C",
+      "grade_percent": 57,
+      "area_km2": 450295,
+      "population": 10610485,
+      "government_type": "Unitary parliamentary constitutional monarchy"
     },
     "belgium": {
       "safety": 5,
@@ -1584,7 +1754,12 @@
           "name": "Bruges",
           "monthly_usd": 2500
         }
-      ]
+      ],
+      "grade": "C",
+      "grade_percent": 43,
+      "area_km2": 30528,
+      "population": 11867634,
+      "government_type": "Federal parliamentary constitutional monarchy"
     },
     "austria": {
       "safety": 7,
@@ -1629,7 +1804,12 @@
           "name": "Linz",
           "monthly_usd": 2650
         }
-      ]
+      ],
+      "grade": "B",
+      "grade_percent": 76,
+      "area_km2": 83871,
+      "population": 9219113,
+      "government_type": "Federal semi-presidential republic"
     },
     "finland": {
       "safety": 7,
@@ -1674,7 +1854,12 @@
           "name": "Tampere",
           "monthly_usd": 2900
         }
-      ]
+      ],
+      "grade": "A",
+      "grade_percent": 87,
+      "area_km2": 338424,
+      "population": 5652881,
+      "government_type": "Unitary parliamentary republic"
     },
     "united-kingdom": {
       "safety": 5,
@@ -1719,7 +1904,12 @@
           "name": "London",
           "monthly_usd": 2650
         }
-      ]
+      ],
+      "grade": "C",
+      "grade_percent": 54,
+      "area_km2": 242900,
+      "population": 66912637,
+      "government_type": "Unitary parliamentary constitutional monarchy"
     },
     "singapore": {
       "safety": 8,
@@ -1764,7 +1954,12 @@
           "name": "Woodlands",
           "monthly_usd": 3050
         }
-      ]
+      ],
+      "grade": "A",
+      "grade_percent": 100,
+      "area_km2": 710,
+      "population": 6110200,
+      "government_type": "Unitary parliamentary republic"
     },
     "united-arab-emirates": {
       "safety": 9,
@@ -1809,7 +2004,12 @@
           "name": "Ajman",
           "monthly_usd": 2600
         }
-      ]
+      ],
+      "grade": "A",
+      "grade_percent": 96,
+      "area_km2": 83600,
+      "population": 11027129,
+      "government_type": "Federal semi-presidential elective semi-constitutional monarchy"
     },
     "qatar": {
       "safety": 8,
@@ -1854,7 +2054,12 @@
           "name": "Al Khor",
           "monthly_usd": 2750
         }
-      ]
+      ],
+      "grade": "B",
+      "grade_percent": 74,
+      "area_km2": 11586,
+      "population": 3214609,
+      "government_type": "Unitary authoritarian semi-constitutional monarchy"
     },
     "saudi-arabia": {
       "safety": 8,
@@ -1899,7 +2104,12 @@
           "name": "Dammam",
           "monthly_usd": 1800
         }
-      ]
+      ],
+      "grade": "B",
+      "grade_percent": 65,
+      "area_km2": 2149690,
+      "population": 33702731,
+      "government_type": "Unitary Islamic absolute monarchy"
     },
     "iceland": {
       "safety": 7,
@@ -1944,7 +2154,12 @@
           "name": "Reykjavik",
           "monthly_usd": 3350
         }
-      ]
+      ],
+      "grade": "A",
+      "grade_percent": 89,
+      "area_km2": 103000,
+      "population": 394324,
+      "government_type": "Unitary parliamentary republic"
     },
     "india": {
       "safety": 6,
@@ -1989,7 +2204,12 @@
           "name": "Delhi",
           "monthly_usd": 1000
         }
-      ]
+      ],
+      "grade": "D",
+      "grade_percent": 28,
+      "area_km2": 3287590,
+      "population": 1380004385,
+      "government_type": "Federal parliamentary republic"
     },
     "philippines": {
       "safety": 6,
@@ -2034,7 +2254,12 @@
           "name": "Davao City",
           "monthly_usd": 1150
         }
-      ]
+      ],
+      "grade": "C",
+      "grade_percent": 41,
+      "area_km2": 342353,
+      "population": 112729484,
+      "government_type": "Unitary presidential republic"
     },
     "china": {
       "safety": 8,
@@ -2079,7 +2304,12 @@
           "name": "Shanghai",
           "monthly_usd": 2000
         }
-      ]
+      ],
+      "grade": "B",
+      "grade_percent": 70,
+      "area_km2": 9706961,
+      "population": 1404890000,
+      "government_type": "Unitary communist state"
     },
     "georgia": {
       "safety": 7,
@@ -2124,7 +2354,12 @@
           "name": "Rustavi",
           "monthly_usd": 1150
         }
-      ]
+      ],
+      "grade": "D",
+      "grade_percent": 22,
+      "area_km2": 69700,
+      "population": 3657000,
+      "government_type": "Unitary parliamentary republic"
     },
     "serbia": {
       "safety": 6,
@@ -2169,7 +2404,12 @@
           "name": "Nis",
           "monthly_usd": 1550
         }
-      ]
+      ],
+      "grade": "C",
+      "grade_percent": 30,
+      "area_km2": 88361,
+      "population": 6567783,
+      "government_type": "Unitary parliamentary republic"
     },
     "kenya": {
       "safety": 4,
@@ -2214,7 +2454,12 @@
           "name": "Nakuru",
           "monthly_usd": 1100
         }
-      ]
+      ],
+      "grade": "F",
+      "grade_percent": 4,
+      "area_km2": 580367,
+      "population": 53330978,
+      "government_type": "Unitary presidential republic"
     },
     "peru": {
       "safety": 3,
@@ -2259,7 +2504,12 @@
           "name": "Cusco",
           "monthly_usd": 1350
         }
-      ]
+      ],
+      "grade": "F",
+      "grade_percent": 6,
+      "area_km2": 1285216,
+      "population": 34352720,
+      "government_type": "Unitary semi-presidential republic"
     },
     "brazil": {
       "safety": 4,
@@ -2304,7 +2554,12 @@
           "name": "Rio de Janeiro",
           "monthly_usd": 1450
         }
-      ]
+      ],
+      "grade": "D",
+      "grade_percent": 24,
+      "area_km2": 8515767,
+      "population": 213421037,
+      "government_type": "Federal presidential republic"
     },
     "chile": {
       "safety": 4,
@@ -2349,7 +2604,12 @@
           "name": "Concepcion",
           "monthly_usd": 2100
         }
-      ]
+      ],
+      "grade": "D",
+      "grade_percent": 17,
+      "area_km2": 756102,
+      "population": 19629588,
+      "government_type": "Unitary presidential republic"
     },
     "albania": {
       "safety": 6,
@@ -2394,7 +2654,12 @@
           "name": "Vlore",
           "monthly_usd": 1300
         }
-      ]
+      ],
+      "grade": "D",
+      "grade_percent": 11,
+      "area_km2": 28748,
+      "population": 2402113,
+      "government_type": "Unitary parliamentary republic"
     },
     "sri-lanka": {
       "safety": 6,
@@ -2439,7 +2704,12 @@
           "name": "Galle",
           "monthly_usd": 1050
         }
-      ]
+      ],
+      "grade": "D",
+      "grade_percent": 19,
+      "area_km2": 65610,
+      "population": 21756000,
+      "government_type": "Unitary semi-presidential republic"
     },
     "egypt": {
       "safety": 5,
@@ -2484,7 +2754,12 @@
           "name": "Giza",
           "monthly_usd": 1050
         }
-      ]
+      ],
+      "grade": "F",
+      "grade_percent": 0,
+      "area_km2": 1002450,
+      "population": 107868296,
+      "government_type": "Unitary semi-presidential republic under an authoritarian government"
     }
   },
   "budget_data_source": "WhereNext (getwherenext.com), CC BY 4.0, World Bank ICP + Eurostat"

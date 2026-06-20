@@ -1,0 +1,270 @@
+---
+export const prerender = true;
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import qualityScoresData from '../../../data/quality-scores.json';
+
+const NAMES = {
+  'portugal':'Portugal','spain':'Spain','poland':'Poland',
+  'mexico':'Mexico','thailand':'Thailand','germany':'Germany',
+  'japan':'Japan','croatia':'Croatia',
+  'czech-republic':'Czech Republic','hungary':'Hungary',
+  'romania':'Romania','bulgaria':'Bulgaria','vietnam':'Vietnam',
+  'south-korea':'South Korea','australia':'Australia',
+  'new-zealand':'New Zealand','canada':'Canada','ireland':'Ireland',
+  'netherlands':'Netherlands','france':'France',
+  'argentina':'Argentina','ecuador':'Ecuador','morocco':'Morocco',
+  'switzerland':'Switzerland','norway':'Norway','denmark':'Denmark',
+  'sweden':'Sweden','belgium':'Belgium','austria':'Austria',
+  'finland':'Finland','united-kingdom':'United Kingdom',
+  'singapore':'Singapore','united-arab-emirates':'UAE',
+  'qatar':'Qatar','saudi-arabia':'Saudi Arabia','iceland':'Iceland',
+  'india':'India','philippines':'Philippines','china':'China',
+  'georgia':'Georgia','serbia':'Serbia','kenya':'Kenya',
+  'peru':'Peru','brazil':'Brazil','chile':'Chile',
+  'albania':'Albania','sri-lanka':'Sri Lanka','egypt':'Egypt',
+  'indonesia':'Indonesia','colombia':'Colombia',
+  'costa-rica':'Costa Rica','panama':'Panama',
+  'malaysia':'Malaysia','italy':'Italy','greece':'Greece'
+};
+
+const ISO2 = {
+  'portugal':'pt','spain':'es','poland':'pl','mexico':'mx',
+  'thailand':'th','germany':'de','japan':'jp','croatia':'hr',
+  'czech-republic':'cz','hungary':'hu','romania':'ro',
+  'bulgaria':'bg','vietnam':'vn','south-korea':'kr',
+  'australia':'au','new-zealand':'nz','canada':'ca',
+  'ireland':'ie','netherlands':'nl','france':'fr',
+  'argentina':'ar','ecuador':'ec','morocco':'ma',
+  'switzerland':'ch','norway':'no','denmark':'dk',
+  'sweden':'se','belgium':'be','austria':'at','finland':'fi',
+  'united-kingdom':'gb','singapore':'sg',
+  'united-arab-emirates':'ae','qatar':'qa',
+  'saudi-arabia':'sa','iceland':'is','india':'in',
+  'philippines':'ph','china':'cn','georgia':'ge',
+  'serbia':'rs','kenya':'ke','peru':'pe','brazil':'br',
+  'chile':'cl','albania':'al','sri-lanka':'lk','egypt':'eg',
+  'indonesia':'id','colombia':'co','costa-rica':'cr',
+  'panama':'pa','malaysia':'my','italy':'it','greece':'gr'
+};
+
+const GOAL_DEFINITIONS = {
+  'best-for-retirement': {
+    title: 'Best Countries for Retirement',
+    intro: 'Ranked by a combination of healthcare quality, safety, and overall happiness — the three factors that matter most for a comfortable retirement abroad.',
+    filter: (d) => true,
+    sort: (a, b) => {
+      const scoreA = (a.healthcare || 0) * 0.4 + (a.safety || 0) * 0.3 + (a.happiness || 0) * 0.3;
+      const scoreB = (b.healthcare || 0) * 0.4 + (b.safety || 0) * 0.3 + (b.happiness || 0) * 0.3;
+      return scoreB - scoreA;
+    },
+    metric: (d) => `Healthcare ${d.healthcare}/10 · Safety ${d.safety}/10 · Happiness ${d.happiness}/10`
+  },
+  'remote-work-friendly': {
+    title: 'Best Countries for Remote Work',
+    intro: 'Countries with a digital nomad visa program and fast, reliable internet — ranked by internet speed.',
+    filter: (d) => d.nomad_visa === true,
+    sort: (a, b) => (b.internet || 0) - (a.internet || 0),
+    metric: (d) => `Internet ${d.internet}/10 (${d.raw?.internet || '—'} Mbps) · Digital Nomad Visa available`
+  },
+  'lowest-cost-of-living': {
+    title: 'Lowest Cost of Living for Americans',
+    intro: 'Ranked by cost index from WhereNext (institutional data via World Bank ICP and Eurostat), where the US scores 82.',
+    filter: (d) => d.cost_index != null,
+    sort: (a, b) => (a.cost_index || 999) - (b.cost_index || 999),
+    metric: (d) => `Cost Index ${d.cost_index} (US = 82)${d.budget_single ? ' · $' + d.budget_single + '/mo single' : ''}`
+  },
+  'safest-countries': {
+    title: 'Safest Countries for Americans',
+    intro: 'Ranked by the Numbeo Safety Index, which measures perceived crime levels and personal security.',
+    filter: (d) => d.safety != null,
+    sort: (a, b) => (b.safety || 0) - (a.safety || 0),
+    metric: (d) => `Safety ${d.safety}/10 (${d.raw?.safety || '—'} Numbeo index)`
+  },
+  'english-friendly': {
+    title: 'Most English-Friendly Countries',
+    intro: 'Ranked by the EF English Proficiency Index — countries where you can navigate daily life without learning a new language.',
+    filter: (d) => d.english != null && d.english >= 500,
+    sort: (a, b) => (b.english || 0) - (a.english || 0),
+    metric: (d) => d.english >= 999 ? 'Native English speaking' : `EF EPI score: ${d.english}`
+  },
+  'digital-nomad-visas': {
+    title: 'Countries with Digital Nomad Visas',
+    intro: 'Countries offering an official visa program for remote workers, sorted by cost of living.',
+    filter: (d) => d.nomad_visa === true,
+    sort: (a, b) => (a.cost_index || 999) - (b.cost_index || 999),
+    metric: (d) => `${d.visa_days ? d.visa_days + ' day visa-free entry' : 'Visa info available'}${d.cost_index ? ' · Cost Index ' + d.cost_index : ''}`
+  }
+};
+
+export async function getStaticPaths() {
+  return [
+    'best-for-retirement',
+    'remote-work-friendly',
+    'lowest-cost-of-living',
+    'safest-countries',
+    'english-friendly',
+    'digital-nomad-visas'
+  ].map(goalSlug => ({ params: { goal: goalSlug } }));
+}
+
+const { goal } = Astro.params;
+const goalDef = GOAL_DEFINITIONS[goal];
+const countries = qualityScoresData.countries;
+
+const rankedList = goalDef ? Object.entries(countries)
+  .filter(([slug, data]) => goalDef.filter(data))
+  .map(([slug, data]) => ({
+    slug,
+    name: NAMES[slug] || slug,
+    iso2: ISO2[slug] || '',
+    metricText: goalDef.metric(data),
+    data
+  }))
+  .sort((a, b) => goalDef.sort(a.data, b.data))
+  .slice(0, 20) : [];
+
+const pageTitle = goalDef
+  ? `${goalDef.title} (2026) | LeavingAmerica`
+  : 'Not Found | LeavingAmerica';
+const pageDescription = goalDef
+  ? `${goalDef.intro} Compare ${rankedList.length} countries based on public economic data.`
+  : '';
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+
+<style>
+* { box-sizing: border-box; }
+
+.goal-page {
+  font-family: 'Manrope', sans-serif;
+  background: #F8FAFC;
+  min-height: 100vh;
+}
+
+.breadcrumb {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 100px 24px 0;
+  font-size: 13px;
+  color: #94A3B8;
+}
+.breadcrumb a {
+  color: #64748B;
+  text-decoration: none;
+}
+.breadcrumb a:hover { color: #2563EB; }
+
+.goal-hero {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px 24px 40px;
+}
+.goal-hero h1 {
+  font-size: 34px;
+  font-weight: 800;
+  color: #0F172A;
+  margin-bottom: 12px;
+}
+.goal-hero p {
+  font-size: 16px;
+  color: #64748B;
+  line-height: 1.7;
+}
+
+.ranking-list {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px 64px;
+}
+
+.ranking-item {
+  background: white;
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+.ranking-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37,99,235,0.1);
+  border-color: #C7D2FE;
+}
+.ranking-position {
+  font-size: 18px;
+  font-weight: 800;
+  color: #C7D2FE;
+  width: 32px;
+  flex-shrink: 0;
+}
+.ranking-flag {
+  width: 36px !important;
+  height: 27px !important;
+  border-radius: 5px !important;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15) !important;
+  border: 1px solid rgba(0,0,0,0.1) !important;
+  flex-shrink: 0;
+}
+.ranking-info { flex: 1; }
+.ranking-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0F172A;
+}
+.ranking-metric {
+  font-size: 12px;
+  color: #64748B;
+  margin-top: 2px;
+}
+
+.not-found a {
+  color: #2563EB;
+}
+
+@media (max-width: 768px) {
+  .goal-hero h1 { font-size: 24px; }
+  .ranking-item { flex-wrap: wrap; }
+}
+</style>
+
+<div class="goal-page">
+  <div class="breadcrumb">
+    <a href="/">Home</a> / <a href="/countries">Countries</a> / {goalDef?.title || 'Not Found'}
+  </div>
+
+  {goalDef ? (
+    <>
+      <div class="goal-hero">
+        <h1>{goalDef.title}</h1>
+        <p>{goalDef.intro}</p>
+      </div>
+      <div class="ranking-list">
+        {rankedList.map((c, i) => (
+          <a href={`/countries/${c.slug}`} class="ranking-item">
+            <div class="ranking-position">#{i + 1}</div>
+            {c.iso2 && (
+              <span class={`fi fi-${c.iso2} ranking-flag`}></span>
+            )}
+            <div class="ranking-info">
+              <div class="ranking-name">{c.name}</div>
+              <div class="ranking-metric">{c.metricText}</div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </>
+  ) : (
+    <div class="goal-hero not-found">
+      <h1>Category Not Found</h1>
+      <p>This ranking category does not exist. <a href="/countries">Browse all countries</a>.</p>
+    </div>
+  )}
+</div>
+
+</BaseLayout>

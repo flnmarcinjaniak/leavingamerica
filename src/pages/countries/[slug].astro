@@ -1,0 +1,947 @@
+---
+export const prerender = true;
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import qualityScoresData from '../../data/quality-scores.json';
+
+export async function getStaticPaths() {
+  const countries = qualityScoresData.countries;
+  return Object.entries(countries).map(
+    ([slug, data]) => ({
+      params: { slug },
+      props: { slug, data, allCountries: countries }
+    })
+  );
+}
+
+const { slug, data, allCountries } = Astro.props;
+
+const NAMES = {
+  'portugal':'Portugal','spain':'Spain','poland':'Poland',
+  'mexico':'Mexico','thailand':'Thailand','germany':'Germany',
+  'japan':'Japan','croatia':'Croatia',
+  'czech-republic':'Czech Republic','hungary':'Hungary',
+  'romania':'Romania','bulgaria':'Bulgaria','vietnam':'Vietnam',
+  'south-korea':'South Korea','australia':'Australia',
+  'new-zealand':'New Zealand','canada':'Canada','ireland':'Ireland',
+  'netherlands':'Netherlands','france':'France',
+  'argentina':'Argentina','ecuador':'Ecuador','morocco':'Morocco',
+  'switzerland':'Switzerland','norway':'Norway','denmark':'Denmark',
+  'sweden':'Sweden','belgium':'Belgium','austria':'Austria',
+  'finland':'Finland','united-kingdom':'United Kingdom',
+  'singapore':'Singapore','united-arab-emirates':'UAE',
+  'qatar':'Qatar','saudi-arabia':'Saudi Arabia','iceland':'Iceland',
+  'india':'India','philippines':'Philippines','china':'China',
+  'georgia':'Georgia','serbia':'Serbia','kenya':'Kenya',
+  'peru':'Peru','brazil':'Brazil','chile':'Chile',
+  'albania':'Albania','sri-lanka':'Sri Lanka','egypt':'Egypt',
+  'indonesia':'Indonesia','colombia':'Colombia',
+  'costa-rica':'Costa Rica','panama':'Panama',
+  'malaysia':'Malaysia','italy':'Italy','greece':'Greece'
+};
+
+const ISO2 = {
+  'portugal':'pt','spain':'es','poland':'pl','mexico':'mx',
+  'thailand':'th','germany':'de','japan':'jp','croatia':'hr',
+  'czech-republic':'cz','hungary':'hu','romania':'ro',
+  'bulgaria':'bg','vietnam':'vn','south-korea':'kr',
+  'australia':'au','new-zealand':'nz','canada':'ca',
+  'ireland':'ie','netherlands':'nl','france':'fr',
+  'argentina':'ar','ecuador':'ec','morocco':'ma',
+  'switzerland':'ch','norway':'no','denmark':'dk',
+  'sweden':'se','belgium':'be','austria':'at','finland':'fi',
+  'united-kingdom':'gb','singapore':'sg',
+  'united-arab-emirates':'ae','qatar':'qa',
+  'saudi-arabia':'sa','iceland':'is','india':'in',
+  'philippines':'ph','china':'cn','georgia':'ge',
+  'serbia':'rs','kenya':'ke','peru':'pe','brazil':'br',
+  'chile':'cl','albania':'al','sri-lanka':'lk','egypt':'eg',
+  'indonesia':'id','colombia':'co','costa-rica':'cr',
+  'panama':'pa','malaysia':'my','italy':'it','greece':'gr'
+};
+
+const countryName = NAMES[slug] || slug;
+const countryIso2 = ISO2[slug] || '';
+
+function calculateGrade(q) {
+  const verdicts = {
+    'A': 'Excellent destination', 'B': 'Good destination',
+    'C': 'Average destination', 'D': 'Below average', 'F': 'Poor destination'
+  };
+  if (q.grade !== undefined && q.grade_percent !== undefined) {
+    return { percent: q.grade_percent, grade: q.grade, verdict: verdicts[q.grade] || 'Average destination' };
+  }
+  const weights = {
+    safety: 0.25, healthcare: 0.20, happiness: 0.15,
+    gdpGrowth: 0.05, pollution: 0.10, unemployment: 0.10,
+    internet: 0.10, traffic: 0.05
+  };
+  let totalScore = 0, totalWeight = 0;
+  for (const [metric, weight] of Object.entries(weights)) {
+    const score = q[metric];
+    if (score !== null && score !== undefined) {
+      totalScore += score * weight;
+      totalWeight += weight;
+    }
+  }
+  const weightedAverage = totalWeight > 0 ? totalScore / totalWeight : 0;
+  const percent = Math.round(weightedAverage * 10);
+  let grade, verdict;
+  if (percent >= 85) { grade = 'A'; verdict = verdicts['A']; }
+  else if (percent >= 70) { grade = 'B'; verdict = verdicts['B']; }
+  else if (percent >= 55) { grade = 'C'; verdict = verdicts['C']; }
+  else if (percent >= 40) { grade = 'D'; verdict = verdicts['D']; }
+  else { grade = 'F'; verdict = verdicts['F']; }
+  return { percent, grade, verdict };
+}
+
+const overallScore = calculateGrade(data);
+
+// Quick Verdict Bar helpers
+function getVisaStatus(visaDays) {
+  if (visaDays === null || visaDays === undefined) {
+    return { text: 'Check requirements', status: 'neutral' };
+  }
+  if (visaDays >= 90) {
+    return { text: `Visa-free · ${visaDays} days`, status: 'favorable' };
+  }
+  if (visaDays >= 30) {
+    return { text: `Visa on arrival · ${visaDays} days`, status: 'neutral' };
+  }
+  return { text: 'Visa required', status: 'restricted' };
+}
+
+function getEnglishStatus(english) {
+  if (english === null || english === undefined) {
+    return { text: 'Data not available', status: 'neutral' };
+  }
+  if (english >= 999) return { text: 'Native English', status: 'favorable' };
+  if (english >= 600) return { text: `Very High (${english})`, status: 'favorable' };
+  if (english >= 500) return { text: `High (${english})`, status: 'favorable' };
+  if (english >= 400) return { text: `Moderate (${english})`, status: 'neutral' };
+  return { text: `Low (${english})`, status: 'restricted' };
+}
+
+function getTaxStatus(taxSystem) {
+  if (taxSystem === 'zero') return { text: 'No income tax', status: 'favorable' };
+  if (taxSystem === 'territorial') return { text: 'Territorial', status: 'favorable' };
+  if (taxSystem === 'worldwide') return { text: 'Worldwide', status: 'neutral' };
+  return { text: 'Unknown', status: 'neutral' };
+}
+
+const visaInfo = getVisaStatus(data.visa_days);
+const englishInfo = getEnglishStatus(data.english);
+const taxInfo = getTaxStatus(data.tax_system);
+
+// Why Americans Move Here — conditional reasons
+const moveReasons = [];
+if (data.tax_system === 'zero') {
+  moveReasons.push('No personal income tax — keep significantly more of every paycheck');
+} else if (data.tax_system === 'territorial') {
+  moveReasons.push('Territorial tax system — foreign-sourced income is generally not taxed locally');
+}
+if (data.healthcare >= 8) {
+  moveReasons.push(`Healthcare rated ${data.healthcare}/10 — quality care at a fraction of US costs`);
+}
+if (data.safety >= 8) {
+  moveReasons.push(`Ranked ${data.safety}/10 for safety — well above global average`);
+}
+if (data.nomad_visa) {
+  moveReasons.push('Digital Nomad Visa available — a clear legal path for remote workers');
+}
+if (data.cost_index && data.cost_index < 60) {
+  moveReasons.push(data.us_comparison
+    ? `Living costs are ${data.us_comparison}`
+    : 'Significantly lower cost of living than the US');
+}
+if (data.happiness >= 7) {
+  moveReasons.push('Consistently ranks among the happiest countries in the world');
+}
+if (data.english >= 999) {
+  moveReasons.push('English is the primary language — no communication barrier');
+} else if (data.english >= 600) {
+  moveReasons.push(`Very high English proficiency (${data.english} EF EPI) makes daily life easy`);
+}
+if (data.internet >= 9) {
+  moveReasons.push('Fast, reliable internet — ideal for remote work');
+}
+
+// Why It Might Not Be Right For You — conditional concerns
+const concernReasons = [];
+if (data.english !== null && data.english < 999 && data.english < 450) {
+  concernReasons.push('Lower English proficiency may mean a real language barrier in daily life');
+}
+if (data.visa_days !== null && data.visa_days < 90) {
+  concernReasons.push('Limited visa-free stay — longer-term residency requires a separate visa application');
+}
+if (data.tax_system === 'worldwide') {
+  concernReasons.push('Worldwide taxation means you may owe local tax in addition to US filing obligations');
+}
+if (data.unemployment !== null && data.unemployment < 6) {
+  concernReasons.push('A more competitive local job market if you plan to seek local employment');
+}
+if (data.safety !== null && data.safety < 6) {
+  concernReasons.push('Safety varies by region — research specific neighborhoods before committing');
+}
+if (data.healthcare !== null && data.healthcare < 6) {
+  concernReasons.push('Healthcare infrastructure may not match what you are used to in major US cities');
+}
+if (!data.nomad_visa) {
+  concernReasons.push('No dedicated digital nomad visa program — remote workers need to explore other residency options');
+}
+if (data.cost_index && data.cost_index > 80) {
+  concernReasons.push(data.us_comparison
+    ? `Living costs are ${data.us_comparison}`
+    : 'Cost of living is comparable to or higher than many US cities');
+}
+
+// Quality metrics for display
+const metricConfigs = [
+  { key: 'safety', label: 'Safety', raw: data.raw?.safety, unit: 'Numbeo safety index' },
+  { key: 'healthcare', label: 'Healthcare', raw: data.raw?.healthcare, unit: 'Numbeo health index' },
+  { key: 'happiness', label: 'Happiness', raw: data.raw?.happiness, unit: '/10 WHR score' },
+  { key: 'pollution', label: 'Pollution', raw: data.raw?.pollution, unit: 'Numbeo pollution index' },
+  { key: 'internet', label: 'Internet', raw: data.raw?.internet, unit: 'Mbps avg speed' },
+  { key: 'traffic', label: 'Traffic', raw: data.raw?.traffic, unit: 'min/year in traffic' },
+  { key: 'unemployment', label: 'Unemployment', raw: data.raw?.unemployment, unit: '% unemployment' },
+  { key: 'gdpGrowth', label: 'GDP Growth', raw: data.raw?.gdpGrowth, unit: '% GDP growth' },
+];
+
+// Similar countries — by cost_index proximity
+const similarCountries = Object.entries(allCountries)
+  .filter(([s, d]) => s !== slug && d.cost_index != null && data.cost_index != null)
+  .map(([s, d]) => ({
+    slug: s,
+    diff: Math.abs(d.cost_index - data.cost_index),
+    data: d
+  }))
+  .sort((a, b) => a.diff - b.diff)
+  .slice(0, 3);
+
+// Country-specific FAQ
+const faqs = [
+  {
+    q: `Is ${countryName} safe for Americans?`,
+    a: data.safety >= 8
+      ? `${countryName} ranks ${data.safety}/10 for safety on the Numbeo Safety Index, well above the global average. Like anywhere, safety varies by neighborhood, so research specific areas before committing.`
+      : data.safety >= 6
+      ? `${countryName} rates ${data.safety}/10 for safety — reasonable but with some regional variation. Standard travel precautions are recommended.`
+      : `${countryName} rates ${data.safety}/10 for safety. Research specific cities and neighborhoods carefully, and consider speaking with expats currently living there.`
+  },
+  {
+    q: `Do Americans need a visa for ${countryName}?`,
+    a: data.visa_days >= 90
+      ? `US passport holders can typically enter ${countryName} visa-free for up to ${data.visa_days} days. Long-term residency requires a separate visa or residence permit application.`
+      : data.visa_days >= 30
+      ? `US passport holders can typically enter ${countryName} with a visa on arrival or short visa-free stay of up to ${data.visa_days} days. Longer stays require advance visa arrangements.`
+      : `${countryName} generally requires US citizens to obtain a visa before travel. Check the nearest consulate for current requirements.`
+  },
+  {
+    q: `How much tax do Americans pay in ${countryName}?`,
+    a: data.tax_system === 'zero'
+      ? `${countryName} has no personal income tax. However, US citizens are still required to file US federal taxes on worldwide income regardless of where they live. Consult a tax professional familiar with expat taxation.`
+      : data.tax_system === 'territorial'
+      ? `${countryName} uses a territorial tax system, meaning foreign-sourced income is generally not taxed locally. US citizens still must file US federal taxes on worldwide income. Consult a qualified tax professional.`
+      : `${countryName} uses worldwide taxation, meaning local tax may apply to your global income in addition to US filing obligations. The Foreign Earned Income Exclusion (FEIE) may reduce US tax liability. Consult a tax professional specializing in expat taxes.`
+  },
+  {
+    q: `Does ${countryName} have a digital nomad visa?`,
+    a: data.nomad_visa
+      ? `Yes, ${countryName} offers a digital nomad visa or remote work permit for foreigners earning income from outside the country. Requirements typically include proof of remote income and health insurance.`
+      : `${countryName} does not currently have a dedicated digital nomad visa program. Remote workers typically rely on tourist visas, standard work visas, or other residency pathways.`
+  },
+  {
+    q: `What is the cost of living in ${countryName} compared to the US?`,
+    a: data.us_comparison
+      ? `Living in ${countryName} is ${data.us_comparison}. A single person can expect to spend around $${data.budget_single}/month on average, excluding rent.`
+      : `Cost of living data for ${countryName} is being updated. Use our calculator above for a personalized comparison based on your US city and income.`
+  },
+  {
+    q: `Is English widely spoken in ${countryName}?`,
+    a: data.english >= 999
+      ? `Yes, English is the primary language in ${countryName}.`
+      : data.english >= 600
+      ? `${countryName} has very high English proficiency (EF EPI score of ${data.english}), making daily life and business easy to navigate without learning the local language.`
+      : data.english >= 450
+      ? `${countryName} has moderate English proficiency (EF EPI score of ${data.english}). English is commonly understood in cities and tourist areas, but learning basic local phrases is recommended.`
+      : `${countryName} has lower English proficiency (EF EPI score of ${data.english}). Learning the local language will significantly improve daily life and integration.`
+  }
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(f => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": f.a
+    }
+  }))
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://leavingamerica.co" },
+    { "@type": "ListItem", "position": 2, "name": "Countries", "item": "https://leavingamerica.co/countries" },
+    { "@type": "ListItem", "position": 3, "name": countryName, "item": `https://leavingamerica.co/countries/${slug}` }
+  ]
+};
+
+const pageTitle = `Moving to ${countryName} from USA: Cost, Visa & Healthcare Guide (2026) | LeavingAmerica`;
+const pageDescription = `See how far your salary goes in ${countryName}. ${data.us_comparison ? 'Living costs are ' + data.us_comparison + '.' : ''} Compare visa requirements, healthcare, and taxes for Americans. Free calculator.`;
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+<style>
+* { box-sizing: border-box; }
+
+.country-page {
+  font-family: 'Manrope', sans-serif;
+  background: #F8FAFC;
+}
+
+.breadcrumb {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 100px 24px 0;
+  font-size: 13px;
+  color: #94A3B8;
+}
+.breadcrumb a {
+  color: #64748B;
+  text-decoration: none;
+}
+.breadcrumb a:hover { color: #2563EB; }
+
+.country-hero {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 24px 40px;
+}
+.country-hero h1 {
+  font-size: 38px;
+  font-weight: 800;
+  color: #0F172A;
+  line-height: 1.2;
+  margin-bottom: 16px;
+  max-width: 800px;
+}
+.country-hero-sub {
+  font-size: 17px;
+  color: #64748B;
+  line-height: 1.7;
+  max-width: 680px;
+}
+
+.verdict-bar {
+  max-width: 1100px;
+  margin: 0 auto 40px;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.verdict-item {
+  background: white;
+  border-radius: 14px;
+  padding: 18px 20px;
+  border-left: 3px solid #E2E8F0;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+}
+.verdict-item.favorable { border-left-color: #16A34A; }
+.verdict-item.neutral { border-left-color: #D97706; }
+.verdict-item.restricted { border-left-color: #DC2626; }
+.verdict-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #94A3B8;
+  margin-bottom: 6px;
+}
+.verdict-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0F172A;
+}
+
+.section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px 56px;
+}
+
+.preview-card {
+  background: linear-gradient(135deg, #F8FAFF 0%, #EEF2FF 100%);
+  border: 1px solid #C7D2FE;
+  border-radius: 20px;
+  padding: 36px;
+  text-align: center;
+}
+.preview-card-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #2563EB;
+  margin-bottom: 12px;
+}
+.preview-card-text {
+  font-size: 22px;
+  font-weight: 700;
+  color: #0F172A;
+  line-height: 1.4;
+  margin-bottom: 20px;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.preview-cta {
+  display: inline-flex;
+  align-items: center;
+  background: linear-gradient(135deg, #2563EB, #0EA5E9);
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 14px 28px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.preview-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(37,99,235,0.3);
+}
+
+.section-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: #0F172A;
+  margin-bottom: 8px;
+}
+.section-sub {
+  font-size: 14px;
+  color: #64748B;
+  margin-bottom: 24px;
+}
+
+.reasons-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.reason-card {
+  background: white;
+  border-radius: 12px;
+  padding: 16px 18px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  color: #374151;
+  line-height: 1.5;
+  border-left: 3px solid #16A34A;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.reason-card.concern {
+  border-left-color: #D97706;
+}
+.reason-check {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #DCFCE7;
+  color: #16A34A;
+  font-size: 11px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.reason-check.concern {
+  background: #FEF3C7;
+  color: #92400E;
+}
+
+.budget-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+}
+.budget-card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+}
+.budget-card-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #94A3B8;
+  margin-bottom: 10px;
+}
+.budget-card-value {
+  font-size: 28px;
+  font-weight: 800;
+  color: #0F172A;
+}
+.budget-card-sub {
+  font-size: 12px;
+  color: #94A3B8;
+  margin-top: 4px;
+}
+
+.cities-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+}
+.city-card {
+  background: white;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+}
+.city-name {
+  font-size: 17px;
+  font-weight: 700;
+  color: #0F172A;
+  margin-bottom: 6px;
+}
+.city-cost {
+  font-size: 22px;
+  font-weight: 800;
+  color: #2563EB;
+}
+.city-cost-label {
+  font-size: 11px;
+  color: #94A3B8;
+}
+
+.quality-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.quality-item {
+  background: white;
+  border-radius: 12px;
+  padding: 16px 18px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.quality-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.quality-label { font-size: 13px; font-weight: 600; color: #475569; }
+.quality-score { font-size: 13px; font-weight: 700; color: #2563EB; }
+.progress-track {
+  height: 6px;
+  background: #E2E8F0;
+  border-radius: 100px;
+  overflow: hidden;
+}
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #2563EB, #0EA5E9);
+  border-radius: 100px;
+}
+.quality-raw {
+  font-size: 10px;
+  color: #94A3B8;
+  margin-top: 4px;
+  font-style: italic;
+}
+
+.affiliate-mini {
+  background: white;
+  border: 1px solid #E2E8F0;
+  border-radius: 14px;
+  padding: 20px 24px;
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.affiliate-mini-text {
+  font-size: 14px;
+  color: #475569;
+  flex: 1;
+}
+.affiliate-mini-btn {
+  background: #0F172A;
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.adsense-block {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px 56px;
+  min-height: 100px;
+}
+
+.faq-item {
+  background: white;
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+}
+.faq-q {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0F172A;
+  margin-bottom: 10px;
+}
+.faq-a {
+  font-size: 14px;
+  color: #64748B;
+  line-height: 1.7;
+}
+
+.similar-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+}
+.similar-card {
+  background: white;
+  border-radius: 14px;
+  padding: 20px;
+  text-decoration: none;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  transition: all 0.2s ease;
+  display: block;
+}
+.similar-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(37,99,235,0.1);
+}
+.country-hero-flag-icon {
+  width: 56px !important;
+  height: 42px !important;
+  border-radius: 6px !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important;
+  border: 1.5px solid rgba(0,0,0,0.12) !important;
+  outline: 1px solid rgba(255,255,255,0.8);
+  display: inline-block;
+  margin-bottom: 16px;
+}
+
+.similar-flag-icon {
+  width: 32px !important;
+  height: 24px !important;
+  border-radius: 4px !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important;
+  border: 1.5px solid rgba(0,0,0,0.12) !important;
+  outline: 1px solid rgba(255,255,255,0.8);
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.similar-name { font-size: 16px; font-weight: 700; color: #0F172A; }
+.similar-index { font-size: 12px; color: #94A3B8; margin-top: 4px; }
+
+.final-cta {
+  background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+  border-radius: 24px;
+  padding: 48px;
+  text-align: center;
+}
+.final-cta h2 {
+  font-size: 28px;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 12px;
+}
+.final-cta p {
+  font-size: 15px;
+  color: #94A3B8;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 768px) {
+  .verdict-bar { grid-template-columns: 1fr 1fr; }
+  .reasons-grid { grid-template-columns: 1fr; }
+  .budget-grid { grid-template-columns: 1fr; }
+  .cities-grid { grid-template-columns: 1fr; }
+  .quality-grid { grid-template-columns: 1fr; }
+  .similar-grid { grid-template-columns: 1fr; }
+  .country-hero h1 { font-size: 28px; }
+}
+</style>
+
+<div class="country-page">
+
+  <div class="breadcrumb">
+    <a href="/">Home</a> / <a href="/countries">Countries</a> / {countryName}
+  </div>
+
+  <div class="country-hero">
+    {countryIso2 && (
+      <span class={`fi fi-${countryIso2} country-hero-flag-icon`}></span>
+    )}
+    <h1>Moving to {countryName} from the US: Cost, Visa, and Healthcare Guide</h1>
+    <p class="country-hero-sub">
+      Everything Americans need to know about relocating to {countryName} —
+      real cost of living data, visa requirements, healthcare, and taxes,
+      based on public economic data.
+    </p>
+  </div>
+
+  <div class="verdict-bar">
+    <div class={`verdict-item ${overallScore.grade === 'A' || overallScore.grade === 'B' ? 'favorable' : overallScore.grade === 'C' ? 'neutral' : 'restricted'}`}>
+      <div class="verdict-label">Overall Grade</div>
+      <div class="verdict-value">{overallScore.grade} · {overallScore.percent}%</div>
+    </div>
+    <div class={`verdict-item ${visaInfo.status}`}>
+      <div class="verdict-label">Visa (US Passport)</div>
+      <div class="verdict-value">{visaInfo.text}</div>
+    </div>
+    <div class={`verdict-item ${englishInfo.status}`}>
+      <div class="verdict-label">English Level</div>
+      <div class="verdict-value">{englishInfo.text}</div>
+    </div>
+    <div class={`verdict-item ${taxInfo.status}`}>
+      <div class="verdict-label">Tax System</div>
+      <div class="verdict-value">{taxInfo.text}</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="preview-card">
+      <div class="preview-card-label">COST OF LIVING SNAPSHOT</div>
+      <p class="preview-card-text">
+        {data.us_comparison
+          ? `Living in ${countryName} is ${data.us_comparison}.`
+          : `See how ${countryName} compares to the US.`}
+        {data.budget_single && ` A single person spends around $${data.budget_single}/month on average, excluding rent.`}
+      </p>
+      <a href="/#calculator"
+         class="preview-cta"
+         onclick={`sessionStorage.setItem('quiz_country', '${slug}')`}>
+        See exactly how far YOUR salary goes &rarr;
+      </a>
+    </div>
+  </div>
+
+  {moveReasons.length > 0 && (
+    <div class="section">
+      <h2 class="section-title">Why Americans Move to {countryName}</h2>
+      <p class="section-sub">Based on real, publicly sourced economic and quality-of-life data</p>
+      <div class="reasons-grid">
+        {moveReasons.map(reason => (
+          <div class="reason-card">
+            <span class="reason-check">&#10003;</span>
+            <span>{reason}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  )}
+
+  {concernReasons.length > 0 && (
+    <div class="section">
+      <h2 class="section-title">Why {countryName} Might Not Be Right for You</h2>
+      <p class="section-sub">Honest considerations before you commit</p>
+      <div class="reasons-grid">
+        {concernReasons.map(reason => (
+          <div class="reason-card concern">
+            <span class="reason-check concern">!</span>
+            <span>{reason}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  )}
+
+  {(data.budget_single || data.budget_couple) && (
+    <div class="section">
+      <h2 class="section-title">Typical Monthly Budget in {countryName}</h2>
+      <p class="section-sub">Excluding rent · Based on World Bank ICP and Eurostat data via WhereNext</p>
+      <div class="budget-grid">
+        {data.budget_single && (
+          <div class="budget-card">
+            <div class="budget-card-label">Single Person</div>
+            <div class="budget-card-value">${data.budget_single}</div>
+            <div class="budget-card-sub">per month</div>
+          </div>
+        )}
+        {data.budget_couple && (
+          <div class="budget-card">
+            <div class="budget-card-label">Couple</div>
+            <div class="budget-card-value">${data.budget_couple}</div>
+            <div class="budget-card-sub">per month</div>
+          </div>
+        )}
+        {data.cost_index && (
+          <div class="budget-card">
+            <div class="budget-card-label">Cost Index</div>
+            <div class="budget-card-value">{data.cost_index}</div>
+            <div class="budget-card-sub">US = 82</div>
+          </div>
+        )}
+      </div>
+    </div>
+  )}
+
+  {data.affordable_cities && data.affordable_cities.length > 0 && (
+    <div class="section">
+      <h2 class="section-title">Most Affordable Cities in {countryName}</h2>
+      <p class="section-sub">Estimated monthly cost of living by city</p>
+      <div class="cities-grid">
+        {data.affordable_cities.map(city => (
+          <div class="city-card">
+            <div class="city-name">{city.name}</div>
+            <div class="city-cost">${city.monthly_usd}</div>
+            <div class="city-cost-label">per month</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )}
+
+  <div class="section">
+    <h2 class="section-title">Quality of Life in {countryName}</h2>
+    <p class="section-sub">8 metrics from independent public data sources</p>
+    <div class="quality-grid">
+      {metricConfigs.map(m => (
+        <div class="quality-item">
+          <div class="quality-row">
+            <span class="quality-label">{m.label}</span>
+            <span class="quality-score">{data[m.key]}/10</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-bar" style={`width: ${data[m.key] * 10}%`}></div>
+          </div>
+          {m.raw != null && (
+            <div class="quality-raw">{m.raw} {m.unit}</div>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Healthcare for Americans in {countryName}</h2>
+    <p class="section-sub">
+      {countryName} rates {data.healthcare}/10 for healthcare quality on the Numbeo Health Care Index.
+      US health insurance typically does not cover care abroad — most expats and
+      digital nomads use international health insurance instead.
+    </p>
+    <div class="affiliate-mini">
+      <span class="affiliate-mini-text">
+        Global health coverage from $45/month — no US address required
+      </span>
+      <a href="#" class="affiliate-mini-btn" rel="noopener sponsored">
+        Get a SafetyWing quote &rarr;
+      </a>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Visa &amp; Residency in {countryName}</h2>
+    <p class="section-sub">
+      US passport holders can enter {countryName} {visaInfo.text.toLowerCase()}.
+      {data.nomad_visa
+        ? ` A digital nomad visa is available for remote workers seeking longer-term residency.`
+        : ` There is no dedicated digital nomad visa — explore standard residency or work visa options for longer stays.`}
+    </p>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Taxes for Americans in {countryName}</h2>
+    <p class="section-sub">
+      {countryName} uses a {data.tax_system || 'unknown'} tax system.
+      US citizens are required to file US federal taxes regardless of where
+      they live. The Foreign Earned Income Exclusion (FEIE) may reduce or
+      eliminate US tax liability on foreign-earned income up to a certain
+      threshold.
+    </p>
+    <div class="affiliate-mini">
+      <span class="affiliate-mini-text">
+        Confused about FEIE and double taxation? Get expert help from
+        expat tax specialists.
+      </span>
+      <a href="#" class="affiliate-mini-btn" rel="noopener sponsored">
+        Get tax help &rarr;
+      </a>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Day to Day Life</h2>
+    <p class="section-sub">
+      Internet speeds average {data.raw?.internet} Mbps.
+      {data.raw?.traffic && ` Commuters spend around ${Math.round(data.raw.traffic)} minutes per year in traffic.`}
+      {data.pollution >= 7 ? ' Air quality is generally good.' : ' Air quality varies by region.'}
+    </p>
+  </div>
+
+  <div class="adsense-block">
+    <!-- AdSense unit placeholder -->
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    {faqs.map(faq => (
+      <div class="faq-item">
+        <div class="faq-q">{faq.q}</div>
+        <div class="faq-a">{faq.a}</div>
+      </div>
+    ))}
+  </div>
+
+  {similarCountries.length > 0 && (
+    <div class="section">
+      <h2 class="section-title">Similar Countries to Consider</h2>
+      <p class="section-sub">Countries with a comparable cost of living</p>
+      <div class="similar-grid">
+        {similarCountries.map(c => (
+          <a href={`/countries/${c.slug}`} class="similar-card">
+            {ISO2[c.slug] && (
+              <span class={`fi fi-${ISO2[c.slug]} similar-flag-icon`}></span>
+            )}
+            <div class="similar-name">{NAMES[c.slug] || c.slug}</div>
+            <div class="similar-index">Cost index: {c.data.cost_index}</div>
+          </a>
+        ))}
+      </div>
+    </div>
+  )}
+
+  <div class="section">
+    <div class="final-cta">
+      <h2>Ready to see your exact numbers?</h2>
+      <p>Enter your US city and income to get a personalized comparison for {countryName}</p>
+      <a href="/#calculator"
+         class="preview-cta"
+         onclick={`sessionStorage.setItem('quiz_country', '${slug}')`}>
+        Calculate My Savings in {countryName} &rarr;
+      </a>
+    </div>
+  </div>
+
+</div>
+
+</BaseLayout>

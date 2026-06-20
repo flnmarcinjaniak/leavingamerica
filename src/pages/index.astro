@@ -1026,6 +1026,51 @@ const qs = qualityScores.countries as Record<string, any>;
   const shareBtn      = document.getElementById('shareBtn');
   const copyBtn       = document.getElementById('copyBtn');
 
+  // Prefill country from Country Match quiz
+  // or country pages, if present
+  (function() {
+    const prefillCountry = sessionStorage.getItem(
+      'quiz_country'
+    );
+    if (!prefillCountry) return;
+
+    const countrySelectEl = document.getElementById(
+      'countrySelect'
+    );
+    if (!countrySelectEl) return;
+
+    // countrySelect options are keyed by ISO2
+    // code — find the matching ISO2 via COUNTRY_SLUGS
+    let matchedIso2 = null;
+    for (const [iso2, slug] of Object.entries(
+      COUNTRY_SLUGS
+    )) {
+      if (slug === prefillCountry) {
+        matchedIso2 = iso2;
+        break;
+      }
+    }
+
+    if (matchedIso2) {
+      (countrySelectEl as HTMLSelectElement).value = matchedIso2;
+    }
+
+    // Clear so it doesn't persist on future visits
+    sessionStorage.removeItem('quiz_country');
+
+    // Scroll to calculator after page has settled
+    setTimeout(() => {
+      const calcSection = document.getElementById(
+        'calculator'
+      );
+      if (calcSection) {
+        calcSection.scrollIntoView({
+          behavior: 'smooth'
+        });
+      }
+    }, 300);
+  })();
+
   function getCached(key) {
     try {
       const item = sessionStorage.getItem(key);

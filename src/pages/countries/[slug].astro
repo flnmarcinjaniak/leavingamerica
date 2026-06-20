@@ -206,16 +206,36 @@ const metricConfigs = [
   { key: 'gdpGrowth', label: 'GDP Growth', raw: data.raw?.gdpGrowth, unit: '% GDP growth' },
 ];
 
-// Similar countries — by cost_index proximity
-const similarCountries = Object.entries(allCountries)
-  .filter(([s, d]) => s !== slug && d.cost_index != null && data.cost_index != null)
-  .map(([s, d]) => ({
-    slug: s,
-    diff: Math.abs(d.cost_index - data.cost_index),
-    data: d
-  }))
-  .sort((a, b) => a.diff - b.diff)
-  .slice(0, 3);
+const similarCountries = (() => {
+  const currentContinent = data.continents?.[0];
+
+  const allCandidates = Object.entries(allCountries)
+    .filter(([s, d]) => s !== slug && d.cost_index != null && data.cost_index != null)
+    .map(([s, d]) => ({
+      slug: s,
+      diff: Math.abs(d.cost_index - data.cost_index),
+      sameContinent: currentContinent &&
+        d.continents?.[0] === currentContinent,
+      data: d
+    }));
+
+  const sameContinentMatches = allCandidates
+    .filter(c => c.sameContinent)
+    .sort((a, b) => a.diff - b.diff);
+
+  if (sameContinentMatches.length >= 3) {
+    return sameContinentMatches.slice(0, 3);
+  }
+
+  const remaining = allCandidates
+    .filter(c => !c.sameContinent)
+    .sort((a, b) => a.diff - b.diff);
+
+  return [
+    ...sameContinentMatches,
+    ...remaining
+  ].slice(0, 3);
+})();
 
 // Country-specific FAQ
 const faqs = [
@@ -319,6 +339,14 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
   text-decoration: none;
 }
 .breadcrumb a:hover { color: #2563EB; }
+
+.data-freshness {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 8px 24px 0;
+  font-size: 12px;
+  color: #94A3B8;
+}
 
 .country-hero {
   max-width: 1100px;
@@ -680,6 +708,52 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
   margin-bottom: 24px;
 }
 
+.quick-facts-card {
+  background: linear-gradient(
+    135deg, #F8FAFF 0%, #EEF2FF 100%
+  );
+  border: 1px solid #C7D2FE;
+  border-radius: 20px;
+  padding: 36px 40px;
+  position: relative;
+  overflow: hidden;
+}
+.quick-facts-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg, #2563EB, #0EA5E9
+  );
+}
+.quick-facts-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #2563EB;
+  margin-bottom: 16px;
+}
+.quick-facts-text {
+  font-size: 19px;
+  color: #1E293B;
+  line-height: 1.75;
+  font-weight: 450;
+}
+.quick-facts-dropcap {
+  font-size: 52px;
+  font-weight: 800;
+  color: #2563EB;
+  line-height: 1;
+  float: left;
+  margin-right: 8px;
+  margin-top: 4px;
+  font-family: 'Manrope', sans-serif;
+}
+
 @media (max-width: 768px) {
   .verdict-bar { grid-template-columns: 1fr 1fr; }
   .reasons-grid { grid-template-columns: 1fr; }
@@ -688,6 +762,9 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
   .quality-grid { grid-template-columns: 1fr; }
   .similar-grid { grid-template-columns: 1fr; }
   .country-hero h1 { font-size: 28px; }
+  .quick-facts-card { padding: 24px 24px; }
+  .quick-facts-text { font-size: 16px; }
+  .quick-facts-dropcap { font-size: 38px; }
 }
 </style>
 
@@ -695,6 +772,10 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
 
   <div class="breadcrumb">
     <a href="/">Home</a> / <a href="/countries">Countries</a> / {countryName}
+  </div>
+  <div class="data-freshness">
+    Data updated {qualityScoresData.lastUpdated || 'recently'}
+    · Sources: World Bank, Numbeo, WhereNext, EF EPI
   </div>
 
   <div class="country-hero">
@@ -727,6 +808,22 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
       <div class="verdict-value">{taxInfo.text}</div>
     </div>
   </div>
+
+  {data.quick_facts_paragraph && (
+    <div class="section">
+      <div class="quick-facts-card">
+        <p class="quick-facts-label">
+          WHAT {countryName.toUpperCase()} IS ACTUALLY LIKE
+        </p>
+        <p class="quick-facts-text">
+          <span class="quick-facts-dropcap">
+            {data.quick_facts_paragraph.charAt(0)}
+          </span>
+          {data.quick_facts_paragraph.slice(1)}
+        </p>
+      </div>
+    </div>
+  )}
 
   <div class="section">
     <div class="preview-card">

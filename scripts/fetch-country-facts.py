@@ -137,6 +137,8 @@ def fetch_country_facts(iso2_code):
             'value': gini[latest_year]
         }
 
+    continents = country.get('continents', [])
+
     return {
         'returned_name': returned_name,
         'area_km2': area.get('kilometers'),
@@ -153,6 +155,7 @@ def fetch_country_facts(iso2_code):
         'timezones': timezones,
         'landlocked': landlocked,
         'gini': gini_latest,
+        'continents': continents,
         'memberships': {
             'nato': memberships.get('nato'),
             'eu': memberships.get('eu'),
@@ -237,7 +240,8 @@ def merge_into_json(facts_data):
         'government_type', 'capital',
         'currencies', 'languages', 'demonym',
         'driving_side', 'borders', 'timezones',
-        'landlocked', 'gini', 'memberships'
+        'landlocked', 'gini', 'memberships',
+        'continents'
     ]
 
     for slug, facts in facts_data.items():

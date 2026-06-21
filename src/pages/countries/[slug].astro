@@ -204,15 +204,64 @@ if (concernReasons.length < 2) {
 }
 
 // Quality metrics for display
+function interpretSafety(score) {
+  if (score >= 8) return 'Among the safer countries globally';
+  if (score >= 6) return 'Reasonably safe by global standards';
+  if (score >= 4) return 'Safety varies significantly by region';
+  return 'Requires careful research before relocating';
+}
+function interpretHealthcare(score) {
+  if (score >= 8) return 'Top-tier healthcare infrastructure';
+  if (score >= 6) return 'Solid healthcare system overall';
+  if (score >= 4) return 'Healthcare quality varies by facility';
+  return 'Healthcare infrastructure is limited';
+}
+function interpretHappiness(score) {
+  if (score >= 8) return 'Among the happiest populations globally';
+  if (score >= 6) return 'Generally positive quality of life';
+  if (score >= 4) return 'Moderate life satisfaction reported';
+  return 'Lower reported life satisfaction';
+}
+function interpretPollution(score) {
+  if (score >= 8) return 'Among the cleaner environments globally';
+  if (score >= 6) return 'Generally good air quality';
+  if (score >= 4) return 'Air quality varies by region and season';
+  return 'Pollution is a notable concern';
+}
+function interpretInternet(score) {
+  if (score >= 8) return 'Among the fastest connections worldwide';
+  if (score >= 6) return 'Reliable for most remote work needs';
+  if (score >= 4) return 'Workable but inconsistent in places';
+  return 'May be limiting for remote work';
+}
+function interpretTraffic(score) {
+  if (score >= 8) return 'Minimal time lost to congestion';
+  if (score >= 6) return 'Manageable commute times overall';
+  if (score >= 4) return 'Congestion is common in major cities';
+  return 'Significant time lost to traffic';
+}
+function interpretUnemployment(score) {
+  if (score >= 8) return 'Strong, stable job market';
+  if (score >= 6) return 'Generally stable employment conditions';
+  if (score >= 4) return 'Job market conditions vary';
+  return 'Employment conditions are challenging';
+}
+function interpretGdpGrowth(score) {
+  if (score >= 8) return 'Strong economic growth';
+  if (score >= 6) return 'Steady economic expansion';
+  if (score >= 4) return 'Modest or mixed economic growth';
+  return 'Economic growth has been limited';
+}
+
 const metricConfigs = [
-  { key: 'safety', label: 'Safety', raw: data.raw?.safety, unit: 'Numbeo safety index' },
-  { key: 'healthcare', label: 'Healthcare', raw: data.raw?.healthcare, unit: 'Numbeo health index' },
-  { key: 'happiness', label: 'Happiness', raw: data.raw?.happiness, unit: '/10 WHR score' },
-  { key: 'pollution', label: 'Pollution', raw: data.raw?.pollution, unit: 'Numbeo pollution index' },
-  { key: 'internet', label: 'Internet', raw: data.raw?.internet, unit: 'Mbps avg speed' },
-  { key: 'traffic', label: 'Traffic', raw: data.raw?.traffic, unit: 'min/year in traffic' },
-  { key: 'unemployment', label: 'Unemployment', raw: data.raw?.unemployment, unit: '% unemployment' },
-  { key: 'gdpGrowth', label: 'GDP Growth', raw: data.raw?.gdpGrowth, unit: '% GDP growth' },
+  { key: 'safety', label: 'Safety', raw: data.raw?.safety, unit: 'Numbeo safety index', interpret: interpretSafety },
+  { key: 'healthcare', label: 'Healthcare', raw: data.raw?.healthcare, unit: 'Numbeo health index', interpret: interpretHealthcare },
+  { key: 'happiness', label: 'Happiness', raw: data.raw?.happiness, unit: '/10 WHR score', interpret: interpretHappiness },
+  { key: 'pollution', label: 'Pollution', raw: data.raw?.pollution, unit: 'Numbeo pollution index', interpret: interpretPollution },
+  { key: 'internet', label: 'Internet', raw: data.raw?.internet, unit: 'Mbps avg speed', interpret: interpretInternet },
+  { key: 'traffic', label: 'Traffic', raw: data.raw?.traffic, unit: 'min/year in traffic', interpret: interpretTraffic },
+  { key: 'unemployment', label: 'Unemployment', raw: data.raw?.unemployment, unit: '% unemployment', interpret: interpretUnemployment },
+  { key: 'gdpGrowth', label: 'GDP Growth', raw: data.raw?.gdpGrowth, unit: '% GDP growth', interpret: interpretGdpGrowth },
 ];
 
 const similarCountries = (() => {
@@ -547,31 +596,30 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
   margin-top: 4px;
 }
 
-.cities-grid {
+.logistics-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 16px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 12px;
 }
-.city-card {
+.logistics-card {
   background: white;
   border-radius: 14px;
-  padding: 20px;
+  padding: 18px 16px;
   box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  text-align: center;
 }
-.city-name {
-  font-size: 17px;
+.logistics-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #94A3B8;
+  margin-bottom: 8px;
+}
+.logistics-value {
+  font-size: 15px;
   font-weight: 700;
   color: #0F172A;
-  margin-bottom: 6px;
-}
-.city-cost {
-  font-size: 22px;
-  font-weight: 800;
-  color: #2563EB;
-}
-.city-cost-label {
-  font-size: 11px;
-  color: #94A3B8;
 }
 
 .quality-grid {
@@ -608,6 +656,12 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
   color: #94A3B8;
   margin-top: 4px;
   font-style: italic;
+}
+.quality-interpret {
+  font-size: 12px;
+  color: #475569;
+  margin-top: 6px;
+  font-weight: 500;
 }
 
 .affiliate-mini {
@@ -778,7 +832,7 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
   .verdict-bar { grid-template-columns: 1fr 1fr; }
   .reasons-grid { grid-template-columns: 1fr; }
   .budget-grid { grid-template-columns: 1fr; }
-  .cities-grid { grid-template-columns: 1fr; }
+  .logistics-grid { grid-template-columns: 1fr 1fr; }
   .quality-grid { grid-template-columns: 1fr; }
   .similar-grid { grid-template-columns: 1fr; }
   .country-hero h1 { font-size: 28px; }
@@ -925,18 +979,47 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
     </div>
   )}
 
-  {data.affordable_cities && data.affordable_cities.length > 0 && (
+  {(data.borders || data.driving_side || data.timezones) && (
     <div class="section">
-      <h2 class="section-title">Most Affordable Cities in {countryName}</h2>
-      <p class="section-sub">Estimated monthly cost of living by city</p>
-      <div class="cities-grid">
-        {data.affordable_cities.map(city => (
-          <div class="city-card">
-            <div class="city-name">{city.name}</div>
-            <div class="city-cost">${city.monthly_usd}</div>
-            <div class="city-cost-label">per month</div>
+      <h2 class="section-title">Getting Around {countryName}</h2>
+      <p class="section-sub">Practical logistics for everyday life</p>
+      <div class="logistics-grid">
+        {data.borders && (
+          <div class="logistics-card">
+            <div class="logistics-label">LAND BORDERS</div>
+            <div class="logistics-value">
+              {data.borders.length === 0
+                ? 'None (island nation)'
+                : `${data.borders.length} ${data.borders.length === 1 ? 'country' : 'countries'}`}
+            </div>
           </div>
-        ))}
+        )}
+        {data.driving_side && (
+          <div class="logistics-card">
+            <div class="logistics-label">DRIVING SIDE</div>
+            <div class="logistics-value">
+              {data.driving_side === 'right' ? 'Right (same as US)' : 'Left'}
+            </div>
+          </div>
+        )}
+        {data.timezones && data.timezones.length > 0 && (
+          <div class="logistics-card">
+            <div class="logistics-label">TIME ZONE</div>
+            <div class="logistics-value">
+              {data.timezones.length === 1
+                ? data.timezones[0]
+                : `${data.timezones.length} zones`}
+            </div>
+          </div>
+        )}
+        {data.currencies && data.currencies.length > 0 && (
+          <div class="logistics-card">
+            <div class="logistics-label">CURRENCY</div>
+            <div class="logistics-value">
+              {data.currencies[0]}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )}
@@ -956,6 +1039,11 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
           </div>
           {m.raw != null && (
             <div class="quality-raw">{m.raw} {m.unit}</div>
+          )}
+          {data[m.key] != null && (
+            <div class="quality-interpret">
+              {m.interpret(data[m.key])}
+            </div>
           )}
         </div>
       ))}

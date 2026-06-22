@@ -418,6 +418,24 @@ def unemployment_to_score(value):
     elif v < 20: return 4
     else: return 3
 
+def hdi_to_score(hdi_value):
+    """Convert HDI (0.0-1.0 scale) to 1-10 score. Calibrated against real
+    distribution: top countries (Iceland, Switzerland, Norway) score 0.97+,
+    most developed nations 0.85-0.95, developing nations 0.55-0.75."""
+    if hdi_value is None:
+        return None
+    v = float(hdi_value)
+    if v >= 0.94:   return 10
+    elif v >= 0.90: return 9
+    elif v >= 0.86: return 8
+    elif v >= 0.82: return 7
+    elif v >= 0.78: return 6
+    elif v >= 0.74: return 5
+    elif v >= 0.68: return 4
+    elif v >= 0.60: return 3
+    elif v >= 0.50: return 2
+    else:           return 1
+
 def gdp_growth_to_score(value):
     if value is None:
         return None
@@ -545,6 +563,53 @@ def fetch_happiness_owid():
             print(f"  NOT FOUND: {slug} ({iso3})")
     return results
 
+def fetch_hdi_owid():
+    """Fetch Human Development Index from Our World in Data (UNDP Human
+    Development Report data) — composite measure of health (life expectancy),
+    education (years of schooling), and income (GNI per capita), replacing
+    GDP Growth as a better proxy for overall standard of living."""
+    url = ("https://ourworldindata.org/grapher/"
+           "human-development-index.csv?v=1&csvType=full")
+    print(f"\n--- Step: Human Development Index (OWID/UNDP) ---")
+    print(f"Fetching: {url}")
+    response = requests.get(url, timeout=30, headers={
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'text/csv,application/csv,text/plain,*/*',
+    })
+    response.raise_for_status()
+    if 'text/html' in response.headers.get('Content-Type', ''):
+        raise ValueError('OWID returned HTML instead of CSV')
+    results = {}
+    latest = {}
+    reader = csv.DictReader(io.StringIO(response.text))
+    for row in reader:
+        code = row.get("Code", "")
+        year = row.get("Year", "")
+        value_key = [
+            k for k in row.keys()
+            if "human development" in k.lower() or "hdi" in k.lower()
+        ]
+        if not value_key:
+            continue
+        value = row.get(value_key[0], "")
+        if not value or not code or not year:
+            continue
+        try:
+            v = float(value)
+            y = int(year)
+            if code not in latest or y > latest[code][0]:
+                latest[code] = (y, v)
+        except (ValueError, TypeError):
+            continue
+    for slug, iso3 in OWID_CODES.items():
+        if iso3 in latest:
+            year, value = latest[iso3]
+            results[slug] = value
+            print(f"  {slug}: {value:.3f} (year {year})")
+        else:
+            print(f"  NOT FOUND: {slug} ({iso3})")
+    return results
+
 def fetch_internet_wikipedia():
     url = ("https://en.wikipedia.org/wiki/"
            "List_of_countries_by_Internet_connection_speeds")
@@ -553,11 +618,10 @@ def fetch_internet_wikipedia():
     time.sleep(2)
     session = requests.Session()
     session.headers.update({
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+        'User-Agent': 'LeavingAmericaBot/1.0 (https://leavingamerica.co; contact@leavingamerica.co) Python-requests',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
         'Accept-Language': 'en-US,en;q=0.5',
-        'Connection': 'keep-alive',
-        'Upgrade-Insecure-Requests': '1',
+        'Accept-Encoding': 'gzip',
     })
     response = session.get(url, timeout=30)
     response.raise_for_status()
@@ -632,12 +696,10 @@ def fetch_global_peace_index():
     time.sleep(2)
     session = requests.Session()
     session.headers.update({
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; '
-        'Win64; x64) AppleWebKit/537.36 (KHTML, '
-        'like Gecko) Chrome/124.0.0.0 Safari/537.36',
-        'Accept': 'text/html,application/xhtml+xml,'
-        'application/xml;q=0.9,*/*;q=0.8',
+        'User-Agent': 'LeavingAmericaBot/1.0 (https://leavingamerica.co; contact@leavingamerica.co) Python-requests',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
         'Accept-Language': 'en-US,en;q=0.5',
+        'Accept-Encoding': 'gzip',
     })
     url = "https://en.wikipedia.org/wiki/Global_Peace_Index"
     response = session.get(url, timeout=30)
@@ -673,8 +735,14 @@ def fetch_global_peace_index():
 def fetch_english_proficiency():
     """Fetch EF English Proficiency Index from Wikipedia"""
     print("\n--- Step 9: English Proficiency (EF EPI / Wikipedia) ---")
+    time.sleep(3)  # avoid 403 — prior steps hit GPI and Internet Speed Wikipedia pages
     url = "https://en.wikipedia.org/wiki/EF_English_Proficiency_Index"
-    response = requests.get(url, timeout=30, headers=HEADERS)
+    response = requests.get(url, timeout=30, headers={
+        'User-Agent': 'LeavingAmericaBot/1.0 (https://leavingamerica.co; contact@leavingamerica.co) Python-requests',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        'Accept-Language': 'en-US,en;q=0.5',
+        'Accept-Encoding': 'gzip',
+    })
     response.raise_for_status()
     soup = BeautifulSoup(response.text, 'html.parser')
 
@@ -899,6 +967,10 @@ happiness_data = fetch_happiness_owid()
 print(f"Found {len(happiness_data)} countries")
 time.sleep(2)
 
+hdi_data = fetch_hdi_owid()
+print(f"Found {len(hdi_data)} countries")
+time.sleep(2)
+
 # STEP 8 - Wikipedia Internet Speeds
 print("\n--- Step 8: Internet Speeds (Wikipedia/Speedtest) ---")
 internet_data = fetch_internet_wikipedia()
@@ -1009,7 +1081,7 @@ for numbeo_name, slug in COUNTRIES.items():
         "pollution": pollution_to_score(pollution_val),
         "traffic": traffic_to_score(traffic_val),
         "unemployment": unemployment_to_score(unemp_val),
-        "gdpGrowth": gdp_growth_to_score(gdp_val),
+        "hdi": hdi_to_score(hdi_data.get(slug)),
         "happiness": happiness_to_score(happiness_val),
         "internet": internet_to_score(internet_val),
         "english": english_score,
@@ -1027,7 +1099,7 @@ for numbeo_name, slug in COUNTRIES.items():
             "pollution": round(pollution_val, 1) if pollution_val is not None else None,
             "traffic": round(traffic_val, 1) if traffic_val is not None else None,
             "unemployment": round(unemp_val, 2) if unemp_val is not None else None,
-            "gdpGrowth": round(gdp_val, 2) if gdp_val is not None else None,
+            "hdi": round(hdi_data.get(slug), 3) if hdi_data.get(slug) is not None else None,
             "happiness": round(happiness_val, 3) if happiness_val is not None else None,
             "internet": round(internet_val, 2) if internet_val is not None else None,
             "english": english_raw,
@@ -1057,7 +1129,7 @@ output = {
         "pollution": "Numbeo Pollution Index (latest available) - numbeo.com",
         "traffic": "Numbeo Traffic Index (latest available) - numbeo.com",
         "unemployment": "World Bank ILO Unemployment (latest available) - data.worldbank.org",
-        "gdpGrowth": "World Bank GDP Growth (latest available) - data.worldbank.org",
+        "hdi": "UNDP Human Development Index via Our World in Data - ourworldindata.org",
         "happiness": "World Happiness Report via Our World in Data (latest available) - ourworldindata.org",
         "internet": "Speedtest Global Index via Wikipedia (latest available) - en.wikipedia.org/wiki/List_of_countries_by_Internet_connection_speeds"
     },
@@ -1070,7 +1142,7 @@ with open("src/data/quality-scores.json", "w", encoding="utf-8") as f:
 complete = sum(1 for v in results.values()
                if all(v.get(k) for k in
                ["safety", "healthcare", "pollution", "traffic",
-                "unemployment", "gdpGrowth", "happiness", "internet"]))
+                "unemployment", "hdi", "happiness", "internet"]))
 print(f"\nDone. {complete}/{len(results)} countries fully complete.")
 print(f"Saved to src/data/quality-scores.json")
 print(f"Date: {str(date.today())}")

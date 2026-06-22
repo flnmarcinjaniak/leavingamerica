@@ -56,10 +56,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <li>Safety: 25%</li>
 <li>Healthcare: 20%</li>
 <li>Happiness: 15%</li>
-<li>Pollution: 10%</li>
-<li>Unemployment: 10%</li>
-<li>Internet Speed: 10%</li>
-<li>GDP Growth: 5%</li>
+<li>Human Development Index: 15%</li>
+<li>Pollution: 8%</li>
+<li>Unemployment: 7%</li>
+<li>Internet Speed: 5%</li>
 <li>Traffic: 5%</li>
 </ul>
 
@@ -75,10 +75,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <h2>Individual Metrics</h2>
 
 <h3>Safety</h3>
-<p>Source: Numbeo Safety Index. The raw index score is divided by 10 and rounded to produce a 1 to 10 score.</p>
+<p>Source: Global Peace Index (Institute for Economics and Peace). A composite measure of societal safety, ongoing conflict, and militarization, scored on a 1.0-5.0 scale (lower is more peaceful) and converted to our 1-10 scoring system.</p>
 
 <h3>Healthcare</h3>
-<p>Source: Numbeo Health Care Index. Uses a stepped conversion scale based on index ranges: scores above 130 receive 10/10, scores above 110 receive 9/10, scores above 90 receive 8/10, and so on down to 1/10 for scores below 15.</p>
+<p>Source: UHC Service Coverage Index (World Bank/WHO). Measures coverage of essential health services across 14 tracer indicators, scored 0-100 and converted to our 1-10 scoring system.</p>
 
 <h3>Happiness</h3>
 <p>Source: World Happiness Report via Our World in Data. The WHR score runs from 0 to 10 and is used directly as the metric score.</p>
@@ -92,8 +92,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <h3>Internet Speed</h3>
 <p>Source: Speedtest Global Index via Wikipedia. Speeds above 250 Mbps receive 10/10. Speeds below 60 Mbps receive 5/10.</p>
 
-<h3>GDP Growth</h3>
-<p>Source: World Bank. Growth above 5% receives 10/10. Negative growth receives lower scores.</p>
+<h3>Human Development Index</h3>
+<p>Source: UNDP Human Development Index via Our World in Data. A composite measure combining life expectancy, education levels, and income per capita, calibrated on a 0.0-1.0 scale and converted to our 1-10 scoring system. Replaces GDP growth as a more direct proxy for overall standard of living.</p>
 
 <h3>Traffic</h3>
 <p>Source: Numbeo Traffic Index. Lower traffic time indices receive higher scores.</p>

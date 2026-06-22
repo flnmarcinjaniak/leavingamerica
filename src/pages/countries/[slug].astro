@@ -66,8 +66,8 @@ const countryIso2 = ISO2[slug] || '';
 function calculateGrade(q) {
   const weights = {
     safety: 0.25, healthcare: 0.20, happiness: 0.15,
-    gdpGrowth: 0.05, pollution: 0.10, unemployment: 0.10,
-    internet: 0.10, traffic: 0.05
+    hdi: 0.15, pollution: 0.08, unemployment: 0.07,
+    internet: 0.05, traffic: 0.05
   };
   let totalScore = 0, totalWeight = 0;
   for (const [metric, weight] of Object.entries(weights)) {
@@ -252,16 +252,22 @@ function interpretGdpGrowth(score) {
   if (score >= 4) return 'Modest or mixed economic growth';
   return 'Economic growth has been limited';
 }
+function interpretHdi(score) {
+  if (score >= 8) return 'Very high human development';
+  if (score >= 6) return 'High human development';
+  if (score >= 4) return 'Medium human development';
+  return 'Lower human development — research carefully';
+}
 
 const metricConfigs = [
-  { key: 'safety', label: 'Safety', raw: data.raw?.safety, unit: 'Numbeo safety index', interpret: interpretSafety },
-  { key: 'healthcare', label: 'Healthcare', raw: data.raw?.healthcare, unit: 'Numbeo health index', interpret: interpretHealthcare },
+  { key: 'safety', label: 'Safety', raw: data.raw?.safety, unit: 'GPI score (lower = safer)', interpret: interpretSafety },
+  { key: 'healthcare', label: 'Healthcare', raw: data.raw?.healthcare, unit: 'UHC coverage index', interpret: interpretHealthcare },
   { key: 'happiness', label: 'Happiness', raw: data.raw?.happiness, unit: '/10 WHR score', interpret: interpretHappiness },
   { key: 'pollution', label: 'Pollution', raw: data.raw?.pollution, unit: 'Numbeo pollution index', interpret: interpretPollution },
   { key: 'internet', label: 'Internet', raw: data.raw?.internet, unit: 'Mbps avg speed', interpret: interpretInternet },
   { key: 'traffic', label: 'Traffic', raw: data.raw?.traffic, unit: 'min/year in traffic', interpret: interpretTraffic },
   { key: 'unemployment', label: 'Unemployment', raw: data.raw?.unemployment, unit: '% unemployment', interpret: interpretUnemployment },
-  { key: 'gdpGrowth', label: 'GDP Growth', raw: data.raw?.gdpGrowth, unit: '% GDP growth', interpret: interpretGdpGrowth },
+  { key: 'hdi', label: 'Human Development', raw: data.raw?.hdi, unit: 'HDI score (UNDP)', interpret: interpretHdi },
 ];
 
 const similarCountries = (() => {
@@ -300,7 +306,7 @@ const faqs = [
   {
     q: `Is ${countryName} safe for Americans?`,
     a: data.safety >= 8
-      ? `${countryName} ranks ${data.safety}/10 for safety on the Numbeo Safety Index, well above the global average. Like anywhere, safety varies by neighborhood, so research specific areas before committing.`
+      ? `${countryName} ranks ${data.safety}/10 for safety on the Global Peace Index, well above the global average. Like anywhere, safety varies by neighborhood, so research specific areas before committing.`
       : data.safety >= 6
       ? `${countryName} rates ${data.safety}/10 for safety — reasonable but with some regional variation. Standard travel precautions are recommended.`
       : `${countryName} rates ${data.safety}/10 for safety. Research specific cities and neighborhoods carefully, and consider speaking with expats currently living there.`
@@ -1069,7 +1075,7 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
   <div class="section">
     <h2 class="section-title">Healthcare for Americans in {countryName}</h2>
     <p class="section-sub">
-      {countryName} rates {data.healthcare}/10 for healthcare quality on the Numbeo Health Care Index.
+      {countryName} rates {data.healthcare}/10 for healthcare quality on the UHC Service Coverage Index.
       US health insurance typically does not cover care abroad — most expats and
       digital nomads use international health insurance instead.
     </p>

@@ -6,7 +6,7 @@
     "pollution": "Numbeo Pollution Index (latest available) - numbeo.com",
     "traffic": "Numbeo Traffic Index (latest available) - numbeo.com",
     "unemployment": "World Bank ILO Unemployment (latest available) - data.worldbank.org",
-    "gdpGrowth": "World Bank GDP Growth (latest available) - data.worldbank.org",
+    "hdi": "UNDP Human Development Index via Our World in Data - ourworldindata.org",
     "happiness": "World Happiness Report via Our World in Data (latest available) - ourworldindata.org",
     "internet": "Speedtest Global Index via Wikipedia (latest available) - en.wikipedia.org/wiki/List_of_countries_by_Internet_connection_speeds"
   },
@@ -17,7 +17,7 @@
       "pollution": 8,
       "traffic": 8,
       "unemployment": 8,
-      "gdpGrowth": 7,
+      "hdi": 8,
       "happiness": 6,
       "internet": 9,
       "english": 612.0,
@@ -35,14 +35,12 @@
         "pollution": 48.0,
         "traffic": 3618.6,
         "unemployment": 6.16,
-        "gdpGrowth": 2.14,
+        "hdi": 0.89,
         "happiness": 6.029,
         "internet": 243.84,
         "english": 612.0,
         "visa_days": 90
-      },
-      "grade_percent": 80,
-      "grade_label": "Excellent destination"
+      }
     },
     "spain": {
       "safety": 8,
@@ -50,7 +48,7 @@
       "pollution": 8,
       "traffic": 9,
       "unemployment": 6,
-      "gdpGrowth": 8,
+      "hdi": 9,
       "happiness": 7,
       "internet": 10,
       "english": 540.0,
@@ -68,14 +66,12 @@
         "pollution": 56.8,
         "traffic": 2814.6,
         "unemployment": 10.38,
-        "gdpGrowth": 3.46,
+        "hdi": 0.918,
         "happiness": 6.54,
         "internet": 277.98,
         "english": 540.0,
         "visa_days": 90
-      },
-      "grade_percent": 79,
-      "grade_label": "Very good destination"
+      }
     },
     "mexico": {
       "safety": 3,
@@ -83,7 +79,7 @@
       "pollution": 5,
       "traffic": 5,
       "unemployment": 10,
-      "gdpGrowth": 6,
+      "hdi": 6,
       "happiness": 7,
       "internet": 7,
       "english": 440.0,
@@ -101,14 +97,12 @@
         "pollution": 98.8,
         "traffic": 6850.9,
         "unemployment": 2.67,
-        "gdpGrowth": 1.43,
+        "hdi": 0.789,
         "happiness": 6.972,
         "internet": 104.25,
         "english": 440.0,
         "visa_days": 180
-      },
-      "grade_percent": 62,
-      "grade_label": "Good destination"
+      }
     },
     "germany": {
       "safety": 8,
@@ -116,7 +110,7 @@
       "pollution": 8,
       "traffic": 9,
       "unemployment": 9,
-      "gdpGrowth": 4,
+      "hdi": 10,
       "happiness": 7,
       "internet": 7,
       "english": 615.0,
@@ -134,14 +128,12 @@
         "pollution": 45.3,
         "traffic": 2343.4,
         "unemployment": 3.71,
-        "gdpGrowth": -0.5,
+        "hdi": 0.959,
         "happiness": 6.882,
         "internet": 103.72,
         "english": 615.0,
         "visa_days": 90
-      },
-      "grade_percent": 79,
-      "grade_label": "Very good destination"
+      }
     },
     "italy": {
       "safety": 7,
@@ -149,7 +141,7 @@
       "pollution": 5,
       "traffic": 7,
       "unemployment": 8,
-      "gdpGrowth": 5,
+      "hdi": 9,
       "happiness": 7,
       "internet": 7,
       "english": 513.0,
@@ -167,14 +159,12 @@
         "pollution": 90.0,
         "traffic": 4065.8,
         "unemployment": 6.39,
-        "gdpGrowth": 0.69,
+        "hdi": 0.915,
         "happiness": 6.574,
         "internet": 117.11,
         "english": 513.0,
         "visa_days": 90
-      },
-      "grade_percent": 70,
-      "grade_label": "Very good destination"
+      }
     },
     "greece": {
       "safety": 7,
@@ -182,7 +172,7 @@
       "pollution": 6,
       "traffic": 7,
       "unemployment": 7,
-      "gdpGrowth": 7,
+      "hdi": 9,
       "happiness": 6,
       "internet": 7,
       "english": 592.0,
@@ -200,14 +190,12 @@
         "pollution": 85.8,
         "traffic": 4305.0,
         "unemployment": 8.54,
-        "gdpGrowth": 2.09,
+        "hdi": 0.908,
         "happiness": 5.697,
         "internet": 94.29,
         "english": 592.0,
         "visa_days": 90
-      },
-      "grade_percent": 70,
-      "grade_label": "Very good destination"
+      }
     },
     "costa-rica": {
       "safety": 7,
@@ -215,7 +203,7 @@
       "pollution": 7,
       "traffic": 3,
       "unemployment": 8,
-      "gdpGrowth": 9,
+      "hdi": 7,
       "happiness": 7,
       "internet": 8,
       "english": 516.0,
@@ -233,14 +221,12 @@
         "pollution": 70.4,
         "traffic": 9516.5,
         "unemployment": 6.84,
-        "gdpGrowth": 4.32,
+        "hdi": 0.833,
         "happiness": 7.439,
         "internet": 169.03,
         "english": 516.0,
         "visa_days": 180
-      },
-      "grade_percent": 73,
-      "grade_label": "Very good destination"
+      }
     },
     "panama": {
       "safety": 6,
@@ -248,7 +234,7 @@
       "pollution": 5,
       "traffic": 5,
       "unemployment": 7,
-      "gdpGrowth": 7,
+      "hdi": 7,
       "happiness": 7,
       "internet": 9,
       "english": 491.0,
@@ -266,14 +252,12 @@
         "pollution": 97.0,
         "traffic": 6953.3,
         "unemployment": 8.36,
-        "gdpGrowth": 2.75,
+        "hdi": 0.839,
         "happiness": 6.547,
         "internet": 219.49,
         "english": 491.0,
         "visa_days": 180
-      },
-      "grade_percent": 68,
-      "grade_label": "Good destination"
+      }
     },
     "thailand": {
       "safety": 6,
@@ -281,7 +265,7 @@
       "pollution": 4,
       "traffic": 5,
       "unemployment": 10,
-      "gdpGrowth": 7,
+      "hdi": 6,
       "happiness": 6,
       "internet": 10,
       "english": 402.0,
@@ -299,14 +283,12 @@
         "pollution": 133.0,
         "traffic": 6704.0,
         "unemployment": 0.78,
-        "gdpGrowth": 2.54,
+        "hdi": 0.798,
         "happiness": 6.296,
         "internet": 279.65,
         "english": 402.0,
         "visa_days": 60
-      },
-      "grade_percent": 70,
-      "grade_label": "Very good destination"
+      }
     },
     "malaysia": {
       "safety": 8,
@@ -314,7 +296,7 @@
       "pollution": 5,
       "traffic": 4,
       "unemployment": 9,
-      "gdpGrowth": 10,
+      "hdi": 6,
       "happiness": 6,
       "internet": 8,
       "english": 581.0,
@@ -332,14 +314,12 @@
         "pollution": 103.2,
         "traffic": 7710.3,
         "unemployment": 3.76,
-        "gdpGrowth": 5.11,
+        "hdi": 0.819,
         "happiness": 6.005,
         "internet": 168.07,
         "english": 581.0,
         "visa_days": 180
-      },
-      "grade_percent": 74,
-      "grade_label": "Very good destination"
+      }
     },
     "indonesia": {
       "safety": 6,
@@ -347,7 +327,7 @@
       "pollution": 4,
       "traffic": 5,
       "unemployment": 9,
-      "gdpGrowth": 10,
+      "hdi": 4,
       "happiness": 6,
       "internet": 5,
       "english": 471.0,
@@ -365,14 +345,12 @@
         "pollution": 117.6,
         "traffic": 6920.1,
         "unemployment": 3.24,
-        "gdpGrowth": 5.03,
+        "hdi": 0.728,
         "happiness": 5.617,
         "internet": 45.91,
         "english": 471.0,
         "visa_days": 30
-      },
-      "grade_percent": 64,
-      "grade_label": "Good destination"
+      }
     },
     "colombia": {
       "safety": 3,
@@ -380,7 +358,7 @@
       "pollution": 5,
       "traffic": 6,
       "unemployment": 7,
-      "gdpGrowth": 6,
+      "hdi": 6,
       "happiness": 6,
       "internet": 9,
       "english": 480.0,
@@ -398,14 +376,12 @@
         "pollution": 109.7,
         "traffic": 5013.1,
         "unemployment": 8.29,
-        "gdpGrowth": 1.6,
+        "hdi": 0.788,
         "happiness": 6.04,
         "internet": 214.3,
         "english": 480.0,
         "visa_days": 180
-      },
-      "grade_percent": 60,
-      "grade_label": "Good destination"
+      }
     },
     "croatia": {
       "safety": 8,
@@ -413,7 +389,7 @@
       "pollution": 8,
       "traffic": 9,
       "unemployment": 8,
-      "gdpGrowth": 8,
+      "hdi": 8,
       "happiness": 6,
       "internet": 8,
       "english": 617.0,
@@ -431,14 +407,12 @@
         "pollution": 52.2,
         "traffic": 2741.4,
         "unemployment": 5.0,
-        "gdpGrowth": 3.83,
+        "hdi": 0.889,
         "happiness": 6.009,
         "internet": 136.75,
         "english": 617.0,
         "visa_days": 90
-      },
-      "grade_percent": 78,
-      "grade_label": "Very good destination"
+      }
     },
     "czech-republic": {
       "safety": 8,
@@ -446,7 +420,7 @@
       "pollution": 8,
       "traffic": 10,
       "unemployment": 10,
-      "gdpGrowth": 6,
+      "hdi": 9,
       "happiness": 7,
       "internet": 7,
       "english": 582.0,
@@ -464,14 +438,12 @@
         "pollution": 55.6,
         "traffic": 1817.6,
         "unemployment": 2.83,
-        "gdpGrowth": 1.23,
+        "hdi": 0.915,
         "happiness": 6.821,
         "internet": 92.71,
         "english": 582.0,
         "visa_days": 90
-      },
-      "grade_percent": 80,
-      "grade_label": "Excellent destination"
+      }
     },
     "poland": {
       "safety": 8,
@@ -479,7 +451,7 @@
       "pollution": 5,
       "traffic": 8,
       "unemployment": 10,
-      "gdpGrowth": 8,
+      "hdi": 9,
       "happiness": 7,
       "internet": 9,
       "english": 600.0,
@@ -497,14 +469,12 @@
         "pollution": 98.2,
         "traffic": 3245.8,
         "unemployment": 2.98,
-        "gdpGrowth": 3.03,
+        "hdi": 0.906,
         "happiness": 6.768,
         "internet": 223.25,
         "english": 600.0,
         "visa_days": 90
-      },
-      "grade_percent": 79,
-      "grade_label": "Very good destination"
+      }
     },
     "hungary": {
       "safety": 8,
@@ -512,7 +482,7 @@
       "pollution": 6,
       "traffic": 9,
       "unemployment": 9,
-      "gdpGrowth": 5,
+      "hdi": 8,
       "happiness": 6,
       "internet": 10,
       "english": 590.0,
@@ -530,14 +500,12 @@
         "pollution": 80.0,
         "traffic": 2776.9,
         "unemployment": 4.52,
-        "gdpGrowth": 0.56,
+        "hdi": 0.87,
         "happiness": 5.937,
         "internet": 251.72,
         "english": 590.0,
         "visa_days": 90
-      },
-      "grade_percent": 77,
-      "grade_label": "Very good destination"
+      }
     },
     "romania": {
       "safety": 7,
@@ -545,7 +513,7 @@
       "pollution": 5,
       "traffic": 8,
       "unemployment": 8,
-      "gdpGrowth": 5,
+      "hdi": 7,
       "happiness": 7,
       "internet": 10,
       "english": 605.0,
@@ -563,14 +531,12 @@
         "pollution": 99.7,
         "traffic": 3613.6,
         "unemployment": 5.99,
-        "gdpGrowth": 0.92,
+        "hdi": 0.845,
         "happiness": 6.629,
         "internet": 283.06,
         "english": 605.0,
         "visa_days": 90
-      },
-      "grade_percent": 74,
-      "grade_label": "Very good destination"
+      }
     },
     "bulgaria": {
       "safety": 8,
@@ -578,7 +544,7 @@
       "pollution": 4,
       "traffic": 9,
       "unemployment": 9,
-      "gdpGrowth": 8,
+      "hdi": 7,
       "happiness": 6,
       "internet": 7,
       "english": 594.0,
@@ -596,14 +562,12 @@
         "pollution": 112.7,
         "traffic": 2708.7,
         "unemployment": 3.54,
-        "gdpGrowth": 3.39,
+        "hdi": 0.845,
         "happiness": 5.703,
         "internet": 94.44,
         "english": 594.0,
         "visa_days": 90
-      },
-      "grade_percent": 72,
-      "grade_label": "Very good destination"
+      }
     },
     "vietnam": {
       "safety": 7,
@@ -611,7 +575,7 @@
       "pollution": 3,
       "traffic": 8,
       "unemployment": 10,
-      "gdpGrowth": 10,
+      "hdi": 5,
       "happiness": 6,
       "internet": 10,
       "english": 500.0,
@@ -629,14 +593,12 @@
         "pollution": 149.5,
         "traffic": 3388.9,
         "unemployment": 1.52,
-        "gdpGrowth": 7.09,
+        "hdi": 0.766,
         "happiness": 6.428,
         "internet": 281.72,
         "english": 500.0,
         "visa_days": 90
-      },
-      "grade_percent": 73,
-      "grade_label": "Very good destination"
+      }
     },
     "japan": {
       "safety": 9,
@@ -644,7 +606,7 @@
       "pollution": 7,
       "traffic": 9,
       "unemployment": 10,
-      "gdpGrowth": 5,
+      "hdi": 9,
       "happiness": 6,
       "internet": 10,
       "english": 446.0,
@@ -662,14 +624,12 @@
         "pollution": 60.8,
         "traffic": 2121.6,
         "unemployment": 2.45,
-        "gdpGrowth": 0.1,
+        "hdi": 0.925,
         "happiness": 6.13,
         "internet": 255.27,
         "english": 446.0,
         "visa_days": 90
-      },
-      "grade_percent": 84,
-      "grade_label": "Excellent destination"
+      }
     },
     "south-korea": {
       "safety": 7,
@@ -677,7 +637,7 @@
       "pollution": 5,
       "traffic": 9,
       "unemployment": 10,
-      "gdpGrowth": 7,
+      "hdi": 9,
       "happiness": 6,
       "internet": 10,
       "english": 522.0,
@@ -695,14 +655,12 @@
         "pollution": 102.5,
         "traffic": 2721.6,
         "unemployment": 2.68,
-        "gdpGrowth": 2.0,
+        "hdi": 0.937,
         "happiness": 6.04,
         "internet": 257.76,
         "english": 522.0,
         "visa_days": 90
-      },
-      "grade_percent": 77,
-      "grade_label": "Very good destination"
+      }
     },
     "australia": {
       "safety": 8,
@@ -710,7 +668,7 @@
       "pollution": 9,
       "traffic": 5,
       "unemployment": 9,
-      "gdpGrowth": 6,
+      "hdi": 10,
       "happiness": 7,
       "internet": 8,
       "english": 999,
@@ -728,14 +686,12 @@
         "pollution": 44.6,
         "traffic": 6468.9,
         "unemployment": 4.09,
-        "gdpGrowth": 1.37,
+        "hdi": 0.958,
         "happiness": 6.916,
         "internet": 154.09,
         "english": 999,
         "visa_days": 90
-      },
-      "grade_percent": 80,
-      "grade_label": "Excellent destination"
+      }
     },
     "new-zealand": {
       "safety": 9,
@@ -743,7 +699,7 @@
       "pollution": 9,
       "traffic": 6,
       "unemployment": 8,
-      "gdpGrowth": 6,
+      "hdi": 9,
       "happiness": 7,
       "internet": 9,
       "english": 999,
@@ -761,14 +717,12 @@
         "pollution": 44.8,
         "traffic": 5531.0,
         "unemployment": 5.08,
-        "gdpGrowth": 1.29,
+        "hdi": 0.938,
         "happiness": 6.995,
         "internet": 201.91,
         "english": 999,
         "visa_days": 90
-      },
-      "grade_percent": 83,
-      "grade_label": "Excellent destination"
+      }
     },
     "canada": {
       "safety": 8,
@@ -776,7 +730,7 @@
       "pollution": 8,
       "traffic": 6,
       "unemployment": 8,
-      "gdpGrowth": 6,
+      "hdi": 9,
       "happiness": 7,
       "internet": 10,
       "english": 999,
@@ -794,14 +748,12 @@
         "pollution": 48.4,
         "traffic": 5370.2,
         "unemployment": 6.91,
-        "gdpGrowth": 1.55,
+        "hdi": 0.939,
         "happiness": 6.741,
         "internet": 277.7,
         "english": 999,
         "visa_days": 180
-      },
-      "grade_percent": 80,
-      "grade_label": "Excellent destination"
+      }
     },
     "ireland": {
       "safety": 9,
@@ -809,7 +761,7 @@
       "pollution": 8,
       "traffic": 7,
       "unemployment": 9,
-      "gdpGrowth": 7,
+      "hdi": 10,
       "happiness": 7,
       "internet": 9,
       "english": 999,
@@ -827,14 +779,12 @@
         "pollution": 57.7,
         "traffic": 4272.1,
         "unemployment": 4.63,
-        "gdpGrowth": 2.6,
+        "hdi": 0.949,
         "happiness": 6.928,
         "internet": 220.71,
         "english": 999,
         "visa_days": 90
-      },
-      "grade_percent": 82,
-      "grade_label": "Excellent destination"
+      }
     },
     "netherlands": {
       "safety": 8,
@@ -842,7 +792,7 @@
       "pollution": 9,
       "traffic": 10,
       "unemployment": 9,
-      "gdpGrowth": 6,
+      "hdi": 10,
       "happiness": 7,
       "internet": 9,
       "english": 624.0,
@@ -860,14 +810,12 @@
         "pollution": 33.1,
         "traffic": 1852.4,
         "unemployment": 3.87,
-        "gdpGrowth": 1.08,
+        "hdi": 0.955,
         "happiness": 7.223,
         "internet": 237.66,
         "english": 624.0,
         "visa_days": 90
-      },
-      "grade_percent": 82,
-      "grade_label": "Excellent destination"
+      }
     },
     "france": {
       "safety": 6,
@@ -875,7 +823,7 @@
       "pollution": 7,
       "traffic": 8,
       "unemployment": 7,
-      "gdpGrowth": 6,
+      "hdi": 9,
       "happiness": 7,
       "internet": 10,
       "english": 539.0,
@@ -893,14 +841,12 @@
         "pollution": 72.6,
         "traffic": 3374.8,
         "unemployment": 7.54,
-        "gdpGrowth": 1.19,
+        "hdi": 0.92,
         "happiness": 6.586,
         "internet": 352.35,
         "english": 539.0,
         "visa_days": 90
-      },
-      "grade_percent": 73,
-      "grade_label": "Very good destination"
+      }
     },
     "argentina": {
       "safety": 6,
@@ -908,7 +854,7 @@
       "pollution": 6,
       "traffic": 7,
       "unemployment": 7,
-      "gdpGrowth": 3,
+      "hdi": 8,
       "happiness": 6,
       "internet": 7,
       "english": 575.0,
@@ -926,14 +872,12 @@
         "pollution": 85.8,
         "traffic": 4181.1,
         "unemployment": 7.14,
-        "gdpGrowth": -1.34,
+        "hdi": 0.865,
         "happiness": 6.43,
         "internet": 111.54,
         "english": 575.0,
         "visa_days": 90
-      },
-      "grade_percent": 65,
-      "grade_label": "Good destination"
+      }
     },
     "ecuador": {
       "safety": 3,
@@ -941,7 +885,7 @@
       "pollution": 5,
       "traffic": 6,
       "unemployment": 9,
-      "gdpGrowth": 3,
+      "hdi": 5,
       "happiness": 6,
       "internet": 8,
       "english": 466.0,
@@ -959,14 +903,12 @@
         "pollution": 100.9,
         "traffic": 5670.5,
         "unemployment": 3.31,
-        "gdpGrowth": -2.0,
+        "hdi": 0.777,
         "happiness": 6.144,
         "internet": 169.66,
         "english": 466.0,
         "visa_days": 90
-      },
-      "grade_percent": 59,
-      "grade_label": "Solid destination"
+      }
     },
     "morocco": {
       "safety": 7,
@@ -974,7 +916,7 @@
       "pollution": 4,
       "traffic": 8,
       "unemployment": 6,
-      "gdpGrowth": 8,
+      "hdi": 4,
       "happiness": 5,
       "internet": 5,
       "english": 492.0,
@@ -992,14 +934,12 @@
         "pollution": 118.9,
         "traffic": 3530.3,
         "unemployment": 9,
-        "gdpGrowth": 3.79,
+        "hdi": 0.71,
         "happiness": 4.646,
         "internet": 56.22,
         "english": 492.0,
         "visa_days": 90
-      },
-      "grade_percent": 60,
-      "grade_label": "Good destination"
+      }
     },
     "switzerland": {
       "safety": 9,
@@ -1007,7 +947,7 @@
       "pollution": 9,
       "traffic": 8,
       "unemployment": 9,
-      "gdpGrowth": 6,
+      "hdi": 10,
       "happiness": 7,
       "internet": 10,
       "english": 564.0,
@@ -1025,14 +965,12 @@
         "pollution": 38.9,
         "traffic": 3149.2,
         "unemployment": 4.87,
-        "gdpGrowth": 1.3,
+        "hdi": 0.97,
         "happiness": 7.018,
         "internet": 292.56,
         "english": 564.0,
         "visa_days": 90
-      },
-      "grade_percent": 86,
-      "grade_label": "Excellent destination"
+      }
     },
     "norway": {
       "safety": 8,
@@ -1040,7 +978,7 @@
       "pollution": 9,
       "traffic": 9,
       "unemployment": 9,
-      "gdpGrowth": 7,
+      "hdi": 10,
       "happiness": 7,
       "internet": 8,
       "english": 613.0,
@@ -1058,14 +996,12 @@
         "pollution": 30.5,
         "traffic": 2654.3,
         "unemployment": 4.64,
-        "gdpGrowth": 2.1,
+        "hdi": 0.97,
         "happiness": 7.242,
         "internet": 177.11,
         "english": 613.0,
         "visa_days": 90
-      },
-      "grade_percent": 82,
-      "grade_label": "Excellent destination"
+      }
     },
     "denmark": {
       "safety": 8,
@@ -1073,7 +1009,7 @@
       "pollution": 9,
       "traffic": 10,
       "unemployment": 8,
-      "gdpGrowth": 8,
+      "hdi": 10,
       "happiness": 8,
       "internet": 10,
       "english": 611.0,
@@ -1091,14 +1027,12 @@
         "pollution": 35.4,
         "traffic": 1822.8,
         "unemployment": 5.53,
-        "gdpGrowth": 3.48,
+        "hdi": 0.962,
         "happiness": 7.539,
         "internet": 291.6,
         "english": 611.0,
         "visa_days": 90
-      },
-      "grade_percent": 84,
-      "grade_label": "Excellent destination"
+      }
     },
     "sweden": {
       "safety": 7,
@@ -1106,7 +1040,7 @@
       "pollution": 10,
       "traffic": 9,
       "unemployment": 7,
-      "gdpGrowth": 5,
+      "hdi": 10,
       "happiness": 7,
       "internet": 9,
       "english": 609.0,
@@ -1124,14 +1058,12 @@
         "pollution": 27.4,
         "traffic": 2180.1,
         "unemployment": 8.69,
-        "gdpGrowth": 0.82,
+        "hdi": 0.959,
         "happiness": 7.255,
         "internet": 213.29,
         "english": 609.0,
         "visa_days": 90
-      },
-      "grade_percent": 77,
-      "grade_label": "Very good destination"
+      }
     },
     "belgium": {
       "safety": 8,
@@ -1139,7 +1071,7 @@
       "pollution": 6,
       "traffic": 7,
       "unemployment": 8,
-      "gdpGrowth": 6,
+      "hdi": 10,
       "happiness": 7,
       "internet": 8,
       "english": 608.0,
@@ -1157,14 +1089,12 @@
         "pollution": 78.2,
         "traffic": 4031.3,
         "unemployment": 5.91,
-        "gdpGrowth": 1.07,
+        "hdi": 0.951,
         "happiness": 6.926,
         "internet": 140.97,
         "english": 608.0,
         "visa_days": 90
-      },
-      "grade_percent": 77,
-      "grade_label": "Very good destination"
+      }
     },
     "austria": {
       "safety": 9,
@@ -1172,7 +1102,7 @@
       "pollution": 9,
       "traffic": 10,
       "unemployment": 8,
-      "gdpGrowth": 4,
+      "hdi": 9,
       "happiness": 7,
       "internet": 7,
       "english": 616.0,
@@ -1190,14 +1120,12 @@
         "pollution": 32.9,
         "traffic": 1441.9,
         "unemployment": 5.58,
-        "gdpGrowth": -0.66,
+        "hdi": 0.93,
         "happiness": 6.845,
         "internet": 114.0,
         "english": 616.0,
         "visa_days": 90
-      },
-      "grade_percent": 80,
-      "grade_label": "Excellent destination"
+      }
     },
     "finland": {
       "safety": 9,
@@ -1205,7 +1133,7 @@
       "pollution": 10,
       "traffic": 10,
       "unemployment": 6,
-      "gdpGrowth": 5,
+      "hdi": 10,
       "happiness": 8,
       "internet": 9,
       "english": 603.0,
@@ -1223,14 +1151,12 @@
         "pollution": 19.7,
         "traffic": 1547.4,
         "unemployment": 9.46,
-        "gdpGrowth": 0.42,
+        "hdi": 0.948,
         "happiness": 7.764,
         "internet": 180.47,
         "english": 603.0,
         "visa_days": 90
-      },
-      "grade_percent": 85,
-      "grade_label": "Excellent destination"
+      }
     },
     "united-kingdom": {
       "safety": 7,
@@ -1238,7 +1164,7 @@
       "pollution": 7,
       "traffic": 7,
       "unemployment": 9,
-      "gdpGrowth": 6,
+      "hdi": 10,
       "happiness": 7,
       "internet": 8,
       "english": 999,
@@ -1256,14 +1182,12 @@
         "pollution": 66.8,
         "traffic": 4030.2,
         "unemployment": 4.75,
-        "gdpGrowth": 1.13,
+        "hdi": 0.946,
         "happiness": 6.694,
         "internet": 172.24,
         "english": 999,
         "visa_days": 90
-      },
-      "grade_percent": 76,
-      "grade_label": "Very good destination"
+      }
     },
     "singapore": {
       "safety": 9,
@@ -1271,7 +1195,7 @@
       "pollution": 8,
       "traffic": 9,
       "unemployment": 10,
-      "gdpGrowth": 9,
+      "hdi": 10,
       "happiness": 7,
       "internet": 10,
       "english": 999,
@@ -1289,14 +1213,12 @@
         "pollution": 54.8,
         "traffic": 2403.9,
         "unemployment": 2.82,
-        "gdpGrowth": 4.39,
+        "hdi": 0.946,
         "happiness": 6.585,
         "internet": 425.46,
         "english": 999,
         "visa_days": 180
-      },
-      "grade_percent": 88,
-      "grade_label": "Excellent destination"
+      }
     },
     "united-arab-emirates": {
       "safety": 6,
@@ -1304,7 +1226,7 @@
       "pollution": 6,
       "traffic": 4,
       "unemployment": 10,
-      "gdpGrowth": 8,
+      "hdi": 10,
       "happiness": 7,
       "internet": 10,
       "english": 487.0,
@@ -1322,14 +1244,12 @@
         "pollution": 81.7,
         "traffic": 7973.5,
         "unemployment": 2.17,
-        "gdpGrowth": 3.99,
+        "hdi": 0.94,
         "happiness": 6.821,
         "internet": 384.51,
         "english": 487.0,
         "visa_days": 30
-      },
-      "grade_percent": 74,
-      "grade_label": "Very good destination"
+      }
     },
     "qatar": {
       "safety": 8,
@@ -1337,7 +1257,7 @@
       "pollution": 5,
       "traffic": 4,
       "unemployment": 10,
-      "gdpGrowth": 7,
+      "hdi": 8,
       "happiness": 6,
       "internet": 9,
       "english": 469.0,
@@ -1355,14 +1275,12 @@
         "pollution": 106.2,
         "traffic": 7264.8,
         "unemployment": 0.13,
-        "gdpGrowth": 2.36,
+        "hdi": 0.886,
         "happiness": 6.374,
         "internet": 211.97,
         "english": 469.0,
         "visa_days": 90
-      },
-      "grade_percent": 74,
-      "grade_label": "Very good destination"
+      }
     },
     "saudi-arabia": {
       "safety": 6,
@@ -1370,7 +1288,7 @@
       "pollution": 5,
       "traffic": 4,
       "unemployment": 9,
-      "gdpGrowth": 6,
+      "hdi": 9,
       "happiness": 7,
       "internet": 8,
       "english": 404.0,
@@ -1388,14 +1306,12 @@
         "pollution": 107.7,
         "traffic": 7535.2,
         "unemployment": 3.04,
-        "gdpGrowth": 2.0,
+        "hdi": 0.9,
         "happiness": 6.817,
         "internet": 167.93,
         "english": 404.0,
         "visa_days": 30
-      },
-      "grade_percent": 68,
-      "grade_label": "Good destination"
+      }
     },
     "iceland": {
       "safety": 10,
@@ -1403,7 +1319,7 @@
       "pollution": 10,
       "traffic": 8,
       "unemployment": 9,
-      "gdpGrowth": 4,
+      "hdi": 10,
       "happiness": 8,
       "internet": 10,
       "english": 630.0,
@@ -1421,14 +1337,12 @@
         "pollution": 28.4,
         "traffic": 3186.9,
         "unemployment": 3.62,
-        "gdpGrowth": -0.97,
+        "hdi": 0.972,
         "happiness": 7.54,
         "internet": 347.3,
         "english": 630.0,
         "visa_days": 90
-      },
-      "grade_percent": 90,
-      "grade_label": "Outstanding destination"
+      }
     },
     "india": {
       "safety": 4,
@@ -1436,7 +1350,7 @@
       "pollution": 4,
       "traffic": 5,
       "unemployment": 9,
-      "gdpGrowth": 10,
+      "hdi": 4,
       "happiness": 5,
       "internet": 6,
       "english": 484.0,
@@ -1454,14 +1368,12 @@
         "pollution": 127.0,
         "traffic": 6037.7,
         "unemployment": 4.22,
-        "gdpGrowth": 6.49,
+        "hdi": 0.685,
         "happiness": 4.536,
         "internet": 60.85,
         "english": 484.0,
         "visa_days": 90
-      },
-      "grade_percent": 58,
-      "grade_label": "Solid destination"
+      }
     },
     "philippines": {
       "safety": 6,
@@ -1469,7 +1381,7 @@
       "pollution": 4,
       "traffic": 6,
       "unemployment": 10,
-      "gdpGrowth": 10,
+      "hdi": 4,
       "happiness": 6,
       "internet": 7,
       "english": 569.0,
@@ -1487,14 +1399,12 @@
         "pollution": 127.1,
         "traffic": 5707.7,
         "unemployment": 2.23,
-        "gdpGrowth": 5.69,
+        "hdi": 0.72,
         "happiness": 6.206,
         "internet": 109.86,
         "english": 569.0,
         "visa_days": 30
-      },
-      "grade_percent": 67,
-      "grade_label": "Good destination"
+      }
     },
     "china": {
       "safety": 5,
@@ -1502,7 +1412,7 @@
       "pollution": 3,
       "traffic": 8,
       "unemployment": 9,
-      "gdpGrowth": 9,
+      "hdi": 6,
       "happiness": 6,
       "internet": 9,
       "english": 464.0,
@@ -1520,14 +1430,12 @@
         "pollution": 138.1,
         "traffic": 3524.6,
         "unemployment": 4.62,
-        "gdpGrowth": 4.98,
+        "hdi": 0.797,
         "happiness": 6.074,
         "internet": 206.91,
         "english": 464.0,
         "visa_days": 90
-      },
-      "grade_percent": 67,
-      "grade_label": "Good destination"
+      }
     },
     "georgia": {
       "safety": 6,
@@ -1535,7 +1443,7 @@
       "pollution": 4,
       "traffic": 9,
       "unemployment": 5,
-      "gdpGrowth": 10,
+      "hdi": 7,
       "happiness": 6,
       "internet": 5,
       "english": 541.0,
@@ -1553,14 +1461,12 @@
         "pollution": 121.4,
         "traffic": 2277.8,
         "unemployment": 12.1,
-        "gdpGrowth": 9.68,
+        "hdi": 0.844,
         "happiness": 5.517,
         "internet": 44.73,
         "english": 541.0,
         "visa_days": 360
-      },
-      "grade_percent": 62,
-      "grade_label": "Good destination"
+      }
     },
     "serbia": {
       "safety": 6,
@@ -1568,7 +1474,7 @@
       "pollution": 4,
       "traffic": 8,
       "unemployment": 7,
-      "gdpGrowth": 8,
+      "hdi": 7,
       "happiness": 7,
       "internet": 7,
       "english": 579.0,
@@ -1586,14 +1492,12 @@
         "pollution": 116.1,
         "traffic": 3017.3,
         "unemployment": 7.12,
-        "gdpGrowth": 3.95,
+        "hdi": 0.833,
         "happiness": 6.691,
         "internet": 102.35,
         "english": 579.0,
         "visa_days": 90
-      },
-      "grade_percent": 66,
-      "grade_label": "Good destination"
+      }
     },
     "kenya": {
       "safety": 4,
@@ -1601,7 +1505,7 @@
       "pollution": 4,
       "traffic": 4,
       "unemployment": 8,
-      "gdpGrowth": 9,
+      "hdi": 3,
       "happiness": 5,
       "internet": 5,
       "english": 593.0,
@@ -1619,14 +1523,12 @@
         "pollution": 120.8,
         "traffic": 7305.9,
         "unemployment": 5.45,
-        "gdpGrowth": 4.72,
+        "hdi": 0.628,
         "happiness": 4.674,
         "internet": 16.48,
         "english": 593.0,
         "visa_days": 90
-      },
-      "grade_percent": 53,
-      "grade_label": "Solid destination"
+      }
     },
     "peru": {
       "safety": 5,
@@ -1634,7 +1536,7 @@
       "pollution": 3,
       "traffic": 5,
       "unemployment": 8,
-      "gdpGrowth": 8,
+      "hdi": 6,
       "happiness": 6,
       "internet": 10,
       "english": 519.0,
@@ -1652,14 +1554,12 @@
         "pollution": 145.6,
         "traffic": 6346.7,
         "unemployment": 5.12,
-        "gdpGrowth": 3.3,
+        "hdi": 0.794,
         "happiness": 5.974,
         "internet": 258.37,
         "english": 519.0,
         "visa_days": 180
-      },
-      "grade_percent": 63,
-      "grade_label": "Good destination"
+      }
     },
     "brazil": {
       "safety": 4,
@@ -1667,7 +1567,7 @@
       "pollution": 6,
       "traffic": 6,
       "unemployment": 8,
-      "gdpGrowth": 8,
+      "hdi": 6,
       "happiness": 7,
       "internet": 9,
       "english": 482.0,
@@ -1685,14 +1585,12 @@
         "pollution": 89.7,
         "traffic": 5474.6,
         "unemployment": 5.97,
-        "gdpGrowth": 3.42,
+        "hdi": 0.786,
         "happiness": 6.634,
         "internet": 221.53,
         "english": 482.0,
         "visa_days": 90
-      },
-      "grade_percent": 66,
-      "grade_label": "Good destination"
+      }
     },
     "chile": {
       "safety": 7,
@@ -1700,7 +1598,7 @@
       "pollution": 3,
       "traffic": 8,
       "unemployment": 7,
-      "gdpGrowth": 7,
+      "hdi": 8,
       "happiness": 6,
       "internet": 10,
       "english": 517.0,
@@ -1718,14 +1616,12 @@
         "pollution": 138.6,
         "traffic": 3230.6,
         "unemployment": 8.97,
-        "gdpGrowth": 2.64,
+        "hdi": 0.878,
         "happiness": 6.302,
         "internet": 334.99,
         "english": 517.0,
         "visa_days": 90
-      },
-      "grade_percent": 70,
-      "grade_label": "Very good destination"
+      }
     },
     "albania": {
       "safety": 7,
@@ -1733,7 +1629,7 @@
       "pollution": 3,
       "traffic": 10,
       "unemployment": 6,
-      "gdpGrowth": 9,
+      "hdi": 6,
       "happiness": 6,
       "internet": 7,
       "english": 532.0,
@@ -1751,14 +1647,12 @@
         "pollution": 135.2,
         "traffic": 1514.8,
         "unemployment": 10.93,
-        "gdpGrowth": 4.05,
+        "hdi": 0.81,
         "happiness": 5.662,
         "internet": 93.64,
         "english": 532.0,
         "visa_days": 360
-      },
-      "grade_percent": 66,
-      "grade_label": "Good destination"
+      }
     },
     "sri-lanka": {
       "safety": 6,
@@ -1766,7 +1660,7 @@
       "pollution": 5,
       "traffic": 4,
       "unemployment": 9,
-      "gdpGrowth": 10,
+      "hdi": 5,
       "happiness": 4,
       "internet": 5,
       "english": 486.0,
@@ -1784,14 +1678,12 @@
         "pollution": 99.1,
         "traffic": 7224.4,
         "unemployment": 4.0,
-        "gdpGrowth": 5.01,
+        "hdi": 0.776,
         "happiness": 4.013,
         "internet": 38.61,
         "english": 486.0,
         "visa_days": 30
-      },
-      "grade_percent": 61,
-      "grade_label": "Good destination"
+      }
     },
     "egypt": {
       "safety": 5,
@@ -1799,7 +1691,7 @@
       "pollution": 3,
       "traffic": 3,
       "unemployment": 8,
-      "gdpGrowth": 7,
+      "hdi": 5,
       "happiness": 4,
       "internet": 7,
       "english": 459.0,
@@ -1817,14 +1709,12 @@
         "pollution": 146.4,
         "traffic": 8488.8,
         "unemployment": 6.78,
-        "gdpGrowth": 2.4,
+        "hdi": 0.754,
         "happiness": 3.862,
         "internet": 92.5,
         "english": 459.0,
         "visa_days": 30
-      },
-      "grade_percent": 56,
-      "grade_label": "Solid destination"
+      }
     }
   }
 }

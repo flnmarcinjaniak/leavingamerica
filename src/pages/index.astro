@@ -8,10 +8,10 @@ function computeScore(q: Record<string, number>) {
     safety:       0.25,
     healthcare:   0.20,
     happiness:    0.15,
-    gdpGrowth:    0.05,
-    pollution:    0.10,
-    unemployment: 0.10,
-    internet:     0.10,
+    hdi:          0.15,
+    pollution:    0.08,
+    unemployment: 0.07,
+    internet:     0.05,
     traffic:      0.05,
   };
   let total = 0, totalWeight = 0;
@@ -509,13 +509,13 @@ const qs = qualityScores.countries as Record<string, any>;
                   </div>
                   <div class="quality-item">
                     <div class="quality-row">
-                      <span class="progress-label">GDP Growth</span>
-                      <span class="progress-score" id="gdpScore">-</span>
+                      <span class="progress-label">Human Development</span>
+                      <span class="progress-score" id="hdiScore">-</span>
                     </div>
                     <div class="progress-track">
-                      <div class="progress-bar bar-gdp" id="gdpBar"></div>
+                      <div class="progress-bar bar-hdi" id="hdiBar"></div>
                     </div>
-                    <span class="quality-raw" id="gdpRaw"></span>
+                    <span class="quality-raw" id="hdiRaw"></span>
                   </div>
                 </div>
               </div>
@@ -584,7 +584,7 @@ const qs = qualityScores.countries as Record<string, any>;
                     <img src="/images/logo-worldbank.webp" alt="World Bank" class="source-logo"/>
                     <div>
                       <span class="source-name">World Bank</span>
-                      <span class="source-desc">Unemployment, GDP Growth, PPP</span>
+                      <span class="source-desc">Unemployment, Human Development, PPP</span>
                     </div>
                   </a>
                   <a href="https://ourworldindata.org" target="_blank" class="source-badge">
@@ -1128,10 +1128,10 @@ const qs = qualityScores.countries as Record<string, any>;
       safety: 0.25,
       healthcare: 0.20,
       happiness: 0.15,
-      gdpGrowth: 0.05,
-      pollution: 0.10,
-      unemployment: 0.10,
-      internet: 0.10,
+      hdi: 0.15,
+      pollution: 0.08,
+      unemployment: 0.07,
+      internet: 0.05,
       traffic: 0.05
     };
 
@@ -1378,7 +1378,7 @@ const qs = qualityScores.countries as Record<string, any>;
         ['internet',     'internetScore',  'internetBar'],
         ['traffic',      'trafficScore',   'trafficBar'],
         ['unemployment', 'unempScore',     'unempBar'],
-        ['gdpGrowth',    'gdpScore',       'gdpBar']
+        ['hdi',          'hdiScore',       'hdiBar']
       ];
 
       metrics.forEach(([key, scoreId, barId]) => {
@@ -1437,7 +1437,7 @@ const qs = qualityScores.countries as Record<string, any>;
         { key: 'internet',     rawId: 'internetRaw',  label: 'Mbps avg speed' },
         { key: 'traffic',      rawId: 'trafficRaw',   label: 'Traffic Index (lower = better)' },
         { key: 'unemployment', rawId: 'unempRaw',     label: '% unemployment rate' },
-        { key: 'gdpGrowth',    rawId: 'gdpRaw',       label: '% GDP growth' }
+        { key: 'hdi',          rawId: 'hdiRaw',       label: 'HDI score' }
       ];
       rawMetrics.forEach(({ key, rawId, label }) => {
         const el = document.getElementById(rawId);

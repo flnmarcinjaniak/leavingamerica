@@ -73,10 +73,10 @@ function calculateGrade(q) {
   else if (percent >= 80) label = 'Excellent destination';
   else if (percent >= 70) label = 'Very good destination';
   else if (percent >= 60) label = 'Good destination';
-  else if (percent >= 50) label = 'Solid destination';
+  else if (percent >= 50) label = 'Moderate destination';
   else if (percent >= 40) label = 'Mixed destination';
-  else if (percent >= 30) label = 'Below average destination';
-  else label = 'Needs careful research';
+  else if (percent >= 30) label = 'Limited destination';
+  else label = 'Challenging destination';
   return { percent, label };
 }
 

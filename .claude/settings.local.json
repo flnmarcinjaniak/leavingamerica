@@ -10,7 +10,8 @@
       "Bash(node -e \"const d = require\\('./src/data/countries.json'\\); console.log\\('Total countries:', d.length\\); d.forEach\\(c => console.log\\(c.id, '-', c.name\\)\\);\")",
       "Bash(node -e \"const d = require\\('./src/data/us-cities.json'\\); console.log\\('Total cities:', d.length\\); d.forEach\\(\\(c,i\\) => console.log\\(\\(i+1\\)+'.',c.name+',',c.state,'| costIndex:',c.costIndex,'| rent: $'+c.rentOneBedroomAverage\\)\\);\")",
       "Bash(pip install *)",
-      "Bash(python -m pip install requests beautifulsoup4)"
+      "Bash(python -m pip install requests beautifulsoup4)",
+      "Bash(node -e ' *)"
     ]
   }
 }

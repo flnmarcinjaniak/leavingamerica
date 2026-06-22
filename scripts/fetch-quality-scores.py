@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import json
+import os
 import time
 import csv
 import io
@@ -1120,12 +1121,34 @@ for numbeo_name, slug in COUNTRIES.items():
           f"tax={results[slug]['tax_system']}, "
           f"nomad={results[slug]['nomad_visa']}")
 
+# Merge with existing JSON to preserve enrichment fields added by other scripts
+# (generate-quick-facts.py, fetch-monthly-budget.py, fetch-country-facts.py)
+# that this script does not compute and should never overwrite.
+existing_data = {}
+existing_path = "src/data/quality-scores.json"
+if os.path.exists(existing_path):
+    with open(existing_path, 'r', encoding='utf-8') as f:
+        existing_json = json.load(f)
+        existing_data = existing_json.get('countries', {})
+
+merged_countries = {}
+for slug, new_fields in results.items():
+    existing_country = existing_data.get(slug, {})
+    merged_country = {**existing_country, **new_fields}
+    merged_countries[slug] = merged_country
+
+# Preserve any countries that exist in the old file but weren't in this run's
+# results (defensive — shouldn't normally happen)
+for slug, old_country in existing_data.items():
+    if slug not in merged_countries:
+        merged_countries[slug] = old_country
+
 # SAVE
 output = {
     "lastUpdated": str(date.today()),
     "source": {
-        "safety": "Numbeo Safety Index (latest available) - numbeo.com",
-        "healthcare": "Numbeo Health Care Index (latest available) - numbeo.com",
+        "safety": "Global Peace Index (Institute for Economics and Peace) via Wikipedia, with World Bank homicide rate as fallback",
+        "healthcare": "UHC Service Coverage Index (World Bank/WHO) - data.worldbank.org",
         "pollution": "Numbeo Pollution Index (latest available) - numbeo.com",
         "traffic": "Numbeo Traffic Index (latest available) - numbeo.com",
         "unemployment": "World Bank ILO Unemployment (latest available) - data.worldbank.org",
@@ -1133,7 +1156,7 @@ output = {
         "happiness": "World Happiness Report via Our World in Data (latest available) - ourworldindata.org",
         "internet": "Speedtest Global Index via Wikipedia (latest available) - en.wikipedia.org/wiki/List_of_countries_by_Internet_connection_speeds"
     },
-    "countries": results
+    "countries": merged_countries
 }
 
 with open("src/data/quality-scores.json", "w", encoding="utf-8") as f:

@@ -40,13 +40,13 @@ def calculate_grade(metrics):
     elif percent >= 60:
         label = "Good destination"
     elif percent >= 50:
-        label = "Solid destination"
+        label = "Moderate destination"
     elif percent >= 40:
         label = "Mixed destination"
     elif percent >= 30:
-        label = "Below average destination"
+        label = "Limited destination"
     else:
-        label = "Needs careful research"
+        label = "Challenging destination"
 
     return percent, label
 

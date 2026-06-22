@@ -25,10 +25,10 @@ function computeScore(q: Record<string, number>) {
   else if (pct >= 80) label = 'Excellent destination';
   else if (pct >= 70) label = 'Very good destination';
   else if (pct >= 60) label = 'Good destination';
-  else if (pct >= 50) label = 'Solid destination';
+  else if (pct >= 50) label = 'Moderate destination';
   else if (pct >= 40) label = 'Mixed destination';
-  else if (pct >= 30) label = 'Below average destination';
-  else label = 'Needs careful research';
+  else if (pct >= 30) label = 'Limited destination';
+  else label = 'Challenging destination';
   return { pct, label };
 }
 
@@ -1154,10 +1154,10 @@ const qs = qualityScores.countries as Record<string, any>;
     else if (percent >= 80) verdict = 'Excellent destination';
     else if (percent >= 70) verdict = 'Very good destination';
     else if (percent >= 60) verdict = 'Good destination';
-    else if (percent >= 50) verdict = 'Solid destination';
+    else if (percent >= 50) verdict = 'Moderate destination';
     else if (percent >= 40) verdict = 'Mixed destination';
-    else if (percent >= 30) verdict = 'Below average destination';
-    else verdict = 'Needs careful research';
+    else if (percent >= 30) verdict = 'Limited destination';
+    else verdict = 'Challenging destination';
 
     return { percent, verdict };
   }
@@ -1430,8 +1430,8 @@ const qs = qualityScores.countries as Record<string, any>;
 
       // Raw metric data labels
       const rawMetrics = [
-        { key: 'safety',       rawId: 'safetyRaw',    label: 'Safety Index' },
-        { key: 'healthcare',   rawId: 'healthRaw',    label: 'Health Care Index' },
+        { key: 'safety',       rawId: 'safetyRaw',    label: 'GPI score (lower = safer)' },
+        { key: 'healthcare',   rawId: 'healthRaw',    label: 'UHC coverage index (0–100)' },
         { key: 'happiness',    rawId: 'happinessRaw', label: 'Happiness score out of 10' },
         { key: 'pollution',    rawId: 'pollutionRaw', label: 'Pollution Index (lower = better)' },
         { key: 'internet',     rawId: 'internetRaw',  label: 'Mbps avg speed' },
@@ -2807,7 +2807,7 @@ const qs = qualityScores.countries as Record<string, any>;
   .bar-internet  { background: linear-gradient(90deg, #8B5CF6, #A78BFA); }
   .bar-traffic   { background: linear-gradient(90deg, #EC4899, #F472B6); }
   .bar-unemp     { background: linear-gradient(90deg, #14B8A6, #2DD4BF); }
-  .bar-gdp       { background: linear-gradient(90deg, #F97316, #FB923C); }
+  .bar-hdi       { background: linear-gradient(90deg, #F97316, #FB923C); }
 
   .sources-card { background: #F8FAFC; border-color: #E2E8F0; }
 
@@ -3014,9 +3014,10 @@ const qs = qualityScores.countries as Record<string, any>;
   /* QUALITY RAW */
   .quality-raw {
     display: block;
-    font-size: 10px;
-    color: #94A3B8;
-    margin-top: 3px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #1E293B;
+    margin-top: 4px;
     font-variant-numeric: tabular-nums;
   }
 

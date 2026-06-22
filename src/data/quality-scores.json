@@ -1,8 +1,8 @@
 {
   "lastUpdated": "2026-06-22",
   "source": {
-    "safety": "Numbeo Safety Index (latest available) - numbeo.com",
-    "healthcare": "Numbeo Health Care Index (latest available) - numbeo.com",
+    "safety": "Global Peace Index (Institute for Economics and Peace) via Wikipedia, with World Bank homicide rate as fallback",
+    "healthcare": "UHC Service Coverage Index (World Bank/WHO) - data.worldbank.org",
     "pollution": "Numbeo Pollution Index (latest available) - numbeo.com",
     "traffic": "Numbeo Traffic Index (latest available) - numbeo.com",
     "unemployment": "World Bank ILO Unemployment (latest available) - data.worldbank.org",
@@ -42,7 +42,63 @@
         "visa_days": 90
       },
       "grade_percent": 81,
-      "grade_label": "Excellent destination"
+      "grade_label": "Excellent destination",
+      "budget_single": 2000,
+      "budget_couple": 3100,
+      "cost_index": 54,
+      "us_comparison": "approximately 34% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Porto",
+          "monthly_usd": 1550
+        },
+        {
+          "name": "Lisbon",
+          "monthly_usd": 1750
+        },
+        {
+          "name": "Coimbra",
+          "monthly_usd": 2250
+        }
+      ],
+      "area_km2": 92090,
+      "population": 10749635,
+      "government_type": "Unitary semi-presidential republic",
+      "capital": "Lisbon",
+      "currencies": [
+        "Euro"
+      ],
+      "languages": [
+        "Portuguese"
+      ],
+      "demonym": "Portuguese",
+      "driving_side": "right",
+      "borders": [
+        "ESP"
+      ],
+      "timezones": [
+        "UTC-01:00",
+        "UTC"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2023",
+        "value": 33.9
+      },
+      "memberships": {
+        "nato": true,
+        "eu": true,
+        "eurozone": true,
+        "schengen": true,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Lisbon sits at the western edge of continental Europe, making Portugal the kind of place that feels like the end of one world and the beginning of another. With just one land border, shared with Spain, the country is surprisingly self-contained for its size, and its Atlantic coastline defines much of daily life. Schengen membership means easy travel across Europe, and the euro removes the currency friction that complicates life in some neighboring countries.",
+      "continents": [
+        "Europe"
+      ]
     },
     "spain": {
       "safety": 8,
@@ -75,7 +131,71 @@
         "visa_days": 90
       },
       "grade_percent": 79,
-      "grade_label": "Very good destination"
+      "grade_label": "Very good destination",
+      "budget_single": 2200,
+      "budget_couple": 3400,
+      "cost_index": 60,
+      "us_comparison": "approximately 27% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Seville",
+          "monthly_usd": 1400
+        },
+        {
+          "name": "Valencia",
+          "monthly_usd": 1550
+        },
+        {
+          "name": "Madrid",
+          "monthly_usd": 1900
+        }
+      ],
+      "area_km2": 505992,
+      "population": 49687120,
+      "government_type": "Unitary parliamentary constitutional monarchy",
+      "capital": "Madrid",
+      "currencies": [
+        "Euro"
+      ],
+      "languages": [
+        "Spanish",
+        "Catalan",
+        "Basque",
+        "Galician",
+        "Aranese"
+      ],
+      "demonym": "Spanish",
+      "driving_side": "right",
+      "borders": [
+        "AND",
+        "FRA",
+        "GIB",
+        "PRT",
+        "MAR"
+      ],
+      "timezones": [
+        "UTC",
+        "UTC+01:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2023",
+        "value": 33.4
+      },
+      "memberships": {
+        "nato": true,
+        "eu": true,
+        "eurozone": true,
+        "schengen": true,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Spain is one of Western Europe's largest countries, covering more than 500,000 square kilometers with Madrid at its center, and its euro-based economy and full Schengen membership mean practical daily life and regional travel feel relatively frictionless for newcomers. Spanish is the dominant language, but Catalan, Basque, Galician, and Aranese all hold official or recognized status in their respective regions, so the linguistic landscape varies considerably depending on where someone settles. With a Gini coefficient of 33.4, income inequality sits at a moderate level by global standards.",
+      "continents": [
+        "Europe"
+      ]
     },
     "mexico": {
       "safety": 3,
@@ -108,7 +228,66 @@
         "visa_days": 180
       },
       "grade_percent": 62,
-      "grade_label": "Good destination"
+      "grade_label": "Good destination",
+      "budget_single": 1400,
+      "budget_couple": 2150,
+      "cost_index": 38,
+      "us_comparison": "approximately 54% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Merida",
+          "monthly_usd": 800
+        },
+        {
+          "name": "Guadalajara",
+          "monthly_usd": 900
+        },
+        {
+          "name": "Mexico City",
+          "monthly_usd": 1000
+        }
+      ],
+      "area_km2": 1964375,
+      "population": 134407258,
+      "government_type": "Federal presidential republic",
+      "capital": "Mexico City",
+      "currencies": [
+        "Mexican peso"
+      ],
+      "languages": [
+        "Spanish"
+      ],
+      "demonym": "Mexican",
+      "driving_side": "right",
+      "borders": [
+        "BLZ",
+        "GTM",
+        "USA"
+      ],
+      "timezones": [
+        "UTC-08:00",
+        "UTC-07:00",
+        "UTC-06:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2024",
+        "value": 42.6
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": true,
+        "g7": false,
+        "g20": true,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Mexico is one of the largest countries in the Western Hemisphere, and its capital, Mexico City, ranks among the most populous urban centers on earth. With over 134 million people spread across nearly two million square kilometers, life here varies enormously by region, from Pacific beach towns to high-altitude colonial cities. The country's G20 and OECD membership signals a mature, internationally integrated economy, though a Gini coefficient of 42.6 means income inequality remains a meaningful reality of daily life.",
+      "continents": [
+        "North America"
+      ]
     },
     "germany": {
       "safety": 8,
@@ -141,7 +320,70 @@
         "visa_days": 90
       },
       "grade_percent": 81,
-      "grade_label": "Excellent destination"
+      "grade_label": "Excellent destination",
+      "budget_single": 2500,
+      "budget_couple": 3900,
+      "cost_index": 68,
+      "us_comparison": "approximately 17% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Berlin",
+          "monthly_usd": 1850
+        },
+        {
+          "name": "Munich",
+          "monthly_usd": 2400
+        },
+        {
+          "name": "Cologne",
+          "monthly_usd": 2450
+        }
+      ],
+      "area_km2": 357114,
+      "population": 83497147,
+      "government_type": "Federal parliamentary republic",
+      "capital": "Berlin",
+      "currencies": [
+        "Euro"
+      ],
+      "languages": [
+        "German"
+      ],
+      "demonym": "German",
+      "driving_side": "right",
+      "borders": [
+        "AUT",
+        "BEL",
+        "CZE",
+        "DNK",
+        "FRA",
+        "LUX",
+        "NLD",
+        "POL",
+        "CHE"
+      ],
+      "timezones": [
+        "UTC+01:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2022",
+        "value": 33.7
+      },
+      "memberships": {
+        "nato": true,
+        "eu": true,
+        "eurozone": true,
+        "schengen": true,
+        "oecd": true,
+        "g7": true,
+        "g20": true,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Berlin alone makes a compelling case: few capitals anywhere balance that much history, art, and raw creative energy in one place. Germany sits at the center of Europe in every sense, sharing land borders with nine countries, which makes it an extraordinary base for anyone who wants to explore the continent. The Euro, Schengen travel, and one of the more equal income distributions among wealthy nations (a Gini of 33.7) give everyday life here a stability that's genuinely hard to find elsewhere.",
+      "continents": [
+        "Europe"
+      ]
     },
     "italy": {
       "safety": 7,
@@ -174,7 +416,68 @@
         "visa_days": 90
       },
       "grade_percent": 71,
-      "grade_label": "Very good destination"
+      "grade_label": "Very good destination",
+      "budget_single": 2300,
+      "budget_couple": 3550,
+      "cost_index": 63,
+      "us_comparison": "approximately 23% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Rome",
+          "monthly_usd": 2000
+        },
+        {
+          "name": "Turin",
+          "monthly_usd": 2100
+        },
+        {
+          "name": "Milan",
+          "monthly_usd": 2250
+        }
+      ],
+      "area_km2": 301336,
+      "population": 58915561,
+      "government_type": "Unitary parliamentary republic",
+      "capital": "Rome",
+      "currencies": [
+        "Euro"
+      ],
+      "languages": [
+        "Italian",
+        "Catalan"
+      ],
+      "demonym": "Italian",
+      "driving_side": "right",
+      "borders": [
+        "AUT",
+        "FRA",
+        "SMR",
+        "SVN",
+        "CHE",
+        "VAT"
+      ],
+      "timezones": [
+        "UTC+01:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2023",
+        "value": 34.3
+      },
+      "memberships": {
+        "nato": true,
+        "eu": true,
+        "eurozone": true,
+        "schengen": true,
+        "oecd": true,
+        "g7": true,
+        "g20": true,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Rome may get all the headlines, but Italy's appeal as a place to actually live runs much deeper than its most famous city. With nearly 59 million people spread across a country slightly larger than Arizona, it offers extraordinary regional variety, from the Alps to Sicily, all under one currency and within the Schengen zone for easy European travel. The Gini coefficient of 34.3 suggests a relatively moderate income gap by global standards, which may reassure Americans used to sharper economic divides.",
+      "continents": [
+        "Europe"
+      ]
     },
     "greece": {
       "safety": 7,
@@ -207,7 +510,65 @@
         "visa_days": 90
       },
       "grade_percent": 69,
-      "grade_label": "Good destination"
+      "grade_label": "Good destination",
+      "budget_single": 1900,
+      "budget_couple": 2950,
+      "cost_index": 52,
+      "us_comparison": "approximately 37% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Athens",
+          "monthly_usd": 1400
+        },
+        {
+          "name": "Heraklion",
+          "monthly_usd": 2050
+        },
+        {
+          "name": "Patras",
+          "monthly_usd": 2150
+        }
+      ],
+      "area_km2": 131990,
+      "population": 10718565,
+      "government_type": "Unitary parliamentary republic",
+      "capital": "Athens",
+      "currencies": [
+        "Euro"
+      ],
+      "languages": [
+        "Greek"
+      ],
+      "demonym": "Greek",
+      "driving_side": "right",
+      "borders": [
+        "ALB",
+        "BGR",
+        "TUR",
+        "MKD"
+      ],
+      "timezones": [
+        "UTC+02:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2023",
+        "value": 33.4
+      },
+      "memberships": {
+        "nato": true,
+        "eu": true,
+        "eurozone": true,
+        "schengen": true,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Athens is one of the oldest continuously inhabited cities on earth, and it anchors a country of just under 11 million people spread across a mainland and hundreds of islands in the Aegean and Ionian seas. Greece is a full EU and Eurozone member, so Americans who sort out residency here are living inside the Schengen Area, with easy, borderless access to the rest of continental Europe. The income inequality figure, a Gini of 33.4, sits at a fairly moderate level, suggesting a society that is less economically stratified than many people might expect.",
+      "continents": [
+        "Europe"
+      ]
     },
     "costa-rica": {
       "safety": 7,
@@ -240,7 +601,63 @@
         "visa_days": 180
       },
       "grade_percent": 72,
-      "grade_label": "Very good destination"
+      "grade_label": "Very good destination",
+      "budget_single": 1700,
+      "budget_couple": 2650,
+      "cost_index": 46,
+      "us_comparison": "approximately 44% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "San Jose",
+          "monthly_usd": 1400
+        },
+        {
+          "name": "Alajuela",
+          "monthly_usd": 1850
+        },
+        {
+          "name": "Heredia",
+          "monthly_usd": 1950
+        }
+      ],
+      "area_km2": 51100,
+      "population": 5160700,
+      "government_type": "Unitary presidential republic",
+      "capital": "San José",
+      "currencies": [
+        "Costa Rican colón"
+      ],
+      "languages": [
+        "Spanish"
+      ],
+      "demonym": "Costa Rican",
+      "driving_side": "right",
+      "borders": [
+        "NIC",
+        "PAN"
+      ],
+      "timezones": [
+        "UTC-06:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2025",
+        "value": 45.5
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "San José sits at the center of a country that punches well above its weight for a nation of just over five million people. Costa Rica has built a reputation as one of Latin America's most stable democracies, and its recent OECD membership signals the kind of institutional maturity that matters to expats thinking about property rights and rule of law. The catch is a Gini coefficient of 45.5, meaning income inequality remains a real social pressure beneath the peaceful surface.",
+      "continents": [
+        "North America"
+      ]
     },
     "panama": {
       "safety": 6,
@@ -273,7 +690,64 @@
         "visa_days": 180
       },
       "grade_percent": 68,
-      "grade_label": "Good destination"
+      "grade_label": "Good destination",
+      "budget_single": 1550,
+      "budget_couple": 2400,
+      "cost_index": 43,
+      "us_comparison": "approximately 48% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Panama City",
+          "monthly_usd": 1650
+        },
+        {
+          "name": "Santiago",
+          "monthly_usd": 2050
+        },
+        {
+          "name": "Colon",
+          "monthly_usd": 2150
+        }
+      ],
+      "area_km2": 75417,
+      "population": 4337768,
+      "government_type": "Unitary presidential republic",
+      "capital": "Panama City",
+      "currencies": [
+        "Panamanian balboa",
+        "United States dollar"
+      ],
+      "languages": [
+        "Spanish"
+      ],
+      "demonym": "Panamanian",
+      "driving_side": "right",
+      "borders": [
+        "COL",
+        "CRI"
+      ],
+      "timezones": [
+        "UTC-05:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2024",
+        "value": 49.7
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Panama City is one of the few capital cities in Latin America with a genuine skyline, and the country's use of the U.S. dollar as official currency removes a layer of financial friction that trips up Americans elsewhere. At roughly 4.3 million people spread across a narrow strip of land connecting two continents, Panama punches well above its size in terms of international commerce and expat infrastructure. The Gini coefficient of 49.7 signals real income inequality, though, so the comfortable life many newcomers find here coexists with significant poverty outside the wealthier enclaves.",
+      "continents": [
+        "North America"
+      ]
     },
     "thailand": {
       "safety": 6,
@@ -306,7 +780,65 @@
         "visa_days": 60
       },
       "grade_percent": 70,
-      "grade_label": "Very good destination"
+      "grade_label": "Very good destination",
+      "budget_single": 1000,
+      "budget_couple": 1550,
+      "cost_index": 28,
+      "us_comparison": "approximately 66% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Chiang Mai",
+          "monthly_usd": 550
+        },
+        {
+          "name": "Bangkok",
+          "monthly_usd": 900
+        },
+        {
+          "name": "Phuket",
+          "monthly_usd": 1150
+        }
+      ],
+      "area_km2": 513120,
+      "population": 65975198,
+      "government_type": "Unitary parliamentary constitutional monarchy",
+      "capital": "Bangkok",
+      "currencies": [
+        "Thai baht"
+      ],
+      "languages": [
+        "Thai"
+      ],
+      "demonym": "Thai",
+      "driving_side": "left",
+      "borders": [
+        "MMR",
+        "KHM",
+        "LAO",
+        "MYS"
+      ],
+      "timezones": [
+        "UTC+07:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2024",
+        "value": 33.3
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Bangkok is one of Southeast Asia's most electric cities, and it sets the tone for a country of nearly 66 million people spread across a surprisingly large 513,120 square kilometers of coastline, jungle, and mountains. Thailand runs on the Thai baht, Thai is the official language, and traffic moves on the left side of the road, which takes some adjustment for Americans. With a Gini coefficient of 33.3, income inequality is relatively moderate by regional standards, meaning the gap between everyday costs and expat salaries can work meaningfully in your favor.",
+      "continents": [
+        "Asia"
+      ]
     },
     "malaysia": {
       "safety": 8,
@@ -339,7 +871,65 @@
         "visa_days": 180
       },
       "grade_percent": 73,
-      "grade_label": "Very good destination"
+      "grade_label": "Very good destination",
+      "budget_single": 1050,
+      "budget_couple": 1650,
+      "cost_index": 29,
+      "us_comparison": "approximately 65% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Kuala Lumpur",
+          "monthly_usd": 900
+        },
+        {
+          "name": "Penang",
+          "monthly_usd": 1000
+        },
+        {
+          "name": "Kota Kinabalu",
+          "monthly_usd": 1550
+        }
+      ],
+      "area_km2": 330803,
+      "population": 34564810,
+      "government_type": "Federal parliamentary constitutional elective monarchy",
+      "capital": "Kuala Lumpur",
+      "currencies": [
+        "Malaysian ringgit"
+      ],
+      "languages": [
+        "English",
+        "Malay"
+      ],
+      "demonym": "Malaysian",
+      "driving_side": "left",
+      "borders": [
+        "BRN",
+        "IDN",
+        "THA"
+      ],
+      "timezones": [
+        "UTC+08:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2021",
+        "value": 40.7
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": true
+      },
+      "quick_facts_paragraph": "Kuala Lumpur sits at the center of one of Southeast Asia's most livable cities for English-speaking expats, given that English functions as a widely spoken second language alongside the official Malay. Malaysia's 34 million people occupy a country split between the Malay Peninsula and the island of Borneo, giving it a geographic variety that few nations its size can match. The ringgit keeps costs genuinely affordable by Western standards, though the Gini coefficient of 40.7 signals real income inequality beneath the modern skyline.",
+      "continents": [
+        "Asia"
+      ]
     },
     "indonesia": {
       "safety": 6,
@@ -372,7 +962,66 @@
         "visa_days": 30
       },
       "grade_percent": 62,
-      "grade_label": "Good destination"
+      "grade_label": "Good destination",
+      "budget_single": 1000,
+      "budget_couple": 1550,
+      "cost_index": 28,
+      "us_comparison": "approximately 66% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Surabaya",
+          "monthly_usd": 900
+        },
+        {
+          "name": "Jakarta",
+          "monthly_usd": 1100
+        },
+        {
+          "name": "Denpasar",
+          "monthly_usd": 1100
+        }
+      ],
+      "area_km2": 1904569,
+      "population": 288315089,
+      "government_type": "Unitary presidential republic",
+      "capital": "Jakarta",
+      "currencies": [
+        "Indonesian rupiah"
+      ],
+      "languages": [
+        "Indonesian"
+      ],
+      "demonym": "Indonesian",
+      "driving_side": "left",
+      "borders": [
+        "TLS",
+        "MYS",
+        "PNG"
+      ],
+      "timezones": [
+        "UTC+07:00",
+        "UTC+08:00",
+        "UTC+09:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2025",
+        "value": 34.4
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": true,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Indonesia is the world's fourth most populous country, an archipelago of over 17,000 islands stretching across a stretch of ocean larger than the continental United States. Jakarta serves as the capital, though a new administrative capital is under construction on Borneo, which tells you something about the scale of ambition here. The rupiah is the local currency, Indonesian is the national language, and the country holds a seat at the G20, signaling a serious and growing economy.",
+      "continents": [
+        "Asia"
+      ]
     },
     "colombia": {
       "safety": 3,
@@ -405,7 +1054,66 @@
         "visa_days": 180
       },
       "grade_percent": 59,
-      "grade_label": "Solid destination"
+      "grade_label": "Moderate destination",
+      "budget_single": 1000,
+      "budget_couple": 1550,
+      "cost_index": 28,
+      "us_comparison": "approximately 66% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Medellin",
+          "monthly_usd": 650
+        },
+        {
+          "name": "Bogota",
+          "monthly_usd": 800
+        },
+        {
+          "name": "Cartagena",
+          "monthly_usd": 1150
+        }
+      ],
+      "area_km2": 1141748,
+      "population": 52695952,
+      "government_type": "Unitary presidential republic",
+      "capital": "Bogotá",
+      "currencies": [
+        "Colombian peso"
+      ],
+      "languages": [
+        "Spanish"
+      ],
+      "demonym": "Colombian",
+      "driving_side": "right",
+      "borders": [
+        "BRA",
+        "ECU",
+        "PAN",
+        "PER",
+        "VEN"
+      ],
+      "timezones": [
+        "UTC-05:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2024",
+        "value": 54.4
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Colombia is one of the few countries in South America that has coastline on both the Pacific and the Caribbean, which tells you something about its sheer geographic range. At over 52 million people, it's the third most populous country on the continent, with Bogotá serving as a sprawling, altitude-defying capital that surprises most visitors. The income inequality here is among the highest tracked by any OECD member, something anyone serious about relocating should understand before romanticizing the low cost of living.",
+      "continents": [
+        "South America"
+      ]
     },
     "croatia": {
       "safety": 8,
@@ -438,7 +1146,66 @@
         "visa_days": 90
       },
       "grade_percent": 77,
-      "grade_label": "Very good destination"
+      "grade_label": "Very good destination",
+      "budget_single": 1500,
+      "budget_couple": 2350,
+      "cost_index": 41,
+      "us_comparison": "approximately 50% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Zagreb",
+          "monthly_usd": 1750
+        },
+        {
+          "name": "Split",
+          "monthly_usd": 1900
+        },
+        {
+          "name": "Osijek",
+          "monthly_usd": 2000
+        }
+      ],
+      "area_km2": 56594,
+      "population": 3866233,
+      "government_type": "Unitary parliamentary republic",
+      "capital": "Zagreb",
+      "currencies": [
+        "Euro"
+      ],
+      "languages": [
+        "Croatian"
+      ],
+      "demonym": "Croatian",
+      "driving_side": "right",
+      "borders": [
+        "BIH",
+        "HUN",
+        "MNE",
+        "SRB",
+        "SVN"
+      ],
+      "timezones": [
+        "UTC+01:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2023",
+        "value": 30.1
+      },
+      "memberships": {
+        "nato": true,
+        "eu": true,
+        "eurozone": true,
+        "schengen": true,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Croatia joined the EU and adopted the euro only recently, making it one of the newer entries into the Schengen zone and a compelling option for Americans who want Mediterranean coastline without the price tag of France or Italy. With nearly 4 million people spread across a country smaller than West Virginia, the pace of life is genuinely unhurried, and a Gini coefficient of 30.1 signals a relatively equal society by European standards. Zagreb anchors the interior while the Adriatic coast does most of the postcard work.",
+      "continents": [
+        "Europe"
+      ]
     },
     "czech-republic": {
       "safety": 8,
@@ -471,7 +1238,66 @@
         "visa_days": 90
       },
       "grade_percent": 81,
-      "grade_label": "Excellent destination"
+      "grade_label": "Excellent destination",
+      "budget_single": 1600,
+      "budget_couple": 2500,
+      "cost_index": 44,
+      "us_comparison": "approximately 46% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Ostrava",
+          "monthly_usd": 1300
+        },
+        {
+          "name": "Prague",
+          "monthly_usd": 1650
+        },
+        {
+          "name": "Plzen",
+          "monthly_usd": 2200
+        }
+      ],
+      "area_km2": 78865,
+      "population": 10915839,
+      "government_type": "Unitary parliamentary republic",
+      "capital": "Prague",
+      "currencies": [
+        "Czech koruna"
+      ],
+      "languages": [
+        "Czech",
+        "Slovak"
+      ],
+      "demonym": "Czech",
+      "driving_side": "right",
+      "borders": [
+        "AUT",
+        "DEU",
+        "POL",
+        "SVK"
+      ],
+      "timezones": [
+        "UTC+01:00"
+      ],
+      "landlocked": true,
+      "gini": {
+        "year": "2023",
+        "value": 25.7
+      },
+      "memberships": {
+        "nato": true,
+        "eu": true,
+        "eurozone": false,
+        "schengen": true,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Prague keeps showing up on \"most livable city\" lists for good reason: the Czech Republic pairs stunning medieval architecture with one of the lowest income inequality rates in the developed world, a Gini coefficient of just 25.7. As a Schengen member and full EU participant, the country offers straightforward travel across Europe, and its 10.9 million residents enjoy strong institutional stability backed by NATO membership. The koruna remains the local currency, not the euro, which has kept costs relatively manageable for newcomers.",
+      "continents": [
+        "Europe"
+      ]
     },
     "poland": {
       "safety": 8,
@@ -504,7 +1330,68 @@
         "visa_days": 90
       },
       "grade_percent": 78,
-      "grade_label": "Very good destination"
+      "grade_label": "Very good destination",
+      "budget_single": 1300,
+      "budget_couple": 2000,
+      "cost_index": 35,
+      "us_comparison": "approximately 57% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Krakow",
+          "monthly_usd": 1400
+        },
+        {
+          "name": "Warsaw",
+          "monthly_usd": 1450
+        },
+        {
+          "name": "Gdansk",
+          "monthly_usd": 2050
+        }
+      ],
+      "area_km2": 312679,
+      "population": 37314000,
+      "government_type": "Unitary parliamentary republic",
+      "capital": "Warsaw",
+      "currencies": [
+        "Polish złoty"
+      ],
+      "languages": [
+        "Polish"
+      ],
+      "demonym": "Polish",
+      "driving_side": "right",
+      "borders": [
+        "BLR",
+        "CZE",
+        "DEU",
+        "LTU",
+        "RUS",
+        "SVK",
+        "UKR"
+      ],
+      "timezones": [
+        "UTC+01:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2023",
+        "value": 28.5
+      },
+      "memberships": {
+        "nato": true,
+        "eu": true,
+        "eurozone": false,
+        "schengen": true,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Poland sits at the crossroads of Europe, sharing land borders with seven countries and offering EU and Schengen access that makes it genuinely practical as a base for continental living. Warsaw has emerged as one of the region's most economically dynamic capitals, and the country's Gini coefficient of 28.5 reflects a notably compressed income distribution, meaning wealth is spread more evenly here than in most Western nations, including the United States.",
+      "continents": [
+        "Europe"
+      ]
     },
     "hungary": {
       "safety": 8,
@@ -537,7 +1424,68 @@
         "visa_days": 90
       },
       "grade_percent": 78,
-      "grade_label": "Very good destination"
+      "grade_label": "Very good destination",
+      "budget_single": 1450,
+      "budget_couple": 2250,
+      "cost_index": 39,
+      "us_comparison": "approximately 52% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Budapest",
+          "monthly_usd": 1150
+        },
+        {
+          "name": "Pecs",
+          "monthly_usd": 1800
+        },
+        {
+          "name": "Szeged",
+          "monthly_usd": 1900
+        }
+      ],
+      "area_km2": 93028,
+      "population": 9489000,
+      "government_type": "Unitary parliamentary republic",
+      "capital": "Budapest",
+      "currencies": [
+        "Hungarian forint"
+      ],
+      "languages": [
+        "Hungarian"
+      ],
+      "demonym": "Hungarian",
+      "driving_side": "right",
+      "borders": [
+        "AUT",
+        "HRV",
+        "ROU",
+        "SRB",
+        "SVK",
+        "SVN",
+        "UKR"
+      ],
+      "timezones": [
+        "UTC+01:00"
+      ],
+      "landlocked": true,
+      "gini": {
+        "year": "2017",
+        "value": 30.6
+      },
+      "memberships": {
+        "nato": true,
+        "eu": true,
+        "eurozone": false,
+        "schengen": true,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Budapest is one of Europe's most underrated capitals, a city that consistently surprises Americans who expect something quieter than what they find. Hungary sits at the geographic heart of the continent, sharing borders with seven countries, which makes it an excellent base for anyone who wants to travel widely across Europe. As an EU and Schengen member, movement is easy, and the country's income inequality ranks notably low compared to much of the Western world.",
+      "continents": [
+        "Europe"
+      ]
     },
     "romania": {
       "safety": 7,
@@ -570,7 +1518,66 @@
         "visa_days": 90
       },
       "grade_percent": 75,
-      "grade_label": "Very good destination"
+      "grade_label": "Very good destination",
+      "budget_single": 1150,
+      "budget_couple": 1800,
+      "cost_index": 31,
+      "us_comparison": "approximately 62% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Bucharest",
+          "monthly_usd": 1300
+        },
+        {
+          "name": "Iasi",
+          "monthly_usd": 1550
+        },
+        {
+          "name": "Timisoara",
+          "monthly_usd": 1650
+        }
+      ],
+      "area_km2": 238391,
+      "population": 19043151,
+      "government_type": "Unitary semi-presidential republic",
+      "capital": "Bucharest",
+      "currencies": [
+        "Romanian leu"
+      ],
+      "languages": [
+        "Romanian"
+      ],
+      "demonym": "Romanian",
+      "driving_side": "right",
+      "borders": [
+        "BGR",
+        "HUN",
+        "MDA",
+        "SRB",
+        "UKR"
+      ],
+      "timezones": [
+        "UTC+02:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2023",
+        "value": 29.8
+      },
+      "memberships": {
+        "nato": true,
+        "eu": true,
+        "eurozone": false,
+        "schengen": true,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Romania joined the EU and NATO over two decades ago, yet it remains one of the more overlooked destinations for Americans thinking seriously about living in Europe. Bucharest, the capital, anchors a country of roughly 19 million people spread across nearly 240,000 square kilometers of terrain that ranges from the Carpathians to the Black Sea coast. Its Gini coefficient of 29.8 signals a relatively equitable income distribution, which tends to reflect in the texture of everyday life.",
+      "continents": [
+        "Europe"
+      ]
     },
     "bulgaria": {
       "safety": 8,
@@ -603,7 +1610,66 @@
         "visa_days": 90
       },
       "grade_percent": 71,
-      "grade_label": "Very good destination"
+      "grade_label": "Very good destination",
+      "budget_single": 1150,
+      "budget_couple": 1800,
+      "cost_index": 32,
+      "us_comparison": "approximately 61% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Sofia",
+          "monthly_usd": 750
+        },
+        {
+          "name": "Burgas",
+          "monthly_usd": 1350
+        },
+        {
+          "name": "Varna",
+          "monthly_usd": 1450
+        }
+      ],
+      "area_km2": 110879,
+      "population": 6423207,
+      "government_type": "Unitary parliamentary republic",
+      "capital": "Sofia",
+      "currencies": [
+        "Euro"
+      ],
+      "languages": [
+        "Bulgarian"
+      ],
+      "demonym": "Bulgarian",
+      "driving_side": "right",
+      "borders": [
+        "GRC",
+        "MKD",
+        "ROU",
+        "SRB",
+        "TUR"
+      ],
+      "timezones": [
+        "UTC+02:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2023",
+        "value": 39.5
+      },
+      "memberships": {
+        "nato": true,
+        "eu": true,
+        "eurozone": false,
+        "schengen": true,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Sofia sits at the crossroads of the Balkans, and Bulgaria's EU and Schengen membership means Americans who settle here gain easy access to the broader European continent. At just over 6.4 million people spread across a country roughly the size of Tennessee, it offers a pace and density that feels genuinely unhurried. The Euro keeps finances straightforward, though a Gini coefficient of 39.5 signals real economic inequality that prospective residents should understand before assuming costs are low across the board.",
+      "continents": [
+        "Europe"
+      ]
     },
     "vietnam": {
       "safety": 7,
@@ -636,7 +1702,64 @@
         "visa_days": 90
       },
       "grade_percent": 71,
-      "grade_label": "Very good destination"
+      "grade_label": "Very good destination",
+      "budget_single": 900,
+      "budget_couple": 1400,
+      "cost_index": 24,
+      "us_comparison": "approximately 71% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Da Nang",
+          "monthly_usd": 450
+        },
+        {
+          "name": "Ho Chi Minh City",
+          "monthly_usd": 650
+        },
+        {
+          "name": "Hanoi",
+          "monthly_usd": 750
+        }
+      ],
+      "area_km2": 331212,
+      "population": 102300000,
+      "government_type": "Unitary communist state",
+      "capital": "Hanoi",
+      "currencies": [
+        "Vietnamese đồng"
+      ],
+      "languages": [
+        "Vietnamese"
+      ],
+      "demonym": "Vietnamese",
+      "driving_side": "right",
+      "borders": [
+        "KHM",
+        "CHN",
+        "LAO"
+      ],
+      "timezones": [
+        "UTC+07:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2022",
+        "value": 36.1
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Vietnam stretches along nearly 3,500 kilometers of Southeast Asian coastline, a long, narrow country of 102 million people where the northern capital of Hanoi feels worlds apart from the energy of Ho Chi Minh City in the south. The cost of living draws a lot of attention among expats, and the income inequality picture is relatively moderate by regional standards, with a Gini coefficient of 36.1. Life here runs on the Vietnamese đồng, the language is Vietnamese with essentially no official English, and anyone serious about settling in should budget time for the language curve.",
+      "continents": [
+        "Asia"
+      ]
     },
     "japan": {
       "safety": 9,
@@ -669,7 +1792,60 @@
         "visa_days": 90
       },
       "grade_percent": 85,
-      "grade_label": "Excellent destination"
+      "grade_label": "Excellent destination",
+      "budget_single": 2700,
+      "budget_couple": 4200,
+      "cost_index": 74,
+      "us_comparison": "approximately 10% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Osaka",
+          "monthly_usd": 2000
+        },
+        {
+          "name": "Fukuoka",
+          "monthly_usd": 2000
+        },
+        {
+          "name": "Tokyo",
+          "monthly_usd": 2250
+        }
+      ],
+      "area_km2": 377930,
+      "population": 122950000,
+      "government_type": "Unitary parliamentary constitutional monarchy",
+      "capital": "Tokyo",
+      "currencies": [
+        "Japanese yen"
+      ],
+      "languages": [
+        "Japanese"
+      ],
+      "demonym": "Japanese",
+      "driving_side": "left",
+      "borders": [],
+      "timezones": [
+        "UTC+09:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2020",
+        "value": 32.3
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": true,
+        "g7": true,
+        "g20": true,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Tokyo alone holds more people than most countries, and Japan as a whole packs nearly 123 million residents into an island nation not much larger than California. The Gini coefficient of 32.3 signals a relatively equitable society by developed-world standards, which shows up in everyday life as remarkably low crime and consistent public services. Japanese is the only official language, so anyone serious about the move should factor in a steep linguistic learning curve.",
+      "continents": [
+        "Asia"
+      ]
     },
     "south-korea": {
       "safety": 7,
@@ -702,7 +1878,62 @@
         "visa_days": 90
       },
       "grade_percent": 78,
-      "grade_label": "Very good destination"
+      "grade_label": "Very good destination",
+      "budget_single": 2250,
+      "budget_couple": 3500,
+      "cost_index": 62,
+      "us_comparison": "approximately 24% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Busan",
+          "monthly_usd": 1750
+        },
+        {
+          "name": "Seoul",
+          "monthly_usd": 2100
+        },
+        {
+          "name": "Daejeon",
+          "monthly_usd": 2500
+        }
+      ],
+      "area_km2": 100210,
+      "population": 51106229,
+      "government_type": "Unitary presidential republic",
+      "capital": "Seoul",
+      "currencies": [
+        "South Korean won"
+      ],
+      "languages": [
+        "Korean"
+      ],
+      "demonym": "South Korean",
+      "driving_side": "right",
+      "borders": [
+        "PRK"
+      ],
+      "timezones": [
+        "UTC+09:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2021",
+        "value": 32.9
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": true,
+        "g7": false,
+        "g20": true,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Seoul is one of the most wired, fast-moving capitals on earth, and at 51 million people spread across a peninsula roughly the size of Virginia, South Korea packs an enormous amount of country into a compact space. The Gini coefficient of 32.9 suggests a relatively equitable income distribution by global standards, which tracks with a society that has invested heavily in education and infrastructure. OECD and G20 membership signals a mature, institutional economy, and everyday life runs on the South Korean won in a place where cashless payments and high-speed everything are simply the norm.",
+      "continents": [
+        "Asia"
+      ]
     },
     "australia": {
       "safety": 8,
@@ -735,7 +1966,67 @@
         "visa_days": 90
       },
       "grade_percent": 81,
-      "grade_label": "Excellent destination"
+      "grade_label": "Excellent destination",
+      "budget_single": 3350,
+      "budget_couple": 5200,
+      "cost_index": 91,
+      "us_comparison": "approximately 11% more expensive than the United States",
+      "affordable_cities": [
+        {
+          "name": "Perth",
+          "monthly_usd": 2550
+        },
+        {
+          "name": "Brisbane",
+          "monthly_usd": 2650
+        },
+        {
+          "name": "Melbourne",
+          "monthly_usd": 2800
+        }
+      ],
+      "area_km2": 7692024,
+      "population": 27724744,
+      "government_type": "Federal parliamentary constitutional monarchy",
+      "capital": "Canberra",
+      "currencies": [
+        "Australian dollar"
+      ],
+      "languages": [
+        "English"
+      ],
+      "demonym": "Australian",
+      "driving_side": "left",
+      "borders": [],
+      "timezones": [
+        "UTC+05:00",
+        "UTC+06:30",
+        "UTC+07:00",
+        "UTC+08:00",
+        "UTC+09:30",
+        "UTC+10:00",
+        "UTC+10:30",
+        "UTC+11:30"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2020",
+        "value": 33.8
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": true,
+        "g7": false,
+        "g20": true,
+        "commonwealth": true
+      },
+      "quick_facts_paragraph": "Australia is vast in a way that genuinely surprises most newcomers. At over 7.6 million square kilometers, it's roughly the size of the contiguous United States, yet fewer than 28 million people live there, keeping large stretches of the country genuinely remote. English is the official language, the economy is a stable G20 member, and a relatively low Gini coefficient of 33.8 suggests wealth is distributed more evenly than in the U.S. The adjustment to driving on the left is real, but most Americans adapt within a week or two.",
+      "continents": [
+        "Oceania"
+      ]
     },
     "new-zealand": {
       "safety": 9,
@@ -768,7 +2059,63 @@
         "visa_days": 90
       },
       "grade_percent": 84,
-      "grade_label": "Excellent destination"
+      "grade_label": "Excellent destination",
+      "budget_single": 2950,
+      "budget_couple": 4550,
+      "cost_index": 80,
+      "us_comparison": "approximately 2% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Hamilton",
+          "monthly_usd": 2550
+        },
+        {
+          "name": "Auckland",
+          "monthly_usd": 2650
+        },
+        {
+          "name": "Christchurch",
+          "monthly_usd": 2650
+        }
+      ],
+      "area_km2": 270467,
+      "population": 4993923,
+      "government_type": "Unitary parliamentary constitutional monarchy",
+      "capital": "Wellington",
+      "currencies": [
+        "New Zealand dollar"
+      ],
+      "languages": [
+        "English",
+        "Maori",
+        "New Zealand Sign Language"
+      ],
+      "demonym": "New Zealander",
+      "driving_side": "left",
+      "borders": [],
+      "timezones": [
+        "UTC-11:00",
+        "UTC-10:00",
+        "UTC+12:00",
+        "UTC+12:45",
+        "UTC+13:00"
+      ],
+      "landlocked": false,
+      "gini": null,
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": true
+      },
+      "quick_facts_paragraph": "Wellington may be the capital, but Auckland pulls most of the population toward the North Island, leaving the South Island to its glaciers, fjords, and famously uncrowded roads. At just under five million people spread across a country roughly the size of Colorado, New Zealand rewards those who want space. It's an OECD member with stable institutions, English is the dominant language, and the main practical adjustment for Americans is remembering to drive on the left.",
+      "continents": [
+        "Oceania"
+      ]
     },
     "canada": {
       "safety": 8,
@@ -801,7 +2148,68 @@
         "visa_days": 180
       },
       "grade_percent": 82,
-      "grade_label": "Excellent destination"
+      "grade_label": "Excellent destination",
+      "budget_single": 2850,
+      "budget_couple": 4400,
+      "cost_index": 78,
+      "us_comparison": "approximately 5% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Montreal",
+          "monthly_usd": 2400
+        },
+        {
+          "name": "Calgary",
+          "monthly_usd": 2650
+        },
+        {
+          "name": "Toronto",
+          "monthly_usd": 2850
+        }
+      ],
+      "area_km2": 9984670,
+      "population": 41575585,
+      "government_type": "Federal parliamentary constitutional monarchy",
+      "capital": "Ottawa",
+      "currencies": [
+        "Canadian dollar"
+      ],
+      "languages": [
+        "English",
+        "French"
+      ],
+      "demonym": "Canadian",
+      "driving_side": "right",
+      "borders": [
+        "USA"
+      ],
+      "timezones": [
+        "UTC-08:00",
+        "UTC-07:00",
+        "UTC-06:00",
+        "UTC-05:00",
+        "UTC-04:00",
+        "UTC-03:30"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2022",
+        "value": 31.5
+      },
+      "memberships": {
+        "nato": true,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": true,
+        "g7": true,
+        "g20": true,
+        "commonwealth": true
+      },
+      "quick_facts_paragraph": "Canada shares its only land border with the United States, which makes it the most logistically straightforward move an American can make, yet the country feels genuinely distinct. With 41.5 million people spread across nearly 10 million square kilometers, it offers serious breathing room, and its Gini coefficient of 31.5 points to a notably more equal distribution of income than most Americans are used to. Ottawa is the capital, English and French are both official languages, and the Canadian dollar keeps daily finances familiar without being identical.",
+      "continents": [
+        "North America"
+      ]
     },
     "ireland": {
       "safety": 9,
@@ -834,7 +2242,63 @@
         "visa_days": 90
       },
       "grade_percent": 83,
-      "grade_label": "Excellent destination"
+      "grade_label": "Excellent destination",
+      "budget_single": 3350,
+      "budget_couple": 5200,
+      "cost_index": 91,
+      "us_comparison": "approximately 11% more expensive than the United States",
+      "affordable_cities": [
+        {
+          "name": "Dublin",
+          "monthly_usd": 2750
+        },
+        {
+          "name": "Limerick",
+          "monthly_usd": 2750
+        },
+        {
+          "name": "Galway",
+          "monthly_usd": 2850
+        }
+      ],
+      "area_km2": 70273,
+      "population": 7185600,
+      "government_type": "",
+      "capital": "Dublin",
+      "currencies": [
+        "Euro"
+      ],
+      "languages": [
+        "English",
+        "Irish"
+      ],
+      "demonym": "Irish",
+      "driving_side": "left",
+      "borders": [
+        "GBR"
+      ],
+      "timezones": [
+        "UTC"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2023",
+        "value": 29
+      },
+      "memberships": {
+        "nato": false,
+        "eu": true,
+        "eurozone": true,
+        "schengen": false,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Dublin punches well above its weight as a capital city, giving Ireland an outsized presence in Europe despite the country covering just 70,273 square kilometers. With a population of around 7.2 million spread across the island, life here tends toward the manageable rather than the overwhelming, and the Gini coefficient of 29 reflects one of the more equitable income distributions among developed nations. Ireland's EU and Eurozone membership means the euro is the currency and cross-border financial life is straightforward, though adjusting to left-side driving is a genuine early hurdle for arriving Americans.",
+      "continents": [
+        "Europe"
+      ]
     },
     "netherlands": {
       "safety": 8,
@@ -867,7 +2331,63 @@
         "visa_days": 90
       },
       "grade_percent": 83,
-      "grade_label": "Excellent destination"
+      "grade_label": "Excellent destination",
+      "budget_single": 2750,
+      "budget_couple": 4250,
+      "cost_index": 75,
+      "us_comparison": "approximately 9% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Amsterdam",
+          "monthly_usd": 2500
+        },
+        {
+          "name": "Utrecht",
+          "monthly_usd": 2500
+        },
+        {
+          "name": "Rotterdam",
+          "monthly_usd": 2650
+        }
+      ],
+      "area_km2": 41850,
+      "population": 18044027,
+      "government_type": "Unitary parliamentary constitutional monarchy",
+      "capital": "Amsterdam",
+      "currencies": [
+        "Euro"
+      ],
+      "languages": [
+        "Dutch"
+      ],
+      "demonym": "Dutch",
+      "driving_side": "right",
+      "borders": [
+        "BEL",
+        "DEU"
+      ],
+      "timezones": [
+        "UTC+01:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2021",
+        "value": 25.7
+      },
+      "memberships": {
+        "nato": true,
+        "eu": true,
+        "eurozone": true,
+        "schengen": true,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Amsterdam may be the capital, but the Netherlands as a whole punches well above its weight for a country just slightly larger than Maryland. With 18 million people packed into that compact space, density is real, and cycling infrastructure is how daily life actually functions. The country's Gini coefficient of 25.7 signals genuinely low income inequality, which shows up in quality public services and a middle-class stability that Americans often find striking.",
+      "continents": [
+        "Europe"
+      ]
     },
     "france": {
       "safety": 6,
@@ -900,7 +2420,82 @@
         "visa_days": 90
       },
       "grade_percent": 73,
-      "grade_label": "Very good destination"
+      "grade_label": "Very good destination",
+      "budget_single": 2450,
+      "budget_couple": 3800,
+      "cost_index": 67,
+      "us_comparison": "approximately 18% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Lyon",
+          "monthly_usd": 1900
+        },
+        {
+          "name": "Nantes",
+          "monthly_usd": 2250
+        },
+        {
+          "name": "Paris",
+          "monthly_usd": 2550
+        }
+      ],
+      "area_km2": 551695,
+      "population": 69081996,
+      "government_type": "Unitary semi-presidential republic",
+      "capital": "Paris",
+      "currencies": [
+        "Euro"
+      ],
+      "languages": [
+        "French"
+      ],
+      "demonym": "French",
+      "driving_side": "right",
+      "borders": [
+        "AND",
+        "BEL",
+        "DEU",
+        "ITA",
+        "LUX",
+        "MCO",
+        "ESP",
+        "CHE"
+      ],
+      "timezones": [
+        "UTC-10:00",
+        "UTC-09:30",
+        "UTC-09:00",
+        "UTC-08:00",
+        "UTC-04:00",
+        "UTC-03:00",
+        "UTC+01:00",
+        "UTC+02:00",
+        "UTC+03:00",
+        "UTC+04:00",
+        "UTC+05:00",
+        "UTC+10:00",
+        "UTC+11:00",
+        "UTC+12:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2023",
+        "value": 31.8
+      },
+      "memberships": {
+        "nato": true,
+        "eu": true,
+        "eurozone": true,
+        "schengen": true,
+        "oecd": true,
+        "g7": true,
+        "g20": true,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "France is the kind of place that earns its reputation honestly. Paris alone could anchor a life, but the country's 551,695 square kilometers stretch from Alpine ski towns to Atlantic coastline to Mediterranean beaches, all operating under a single currency and a social contract that keeps income inequality among the lowest in the developed world. As a G7 nation and founding EU member within the Schengen zone, it offers Americans both institutional stability and easy travel across Europe.",
+      "continents": [
+        "Europe"
+      ]
     },
     "argentina": {
       "safety": 6,
@@ -933,7 +2528,67 @@
         "visa_days": 90
       },
       "grade_percent": 67,
-      "grade_label": "Good destination"
+      "grade_label": "Good destination",
+      "budget_single": 1150,
+      "budget_couple": 1800,
+      "cost_index": 32,
+      "us_comparison": "approximately 61% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Buenos Aires",
+          "monthly_usd": 750
+        },
+        {
+          "name": "Mendoza",
+          "monthly_usd": 1550
+        },
+        {
+          "name": "Rosario",
+          "monthly_usd": 1650
+        }
+      ],
+      "area_km2": 2780400,
+      "population": 46735004,
+      "government_type": "Federal presidential republic",
+      "capital": "Buenos Aires",
+      "currencies": [
+        "Argentine peso"
+      ],
+      "languages": [
+        "Guarani",
+        "Spanish"
+      ],
+      "demonym": "Argentine",
+      "driving_side": "right",
+      "borders": [
+        "BOL",
+        "BRA",
+        "CHL",
+        "PRY",
+        "URY"
+      ],
+      "timezones": [
+        "UTC-03:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2024",
+        "value": 42.4
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": true,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Buenos Aires is one of the most culturally dense capitals in the Western Hemisphere, and the country it anchors spans nearly 2.8 million square kilometers, stretching from the subtropical north to the edge of Patagonia. Argentina's 46 million people are largely Spanish-speaking, though Guaraní holds recognized status as well. The peso's volatility is real, and a Gini coefficient of 42.4 signals meaningful income inequality, so financial planning matters more here than in many other expat destinations.",
+      "continents": [
+        "South America"
+      ]
     },
     "ecuador": {
       "safety": 3,
@@ -966,7 +2621,64 @@
         "visa_days": 90
       },
       "grade_percent": 61,
-      "grade_label": "Good destination"
+      "grade_label": "Good destination",
+      "budget_single": 1350,
+      "budget_couple": 2100,
+      "cost_index": 37,
+      "us_comparison": "approximately 55% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Quito",
+          "monthly_usd": 1100
+        },
+        {
+          "name": "Manta",
+          "monthly_usd": 1250
+        },
+        {
+          "name": "Cuenca",
+          "monthly_usd": 1350
+        }
+      ],
+      "area_km2": 276841,
+      "population": 17483326,
+      "government_type": "Unitary presidential republic",
+      "capital": "Quito",
+      "currencies": [
+        "United States dollar"
+      ],
+      "languages": [
+        "Spanish"
+      ],
+      "demonym": "Ecuadorean",
+      "driving_side": "right",
+      "borders": [
+        "COL",
+        "PER"
+      ],
+      "timezones": [
+        "UTC-06:00",
+        "UTC-05:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2025",
+        "value": 45.9
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Ecuador runs the full spectrum from Pacific coastline to Amazon basin to the Galápagos Islands, all packed into a country roughly the size of Nevada. For Americans, one practical reality stands out immediately: Ecuador uses the U.S. dollar as its official currency, which eliminates exchange rate headaches entirely. The income inequality gap is real, with a Gini coefficient of 45.9, and prospective residents do well to research neighborhoods and regions carefully before committing.",
+      "continents": [
+        "South America"
+      ]
     },
     "morocco": {
       "safety": 7,
@@ -999,7 +2711,65 @@
         "visa_days": 90
       },
       "grade_percent": 59,
-      "grade_label": "Solid destination"
+      "grade_label": "Moderate destination",
+      "budget_single": 1300,
+      "budget_couple": 2000,
+      "cost_index": 35,
+      "us_comparison": "approximately 57% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Casablanca",
+          "monthly_usd": 1150
+        },
+        {
+          "name": "Tangier",
+          "monthly_usd": 1150
+        },
+        {
+          "name": "Rabat",
+          "monthly_usd": 1300
+        }
+      ],
+      "area_km2": 446550,
+      "population": 36828330,
+      "government_type": "Unitary parliamentary semi-constitutional monarchy",
+      "capital": "Rabat",
+      "currencies": [
+        "Moroccan dirham"
+      ],
+      "languages": [
+        "Arabic",
+        "Standard Moroccan Tamazight"
+      ],
+      "demonym": "Moroccan",
+      "driving_side": "right",
+      "borders": [
+        "DZA",
+        "ESH",
+        "ESP"
+      ],
+      "timezones": [
+        "UTC"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2013",
+        "value": 39.5
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Rabat may be the capital, but it's Marrakech and Casablanca that most Americans picture when Morocco comes to mind, which tells you something about how much personality this country carries beyond its seat of government. Spread across 446,550 square kilometers along Africa's Atlantic and Mediterranean coasts, Morocco is a country of 36 million people where Arabic and Tamazight share official status, reflecting a Berber heritage that runs deep alongside Arab influence. The Moroccan dirham is not freely convertible, a practical reality that shapes daily financial life for expats from day one.",
+      "continents": [
+        "Africa"
+      ]
     },
     "switzerland": {
       "safety": 9,
@@ -1032,7 +2802,69 @@
         "visa_days": 90
       },
       "grade_percent": 87,
-      "grade_label": "Excellent destination"
+      "grade_label": "Excellent destination",
+      "budget_single": 4000,
+      "budget_couple": 6200,
+      "cost_index": 109,
+      "us_comparison": "approximately 33% more expensive than the United States",
+      "affordable_cities": [
+        {
+          "name": "Bern",
+          "monthly_usd": 3200
+        },
+        {
+          "name": "Basel",
+          "monthly_usd": 3500
+        },
+        {
+          "name": "Zurich",
+          "monthly_usd": 3600
+        }
+      ],
+      "area_km2": 41284,
+      "population": 9154242,
+      "government_type": "Federal assembly-independent directorial republic",
+      "capital": "Bern",
+      "currencies": [
+        "Swiss franc"
+      ],
+      "languages": [
+        "French",
+        "Swiss German",
+        "Italian",
+        "Romansh"
+      ],
+      "demonym": "Swiss",
+      "driving_side": "right",
+      "borders": [
+        "AUT",
+        "FRA",
+        "ITA",
+        "LIE",
+        "DEU"
+      ],
+      "timezones": [
+        "UTC+01:00"
+      ],
+      "landlocked": true,
+      "gini": {
+        "year": "2022",
+        "value": 33.8
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": true,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Switzerland packs four official languages, French, Swiss German, Italian, and Romansh, into a landlocked country smaller than West Virginia. Bern serves as the capital, though Zurich and Geneva tend to overshadow it in international conversation. Its Gini coefficient of 33.8 reflects a notably equitable income distribution for such a wealthy nation, and Schengen membership means residents move freely across much of Europe without stopping at a border.",
+      "continents": [
+        "Europe"
+      ]
     },
     "norway": {
       "safety": 8,
@@ -1065,7 +2897,68 @@
         "visa_days": 90
       },
       "grade_percent": 83,
-      "grade_label": "Excellent destination"
+      "grade_label": "Excellent destination",
+      "budget_single": 3500,
+      "budget_couple": 5450,
+      "cost_index": 95,
+      "us_comparison": "approximately 16% more expensive than the United States",
+      "affordable_cities": [
+        {
+          "name": "Stavanger",
+          "monthly_usd": 3050
+        },
+        {
+          "name": "Trondheim",
+          "monthly_usd": 3200
+        },
+        {
+          "name": "Bergen",
+          "monthly_usd": 3350
+        }
+      ],
+      "area_km2": 323802,
+      "population": 5627400,
+      "government_type": "Unitary parliamentary constitutional monarchy",
+      "capital": "Oslo",
+      "currencies": [
+        "Norwegian krone"
+      ],
+      "languages": [
+        "Norwegian Nynorsk",
+        "Norwegian Bokmål",
+        "Northern Sami",
+        "Lule Sami",
+        "Southern Sami"
+      ],
+      "demonym": "Norwegian",
+      "driving_side": "right",
+      "borders": [
+        "FIN",
+        "SWE",
+        "RUS"
+      ],
+      "timezones": [
+        "UTC+01:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2023",
+        "value": 26.5
+      },
+      "memberships": {
+        "nato": true,
+        "eu": false,
+        "eurozone": false,
+        "schengen": true,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Oslo may not have the name recognition of Paris or Lisbon among Americans dreaming of a European move, but Norway rewards the curious. With a population of just 5.6 million spread across 323,000 square kilometers of coastline and fjord country, it offers a kind of breathing room that's genuinely rare. Its Gini coefficient of 26.5 puts it among the most economically equal societies on earth, and NATO and Schengen membership mean institutional stability and easy travel across the continent.",
+      "continents": [
+        "Europe"
+      ]
     },
     "denmark": {
       "safety": 8,
@@ -1098,7 +2991,66 @@
         "visa_days": 90
       },
       "grade_percent": 84,
-      "grade_label": "Excellent destination"
+      "grade_label": "Excellent destination",
+      "budget_single": 3200,
+      "budget_couple": 4950,
+      "cost_index": 88,
+      "us_comparison": "approximately 7% more expensive than the United States",
+      "affordable_cities": [
+        {
+          "name": "Aalborg",
+          "monthly_usd": 2850
+        },
+        {
+          "name": "Odense",
+          "monthly_usd": 2950
+        },
+        {
+          "name": "Aarhus",
+          "monthly_usd": 3150
+        }
+      ],
+      "area_km2": 43094,
+      "population": 6001008,
+      "government_type": "Unitary parliamentary constitutional monarchy",
+      "capital": "Copenhagen",
+      "currencies": [
+        "Danish krone"
+      ],
+      "languages": [
+        "Danish"
+      ],
+      "demonym": "Danish",
+      "driving_side": "right",
+      "borders": [
+        "DEU"
+      ],
+      "timezones": [
+        "UTC-04:00",
+        "UTC-03:00",
+        "UTC-01:00",
+        "UTC",
+        "UTC+01:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2023",
+        "value": 29.9
+      },
+      "memberships": {
+        "nato": true,
+        "eu": true,
+        "eurozone": false,
+        "schengen": true,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Copenhagen consistently ranks among the world's most livable cities, and the country surrounding it tends to live up to that reputation. Denmark's Gini coefficient of 29.9 reflects one of the more equal income distributions anywhere, which shows up in daily life through strong public services and a general sense of social stability. With just one land border and full Schengen membership, travel across Europe is frictionless for Danish residents.",
+      "continents": [
+        "Europe"
+      ]
     },
     "sweden": {
       "safety": 7,
@@ -1131,7 +3083,63 @@
         "visa_days": 90
       },
       "grade_percent": 78,
-      "grade_label": "Very good destination"
+      "grade_label": "Very good destination",
+      "budget_single": 3050,
+      "budget_couple": 4750,
+      "cost_index": 84,
+      "us_comparison": "approximately 2% more expensive than the United States",
+      "affordable_cities": [
+        {
+          "name": "Uppsala",
+          "monthly_usd": 2750
+        },
+        {
+          "name": "Malmo",
+          "monthly_usd": 2850
+        },
+        {
+          "name": "Stockholm",
+          "monthly_usd": 3000
+        }
+      ],
+      "area_km2": 450295,
+      "population": 10610485,
+      "government_type": "Unitary parliamentary constitutional monarchy",
+      "capital": "Stockholm",
+      "currencies": [
+        "Swedish krona"
+      ],
+      "languages": [
+        "Swedish"
+      ],
+      "demonym": "Swedish",
+      "driving_side": "right",
+      "borders": [
+        "FIN",
+        "NOR"
+      ],
+      "timezones": [
+        "UTC+01:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2023",
+        "value": 29.3
+      },
+      "memberships": {
+        "nato": true,
+        "eu": true,
+        "eurozone": false,
+        "schengen": true,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Stockholm tends to get all the attention, but Sweden itself is a country of striking scale, stretching across 450,295 square kilometers with a population of just over 10.6 million. That relatively low density shapes daily life considerably, offering a kind of breathing room that's genuinely rare in Western Europe. As both an EU and Schengen member, Sweden sits at the center of European institutional life, and its Gini coefficient of 29.3 signals one of the more economically equal societies an American could move to.",
+      "continents": [
+        "Europe"
+      ]
     },
     "belgium": {
       "safety": 8,
@@ -1164,7 +3172,67 @@
         "visa_days": 90
       },
       "grade_percent": 78,
-      "grade_label": "Very good destination"
+      "grade_label": "Very good destination",
+      "budget_single": 2650,
+      "budget_couple": 4100,
+      "cost_index": 72,
+      "us_comparison": "approximately 12% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Ghent",
+          "monthly_usd": 2400
+        },
+        {
+          "name": "Antwerp",
+          "monthly_usd": 2500
+        },
+        {
+          "name": "Bruges",
+          "monthly_usd": 2500
+        }
+      ],
+      "area_km2": 30528,
+      "population": 11867634,
+      "government_type": "Federal parliamentary constitutional monarchy",
+      "capital": "Brussels",
+      "currencies": [
+        "Euro"
+      ],
+      "languages": [
+        "German",
+        "French",
+        "Dutch"
+      ],
+      "demonym": "Belgian",
+      "driving_side": "right",
+      "borders": [
+        "FRA",
+        "DEU",
+        "LUX",
+        "NLD"
+      ],
+      "timezones": [
+        "UTC+01:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2023",
+        "value": 26.8
+      },
+      "memberships": {
+        "nato": true,
+        "eu": true,
+        "eurozone": true,
+        "schengen": true,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Brussels sits at the political center of Europe, hosting NATO headquarters and serving as the effective capital of the EU, which gives Belgium an unusually international character for a country roughly the size of Maryland. With three official languages, German, French, and Dutch, daily life here reflects a genuinely multilingual society rather than a novelty. At a Gini coefficient of 26.8, income inequality is among the lowest measured anywhere, a detail that tends to show up in public services and quality of life in ways Americans often find striking.",
+      "continents": [
+        "Europe"
+      ]
     },
     "austria": {
       "safety": 9,
@@ -1197,7 +3265,69 @@
         "visa_days": 90
       },
       "grade_percent": 82,
-      "grade_label": "Excellent destination"
+      "grade_label": "Excellent destination",
+      "budget_single": 2650,
+      "budget_couple": 4100,
+      "cost_index": 72,
+      "us_comparison": "approximately 12% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Graz",
+          "monthly_usd": 2200
+        },
+        {
+          "name": "Vienna",
+          "monthly_usd": 2500
+        },
+        {
+          "name": "Linz",
+          "monthly_usd": 2650
+        }
+      ],
+      "area_km2": 83871,
+      "population": 9219113,
+      "government_type": "Federal semi-presidential republic",
+      "capital": "Vienna",
+      "currencies": [
+        "Euro"
+      ],
+      "languages": [
+        "German"
+      ],
+      "demonym": "Austrian",
+      "driving_side": "right",
+      "borders": [
+        "CZE",
+        "DEU",
+        "HUN",
+        "ITA",
+        "LIE",
+        "SVK",
+        "SVN",
+        "CHE"
+      ],
+      "timezones": [
+        "UTC+01:00"
+      ],
+      "landlocked": true,
+      "gini": {
+        "year": "2023",
+        "value": 31.2
+      },
+      "memberships": {
+        "nato": false,
+        "eu": true,
+        "eurozone": true,
+        "schengen": true,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Vienna regularly tops global quality-of-life rankings, and the surrounding country tends to confirm why. Austria sits at the heart of Europe, sharing borders with eight countries, which makes it an exceptional base for anyone who wants weekend trains to Prague, Munich, or Ljubljana without the fuss of currency exchanges. Its Gini coefficient of 31.2 signals a notably equitable society, and membership in the EU and Schengen zone means institutional stability and freedom of movement across most of the continent.",
+      "continents": [
+        "Europe"
+      ]
     },
     "finland": {
       "safety": 9,
@@ -1230,7 +3360,65 @@
         "visa_days": 90
       },
       "grade_percent": 87,
-      "grade_label": "Excellent destination"
+      "grade_label": "Excellent destination",
+      "budget_single": 2950,
+      "budget_couple": 4550,
+      "cost_index": 80,
+      "us_comparison": "approximately 2% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Turku",
+          "monthly_usd": 2800
+        },
+        {
+          "name": "Helsinki",
+          "monthly_usd": 2850
+        },
+        {
+          "name": "Tampere",
+          "monthly_usd": 2900
+        }
+      ],
+      "area_km2": 338424,
+      "population": 5652881,
+      "government_type": "Unitary parliamentary republic",
+      "capital": "Helsinki",
+      "currencies": [
+        "Euro"
+      ],
+      "languages": [
+        "Finnish",
+        "Swedish"
+      ],
+      "demonym": "Finnish",
+      "driving_side": "right",
+      "borders": [
+        "NOR",
+        "SWE",
+        "RUS"
+      ],
+      "timezones": [
+        "UTC+02:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2023",
+        "value": 27.4
+      },
+      "memberships": {
+        "nato": true,
+        "eu": true,
+        "eurozone": true,
+        "schengen": true,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Finland is one of the most equal societies on the planet, with a Gini coefficient of 27.4 that puts most wealthy nations to shame. The country spans 338,424 square kilometers across northern Europe, giving its 5.6 million residents a lot of breathing room, and Helsinki punches well above its weight as a capital, blending Scandinavian design sensibility with a genuinely distinct Finnish character. EU and Schengen membership makes onward travel across Europe straightforward, and the euro means no currency headaches.",
+      "continents": [
+        "Europe"
+      ]
     },
     "united-kingdom": {
       "safety": 7,
@@ -1263,7 +3451,70 @@
         "visa_days": 90
       },
       "grade_percent": 77,
-      "grade_label": "Very good destination"
+      "grade_label": "Very good destination",
+      "budget_single": 2900,
+      "budget_couple": 4500,
+      "cost_index": 79,
+      "us_comparison": "approximately 4% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Manchester",
+          "monthly_usd": 2000
+        },
+        {
+          "name": "Edinburgh",
+          "monthly_usd": 2100
+        },
+        {
+          "name": "London",
+          "monthly_usd": 2650
+        }
+      ],
+      "area_km2": 242900,
+      "population": 66912637,
+      "government_type": "Unitary parliamentary constitutional monarchy",
+      "capital": "London",
+      "currencies": [
+        "British pound"
+      ],
+      "languages": [
+        "English"
+      ],
+      "demonym": "British",
+      "driving_side": "left",
+      "borders": [
+        "IRL"
+      ],
+      "timezones": [
+        "UTC-08:00",
+        "UTC-05:00",
+        "UTC-04:00",
+        "UTC-03:00",
+        "UTC-02:00",
+        "UTC",
+        "UTC+01:00",
+        "UTC+02:00",
+        "UTC+06:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2021",
+        "value": 32.4
+      },
+      "memberships": {
+        "nato": true,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": true,
+        "g7": true,
+        "g20": true,
+        "commonwealth": true
+      },
+      "quick_facts_paragraph": "London is one of the world's great cities, and for Americans, the language barrier is nonexistent, which removes one of the biggest friction points of relocating abroad. The UK left the EU after Brexit, so Americans won't gain European free movement by settling here, but its G7 standing and deep institutional ties to the US mean the professional and financial infrastructure feels familiar. With a Gini coefficient of 32.4, income inequality is notably lower than in the United States.",
+      "continents": [
+        "Europe"
+      ]
     },
     "singapore": {
       "safety": 9,
@@ -1296,7 +3547,60 @@
         "visa_days": 180
       },
       "grade_percent": 88,
-      "grade_label": "Excellent destination"
+      "grade_label": "Excellent destination",
+      "budget_single": 2250,
+      "budget_couple": 3500,
+      "cost_index": 61,
+      "us_comparison": "approximately 26% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Tampines",
+          "monthly_usd": 2950
+        },
+        {
+          "name": "Jurong East",
+          "monthly_usd": 3000
+        },
+        {
+          "name": "Woodlands",
+          "monthly_usd": 3050
+        }
+      ],
+      "area_km2": 710,
+      "population": 6110200,
+      "government_type": "Unitary parliamentary republic",
+      "capital": "Singapore",
+      "currencies": [
+        "Singapore dollar"
+      ],
+      "languages": [
+        "English",
+        "Chinese",
+        "Malay",
+        "Tamil"
+      ],
+      "demonym": "Singaporean",
+      "driving_side": "left",
+      "borders": [],
+      "timezones": [
+        "UTC+08:00"
+      ],
+      "landlocked": false,
+      "gini": null,
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": true
+      },
+      "quick_facts_paragraph": "Singapore is one of the world's most compact countries, fitting a population of over six million into just 710 square kilometers at the southern tip of the Malay Peninsula. English is an official language alongside Chinese, Malay, and Tamil, which makes daily life surprisingly accessible for Americans, even if the local mix of accents and slang takes some getting used to. As a Commonwealth member, it carries a certain institutional familiarity, though the city-state operates very much on its own terms.",
+      "continents": [
+        "Asia"
+      ]
     },
     "united-arab-emirates": {
       "safety": 6,
@@ -1329,7 +3633,63 @@
         "visa_days": 30
       },
       "grade_percent": 73,
-      "grade_label": "Very good destination"
+      "grade_label": "Very good destination",
+      "budget_single": 2150,
+      "budget_couple": 3350,
+      "cost_index": 59,
+      "us_comparison": "approximately 28% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Abu Dhabi",
+          "monthly_usd": 2250
+        },
+        {
+          "name": "Dubai",
+          "monthly_usd": 2400
+        },
+        {
+          "name": "Ajman",
+          "monthly_usd": 2600
+        }
+      ],
+      "area_km2": 83600,
+      "population": 11027129,
+      "government_type": "Federal semi-presidential elective semi-constitutional monarchy",
+      "capital": "Abu Dhabi",
+      "currencies": [
+        "United Arab Emirates dirham"
+      ],
+      "languages": [
+        "Arabic"
+      ],
+      "demonym": "Emirati",
+      "driving_side": "right",
+      "borders": [
+        "OMN",
+        "SAU"
+      ],
+      "timezones": [
+        "UTC+04:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2018",
+        "value": 26.4
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Abu Dhabi may be the capital, but Dubai tends to dominate the American imagination, which means most newcomers arrive with a skewed sense of what the UAE actually is. Spread across 83,600 square kilometers on the Arabian Gulf, the country of 11 million is one of the more economically equal societies in the region, with a Gini coefficient of 26.4. Arabic is the official language, though English is widely spoken in business and daily life.",
+      "continents": [
+        "Asia"
+      ]
     },
     "qatar": {
       "safety": 8,
@@ -1362,7 +3722,62 @@
         "visa_days": 90
       },
       "grade_percent": 75,
-      "grade_label": "Very good destination"
+      "grade_label": "Very good destination",
+      "budget_single": 2200,
+      "budget_couple": 3400,
+      "cost_index": 60,
+      "us_comparison": "approximately 27% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Doha",
+          "monthly_usd": 2550
+        },
+        {
+          "name": "Lusail",
+          "monthly_usd": 2650
+        },
+        {
+          "name": "Al Khor",
+          "monthly_usd": 2750
+        }
+      ],
+      "area_km2": 11586,
+      "population": 3214609,
+      "government_type": "Unitary authoritarian semi-constitutional monarchy",
+      "capital": "Doha",
+      "currencies": [
+        "Qatari riyal"
+      ],
+      "languages": [
+        "Arabic"
+      ],
+      "demonym": "Qatari",
+      "driving_side": "right",
+      "borders": [
+        "SAU"
+      ],
+      "timezones": [
+        "UTC+03:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2017",
+        "value": 35.1
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Doha punches well above its weight for a capital city, offering a skyline and infrastructure that would feel at home in any major global hub. Qatar is a small peninsula on the Arabian Gulf, just over 11,500 square kilometers, with a population of roughly 3.2 million and a single land border with Saudi Arabia. The income inequality figure is relatively moderate at 35.1, though daily life here operates under Islamic law and cultural norms that can require genuine adjustment for Western expats.",
+      "continents": [
+        "Asia"
+      ]
     },
     "saudi-arabia": {
       "safety": 6,
@@ -1395,7 +3810,65 @@
         "visa_days": 30
       },
       "grade_percent": 69,
-      "grade_label": "Good destination"
+      "grade_label": "Good destination",
+      "budget_single": 1550,
+      "budget_couple": 2400,
+      "cost_index": 43,
+      "us_comparison": "approximately 48% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Mecca",
+          "monthly_usd": 1700
+        },
+        {
+          "name": "Jeddah",
+          "monthly_usd": 1750
+        },
+        {
+          "name": "Dammam",
+          "monthly_usd": 1800
+        }
+      ],
+      "area_km2": 2149690,
+      "population": 33702731,
+      "government_type": "Unitary Islamic absolute monarchy",
+      "capital": "Riyadh",
+      "currencies": [
+        "Saudi riyal"
+      ],
+      "languages": [
+        "Arabic"
+      ],
+      "demonym": "Saudi Arabian",
+      "driving_side": "right",
+      "borders": [
+        "IRQ",
+        "JOR",
+        "KWT",
+        "OMN",
+        "QAT",
+        "ARE",
+        "YEM"
+      ],
+      "timezones": [
+        "UTC+03:00"
+      ],
+      "landlocked": false,
+      "gini": null,
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": true,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Saudi Arabia is one of the largest countries in the Middle East, covering more than 2.1 million square kilometers of desert, coastline, and rapidly modernizing cities, with Riyadh serving as the political and commercial hub of a nation of nearly 34 million people. For Americans considering a move, the transition runs deeper than learning Arabic or adjusting to the Saudi riyal. Social norms, legal expectations, and daily life operate on a fundamentally different framework than most Westerners are accustomed to, and that reality deserves serious research before any decisions are made.",
+      "continents": [
+        "Asia"
+      ]
     },
     "iceland": {
       "safety": 10,
@@ -1428,7 +3901,60 @@
         "visa_days": 90
       },
       "grade_percent": 93,
-      "grade_label": "Outstanding destination"
+      "grade_label": "Outstanding destination",
+      "budget_single": 3600,
+      "budget_couple": 5600,
+      "cost_index": 99,
+      "us_comparison": "approximately 21% more expensive than the United States",
+      "affordable_cities": [
+        {
+          "name": "Akureyri",
+          "monthly_usd": 3150
+        },
+        {
+          "name": "Hafnarfjordur",
+          "monthly_usd": 3250
+        },
+        {
+          "name": "Reykjavik",
+          "monthly_usd": 3350
+        }
+      ],
+      "area_km2": 103000,
+      "population": 394324,
+      "government_type": "Unitary parliamentary republic",
+      "capital": "Reykjavik",
+      "currencies": [
+        "Icelandic króna"
+      ],
+      "languages": [
+        "Icelandic"
+      ],
+      "demonym": "Icelander",
+      "driving_side": "right",
+      "borders": [],
+      "timezones": [
+        "UTC"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2019",
+        "value": 26.8
+      },
+      "memberships": {
+        "nato": true,
+        "eu": false,
+        "eurozone": false,
+        "schengen": true,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Reykjavik may be one of the world's smallest capitals, but it anchors a country that consistently ranks among the most equal societies on earth, with a Gini coefficient of just 26.8. Iceland sits outside the EU but inside the Schengen zone, so travel across Europe stays relatively frictionless for residents. The catch is real: Icelandic is the official language, the population barely clears 394,000, and the island's remoteness shapes daily life in ways that thrill some Americans and quietly wear on others.",
+      "continents": [
+        "Europe"
+      ]
     },
     "india": {
       "safety": 4,
@@ -1461,7 +3987,69 @@
         "visa_days": 90
       },
       "grade_percent": 56,
-      "grade_label": "Solid destination"
+      "grade_label": "Moderate destination",
+      "budget_single": 750,
+      "budget_couple": 1150,
+      "cost_index": 21,
+      "us_comparison": "approximately 74% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Hyderabad",
+          "monthly_usd": 900
+        },
+        {
+          "name": "Bangalore",
+          "monthly_usd": 900
+        },
+        {
+          "name": "Delhi",
+          "monthly_usd": 1000
+        }
+      ],
+      "area_km2": 3287590,
+      "population": 1380004385,
+      "government_type": "Federal parliamentary republic",
+      "capital": "New Delhi",
+      "currencies": [
+        "Indian rupee"
+      ],
+      "languages": [
+        "English",
+        "Hindi",
+        "Tamil"
+      ],
+      "demonym": "Indian",
+      "driving_side": "left",
+      "borders": [
+        "BGD",
+        "BTN",
+        "MMR",
+        "CHN",
+        "NPL",
+        "PAK"
+      ],
+      "timezones": [
+        "UTC+05:30"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2022",
+        "value": 25.5
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": true,
+        "commonwealth": true
+      },
+      "quick_facts_paragraph": "India is the world's most populous country, home to nearly 1.4 billion people spread across a landmass roughly a third the size of the United States. New Delhi anchors a nation where English remains an official language alongside Hindi and Tamil, which smooths daily life considerably for American arrivals. The Gini coefficient of 25.5 suggests a more compressed income distribution than many expect, though the lived economic reality varies enormously by region.",
+      "continents": [
+        "Asia"
+      ]
     },
     "philippines": {
       "safety": 6,
@@ -1494,7 +4082,61 @@
         "visa_days": 30
       },
       "grade_percent": 65,
-      "grade_label": "Good destination"
+      "grade_label": "Good destination",
+      "budget_single": 1150,
+      "budget_couple": 1800,
+      "cost_index": 32,
+      "us_comparison": "approximately 61% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Manila",
+          "monthly_usd": 1000
+        },
+        {
+          "name": "Quezon City",
+          "monthly_usd": 1050
+        },
+        {
+          "name": "Davao City",
+          "monthly_usd": 1150
+        }
+      ],
+      "area_km2": 342353,
+      "population": 112729484,
+      "government_type": "Unitary presidential republic",
+      "capital": "Manila",
+      "currencies": [
+        "Philippine peso"
+      ],
+      "languages": [
+        "English",
+        "Filipino"
+      ],
+      "demonym": "Filipino",
+      "driving_side": "right",
+      "borders": [],
+      "timezones": [
+        "UTC+08:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2023",
+        "value": 39.3
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "The Philippines is an archipelago of more than 7,000 islands spread across Southeast Asia, home to over 112 million people and anchored by the sprawling, chaotic capital of Manila. English is an official language alongside Filipino, which makes daily life and bureaucracy far more accessible for Americans than in most of the region. The country's income inequality sits at a moderate Gini of 39.3, a reminder that prosperity here is unevenly distributed, something worth factoring into any relocation plan.",
+      "continents": [
+        "Asia"
+      ]
     },
     "china": {
       "safety": 5,
@@ -1527,7 +4169,77 @@
         "visa_days": 90
       },
       "grade_percent": 66,
-      "grade_label": "Good destination"
+      "grade_label": "Good destination",
+      "budget_single": 1850,
+      "budget_couple": 2850,
+      "cost_index": 50,
+      "us_comparison": "approximately 39% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Chengdu",
+          "monthly_usd": 1600
+        },
+        {
+          "name": "Beijing",
+          "monthly_usd": 1900
+        },
+        {
+          "name": "Shanghai",
+          "monthly_usd": 2000
+        }
+      ],
+      "area_km2": 9706961,
+      "population": 1404890000,
+      "government_type": "Unitary communist state",
+      "capital": "Beijing",
+      "currencies": [
+        "Chinese yuan"
+      ],
+      "languages": [
+        "Chinese"
+      ],
+      "demonym": "Chinese",
+      "driving_side": "right",
+      "borders": [
+        "AFG",
+        "BTN",
+        "MMR",
+        "HKG",
+        "IND",
+        "KAZ",
+        "NPL",
+        "PRK",
+        "KGZ",
+        "LAO",
+        "MAC",
+        "MNG",
+        "PAK",
+        "RUS",
+        "TJK",
+        "VNM"
+      ],
+      "timezones": [
+        "UTC+08:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2022",
+        "value": 36
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": true,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "China is the world's most populous country, home to nearly 1.4 billion people across a landmass that stretches from tropical coastlines to Central Asian steppe. Beijing serves as the capital of a nation that shares land borders with 16 countries, a geographic reality that shapes everything from regional cuisines to infrastructure priorities. The official language is Chinese, and while English is increasingly taught in cities, daily life outside major urban centers runs almost entirely in Mandarin.",
+      "continents": [
+        "Asia"
+      ]
     },
     "georgia": {
       "safety": 6,
@@ -1560,7 +4272,65 @@
         "visa_days": 360
       },
       "grade_percent": 59,
-      "grade_label": "Solid destination"
+      "grade_label": "Moderate destination",
+      "budget_single": 850,
+      "budget_couple": 1300,
+      "cost_index": 23,
+      "us_comparison": "approximately 72% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Batumi",
+          "monthly_usd": 350
+        },
+        {
+          "name": "Tbilisi",
+          "monthly_usd": 550
+        },
+        {
+          "name": "Rustavi",
+          "monthly_usd": 1150
+        }
+      ],
+      "area_km2": 69700,
+      "population": 3657000,
+      "government_type": "Unitary parliamentary republic",
+      "capital": "Tbilisi",
+      "currencies": [
+        "lari"
+      ],
+      "languages": [
+        "Georgian"
+      ],
+      "demonym": "Georgian",
+      "driving_side": "right",
+      "borders": [
+        "ARM",
+        "AZE",
+        "RUS",
+        "TUR"
+      ],
+      "timezones": [
+        "UTC+04:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2024",
+        "value": 33.9
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Tbilisi has been pulling in a certain kind of American expat for years now, drawn by low costs, a genuinely distinct culture, and a city that feels nothing like anywhere else in Europe or Asia. Georgia sits at the crossroads of those two continents, touching the Black Sea to the west and sharing borders with Russia, Turkey, Armenia, and Azerbaijan, which gives it an outsized geopolitical weight for a country of 3.7 million people. The lari keeps everyday life affordable, and an income inequality score of 33.9 puts it in reasonably balanced territory by regional standards.",
+      "continents": [
+        "Asia"
+      ]
     },
     "serbia": {
       "safety": 6,
@@ -1593,7 +4363,69 @@
         "visa_days": 90
       },
       "grade_percent": 65,
-      "grade_label": "Good destination"
+      "grade_label": "Good destination",
+      "budget_single": 1200,
+      "budget_couple": 1850,
+      "cost_index": 33,
+      "us_comparison": "approximately 60% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Belgrade",
+          "monthly_usd": 800
+        },
+        {
+          "name": "Kragujevac",
+          "monthly_usd": 1450
+        },
+        {
+          "name": "Nis",
+          "monthly_usd": 1550
+        }
+      ],
+      "area_km2": 88361,
+      "population": 6567783,
+      "government_type": "Unitary parliamentary republic",
+      "capital": "Belgrade",
+      "currencies": [
+        "Serbian dinar"
+      ],
+      "languages": [
+        "Serbian"
+      ],
+      "demonym": "Serbian",
+      "driving_side": "right",
+      "borders": [
+        "BIH",
+        "BGR",
+        "HRV",
+        "HUN",
+        "UNK",
+        "MKD",
+        "MNE",
+        "ROU"
+      ],
+      "timezones": [
+        "UTC+01:00"
+      ],
+      "landlocked": true,
+      "gini": {
+        "year": "2023",
+        "value": 32.8
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Belgrade punches well above its weight for a capital city of a landlocked Balkan nation of about 6.5 million people. Serbia shares borders with eight countries, which means surprisingly easy overland access to much of Central and Southeastern Europe, and its income inequality sits at a Gini of 32.8, relatively modest by global standards. The Serbian dinar keeps costs low, and the country rewards those willing to live a little further off the well-worn expat trail.",
+      "continents": [
+        "Europe"
+      ]
     },
     "kenya": {
       "safety": 4,
@@ -1626,7 +4458,67 @@
         "visa_days": 90
       },
       "grade_percent": 51,
-      "grade_label": "Solid destination"
+      "grade_label": "Moderate destination",
+      "budget_single": 1100,
+      "budget_couple": 1700,
+      "cost_index": 30,
+      "us_comparison": "approximately 63% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Mombasa",
+          "monthly_usd": 900
+        },
+        {
+          "name": "Nairobi",
+          "monthly_usd": 1100
+        },
+        {
+          "name": "Nakuru",
+          "monthly_usd": 1100
+        }
+      ],
+      "area_km2": 580367,
+      "population": 53330978,
+      "government_type": "Unitary presidential republic",
+      "capital": "Nairobi",
+      "currencies": [
+        "Kenyan shilling"
+      ],
+      "languages": [
+        "English",
+        "Swahili"
+      ],
+      "demonym": "Kenyan",
+      "driving_side": "left",
+      "borders": [
+        "ETH",
+        "SOM",
+        "SSD",
+        "TZA",
+        "UGA"
+      ],
+      "timezones": [
+        "UTC+03:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2022",
+        "value": 38.5
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": true
+      },
+      "quick_facts_paragraph": "Nairobi is one of Africa's most consequential cities, and it gives you a sense of what Kenya is at its core: fast-moving, ambitious, and deeply connected to the wider world. With a population of over 53 million spread across a country slightly larger than Texas, Kenya sits at the crossroads of East Africa, sharing land borders with five neighbors and opening onto the Indian Ocean to the southeast. English and Swahili are both official languages, which makes daily life considerably more accessible for American arrivals than in much of the continent.",
+      "continents": [
+        "Africa"
+      ]
     },
     "peru": {
       "safety": 5,
@@ -1659,7 +4551,68 @@
         "visa_days": 180
       },
       "grade_percent": 62,
-      "grade_label": "Good destination"
+      "grade_label": "Good destination",
+      "budget_single": 1350,
+      "budget_couple": 2100,
+      "cost_index": 37,
+      "us_comparison": "approximately 55% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Lima",
+          "monthly_usd": 1150
+        },
+        {
+          "name": "Trujillo",
+          "monthly_usd": 1250
+        },
+        {
+          "name": "Cusco",
+          "monthly_usd": 1350
+        }
+      ],
+      "area_km2": 1285216,
+      "population": 34352720,
+      "government_type": "Unitary semi-presidential republic",
+      "capital": "Lima",
+      "currencies": [
+        "Peruvian sol"
+      ],
+      "languages": [
+        "Aymara",
+        "Quechua",
+        "Spanish"
+      ],
+      "demonym": "Peruvian",
+      "driving_side": "right",
+      "borders": [
+        "BOL",
+        "BRA",
+        "CHL",
+        "COL",
+        "ECU"
+      ],
+      "timezones": [
+        "UTC-05:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2024",
+        "value": 40.1
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Lima is one of the largest cities in South America, and for many Americans it becomes the entry point into a country far more complex than the Machu Picchu postcards suggest. Peru stretches across 1.28 million square kilometers, with Spanish sharing official status alongside Quechua and Aymara, a linguistic reality that reflects deep Indigenous roots still very much alive in daily life. At a Gini coefficient of 40.1, income inequality is a real part of the social landscape, something relocating Americans tend to notice quickly once they settle in.",
+      "continents": [
+        "South America"
+      ]
     },
     "brazil": {
       "safety": 4,
@@ -1692,7 +4645,74 @@
         "visa_days": 90
       },
       "grade_percent": 66,
-      "grade_label": "Good destination"
+      "grade_label": "Good destination",
+      "budget_single": 1300,
+      "budget_couple": 2000,
+      "cost_index": 35,
+      "us_comparison": "approximately 57% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Curitiba",
+          "monthly_usd": 1300
+        },
+        {
+          "name": "Brasilia",
+          "monthly_usd": 1450
+        },
+        {
+          "name": "Rio de Janeiro",
+          "monthly_usd": 1450
+        }
+      ],
+      "area_km2": 8515767,
+      "population": 213421037,
+      "government_type": "Federal presidential republic",
+      "capital": "Brasília",
+      "currencies": [
+        "Brazilian real"
+      ],
+      "languages": [
+        "Portuguese"
+      ],
+      "demonym": "Brazilian",
+      "driving_side": "right",
+      "borders": [
+        "ARG",
+        "BOL",
+        "COL",
+        "GUF",
+        "GUY",
+        "PRY",
+        "PER",
+        "SUR",
+        "URY",
+        "VEN"
+      ],
+      "timezones": [
+        "UTC-05:00",
+        "UTC-04:00",
+        "UTC-03:00",
+        "UTC-02:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2024",
+        "value": 50.3
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": true,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Brazil is the largest country in South America and the fifth largest on earth, spanning more than 8.5 million square kilometers from the Amazon basin to the Atlantic coast. That scale means the experience of living there varies enormously depending on the city, the region, and the local economy. One thing consistent across the country is its staggering income inequality, reflected in a Gini coefficient of 50.3, which shapes daily life, neighborhood geography, and the social dynamics that any newcomer will need to understand before settling in.",
+      "continents": [
+        "South America"
+      ]
     },
     "chile": {
       "safety": 7,
@@ -1725,7 +4745,65 @@
         "visa_days": 90
       },
       "grade_percent": 70,
-      "grade_label": "Very good destination"
+      "grade_label": "Very good destination",
+      "budget_single": 1650,
+      "budget_couple": 2550,
+      "cost_index": 45,
+      "us_comparison": "approximately 45% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Santiago",
+          "monthly_usd": 1550
+        },
+        {
+          "name": "La Serena",
+          "monthly_usd": 2000
+        },
+        {
+          "name": "Concepcion",
+          "monthly_usd": 2100
+        }
+      ],
+      "area_km2": 756102,
+      "population": 19629588,
+      "government_type": "Unitary presidential republic",
+      "capital": "Santiago",
+      "currencies": [
+        "Chilean peso"
+      ],
+      "languages": [
+        "Spanish"
+      ],
+      "demonym": "Chilean",
+      "driving_side": "right",
+      "borders": [
+        "ARG",
+        "BOL",
+        "PER"
+      ],
+      "timezones": [
+        "UTC-06:00",
+        "UTC-04:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2024",
+        "value": 43
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Chile is one of South America's most stable and economically developed countries, a fact underscored by its OECD membership, which puts it in rare company on a continent where institutional reliability can vary wildly. Santiago is a genuinely modern capital with good infrastructure, but the country's income inequality, reflected in a Gini coefficient of 43, means the gap between wealthy and working-class Chileans is still pronounced. Spanish is the only language needed, and the country's dramatic Pacific coastline and sheer geographic length make it unlike anywhere else in the hemisphere.",
+      "continents": [
+        "South America"
+      ]
     },
     "albania": {
       "safety": 7,
@@ -1758,7 +4836,65 @@
         "visa_days": 360
       },
       "grade_percent": 65,
-      "grade_label": "Good destination"
+      "grade_label": "Good destination",
+      "budget_single": 1250,
+      "budget_couple": 1950,
+      "cost_index": 34,
+      "us_comparison": "approximately 59% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Tirana",
+          "monthly_usd": 450
+        },
+        {
+          "name": "Shkoder",
+          "monthly_usd": 1150
+        },
+        {
+          "name": "Vlore",
+          "monthly_usd": 1300
+        }
+      ],
+      "area_km2": 28748,
+      "population": 2402113,
+      "government_type": "Unitary parliamentary republic",
+      "capital": "Tirana",
+      "currencies": [
+        "Albanian lek"
+      ],
+      "languages": [
+        "Albanian"
+      ],
+      "demonym": "Albanian",
+      "driving_side": "right",
+      "borders": [
+        "MNE",
+        "GRC",
+        "MKD",
+        "UNK"
+      ],
+      "timezones": [
+        "UTC+01:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2020",
+        "value": 29.4
+      },
+      "memberships": {
+        "nato": true,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Tirana has been quietly drawing in expats who want southern European lifestyle without southern European price tags. Albania sits on the Adriatic and Ionian coasts, so the beaches are real, and with a population of just over 2.4 million spread across a compact country, it never feels overwhelming. The Gini coefficient of 29.4 signals relatively low income inequality by regional standards, and NATO membership since 2009 gives the country a degree of institutional stability that matters for anyone thinking long-term.",
+      "continents": [
+        "Europe"
+      ]
     },
     "sri-lanka": {
       "safety": 6,
@@ -1791,7 +4927,61 @@
         "visa_days": 30
       },
       "grade_percent": 59,
-      "grade_label": "Solid destination"
+      "grade_label": "Moderate destination",
+      "budget_single": 750,
+      "budget_couple": 1150,
+      "cost_index": 21,
+      "us_comparison": "approximately 74% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Colombo",
+          "monthly_usd": 800
+        },
+        {
+          "name": "Jaffna",
+          "monthly_usd": 950
+        },
+        {
+          "name": "Galle",
+          "monthly_usd": 1050
+        }
+      ],
+      "area_km2": 65610,
+      "population": 21756000,
+      "government_type": "Unitary semi-presidential republic",
+      "capital": "Sri Jayawardenepura Kotte",
+      "currencies": [
+        "Sri Lankan rupee"
+      ],
+      "languages": [
+        "Sinhala",
+        "Tamil"
+      ],
+      "demonym": "Sri Lankan",
+      "driving_side": "left",
+      "borders": [],
+      "timezones": [
+        "UTC+05:30"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2019",
+        "value": 37.7
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": true
+      },
+      "quick_facts_paragraph": "Sri Lanka is an island nation of nearly 22 million people sitting just off the southern tip of India, and its relatively moderate Gini score of 37.7 suggests less economic stratification than many of its regional neighbors. The capital is the somewhat tongue-twisting Sri Jayawardenepura Kotte, though Colombo functions as the commercial heart of the country. A Commonwealth member with left-side driving and two official languages, Sinhala and Tamil, it carries the institutional and cultural imprints of its colonial past into a present that feels very much its own.",
+      "continents": [
+        "Asia"
+      ]
     },
     "egypt": {
       "safety": 5,
@@ -1824,7 +5014,65 @@
         "visa_days": 30
       },
       "grade_percent": 55,
-      "grade_label": "Solid destination"
+      "grade_label": "Moderate destination",
+      "budget_single": 700,
+      "budget_couple": 1100,
+      "cost_index": 19,
+      "us_comparison": "approximately 77% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Cairo",
+          "monthly_usd": 800
+        },
+        {
+          "name": "Sharm El Sheikh",
+          "monthly_usd": 950
+        },
+        {
+          "name": "Giza",
+          "monthly_usd": 1050
+        }
+      ],
+      "area_km2": 1002450,
+      "population": 107868296,
+      "government_type": "Unitary semi-presidential republic under an authoritarian government",
+      "capital": "Cairo",
+      "currencies": [
+        "Egyptian pound"
+      ],
+      "languages": [
+        "Arabic"
+      ],
+      "demonym": "Egyptian",
+      "driving_side": "right",
+      "borders": [
+        "ISR",
+        "LBY",
+        "PSE",
+        "SDN"
+      ],
+      "timezones": [
+        "UTC+02:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2021",
+        "value": 28.5
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "quick_facts_paragraph": "Cairo is one of the most densely peopled cities on earth, and that energy sets the tone for life in a country of nearly 108 million people spread across just a fraction of Egypt's vast 1,002,450 square kilometers, most of it desert. Daily life runs on Arabic and Egyptian pounds, and the country's Gini coefficient of 28.5 suggests a relatively compressed income distribution by global standards, which surprises many Westerners who arrive expecting sharper extremes.",
+      "continents": [
+        "Africa"
+      ]
     }
   }
 }

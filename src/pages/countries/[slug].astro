@@ -85,10 +85,10 @@ function calculateGrade(q) {
   else if (percent >= 80) label = 'Excellent destination';
   else if (percent >= 70) label = 'Very good destination';
   else if (percent >= 60) label = 'Good destination';
-  else if (percent >= 50) label = 'Solid destination';
+  else if (percent >= 50) label = 'Moderate destination';
   else if (percent >= 40) label = 'Mixed destination';
-  else if (percent >= 30) label = 'Below average destination';
-  else label = 'Needs careful research';
+  else if (percent >= 30) label = 'Limited destination';
+  else label = 'Challenging destination';
   return { percent, label };
 }
 
@@ -674,10 +674,10 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
   border-radius: 100px;
 }
 .quality-raw {
-  font-size: 10px;
-  color: #94A3B8;
+  font-size: 12px;
+  font-weight: 600;
+  color: #1E293B;
   margin-top: 4px;
-  font-style: italic;
 }
 .quality-interpret {
   font-size: 12px;

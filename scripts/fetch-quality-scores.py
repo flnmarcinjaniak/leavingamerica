@@ -622,7 +622,7 @@ def parse_numbeo_rankings(url):
                 continue
     return results
 
-def fetch_world_bank_indicator(indicator_code, mrv=1):
+def fetch_world_bank_indicator(indicator_code, mrv=1, per_page=100):
     # Split into two batches to avoid timeout with 82 countries
     all_codes = list(WORLD_BANK_CODES.values())
     mid = len(all_codes) // 2
@@ -634,7 +634,7 @@ def fetch_world_bank_indicator(indicator_code, mrv=1):
     for iso_codes in [batch1, batch2]:
         url = (f"https://api.worldbank.org/v2/country/{iso_codes}"
                f"/indicator/{indicator_code}"
-               f"?format=json&mrv={mrv}&per_page=100")
+               f"?format=json&mrv={mrv}&per_page={per_page}")
         print(f"Fetching World Bank: {indicator_code} (batch)")
         response = requests.get(url, timeout=60)
         response.raise_for_status()
@@ -806,7 +806,7 @@ def fetch_homicide_rate():
     objective safety proxy, replacing subjective Numbeo Safety Index"""
     print("\n--- Step: Homicide Rate "
           "(World Bank VC.IHR.PSRC.P5 - objective safety) ---")
-    results = fetch_world_bank_indicator("VC.IHR.PSRC.P5", mrv=10)
+    results = fetch_world_bank_indicator("VC.IHR.PSRC.P5", mrv=10, per_page=500)
     print(f"Found {len(results)} countries")
     return results
 

@@ -82,6 +82,11 @@ no need to re-run this often — once every few months is plenty.
 `?codes.alpha_2=PT`), NOT a `filter=` parameter — the filter syntax doesn't
 work on this API despite some documentation suggesting otherwise.
 
+**Rate limit note:** Free tier is 500 requests/month. Fetching all 82
+countries uses most of this allowance in one run. If you need to add more
+countries before your monthly limit resets, check your usage at
+restcountries.com first.
+
 ### 5. `generate-quick-facts.py` — run rarely, costs API credits
 Generates the editorial "WHAT [COUNTRY] IS ACTUALLY LIKE" paragraph for each
 country by calling the Claude API, using only the real facts already in the JSON

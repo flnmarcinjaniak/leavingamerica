@@ -5103,7 +5103,9 @@
         "internet": 83.79,
         "english": 999,
         "visa_days": 240
-      }
+      },
+      "grade_percent": 51,
+      "grade_label": "Moderate destination"
     },
     "belize": {
       "safety": 2,
@@ -5134,7 +5136,9 @@
         "internet": 50.45,
         "english": null,
         "visa_days": 180
-      }
+      },
+      "grade_percent": 52,
+      "grade_label": "Moderate destination"
     },
     "bolivia": {
       "safety": 6,
@@ -5165,7 +5169,9 @@
         "internet": 67.01,
         "english": 521.0,
         "visa_days": 30
-      }
+      },
+      "grade_percent": 64,
+      "grade_label": "Good destination"
     },
     "cambodia": {
       "safety": 6,
@@ -5196,7 +5202,9 @@
         "internet": 53.08,
         "english": 390.0,
         "visa_days": 30
-      }
+      },
+      "grade_percent": 57,
+      "grade_label": "Moderate destination"
     },
     "cyprus": {
       "safety": 6,
@@ -5227,7 +5235,9 @@
         "internet": 165.55,
         "english": 537.0,
         "visa_days": 90
-      }
+      },
+      "grade_percent": 69,
+      "grade_label": "Good destination"
     },
     "dominican-republic": {
       "safety": 6,
@@ -5258,7 +5268,9 @@
         "internet": 72.63,
         "english": 503.0,
         "visa_days": 180
-      }
+      },
+      "grade_percent": 62,
+      "grade_label": "Good destination"
     },
     "el-salvador": {
       "safety": 5,
@@ -5289,7 +5301,9 @@
         "internet": 108.77,
         "english": 523.0,
         "visa_days": 180
-      }
+      },
+      "grade_percent": 69,
+      "grade_label": "Good destination"
     },
     "estonia": {
       "safety": 8,
@@ -5320,7 +5334,9 @@
         "internet": 95.32,
         "english": 561.0,
         "visa_days": 90
-      }
+      },
+      "grade_percent": 78,
+      "grade_label": "Very good destination"
     },
     "ghana": {
       "safety": 6,
@@ -5351,7 +5367,9 @@
         "internet": 49.64,
         "english": 540.0,
         "visa_days": 30
-      }
+      },
+      "grade_percent": 58,
+      "grade_label": "Moderate destination"
     },
     "honduras": {
       "safety": 6,
@@ -5382,7 +5400,9 @@
         "internet": 92.0,
         "english": 553.0,
         "visa_days": 90
-      }
+      },
+      "grade_percent": 65,
+      "grade_label": "Good destination"
     },
     "jamaica": {
       "safety": 6,
@@ -5413,7 +5433,9 @@
         "internet": 86.55,
         "english": 999,
         "visa_days": 180
-      }
+      },
+      "grade_percent": 63,
+      "grade_label": "Good destination"
     },
     "kazakhstan": {
       "safety": 7,
@@ -5444,7 +5466,9 @@
         "internet": 88.1,
         "english": 417.0,
         "visa_days": 30
-      }
+      },
+      "grade_percent": 71,
+      "grade_label": "Very good destination"
     },
     "latvia": {
       "safety": 8,
@@ -5475,7 +5499,9 @@
         "internet": 146.87,
         "english": 599.0,
         "visa_days": 90
-      }
+      },
+      "grade_percent": 77,
+      "grade_label": "Very good destination"
     },
     "lithuania": {
       "safety": 8,
@@ -5506,7 +5532,9 @@
         "internet": 218.67,
         "english": 543.0,
         "visa_days": 90
-      }
+      },
+      "grade_percent": 81,
+      "grade_label": "Excellent destination"
     },
     "malta": {
       "safety": 10,
@@ -5537,7 +5565,9 @@
         "internet": 209.61,
         "english": null,
         "visa_days": 90
-      }
+      },
+      "grade_percent": 82,
+      "grade_label": "Excellent destination"
     },
     "montenegro": {
       "safety": 8,
@@ -5568,7 +5598,9 @@
         "internet": 144.78,
         "english": null,
         "visa_days": 90
-      }
+      },
+      "grade_percent": 70,
+      "grade_label": "Very good destination"
     },
     "nepal": {
       "safety": 5,
@@ -5599,7 +5631,9 @@
         "internet": 84.34,
         "english": 514.0,
         "visa_days": 30
-      }
+      },
+      "grade_percent": 52,
+      "grade_label": "Moderate destination"
     },
     "nicaragua": {
       "safety": 5,
@@ -5630,7 +5664,9 @@
         "internet": 95.11,
         "english": 512.0,
         "visa_days": 90
-      }
+      },
+      "grade_percent": 63,
+      "grade_label": "Good destination"
     },
     "north-macedonia": {
       "safety": 7,
@@ -5661,7 +5697,9 @@
         "internet": 56.88,
         "english": 595.0,
         "visa_days": 90
-      }
+      },
+      "grade_percent": 61,
+      "grade_label": "Good destination"
     },
     "paraguay": {
       "safety": 7,
@@ -5692,7 +5730,9 @@
         "internet": 118.56,
         "english": 531.0,
         "visa_days": 90
-      }
+      },
+      "grade_percent": 73,
+      "grade_label": "Very good destination"
     },
     "rwanda": {
       "safety": 5,
@@ -5723,7 +5763,9 @@
         "internet": 43.52,
         "english": 417.0,
         "visa_days": 30
-      }
+      },
+      "grade_percent": 50,
+      "grade_label": "Moderate destination"
     },
     "slovakia": {
       "safety": 8,
@@ -5754,7 +5796,9 @@
         "internet": 114.33,
         "english": 606.0,
         "visa_days": 90
-      }
+      },
+      "grade_percent": 75,
+      "grade_label": "Very good destination"
     },
     "slovenia": {
       "safety": 9,
@@ -5785,7 +5829,9 @@
         "internet": 200.99,
         "english": null,
         "visa_days": 90
-      }
+      },
+      "grade_percent": 84,
+      "grade_label": "Excellent destination"
     },
     "south-africa": {
       "safety": 4,
@@ -5816,7 +5862,9 @@
         "internet": 48.9,
         "english": 602.0,
         "visa_days": 90
-      }
+      },
+      "grade_percent": 48,
+      "grade_label": "Mixed destination"
     },
     "taiwan": {
       "safety": 7,
@@ -5847,7 +5895,9 @@
         "internet": 270.85,
         "english": null,
         "visa_days": 90
-      }
+      },
+      "grade_percent": 71,
+      "grade_label": "Very good destination"
     },
     "turkey": {
       "safety": 3,
@@ -5878,7 +5928,9 @@
         "internet": 80.02,
         "english": 488.0,
         "visa_days": 180
-      }
+      },
+      "grade_percent": 54,
+      "grade_label": "Moderate destination"
     },
     "uruguay": {
       "safety": 7,
@@ -5909,7 +5961,9 @@
         "internet": 181.44,
         "english": 542.0,
         "visa_days": 90
-      }
+      },
+      "grade_percent": 74,
+      "grade_label": "Very good destination"
     }
   }
 }

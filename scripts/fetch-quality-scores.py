@@ -622,18 +622,19 @@ def parse_numbeo_rankings(url):
                 continue
     return results
 
-def fetch_world_bank_indicator(indicator_code):
-    # Split into two batches to avoid timeout with 55 countries
+def fetch_world_bank_indicator(indicator_code, mrv=1):
+    # Split into two batches to avoid timeout with 82 countries
     all_codes = list(WORLD_BANK_CODES.values())
     mid = len(all_codes) // 2
     batch1 = ";".join(all_codes[:mid])
     batch2 = ";".join(all_codes[mid:])
 
     results = {}
+    best_years = {}  # slug → most recent year stored
     for iso_codes in [batch1, batch2]:
         url = (f"https://api.worldbank.org/v2/country/{iso_codes}"
                f"/indicator/{indicator_code}"
-               f"?format=json&mrv=1&per_page=35")
+               f"?format=json&mrv={mrv}&per_page=100")
         print(f"Fetching World Bank: {indicator_code} (batch)")
         response = requests.get(url, timeout=60)
         response.raise_for_status()
@@ -643,9 +644,12 @@ def fetch_world_bank_indicator(indicator_code):
         for item in data[1]:
             if item["value"] is not None:
                 iso2 = item["country"]["id"]
+                year = int(item["date"])
                 for slug, code in WORLD_BANK_CODES.items():
                     if code == iso2:
-                        results[slug] = item["value"]
+                        if slug not in best_years or year > best_years[slug]:
+                            results[slug] = item["value"]
+                            best_years[slug] = year
                         break
     return results
 
@@ -802,7 +806,7 @@ def fetch_homicide_rate():
     objective safety proxy, replacing subjective Numbeo Safety Index"""
     print("\n--- Step: Homicide Rate "
           "(World Bank VC.IHR.PSRC.P5 - objective safety) ---")
-    results = fetch_world_bank_indicator("VC.IHR.PSRC.P5")
+    results = fetch_world_bank_indicator("VC.IHR.PSRC.P5", mrv=10)
     print(f"Found {len(results)} countries")
     return results
 

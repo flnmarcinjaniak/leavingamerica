@@ -62,7 +62,7 @@
         }
       ],
       "area_km2": 92090,
-      "population": 10749635,
+      "population": 11424031,
       "government_type": "Unitary semi-presidential republic",
       "capital": "Lisbon",
       "currencies": [
@@ -5105,7 +5105,39 @@
         "visa_days": 240
       },
       "grade_percent": 51,
-      "grade_label": "Moderate destination"
+      "grade_label": "Moderate destination",
+      "area_km2": 13943,
+      "population": 398165,
+      "government_type": "Unitary parliamentary constitutional monarchy",
+      "capital": "Nassau",
+      "currencies": [
+        "Bahamian dollar",
+        "United States dollar"
+      ],
+      "languages": [
+        "English"
+      ],
+      "demonym": "Bahamian",
+      "driving_side": "left",
+      "borders": [],
+      "timezones": [
+        "UTC-05:00"
+      ],
+      "landlocked": false,
+      "gini": null,
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": true
+      },
+      "continents": [
+        "North America"
+      ]
     },
     "belize": {
       "safety": 2,
@@ -5138,7 +5170,46 @@
         "visa_days": 180
       },
       "grade_percent": 52,
-      "grade_label": "Moderate destination"
+      "grade_label": "Moderate destination",
+      "area_km2": 22966,
+      "population": 397483,
+      "government_type": "Unitary parliamentary constitutional monarchy",
+      "capital": "Belmopan",
+      "currencies": [
+        "Belize dollar"
+      ],
+      "languages": [
+        "Belize Kriol",
+        "English",
+        "Spanish"
+      ],
+      "demonym": "Belizean",
+      "driving_side": "right",
+      "borders": [
+        "GTM",
+        "MEX"
+      ],
+      "timezones": [
+        "UTC-06:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2018",
+        "value": 39.9
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": true
+      },
+      "continents": [
+        "North America"
+      ]
     },
     "bolivia": {
       "safety": 6,
@@ -5171,7 +5242,50 @@
         "visa_days": 30
       },
       "grade_percent": 64,
-      "grade_label": "Good destination"
+      "grade_label": "Good destination",
+      "area_km2": 1098581,
+      "population": 11365333,
+      "government_type": "Unitary presidential republic",
+      "capital": "Sucre",
+      "currencies": [
+        "Bolivian boliviano"
+      ],
+      "languages": [
+        "Aymara",
+        "Guarani",
+        "Quechua",
+        "Spanish"
+      ],
+      "demonym": "Bolivian",
+      "driving_side": "right",
+      "borders": [
+        "ARG",
+        "BRA",
+        "CHL",
+        "PRY",
+        "PER"
+      ],
+      "timezones": [
+        "UTC-04:00"
+      ],
+      "landlocked": true,
+      "gini": {
+        "year": "2024",
+        "value": 40.9
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "continents": [
+        "South America"
+      ]
     },
     "cambodia": {
       "safety": 6,
@@ -5222,6 +5336,42 @@
           "name": "Battambang",
           "monthly_usd": 1000
         }
+      ],
+      "area_km2": 181035,
+      "population": 17638801,
+      "government_type": "Unitary parliamentary constitutional elective monarchy under a hereditary dictatorship",
+      "capital": "Phnom Penh",
+      "currencies": [
+        "Cambodian riel",
+        "United States dollar"
+      ],
+      "languages": [
+        "Khmer"
+      ],
+      "demonym": "Cambodian",
+      "driving_side": "right",
+      "borders": [
+        "LAO",
+        "THA",
+        "VNM"
+      ],
+      "timezones": [
+        "UTC+07:00"
+      ],
+      "landlocked": false,
+      "gini": null,
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "continents": [
+        "Asia"
       ]
     },
     "cyprus": {
@@ -5273,6 +5423,41 @@
           "name": "Larnaca",
           "monthly_usd": 2250
         }
+      ],
+      "area_km2": 9251,
+      "population": 923272,
+      "government_type": "Unitary presidential republic",
+      "capital": "Nicosia",
+      "currencies": [
+        "Euro"
+      ],
+      "languages": [
+        "Greek",
+        "Turkish"
+      ],
+      "demonym": "Cypriot",
+      "driving_side": "left",
+      "borders": [],
+      "timezones": [
+        "UTC+02:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2023",
+        "value": 31.8
+      },
+      "memberships": {
+        "nato": false,
+        "eu": true,
+        "eurozone": true,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": true
+      },
+      "continents": [
+        "Europe"
       ]
     },
     "dominican-republic": {
@@ -5324,6 +5509,42 @@
           "name": "Santiago",
           "monthly_usd": 1600
         }
+      ],
+      "area_km2": 48671,
+      "population": 11532151,
+      "government_type": "Unitary presidential republic",
+      "capital": "Santo Domingo",
+      "currencies": [
+        "Dominican peso"
+      ],
+      "languages": [
+        "Spanish"
+      ],
+      "demonym": "Dominican",
+      "driving_side": "right",
+      "borders": [
+        "HTI"
+      ],
+      "timezones": [
+        "UTC-04:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2024",
+        "value": 39
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "continents": [
+        "North America"
       ]
     },
     "el-salvador": {
@@ -5357,7 +5578,44 @@
         "visa_days": 180
       },
       "grade_percent": 69,
-      "grade_label": "Good destination"
+      "grade_label": "Good destination",
+      "area_km2": 21041,
+      "population": 6029976,
+      "government_type": "Unitary presidential republic",
+      "capital": "San Salvador",
+      "currencies": [
+        "United States dollar"
+      ],
+      "languages": [
+        "Spanish"
+      ],
+      "demonym": "Salvadoran",
+      "driving_side": "right",
+      "borders": [
+        "GTM",
+        "HND"
+      ],
+      "timezones": [
+        "UTC-06:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2023",
+        "value": 39.8
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "continents": [
+        "North America"
+      ]
     },
     "estonia": {
       "safety": 8,
@@ -5408,6 +5666,43 @@
           "name": "Parnu",
           "monthly_usd": 2200
         }
+      ],
+      "area_km2": 45227,
+      "population": 1362954,
+      "government_type": "Unitary parliamentary republic",
+      "capital": "Tallinn",
+      "currencies": [
+        "Euro"
+      ],
+      "languages": [
+        "Estonian"
+      ],
+      "demonym": "Estonian",
+      "driving_side": "right",
+      "borders": [
+        "LVA",
+        "RUS"
+      ],
+      "timezones": [
+        "UTC+02:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2023",
+        "value": 30.7
+      },
+      "memberships": {
+        "nato": true,
+        "eu": true,
+        "eurozone": true,
+        "schengen": true,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "continents": [
+        "Europe"
       ]
     },
     "ghana": {
@@ -5459,6 +5754,44 @@
           "name": "Tamale",
           "monthly_usd": 1150
         }
+      ],
+      "area_km2": 238533,
+      "population": 35039451,
+      "government_type": "Unitary presidential republic",
+      "capital": "Accra",
+      "currencies": [
+        "Ghanaian cedi"
+      ],
+      "languages": [
+        "English"
+      ],
+      "demonym": "Ghanaian",
+      "driving_side": "right",
+      "borders": [
+        "BFA",
+        "CIV",
+        "TGO"
+      ],
+      "timezones": [
+        "UTC"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2016",
+        "value": 43.5
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": true
+      },
+      "continents": [
+        "Africa"
       ]
     },
     "honduras": {
@@ -5492,7 +5825,45 @@
         "visa_days": 90
       },
       "grade_percent": 65,
-      "grade_label": "Good destination"
+      "grade_label": "Good destination",
+      "area_km2": 112492,
+      "population": 9571352,
+      "government_type": "Unitary presidential republic",
+      "capital": "Tegucigalpa",
+      "currencies": [
+        "Honduran lempira"
+      ],
+      "languages": [
+        "Spanish"
+      ],
+      "demonym": "Honduran",
+      "driving_side": "right",
+      "borders": [
+        "GTM",
+        "SLV",
+        "NIC"
+      ],
+      "timezones": [
+        "UTC-06:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2024",
+        "value": 45.7
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "continents": [
+        "North America"
+      ]
     },
     "jamaica": {
       "safety": 6,
@@ -5543,6 +5914,41 @@
           "name": "Montego Bay",
           "monthly_usd": 1900
         }
+      ],
+      "area_km2": 10991,
+      "population": 2824913,
+      "government_type": "Unitary parliamentary constitutional monarchy",
+      "capital": "Kingston",
+      "currencies": [
+        "Jamaican dollar"
+      ],
+      "languages": [
+        "English",
+        "Jamaican Patois"
+      ],
+      "demonym": "Jamaican",
+      "driving_side": "left",
+      "borders": [],
+      "timezones": [
+        "UTC-05:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2021",
+        "value": 39.9
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": true
+      },
+      "continents": [
+        "North America"
       ]
     },
     "kazakhstan": {
@@ -5576,7 +5982,49 @@
         "visa_days": 30
       },
       "grade_percent": 71,
-      "grade_label": "Very good destination"
+      "grade_label": "Very good destination",
+      "area_km2": 2724900,
+      "population": 20547909,
+      "government_type": "Semi-presidential republic under an authoritarian government",
+      "capital": "Astana",
+      "currencies": [
+        "Kazakhstani tenge"
+      ],
+      "languages": [
+        "Kazakh",
+        "Russian"
+      ],
+      "demonym": "Kazakhstani",
+      "driving_side": "right",
+      "borders": [
+        "CHN",
+        "KGZ",
+        "RUS",
+        "TKM",
+        "UZB"
+      ],
+      "timezones": [
+        "UTC+05:00",
+        "UTC+06:00"
+      ],
+      "landlocked": true,
+      "gini": {
+        "year": "2021",
+        "value": 29.2
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "continents": [
+        "Asia"
+      ]
     },
     "latvia": {
       "safety": 8,
@@ -5627,6 +6075,45 @@
           "name": "Liepaja",
           "monthly_usd": 2000
         }
+      ],
+      "area_km2": 64559,
+      "population": 1842226,
+      "government_type": "Unitary parliamentary republic",
+      "capital": "Riga",
+      "currencies": [
+        "Euro"
+      ],
+      "languages": [
+        "Latvian"
+      ],
+      "demonym": "Latvian",
+      "driving_side": "right",
+      "borders": [
+        "BLR",
+        "EST",
+        "LTU",
+        "RUS"
+      ],
+      "timezones": [
+        "UTC+02:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2023",
+        "value": 34
+      },
+      "memberships": {
+        "nato": true,
+        "eu": true,
+        "eurozone": true,
+        "schengen": true,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "continents": [
+        "Europe"
       ]
     },
     "lithuania": {
@@ -5678,6 +6165,45 @@
           "name": "Klaipeda",
           "monthly_usd": 1950
         }
+      ],
+      "area_km2": 65300,
+      "population": 2897430,
+      "government_type": "Unitary semi-presidential republic",
+      "capital": "Vilnius",
+      "currencies": [
+        "Euro"
+      ],
+      "languages": [
+        "Lithuanian"
+      ],
+      "demonym": "Lithuanian",
+      "driving_side": "right",
+      "borders": [
+        "BLR",
+        "LVA",
+        "POL",
+        "RUS"
+      ],
+      "timezones": [
+        "UTC+02:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2023",
+        "value": 36
+      },
+      "memberships": {
+        "nato": true,
+        "eu": true,
+        "eurozone": true,
+        "schengen": true,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "continents": [
+        "Europe"
       ]
     },
     "malta": {
@@ -5729,6 +6255,41 @@
           "name": "Sliema",
           "monthly_usd": 2600
         }
+      ],
+      "area_km2": 316,
+      "population": 519562,
+      "government_type": "Unitary parliamentary republic",
+      "capital": "Valletta",
+      "currencies": [
+        "Euro"
+      ],
+      "languages": [
+        "English",
+        "Maltese"
+      ],
+      "demonym": "Maltese",
+      "driving_side": "left",
+      "borders": [],
+      "timezones": [
+        "UTC+01:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2023",
+        "value": 31.8
+      },
+      "memberships": {
+        "nato": false,
+        "eu": true,
+        "eurozone": true,
+        "schengen": true,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": true
+      },
+      "continents": [
+        "Europe"
       ]
     },
     "montenegro": {
@@ -5780,6 +6341,46 @@
           "name": "Budva",
           "monthly_usd": 1900
         }
+      ],
+      "area_km2": 13812,
+      "population": 622902,
+      "government_type": "Unitary parliamentary republic",
+      "capital": "Podgorica",
+      "currencies": [
+        "Euro"
+      ],
+      "languages": [
+        "Montenegrin"
+      ],
+      "demonym": "Montenegrin",
+      "driving_side": "right",
+      "borders": [
+        "ALB",
+        "BIH",
+        "HRV",
+        "UNK",
+        "SRB"
+      ],
+      "timezones": [
+        "UTC+01:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2021",
+        "value": 34.3
+      },
+      "memberships": {
+        "nato": true,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "continents": [
+        "Europe"
       ]
     },
     "nepal": {
@@ -5831,6 +6432,43 @@
           "name": "Lalitpur",
           "monthly_usd": 850
         }
+      ],
+      "area_km2": 147181,
+      "population": 31122387,
+      "government_type": "Federal parliamentary republic",
+      "capital": "Kathmandu",
+      "currencies": [
+        "Nepalese rupee"
+      ],
+      "languages": [
+        "Nepali"
+      ],
+      "demonym": "Nepalese",
+      "driving_side": "left",
+      "borders": [
+        "CHN",
+        "IND"
+      ],
+      "timezones": [
+        "UTC+05:45"
+      ],
+      "landlocked": true,
+      "gini": {
+        "year": "2022",
+        "value": 30
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "continents": [
+        "Asia"
       ]
     },
     "nicaragua": {
@@ -5864,7 +6502,44 @@
         "visa_days": 90
       },
       "grade_percent": 63,
-      "grade_label": "Good destination"
+      "grade_label": "Good destination",
+      "area_km2": 130373,
+      "population": 6676948,
+      "government_type": "Unitary diarchic presidential socialist republic under an authoritarian dictatorship",
+      "capital": "Managua",
+      "currencies": [
+        "Nicaraguan córdoba"
+      ],
+      "languages": [
+        "Spanish"
+      ],
+      "demonym": "Nicaraguan",
+      "driving_side": "right",
+      "borders": [
+        "CRI",
+        "HND"
+      ],
+      "timezones": [
+        "UTC-06:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2014",
+        "value": 46.2
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "continents": [
+        "North America"
+      ]
     },
     "north-macedonia": {
       "safety": 7,
@@ -5915,6 +6590,46 @@
           "name": "Bitola",
           "monthly_usd": 1550
         }
+      ],
+      "area_km2": 25713,
+      "population": 1836713,
+      "government_type": "Unitary parliamentary republic",
+      "capital": "Skopje",
+      "currencies": [
+        "denar"
+      ],
+      "languages": [
+        "Macedonian"
+      ],
+      "demonym": "Macedonian",
+      "driving_side": "right",
+      "borders": [
+        "ALB",
+        "BGR",
+        "GRC",
+        "UNK",
+        "SRB"
+      ],
+      "timezones": [
+        "UTC+01:00"
+      ],
+      "landlocked": true,
+      "gini": {
+        "year": "2019",
+        "value": 33.5
+      },
+      "memberships": {
+        "nato": true,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "continents": [
+        "Europe"
       ]
     },
     "paraguay": {
@@ -5948,7 +6663,46 @@
         "visa_days": 90
       },
       "grade_percent": 73,
-      "grade_label": "Very good destination"
+      "grade_label": "Very good destination",
+      "area_km2": 406752,
+      "population": 6460159,
+      "government_type": "Unitary presidential republic",
+      "capital": "Asunción",
+      "currencies": [
+        "Paraguayan guaraní"
+      ],
+      "languages": [
+        "Guarani",
+        "Spanish"
+      ],
+      "demonym": "Paraguayan",
+      "driving_side": "right",
+      "borders": [
+        "ARG",
+        "BOL",
+        "BRA"
+      ],
+      "timezones": [
+        "UTC-04:00"
+      ],
+      "landlocked": true,
+      "gini": {
+        "year": "2024",
+        "value": 44.2
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "continents": [
+        "South America"
+      ]
     },
     "rwanda": {
       "safety": 5,
@@ -5999,6 +6753,47 @@
           "name": "Butare",
           "monthly_usd": 1300
         }
+      ],
+      "area_km2": 26338,
+      "population": 14104969,
+      "government_type": "Unitary semi-presidential republic under an authoritarian dictatorship",
+      "capital": "Kigali",
+      "currencies": [
+        "Rwandan franc"
+      ],
+      "languages": [
+        "English",
+        "French",
+        "Kinyarwanda"
+      ],
+      "demonym": "Rwandan",
+      "driving_side": "right",
+      "borders": [
+        "BDI",
+        "COD",
+        "TZA",
+        "UGA"
+      ],
+      "timezones": [
+        "UTC+02:00"
+      ],
+      "landlocked": true,
+      "gini": {
+        "year": "2023",
+        "value": 39.4
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": true
+      },
+      "continents": [
+        "Africa"
       ]
     },
     "slovakia": {
@@ -6050,6 +6845,46 @@
           "name": "Zilina",
           "monthly_usd": 2000
         }
+      ],
+      "area_km2": 49037,
+      "population": 5405368,
+      "government_type": "Unitary parliamentary republic",
+      "capital": "Bratislava",
+      "currencies": [
+        "Euro"
+      ],
+      "languages": [
+        "Slovak"
+      ],
+      "demonym": "Slovak",
+      "driving_side": "right",
+      "borders": [
+        "AUT",
+        "CZE",
+        "HUN",
+        "POL",
+        "UKR"
+      ],
+      "timezones": [
+        "UTC+01:00"
+      ],
+      "landlocked": true,
+      "gini": {
+        "year": "2023",
+        "value": 23.8
+      },
+      "memberships": {
+        "nato": true,
+        "eu": true,
+        "eurozone": true,
+        "schengen": true,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "continents": [
+        "Europe"
       ]
     },
     "slovenia": {
@@ -6101,6 +6936,45 @@
           "name": "Maribor",
           "monthly_usd": 2400
         }
+      ],
+      "area_km2": 20273,
+      "population": 2135107,
+      "government_type": "Unitary parliamentary republic",
+      "capital": "Ljubljana",
+      "currencies": [
+        "Euro"
+      ],
+      "languages": [
+        "Slovenian"
+      ],
+      "demonym": "Slovene",
+      "driving_side": "right",
+      "borders": [
+        "AUT",
+        "HRV",
+        "ITA",
+        "HUN"
+      ],
+      "timezones": [
+        "UTC+01:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2023",
+        "value": 24.7
+      },
+      "memberships": {
+        "nato": true,
+        "eu": true,
+        "eurozone": true,
+        "schengen": true,
+        "oecd": true,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "continents": [
+        "Europe"
       ]
     },
     "south-africa": {
@@ -6152,6 +7026,57 @@
           "name": "Pretoria",
           "monthly_usd": 1450
         }
+      ],
+      "area_km2": 1221037,
+      "population": 63015904,
+      "government_type": "Unitary parliamentary republic with an executive presidency",
+      "capital": "Pretoria",
+      "currencies": [
+        "South African rand"
+      ],
+      "languages": [
+        "Afrikaans",
+        "English",
+        "Southern Ndebele",
+        "Northern Sotho",
+        "Sotho",
+        "Swazi",
+        "Tswana",
+        "Tsonga",
+        "Venda",
+        "Xhosa",
+        "Zulu"
+      ],
+      "demonym": "South African",
+      "driving_side": "left",
+      "borders": [
+        "BWA",
+        "LSO",
+        "MOZ",
+        "NAM",
+        "SWZ",
+        "ZWE"
+      ],
+      "timezones": [
+        "UTC+02:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2024",
+        "value": 54.1
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": true,
+        "commonwealth": true
+      },
+      "continents": [
+        "Africa"
       ]
     },
     "taiwan": {
@@ -6203,6 +7128,37 @@
           "name": "Taichung",
           "monthly_usd": 2250
         }
+      ],
+      "area_km2": 36193,
+      "population": 23299132,
+      "government_type": "Unitary semi-presidential republic",
+      "capital": "Taipei",
+      "currencies": [
+        "New Taiwan dollar"
+      ],
+      "languages": [
+        "Chinese"
+      ],
+      "demonym": "Taiwanese",
+      "driving_side": "right",
+      "borders": [],
+      "timezones": [
+        "UTC+08:00"
+      ],
+      "landlocked": false,
+      "gini": null,
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "continents": [
+        "Asia"
       ]
     },
     "turkey": {
@@ -6254,6 +7210,50 @@
           "name": "Izmir",
           "monthly_usd": 1550
         }
+      ],
+      "area_km2": 783562,
+      "population": 86092168,
+      "government_type": "Unitary presidential republic",
+      "capital": "Ankara",
+      "currencies": [
+        "Turkish lira"
+      ],
+      "languages": [
+        "Turkish"
+      ],
+      "demonym": "Turkish",
+      "driving_side": "right",
+      "borders": [
+        "ARM",
+        "AZE",
+        "BGR",
+        "GEO",
+        "GRC",
+        "IRN",
+        "IRQ",
+        "SYR"
+      ],
+      "timezones": [
+        "UTC+03:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2023",
+        "value": 43.7
+      },
+      "memberships": {
+        "nato": true,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": true,
+        "g7": false,
+        "g20": true,
+        "commonwealth": false
+      },
+      "continents": [
+        "Europe",
+        "Asia"
       ]
     },
     "uruguay": {
@@ -6305,6 +7305,43 @@
           "name": "Salto",
           "monthly_usd": 2250
         }
+      ],
+      "area_km2": 181034,
+      "population": 3499451,
+      "government_type": "Unitary presidential republic",
+      "capital": "Montevideo",
+      "currencies": [
+        "Uruguayan peso"
+      ],
+      "languages": [
+        "Spanish"
+      ],
+      "demonym": "Uruguayan",
+      "driving_side": "right",
+      "borders": [
+        "ARG",
+        "BRA"
+      ],
+      "timezones": [
+        "UTC-03:00"
+      ],
+      "landlocked": false,
+      "gini": {
+        "year": "2024",
+        "value": 40
+      },
+      "memberships": {
+        "nato": false,
+        "eu": false,
+        "eurozone": false,
+        "schengen": false,
+        "oecd": false,
+        "g7": false,
+        "g20": false,
+        "commonwealth": false
+      },
+      "continents": [
+        "South America"
       ]
     }
   },

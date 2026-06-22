@@ -5204,7 +5204,25 @@
         "visa_days": 30
       },
       "grade_percent": 57,
-      "grade_label": "Moderate destination"
+      "grade_label": "Moderate destination",
+      "budget_single": 1050,
+      "budget_couple": 1650,
+      "cost_index": 29,
+      "us_comparison": "approximately 65% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Sihanoukville",
+          "monthly_usd": 900
+        },
+        {
+          "name": "Phnom Penh",
+          "monthly_usd": 900
+        },
+        {
+          "name": "Battambang",
+          "monthly_usd": 1000
+        }
+      ]
     },
     "cyprus": {
       "safety": 6,
@@ -5237,7 +5255,25 @@
         "visa_days": 90
       },
       "grade_percent": 69,
-      "grade_label": "Good destination"
+      "grade_label": "Good destination",
+      "budget_single": 2100,
+      "budget_couple": 3250,
+      "cost_index": 58,
+      "us_comparison": "approximately 29% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Limassol",
+          "monthly_usd": 2100
+        },
+        {
+          "name": "Paphos",
+          "monthly_usd": 2150
+        },
+        {
+          "name": "Larnaca",
+          "monthly_usd": 2250
+        }
+      ]
     },
     "dominican-republic": {
       "safety": 6,
@@ -5270,7 +5306,25 @@
         "visa_days": 180
       },
       "grade_percent": 62,
-      "grade_label": "Good destination"
+      "grade_label": "Good destination",
+      "budget_single": 1100,
+      "budget_couple": 1700,
+      "cost_index": 30,
+      "us_comparison": "approximately 63% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "La Romana",
+          "monthly_usd": 1300
+        },
+        {
+          "name": "Punta Cana",
+          "monthly_usd": 1450
+        },
+        {
+          "name": "Santiago",
+          "monthly_usd": 1600
+        }
+      ]
     },
     "el-salvador": {
       "safety": 5,
@@ -5336,7 +5390,25 @@
         "visa_days": 90
       },
       "grade_percent": 78,
-      "grade_label": "Very good destination"
+      "grade_label": "Very good destination",
+      "budget_single": 1950,
+      "budget_couple": 3000,
+      "cost_index": 53,
+      "us_comparison": "approximately 35% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Tallinn",
+          "monthly_usd": 2000
+        },
+        {
+          "name": "Narva",
+          "monthly_usd": 2100
+        },
+        {
+          "name": "Parnu",
+          "monthly_usd": 2200
+        }
+      ]
     },
     "ghana": {
       "safety": 6,
@@ -5369,7 +5441,25 @@
         "visa_days": 30
       },
       "grade_percent": 58,
-      "grade_label": "Moderate destination"
+      "grade_label": "Moderate destination",
+      "budget_single": 1150,
+      "budget_couple": 1800,
+      "cost_index": 31,
+      "us_comparison": "approximately 62% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Takoradi",
+          "monthly_usd": 1000
+        },
+        {
+          "name": "Accra",
+          "monthly_usd": 1100
+        },
+        {
+          "name": "Tamale",
+          "monthly_usd": 1150
+        }
+      ]
     },
     "honduras": {
       "safety": 6,
@@ -5435,7 +5525,25 @@
         "visa_days": 180
       },
       "grade_percent": 63,
-      "grade_label": "Good destination"
+      "grade_label": "Good destination",
+      "budget_single": 1600,
+      "budget_couple": 2500,
+      "cost_index": 44,
+      "us_comparison": "approximately 46% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Portmore",
+          "monthly_usd": 1600
+        },
+        {
+          "name": "Spanish Town",
+          "monthly_usd": 1700
+        },
+        {
+          "name": "Montego Bay",
+          "monthly_usd": 1900
+        }
+      ]
     },
     "kazakhstan": {
       "safety": 7,
@@ -5501,7 +5609,25 @@
         "visa_days": 90
       },
       "grade_percent": 77,
-      "grade_label": "Very good destination"
+      "grade_label": "Very good destination",
+      "budget_single": 1700,
+      "budget_couple": 2650,
+      "cost_index": 47,
+      "us_comparison": "approximately 43% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Riga",
+          "monthly_usd": 1750
+        },
+        {
+          "name": "Jelgava",
+          "monthly_usd": 1850
+        },
+        {
+          "name": "Liepaja",
+          "monthly_usd": 2000
+        }
+      ]
     },
     "lithuania": {
       "safety": 8,
@@ -5534,7 +5660,25 @@
         "visa_days": 90
       },
       "grade_percent": 81,
-      "grade_label": "Excellent destination"
+      "grade_label": "Excellent destination",
+      "budget_single": 1550,
+      "budget_couple": 2400,
+      "cost_index": 42,
+      "us_comparison": "approximately 49% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Vilnius",
+          "monthly_usd": 1650
+        },
+        {
+          "name": "Siauliai",
+          "monthly_usd": 1850
+        },
+        {
+          "name": "Klaipeda",
+          "monthly_usd": 1950
+        }
+      ]
     },
     "malta": {
       "safety": 10,
@@ -5567,7 +5711,25 @@
         "visa_days": 90
       },
       "grade_percent": 82,
-      "grade_label": "Excellent destination"
+      "grade_label": "Excellent destination",
+      "budget_single": 2050,
+      "budget_couple": 3200,
+      "cost_index": 56,
+      "us_comparison": "approximately 32% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Birkirkara",
+          "monthly_usd": 2300
+        },
+        {
+          "name": "St. Julian's",
+          "monthly_usd": 2400
+        },
+        {
+          "name": "Sliema",
+          "monthly_usd": 2600
+        }
+      ]
     },
     "montenegro": {
       "safety": 8,
@@ -5600,7 +5762,25 @@
         "visa_days": 90
       },
       "grade_percent": 70,
-      "grade_label": "Very good destination"
+      "grade_label": "Very good destination",
+      "budget_single": 1200,
+      "budget_couple": 1850,
+      "cost_index": 33,
+      "us_comparison": "approximately 60% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Niksic",
+          "monthly_usd": 1600
+        },
+        {
+          "name": "Kotor",
+          "monthly_usd": 1700
+        },
+        {
+          "name": "Budva",
+          "monthly_usd": 1900
+        }
+      ]
     },
     "nepal": {
       "safety": 5,
@@ -5633,7 +5813,25 @@
         "visa_days": 30
       },
       "grade_percent": 52,
-      "grade_label": "Moderate destination"
+      "grade_label": "Moderate destination",
+      "budget_single": 800,
+      "budget_couple": 1250,
+      "cost_index": 22,
+      "us_comparison": "approximately 73% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Kathmandu",
+          "monthly_usd": 650
+        },
+        {
+          "name": "Biratnagar",
+          "monthly_usd": 750
+        },
+        {
+          "name": "Lalitpur",
+          "monthly_usd": 850
+        }
+      ]
     },
     "nicaragua": {
       "safety": 5,
@@ -5699,7 +5897,25 @@
         "visa_days": 90
       },
       "grade_percent": 61,
-      "grade_label": "Good destination"
+      "grade_label": "Good destination",
+      "budget_single": 1450,
+      "budget_couple": 2250,
+      "cost_index": 40,
+      "us_comparison": "approximately 51% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Kumanovo",
+          "monthly_usd": 1250
+        },
+        {
+          "name": "Ohrid",
+          "monthly_usd": 1350
+        },
+        {
+          "name": "Bitola",
+          "monthly_usd": 1550
+        }
+      ]
     },
     "paraguay": {
       "safety": 7,
@@ -5765,7 +5981,25 @@
         "visa_days": 30
       },
       "grade_percent": 50,
-      "grade_label": "Moderate destination"
+      "grade_label": "Moderate destination",
+      "budget_single": 800,
+      "budget_couple": 1250,
+      "cost_index": 22,
+      "us_comparison": "approximately 73% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Musanze",
+          "monthly_usd": 1000
+        },
+        {
+          "name": "Gisenyi",
+          "monthly_usd": 1150
+        },
+        {
+          "name": "Butare",
+          "monthly_usd": 1300
+        }
+      ]
     },
     "slovakia": {
       "safety": 8,
@@ -5798,7 +6032,25 @@
         "visa_days": 90
       },
       "grade_percent": 75,
-      "grade_label": "Very good destination"
+      "grade_label": "Very good destination",
+      "budget_single": 1750,
+      "budget_couple": 2700,
+      "cost_index": 48,
+      "us_comparison": "approximately 41% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Bratislava",
+          "monthly_usd": 1900
+        },
+        {
+          "name": "Nitra",
+          "monthly_usd": 1900
+        },
+        {
+          "name": "Zilina",
+          "monthly_usd": 2000
+        }
+      ]
     },
     "slovenia": {
       "safety": 9,
@@ -5831,7 +6083,25 @@
         "visa_days": 90
       },
       "grade_percent": 84,
-      "grade_label": "Excellent destination"
+      "grade_label": "Excellent destination",
+      "budget_single": 2000,
+      "budget_couple": 3100,
+      "cost_index": 54,
+      "us_comparison": "approximately 34% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Kranj",
+          "monthly_usd": 2100
+        },
+        {
+          "name": "Celje",
+          "monthly_usd": 2250
+        },
+        {
+          "name": "Maribor",
+          "monthly_usd": 2400
+        }
+      ]
     },
     "south-africa": {
       "safety": 4,
@@ -5864,7 +6134,25 @@
         "visa_days": 90
       },
       "grade_percent": 48,
-      "grade_label": "Mixed destination"
+      "grade_label": "Mixed destination",
+      "budget_single": 1450,
+      "budget_couple": 2250,
+      "cost_index": 40,
+      "us_comparison": "approximately 51% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Cape Town",
+          "monthly_usd": 1000
+        },
+        {
+          "name": "Johannesburg",
+          "monthly_usd": 1300
+        },
+        {
+          "name": "Pretoria",
+          "monthly_usd": 1450
+        }
+      ]
     },
     "taiwan": {
       "safety": 7,
@@ -5897,7 +6185,25 @@
         "visa_days": 90
       },
       "grade_percent": 71,
-      "grade_label": "Very good destination"
+      "grade_label": "Very good destination",
+      "budget_single": 1550,
+      "budget_couple": 2400,
+      "cost_index": 43,
+      "us_comparison": "approximately 48% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Taipei",
+          "monthly_usd": 1650
+        },
+        {
+          "name": "Tainan",
+          "monthly_usd": 2150
+        },
+        {
+          "name": "Taichung",
+          "monthly_usd": 2250
+        }
+      ]
     },
     "turkey": {
       "safety": 3,
@@ -5930,7 +6236,25 @@
         "visa_days": 180
       },
       "grade_percent": 54,
-      "grade_label": "Moderate destination"
+      "grade_label": "Moderate destination",
+      "budget_single": 850,
+      "budget_couple": 1300,
+      "cost_index": 23,
+      "us_comparison": "approximately 72% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Istanbul",
+          "monthly_usd": 1400
+        },
+        {
+          "name": "Antalya",
+          "monthly_usd": 1450
+        },
+        {
+          "name": "Izmir",
+          "monthly_usd": 1550
+        }
+      ]
     },
     "uruguay": {
       "safety": 7,
@@ -5963,7 +6287,26 @@
         "visa_days": 90
       },
       "grade_percent": 74,
-      "grade_label": "Very good destination"
+      "grade_label": "Very good destination",
+      "budget_single": 1900,
+      "budget_couple": 2950,
+      "cost_index": 52,
+      "us_comparison": "approximately 37% cheaper than the United States",
+      "affordable_cities": [
+        {
+          "name": "Montevideo",
+          "monthly_usd": 1750
+        },
+        {
+          "name": "Maldonado",
+          "monthly_usd": 2150
+        },
+        {
+          "name": "Salto",
+          "monthly_usd": 2250
+        }
+      ]
     }
-  }
+  },
+  "budget_data_source": "WhereNext (getwherenext.com), CC BY 4.0, World Bank ICP + Eurostat"
 }

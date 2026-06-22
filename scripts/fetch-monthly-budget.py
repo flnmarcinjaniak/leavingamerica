@@ -42,6 +42,20 @@ COUNTRY_CODES = {
     "brazil": "BR", "chile": "CL",
     "albania": "AL", "sri-lanka": "LK",
     "egypt": "EG",
+    "turkey": "TR", "kazakhstan": "KZ",
+    "lithuania": "LT", "latvia": "LV",
+    "estonia": "EE", "south-africa": "ZA",
+    "cambodia": "KH", "uruguay": "UY",
+    "paraguay": "PY", "bolivia": "BO",
+    "ghana": "GH", "rwanda": "RW",
+    "nepal": "NP", "taiwan": "TW",
+    "slovenia": "SI", "slovakia": "SK",
+    "malta": "MT", "cyprus": "CY",
+    "montenegro": "ME", "north-macedonia": "MK",
+    "dominican-republic": "DO", "belize": "BZ",
+    "el-salvador": "SV", "honduras": "HN",
+    "jamaica": "JM", "nicaragua": "NI",
+    "bahamas": "BS",
 }
 
 
@@ -86,7 +100,7 @@ def fetch_country_budget(slug, iso2):
 
 
 def fetch_all_budgets():
-    """Fetch budget data for all 55 countries.
+    """Fetch budget data for all 82 countries.
     WhereNext has no documented rate limit,
     but we add a small courtesy delay between
     requests anyway."""

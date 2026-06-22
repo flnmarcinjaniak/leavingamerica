@@ -37,6 +37,19 @@ COUNTRIES = {
     "Georgia": "georgia", "Serbia": "serbia", "Kenya": "kenya",
     "Peru": "peru", "Brazil": "brazil", "Chile": "chile",
     "Albania": "albania", "Sri Lanka": "sri-lanka", "Egypt": "egypt",
+    "Bahamas": "bahamas", "Belize": "belize", "Bolivia": "bolivia",
+    "Cambodia": "cambodia", "Cyprus": "cyprus",
+    "Dominican Republic": "dominican-republic",
+    "El Salvador": "el-salvador", "Estonia": "estonia",
+    "Ghana": "ghana", "Honduras": "honduras", "Jamaica": "jamaica",
+    "Kazakhstan": "kazakhstan", "Latvia": "latvia",
+    "Lithuania": "lithuania", "Malta": "malta",
+    "Montenegro": "montenegro", "Nepal": "nepal",
+    "Nicaragua": "nicaragua", "North Macedonia": "north-macedonia",
+    "Paraguay": "paraguay", "Rwanda": "rwanda",
+    "Slovakia": "slovakia", "Slovenia": "slovenia",
+    "South Africa": "south-africa", "Taiwan": "taiwan",
+    "Turkey": "turkey", "Uruguay": "uruguay",
 }
 
 # Same as COUNTRY_ALIASES in fetch-quality-scores.py
@@ -95,13 +108,40 @@ COUNTRY_ALIASES = {
     "United Arab Emirates": ["United Arab Emirates", "UAE"],
     "United Kingdom": ["United Kingdom", "UK"],
     "Vietnam": ["Vietnam", "Viet Nam"],
+    "Bahamas": ["Bahamas", "The Bahamas"],
+    "Belize": ["Belize"],
+    "Bolivia": ["Bolivia"],
+    "Cambodia": ["Cambodia"],
+    "Cyprus": ["Cyprus"],
+    "Dominican Republic": ["Dominican Republic"],
+    "El Salvador": ["El Salvador"],
+    "Estonia": ["Estonia"],
+    "Ghana": ["Ghana"],
+    "Honduras": ["Honduras"],
+    "Jamaica": ["Jamaica"],
+    "Kazakhstan": ["Kazakhstan"],
+    "Latvia": ["Latvia"],
+    "Lithuania": ["Lithuania"],
+    "Malta": ["Malta"],
+    "Montenegro": ["Montenegro"],
+    "Nepal": ["Nepal"],
+    "Nicaragua": ["Nicaragua"],
+    "North Macedonia": ["North Macedonia", "Macedonia"],
+    "Paraguay": ["Paraguay"],
+    "Rwanda": ["Rwanda"],
+    "Slovakia": ["Slovakia"],
+    "Slovenia": ["Slovenia"],
+    "South Africa": ["South Africa"],
+    "Taiwan": ["Taiwan"],
+    "Turkey": ["Turkey", "Türkiye"],
+    "Uruguay": ["Uruguay"],
 }
 
 # Countries where English is native — assigned sentinel score 999
 NATIVE_ENGLISH = {
     'Australia', 'New Zealand', 'Canada',
     'Ireland', 'Singapore', 'United Kingdom',
-    'United States',
+    'United States', 'Jamaica', 'Bahamas',
 }
 
 # Manual overrides for countries not in the EF EPI table

@@ -222,55 +222,83 @@ const qs = qualityScores.countries as Record<string, any>;
               <option value="AR">Argentina</option>
               <option value="AT">Austria</option>
               <option value="AU">Australia</option>
+              <option value="BS">Bahamas</option>
               <option value="BE">Belgium</option>
-              <option value="BG">Bulgaria</option>
+              <option value="BZ">Belize</option>
+              <option value="BO">Bolivia</option>
               <option value="BR">Brazil</option>
+              <option value="BG">Bulgaria</option>
+              <option value="KH">Cambodia</option>
+              <option value="CA">Canada</option>
               <option value="CL">Chile</option>
               <option value="CN">China</option>
               <option value="CO">Colombia</option>
               <option value="CR">Costa Rica</option>
               <option value="HR">Croatia</option>
+              <option value="CY">Cyprus</option>
               <option value="CZ">Czech Republic</option>
               <option value="DK">Denmark</option>
+              <option value="DO">Dominican Republic</option>
               <option value="EC">Ecuador</option>
               <option value="EG">Egypt</option>
+              <option value="SV">El Salvador</option>
+              <option value="EE">Estonia</option>
               <option value="FI">Finland</option>
               <option value="FR">France</option>
               <option value="GE">Georgia</option>
               <option value="DE">Germany</option>
+              <option value="GH">Ghana</option>
               <option value="GR">Greece</option>
+              <option value="HN">Honduras</option>
               <option value="HU">Hungary</option>
               <option value="IS">Iceland</option>
               <option value="IN">India</option>
               <option value="ID">Indonesia</option>
               <option value="IE">Ireland</option>
               <option value="IT">Italy</option>
+              <option value="JM">Jamaica</option>
               <option value="JP">Japan</option>
+              <option value="KZ">Kazakhstan</option>
               <option value="KE">Kenya</option>
+              <option value="LV">Latvia</option>
+              <option value="LT">Lithuania</option>
               <option value="MY">Malaysia</option>
+              <option value="MT">Malta</option>
               <option value="MX">Mexico</option>
+              <option value="ME">Montenegro</option>
               <option value="MA">Morocco</option>
+              <option value="NP">Nepal</option>
               <option value="NL">Netherlands</option>
               <option value="NZ">New Zealand</option>
+              <option value="NI">Nicaragua</option>
+              <option value="MK">North Macedonia</option>
               <option value="NO">Norway</option>
               <option value="PA">Panama</option>
+              <option value="PY">Paraguay</option>
               <option value="PE">Peru</option>
               <option value="PH">Philippines</option>
               <option value="PL">Poland</option>
               <option value="PT">Portugal</option>
               <option value="QA">Qatar</option>
               <option value="RO">Romania</option>
+              <option value="RW">Rwanda</option>
               <option value="SA">Saudi Arabia</option>
               <option value="RS">Serbia</option>
               <option value="SG">Singapore</option>
+              <option value="SK">Slovakia</option>
+              <option value="SI">Slovenia</option>
+              <option value="ZA">South Africa</option>
               <option value="KR">South Korea</option>
               <option value="ES">Spain</option>
               <option value="LK">Sri Lanka</option>
               <option value="SE">Sweden</option>
               <option value="CH">Switzerland</option>
+              <option value="TW">Taiwan</option>
               <option value="TH">Thailand</option>
+              <option value="TR">Turkey</option>
               <option value="AE">United Arab Emirates</option>
               <option value="GB">United Kingdom</option>
+              <option value="UY">Uruguay</option>
               <option value="VN">Vietnam</option>
             </select>
           </div>
@@ -814,7 +842,7 @@ const qs = qualityScores.countries as Record<string, any>;
           <div class="step-icon"><img src="/images/icon-globe.webp" alt="Globe" width="56" height="56"/></div>
           <div class="step-num">Step 2</div>
           <h3>Choose Your Destination</h3>
-          <p>Pick from 55 countries. We fetch live World Bank PPP data and exchange rates instantly.</p>
+          <p>Pick from 82 countries. We fetch live World Bank PPP data and exchange rates instantly.</p>
         </div>
         <div class="steps-arrow-between" id="arrow2">▶</div>
         <div class="step-card reveal">
@@ -1037,6 +1065,15 @@ const qs = qualityScores.countries as Record<string, any>;
     "RS": "serbia",    "SG": "singapore",    "LK": "sri-lanka",
     "SE": "sweden",    "CH": "switzerland",  "AE": "united-arab-emirates",
     "GB": "united-kingdom",
+    "BS": "bahamas",    "BZ": "belize",        "BO": "bolivia",
+    "KH": "cambodia",  "CY": "cyprus",        "DO": "dominican-republic",
+    "SV": "el-salvador","EE": "estonia",       "GH": "ghana",
+    "HN": "honduras",  "JM": "jamaica",       "KZ": "kazakhstan",
+    "LV": "latvia",    "LT": "lithuania",     "MT": "malta",
+    "ME": "montenegro","NP": "nepal",         "NI": "nicaragua",
+    "MK": "north-macedonia","PY": "paraguay", "RW": "rwanda",
+    "SK": "slovakia",  "SI": "slovenia",      "ZA": "south-africa",
+    "TW": "taiwan",    "TR": "turkey",        "UY": "uruguay",
   };
 
   const citySelect    = document.getElementById('citySelect');
@@ -1210,7 +1247,14 @@ const qs = qualityScores.countries as Record<string, any>;
       "KE":"KES","NO":"NOK","PE":"PEN","PH":"PHP",
       "QA":"QAR","SA":"SAR","RS":"RSD","SG":"SGD",
       "LK":"LKR","SE":"SEK","CH":"CHF","AE":"AED",
-      "GB":"GBP"
+      "GB":"GBP",
+      "BS":"BSD","BZ":"BZD","BO":"BOB","KH":"USD",
+      "CY":"EUR","DO":"DOP","SV":"USD","EE":"EUR",
+      "GH":"GHS","HN":"HNL","JM":"JMD","KZ":"KZT",
+      "LV":"EUR","LT":"EUR","MT":"EUR","ME":"EUR",
+      "NP":"NPR","NI":"NIO","MK":"MKD","PY":"PYG",
+      "RW":"RWF","SK":"EUR","SI":"EUR","ZA":"ZAR",
+      "TW":"TWD","TR":"TRY","UY":"UYU",
     };
 
     try {
@@ -1710,7 +1754,11 @@ const qs = qualityScores.countries as Record<string, any>;
         "IE":"EUR","NL":"EUR","FR":"EUR","AR":"ARS","EC":"USD","MA":"MAD","AL":"ALL","AT":"EUR",
         "BE":"EUR","BR":"BRL","CL":"CLP","CN":"CNY","DK":"DKK","EG":"EGP","FI":"EUR","GE":"GEL",
         "IS":"ISK","IN":"INR","KE":"KES","NO":"NOK","PE":"PEN","PH":"PHP","QA":"QAR","SA":"SAR",
-        "RS":"RSD","SG":"SGD","LK":"LKR","SE":"SEK","CH":"CHF","AE":"AED","GB":"GBP"
+        "RS":"RSD","SG":"SGD","LK":"LKR","SE":"SEK","CH":"CHF","AE":"AED","GB":"GBP",
+        "BS":"BSD","BZ":"BZD","BO":"BOB","KH":"USD","CY":"EUR","DO":"DOP","SV":"USD",
+        "EE":"EUR","GH":"GHS","HN":"HNL","JM":"JMD","KZ":"KZT","LV":"EUR","LT":"EUR",
+        "MT":"EUR","ME":"EUR","NP":"NPR","NI":"NIO","MK":"MKD","PY":"PYG","RW":"RWF",
+        "SK":"EUR","SI":"EUR","ZA":"ZAR","TW":"TWD","TR":"TRY","UY":"UYU",
       };
 
       if (!testPPP) {

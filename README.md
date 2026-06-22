@@ -1,43 +1,44 @@
-# Astro Starter Kit: Minimal
+LEAVINGAMERICA.CO — HARMONOGRAM AKTUALIZACJI DANYCH
+CO MIESIĄC (np. 1. dzień miesiąca):
+→ python scripts/fetch-quality-scores.py
+→ python scripts/recompute-grades.py
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Dane które się zmieniają: safety (GPI), 
+healthcare (UHC), happiness, HDI, pollution, 
+traffic, unemployment, internet, English, 
+visa, tax, nomad visa, oceny ogólne
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Jeśli fetch-quality-scores.py wywali się na 
+Wikipedii (403) — restart modemu, potem:
+→ python scripts/fetch-english-proficiency-only.py
+→ python scripts/recompute-grades.py
+CO 3 MIESIĄCE (raz na kwartał):
+→ python scripts/fetch-monthly-budget.py
 
-## 🚀 Project Structure
+Dane: budget_single, budget_couple, cost_index, 
+us_comparison (WhereNext — koszty życia nie 
+zmieniają się szybko)
+RAZ NA PÓŁ ROKU / RZADKO:
+→ python scripts/fetch-country-facts.py
 
-Inside of your Astro project, you'll see the following folders and files:
+Dane: population, area, capital, languages, 
+borders, itd. (REST Countries — to praktycznie 
+się nie zmienia)
+TYLKO PRZY DODAWANIU NOWYCH KRAJÓW:
+→ python scripts/generate-quick-facts.py
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Generuje akapit "WHAT X IS ACTUALLY LIKE" — 
+kosztuje kredyty API, uruchamiaj tylko dla 
+nowych krajów, nie całej listy 55 (chyba że 
+chcesz odświeżyć styl pisania)
+PO KAŻDEJ AKTUALIZACJI:
+Sprawdź wizualnie 2-3 strony krajów 
+(np. /countries/portugal, /countries/kenya) — 
+upewnij się że Quick Facts paragraph, budget 
+data i Getting Around section nadal się 
+wyświetlają (to był realny incydent utraty 
+danych w czerwcu 2026, sprawdzaj zawsze).
+PRZYPOMNIENIE: jeśli zapomnisz kolejności albo 
+szczegółów technicznych — zajrzyj do 
+scripts/README.md w repo, tam jest pełna 
+dokumentacja każdego skryptu.

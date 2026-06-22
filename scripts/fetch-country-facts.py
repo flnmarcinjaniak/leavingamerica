@@ -61,6 +61,15 @@ COUNTRY_ISO2 = {
     "BR": "brazil", "CL": "chile",
     "AL": "albania", "LK": "sri-lanka",
     "EG": "egypt",
+    "BS": "bahamas", "BZ": "belize", "BO": "bolivia",
+    "KH": "cambodia", "CY": "cyprus", "DO": "dominican-republic",
+    "SV": "el-salvador", "EE": "estonia", "GH": "ghana",
+    "HN": "honduras", "JM": "jamaica", "KZ": "kazakhstan",
+    "LV": "latvia", "LT": "lithuania", "MT": "malta",
+    "ME": "montenegro", "NP": "nepal", "NI": "nicaragua",
+    "MK": "north-macedonia", "PY": "paraguay", "RW": "rwanda",
+    "SK": "slovakia", "SI": "slovenia", "ZA": "south-africa",
+    "TW": "taiwan", "TR": "turkey", "UY": "uruguay",
 }
 
 

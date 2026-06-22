@@ -330,12 +330,6 @@ import qualityScores from '../../data/quality-scores.json';
   height: 21px !important;
   border-radius: 4px !important;
 }
-.alt-match-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 6px;
-}
 .match-country-name {
   font-size: 36px;
   font-weight: 800;
@@ -497,11 +491,14 @@ import qualityScores from '../../data/quality-scores.json';
 .alt-match {
   background: white;
   border-radius: 16px;
-  padding: 22px 24px;
+  padding: 20px 24px;
   border: 1px solid #E2E8F0;
   box-shadow: 0 1px 6px rgba(0,0,0,0.04);
   cursor: pointer;
   transition: all 0.2s ease;
+  text-decoration: none;
+  display: block;
+  color: inherit;
 }
 
 .alt-match:hover {
@@ -510,15 +507,54 @@ import qualityScores from '../../data/quality-scores.json';
   box-shadow: 0 6px 20px rgba(37,99,235,0.1);
 }
 
-.alt-match-name {
-  font-size: 17px;
+.alt-match-rank {
+  font-size: 10px;
   font-weight: 700;
-  color: #0F172A;
-  margin-bottom: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #64748B;
+  margin-bottom: 10px;
 }
 
+.alt-match-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.alt-match-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0F172A;
+  flex: 1;
+}
+
+.alt-match-score-wrap { margin-left: auto; text-align: right; }
 .alt-match-score { font-size: 20px; font-weight: 800; color: #2563EB; }
 .alt-match-score-label { font-size: 11px; color: #94A3B8; }
+
+.alt-match-reasons {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0 0;
+  border-top: 1px solid #F1F5F9;
+  padding-top: 10px;
+}
+.alt-match-reasons li {
+  font-size: 12px;
+  color: #475569;
+  padding: 3px 0;
+  padding-left: 14px;
+  position: relative;
+}
+.alt-match-reasons li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #10B981;
+  font-size: 10px;
+}
 
 .next-steps {
   background: white;
@@ -1050,7 +1086,20 @@ const NAMES = {
   'egypt':'Egypt','indonesia':'Indonesia',
   'colombia':'Colombia','costa-rica':'Costa Rica',
   'panama':'Panama','malaysia':'Malaysia',
-  'italy':'Italy','greece':'Greece'
+  'italy':'Italy','greece':'Greece',
+  'bahamas':'Bahamas','belize':'Belize','bolivia':'Bolivia',
+  'cambodia':'Cambodia','cyprus':'Cyprus',
+  'dominican-republic':'Dominican Republic',
+  'el-salvador':'El Salvador','estonia':'Estonia',
+  'ghana':'Ghana','honduras':'Honduras','jamaica':'Jamaica',
+  'kazakhstan':'Kazakhstan','latvia':'Latvia',
+  'lithuania':'Lithuania','malta':'Malta',
+  'montenegro':'Montenegro','nepal':'Nepal',
+  'nicaragua':'Nicaragua','north-macedonia':'North Macedonia',
+  'paraguay':'Paraguay','rwanda':'Rwanda',
+  'slovakia':'Slovakia','slovenia':'Slovenia',
+  'south-africa':'South Africa','taiwan':'Taiwan',
+  'turkey':'Turkey','uruguay':'Uruguay',
 };
 
 const ISO2 = {
@@ -1070,7 +1119,16 @@ const ISO2 = {
   'serbia':'rs','kenya':'ke','peru':'pe','brazil':'br',
   'chile':'cl','albania':'al','sri-lanka':'lk','egypt':'eg',
   'indonesia':'id','colombia':'co','costa-rica':'cr',
-  'panama':'pa','malaysia':'my','italy':'it','greece':'gr'
+  'panama':'pa','malaysia':'my','italy':'it','greece':'gr',
+  'bahamas':'bs','belize':'bz','bolivia':'bo',
+  'cambodia':'kh','cyprus':'cy','dominican-republic':'do',
+  'el-salvador':'sv','estonia':'ee','ghana':'gh',
+  'honduras':'hn','jamaica':'jm','kazakhstan':'kz',
+  'latvia':'lv','lithuania':'lt','malta':'mt',
+  'montenegro':'me','nepal':'np','nicaragua':'ni',
+  'north-macedonia':'mk','paraguay':'py','rwanda':'rw',
+  'slovakia':'sk','slovenia':'si','south-africa':'za',
+  'taiwan':'tw','turkey':'tr','uruguay':'uy',
 };
 
 const QUALITY = JSON.parse(
@@ -1084,7 +1142,11 @@ const EXPENSIVE_COL = new Set([
   'united-kingdom','austria','belgium',
   'united-arab-emirates','qatar','saudi-arabia',
   'france','germany','japan','south-korea',
-  'canada','israel'
+  'canada','israel',
+  'lithuania','latvia','estonia','slovenia',
+  'slovakia','malta','cyprus','montenegro',
+  'taiwan','turkey','south-africa','uruguay',
+  'paraguay','bahamas',
 ]);
 
 const AFFORDABLE_COL = new Set([
@@ -1094,7 +1156,11 @@ const AFFORDABLE_COL = new Set([
   'hungary','serbia','poland','czech-republic','croatia',
   'egypt','morocco',
   'colombia','peru','ecuador','mexico',
-  'costa-rica','panama'
+  'costa-rica','panama',
+  'kazakhstan','cambodia','bolivia','ghana',
+  'rwanda','nepal','north-macedonia',
+  'dominican-republic','belize','el-salvador',
+  'honduras','jamaica','nicaragua',
 ]);
 
 // ── Progress steps ─────────────────────────────
@@ -1175,8 +1241,8 @@ window.calculateResults = function() {
     var score = 0;
     var w = {
       safety:0.25, healthcare:0.20, happiness:0.15,
-      gdpGrowth:0.05, pollution:0.10, unemployment:0.10,
-      internet:0.10, traffic:0.05
+      hdi:0.15, pollution:0.08, unemployment:0.07,
+      internet:0.05, traffic:0.05
     };
     var base = 0, totalW = 0;
     Object.entries(w).forEach(function([k, weight]) {
@@ -1188,7 +1254,7 @@ window.calculateResults = function() {
       if (EXPENSIVE_COL.has(slug)) score -= 32;
       if (AFFORDABLE_COL.has(slug)) score += 22;
       if (q.unemployment >= 8) score += 10;
-      if (q.gdpGrowth >= 7) score += 5;
+      if (q.hdi >= 7) score += 5;
     }
     if (answers[1] === 'healthcare') { score += (q.healthcare || 5) * 3; }
     if (answers[1] === 'retirement') {
@@ -1233,7 +1299,7 @@ window.calculateResults = function() {
       if (EXPENSIVE_COL.has(slug)) score -= 28;
       if (AFFORDABLE_COL.has(slug)) score += 20;
       if (q.unemployment >= 8) score += 10;
-      if (q.gdpGrowth >= 7) score += 6;
+      if (q.hdi >= 7) score += 6;
     }
     if (answers[3] === 'retire') {
       if (q.healthcare >= 8) score += 18;
@@ -1272,7 +1338,7 @@ window.calculateResults = function() {
     if (answers[6] === 'nature')     score += (q.pollution || 5) * 4;
     if (answers[6] === 'internet')   score += (q.internet || 5) * 4;
     if (answers[6] === 'economy') {
-      score += (q.gdpGrowth || 5) * 3;
+      score += (q.hdi || 5) * 3;
       score += (q.unemployment || 5) * 3;
     }
     if (answers[6] === 'traffic') score += (q.traffic || 5) * 4;
@@ -1294,7 +1360,7 @@ window.calculateResults = function() {
   var top3 = sorted.slice(0, 3).map(function([slug, s]) {
     return {
       slug: slug,
-      score: Math.min(98, Math.round((s / maxScore) * 95) + Math.floor(Math.random() * 4)),
+      score: Math.min(99, Math.round((s / maxScore) * 97)),
       data: QUALITY[slug]
     };
   });
@@ -1516,24 +1582,37 @@ function showResults(top3) {
     '<div class="next-steps">' +
     '<div class="next-steps-title">Recommended Next Steps</div>' +
     '<div class="next-steps-list">' +
-    nextRow('/countries', 'View ' + countryName + ' Country Profile') +
+    nextRow('/countries/' + topMatch.slug, 'View ' + countryName + ' Country Profile') +
     nextRow('/#calculator', 'Compare Your Salary in ' + countryName,
       'prefillCalculator(\'' + topMatch.slug + '\')') +
     nextRow('/tools/visa', 'Explore Visa Options for ' + countryName) +
     '</div></div>';
 
+  var rankLabels = ['2nd Match', '3rd Match'];
   document.getElementById('altMatchesContainer').innerHTML =
-    top3.slice(1).map(function(m) {
+    top3.slice(1).map(function(m, i) {
       var name = NAMES[m.slug] || m.slug;
       var altIso2 = ISO2[m.slug] || '';
       var altFlag = altIso2
         ? '<span class="fi fi-' + altIso2 + ' match-flag match-flag-sm"></span>'
         : '';
-      return '<div class="alt-match" onclick="prefillCalculator(\'' + m.slug + '\')">' +
+      var altReasons = generateReasons(m.slug, m.data, answers).slice(0, 3);
+      var reasonsHTML = altReasons.length
+        ? '<ul class="alt-match-reasons">' +
+          altReasons.map(function(r) {
+            return '<li>' + r + '</li>';
+          }).join('') +
+          '</ul>'
+        : '';
+      return '<a class="alt-match" href="/countries/' + m.slug + '">' +
+        '<div class="alt-match-rank">' + rankLabels[i] + '</div>' +
         '<div class="alt-match-header">' + altFlag +
-        '<div class="alt-match-name">' + name + '</div></div>' +
-        '<div><span class="alt-match-score">' + m.score + '%</span>' +
-        '<span class="alt-match-score-label"> Match</span></div></div>';
+        '<div class="alt-match-name">' + name + '</div>' +
+        '<div class="alt-match-score-wrap"><span class="alt-match-score">' + m.score + '%</span>' +
+        '<span class="alt-match-score-label"> Match</span></div>' +
+        '</div>' +
+        reasonsHTML +
+        '</a>';
     }).join('');
 
   var aff = getAffiliates(answers);

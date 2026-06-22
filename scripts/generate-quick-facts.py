@@ -49,7 +49,20 @@ NAMES = {
     'albania':'Albania','sri-lanka':'Sri Lanka','egypt':'Egypt',
     'indonesia':'Indonesia','colombia':'Colombia',
     'costa-rica':'Costa Rica','panama':'Panama',
-    'malaysia':'Malaysia','italy':'Italy','greece':'Greece'
+    'malaysia':'Malaysia','italy':'Italy','greece':'Greece',
+    'bahamas':'Bahamas','belize':'Belize','bolivia':'Bolivia',
+    'cambodia':'Cambodia','cyprus':'Cyprus',
+    'dominican-republic':'Dominican Republic',
+    'el-salvador':'El Salvador','estonia':'Estonia',
+    'ghana':'Ghana','honduras':'Honduras','jamaica':'Jamaica',
+    'kazakhstan':'Kazakhstan','latvia':'Latvia',
+    'lithuania':'Lithuania','malta':'Malta',
+    'montenegro':'Montenegro','nepal':'Nepal',
+    'nicaragua':'Nicaragua','north-macedonia':'North Macedonia',
+    'paraguay':'Paraguay','rwanda':'Rwanda',
+    'slovakia':'Slovakia','slovenia':'Slovenia',
+    'south-africa':'South Africa','taiwan':'Taiwan',
+    'turkey':'Turkey','uruguay':'Uruguay',
 }
 
 SYSTEM_PROMPT = """You are an experienced

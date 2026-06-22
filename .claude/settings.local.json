@@ -12,6 +12,9 @@
       "Bash(pip install *)",
       "Bash(python -m pip install requests beautifulsoup4)",
       "Bash(node -e ' *)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\marci\\.claude\\projects\\c--Users-marci-Desktop-moje-strony-leavingamerica\\memory"
     ]
   }
 }

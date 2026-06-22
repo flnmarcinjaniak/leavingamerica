@@ -1,6 +1,7 @@
 ---
 export const prerender = true;
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Gauge from '../../components/Gauge.astro';
 import qualityScoresData from '../../data/quality-scores.json';
 
 export async function getStaticPaths() {
@@ -63,13 +64,6 @@ const countryName = NAMES[slug] || slug;
 const countryIso2 = ISO2[slug] || '';
 
 function calculateGrade(q) {
-  const verdicts = {
-    'A': 'Excellent destination', 'B': 'Good destination',
-    'C': 'Average destination', 'D': 'Below average', 'F': 'Poor destination'
-  };
-  if (q.grade !== undefined && q.grade_percent !== undefined) {
-    return { percent: q.grade_percent, grade: q.grade, verdict: verdicts[q.grade] || 'Average destination' };
-  }
   const weights = {
     safety: 0.25, healthcare: 0.20, happiness: 0.15,
     gdpGrowth: 0.05, pollution: 0.10, unemployment: 0.10,
@@ -83,18 +77,24 @@ function calculateGrade(q) {
       totalWeight += weight;
     }
   }
-  const weightedAverage = totalWeight > 0 ? totalScore / totalWeight : 0;
+  const weightedAverage = totalWeight > 0
+    ? totalScore / totalWeight : 0;
   const percent = Math.round(weightedAverage * 10);
-  let grade, verdict;
-  if (percent >= 85) { grade = 'A'; verdict = verdicts['A']; }
-  else if (percent >= 70) { grade = 'B'; verdict = verdicts['B']; }
-  else if (percent >= 55) { grade = 'C'; verdict = verdicts['C']; }
-  else if (percent >= 40) { grade = 'D'; verdict = verdicts['D']; }
-  else { grade = 'F'; verdict = verdicts['F']; }
-  return { percent, grade, verdict };
+  let label;
+  if (percent >= 90) label = 'Outstanding destination';
+  else if (percent >= 80) label = 'Excellent destination';
+  else if (percent >= 70) label = 'Very good destination';
+  else if (percent >= 60) label = 'Good destination';
+  else if (percent >= 50) label = 'Solid destination';
+  else if (percent >= 40) label = 'Mixed destination';
+  else if (percent >= 30) label = 'Below average destination';
+  else label = 'Needs careful research';
+  return { percent, label };
 }
 
-const overallScore = calculateGrade(data);
+const overallScore = (data.grade_percent != null && data.grade_label)
+  ? { percent: data.grade_percent, label: data.grade_label }
+  : calculateGrade(data);
 
 // Quick Verdict Bar helpers
 function getVisaStatus(visaDays) {
@@ -442,6 +442,8 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
   padding: 18px 20px;
   border-left: 3px solid #E2E8F0;
   box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
 }
 .verdict-item.favorable { border-left-color: #16A34A; }
 .verdict-item.neutral { border-left-color: #D97706; }
@@ -452,12 +454,26 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
   text-transform: uppercase;
   letter-spacing: 1px;
   color: #94A3B8;
-  margin-bottom: 6px;
+  margin-bottom: 0;
 }
 .verdict-value {
-  font-size: 14px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
   font-weight: 700;
   color: #0F172A;
+  line-height: 1.2;
+}
+.verdict-gauge-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-left: none;
+  padding-top: 12px;
+}
+.verdict-gauge-item .verdict-label {
+  margin-bottom: 8px;
 }
 
 .section {
@@ -865,9 +881,9 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
   </div>
 
   <div class="verdict-bar">
-    <div class={`verdict-item ${overallScore.grade === 'A' || overallScore.grade === 'B' ? 'favorable' : overallScore.grade === 'C' ? 'neutral' : 'restricted'}`}>
-      <div class="verdict-label">Overall Grade</div>
-      <div class="verdict-value">{overallScore.grade} · {overallScore.percent}%</div>
+    <div class="verdict-item verdict-gauge-item">
+      <div class="verdict-label">Overall Score</div>
+      <Gauge percent={overallScore.percent} label={overallScore.label} size="small" />
     </div>
     <div class={`verdict-item ${visaInfo.status}`}>
       <div class="verdict-label">Visa (US Passport)</div>

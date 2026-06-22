@@ -331,6 +331,54 @@ def healthcare_to_score(value):
     elif v >= 15:  return 2
     else:          return 1
 
+def gpi_to_score(gpi_score):
+    """Convert Global Peace Index score (1.0-5.0 scale, lower = more
+    peaceful) to 1-10 safety score. Calibrated against the real 2026 GPI
+    distribution: Iceland 1.161 (most peaceful) to Russia 3.367 (least
+    peaceful among ranked nations), with most countries clustering 1.4-2.8."""
+    if gpi_score is None:
+        return None
+    v = float(gpi_score)
+    if v <= 1.3:   return 10
+    elif v <= 1.5: return 9
+    elif v <= 1.7: return 8
+    elif v <= 1.9: return 7
+    elif v <= 2.1: return 6
+    elif v <= 2.3: return 5
+    elif v <= 2.5: return 4
+    elif v <= 2.8: return 3
+    elif v <= 3.1: return 2
+    else:          return 1
+
+def homicide_to_score(rate):
+    """Convert intentional homicides per 100k to 1-10 safety score.
+    Lower rate = safer. Calibrated against real global distribution:
+    global median ~2.6, most developed nations <1.5,
+    worst-case countries 20-76 (UNODC/World Bank data, 2025 snapshot)."""
+    if rate is None:
+        return None
+    v = float(rate)
+    if v < 1.0:   return 10
+    elif v < 2.0:  return 9
+    elif v < 3.5:  return 8
+    elif v < 5.5:  return 7
+    elif v < 8.0:  return 6
+    elif v < 12.0: return 5
+    elif v < 18.0: return 4
+    elif v < 25.0: return 3
+    elif v < 40.0: return 2
+    else:          return 1
+
+def uhc_to_score(index_value):
+    """Convert WHO/World Bank UHC Service Coverage Index (0-100 scale)
+    to 1-10 healthcare score. Simple linear conversion since the index
+    is already a well-calibrated 0-100 composite."""
+    if index_value is None:
+        return None
+    v = float(index_value)
+    score = round(v / 10)
+    return max(1, min(10, score))
+
 def pollution_to_score(value):
     if value is None:
         return None
@@ -555,6 +603,73 @@ def fetch_internet_wikipedia():
                 pass
     return results
 
+def fetch_homicide_rate():
+    """Fetch Intentional Homicides per 100k from World Bank —
+    objective safety proxy, replacing subjective Numbeo Safety Index"""
+    print("\n--- Step: Homicide Rate "
+          "(World Bank VC.IHR.PSRC.P5 - objective safety) ---")
+    results = fetch_world_bank_indicator("VC.IHR.PSRC.P5")
+    print(f"Found {len(results)} countries")
+    return results
+
+
+def fetch_uhc_index():
+    """Fetch UHC Service Coverage Index from World Bank —
+    objective healthcare proxy, replacing subjective Numbeo Health Care Index"""
+    print("\n--- Step: UHC Healthcare Index "
+          "(World Bank SH.UHC.SRVS.CV.XD - objective healthcare) ---")
+    results = fetch_world_bank_indicator("SH_UHC_SCI")
+    print(f"Found {len(results)} countries")
+    return results
+
+
+def fetch_global_peace_index():
+    """Fetch Global Peace Index scores from Wikipedia — composite
+    safety/stability measure (conflict, terrorism, crime, political
+    instability) covering 163 countries, replacing the homicide-rate-only
+    approach which had gaps for 17 of our 55 countries."""
+    print("\n--- Step: Global Peace Index (Wikipedia) ---")
+    time.sleep(2)
+    session = requests.Session()
+    session.headers.update({
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; '
+        'Win64; x64) AppleWebKit/537.36 (KHTML, '
+        'like Gecko) Chrome/124.0.0.0 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml,'
+        'application/xml;q=0.9,*/*;q=0.8',
+        'Accept-Language': 'en-US,en;q=0.5',
+    })
+    url = "https://en.wikipedia.org/wiki/Global_Peace_Index"
+    response = session.get(url, timeout=30)
+    response.raise_for_status()
+    soup = BeautifulSoup(response.text, 'html.parser')
+
+    results = {}
+    tables = soup.find_all('table', class_='wikitable')
+    for table in tables:
+        rows = table.find_all('tr')
+        for row in rows:
+            cells = row.find_all(['td', 'th'])
+            if len(cells) < 3:
+                continue
+            try:
+                # Table format: Rank | Country | Score | Change
+                # Country cell may contain flag icon + name
+                country_cell = cells[1]
+                score_cell = cells[2]
+                country = country_cell.get_text(strip=True)
+                score_text = score_cell.get_text(strip=True)
+                score = float(score_text)
+                if 0.5 <= score <= 5.0:
+                    country = re.sub(r'\[.*?\]', '', country).strip()
+                    results[country] = score
+            except (ValueError, IndexError):
+                continue
+
+    print(f"  Found {len(results)} countries")
+    return results
+
+
 def fetch_english_proficiency():
     """Fetch EF English Proficiency Index from Wikipedia"""
     print("\n--- Step 9: English Proficiency (EF EPI / Wikipedia) ---")
@@ -766,6 +881,18 @@ gdp_data = fetch_world_bank_indicator("NY.GDP.MKTP.KD.ZG")
 print(f"Found {len(gdp_data)} countries")
 time.sleep(2)
 
+# STEP 6b - World Bank Homicide Rate (objective safety proxy)
+homicide_data = fetch_homicide_rate()
+time.sleep(2)
+
+# STEP 6c - World Bank UHC Index (objective healthcare proxy)
+uhc_data = fetch_uhc_index()
+time.sleep(2)
+
+# STEP 6d - Global Peace Index (primary safety source, Wikipedia)
+gpi_data = fetch_global_peace_index()
+time.sleep(2)
+
 # STEP 7 - OWID Happiness
 print("\n--- Step 7: Happiness (Our World in Data / WHR) ---")
 happiness_data = fetch_happiness_owid()
@@ -788,8 +915,19 @@ results = {}
 for numbeo_name, slug in COUNTRIES.items():
     country_name = numbeo_name
 
-    safety_val = safety_data.get(numbeo_name)
-    health_val = health_data.get(numbeo_name)
+    homicide_rate = homicide_data.get(slug)
+    uhc_val = uhc_data.get(slug)
+
+    # GPI requires fuzzy name matching like english_data/visa_data
+    gpi_score = None
+    for source_country, score in gpi_data.items():
+        if match_country(country_name, source_country):
+            gpi_score = score
+            break
+
+    # Keep old Numbeo values as secondary reference
+    safety_val_numbeo_legacy = safety_data.get(numbeo_name)
+    health_val_numbeo_legacy = health_data.get(numbeo_name)
     pollution_val = pollution_data.get(numbeo_name)
     traffic_val = traffic_data.get(numbeo_name)
     unemp_val = unemployment_data.get(slug)
@@ -866,8 +1004,8 @@ for numbeo_name, slug in COUNTRIES.items():
             break
 
     results[slug] = {
-        "safety": safety_to_score(safety_val),
-        "healthcare": healthcare_to_score(health_val),
+        "safety": gpi_to_score(gpi_score) if gpi_score is not None else homicide_to_score(homicide_rate),
+        "healthcare": uhc_to_score(uhc_val),
         "pollution": pollution_to_score(pollution_val),
         "traffic": traffic_to_score(traffic_val),
         "unemployment": unemployment_to_score(unemp_val),
@@ -880,8 +1018,12 @@ for numbeo_name, slug in COUNTRIES.items():
         "tax_system": tax_system,
         "nomad_visa": has_nomad_visa,
         "raw": {
-            "safety": round(safety_val, 1) if safety_val is not None else None,
-            "healthcare": round(health_val, 1) if health_val is not None else None,
+            "safety": round(gpi_score, 3) if gpi_score is not None else (round(homicide_rate, 2) if homicide_rate is not None else None),
+            "safety_source": "gpi" if gpi_score is not None else ("homicide_rate" if homicide_rate is not None else None),
+            "healthcare": round(uhc_val, 1) if uhc_val is not None else None,
+            "safety_homicide_legacy": round(homicide_rate, 2) if homicide_rate is not None else None,
+            "safety_numbeo_legacy": round(safety_val_numbeo_legacy, 1) if safety_val_numbeo_legacy is not None else None,
+            "healthcare_numbeo_legacy": round(health_val_numbeo_legacy, 1) if health_val_numbeo_legacy is not None else None,
             "pollution": round(pollution_val, 1) if pollution_val is not None else None,
             "traffic": round(traffic_val, 1) if traffic_val is not None else None,
             "unemployment": round(unemp_val, 2) if unemp_val is not None else None,
@@ -894,8 +1036,13 @@ for numbeo_name, slug in COUNTRIES.items():
     }
 
     print(f"[OK] {country_name}: "
-          f"safety={results[slug]['safety']}, "
-          f"health={results[slug]['healthcare']}, "
+          f"safety={results[slug]['safety']} "
+          f"(gpi={gpi_score}, "
+          f"homicide={homicide_rate}, "
+          f"numbeo_legacy={safety_val_numbeo_legacy}), "
+          f"health={results[slug]['healthcare']} "
+          f"(uhc={uhc_val}, "
+          f"numbeo_legacy={health_val_numbeo_legacy}), "
           f"english={results[slug]['english']}, "
           f"visa={results[slug]['visa_days']}, "
           f"tax={results[slug]['tax_system']}, "
@@ -924,6 +1071,6 @@ complete = sum(1 for v in results.values()
                if all(v.get(k) for k in
                ["safety", "healthcare", "pollution", "traffic",
                 "unemployment", "gdpGrowth", "happiness", "internet"]))
-print(f"\nDone. {complete}/30 countries fully complete.")
+print(f"\nDone. {complete}/{len(results)} countries fully complete.")
 print(f"Saved to src/data/quality-scores.json")
 print(f"Date: {str(date.today())}")

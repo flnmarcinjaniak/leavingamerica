@@ -49,8 +49,8 @@ const ISO2 = {
 };
 
 function calculateGrade(q) {
-  if (q.grade !== undefined && q.grade_percent !== undefined) {
-    return { percent: q.grade_percent, grade: q.grade };
+  if (q.grade_percent != null && q.grade_label) {
+    return { percent: q.grade_percent, label: q.grade_label };
   }
   const weights = {
     safety: 0.25, healthcare: 0.20, happiness: 0.15,
@@ -65,15 +65,19 @@ function calculateGrade(q) {
       totalWeight += weight;
     }
   }
-  const weightedAverage = totalWeight > 0 ? totalScore / totalWeight : 0;
+  const weightedAverage = totalWeight > 0
+    ? totalScore / totalWeight : 0;
   const percent = Math.round(weightedAverage * 10);
-  let grade;
-  if (percent >= 85) grade = 'A';
-  else if (percent >= 70) grade = 'B';
-  else if (percent >= 55) grade = 'C';
-  else if (percent >= 40) grade = 'D';
-  else grade = 'F';
-  return { percent, grade };
+  let label;
+  if (percent >= 90) label = 'Outstanding destination';
+  else if (percent >= 80) label = 'Excellent destination';
+  else if (percent >= 70) label = 'Very good destination';
+  else if (percent >= 60) label = 'Good destination';
+  else if (percent >= 50) label = 'Solid destination';
+  else if (percent >= 40) label = 'Mixed destination';
+  else if (percent >= 30) label = 'Below average destination';
+  else label = 'Needs careful research';
+  return { percent, label };
 }
 
 const countryList = Object.entries(countries)
@@ -295,7 +299,7 @@ const pageDescription = 'Browse cost of living, safety, healthcare, visa require
           <div class="country-card-info">
             <div class="country-card-name">{c.name}</div>
             <div class="country-card-grade">
-              Grade {c.score.grade} · {c.score.percent}%
+              {c.score.percent}% · {c.score.label}
             </div>
           </div>
         </a>

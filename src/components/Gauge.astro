@@ -1,0 +1,203 @@
+---
+interface Props {
+  percent: number;
+  label: string;
+  size?: 'small' | 'medium' | 'large';
+}
+
+const { percent, label, size = 'medium' } = Astro.props;
+
+const gaugeId = `gauge-${Math.random().toString(36).slice(2, 9)}`;
+
+const sizeMap = {
+  small:  { width: 110, height: 78,  fontSize: 20, labelSize: 10 },
+  medium: { width: 160, height: 108, fontSize: 28, labelSize: 12 },
+  large:  { width: 200, height: 132, fontSize: 34, labelSize: 13 },
+};
+const dims = sizeMap[size];
+
+// Arc length of "M 15 105 A 85 85 0 0 1 185 105" = π × 85 ≈ 267
+const ARC_LENGTH = 267;
+
+function getPercentColor(pct: number): string {
+  if (pct >= 70) return '#16A34A';
+  if (pct >= 50) return '#D97706';
+  return '#DC2626';
+}
+const percentColor = getPercentColor(percent);
+---
+
+<div class="gauge-wrap" data-percent={percent} data-gauge-id={gaugeId}>
+  <svg
+    viewBox="0 0 200 120"
+    width={dims.width}
+    height={dims.height}
+    class="gauge-svg"
+    aria-hidden="true"
+  >
+    <defs>
+      <linearGradient id={`${gaugeId}-grad`} x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%"   stop-color="#DC2626" />
+        <stop offset="28%"  stop-color="#F59E0B" />
+        <stop offset="56%"  stop-color="#84CC16" />
+        <stop offset="100%" stop-color="#16A34A" />
+      </linearGradient>
+    </defs>
+
+    <!-- Track -->
+    <path
+      d="M 15 105 A 85 85 0 0 1 185 105"
+      fill="none"
+      stroke="#E2E8F0"
+      stroke-width="12"
+      stroke-linecap="round"
+    />
+
+    <!-- Colored arc — reveals left-to-right via JS dashoffset -->
+    <path
+      d="M 15 105 A 85 85 0 0 1 185 105"
+      fill="none"
+      stroke={`url(#${gaugeId}-grad)`}
+      stroke-width="12"
+      stroke-linecap="round"
+      class="gauge-arc"
+      style={`stroke-dasharray: ${ARC_LENGTH}; stroke-dashoffset: ${ARC_LENGTH};`}
+    />
+
+    <!--
+      Needle: SVG transform attribute rotate(angle, cx, cy) is universally
+      reliable. JS drives the animation via setAttribute — no CSS transforms.
+    -->
+    <g class="gauge-needle-group" transform="rotate(-90, 100, 105)">
+      <line
+        x1="100" y1="105"
+        x2="100" y2="32"
+        stroke="#1E293B"
+        stroke-width="2.5"
+        stroke-linecap="round"
+      />
+    </g>
+
+    <!-- Pivot: outer ring (drawn on top so needle goes under) -->
+    <circle cx="100" cy="105" r="8" fill="#1E293B" />
+    <circle cx="100" cy="105" r="3" fill="white" opacity="0.85" />
+  </svg>
+
+  <div class="gauge-readout">
+    <div
+      class="gauge-percent"
+      style={`font-size: ${dims.fontSize}px; color: ${percentColor};`}
+    >
+      <span class="gauge-percent-number">0</span>%
+    </div>
+    <div class="gauge-label" style={`font-size: ${dims.labelSize}px`}>
+      {label}
+    </div>
+  </div>
+</div>
+
+<style>
+.gauge-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+.gauge-svg {
+  display: block;
+}
+.gauge-arc {
+  transition: stroke-dashoffset 1.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.gauge-readout {
+  text-align: center;
+  margin-top: -6px;
+}
+.gauge-percent {
+  font-weight: 800;
+  font-family: 'Manrope', sans-serif;
+  line-height: 1;
+}
+.gauge-label {
+  font-weight: 600;
+  color: #64748B;
+  margin-top: 3px;
+  font-family: 'Manrope', sans-serif;
+}
+</style>
+
+<script>
+  function easeOutBack(t: number): number {
+    const c1 = 1.5;
+    const c3 = c1 + 1;
+    return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2);
+  }
+
+  function initGauges() {
+    const gauges = document.querySelectorAll<HTMLElement>('.gauge-wrap:not([data-animated])');
+    if (!gauges.length) return;
+
+    const ARC_LENGTH = 267;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target as HTMLElement;
+        if (el.dataset.animated) return;
+        el.dataset.animated = 'true';
+
+        const percent    = parseFloat(el.dataset.percent || '0');
+        const filledLength  = (percent / 100) * ARC_LENGTH;
+        const targetAngle   = (percent / 100) * 180 - 90; // -90=left(0%) … +90=right(100%)
+
+        const needleGroup = el.querySelector('.gauge-needle-group') as SVGGElement | null;
+        const arc         = el.querySelector('.gauge-arc')          as SVGPathElement | null;
+        const numEl       = el.querySelector('.gauge-percent-number') as HTMLElement | null;
+
+        const duration  = 1300;
+        const startTime = performance.now();
+        const startAngle = -90;
+
+        // Arc: CSS transition handles it — just update the property once
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            if (arc) arc.style.strokeDashoffset = String(ARC_LENGTH - filledLength);
+          });
+        });
+
+        // Needle: pure JS animation via SVG transform attribute
+        function animateNeedle(now: number) {
+          const t = Math.min((now - startTime) / duration, 1);
+          const angle = startAngle + (targetAngle - startAngle) * easeOutBack(t);
+          if (needleGroup) {
+            needleGroup.setAttribute('transform', `rotate(${angle}, 100, 105)`);
+          }
+          if (t < 1) requestAnimationFrame(animateNeedle);
+        }
+        requestAnimationFrame(animateNeedle);
+
+        // Count-up with easeOutExpo
+        if (numEl) {
+          function tick(now: number) {
+            const t = Math.min((now - startTime) / duration, 1);
+            const eased = t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+            numEl.textContent = String(Math.round(eased * percent));
+            if (t < 1) requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
+        }
+
+        observer.unobserve(el);
+      });
+    }, { threshold: 0.2 });
+
+    gauges.forEach((g) => observer.observe(g));
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGauges);
+  } else {
+    initGauges();
+  }
+  document.addEventListener('astro:page-load', initGauges);
+</script>

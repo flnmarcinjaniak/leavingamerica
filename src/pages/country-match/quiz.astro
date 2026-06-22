@@ -310,11 +310,37 @@ import qualityScores from '../../data/quality-scores.json';
   margin-bottom: 14px;
 }
 
+.match-country-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+.match-flag {
+  display: inline-block !important;
+  width: 40px !important;
+  height: 30px !important;
+  border-radius: 5px !important;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.18) !important;
+  border: 1px solid rgba(0,0,0,0.1) !important;
+  flex-shrink: 0;
+}
+.match-flag-sm {
+  width: 28px !important;
+  height: 21px !important;
+  border-radius: 4px !important;
+}
+.alt-match-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
 .match-country-name {
   font-size: 36px;
   font-weight: 800;
   color: #0F172A;
-  margin-bottom: 16px;
+  margin-bottom: 0;
   line-height: 1.1;
   letter-spacing: -0.5px;
 }
@@ -488,7 +514,7 @@ import qualityScores from '../../data/quality-scores.json';
   font-size: 17px;
   font-weight: 700;
   color: #0F172A;
-  margin-bottom: 6px;
+  margin-bottom: 0;
 }
 
 .alt-match-score { font-size: 20px; font-weight: 800; color: #2563EB; }
@@ -1027,6 +1053,26 @@ const NAMES = {
   'italy':'Italy','greece':'Greece'
 };
 
+const ISO2 = {
+  'portugal':'pt','spain':'es','poland':'pl','mexico':'mx',
+  'thailand':'th','germany':'de','japan':'jp','croatia':'hr',
+  'czech-republic':'cz','hungary':'hu','romania':'ro',
+  'bulgaria':'bg','vietnam':'vn','south-korea':'kr',
+  'australia':'au','new-zealand':'nz','canada':'ca',
+  'ireland':'ie','netherlands':'nl','france':'fr',
+  'argentina':'ar','ecuador':'ec','morocco':'ma',
+  'switzerland':'ch','norway':'no','denmark':'dk',
+  'sweden':'se','belgium':'be','austria':'at','finland':'fi',
+  'united-kingdom':'gb','singapore':'sg',
+  'united-arab-emirates':'ae','qatar':'qa',
+  'saudi-arabia':'sa','iceland':'is','india':'in',
+  'philippines':'ph','china':'cn','georgia':'ge',
+  'serbia':'rs','kenya':'ke','peru':'pe','brazil':'br',
+  'chile':'cl','albania':'al','sri-lanka':'lk','egypt':'eg',
+  'indonesia':'id','colombia':'co','costa-rica':'cr',
+  'panama':'pa','malaysia':'my','italy':'it','greece':'gr'
+};
+
 const QUALITY = JSON.parse(
   document.getElementById('quality-data-quiz').textContent
 );
@@ -1420,10 +1466,18 @@ function showResults(top3) {
       '</div></div>';
   }
 
+  var topIso2 = ISO2[topMatch.slug] || '';
+  var topFlagHtml = topIso2
+    ? '<span class="fi fi-' + topIso2 + ' match-flag"></span>'
+    : '';
+
   document.getElementById('topMatchContainer').innerHTML =
     '<div class="top-match">' +
     '<div class="match-badge">Top Match</div>' +
+    '<div class="match-country-header">' +
+    topFlagHtml +
     '<div class="match-country-name">' + countryName + '</div>' +
+    '</div>' +
     '<div class="match-score-meter">' +
     '<div class="match-score-top">' +
     '<span class="match-percent">' + topMatch.score + '%</span>' +
@@ -1471,8 +1525,13 @@ function showResults(top3) {
   document.getElementById('altMatchesContainer').innerHTML =
     top3.slice(1).map(function(m) {
       var name = NAMES[m.slug] || m.slug;
+      var altIso2 = ISO2[m.slug] || '';
+      var altFlag = altIso2
+        ? '<span class="fi fi-' + altIso2 + ' match-flag match-flag-sm"></span>'
+        : '';
       return '<div class="alt-match" onclick="prefillCalculator(\'' + m.slug + '\')">' +
-        '<div class="alt-match-name">' + name + '</div>' +
+        '<div class="alt-match-header">' + altFlag +
+        '<div class="alt-match-name">' + name + '</div></div>' +
         '<div><span class="alt-match-score">' + m.score + '%</span>' +
         '<span class="alt-match-score-label"> Match</span></div></div>';
     }).join('');

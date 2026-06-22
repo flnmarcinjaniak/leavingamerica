@@ -20,18 +20,52 @@ function computeScore(q: Record<string, number>) {
     if (val != null) { total += val * w; totalWeight += w; }
   }
   const pct = totalWeight > 0 ? Math.round((total / totalWeight) * 10) : 0;
-  const grade = pct >= 85 ? 'A' : pct >= 70 ? 'B' : pct >= 55 ? 'C' : pct >= 40 ? 'D' : 'F';
-  return { pct, grade };
+  let label;
+  if (pct >= 90) label = 'Outstanding destination';
+  else if (pct >= 80) label = 'Excellent destination';
+  else if (pct >= 70) label = 'Very good destination';
+  else if (pct >= 60) label = 'Good destination';
+  else if (pct >= 50) label = 'Solid destination';
+  else if (pct >= 40) label = 'Mixed destination';
+  else if (pct >= 30) label = 'Below average destination';
+  else label = 'Needs careful research';
+  return { pct, label };
+}
+
+let _mgIdx = 0;
+function miniGaugeSVG(pct: number): string {
+  const ARC = 135;
+  const dashoffset = ARC - (pct / 100) * ARC;
+  const angle = (pct / 100) * 180 - 90;
+  const id = `mg${_mgIdx++}`;
+  return `<svg viewBox="0 0 100 60" width="56" height="36" aria-hidden="true">
+    <defs>
+      <linearGradient id="${id}" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%"   stop-color="#DC2626"/>
+        <stop offset="28%"  stop-color="#F59E0B"/>
+        <stop offset="56%"  stop-color="#84CC16"/>
+        <stop offset="100%" stop-color="#16A34A"/>
+      </linearGradient>
+    </defs>
+    <path d="M 7 52 A 43 43 0 0 1 93 52" fill="none" stroke="#E2E8F0" stroke-width="7" stroke-linecap="round"/>
+    <path d="M 7 52 A 43 43 0 0 1 93 52" fill="none" stroke="url(#${id})" stroke-width="7" stroke-linecap="round" stroke-dasharray="${ARC}" stroke-dashoffset="${dashoffset}"/>
+    <g transform="rotate(${angle}, 50, 52)">
+      <line x1="50" y1="52" x2="50" y2="17" stroke="#1E293B" stroke-width="1.5" stroke-linecap="round"/>
+    </g>
+    <circle cx="50" cy="52" r="4" fill="#1E293B"/>
+    <circle cx="50" cy="52" r="1.5" fill="white" opacity="0.85"/>
+  </svg>`;
 }
 
 const featuredCountries = [
-  { name: "Portugal",       flag: '<span class="fi fi-pt fis"></span>', iso2: "PT", slug: "portugal",        ppp: "1.8×", badge: "Most Popular",          featured: true },
-  { name: "Spain",          flag: '<span class="fi fi-es fis"></span>', iso2: "ES", slug: "spain",            ppp: "1.7×", badge: "Editor's Pick",         featured: false },
-  { name: "Poland",         flag: '<span class="fi fi-pl fis"></span>', iso2: "PL", slug: "poland",           ppp: "2.1×", badge: "Best Value Europe",      featured: false },
-  { name: "Mexico",         flag: '<span class="fi fi-mx fis"></span>', iso2: "MX", slug: "mexico",           ppp: "2.8×", badge: "Best Value Americas",    featured: false },
-  { name: "Thailand",       flag: '<span class="fi fi-th fis"></span>', iso2: "TH", slug: "thailand",         ppp: "3.1×", badge: "Digital Nomad Favorite", featured: false },
-  { name: "Vietnam",        flag: '<span class="fi fi-vn fis"></span>', iso2: "VN", slug: "vietnam",          ppp: "3.4×", badge: null,                     featured: false },
-  { name: "Czech Republic", flag: '<span class="fi fi-cz fis"></span>', iso2: "CZ", slug: "czech-republic",   ppp: "2.0×", badge: null,                     featured: false },
+  { name: "Portugal",       flag: '<span class="fi fi-pt feat-flag"></span>', iso2: "PT", slug: "portugal",        ppp: "1.8×", badge: "Most Popular",          featured: true },
+  { name: "Spain",          flag: '<span class="fi fi-es feat-flag"></span>', iso2: "ES", slug: "spain",            ppp: "1.7×", badge: "Editor's Pick",         featured: false },
+  { name: "Poland",         flag: '<span class="fi fi-pl feat-flag"></span>', iso2: "PL", slug: "poland",           ppp: "2.1×", badge: "Best Value Europe",      featured: false },
+  { name: "Mexico",         flag: '<span class="fi fi-mx feat-flag"></span>', iso2: "MX", slug: "mexico",           ppp: "2.8×", badge: "Best Value Americas",    featured: false },
+  { name: "Thailand",       flag: '<span class="fi fi-th feat-flag"></span>', iso2: "TH", slug: "thailand",         ppp: "3.1×", badge: "Digital Nomad Favorite", featured: false },
+  { name: "Vietnam",        flag: '<span class="fi fi-vn feat-flag"></span>', iso2: "VN", slug: "vietnam",          ppp: "3.4×", badge: null,                     featured: false },
+  { name: "Czech Republic", flag: '<span class="fi fi-cz feat-flag"></span>', iso2: "CZ", slug: "czech-republic",   ppp: "2.0×", badge: null,                     featured: false },
+  { name: "Germany",        flag: '<span class="fi fi-de feat-flag"></span>', iso2: "DE", slug: "germany",          ppp: "1.4×", badge: "Strong Economy",          featured: false },
 ];
 
 const qs = qualityScores.countries as Record<string, any>;
@@ -321,13 +355,36 @@ const qs = qualityScores.countries as Record<string, any>;
                   <span class="score-methodology">Safety &amp; healthcare weighted highest</span>
                 </div>
                 <div class="score-display">
-                  <div class="score-grade" id="scoreGrade">-</div>
-                  <div class="score-details">
-                    <div class="score-percent" id="scorePercent">-</div>
-                    <div class="score-verdict" id="scoreVerdict">-</div>
-                    <p class="result-desc" id="scoreDesc"></p>
+                    <div class="calc-gauge-wrap">
+                      <svg viewBox="0 0 200 120" width="180" height="104" class="calc-gauge-svg">
+                        <defs>
+                          <linearGradient id="calc-gauge-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#DC2626" />
+                            <stop offset="28%" stop-color="#F59E0B" />
+                            <stop offset="56%" stop-color="#84CC16" />
+                            <stop offset="100%" stop-color="#16A34A" />
+                          </linearGradient>
+                          <filter id="calc-gauge-drop" x="-30%" y="-30%" width="160%" height="160%">
+                            <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#0F172A" flood-opacity="0.28" />
+                          </filter>
+                        </defs>
+                        <path d="M 15 105 A 85 85 0 0 1 185 105" fill="none" stroke="#E2E8F0" stroke-width="12" stroke-linecap="round" />
+                        <path id="calcGaugeArc" d="M 15 105 A 85 85 0 0 1 185 105" fill="none" stroke="url(#calc-gauge-grad)" stroke-width="12" stroke-linecap="round" style="stroke-dasharray: 267; stroke-dashoffset: 267; transition: stroke-dashoffset 1.3s cubic-bezier(0.25,0.46,0.45,0.94);" />
+                        <g id="calcGaugeNeedle" transform="rotate(-90, 100, 105)">
+                          <line x1="100" y1="105" x2="100" y2="32" stroke="#1E293B" stroke-width="2.5" stroke-linecap="round" />
+                        </g>
+                        <circle cx="100" cy="105" r="8" fill="#1E293B" />
+                        <circle cx="100" cy="105" r="3" fill="white" opacity="0.85" />
+                      </svg>
+                    </div>
+                    <div class="score-details">
+                      <div class="calc-gauge-percent" id="scorePercent">
+                        <span id="scorePercentNumber">0</span>%
+                      </div>
+                      <div class="score-verdict" id="scoreVerdict">-</div>
+                      <p class="result-desc" id="scoreDesc"></p>
+                    </div>
                   </div>
-                </div>
               </div>
 
               <!-- FINANCIAL SUMMARY -->
@@ -643,15 +700,27 @@ const qs = qualityScores.countries as Record<string, any>;
       <div class="countries-grid">
         {featuredCountries.map(({ name, flag, iso2, slug, ppp, badge, featured }) => {
           const q = qs[slug] || {};
-          const { pct, grade } = computeScore(q);
+          const computed = computeScore(q);
+          const pct = (q.grade_percent != null && q.grade_label)
+            ? q.grade_percent
+            : computed.pct;
+          const label = (q.grade_percent != null && q.grade_label)
+            ? q.grade_label
+            : computed.label;
           return (
             <div class={`country-card reveal${featured ? ' card-featured' : ''}`} data-iso2={iso2}>
               <div class="country-card-header">
                 <div class="country-card-top">
                   <div class="country-flag" set:html={flag}></div>
-                  <span class={`country-grade-pill grade-badge-${grade}`}>{grade} · {pct}%</span>
                 </div>
-                <div class="country-name">{name}</div>
+                <div class="country-name-score-row">
+                  <div class="country-name">{name}</div>
+                  <div class="card-mini-gauge-wrap">
+                    <div set:html={miniGaugeSVG(pct)}></div>
+                    <div class="mini-gauge-pct" style={`color:${pct >= 70 ? '#16A34A' : pct >= 50 ? '#D97706' : '#DC2626'}`}>{pct}%</div>
+                    <div class="mini-gauge-label">{label.replace(' destination', '')}</div>
+                  </div>
+                </div>
                 <div class="country-ppp-hero">{ppp}</div>
                 <div class="country-ppp-label">purchasing power vs US dollar</div>
               </div>
@@ -684,45 +753,6 @@ const qs = qualityScores.countries as Record<string, any>;
             </div>
           );
         })}
-        <div class="country-card reveal"
-             data-iso2="DE"
-             onclick="document.getElementById('countrySelect').value='DE';document.getElementById('calculator').scrollIntoView({behavior:'smooth'})">
-          <div class="country-card-header">
-            <div class="country-card-top">
-              <div class="country-flag"><span class="fi fi-de fis"></span></div>
-              <span class="country-grade-pill grade-badge-B">B · 74%</span>
-            </div>
-            <div class="country-name">Germany</div>
-            <div class="country-ppp-hero">1.4×</div>
-            <div class="country-ppp-label">purchasing power vs US dollar</div>
-          </div>
-          <div class="country-card-body">
-            <div class="country-mini-bars">
-              <div class="mini-bar-row">
-                <span class="mini-bar-label">Safety</span>
-                <div class="mini-bar-track">
-                  <div class="mini-bar-fill" style="width:60%; background:#10B981;"></div>
-                </div>
-                <span class="mini-bar-score">6</span>
-              </div>
-              <div class="mini-bar-row">
-                <span class="mini-bar-label">Healthcare</span>
-                <div class="mini-bar-track">
-                  <div class="mini-bar-fill" style="width:90%; background:#3B82F6;"></div>
-                </div>
-                <span class="mini-bar-score">9</span>
-              </div>
-              <div class="mini-bar-row">
-                <span class="mini-bar-label">Happiness</span>
-                <div class="mini-bar-track">
-                  <div class="mini-bar-fill" style="width:70%; background:#F59E0B;"></div>
-                </div>
-                <span class="mini-bar-score">7</span>
-              </div>
-            </div>
-          </div>
-          <span class="country-badge">Strong Economy</span>
-        </div>
       </div>
     </div>
   </section>
@@ -1119,14 +1149,17 @@ const qs = qualityScores.countries as Record<string, any>;
     const weightedAverage = totalWeight > 0 ? totalScore / totalWeight : 0;
     const percent = Math.round(weightedAverage * 10);
 
-    let grade, verdict;
-    if (percent >= 85) { grade = 'A'; verdict = 'Excellent destination'; }
-    else if (percent >= 70) { grade = 'B'; verdict = 'Good destination'; }
-    else if (percent >= 55) { grade = 'C'; verdict = 'Average destination'; }
-    else if (percent >= 40) { grade = 'D'; verdict = 'Below average'; }
-    else { grade = 'F'; verdict = 'Poor destination'; }
+    let verdict;
+    if (percent >= 90) verdict = 'Outstanding destination';
+    else if (percent >= 80) verdict = 'Excellent destination';
+    else if (percent >= 70) verdict = 'Very good destination';
+    else if (percent >= 60) verdict = 'Good destination';
+    else if (percent >= 50) verdict = 'Solid destination';
+    else if (percent >= 40) verdict = 'Mixed destination';
+    else if (percent >= 30) verdict = 'Below average destination';
+    else verdict = 'Needs careful research';
 
-    return { percent, grade, verdict };
+    return { percent, verdict };
   }
 
   function animateCounter(element, target, duration) {
@@ -1281,13 +1314,61 @@ const qs = qualityScores.countries as Record<string, any>;
 
       const overallScore = calculateOverallScore(q);
 
-      document.getElementById('scoreGrade').textContent   = overallScore.grade;
-      document.getElementById('scorePercent').textContent = overallScore.percent + '%';
       document.getElementById('scoreVerdict').textContent = overallScore.verdict;
       document.getElementById('scoreDesc').textContent    = `Rated across 8 quality-of-life metrics weighted for American expats relocating abroad`;
 
-      const gradeEl = document.getElementById('scoreGrade');
-      gradeEl.className = 'score-grade grade-' + overallScore.grade;
+      (function animateCalcGauge(percent) {
+        const ARC_LENGTH = 267;
+        const arc    = document.getElementById('calcGaugeArc');
+        const needle = document.getElementById('calcGaugeNeedle');
+        const numEl  = document.getElementById('scorePercentNumber');
+
+        const filledLength  = (percent / 100) * ARC_LENGTH;
+        const targetAngle   = (percent / 100) * 180 - 90;
+        const startAngle    = -90;
+        const duration      = 1300;
+
+        // Arc: CSS transition handles it — just set the final value
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            if (arc) arc.style.strokeDashoffset = String(ARC_LENGTH - filledLength);
+          });
+        });
+
+        // Needle: manual rAF loop, same easeOutBack as Gauge.astro
+        if (needle) {
+          function easeOutBack(t) {
+            const c1 = 1.5, c3 = c1 + 1;
+            return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2);
+          }
+          const needleStart = performance.now();
+          function animateNeedle(now) {
+            const t = Math.min((now - needleStart) / duration, 1);
+            const angle = startAngle + (targetAngle - startAngle) * easeOutBack(t);
+            needle.setAttribute('transform', `rotate(${angle}, 100, 105)`);
+            if (t < 1) requestAnimationFrame(animateNeedle);
+          }
+          requestAnimationFrame(animateNeedle);
+        }
+
+        // Count-up with easeOutExpo
+        if (numEl) {
+          const numStart = performance.now();
+          function tick(now) {
+            const t = Math.min((now - numStart) / duration, 1);
+            const eased = t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+            numEl.textContent = String(Math.round(eased * percent));
+            if (t < 1) requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
+        }
+
+        const percentEl = document.getElementById('scorePercent');
+        if (percentEl) {
+          const color = percent >= 70 ? '#16A34A' : percent >= 50 ? '#D97706' : '#DC2626';
+          percentEl.style.color = color;
+        }
+      })(overallScore.percent);
 
       const metrics = [
         ['safety',       'safetyScore',    'safetyBar'],
@@ -2656,23 +2737,25 @@ const qs = qualityScores.countries as Record<string, any>;
     margin-top: 12px;
   }
 
-  .score-grade {
-    font-size: 96px !important;
-    font-weight: 800 !important;
-    line-height: 1 !important;
-    letter-spacing: -4px !important;
-    position: relative;
-    display: block;
-    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  .calc-gauge-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .calc-gauge-svg { display: block; }
+  .calc-gauge-readout {
+    margin-top: -10px;
+    text-align: center;
+  }
+  .calc-gauge-percent {
+    font-size: 32px;
+    font-weight: 800;
+    font-family: 'Manrope', sans-serif;
+    color: #0F172A;
+    line-height: 1;
   }
 
-  .grade-A { color: #10B981; }
-  .grade-B { color: #2563EB; }
-  .grade-C { color: #D97706; }
-  .grade-D { color: #EA580C; }
-  .grade-F { color: #DC2626; }
-
-  .score-percent { font-size: 32px; font-weight: 800; color: #0F172A; letter-spacing: -1px; }
   .score-verdict { font-size: 14px; color: #64748B; margin-top: 4px; font-weight: 500; }
 
   .result-fire {
@@ -3147,6 +3230,14 @@ const qs = qualityScores.countries as Record<string, any>;
   }
 
   .country-flag { display: block; }
+  .feat-flag {
+    display: block !important;
+    width: 32px !important;
+    height: 24px !important;
+    border-radius: 4px !important;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15) !important;
+    border: 1px solid rgba(0,0,0,0.1) !important;
+  }
 
   .country-grade-pill {
     display: inline-flex;
@@ -3156,12 +3247,53 @@ const qs = qualityScores.countries as Record<string, any>;
     font-weight: 700;
     letter-spacing: 0.3px;
   }
+  .country-grade-pct {
+    background: #EFF6FF;
+    color: #2563EB;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 4px 10px;
+    border-radius: 100px;
+  }
 
+  .country-name-score-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    margin-bottom: 4px;
+  }
   .country-name {
     font-size: 17px;
     font-weight: 700;
     color: #0F172A;
-    margin-bottom: 4px;
+  }
+  .card-mini-gauge-wrap {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 0;
+  }
+  .mini-gauge-pct {
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1;
+    margin-top: 3px;
+    font-family: 'Manrope', sans-serif;
+  }
+  .mini-gauge-label {
+    font-size: 9px;
+    font-weight: 600;
+    color: #94A3B8;
+    line-height: 1;
+    margin-top: 2px;
+    white-space: nowrap;
+    font-family: 'Manrope', sans-serif;
+  }
+  .card-mini-gauge {
+    flex-shrink: 0;
+    line-height: 0;
   }
 
   .country-ppp-hero {
@@ -3441,7 +3573,7 @@ const qs = qualityScores.countries as Record<string, any>;
     .quality-grid { grid-template-columns: 1fr; }
     .sources-grid { grid-template-columns: 1fr; }
     .section-h2 { font-size: 36px; }
-    .score-grade { font-size: 72px; }
+
     .affiliate-cards { grid-template-columns: 1fr; }
     .countries-grid { grid-template-columns: repeat(2, 1fr); }
     .financial-grid { flex-direction: column; }

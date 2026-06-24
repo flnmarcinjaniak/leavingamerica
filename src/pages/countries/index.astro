@@ -145,8 +145,8 @@ const browseByGoal = [
   }
 ];
 
-const pageTitle = 'Compare 55 Countries for Americans Moving Abroad | LeavingAmerica';
-const pageDescription = 'Browse cost of living, safety, healthcare, visa requirements, and tax systems for 55 countries. Find where your salary goes furthest as an American expat.';
+const pageTitle = 'Compare 82 Countries for Americans Moving Abroad | LeavingAmerica';
+const pageDescription = 'Browse cost of living, safety, healthcare, visa requirements, and tax systems for 82 countries. Find where your salary goes furthest as an American expat.';
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription}>
@@ -275,6 +275,13 @@ const pageDescription = 'Browse cost of living, safety, healthcare, visa require
   font-size: 11px;
   color: #64748B;
 }
+.grade-score-label {
+  font-size: 9px;
+  font-weight: 700;
+  color: #94A3B8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
 
 @media (max-width: 768px) {
   .goal-grid { grid-template-columns: 1fr; }
@@ -286,7 +293,7 @@ const pageDescription = 'Browse cost of living, safety, healthcare, visa require
 <div class="hub-page">
 
   <div class="hub-hero">
-    <h1>Compare 55 Countries for Americans Moving Abroad</h1>
+    <h1>Compare 82 Countries for Americans Moving Abroad</h1>
     <p>
       Cost of living, safety, healthcare, visa requirements,
       and tax systems — based on public economic data,
@@ -310,7 +317,7 @@ const pageDescription = 'Browse cost of living, safety, healthcare, visa require
   </div>
 
   <div class="section">
-    <h2 class="section-title">All 55 Countries</h2>
+    <h2 class="section-title">All 82 Countries</h2>
     <p class="section-sub">Sorted alphabetically</p>
     <div class="country-grid">
       {countryList.map(c => (
@@ -321,7 +328,7 @@ const pageDescription = 'Browse cost of living, safety, healthcare, visa require
           <div class="country-card-info">
             <div class="country-card-name">{c.name}</div>
             <div class="country-card-grade">
-              {c.score.percent}% · {c.score.label}
+              <span class="grade-score-label">QoL</span> {c.score.percent}/100 · {c.score.label}
             </div>
           </div>
         </a>

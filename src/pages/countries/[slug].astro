@@ -85,6 +85,26 @@ const ISO2 = {
 const countryName = NAMES[slug] || slug;
 const countryIso2 = ISO2[slug] || '';
 
+// Affiliate links — replace placeholder codes with your actual affiliate URLs
+const AFFILIATE_LINKS: Record<string, string> = {
+  'Wise':        'https://wise.com/invite/YOURCODE',
+  'NordVPN':     'https://nordvpn.com/?partner=YOURCODE',
+  'SafetyWing':  'https://safetywing.com/?referral=YOURCODE',
+  'Airalo':      'https://www.airalo.com?referral=YOURCODE',
+};
+
+function linkifyAffiliates(text: string): string {
+  let result = text;
+  for (const [brand, url] of Object.entries(AFFILIATE_LINKS)) {
+    const regex = new RegExp(`\\b${brand}\\b`, 'g');
+    result = result.replace(
+      regex,
+      `<a href="${url}" class="aff-link" target="_blank" rel="noopener sponsored">${brand}</a>`
+    );
+  }
+  return result;
+}
+
 function calculateGrade(q) {
   const weights = {
     safety: 0.25, healthcare: 0.20, happiness: 0.15,
@@ -684,6 +704,8 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
 }
 .quality-label { font-size: 13px; font-weight: 600; color: #475569; }
 .quality-score { font-size: 13px; font-weight: 700; color: #2563EB; }
+.quality-nodata { color: #94A3B8; font-style: italic; font-weight: 500; }
+.quality-nodata-note { color: #94A3B8; font-style: italic; }
 .progress-track {
   height: 6px;
   background: #E2E8F0;
@@ -871,6 +893,19 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
   margin-top: 4px;
   font-family: 'Manrope', sans-serif;
 }
+.quick-facts-extra {
+  margin-top: 18px;
+}
+.aff-link {
+  color: #2563EB;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(37, 99, 235, 0.3);
+  transition: border-color 0.15s;
+}
+.aff-link:hover {
+  border-bottom-color: #2563EB;
+}
 
 @media (max-width: 768px) {
   .verdict-bar { grid-template-columns: 1fr 1fr; }
@@ -910,7 +945,7 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
 
   <div class="verdict-bar">
     <div class="verdict-item verdict-gauge-item">
-      <div class="verdict-label">Overall Score</div>
+      <div class="verdict-label">Quality of Life Score</div>
       <Gauge percent={overallScore.percent} label={overallScore.label} size="small" />
     </div>
     <div class={`verdict-item ${visaInfo.status}`}>
@@ -927,21 +962,29 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
     </div>
   </div>
 
-  {data.quick_facts_paragraph && (
-    <div class="section">
-      <div class="quick-facts-card">
-        <p class="quick-facts-label">
-          WHAT {countryName.toUpperCase()} IS ACTUALLY LIKE
-        </p>
-        <p class="quick-facts-text">
-          <span class="quick-facts-dropcap">
-            {data.quick_facts_paragraph.charAt(0)}
-          </span>
-          {data.quick_facts_paragraph.slice(1)}
-        </p>
+  {data.quick_facts_paragraph && (() => {
+    const paras = data.quick_facts_paragraph
+      .split('\n\n')
+      .map((p: string) => p.trim())
+      .filter(Boolean);
+    const [first, ...rest] = paras;
+    return (
+      <div class="section">
+        <div class="quick-facts-card">
+          <p class="quick-facts-label">
+            WHAT {countryName.toUpperCase()} IS ACTUALLY LIKE
+          </p>
+          <p class="quick-facts-text">
+            <span class="quick-facts-dropcap">{first.charAt(0)}</span>
+            <span set:html={linkifyAffiliates(first.slice(1))} />
+          </p>
+          {rest.map((para: string) => (
+            <p class="quick-facts-text quick-facts-extra" set:html={linkifyAffiliates(para)} />
+          ))}
+        </div>
       </div>
-    </div>
-  )}
+    );
+  })()}
 
   <div class="section">
     <div class="preview-card">
@@ -1076,13 +1119,19 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
         <div class="quality-item">
           <div class="quality-row">
             <span class="quality-label">{m.label}</span>
-            <span class="quality-score">{data[m.key]}/10</span>
+            {data[m.key] != null
+              ? <span class="quality-score">{data[m.key]}/10</span>
+              : <span class="quality-score quality-nodata">No data</span>
+            }
           </div>
           <div class="progress-track">
-            <div class="progress-bar" style={`width: ${data[m.key] * 10}%`}></div>
+            <div class="progress-bar" style={`width: ${data[m.key] != null ? data[m.key] * 10 : 0}%`}></div>
           </div>
           {m.raw != null && (
             <div class="quality-raw">{m.raw} {m.unit}</div>
+          )}
+          {data[m.key] == null && (
+            <div class="quality-raw quality-nodata-note">Not available from public data sources</div>
           )}
           {data[m.key] != null && (
             <div class="quality-interpret">
@@ -1097,8 +1146,10 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
   <div class="section">
     <h2 class="section-title">Healthcare for Americans in {countryName}</h2>
     <p class="section-sub">
-      {countryName} rates {data.healthcare}/10 for healthcare quality on the UHC Service Coverage Index.
-      US health insurance typically does not cover care abroad — most expats and
+      {data.healthcare != null
+        ? `${countryName} rates ${data.healthcare}/10 for healthcare quality on the UHC Service Coverage Index.`
+        : `Healthcare data for ${countryName} is not available from standard public data sources.`}
+      {' '}US health insurance typically does not cover care abroad — most expats and
       digital nomads use international health insurance instead.
     </p>
     <div class="affiliate-mini">

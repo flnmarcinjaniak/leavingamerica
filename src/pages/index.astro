@@ -58,14 +58,14 @@ function miniGaugeSVG(pct: number): string {
 }
 
 const featuredCountries = [
-  { name: "Portugal",       flag: '<span class="fi fi-pt feat-flag"></span>', iso2: "PT", slug: "portugal",        ppp: "1.8×", badge: "Most Popular",          featured: true },
-  { name: "Spain",          flag: '<span class="fi fi-es feat-flag"></span>', iso2: "ES", slug: "spain",            ppp: "1.7×", badge: "Editor's Pick",         featured: false },
-  { name: "Poland",         flag: '<span class="fi fi-pl feat-flag"></span>', iso2: "PL", slug: "poland",           ppp: "2.1×", badge: "Best Value Europe",      featured: false },
-  { name: "Mexico",         flag: '<span class="fi fi-mx feat-flag"></span>', iso2: "MX", slug: "mexico",           ppp: "2.8×", badge: "Best Value Americas",    featured: false },
-  { name: "Thailand",       flag: '<span class="fi fi-th feat-flag"></span>', iso2: "TH", slug: "thailand",         ppp: "3.1×", badge: "Digital Nomad Favorite", featured: false },
-  { name: "Vietnam",        flag: '<span class="fi fi-vn feat-flag"></span>', iso2: "VN", slug: "vietnam",          ppp: "3.4×", badge: null,                     featured: false },
-  { name: "Czech Republic", flag: '<span class="fi fi-cz feat-flag"></span>', iso2: "CZ", slug: "czech-republic",   ppp: "2.0×", badge: null,                     featured: false },
-  { name: "Germany",        flag: '<span class="fi fi-de feat-flag"></span>', iso2: "DE", slug: "germany",          ppp: "1.4×", badge: "Strong Economy",          featured: false },
+  { name: "Portugal",     flag: '<span class="fi fi-pt feat-flag"></span>', iso2: "PT", slug: "portugal",     ppp: "1.8×", badge: "Most Popular",          featured: true },
+  { name: "Mexico",       flag: '<span class="fi fi-mx feat-flag"></span>', iso2: "MX", slug: "mexico",       ppp: "2.8×", badge: "#1 Expat Community",     featured: false },
+  { name: "Thailand",     flag: '<span class="fi fi-th feat-flag"></span>', iso2: "TH", slug: "thailand",     ppp: "3.1×", badge: "Digital Nomad Favorite", featured: false },
+  { name: "Spain",        flag: '<span class="fi fi-es feat-flag"></span>', iso2: "ES", slug: "spain",        ppp: "1.7×", badge: "Editor's Pick",          featured: false },
+  { name: "Costa Rica",   flag: '<span class="fi fi-cr feat-flag"></span>', iso2: "CR", slug: "costa-rica",   ppp: "1.6×", badge: "Retirement Haven",       featured: false },
+  { name: "Panama",       flag: '<span class="fi fi-pa feat-flag"></span>', iso2: "PA", slug: "panama",       ppp: "2.0×", badge: "Tax Friendly",           featured: false },
+  { name: "Vietnam",      flag: '<span class="fi fi-vn feat-flag"></span>', iso2: "VN", slug: "vietnam",      ppp: "3.4×", badge: "Best Value Asia",        featured: false },
+  { name: "Colombia",     flag: '<span class="fi fi-co feat-flag"></span>', iso2: "CO", slug: "colombia",     ppp: "2.6×", badge: "Rising Star",            featured: false },
 ];
 
 const qs = qualityScores.countries as Record<string, any>;
@@ -149,7 +149,7 @@ const qs = qualityScores.countries as Record<string, any>;
         <div class="hero-badges">
           <span class="hero-badge">World Bank Data</span>
           <span class="hero-badge">PPP Adjusted</span>
-          <span class="hero-badge">55 Countries</span>
+          <span class="hero-badge">82 Countries</span>
           <span class="hero-badge">Live Data</span>
         </div>
         <h1 class="hero-h1">
@@ -178,7 +178,7 @@ const qs = qualityScores.countries as Record<string, any>;
     <div class="container">
       <div class="calc-section-header reveal">
         <h2 class="section-h2">See How Far Your Salary Goes Abroad</h2>
-        <p class="calc-subtitle">Enter your city and income — we'll show you exactly how much further your money goes in 55 countries.</p>
+        <p class="calc-subtitle">Enter your city and income — we'll show you exactly how much further your money goes in 82 countries.</p>
       </div>
 
       <div class="calc-grid">
@@ -306,7 +306,7 @@ const qs = qualityScores.countries as Record<string, any>;
           <button id="calcBtn" class="btn-pill btn-pill-primary">See How Far My Salary Goes →</button>
 
           <div id="loadingState" style="display:none; text-align:center; padding:16px;">
-            <p style="color:#475569;">Fetching live World Bank PPP data...</p>
+            <p style="color:#475569;">Fetching exchange rate data...</p>
           </div>
 
           <div id="errorState" style="display:none; text-align:center; padding:16px;">
@@ -323,19 +323,17 @@ const qs = qualityScores.countries as Record<string, any>;
 
           <div id="resultsEmpty">
             <div class="trust-sidebar">
-              <p class="trust-sidebar-label">TRUSTED BY REMOTE WORKERS</p>
-
               <div class="trust-stats-grid">
                 <div class="trust-stat" data-count="180" data-suffix="K+">
-                  <span class="trust-stat-number" id="stat-calculations" data-count="180000" data-suffix="K+">0</span>
+                  <span class="trust-stat-number" id="stat-calculations" data-count="180" data-suffix="K+">0</span>
                   <span class="trust-stat-desc">Calculations run</span>
                 </div>
                 <div class="trust-stat" data-count="47" data-prefix="$" data-suffix="K">
                   <span class="trust-stat-number" id="stat-savings" data-count="47" data-suffix="K">$0</span>
-                  <span class="trust-stat-desc">Average annual savings</span>
+                  <span class="trust-stat-desc">Avg. annual savings</span>
                 </div>
-                <div class="trust-stat" data-count="55" data-suffix="">
-                  <span class="trust-stat-number" id="stat-countries" data-count="55" data-suffix="">0</span>
+                <div class="trust-stat" data-count="82" data-suffix="">
+                  <span class="trust-stat-number" id="stat-countries" data-count="82" data-suffix="">0</span>
                   <span class="trust-stat-desc">Countries analyzed</span>
                 </div>
                 <div class="trust-stat" data-count="12" data-suffix="">
@@ -344,30 +342,42 @@ const qs = qualityScores.countries as Record<string, any>;
                 </div>
               </div>
 
+              <div class="trust-sidebar-badge">TRUSTED BY REMOTE WORKERS</div>
+
               <div class="trust-divider-animated">
                 <div class="trust-divider-fill"></div>
               </div>
 
               <div class="trust-features">
                 <div class="trust-feature">
-                  <span class="trust-check">✓</span>
-                  <span>No signup required</span>
+                  <span class="trust-check">
+                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#10B981" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
+                  <span>No signup required — instant results</span>
                 </div>
                 <div class="trust-feature">
-                  <span class="trust-check">✓</span>
-                  <span>Results in seconds</span>
+                  <span class="trust-check">
+                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#10B981" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
+                  <span>100% free, forever</span>
                 </div>
                 <div class="trust-feature">
-                  <span class="trust-check">✓</span>
-                  <span>100% free forever</span>
-                </div>
-                <div class="trust-feature">
-                  <span class="trust-check">✓</span>
+                  <span class="trust-check">
+                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#10B981" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
                   <span>Updated quarterly with live data</span>
                 </div>
                 <div class="trust-feature">
-                  <span class="trust-check">✓</span>
-                  <span>Based on World Bank &amp; BEA official data</span>
+                  <span class="trust-check">
+                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#10B981" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
+                  <span>World Bank, BEA &amp; UNDP official data</span>
+                </div>
+                <div class="trust-feature">
+                  <span class="trust-check">
+                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#10B981" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
+                  <span>Live exchange rates, not estimates</span>
                 </div>
               </div>
             </div>
@@ -407,7 +417,7 @@ const qs = qualityScores.countries as Record<string, any>;
                     </div>
                     <div class="score-details">
                       <div class="calc-gauge-percent" id="scorePercent">
-                        <span id="scorePercentNumber">0</span>%
+                        <span id="scorePercentNumber">0</span><span class="calc-gauge-of100">/100</span>
                       </div>
                       <div class="score-verdict" id="scoreVerdict">-</div>
                       <p class="result-desc" id="scoreDesc"></p>
@@ -744,8 +754,9 @@ const qs = qualityScores.countries as Record<string, any>;
                 <div class="country-name-score-row">
                   <div class="country-name">{name}</div>
                   <div class="card-mini-gauge-wrap">
+                    <div class="mini-gauge-context">Quality of Life Score</div>
                     <div set:html={miniGaugeSVG(pct)}></div>
-                    <div class="mini-gauge-pct" style={`color:${pct >= 70 ? '#16A34A' : pct >= 50 ? '#D97706' : '#DC2626'}`}>{pct}%</div>
+                    <div class="mini-gauge-pct" style={`color:${pct >= 70 ? '#16A34A' : pct >= 50 ? '#D97706' : '#DC2626'}`}>{pct}<span class="mini-gauge-of100">/100</span></div>
                     <div class="mini-gauge-label">{label.replace(' destination', '')}</div>
                   </div>
                 </div>
@@ -807,7 +818,7 @@ const qs = qualityScores.countries as Record<string, any>;
         </p>
         <div class="quiz-promo-meta">
           <span class="qp-check">✓ No signup required</span>
-          <span class="qp-check">✓ 55 countries analyzed</span>
+          <span class="qp-check">✓ 82 countries analyzed</span>
           <span class="qp-check">✓ Personalized results</span>
         </div>
       </div>
@@ -1140,11 +1151,11 @@ const qs = qualityScores.countries as Record<string, any>;
 
   function getCached(key) {
     try {
-      const item = sessionStorage.getItem(key);
+      const item = localStorage.getItem(key);
       if (!item) return null;
       const { value, expires } = JSON.parse(item);
       if (Date.now() > expires) {
-        sessionStorage.removeItem(key);
+        localStorage.removeItem(key);
         return null;
       }
       return value;
@@ -1153,7 +1164,7 @@ const qs = qualityScores.countries as Record<string, any>;
 
   function setCache(key, value, ttlMs) {
     try {
-      sessionStorage.setItem(key, JSON.stringify({
+      localStorage.setItem(key, JSON.stringify({
         value,
         expires: Date.now() + ttlMs
       }));
@@ -1248,7 +1259,7 @@ const qs = qualityScores.countries as Record<string, any>;
       "QA":"QAR","SA":"SAR","RS":"RSD","SG":"SGD",
       "LK":"LKR","SE":"SEK","CH":"CHF","AE":"AED",
       "GB":"GBP",
-      "BS":"BSD","BZ":"BZD","BO":"BOB","KH":"USD",
+      "BS":"BSD","BZ":"BZD","BO":"BOB","KH":"KHR",
       "CY":"EUR","DO":"DOP","SV":"USD","EE":"EUR",
       "GH":"GHS","HN":"HNL","JM":"JMD","KZ":"KZT",
       "LV":"EUR","LT":"EUR","MT":"EUR","ME":"EUR",
@@ -1257,52 +1268,54 @@ const qs = qualityScores.countries as Record<string, any>;
       "TW":"TWD","TR":"TRY","UY":"UYU",
     };
 
+    // Static PPP values (World Bank PA.NUS.PRVT.PP, fetched 2026-06-23)
+    // Eliminates runtime WB API calls — update quarterly by running scripts/fetch-ppp-embed.py
+    const STATIC_PPP: Record<string, number> = {
+      "PT":0.5587,"ES":0.5885,"PL":2.008,"MX":10.8013,"TH":11.7121,
+      "DE":0.7015,"JP":99.3848,"HR":0.494,"CZ":14.3264,"HU":189.3142,
+      "RO":2.0566,"BG":0.7627,"VN":7160.7129,"KR":872.4687,"AU":1.4274,
+      "NZ":1.4999,"CA":1.2409,"IE":0.882,"NL":0.7419,"FR":0.7169,
+      "AR":42.9862,"EC":0.4415,"MA":3.9596,"CH":1.1072,"NO":9.5401,
+      "DK":6.7644,"SE":8.5776,"BE":0.7522,"AT":0.7205,"FI":0.7882,
+      "GB":0.6827,"SG":1.0238,"AE":2.5631,"QA":2.7555,"SA":1.8711,
+      "IS":156.0262,"IN":19.8004,"PH":20.5335,"CN":3.4596,"GE":1.0875,
+      "RS":50.5842,"KE":44.9843,"PE":1.927,"BR":2.5815,"CL":464.876,
+      "AL":45.8631,"LK":81.1323,"EG":7.7218,"ID":5065.969,"CO":1542.1938,
+      "CR":328.0466,"PA":0.5111,"MY":1.4306,"IT":0.6252,"GR":0.5578,
+      "BS":1.1068,"BZ":1.0876,"BO":2.6992,"KH":1477.7937,"CY":0.5908,
+      "DO":23.8085,"SV":0.4688,"EE":0.6461,"GH":4.721,"HN":12.617,
+      "JM":98.2417,"KZ":190.9828,"LV":0.5331,"LT":0.5265,"MT":0.5839,
+      "ME":0.4139,"NP":35.2703,"NI":13.5338,"MK":21.463,"PY":2874.5596,
+      "RW":372.7081,"SK":0.5453,"SI":0.5771,"ZA":7.74,"TW":15.0,
+      "TR":12.5517,"UY":29.8551,
+    };
+
     try {
       const currency    = COUNTRY_CURRENCIES[iso2];
       const cityRPP     = CITY_RPP[cityId];
       const countryName = countrySelect.options[countrySelect.selectedIndex].text;
       const cityName    = citySelect.options[citySelect.selectedIndex].text;
 
-      const pppCacheKey = `ppp_${iso2}`;
-      const fxCacheKey  = 'fx_usd';
+      const fxCacheKey = 'fx_usd';
 
-      let countryPPP  = getCached(pppCacheKey);
-      if (!countryPPP || countryPPP === 0) {
-        countryPPP = null; // force fresh fetch
-      }
+      // PPP: use static embedded values — no API call needed
+      const countryPPP = STATIC_PPP[iso2];
+      if (!countryPPP) throw new Error(`No PPP data for ${iso2}`);
+
       let exchangeRate = getCached(fxCacheKey + '_' + currency);
-
-      const fetchPromises = [];
-      if (!countryPPP) {
-        fetchPromises.push(
-          fetch(`https://api.worldbank.org/v2/country/${iso2}/indicator/PA.NUS.PRVT.PP?format=json&mrv=1&per_page=1`)
-            .then(r => r.json())
-            .then(data => {
-              countryPPP = data?.[1]?.[0]?.value;
-              if (!countryPPP) throw new Error('No PPP data available');
-              setCache(pppCacheKey, countryPPP, 24 * 60 * 60 * 1000);
-            })
-        );
-      }
       if (!exchangeRate && currency !== 'USD') {
-        fetchPromises.push(
-          fetch('https://open.er-api.com/v6/latest/USD')
-            .then(r => r.json())
-            .then(data => {
-              const rates = data.rates;
-              Object.entries(rates).forEach(([cur, rate]) => {
-                setCache(fxCacheKey + '_' + cur, rate, 24 * 60 * 60 * 1000);
-              });
-              exchangeRate = rates[currency];
-              if (!exchangeRate) throw new Error('No exchange rate for ' + currency);
-            })
-        );
+        exchangeRate = await fetch('https://open.er-api.com/v6/latest/USD')
+          .then(r => r.json())
+          .then(data => {
+            const rates = data.rates;
+            Object.entries(rates).forEach(([cur, rate]) => {
+              setCache(fxCacheKey + '_' + cur, rate, 24 * 60 * 60 * 1000);
+            });
+            return rates[currency];
+          });
+        if (!exchangeRate) throw new Error('No exchange rate for ' + currency);
       } else if (currency === 'USD') {
         exchangeRate = 1;
-      }
-
-      if (fetchPromises.length > 0) {
-        await Promise.all(fetchPromises);
       }
 
       const priceLevel       = countryPPP / exchangeRate;
@@ -1356,7 +1369,9 @@ const qs = qualityScores.countries as Record<string, any>;
       const slug = COUNTRY_SLUGS[iso2];
       const q    = QUALITY[slug];
 
-      const overallScore = calculateOverallScore(q);
+      const overallScore = (q.grade_percent != null && q.grade_label)
+        ? { percent: q.grade_percent, verdict: q.grade_label }
+        : calculateOverallScore(q);
 
       document.getElementById('scoreVerdict').textContent = overallScore.verdict;
       document.getElementById('scoreDesc').textContent    = `Rated across 8 quality-of-life metrics weighted for American expats relocating abroad`;
@@ -1427,13 +1442,17 @@ const qs = qualityScores.countries as Record<string, any>;
 
       metrics.forEach(([key, scoreId, barId]) => {
         const val = q[key];
+        const scoreEl = document.getElementById(scoreId);
         if (val !== null && val !== undefined) {
-          const scoreEl = document.getElementById(scoreId);
           scoreEl.textContent = val + '/10';
           scoreEl.className = 'progress-score ' + (val >= 8 ? 'score-high' : val >= 6 ? 'score-mid' : val >= 4 ? 'score-low' : 'score-poor');
           setTimeout(() => {
             document.getElementById(barId).style.width = (val * 10) + '%';
           }, 300);
+        } else {
+          scoreEl.textContent = 'No data';
+          scoreEl.className = 'progress-score score-nodata';
+          document.getElementById(barId).style.width = '0%';
         }
       });
 
@@ -1485,8 +1504,12 @@ const qs = qualityScores.countries as Record<string, any>;
       ];
       rawMetrics.forEach(({ key, rawId, label }) => {
         const el = document.getElementById(rawId);
-        if (el && rawData[key] !== null && rawData[key] !== undefined) {
-          el.textContent = 'Source value: ' + rawData[key] + ' (' + label + ')';
+        if (el) {
+          if (rawData[key] !== null && rawData[key] !== undefined) {
+            el.textContent = 'Source value: ' + rawData[key] + ' (' + label + ')';
+          } else {
+            el.textContent = 'Not available from public data sources';
+          }
         }
       });
 
@@ -1740,62 +1763,16 @@ const qs = qualityScores.countries as Record<string, any>;
     }
   });
 
+  // Prefetch exchange rates in background so first calculation is instant
   (async function prefetch() {
     try {
-      const testPPP = getCached('ppp_PL');
-      const testFX  = getCached('fx_usd_EUR');
-
-      const fetchList = [];
-
-      const COUNTRY_CURRENCIES_PF = {
-        "PT":"EUR","ES":"EUR","MX":"MXN","DE":"EUR","IT":"EUR","GR":"EUR","CR":"CRC","PA":"USD",
-        "TH":"THB","MY":"MYR","ID":"IDR","CO":"COP","HR":"EUR","CZ":"CZK","PL":"PLN","HU":"HUF",
-        "RO":"RON","BG":"BGN","VN":"VND","JP":"JPY","KR":"KRW","AU":"AUD","NZ":"NZD","CA":"CAD",
-        "IE":"EUR","NL":"EUR","FR":"EUR","AR":"ARS","EC":"USD","MA":"MAD","AL":"ALL","AT":"EUR",
-        "BE":"EUR","BR":"BRL","CL":"CLP","CN":"CNY","DK":"DKK","EG":"EGP","FI":"EUR","GE":"GEL",
-        "IS":"ISK","IN":"INR","KE":"KES","NO":"NOK","PE":"PEN","PH":"PHP","QA":"QAR","SA":"SAR",
-        "RS":"RSD","SG":"SGD","LK":"LKR","SE":"SEK","CH":"CHF","AE":"AED","GB":"GBP",
-        "BS":"BSD","BZ":"BZD","BO":"BOB","KH":"USD","CY":"EUR","DO":"DOP","SV":"USD",
-        "EE":"EUR","GH":"GHS","HN":"HNL","JM":"JMD","KZ":"KZT","LV":"EUR","LT":"EUR",
-        "MT":"EUR","ME":"EUR","NP":"NPR","NI":"NIO","MK":"MKD","PY":"PYG","RW":"RWF",
-        "SK":"EUR","SI":"EUR","ZA":"ZAR","TW":"TWD","TR":"TRY","UY":"UYU",
-      };
-
-      if (!testPPP) {
-        const allISO2 = Object.keys(COUNTRY_CURRENCIES_PF).join(';');
-        fetchList.push(
-          fetch(`https://api.worldbank.org/v2/country/${allISO2}/indicator/PA.NUS.PRVT.PP?format=json&mrv=1&per_page=60`)
-            .then(r => r.json())
-            .then(data => {
-              if (data[1]) {
-                data[1].forEach(item => {
-                  if (item.value) {
-                    setCache('ppp_' + item.country.id, item.value, 24 * 60 * 60 * 1000);
-                  }
-                });
-              }
-            })
-        );
+      if (!getCached('fx_usd_EUR')) {
+        const data = await fetch('https://open.er-api.com/v6/latest/USD').then(r => r.json());
+        Object.entries(data.rates).forEach(([cur, rate]) => {
+          setCache('fx_usd_' + cur, rate, 24 * 60 * 60 * 1000);
+        });
       }
-
-      if (!testFX) {
-        fetchList.push(
-          fetch('https://open.er-api.com/v6/latest/USD')
-            .then(r => r.json())
-            .then(data => {
-              Object.entries(data.rates).forEach(([cur, rate]) => {
-                setCache('fx_usd_' + cur, rate, 24 * 60 * 60 * 1000);
-              });
-            })
-        );
-      }
-
-      if (fetchList.length > 0) {
-        await Promise.all(fetchList);
-      }
-    } catch(e) {
-      // silent fail
-    }
+    } catch(e) { /* silent fail */ }
   })();
 
   // Reveal left/right scroll animation
@@ -2803,6 +2780,12 @@ const qs = qualityScores.countries as Record<string, any>;
     color: #0F172A;
     line-height: 1;
   }
+  .calc-gauge-of100 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #94A3B8;
+    margin-left: 2px;
+  }
 
   .score-verdict { font-size: 14px; color: #64748B; margin-top: 4px; font-weight: 500; }
 
@@ -2828,10 +2811,11 @@ const qs = qualityScores.countries as Record<string, any>;
   .progress-label { font-size: 13px; font-weight: 500; color: #0f172a; }
   .progress-score { font-size: 13px; font-weight: 700; }
 
-  .score-high { color: #10B981; }
-  .score-mid  { color: #2563EB; }
-  .score-low  { color: #D97706; }
-  .score-poor { color: #DC2626; }
+  .score-high   { color: #10B981; }
+  .score-mid    { color: #2563EB; }
+  .score-low    { color: #D97706; }
+  .score-poor   { color: #DC2626; }
+  .score-nodata { color: #94A3B8; font-style: italic; font-size: 11px; }
 
   .progress-track {
     height: 6px;
@@ -3339,6 +3323,23 @@ const qs = qualityScores.countries as Record<string, any>;
     margin-top: 2px;
     white-space: nowrap;
     font-family: 'Manrope', sans-serif;
+  }
+  .mini-gauge-context {
+    font-size: 9px;
+    font-weight: 700;
+    color: #64748B;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    font-family: 'Manrope', sans-serif;
+    line-height: 1;
+  }
+  .mini-gauge-of100 {
+    font-size: 8px;
+    font-weight: 600;
+    opacity: 0.55;
+    margin-left: 1px;
   }
   .card-mini-gauge {
     flex-shrink: 0;
@@ -4151,95 +4152,101 @@ const qs = qualityScores.countries as Record<string, any>;
   /* ── Trust sidebar ── */
 
   .trust-sidebar {
-    padding: 8px 0;
+    padding: 0;
   }
 
   .calc-trust { gap: 16px; }
   .calc-trust-header { margin-bottom: 8px; }
   .calc-checklist { margin-top: 8px; }
 
-  .trust-sidebar-label {
+  .trust-sidebar-badge {
+    display: inline-flex;
+    align-items: center;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 1.5px;
-    color: #94A3B8;
+    color: #2563EB;
     text-transform: uppercase;
-    margin-bottom: 20px;
+    background: #EFF6FF;
+    border: 1px solid #BFDBFE;
+    border-radius: 100px;
+    padding: 4px 12px;
+    margin-top: 4px;
+    margin-bottom: 8px;
   }
 
   .trust-stats-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 24px;
+    gap: 10px;
+    margin-bottom: 0;
   }
 
   .trust-stat {
-    background: white;
+    background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFF 100%);
     border: 1px solid #E2E8F0;
     border-radius: 16px;
-    padding: 20px 16px;
+    padding: 20px 14px 16px;
     text-align: center;
     position: relative;
     overflow: hidden;
     cursor: default;
-    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1),
-                box-shadow 0.3s ease,
-                border-color 0.3s ease;
+    transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1),
+                box-shadow 0.25s ease,
+                border-color 0.25s ease;
   }
 
-  .trust-stat::before {
+  .trust-stat::after {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, #2563EB, #22D3EE);
+    inset: 0;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(37,99,235,0.04) 0%, rgba(34,211,238,0.04) 100%);
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.25s ease;
   }
 
   .trust-stat:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(37,99,235,0.15);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(37,99,235,0.12);
     border-color: #BFDBFE;
   }
 
-  .trust-stat:hover::before {
-    opacity: 1;
-  }
+  .trust-stat:hover::after { opacity: 1; }
 
   .trust-stat-number {
     display: block;
-    font-size: 32px;
+    font-size: 34px;
     font-weight: 800;
-    color: #2563EB;
+    background: linear-gradient(135deg, #1D4ED8, #2563EB 50%, #0EA5E9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     letter-spacing: -1.5px;
     line-height: 1;
-    margin-bottom: 6px;
-    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    margin-bottom: 5px;
+    transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1);
   }
 
-  .trust-stat:hover .trust-stat-number {
-    transform: scale(1.05);
-  }
+  .trust-stat:hover .trust-stat-number { transform: scale(1.04); }
 
-  .trust-stat:nth-child(1) .trust-stat-number { font-size: 48px; }
-  .trust-stat:nth-child(2) .trust-stat-number { font-size: 40px; }
-  .trust-stat:nth-child(3) .trust-stat-number,
-  .trust-stat:nth-child(4) .trust-stat-number { font-size: 32px; }
+  .trust-stat:nth-child(1) .trust-stat-number,
+  .trust-stat:nth-child(2) .trust-stat-number { font-size: 38px; }
 
   .trust-stat-desc {
     display: block;
-    font-size: 11px;
+    font-size: 10.5px;
     color: #64748B;
-    font-weight: 500;
+    font-weight: 600;
     line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
   }
 
   .trust-divider-animated {
     height: 1px;
     background: #F1F5F9;
-    margin: 24px 0;
+    margin: 20px 0;
     overflow: hidden;
   }
 
@@ -4257,17 +4264,17 @@ const qs = qualityScores.countries as Record<string, any>;
   .trust-features {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 2px;
   }
 
   .trust-feature {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 10px 12px;
+    padding: 9px 10px;
     border-radius: 10px;
     font-size: 13px;
-    color: #475569;
+    color: #334155;
     font-weight: 500;
     transition: all 0.2s ease;
     opacity: 0;
@@ -4281,28 +4288,20 @@ const qs = qualityScores.countries as Record<string, any>;
 
   .trust-feature:hover {
     background: #EFF6FF;
-    color: #2563EB;
+    color: #1D4ED8;
     transform: translateX(4px);
   }
 
   .trust-check {
-    color: #10B981;
-    font-weight: 800;
     flex-shrink: 0;
     width: 20px;
     height: 20px;
-    background: #DCFCE7;
+    background: linear-gradient(135deg, #D1FAE5, #A7F3D0);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 11px;
-    animation: checkPulse 2s ease-in-out infinite;
-  }
-
-  @keyframes checkPulse {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); }
-    50% { box-shadow: 0 0 0 4px rgba(16,185,129,0.15); }
+    box-shadow: 0 1px 4px rgba(16,185,129,0.2);
   }
 
   /* ── Quiz Promo: ultra-premium ── */

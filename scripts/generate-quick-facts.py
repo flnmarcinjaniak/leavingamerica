@@ -1,5 +1,15 @@
+"""
+Generate multi-paragraph "What [Country] is actually like" sections
+for all 82 country pages via Claude API.
+
+Usage:
+  python scripts/generate-quick-facts.py           # skip countries already extended
+  python scripts/generate-quick-facts.py --force   # regenerate all
+  python scripts/generate-quick-facts.py portugal  # regenerate one country by slug
+"""
 import json
 import os
+import sys
 import time
 import requests
 
@@ -7,23 +17,15 @@ DATA_PATH = "src/data/quality-scores.json"
 
 
 def load_api_key():
-    """Read ANTHROPIC_API_KEY from .env"""
-    env_path = os.path.join(
-        os.path.dirname(__file__), '..', '.env'
-    )
+    env_path = os.path.join(os.path.dirname(__file__), '..', '.env')
     if not os.path.exists(env_path):
-        raise FileNotFoundError(
-            ".env file not found. Add "
-            "ANTHROPIC_API_KEY=sk-ant-... to it."
-        )
+        raise FileNotFoundError(".env not found. Add ANTHROPIC_API_KEY=sk-ant-... to it.")
     with open(env_path, 'r', encoding='utf-8') as f:
         for line in f:
             line = line.strip()
             if line.startswith('ANTHROPIC_API_KEY='):
                 return line.split('=', 1)[1].strip()
-    raise ValueError(
-        "ANTHROPIC_API_KEY not found in .env"
-    )
+    raise ValueError("ANTHROPIC_API_KEY not found in .env")
 
 
 API_KEY = load_api_key()
@@ -31,205 +33,224 @@ API_KEY = load_api_key()
 NAMES = {
     'portugal':'Portugal','spain':'Spain','poland':'Poland',
     'mexico':'Mexico','thailand':'Thailand','germany':'Germany',
-    'japan':'Japan','croatia':'Croatia',
-    'czech-republic':'Czech Republic','hungary':'Hungary',
-    'romania':'Romania','bulgaria':'Bulgaria','vietnam':'Vietnam',
-    'south-korea':'South Korea','australia':'Australia',
+    'japan':'Japan','croatia':'Croatia','czech-republic':'Czech Republic',
+    'hungary':'Hungary','romania':'Romania','bulgaria':'Bulgaria',
+    'vietnam':'Vietnam','south-korea':'South Korea','australia':'Australia',
     'new-zealand':'New Zealand','canada':'Canada','ireland':'Ireland',
-    'netherlands':'Netherlands','france':'France',
-    'argentina':'Argentina','ecuador':'Ecuador','morocco':'Morocco',
-    'switzerland':'Switzerland','norway':'Norway','denmark':'Denmark',
-    'sweden':'Sweden','belgium':'Belgium','austria':'Austria',
-    'finland':'Finland','united-kingdom':'United Kingdom',
-    'singapore':'Singapore','united-arab-emirates':'UAE',
-    'qatar':'Qatar','saudi-arabia':'Saudi Arabia','iceland':'Iceland',
-    'india':'India','philippines':'Philippines','china':'China',
-    'georgia':'Georgia','serbia':'Serbia','kenya':'Kenya',
-    'peru':'Peru','brazil':'Brazil','chile':'Chile',
-    'albania':'Albania','sri-lanka':'Sri Lanka','egypt':'Egypt',
-    'indonesia':'Indonesia','colombia':'Colombia',
-    'costa-rica':'Costa Rica','panama':'Panama',
-    'malaysia':'Malaysia','italy':'Italy','greece':'Greece',
-    'bahamas':'Bahamas','belize':'Belize','bolivia':'Bolivia',
-    'cambodia':'Cambodia','cyprus':'Cyprus',
-    'dominican-republic':'Dominican Republic',
-    'el-salvador':'El Salvador','estonia':'Estonia',
-    'ghana':'Ghana','honduras':'Honduras','jamaica':'Jamaica',
-    'kazakhstan':'Kazakhstan','latvia':'Latvia',
-    'lithuania':'Lithuania','malta':'Malta',
-    'montenegro':'Montenegro','nepal':'Nepal',
-    'nicaragua':'Nicaragua','north-macedonia':'North Macedonia',
-    'paraguay':'Paraguay','rwanda':'Rwanda',
-    'slovakia':'Slovakia','slovenia':'Slovenia',
-    'south-africa':'South Africa','taiwan':'Taiwan',
-    'turkey':'Turkey','uruguay':'Uruguay',
+    'netherlands':'Netherlands','france':'France','argentina':'Argentina',
+    'ecuador':'Ecuador','morocco':'Morocco','switzerland':'Switzerland',
+    'norway':'Norway','denmark':'Denmark','sweden':'Sweden',
+    'belgium':'Belgium','austria':'Austria','finland':'Finland',
+    'united-kingdom':'United Kingdom','singapore':'Singapore',
+    'united-arab-emirates':'UAE','qatar':'Qatar',
+    'saudi-arabia':'Saudi Arabia','iceland':'Iceland','india':'India',
+    'philippines':'Philippines','china':'China','georgia':'Georgia',
+    'serbia':'Serbia','kenya':'Kenya','peru':'Peru','brazil':'Brazil',
+    'chile':'Chile','albania':'Albania','sri-lanka':'Sri Lanka',
+    'egypt':'Egypt','indonesia':'Indonesia','colombia':'Colombia',
+    'costa-rica':'Costa Rica','panama':'Panama','malaysia':'Malaysia',
+    'italy':'Italy','greece':'Greece','bahamas':'Bahamas','belize':'Belize',
+    'bolivia':'Bolivia','cambodia':'Cambodia','cyprus':'Cyprus',
+    'dominican-republic':'Dominican Republic','el-salvador':'El Salvador',
+    'estonia':'Estonia','ghana':'Ghana','honduras':'Honduras',
+    'jamaica':'Jamaica','kazakhstan':'Kazakhstan','latvia':'Latvia',
+    'lithuania':'Lithuania','malta':'Malta','montenegro':'Montenegro',
+    'nepal':'Nepal','nicaragua':'Nicaragua',
+    'north-macedonia':'North Macedonia','paraguay':'Paraguay',
+    'rwanda':'Rwanda','slovakia':'Slovakia','slovenia':'Slovenia',
+    'south-africa':'South Africa','taiwan':'Taiwan','turkey':'Turkey',
+    'uruguay':'Uruguay',
 }
 
-SYSTEM_PROMPT = """You are an experienced \
-travel and relocation writer for a website \
-helping Americans considering a move abroad. \
-You write the way a human editor at a \
-publication like Conde Nast Traveler or \
-Bloomberg would — varied sentence structure, \
-genuine voice, never templated.
+SYSTEM_PROMPT = """You are a veteran expat journalist who has lived in 30+ countries \
+and writes an insider column for Americans who are seriously evaluating relocation \
+abroad. Your job is to write the "What [Country] is actually like" section \
+for a country profile page.
 
-CRITICAL RULES:
+AUDIENCE: Americans who have done their research, seen the data, and want to know \
+what daily life actually feels like — not a tourism pitch, not Wikipedia.
 
-1. Use ONLY the facts provided. Never invent \
-   additional facts, statistics, or claims not \
-   present in the input data.
+VOICE: Write like a trusted friend who spent 6 months there and knows the real deal. \
+Specific. Occasionally opinionated. Honest about trade-offs. Never enthusiastic for \
+its own sake. The tone sits between a good long-form travel essay and practical \
+relocation advice.
 
-2. NEVER use an em dash (—), and never use a \
-   hyphen or double hyphen as a sentence pause \
-   either (for example: "Portugal, despite its \
-   size -- has..." or "Portugal - despite its \
-   size - has..."). If you need a pause or aside, \
-   restructure the sentence or use a comma, a \
-   period, or the word "and" or "but" instead.
+STRUCTURE: Write exactly 4 paragraphs separated by a blank line. No headers. \
+No bullet points. No numbered lists. Prose only.
 
-3. NEVER use these AI-cliche phrases or anything \
-   similar in spirit: "we believe", "unlock", \
-   "journey", "navigate", "seamlessly", "in \
-   today's world", "when it comes to", "boasts", \
-   "nestled", "rich history", "vibrant culture", \
-   "tapestry", "embark", "delve", "dive into", \
-   "in conclusion", "it's worth noting", \
-   "ultimately".
+Paragraph 1 - HOOK: Open with something specific, counterintuitive, or surprising \
+about this country that most Americans don't know. Not a brochure opener. \
+Not a geography fact unless it's genuinely the most interesting thing. \
+Make the reader feel they just learned something real.
 
-4. OPENING SENTENCE VARIETY IS MANDATORY. You \
-   will be writing many of these paragraphs in \
-   one batch. To avoid repetition across the \
-   batch, vary your opening strategy. Do NOT \
-   default to "[Capital city] + verb" as your \
-   opening more than occasionally. Rotate \
-   through these opening strategies and pick \
-   whichever fits the country's facts best, \
-   making sure no single strategy dominates:
-   - Open with population or scale ("With just \
-     over X million people...")
-   - Open with a geographic fact (borders, \
-     coastline, landlocked status)
-   - Open with the country's institutional \
-     standing (EU/NATO/Schengen membership, or \
-     notable absence of it)
-   - Open with a contrast or honest framing \
-     (what makes this country different from \
-     its neighbors, or a tension worth knowing)
-   - Open with the capital city ONLY if it's \
-     genuinely the most interesting fact \
-     available, not as a default reflex
-   - Open with language or currency if that's \
-     the most distinctive fact
-   - Open with income inequality or economic \
-     character if that's notably high or low
+Paragraph 2 - PRACTICAL REALITY: What costs actually look like (use the budget data \
+provided), how healthcare access works in practice, what bureaucracy is like for \
+foreign residents. This is the paragraph people bookmark. Include concrete numbers.
 
-5. Write 2-3 sentences, 50-80 words total. \
-   Conversational but informative tone, like a \
-   knowledgeable friend explaining what a \
-   country is actually like, not a brochure.
+Paragraph 3 - THE AMERICAN PERSPECTIVE: What Americans particularly notice when \
+they move here. What surprises them (good and bad). What takes adjustment. \
+Language realities. Cultural friction points. What makes them stay.
 
-6. Do not address the reader directly with \
-   "you" more than once if at all. Write more \
-   like third-person reporting.
+Paragraph 4 - FIRST STEPS: Practical things to do in the first weeks. One and only \
+one natural mention of a product or service that solves a real problem Americans \
+face here. Choose the single most relevant option:
+  - "Wise" if the biggest friction is moving money, paying bills, or the local \
+    banking setup is slow or complex for foreigners. Mention naturally, like a \
+    recommendation from a friend: "Most Americans open a Wise account before \
+    they leave - it works at local ATMs while you wait for a bank account."
+  - "NordVPN" if streaming access loss or US banking app geo-blocking is the \
+    most common practical complaint. Mention as a tool people quietly rely on.
+  - "SafetyWing" if healthcare quality is 7 or below, or the country is in \
+    SE Asia, Africa, or Latin America where US health insurance typically does \
+    not apply. Position as the standard starter option: "SafetyWing is what most \
+    American nomads use here for the first year - around $45/month while you \
+    sort out local options."
+  - "Airalo" if SIM card access is the most immediate friction point on arrival \
+    (especially SE Asia, countries with complicated prepaid SIM rules). \
+    Position as the solution for the first days: "Pick up an Airalo eSIM \
+    before boarding - it activates on the plane and skips the airport SIM hunt."
+Do NOT mention more than one product. Do NOT use promotional language. \
+Write the mention the way you would text it to a friend.
 
-7. Only mention EU/NATO/Schengen/OECD/G7/G20 \
-   membership if it's actually true for this \
-   country and relevant to context. Don't force \
-   it in if it doesn't fit naturally.
+LENGTH: 500-700 words total across the 4 paragraphs.
 
-8. SEO AND READER INTENT: Americans reading this \
-   are evaluating whether to relocate. Where the \
-   facts genuinely support it, lean into the \
-   specific, concrete detail that helps someone \
-   picture daily life there (currency, language \
-   barrier, distinct economic character) rather \
-   than generic travel-brochure language. Specificity \
-   serves both the reader's decision-making and \
-   search relevance, vague enthusiasm serves \
-   neither.
+SEO - naturally include (do not force): "Americans moving to [Country]", \
+"living in [Country]", "[Country] expat", and at least one practical \
+number (rent estimate, meal cost, budget figure).
 
-9. Maintain honesty about trade-offs when the \
-   data supports it (e.g. high Gini coefficient, \
-   lack of certain memberships) rather than \
-   defaulting to uniformly positive framing. \
-   This builds the kind of trust that turns \
-   readers into return visitors, which matters \
-   more for this site's goals than sounding like \
-   a tourism ad.
-"""
+STRICTLY FORBIDDEN - these phrases trigger rejection:
+"rich history", "vibrant culture", "nestled", "boasts", "tapestry", \
+"seamlessly", "embark", "delve", "dive into", "it's worth noting", \
+"in conclusion", "ultimately", "overall", "additionally", \
+"when it comes to", "unlock", "journey", "navigate", "don't miss", \
+"hidden gem". Never use em dashes. Never start a sentence with "This".
+
+DATA RULE: You may use your general knowledge for cultural context and \
+qualitative descriptions. For any numerical claims (costs, scores, rankings, \
+percentages), use only the data provided in the input - never invent statistics.
+
+OUTPUT FORMAT: Output only the 4 paragraphs of prose. No preamble. No title. \
+No quotation marks. No markdown. Paragraphs separated by a single blank line."""
 
 
-def build_user_prompt(country_name, data):
-    facts = []
-    if data.get('population'):
-        facts.append(
-            f"Population: {data['population']:,}"
-        )
-    if data.get('area_km2'):
-        facts.append(
-            f"Area: {data['area_km2']:,} km2"
-        )
+def score_label(val):
+    if val is None:
+        return "N/A"
+    if val >= 9:
+        return f"{val}/10 (Excellent)"
+    if val >= 7:
+        return f"{val}/10 (Good)"
+    if val >= 5:
+        return f"{val}/10 (Moderate)"
+    return f"{val}/10 (Below average)"
+
+
+def build_user_prompt(country_name, slug, data):
+    lines = [f"COUNTRY: {country_name}\n"]
+
+    geo = []
     if data.get('capital'):
-        facts.append(f"Capital: {data['capital']}")
+        geo.append(f"Capital: {data['capital']}")
+    if data.get('population'):
+        geo.append(f"Population: {data['population']:,}")
+    if data.get('area_km2'):
+        geo.append(f"Area: {data['area_km2']:,} km2")
     if data.get('languages'):
-        facts.append(
-            f"Official/recognized languages: "
-            f"{', '.join(data['languages'])}"
-        )
+        geo.append(f"Language(s): {', '.join(data['languages'])}")
     if data.get('currencies'):
-        facts.append(
-            f"Currency: {', '.join(data['currencies'])}"
-        )
-    if data.get('demonym'):
-        facts.append(
-            f"What residents are called: "
-            f"{data['demonym']}"
-        )
-    if data.get('driving_side'):
-        facts.append(
-            f"Driving side: {data['driving_side']}"
-        )
+        geo.append(f"Currency: {', '.join(data['currencies'])}")
     if data.get('landlocked') is not None:
-        facts.append(
-            f"Landlocked: {data['landlocked']}"
-        )
+        geo.append(f"Landlocked: {'Yes' if data['landlocked'] else 'No'}")
     if data.get('borders'):
-        facts.append(
-            f"Number of land borders: "
-            f"{len(data['borders'])}"
-        )
+        geo.append(f"Land borders: {len(data['borders'])}")
+    if data.get('driving_side'):
+        geo.append(f"Driving: {data['driving_side']} side of road")
 
     memberships = data.get('memberships', {})
-    active_memberships = [
-        k.upper() for k, v in memberships.items()
-        if v
-    ]
-    if active_memberships:
-        facts.append(
-            f"International memberships: "
-            f"{', '.join(active_memberships)}"
-        )
+    active = [k.upper() for k, v in memberships.items() if v]
+    if active:
+        geo.append(f"International memberships: {', '.join(active)}")
 
     if data.get('gini'):
-        facts.append(
-            f"Income inequality (Gini "
-            f"coefficient, {data['gini']['year']}): "
-            f"{data['gini']['value']}"
+        g = data['gini']
+        inequality = (
+            'low' if g['value'] < 32
+            else 'moderate' if g['value'] < 40
+            else 'high'
         )
+        geo.append(
+            f"Income inequality (Gini {g['year']}): {g['value']} ({inequality} inequality)"
+        )
+    lines.append("GEOGRAPHY & BASICS:\n" + "\n".join(f"  {g}" for g in geo))
 
-    facts_text = '\n'.join(f"- {f}" for f in facts)
+    scores = []
+    score_fields = [
+        ('safety',       'Safety / crime rate'),
+        ('healthcare',   'Healthcare quality'),
+        ('happiness',    'Happiness / wellbeing'),
+        ('hdi',          'Human Development Index'),
+        ('pollution',    'Air & environmental quality'),
+        ('unemployment', 'Employment stability'),
+        ('internet',     'Internet speed & coverage'),
+        ('traffic',      'Traffic safety'),
+    ]
+    for field, label in score_fields:
+        if data.get(field) is not None:
+            scores.append(f"{label}: {score_label(data[field])}")
 
-    return (
-        f"Write a short editorial paragraph "
-        f"about {country_name} for Americans "
-        f"considering moving there. Use only "
-        f"these facts:\n\n{facts_text}\n\n"
-        f"Write only the paragraph, no preamble, "
-        f"no title, no quotation marks around it."
+    if data.get('english'):
+        proficiency = (
+            "Very High" if data['english'] > 600
+            else "High" if data['english'] > 500
+            else "Moderate" if data['english'] > 400
+            else "Low"
+        )
+        scores.append(
+            f"English proficiency: {proficiency} (EF EPI score {int(data['english'])})"
+        )
+    if scores:
+        lines.append("\nQUALITY SCORES:\n" + "\n".join(f"  {s}" for s in scores))
+
+    practical = []
+    if data.get('budget_single'):
+        practical.append(
+            f"Estimated monthly budget (single person): ~${data['budget_single']:,}/month"
+        )
+    if data.get('budget_couple'):
+        practical.append(
+            f"Estimated monthly budget (couple): ~${data['budget_couple']:,}/month"
+        )
+    if data.get('us_comparison'):
+        practical.append(f"Cost vs the US: {data['us_comparison']}")
+    if data.get('affordable_cities'):
+        cities = ", ".join(
+            f"{c['name']} (~${c['monthly_usd']:,}/mo)"
+            for c in data['affordable_cities'][:3]
+        )
+        practical.append(f"Most affordable cities: {cities}")
+    if data.get('visa_days'):
+        practical.append(f"US passport visa-free entry: {data['visa_days']} days")
+    if data.get('nomad_visa'):
+        practical.append("Digital Nomad Visa: Available")
+    if data.get('tax_system'):
+        practical.append(f"Tax system for residents: {data['tax_system']}")
+    if practical:
+        lines.append("\nPRACTICAL & COST DATA:\n" + "\n".join(f"  {p}" for p in practical))
+
+    lines.append(
+        f"\nWrite the 4-paragraph section for {country_name}. "
+        f"Follow the system prompt exactly. "
+        f"Output only the 4 paragraphs, separated by blank lines."
     )
 
+    return "\n".join(lines)
 
-def generate_paragraph(country_name, data):
+
+def is_extended(text):
+    return bool(text and "\n\n" in text.strip())
+
+
+def generate_section(country_name, slug, data):
     response = requests.post(
         "https://api.anthropic.com/v1/messages",
         headers={
@@ -239,18 +260,16 @@ def generate_paragraph(country_name, data):
         },
         json={
             "model": "claude-sonnet-4-6",
-            "max_tokens": 300,
+            "max_tokens": 1200,
             "system": SYSTEM_PROMPT,
             "messages": [
                 {
                     "role": "user",
-                    "content": build_user_prompt(
-                        country_name, data
-                    )
+                    "content": build_user_prompt(country_name, slug, data)
                 }
             ]
         },
-        timeout=30
+        timeout=60
     )
     response.raise_for_status()
     result = response.json()
@@ -258,66 +277,64 @@ def generate_paragraph(country_name, data):
 
 
 def main():
+    args = sys.argv[1:]
+    force = "--force" in args
+    target_slug = next((a for a in args if a != "--force"), None)
+
     with open(DATA_PATH, 'r', encoding='utf-8') as f:
         full_data = json.load(f)
 
     countries = full_data.get('countries', {})
-    generated_count = 0
+
+    if target_slug:
+        if target_slug not in countries:
+            print(f"ERROR: slug '{target_slug}' not found in data.")
+            sys.exit(1)
+        slugs_to_process = [target_slug]
+    else:
+        slugs_to_process = list(countries.keys())
+
+    generated = 0
+    skipped = 0
     failed = []
-    consecutive_capital_opens = 0
 
-    print("--- Generating Quick Facts "
-          "paragraphs via Claude API ---\n")
+    print("--- Generating extended Quick Facts sections via Claude API ---")
+    print(f"Mode: {'force regenerate all' if force else 'skip already extended'}")
+    print(f"Countries to check: {len(slugs_to_process)}\n")
 
-    for slug, data in countries.items():
+    for slug in slugs_to_process:
+        data = countries[slug]
         country_name = NAMES.get(slug, slug)
+        existing = data.get('quick_facts_paragraph', '')
+
+        if not force and is_extended(existing):
+            print(f"  SKIP {country_name} (already extended)")
+            skipped += 1
+            continue
+
+        print(f"  Generating: {country_name}...")
         try:
-            paragraph = generate_paragraph(
-                country_name, data
-            )
-
-            # Opening-variety check: warn if capital city
-            # name starts 3+ consecutive paragraphs
-            first_word = paragraph.split()[0].rstrip('.,')
-            capital_first = (
-                (data.get('capital') or '')
-                .split()[0].rstrip('.,')
-            )
-            if (capital_first and
-                    first_word.lower() ==
-                    capital_first.lower()):
-                consecutive_capital_opens += 1
-                if consecutive_capital_opens >= 3:
-                    print(
-                        f"  WARNING: "
-                        f"{consecutive_capital_opens} "
-                        f"consecutive capital-city "
-                        f"openings (now: {country_name})"
-                        f" -- review batch for variety."
-                    )
-            else:
-                consecutive_capital_opens = 0
-
-            countries[slug][
-                'quick_facts_paragraph'
-            ] = paragraph
-            generated_count += 1
-            print(f"  {country_name}:")
-            print(f"    {paragraph}\n")
-            time.sleep(0.5)
+            text = generate_section(country_name, slug, data)
+            paras = [p.strip() for p in text.split('\n\n') if p.strip()]
+            if len(paras) < 2:
+                print(
+                    f"    WARNING: only {len(paras)} paragraph(s) returned "
+                    f"- regenerate with --force if needed"
+                )
+            countries[slug]['quick_facts_paragraph'] = "\n\n".join(paras)
+            generated += 1
+            word_count = len(text.split())
+            print(f"    OK ({len(paras)} paragraphs, {word_count} words)")
+            time.sleep(0.8)
         except Exception as e:
-            print(f"  FAILED {country_name}: {e}")
+            print(f"    FAILED: {e}")
             failed.append(country_name)
             continue
 
     with open(DATA_PATH, 'w', encoding='utf-8') as f:
-        json.dump(
-            full_data, f, indent=2,
-            ensure_ascii=False
-        )
+        json.dump(full_data, f, indent=2, ensure_ascii=False)
 
-    print(f"\nGenerated {generated_count}/"
-          f"{len(countries)} paragraphs")
+    print(f"\nDone: {generated} generated, {skipped} skipped, {len(failed)} failed")
     if failed:
         print(f"Failed: {', '.join(failed)}")
     print(f"Saved to {DATA_PATH}")

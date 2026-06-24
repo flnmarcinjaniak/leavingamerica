@@ -88,7 +88,7 @@ const percentColor = getPercentColor(percent);
       class="gauge-percent"
       style={`font-size: ${dims.fontSize}px; color: ${percentColor};`}
     >
-      <span class="gauge-percent-number">0</span>%
+      <span class="gauge-percent-number">0</span><span class="gauge-of100" style={`font-size: ${Math.round(dims.fontSize * 0.5)}px`}>/100</span>
     </div>
     <div class="gauge-label" style={`font-size: ${dims.labelSize}px`}>
       {label}
@@ -117,6 +117,11 @@ const percentColor = getPercentColor(percent);
   font-weight: 800;
   font-family: 'Manrope', sans-serif;
   line-height: 1;
+}
+.gauge-of100 {
+  font-weight: 600;
+  color: #94A3B8;
+  margin-left: 2px;
 }
 .gauge-label {
   font-weight: 600;

@@ -5,7 +5,7 @@ import qualityScores from '../../data/quality-scores.json';
 
 <BaseLayout
   title="Country Match Quiz | LeavingAmerica.co"
-  description="Answer 8 questions and discover which country best fits your goals, lifestyle, and finances. 55 countries analyzed.">
+  description="Answer 10 questions and discover which country best fits your goals, lifestyle, and finances. 82 countries analyzed.">
 
 <style is:global>
 * { box-sizing: border-box; }
@@ -78,7 +78,7 @@ import qualityScores from '../../data/quality-scores.json';
   content: '';
   position: absolute;
   left: 0; top: 0; bottom: 0;
-  width: 55%;
+  width: 100%;
   background: #2563EB;
   border-radius: 100px;
   animation: stepGrow 0.45s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
@@ -86,7 +86,7 @@ import qualityScores from '../../data/quality-scores.json';
 
 @keyframes stepGrow {
   from { width: 0; }
-  to { width: 55%; }
+  to { width: 100%; }
 }
 
 .quiz-progress-label {
@@ -752,14 +752,14 @@ import qualityScores from '../../data/quality-scores.json';
     <div class="quiz-progress" id="quizProgress">
       <div class="quiz-progress-steps" id="progressSteps"></div>
       <div class="quiz-progress-label">
-        <span id="progressText">Question 1 of 8</span>
+        <span id="progressText">Question 1 of 10</span>
       </div>
     </div>
 
     <!-- Q1 -->
     <div class="question-screen" id="q1">
       <div class="question-card">
-        <div class="question-number">Question 1 of 8</div>
+        <div class="question-number">Question 1 of 10</div>
         <div class="question-text">What is your biggest frustration<br/>with life in the US right now?</div>
         <div class="options-grid">
           <button class="option-card" onclick="selectOption(1,'cost')">
@@ -797,7 +797,7 @@ import qualityScores from '../../data/quality-scores.json';
     <!-- Q2 -->
     <div class="question-screen" id="q2">
       <div class="question-card">
-        <div class="question-number">Question 2 of 8</div>
+        <div class="question-number">Question 2 of 10</div>
         <div class="question-text">Which best describes<br/>your current situation?</div>
         <div class="options-grid">
           <button class="option-card" onclick="selectOption(2,'remote')">
@@ -835,7 +835,7 @@ import qualityScores from '../../data/quality-scores.json';
     <!-- Q3 -->
     <div class="question-screen" id="q3">
       <div class="question-card">
-        <div class="question-number">Question 3 of 8</div>
+        <div class="question-number">Question 3 of 10</div>
         <div class="question-text">What would financial freedom<br/>look like for you?</div>
         <div class="options-grid single-col">
           <button class="option-card" onclick="selectOption(3,'savemore')">
@@ -869,7 +869,7 @@ import qualityScores from '../../data/quality-scores.json';
     <!-- Q4 -->
     <div class="question-screen" id="q4">
       <div class="question-card">
-        <div class="question-number">Question 4 of 8</div>
+        <div class="question-number">Question 4 of 10</div>
         <div class="question-text">If you faced a major medical issue tomorrow,<br/>what would concern you most?</div>
         <div class="options-grid single-col">
           <button class="option-card" onclick="selectOption(4,'cost')">
@@ -899,7 +899,7 @@ import qualityScores from '../../data/quality-scores.json';
     <!-- Q5 -->
     <div class="question-screen" id="q5">
       <div class="question-card">
-        <div class="question-number">Question 5 of 8</div>
+        <div class="question-number">Question 5 of 10</div>
         <div class="question-text">How comfortable are you building a life<br/>where English is not the main language?</div>
         <div class="options-grid single-col">
           <button class="option-card" onclick="selectOption(5,'english_only')">
@@ -929,7 +929,7 @@ import qualityScores from '../../data/quality-scores.json';
     <!-- Q6 -->
     <div class="question-screen" id="q6">
       <div class="question-card">
-        <div class="question-number">Question 6 of 8</div>
+        <div class="question-number">Question 6 of 10</div>
         <div class="question-text">What matters most about<br/>your new home country?</div>
         <div class="options-grid">
           <button class="option-card" onclick="selectOption(6,'healthcare')">
@@ -967,7 +967,7 @@ import qualityScores from '../../data/quality-scores.json';
     <!-- Q7 -->
     <div class="question-screen" id="q7">
       <div class="question-card">
-        <div class="question-number">Question 7 of 8</div>
+        <div class="question-number">Question 7 of 10</div>
         <div class="question-text">How important is a clear path to<br/>long-term residency or a work permit?</div>
         <div class="options-grid single-col">
           <button class="option-card" onclick="selectOption(7,'critical')">
@@ -993,7 +993,7 @@ import qualityScores from '../../data/quality-scores.json';
     <!-- Q8 -->
     <div class="question-screen" id="q8">
       <div class="question-card">
-        <div class="question-number">Question 8 of 8</div>
+        <div class="question-number">Question 8 of 10</div>
         <div class="question-text">Where are you in your<br/>decision to move abroad?</div>
         <div class="options-grid single-col">
           <button class="option-card" onclick="selectOption(8,'curious')">
@@ -1016,7 +1016,75 @@ import qualityScores from '../../data/quality-scores.json';
       </div>
       <div class="quiz-nav">
         <button class="btn-back" onclick="prevQuestion(8)">Back</button>
-        <button class="btn-next" id="next8" onclick="calculateResults()" disabled>See My Matches</button>
+        <button class="btn-next" id="next8" onclick="nextQuestion(8)" disabled>Continue</button>
+      </div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="question-screen" id="q9">
+      <div class="question-card">
+        <div class="question-number">Question 9 of 10</div>
+        <div class="question-text">What kind of climate and lifestyle<br/>appeals to you most?</div>
+        <div class="options-grid">
+          <button class="option-card" onclick="selectOption(9,'mediterranean')">
+            <span class="option-label">Warm &amp; sunny — Mediterranean</span>
+            <span class="option-desc">Southern Europe, North Africa — beaches, olive oil, outdoor life year-round</span>
+          </button>
+          <button class="option-card" onclick="selectOption(9,'tropical')">
+            <span class="option-label">Hot year-round — Tropical</span>
+            <span class="option-desc">SE Asia, Latin America — lush, warm, beach and jungle</span>
+          </button>
+          <button class="option-card" onclick="selectOption(9,'temperate')">
+            <span class="option-label">Four seasons — Temperate</span>
+            <span class="option-desc">Central &amp; Northern Europe, East Asia — urban lifestyle, real winters</span>
+          </button>
+          <button class="option-card" onclick="selectOption(9,'nordic')">
+            <span class="option-label">Cool &amp; wild — Nordic</span>
+            <span class="option-desc">Scandinavia — nature, silence, very high quality of life</span>
+          </button>
+          <button class="option-card" onclick="selectOption(9,'desert')">
+            <span class="option-label">Hot &amp; dry — Desert</span>
+            <span class="option-desc">Gulf states — modern cities, tax-free income, zero humidity</span>
+          </button>
+          <button class="option-card" onclick="selectOption(9,'open')">
+            <span class="option-label">Climate doesn't matter to me</span>
+            <span class="option-desc">I'll adapt — other factors matter more than weather</span>
+          </button>
+        </div>
+      </div>
+      <div class="quiz-nav">
+        <button class="btn-back" onclick="prevQuestion(9)">Back</button>
+        <button class="btn-next" id="next9" onclick="nextQuestion(9)" disabled>Continue</button>
+      </div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="question-screen" id="q10">
+      <div class="question-card">
+        <div class="question-number">Question 10 of 10</div>
+        <div class="question-text">What monthly budget are you planning<br/>for living expenses abroad?</div>
+        <div class="options-grid single-col">
+          <button class="option-card" onclick="selectOption(10,'tight')">
+            <span class="option-label">Under $1,500 / month</span>
+            <span class="option-desc">I want my dollar to stretch as far as possible — Southeast Asia, Eastern Europe, Latin America</span>
+          </button>
+          <button class="option-card" onclick="selectOption(10,'moderate')">
+            <span class="option-label">$1,500 – $2,500 / month</span>
+            <span class="option-desc">Comfortable but value-conscious — Portugal, Thailand, Mexico, Colombia</span>
+          </button>
+          <button class="option-card" onclick="selectOption(10,'comfortable')">
+            <span class="option-label">$2,500 – $4,000 / month</span>
+            <span class="option-desc">I can afford a good lifestyle — Spain, Japan, South Korea, UAE</span>
+          </button>
+          <button class="option-card" onclick="selectOption(10,'flexible')">
+            <span class="option-label">Budget is not a constraint</span>
+            <span class="option-desc">I want the best quality of life regardless of cost</span>
+          </button>
+        </div>
+      </div>
+      <div class="quiz-nav">
+        <button class="btn-back" onclick="prevQuestion(10)">Back</button>
+        <button class="btn-next" id="next10" onclick="calculateResults()" disabled>See My Matches</button>
       </div>
     </div>
 
@@ -1054,7 +1122,7 @@ import qualityScores from '../../data/quality-scores.json';
 
 const answers = {};
 let currentQ = 0;
-const TOTAL = 8;
+const TOTAL = 10;
 
 const NAMES = {
   'portugal':'Portugal','spain':'Spain',
@@ -1163,6 +1231,65 @@ const AFFORDABLE_COL = new Set([
   'honduras','jamaica','nicaragua',
 ]);
 
+const CLIMATE_MEDITERRANEAN = new Set([
+  'portugal','spain','italy','greece','croatia',
+  'morocco','egypt','albania','malta','montenegro',
+  'cyprus','turkey',
+]);
+const CLIMATE_TROPICAL = new Set([
+  'thailand','malaysia','indonesia','philippines',
+  'vietnam','cambodia','india','sri-lanka',
+  'kenya','ghana','rwanda',
+  'costa-rica','panama','colombia','ecuador',
+  'brazil','bahamas','dominican-republic','jamaica',
+  'belize','honduras','nicaragua','el-salvador',
+  'singapore',
+]);
+const CLIMATE_TEMPERATE = new Set([
+  'germany','france','netherlands','belgium','austria',
+  'switzerland','czech-republic','poland','hungary',
+  'romania','bulgaria','serbia','georgia',
+  'united-kingdom','ireland','south-korea','japan',
+  'north-macedonia','slovakia','slovenia',
+  'estonia','latvia','lithuania',
+  'china','taiwan','australia','new-zealand',
+  'south-africa','argentina','chile','uruguay',
+  'canada','peru','nepal','kazakhstan','paraguay','bolivia',
+]);
+const CLIMATE_NORDIC = new Set([
+  'iceland','norway','sweden','finland','denmark',
+]);
+const CLIMATE_DESERT = new Set([
+  'united-arab-emirates','qatar','saudi-arabia',
+]);
+
+// Budget tiers (for Q10)
+const BUDGET_TIGHT = new Set([
+  'vietnam','thailand','indonesia','cambodia','india','sri-lanka',
+  'georgia','albania','romania','bulgaria','serbia','north-macedonia',
+  'egypt','morocco','ghana','kenya','rwanda','nepal',
+  'colombia','peru','ecuador','bolivia','paraguay',
+  'el-salvador','honduras','nicaragua','nicaragua',
+]);
+const BUDGET_MODERATE = new Set([
+  'portugal','spain','italy','greece','croatia','poland',
+  'hungary','czech-republic','slovakia','slovenia',
+  'turkey','mexico','costa-rica','panama','dominican-republic',
+  'belize','jamaica','argentina','chile','uruguay',
+  'malaysia','philippines','south-africa','jordan',
+]);
+const BUDGET_COMFORTABLE = new Set([
+  'germany','france','netherlands','belgium','austria',
+  'united-kingdom','ireland','japan','south-korea','taiwan',
+  'singapore','united-arab-emirates','qatar','saudi-arabia',
+  'brazil','china','estonia','latvia','lithuania','malta',
+  'montenegro','cyprus','bahamas',
+]);
+const BUDGET_HIGH = new Set([
+  'switzerland','norway','denmark','sweden','finland','iceland',
+  'australia','new-zealand','canada','luxembourg','kazakhstan',
+]);
+
 // ── Progress steps ─────────────────────────────
 function buildProgressSteps() {
   var container = document.getElementById('progressSteps');
@@ -1234,7 +1361,7 @@ function showQuestion(num) {
 
 // ── Scoring ────────────────────────────────────
 window.calculateResults = function() {
-  if (!answers[8]) return;
+  if (!answers[10]) return;
   var scores = {};
 
   Object.entries(QUALITY).forEach(function([slug, q]) {
@@ -1250,107 +1377,171 @@ window.calculateResults = function() {
     });
     score = totalW > 0 ? (base / totalW) * 5 + 15 : 45;
 
+    // Q1 — biggest frustration
     if (answers[1] === 'cost') {
-      if (EXPENSIVE_COL.has(slug)) score -= 32;
-      if (AFFORDABLE_COL.has(slug)) score += 22;
-      if (q.unemployment >= 8) score += 10;
-      if (q.hdi >= 7) score += 5;
+      if (EXPENSIVE_COL.has(slug)) score -= 16;
+      if (AFFORDABLE_COL.has(slug)) score += 11;
+      if (q.unemployment >= 8) score += 5;
+      if (q.hdi >= 7) score += 3;
     }
-    if (answers[1] === 'healthcare') { score += (q.healthcare || 5) * 3; }
+    if (answers[1] === 'healthcare') { score += (q.healthcare || 5) * 1.5; }
     if (answers[1] === 'retirement') {
-      if (q.healthcare >= 8) score += 16;
-      if (q.happiness >= 7) score += 12;
+      if (q.healthcare >= 8) score += 8;
+      if (q.happiness >= 7) score += 6;
     }
     if (answers[1] === 'balance') {
-      if (q.happiness >= 8) score += 16;
-      if (q.traffic >= 7) score += 12;
-      if (q.pollution >= 7) score += 8;
+      if (q.happiness >= 8) score += 8;
+      if (q.traffic >= 7) score += 6;
+      if (q.pollution >= 7) score += 4;
     }
-    if (answers[1] === 'safety') { score += (q.safety || 5) * 4; }
+    if (answers[1] === 'safety') { score += (q.safety || 5) * 2; }
     if (answers[1] === 'freedom') {
-      if (q.nomad_visa) score += 18;
-      if (q.happiness >= 7) score += 12;
-      if (q.pollution >= 7) score += 8;
+      if (q.nomad_visa) score += 9;
+      if (q.happiness >= 7) score += 6;
+      if (q.pollution >= 7) score += 4;
     }
 
+    // Q2 — current situation
     if (answers[2] === 'remote' || answers[2] === 'freelance') {
-      if (q.nomad_visa) score += 22;
-      if (q.internet >= 8) score += 12;
+      if (q.nomad_visa) score += 11;
+      if (q.internet >= 8) score += 6;
     }
     if (answers[2] === 'business') {
-      if (q.tax_system === 'zero') score += 28;
-      else if (q.tax_system === 'territorial') score += 18;
-      if (q.internet >= 8) score += 8;
+      if (q.tax_system === 'zero') score += 14;
+      else if (q.tax_system === 'territorial') score += 9;
+      if (q.internet >= 8) score += 4;
     }
     if (answers[2] === 'family') {
-      score += (q.safety || 5) * 3.5;
-      score += (q.healthcare || 5) * 2.5;
-      if (q.english >= 500) score += 14;
+      score += (q.safety || 5) * 1.8;
+      score += (q.healthcare || 5) * 1.3;
+      if (q.english >= 500) score += 7;
     }
     if (answers[2] === 'preretire' || answers[2] === 'retired') {
-      score += (q.healthcare || 5) * 3.5;
-      score += (q.safety || 5) * 2.5;
-      if (q.happiness >= 7) score += 14;
-      if (EXPENSIVE_COL.has(slug)) score -= 28;
-      if (AFFORDABLE_COL.has(slug)) score += 20;
+      score += (q.healthcare || 5) * 1.8;
+      score += (q.safety || 5) * 1.3;
+      if (q.happiness >= 7) score += 7;
+      if (EXPENSIVE_COL.has(slug)) score -= 14;
+      if (AFFORDABLE_COL.has(slug)) score += 10;
     }
 
+    // Q3 — financial freedom
     if (answers[3] === 'savemore') {
-      if (EXPENSIVE_COL.has(slug)) score -= 28;
-      if (AFFORDABLE_COL.has(slug)) score += 20;
-      if (q.unemployment >= 8) score += 10;
-      if (q.hdi >= 7) score += 6;
+      if (EXPENSIVE_COL.has(slug)) score -= 14;
+      if (AFFORDABLE_COL.has(slug)) score += 10;
+      if (q.unemployment >= 8) score += 5;
+      if (q.hdi >= 7) score += 3;
     }
     if (answers[3] === 'retire') {
-      if (q.healthcare >= 8) score += 18;
-      if (q.happiness >= 7) score += 14;
+      if (q.healthcare >= 8) score += 9;
+      if (q.happiness >= 7) score += 7;
     }
     if (answers[3] === 'taxes') {
-      if (q.tax_system === 'zero') score += 32;
-      else if (q.tax_system === 'territorial') score += 22;
+      if (q.tax_system === 'zero') score += 16;
+      else if (q.tax_system === 'territorial') score += 11;
     }
     if (answers[3] === 'lifestyle') {
-      if (q.happiness >= 8) score += 16;
-      if (q.pollution >= 7) score += 12;
+      if (q.happiness >= 8) score += 8;
+      if (q.pollution >= 7) score += 6;
     }
     if (answers[3] === 'quality') {
-      if (q.happiness >= 8) score += 18;
-      if (q.pollution >= 7) score += 12;
-      if (q.traffic >= 7) score += 10;
+      if (q.happiness >= 8) score += 9;
+      if (q.pollution >= 7) score += 6;
+      if (q.traffic >= 7) score += 5;
     }
 
+    // Q4 — healthcare concern
     if (answers[4] === 'cost' || answers[4] === 'coverage' || answers[4] === 'access') {
-      score += (q.healthcare || 5) * 4;
+      score += (q.healthcare || 5) * 2;
     }
 
+    // Q5 — language comfort
     if (answers[5] === 'english_only') {
-      if (q.english >= 600) score += 28;
-      else if (q.english >= 500) score += 14;
-      else if (q.english < 450) score -= 28;
+      if (q.english >= 600) score += 14;
+      else if (q.english >= 500) score += 7;
+      else if (q.english < 450) score -= 14;
     }
     if (answers[5] === 'mostly') {
-      if (q.english >= 500) score += 14;
-      else if (q.english < 400) score -= 14;
+      if (q.english >= 500) score += 7;
+      else if (q.english < 400) score -= 7;
     }
 
-    if (answers[6] === 'healthcare') score += (q.healthcare || 5) * 4;
-    if (answers[6] === 'safety')     score += (q.safety || 5) * 4;
-    if (answers[6] === 'nature')     score += (q.pollution || 5) * 4;
-    if (answers[6] === 'internet')   score += (q.internet || 5) * 4;
+    // Q6 — what matters most
+    if (answers[6] === 'healthcare') score += (q.healthcare || 5) * 2;
+    if (answers[6] === 'safety')     score += (q.safety || 5) * 2;
+    if (answers[6] === 'nature')     score += (q.pollution || 5) * 2;
+    if (answers[6] === 'internet')   score += (q.internet || 5) * 2;
     if (answers[6] === 'economy') {
-      score += (q.hdi || 5) * 3;
-      score += (q.unemployment || 5) * 3;
+      score += (q.hdi || 5) * 1.5;
+      score += (q.unemployment || 5) * 1.5;
     }
-    if (answers[6] === 'traffic') score += (q.traffic || 5) * 4;
+    if (answers[6] === 'traffic') score += (q.traffic || 5) * 2;
 
+    // Q7 — residency path
     if (answers[7] === 'critical') {
-      if (q.nomad_visa) score += 24;
-      if (q.visa_days >= 180) score += 14;
-      else if (q.visa_days >= 90) score += 8;
+      if (q.nomad_visa) score += 12;
+      if (q.visa_days >= 180) score += 7;
+      else if (q.visa_days >= 90) score += 4;
     }
     if (answers[7] === 'important') {
-      if (q.nomad_visa) score += 14;
+      if (q.nomad_visa) score += 7;
     }
+
+    // Q9 — climate preference (hard filter — all non-matching zones penalized)
+    if (answers[9] === 'mediterranean') {
+      if      (CLIMATE_MEDITERRANEAN.has(slug)) score += 30;
+      else if (CLIMATE_NORDIC.has(slug))        score -= 22;
+      else if (CLIMATE_TEMPERATE.has(slug))     score -= 10;
+      else if (CLIMATE_TROPICAL.has(slug))      score -= 5;
+      else if (CLIMATE_DESERT.has(slug))        score -= 5;
+    }
+    if (answers[9] === 'tropical') {
+      if      (CLIMATE_TROPICAL.has(slug))      score += 30;
+      else if (CLIMATE_NORDIC.has(slug))        score -= 22;
+      else if (CLIMATE_TEMPERATE.has(slug))     score -= 10;
+      else if (CLIMATE_MEDITERRANEAN.has(slug)) score -= 5;
+      else if (CLIMATE_DESERT.has(slug))        score -= 5;
+    }
+    if (answers[9] === 'temperate') {
+      if      (CLIMATE_TEMPERATE.has(slug))     score += 28;
+      else if (CLIMATE_TROPICAL.has(slug))      score -= 10;
+      else if (CLIMATE_NORDIC.has(slug))        score -= 8;
+      else if (CLIMATE_DESERT.has(slug))        score -= 10;
+    }
+    if (answers[9] === 'nordic') {
+      if      (CLIMATE_NORDIC.has(slug))        score += 30;
+      else if (CLIMATE_TROPICAL.has(slug))      score -= 15;
+      else if (CLIMATE_DESERT.has(slug))        score -= 15;
+      else if (CLIMATE_MEDITERRANEAN.has(slug)) score -= 8;
+      else if (CLIMATE_TEMPERATE.has(slug))     score -= 3;
+    }
+    if (answers[9] === 'desert') {
+      if      (CLIMATE_DESERT.has(slug))        score += 30;
+      else if (CLIMATE_NORDIC.has(slug))        score -= 20;
+      else if (CLIMATE_TEMPERATE.has(slug))     score -= 15;
+      else if (CLIMATE_TROPICAL.has(slug))      score -= 8;
+      else if (CLIMATE_MEDITERRANEAN.has(slug)) score -= 5;
+    }
+    // 'open' = no climate bonus or penalty
+
+    // Q10 — monthly budget
+    if (answers[10] === 'tight') {
+      if (BUDGET_TIGHT.has(slug))        score += 22;
+      else if (BUDGET_MODERATE.has(slug)) score += 8;
+      else if (BUDGET_COMFORTABLE.has(slug)) score -= 12;
+      else if (BUDGET_HIGH.has(slug))    score -= 22;
+    }
+    if (answers[10] === 'moderate') {
+      if (BUDGET_MODERATE.has(slug))     score += 20;
+      else if (BUDGET_TIGHT.has(slug))   score += 10;
+      else if (BUDGET_COMFORTABLE.has(slug)) score -= 5;
+      else if (BUDGET_HIGH.has(slug))    score -= 15;
+    }
+    if (answers[10] === 'comfortable') {
+      if (BUDGET_COMFORTABLE.has(slug))  score += 18;
+      else if (BUDGET_MODERATE.has(slug)) score += 8;
+      else if (BUDGET_HIGH.has(slug))    score -= 5;
+    }
+    // 'flexible' = no budget filter
 
     scores[slug] = score;
   });
@@ -1439,8 +1630,24 @@ function getProfileSummary(userAnswers) {
     important: 'Long-term residency options matter to you',
     explore: 'You are still in the research phase'
   };
+  var q9map = {
+    mediterranean: 'You want warm, sunny Mediterranean climate',
+    tropical: 'You prefer a hot tropical climate year-round',
+    temperate: 'You want a temperate four-season climate',
+    nordic: 'You are drawn to cool Nordic nature and lifestyle',
+    desert: 'You prefer a hot, dry desert climate',
+    open: 'Climate is not a deciding factor for you'
+  };
+  var q10map = {
+    tight:       'You want your dollar to stretch — budget under $1,500/month',
+    moderate:    'You are planning $1,500–$2,500/month in living expenses',
+    comfortable: 'You have a $2,500–$4,000/month lifestyle budget',
+    flexible:    'Budget is not a constraint — quality of life comes first'
+  };
   if (q1map[userAnswers[1]]) items.push(q1map[userAnswers[1]]);
   if (q2map[userAnswers[2]]) items.push(q2map[userAnswers[2]]);
+  if (q9map[userAnswers[9]]) items.push(q9map[userAnswers[9]]);
+  if (q10map[userAnswers[10]]) items.push(q10map[userAnswers[10]]);
   if (q7map[userAnswers[7]]) items.push(q7map[userAnswers[7]]);
   return items;
 }

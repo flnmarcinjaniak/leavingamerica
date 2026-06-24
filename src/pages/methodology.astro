@@ -4,7 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <BaseLayout
   title="Data Methodology | LeavingAmerica.co"
-  description="How LeavingAmerica.co calculates purchasing power, quality of life scores, and mobility metrics. Full methodology and data sources."
+  description="How LeavingAmerica.co calculates purchasing power, quality of life scores, and mobility metrics for 82 countries. Full methodology and data sources."
 >
 <div class="ip-page">
 
@@ -12,7 +12,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="ip-wrap">
       <span class="ip-label">Resources</span>
       <h1 class="ip-title">Data Methodology</h1>
-      <p class="ip-lead">This page describes the data sources, calculations, and scoring methods used throughout LeavingAmerica.co.</p>
+      <p class="ip-lead">How we calculate purchasing power, quality-of-life scores, and mobility metrics across 82 countries.</p>
       <p class="ip-date">Last updated: June 2026</p>
     </div>
   </div>
@@ -22,96 +22,107 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <h2>Salary Arbitrage Calculator</h2>
 
-<h3>How the Salary Arbitrage Calculator Works</h3>
-<p>The Salary Arbitrage calculator answers one question: if you earn a certain salary in a specific US city, how much would you need to earn in a foreign country to maintain the same standard of living?</p>
+<h3>How It Works</h3>
+<p>The calculator answers one question: if you earn a certain salary in a specific US city, how much would you need to earn in a foreign country to maintain the same standard of living?</p>
 
-<p>The calculation uses three data points:</p>
+<p>The calculation uses three inputs:</p>
 <ul>
-<li><strong>Your US city's Regional Price Parity (RPP)</strong> from the US Bureau of Economic Analysis. This measures how expensive your city is relative to the US national average. A city with RPP of 1.15 is 15% more expensive than average.</li>
-<li><strong>The destination country's Purchasing Power Parity (PPP)</strong> from the World Bank. This measures how many units of local currency are needed to buy the same goods that one US dollar buys in the United States.</li>
-<li><strong>The current exchange rate</strong> between USD and the local currency, retrieved from World Bank datasets and exchange-rate providers. Exchange rate data is refreshed regularly and cached for up to 24 hours to improve performance.</li>
+<li><strong>Your US city's Regional Price Parity (RPP)</strong> from the US Bureau of Economic Analysis. This measures how expensive your city is relative to the US national average. A city with RPP of 1.15 is 15% more expensive than the national average.</li>
+<li><strong>The destination country's Purchasing Power Parity (PPP)</strong> from the World Bank (indicator PA.NUS.PRVT.PP). This measures how many units of local currency are needed to buy the same goods that one US dollar buys in the United States. PPP values are embedded in the calculator and refreshed quarterly.</li>
+<li><strong>The current exchange rate</strong> between USD and the local currency, retrieved live from open.er-api.com and cached for 24 hours.</li>
 </ul>
 
 <h3>The Formula</h3>
-<p>Price Level = Country PPP / Exchange Rate</p>
-<p>Purchasing Power Multiplier = (1 / Price Level) x City RPP</p>
-<p>Equivalent Income = Your Income / Multiplier</p>
-<p>Annual Savings = Your Income - Equivalent Income (when working remotely)</p>
+<p>Price Level = Country PPP ÷ Exchange Rate</p>
+<p>Purchasing Power Multiplier = (1 ÷ Price Level) × City RPP</p>
+<p>Equivalent Income = Your Income ÷ Multiplier</p>
+<p>Annual Savings = Your Income − Equivalent Income (remote workers only)</p>
 
 <h3>Example</h3>
-<p>If a destination country has a purchasing power multiplier of 2.0, a person earning $100,000 in the United States could experience a standard of living similar to someone earning approximately $50,000 locally. If that person continues earning their US income while living abroad, the difference represents a cost-of-living advantage of $50,000 per year.</p>
+<p>If a destination country has a purchasing power multiplier of 2.0, a person earning $100,000 in the US would only need to earn $50,000 locally to maintain the same lifestyle. If that person keeps their US income while living abroad, the $50,000 difference is their cost-of-living advantage each year.</p>
 
-<h3>Important Limitations</h3>
-<p>The Salary Arbitrage calculator assumes you maintain your US income while paying local costs. Results show your cost-of-living advantage, not your actual after-tax savings. Individual results will vary based on lifestyle, neighborhood, family size, and personal spending habits. Taxes, both US and local, are not factored into the calculation.</p>
-
-<h2>Why Results May Differ</h2>
-<p>The calculator compares countries using national economic datasets and standardized assumptions. Actual living costs can vary significantly depending on city, neighborhood, housing choices, family size, healthcare needs, lifestyle preferences, and local tax obligations.</p>
-<p>Results are best used as a starting point for research, not as a precise financial forecast. We recommend verifying costs with local sources and consulting relevant professionals before making relocation decisions.</p>
+<h3>Limitations</h3>
+<p>Results assume you maintain your US income while paying local costs. Taxes (US and local), housing market variation, healthcare costs, and personal spending habits are not factored in. Use results as a directional estimate, not a precise financial forecast.</p>
 
 <h2>Quality of Life Score</h2>
 
 <h3>How the Score Is Calculated</h3>
-<p>Each country receives a Quality of Life Score from 0 to 100, based on eight metrics weighted as follows:</p>
+<p>Each country receives a Quality of Life Score from 0 to 100%, based on eight metrics. Each metric is scored 1–10 from its raw source value, then weighted:</p>
+
 <ul>
-<li>Safety: 25%</li>
-<li>Healthcare: 20%</li>
-<li>Happiness: 15%</li>
-<li>Human Development Index: 15%</li>
-<li>Pollution: 8%</li>
-<li>Unemployment: 7%</li>
-<li>Internet Speed: 5%</li>
-<li>Traffic: 5%</li>
+<li><strong>Safety — 25%</strong> (Global Peace Index)</li>
+<li><strong>Healthcare — 20%</strong> (UHC Service Coverage Index, WHO/World Bank)</li>
+<li><strong>Happiness — 15%</strong> (World Happiness Report via Our World in Data)</li>
+<li><strong>Human Development — 15%</strong> (HDI via UNDP/Our World in Data)</li>
+<li><strong>Pollution — 8%</strong> (Numbeo Pollution Index)</li>
+<li><strong>Unemployment — 7%</strong> (World Bank)</li>
+<li><strong>Internet Speed — 5%</strong> (Speedtest Global Index)</li>
+<li><strong>Traffic — 5%</strong> (Numbeo Traffic Index)</li>
 </ul>
 
-<h3>Grade Scale</h3>
+<p>The final score is a weighted average of all available metrics. If a metric is unavailable for a country, its weight is redistributed proportionally across the remaining metrics.</p>
+
+<h3>Score Labels</h3>
 <ul>
-<li>A: 85% and above</li>
-<li>B: 70% to 84%</li>
-<li>C: 55% to 69%</li>
-<li>D: 40% to 54%</li>
-<li>F: Below 40%</li>
+<li><strong>Outstanding destination</strong> — 90% and above</li>
+<li><strong>Excellent destination</strong> — 80–89%</li>
+<li><strong>Very good destination</strong> — 70–79%</li>
+<li><strong>Good destination</strong> — 60–69%</li>
+<li><strong>Moderate destination</strong> — 50–59%</li>
+<li><strong>Mixed destination</strong> — 40–49%</li>
+<li><strong>Limited destination</strong> — 30–39%</li>
+<li><strong>Challenging destination</strong> — below 30%</li>
 </ul>
 
 <h2>Individual Metrics</h2>
 
 <h3>Safety</h3>
-<p>Source: Global Peace Index (Institute for Economics and Peace). A composite measure of societal safety, ongoing conflict, and militarization, scored on a 1.0-5.0 scale (lower is more peaceful) and converted to our 1-10 scoring system.</p>
+<p>Source: Global Peace Index (Institute for Economics and Peace). A composite measure of societal safety, ongoing conflict, and militarization, scored 1.0–5.0 (lower = more peaceful). Converted to our 1–10 scale with GPI ≤ 1.3 scoring 10/10 and GPI ≥ 3.5 scoring 1/10.</p>
 
 <h3>Healthcare</h3>
-<p>Source: UHC Service Coverage Index (World Bank/WHO). Measures coverage of essential health services across 14 tracer indicators, scored 0-100 and converted to our 1-10 scoring system.</p>
+<p>Source: UHC Service Coverage Index (WHO/World Bank, indicator SH.UHC.SRVS.CV.XD). Measures coverage of essential health services across 14 tracer indicators on a 0–100 scale. Converted linearly: score = round(UHC ÷ 10). For countries excluded from the World Bank dataset (e.g. Taiwan), the GBD Healthcare Access and Quality (HAQ) Index from IHME is used as a proxy.</p>
 
 <h3>Happiness</h3>
-<p>Source: World Happiness Report via Our World in Data. The WHR score runs from 0 to 10 and is used directly as the metric score.</p>
+<p>Source: World Happiness Report (Gallup World Poll) via Our World in Data. Uses the Cantril ladder score (0–10 scale) directly as the metric score. Small island states not surveyed by Gallup are marked as "No data".</p>
+
+<h3>Human Development Index (HDI)</h3>
+<p>Source: UNDP Human Development Index via Our World in Data. A composite of life expectancy, years of schooling, and GNI per capita, on a 0–1 scale. HDI ≥ 0.94 scores 10/10; HDI ≥ 0.90 scores 9/10; decreasing by approximately 0.04 per point down to 1/10. For countries not in the UNDP dataset (e.g. Taiwan), official government statistics using the UNDP methodology are used.</p>
 
 <h3>Pollution</h3>
-<p>Source: Numbeo Pollution Index. Lower scores are better. Converted using a stepped scale where scores below 30 receive 10/10.</p>
+<p>Source: Numbeo Pollution Index (user-contributed composite of air, water, and environmental quality). Lower values are better. Index below 30 = 10/10; index above 135 = 3/10. Countries with insufficient Numbeo data are marked as "No data".</p>
 
 <h3>Unemployment</h3>
-<p>Source: World Bank. Lower unemployment rates receive higher scores. Rates below 3% receive 10/10.</p>
+<p>Source: World Bank (indicator SL.UEM.TOTL.ZS). Annual unemployment rate as a percentage of the labor force. Rate below 3% = 10/10; rate above 20% = 3/10. For countries excluded from World Bank (e.g. Taiwan), official national statistics bureau data is used.</p>
 
 <h3>Internet Speed</h3>
-<p>Source: Speedtest Global Index via Wikipedia. Speeds above 250 Mbps receive 10/10. Speeds below 60 Mbps receive 5/10.</p>
-
-<h3>Human Development Index</h3>
-<p>Source: UNDP Human Development Index via Our World in Data. A composite measure combining life expectancy, education levels, and income per capita, calibrated on a 0.0-1.0 scale and converted to our 1-10 scoring system. Replaces GDP growth as a more direct proxy for overall standard of living.</p>
+<p>Source: Speedtest Global Index via Wikipedia. National median fixed broadband download speed in Mbps. Speeds above 250 Mbps = 10/10; speeds below 5 Mbps = 1/10.</p>
 
 <h3>Traffic</h3>
-<p>Source: Numbeo Traffic Index. Lower traffic time indices receive higher scores.</p>
+<p>Source: Numbeo Traffic Index. Measures estimated annual time lost to traffic congestion. Index below 2,000 = 10/10; index above 8,000 = 3/10. Countries with insufficient Numbeo data are marked as "No data".</p>
 
 <h2>Mobility Metrics</h2>
-<p>We also track four relocation-related metrics for each country:</p>
+<p>Four additional relocation metrics are tracked for each country but are not included in the Quality of Life Score:</p>
 <ul>
-<li><strong>Visa Access:</strong> Number of days a US passport holder can stay without a visa, sourced from the Passport Index dataset on GitHub.</li>
-<li><strong>English Proficiency:</strong> EF English Proficiency Index score. Countries where English is the primary native language are marked as Native English.</li>
-<li><strong>Tax System:</strong> Whether the country uses worldwide taxation (taxes all income regardless of source), territorial taxation (taxes only local income), or has no personal income tax. Compiled from public tax authority information and updated annually. High-level classification intended for comparison purposes only. Tax rules vary by individual circumstance and may change. Consult a qualified tax advisor before making decisions based on this information.</li>
-<li><strong>Digital Nomad Visa:</strong> Whether the country offers an official visa program for remote workers. Sourced from Citizen Remote.</li>
+<li><strong>Visa-free days:</strong> Number of days a US passport holder can stay without a visa or on visa-on-arrival, sourced from the Passport Index dataset on GitHub.</li>
+<li><strong>English Proficiency:</strong> EF English Proficiency Index score. Countries where English is the primary native language receive a "Native English" designation rather than an EF score.</li>
+<li><strong>Tax System:</strong> Whether the country uses worldwide taxation (taxes global income), territorial taxation (taxes local income only), or no personal income tax. Classified from public tax authority sources. This is a high-level comparison — individual tax obligations depend on residency status, treaties, and personal circumstances. Consult a qualified tax advisor.</li>
+<li><strong>Digital Nomad Visa:</strong> Whether the country offers an official long-stay visa program for remote workers. Sourced from Citizen Remote and official government sources.</li>
 </ul>
 
+<h2>Cost of Living</h2>
+<p>Monthly budget estimates (single person and couple) and cost index data are sourced from the WhereNext open data API (getwherenext.com). Cost index is expressed relative to the US (100 = same as US average). Data is updated quarterly.</p>
+
+<h2>Country Facts</h2>
+<p>Geographic and demographic data (area, population, capital, languages, currencies, borders, memberships) is sourced from the REST Countries API v5 (restcountries.com). Income inequality (Gini coefficient) is sourced from the World Bank.</p>
+
 <h2>Data Updates</h2>
-<p>We update all quality of life and mobility data quarterly. Each update pulls the latest available figures from each source using direct API calls and structured data downloads. Purchasing power and exchange-rate data are retrieved from public APIs and cached for up to 24 hours to improve performance.</p>
+<p>All quality of life and mobility data is updated quarterly. PPP values are refreshed from the World Bank API quarterly and embedded in the calculator. Exchange rates are fetched live and cached for 24 hours. Country facts (population, borders, etc.) are updated annually as they rarely change.</p>
+
+<h2>Missing Data</h2>
+<p>Some countries lack data for specific metrics due to source limitations — for example, small island nations not surveyed by the World Happiness Report, or countries excluded from World Bank databases for geopolitical reasons (Taiwan). Where a reliable alternative source exists using the same definition, that source is used. Otherwise the metric is displayed as "Not available from public data sources" and excluded from the weighted average calculation.</p>
 
 <h2>Contact</h2>
-<p>Questions, corrections, or feedback?<br><br>
+<p>Questions, corrections, or spotted an error?<br><br>
 <a href="mailto:contact@leavingamerica.co">contact@leavingamerica.co</a></p>
 
     </div>

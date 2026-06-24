@@ -14,6 +14,9 @@ const { title, description } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <title>{title}</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet" />
@@ -98,7 +101,7 @@ const { title, description } = Astro.props;
         </div>
         <div class="footer-bottom">
           <p class="footer-copyright">&copy; 2026 LeavingAmerica.co. All rights reserved.</p>
-          <p class="footer-data-note">Data sources: World Bank, BEA, Numbeo, OWID, Speedtest and other public datasets.</p>
+          <p class="footer-data-note">Data sources: World Bank, BEA, Global Peace Index, UNDP, OWID, EF EPI, Numbeo and other public datasets. 82 countries covered.</p>
           <p class="footer-legal-note">For educational purposes only. Not financial, tax, or legal advice.</p>
         </div>
       </div>

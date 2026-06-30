@@ -2,6 +2,7 @@
 export const prerender = true;
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import qualityScoresData from '../../../data/quality-scores.json';
+import goalArticlesData from '../../../data/goal-articles.json';
 
 const NAMES = {
   'portugal':'Portugal','spain':'Spain','poland':'Poland',
@@ -72,7 +73,7 @@ const ISO2 = {
 const GOAL_DEFINITIONS = {
   'best-for-retirement': {
     title: 'Best Countries for Retirement',
-    intro: 'Ranked by a combination of healthcare quality, safety, and overall happiness — the three factors that matter most for a comfortable retirement abroad.',
+    intro: 'Ranked by a combination of healthcare quality, safety, and overall happiness. These are the three factors that matter most for a comfortable retirement abroad.',
     filter: (d) => true,
     sort: (a, b) => {
       const scoreA = (a.healthcare || 0) * 0.4 + (a.safety || 0) * 0.3 + (a.happiness || 0) * 0.3;
@@ -83,7 +84,7 @@ const GOAL_DEFINITIONS = {
   },
   'remote-work-friendly': {
     title: 'Best Countries for Remote Work',
-    intro: 'Countries with a digital nomad visa program and fast, reliable internet — ranked by internet speed.',
+    intro: 'Countries with a digital nomad visa program and fast, reliable internet, ranked by internet speed.',
     filter: (d) => d.nomad_visa === true,
     sort: (a, b) => (b.internet || 0) - (a.internet || 0),
     metric: (d) => `Internet ${d.internet}/10 (${d.raw?.internet || '—'} Mbps) · Digital Nomad Visa available`
@@ -104,7 +105,7 @@ const GOAL_DEFINITIONS = {
   },
   'english-friendly': {
     title: 'Most English-Friendly Countries',
-    intro: 'Ranked by the EF English Proficiency Index — countries where you can navigate daily life without learning a new language.',
+    intro: 'Ranked by the EF English Proficiency Index. These are countries where you can get through daily life without learning a new language.',
     filter: (d) => d.english != null && d.english >= 500,
     sort: (a, b) => (b.english || 0) - (a.english || 0),
     metric: (d) => d.english >= 999 ? 'Native English speaking' : `EF EPI score: ${d.english}`
@@ -131,6 +132,7 @@ export async function getStaticPaths() {
 
 const { goal } = Astro.params;
 const goalDef = GOAL_DEFINITIONS[goal];
+const goalArticle: string | null = (goalArticlesData as Record<string, string>)[goal] || null;
 const countries = qualityScoresData.countries;
 
 const rankedList = goalDef ? Object.entries(countries)
@@ -245,13 +247,32 @@ const pageDescription = goalDef
   margin-top: 2px;
 }
 
+.goal-article {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px 48px;
+  font-size: 16px;
+  line-height: 1.8;
+  color: #374151;
+}
+.goal-article p {
+  margin: 0 0 20px;
+}
+
 .not-found a {
   color: #2563EB;
 }
 
 @media (max-width: 768px) {
+  .goal-hero { text-align: center; padding: 48px 20px 36px; }
   .goal-hero h1 { font-size: 24px; }
+  .goal-hero p { font-size: 15px; }
   .ranking-item { flex-wrap: wrap; }
+  .breadcrumb { text-align: center; }
+}
+@media (max-width: 480px) {
+  .goal-hero h1 { font-size: 22px; }
+  .ranking-number { font-size: 20px; min-width: 32px; }
 }
 </style>
 
@@ -280,6 +301,13 @@ const pageDescription = goalDef
           </a>
         ))}
       </div>
+      {goalArticle && (
+        <div class="goal-article">
+          {goalArticle.split('\n\n').map((para: string) => (
+            <p>{para}</p>
+          ))}
+        </div>
+      )}
     </>
   ) : (
     <div class="goal-hero not-found">

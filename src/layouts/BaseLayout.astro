@@ -14,8 +14,7 @@ const { title, description } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <title>{title}</title>
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -30,13 +29,14 @@ const { title, description } = Astro.props;
         </a>
 
         <div class="nav-links">
-          <a href="/#calculator" class="nav-link">Salary Arbitrage</a>
+          <a href="/#salary-arbitrage" class="nav-link">Salary Arbitrage</a>
           <a href="/country-match" class="nav-link">Country Match</a>
-          <a href="/tools/visa" class="nav-link">Visa Explorer</a>
-          <a href="/countries" class="nav-link">Countries</a>
+          <a href="/fire" class="nav-link">Retire Abroad</a>
+          <a href="/taxes" class="nav-link">Expat Taxes</a>
+          <a href="/countries" class="nav-link">Compare Countries</a>
         </div>
 
-        <a href="/#calculator" class="btn-pill btn-pill-primary nav-cta">Try It Free</a>
+        <a href="/#salary-arbitrage" class="btn-pill btn-pill-primary nav-cta">Try It Free</a>
 
         <button class="hamburger" id="hamburger" aria-label="Open menu">
           <span></span>
@@ -48,11 +48,12 @@ const { title, description } = Astro.props;
 
     <div class="mobile-menu" id="mobile-menu">
       <div class="mobile-menu-inner">
-        <a href="/#calculator" class="mobile-nav-link">Salary Arbitrage</a>
+        <a href="/#salary-arbitrage" class="mobile-nav-link">Salary Arbitrage</a>
         <a href="/country-match" class="mobile-nav-link">Country Match</a>
-        <a href="/tools/visa" class="mobile-nav-link">Visa Explorer</a>
-        <a href="/countries" class="mobile-nav-link">Countries</a>
-        <a href="/#calculator" class="btn-pill btn-pill-primary mobile-nav-cta">Try It Free →</a>
+        <a href="/fire" class="mobile-nav-link">Retire Abroad</a>
+        <a href="/taxes" class="mobile-nav-link">Expat Taxes</a>
+        <a href="/countries" class="mobile-nav-link">Compare Countries</a>
+        <a href="/#salary-arbitrage" class="btn-pill btn-pill-primary mobile-nav-cta">Try It Free →</a>
       </div>
     </div>
 
@@ -65,7 +66,7 @@ const { title, description } = Astro.props;
         <div class="footer-main">
           <div class="footer-brand">
             <img src="/images/logo2.webp" alt="LeavingAmerica" height="32" style="display:block; margin-bottom:14px"/>
-            <p class="footer-tagline">Free Salary Arbitrage calculator for Americans exploring life abroad.</p>
+            <p class="footer-tagline">Free salary, retirement, and tax tools for Americans exploring life abroad.</p>
             <p class="footer-affiliate-note">
               Some links earn us a commission at no extra cost to you.
               <a href="/affiliate-disclosure">Disclosure →</a>
@@ -74,10 +75,11 @@ const { title, description } = Astro.props;
           <div class="footer-col">
             <h4 class="footer-heading">Product</h4>
             <ul class="footer-links">
-              <li><a href="/#calculator">Salary Arbitrage</a></li>
-              <li><a href="/countries">Countries</a></li>
+              <li><a href="/#salary-arbitrage">Salary Arbitrage</a></li>
               <li><a href="/country-match">Country Match</a></li>
-              <li><a href="/tools/visa">Visa Explorer</a></li>
+              <li><a href="/fire">Retire Abroad</a></li>
+              <li><a href="/taxes">US Expat Taxes</a></li>
+              <li><a href="/countries">Compare Countries</a></li>
             </ul>
           </div>
           <div class="footer-col">
@@ -129,6 +131,12 @@ const { title, description } = Astro.props;
           document.body.style.overflow = '';
         });
       });
+
+      if (document.getElementById('fire-config')) {
+        var s = document.createElement('script');
+        s.src = '/fire-calc.js';
+        document.body.appendChild(s);
+      }
     </script>
   </body>
 </html>
@@ -545,8 +553,10 @@ const { title, description } = Astro.props;
     .container { padding: 0 24px; }
     section { padding: 60px 0; }
     .footer { padding: 40px 20px 28px; }
-    .footer-main { grid-template-columns: 1fr 1fr; gap: 28px; margin-bottom: 28px; padding-bottom: 28px; }
+    .footer-main { grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 28px; padding-bottom: 28px; }
     .footer-brand { grid-column: 1 / -1; }
+    .footer-links a { font-size: 12px; }
+    .footer-heading { font-size: 9px; }
     .footer-bottom { gap: 6px; }
   }
 </style>

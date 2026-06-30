@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import qualityScoresData from '../../data/quality-scores.json';
+import goalArticlesData from '../../data/goal-articles.json';
 
 const countries = qualityScoresData.countries;
 
@@ -147,6 +148,7 @@ const browseByGoal = [
 
 const pageTitle = 'Compare 82 Countries for Americans Moving Abroad | LeavingAmerica';
 const pageDescription = 'Browse cost of living, safety, healthcare, visa requirements, and tax systems for 82 countries. Find where your salary goes furthest as an American expat.';
+const hubArticle: string = (goalArticlesData as Record<string, string>)['countries-hub'] || '';
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription}>
@@ -283,10 +285,28 @@ const pageDescription = 'Browse cost of living, safety, healthcare, visa require
   letter-spacing: 0.05em;
 }
 
+.editorial-section {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #374151;
+  max-width: 900px;
+}
+.editorial-section p {
+  margin: 0 0 20px;
+}
+
 @media (max-width: 768px) {
-  .goal-grid { grid-template-columns: 1fr; }
+  .goal-grid { grid-template-columns: 1fr 1fr; }
   .country-grid { grid-template-columns: 1fr 1fr; }
-  .hub-hero h1 { font-size: 26px; }
+  .hub-hero { padding: 60px 20px 32px; }
+  .hub-hero h1 { font-size: 24px; text-align: center; }
+  .hub-hero p { font-size: 15px; text-align: center; }
+  .section-title { font-size: 20px; }
+}
+@media (max-width: 480px) {
+  .goal-grid { grid-template-columns: 1fr; }
+  .country-grid { grid-template-columns: 1fr; }
+  .country-card-name { white-space: normal; }
 }
 </style>
 
@@ -296,7 +316,7 @@ const pageDescription = 'Browse cost of living, safety, healthcare, visa require
     <h1>Compare 82 Countries for Americans Moving Abroad</h1>
     <p>
       Cost of living, safety, healthcare, visa requirements,
-      and tax systems — based on public economic data,
+      and tax systems. All figures from public economic data,
       updated quarterly.
     </p>
   </div>
@@ -335,6 +355,14 @@ const pageDescription = 'Browse cost of living, safety, healthcare, visa require
       ))}
     </div>
   </div>
+
+  {hubArticle && (
+    <div class="section editorial-section">
+      {hubArticle.split('\n\n').map((para: string) => (
+        <p>{para}</p>
+      ))}
+    </div>
+  )}
 
 </div>
 

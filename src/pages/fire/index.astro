@@ -1,0 +1,402 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import qualityScoresData from '../../data/quality-scores.json';
+
+const NAMES: Record<string,string> = {
+  'portugal':'Portugal','spain':'Spain','poland':'Poland','mexico':'Mexico',
+  'thailand':'Thailand','germany':'Germany','japan':'Japan','croatia':'Croatia',
+  'czech-republic':'Czech Republic','hungary':'Hungary','romania':'Romania',
+  'bulgaria':'Bulgaria','vietnam':'Vietnam','south-korea':'South Korea',
+  'australia':'Australia','new-zealand':'New Zealand','canada':'Canada',
+  'ireland':'Ireland','netherlands':'Netherlands','france':'France',
+  'argentina':'Argentina','ecuador':'Ecuador','morocco':'Morocco',
+  'switzerland':'Switzerland','norway':'Norway','denmark':'Denmark',
+  'sweden':'Sweden','belgium':'Belgium','austria':'Austria','finland':'Finland',
+  'united-kingdom':'United Kingdom','singapore':'Singapore',
+  'united-arab-emirates':'UAE','qatar':'Qatar','saudi-arabia':'Saudi Arabia',
+  'iceland':'Iceland','india':'India','philippines':'Philippines','china':'China',
+  'georgia':'Georgia','serbia':'Serbia','kenya':'Kenya','peru':'Peru',
+  'brazil':'Brazil','chile':'Chile','albania':'Albania','sri-lanka':'Sri Lanka',
+  'egypt':'Egypt','indonesia':'Indonesia','colombia':'Colombia',
+  'costa-rica':'Costa Rica','panama':'Panama','malaysia':'Malaysia',
+  'italy':'Italy','greece':'Greece','bahamas':'Bahamas','belize':'Belize',
+  'bolivia':'Bolivia','cambodia':'Cambodia','cyprus':'Cyprus',
+  'dominican-republic':'Dominican Republic','el-salvador':'El Salvador',
+  'estonia':'Estonia','ghana':'Ghana','honduras':'Honduras','jamaica':'Jamaica',
+  'kazakhstan':'Kazakhstan','latvia':'Latvia','lithuania':'Lithuania',
+  'malta':'Malta','montenegro':'Montenegro','nepal':'Nepal',
+  'nicaragua':'Nicaragua','north-macedonia':'North Macedonia','paraguay':'Paraguay',
+  'rwanda':'Rwanda','slovakia':'Slovakia','slovenia':'Slovenia',
+  'south-africa':'South Africa','taiwan':'Taiwan','turkey':'Turkey','uruguay':'Uruguay',
+};
+
+const ISO2: Record<string,string> = {
+  'portugal':'pt','spain':'es','poland':'pl','mexico':'mx','thailand':'th',
+  'germany':'de','japan':'jp','croatia':'hr','czech-republic':'cz','hungary':'hu',
+  'romania':'ro','bulgaria':'bg','vietnam':'vn','south-korea':'kr','australia':'au',
+  'new-zealand':'nz','canada':'ca','ireland':'ie','netherlands':'nl','france':'fr',
+  'argentina':'ar','ecuador':'ec','morocco':'ma','switzerland':'ch','norway':'no',
+  'denmark':'dk','sweden':'se','belgium':'be','austria':'at','finland':'fi',
+  'united-kingdom':'gb','singapore':'sg','united-arab-emirates':'ae','qatar':'qa',
+  'saudi-arabia':'sa','iceland':'is','india':'in','philippines':'ph','china':'cn',
+  'georgia':'ge','serbia':'rs','kenya':'ke','peru':'pe','brazil':'br','chile':'cl',
+  'albania':'al','sri-lanka':'lk','egypt':'eg','indonesia':'id','colombia':'co',
+  'costa-rica':'cr','panama':'pa','malaysia':'my','italy':'it','greece':'gr',
+  'bahamas':'bs','belize':'bz','bolivia':'bo','cambodia':'kh','cyprus':'cy',
+  'dominican-republic':'do','el-salvador':'sv','estonia':'ee','ghana':'gh',
+  'honduras':'hn','jamaica':'jm','kazakhstan':'kz','latvia':'lv','lithuania':'lt',
+  'malta':'mt','montenegro':'me','nepal':'np','nicaragua':'ni',
+  'north-macedonia':'mk','paraguay':'py','rwanda':'rw','slovakia':'sk',
+  'slovenia':'si','south-africa':'za','taiwan':'tw','turkey':'tr','uruguay':'uy',
+};
+
+interface CountryRow {
+  slug: string;
+  name: string;
+  iso2: string;
+  monthly: number;
+  fire: number;
+  healthcare: number;
+  grade: string;
+  visaDays: number;
+}
+
+const rows: CountryRow[] = Object.entries(qualityScoresData.countries)
+  .filter(([, d]: [string, any]) => d.budget_single)
+  .map(([slug, d]: [string, any]) => ({
+    slug,
+    name: NAMES[slug] || slug,
+    iso2: ISO2[slug] || '',
+    monthly: d.budget_single,
+    fire: Math.round(d.budget_single * 12 / 0.04 / 1000) * 1000,
+    healthcare: d.healthcare || 0,
+    grade: d.grade_label || '',
+    visaDays: d.visa_days || 0,
+  }))
+  .sort((a, b) => a.name.localeCompare(b.name));
+
+const cheapest = rows.slice(0, 5);
+const mid = rows.filter(r => r.fire >= 300000 && r.fire <= 700000).slice(0, 5);
+const total = rows.length;
+
+const schemaData = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Which country has the lowest FIRE number for Americans?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": `${cheapest[0]?.name} has one of the lowest FIRE numbers at approximately $${cheapest[0]?.fire.toLocaleString()}, based on monthly expenses of ~$${cheapest[0]?.monthly.toLocaleString()}/month and the 4% withdrawal rule.`
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is a FIRE number?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Your FIRE number is the total investment portfolio size you need to retire. It's calculated as your annual expenses divided by 0.04 (the 4% withdrawal rule). For example, if you spend $2,000/month ($24,000/year) abroad, your FIRE number is $600,000."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the cheapest country to retire as an American?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": `Based on monthly living costs and the 4% rule, the most affordable retirement destinations for Americans include ${cheapest.slice(0,3).map(r => r.name).join(', ')}, with FIRE numbers ranging from $${cheapest[0]?.fire.toLocaleString()} to $${cheapest[2]?.fire.toLocaleString()}.`
+      }
+    }
+  ]
+});
+---
+
+<BaseLayout
+  title={`Retire Abroad Calculator: FIRE Number in ${total} Countries (2026) | LeavingAmerica`}
+  description={`How much do you need to retire abroad? Compare early retirement numbers across ${total} countries. See your FIRE number in Portugal, Thailand, Mexico, Vietnam, and more.`}>
+
+<script type="application/ld+json" set:html={schemaData} />
+
+<style is:global>
+* { box-sizing: border-box; }
+.hub-page { font-family: 'Manrope', sans-serif; background: #F8FAFC; }
+
+.hub-hero {
+  background: linear-gradient(135deg, #0F172A 0%, #1E293B 60%, #1E3A8A 100%);
+  padding: 64px 24px 72px; color: white; text-align: center;
+}
+.hub-hero-inner { max-width: 720px; margin: 0 auto; }
+.hub-eyebrow {
+  font-size: 11px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: #60A5FA; margin-bottom: 14px;
+}
+.hub-hero h1 {
+  font-size: clamp(28px, 4vw, 46px); font-weight: 800;
+  line-height: 1.12; letter-spacing: -0.5px; margin-bottom: 16px;
+}
+.hub-hero-sub { font-size: 16px; color: #94A3B8; line-height: 1.6; margin-bottom: 32px; }
+.hub-stat-row { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; }
+.hub-stat { text-align: center; }
+.hub-stat-val { font-size: 28px; font-weight: 800; color: #60A5FA; }
+.hub-stat-label { font-size: 11px; color: #64748B; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; margin-top: 4px; }
+
+.hub-section { max-width: 960px; margin: 0 auto; padding: 48px 24px; }
+.hub-section h2 {
+  font-size: clamp(20px, 3vw, 28px); font-weight: 800;
+  color: #0F172A; margin-bottom: 8px; letter-spacing: -0.3px;
+}
+.hub-section-sub { font-size: 14px; color: #64748B; margin-bottom: 24px; }
+
+/* Top picks grid */
+.hub-picks { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 14px; margin-bottom: 12px; }
+.hub-pick {
+  background: white; border-radius: 14px; padding: 20px 18px;
+  border: 1.5px solid #E2E8F0; text-decoration: none; color: inherit;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  display: block;
+}
+.hub-pick:hover { border-color: #2563EB; box-shadow: 0 4px 16px rgba(37,99,235,0.12); }
+.hub-pick-flag { font-size: 24px; margin-bottom: 10px; }
+.hub-pick-name { font-size: 14px; font-weight: 700; color: #0F172A; margin-bottom: 4px; }
+.hub-pick-fire { font-size: 18px; font-weight: 800; color: #2563EB; margin-bottom: 3px; }
+.hub-pick-monthly { font-size: 11px; color: #94A3B8; font-weight: 500; }
+
+/* Table */
+.hub-table-wrap { background: white; border-radius: 16px; overflow-x: auto; overflow-y: hidden; border: 1px solid #E2E8F0; -webkit-overflow-scrolling: touch; }
+.hub-table-controls { display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; align-items: center; }
+.hub-search {
+  flex: 1; min-width: 200px; padding: 10px 14px; border: 1.5px solid #E2E8F0;
+  border-radius: 10px; font-size: 14px; font-family: 'Manrope', sans-serif;
+  outline: none; background: white; color: #0F172A;
+}
+.hub-search:focus { border-color: #2563EB; }
+.hub-table { width: 100%; border-collapse: collapse; }
+.hub-table th {
+  font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px;
+  color: #64748B; padding: 12px 16px; border-bottom: 2px solid #E2E8F0;
+  text-align: left; white-space: nowrap;
+}
+.hub-table th.sortable { cursor: pointer; user-select: none; }
+.hub-table th.sortable:hover { color: #2563EB; }
+.hub-table th.sort-asc::after { content: ' ↑'; color: #2563EB; }
+.hub-table th.sort-desc::after { content: ' ↓'; color: #2563EB; }
+.hub-table td { padding: 13px 16px; border-bottom: 1px solid #F1F5F9; font-size: 14px; }
+.hub-table tbody tr:hover td { background: #F8FAFC; }
+.hub-table tbody tr:last-child td { border-bottom: none; }
+.td-name { display: flex; align-items: center; gap: 10px; font-weight: 700; color: #0F172A; }
+.td-fire { font-weight: 800; color: #0F172A; }
+.td-monthly { color: #64748B; }
+.td-health { font-weight: 700; }
+.td-cta { color: #2563EB; font-weight: 700; text-decoration: none; font-size: 13px; white-space: nowrap; }
+.td-cta:hover { text-decoration: underline; }
+.hub-table-note { font-size: 11px; color: #94A3B8; padding: 14px 16px; border-top: 1px solid #F1F5F9; }
+
+/* Article intro */
+.hub-article { background: white; border-radius: 20px; padding: 36px 40px; border: 1px solid #E2E8F0; }
+.hub-article h2 { font-size: 22px; font-weight: 800; color: #0F172A; margin-bottom: 16px; }
+.hub-article p { font-size: 16px; color: #334155; line-height: 1.78; margin-bottom: 16px; }
+.hub-article p:last-child { margin-bottom: 0; }
+
+/* CTA bar */
+.hub-cta { background: linear-gradient(135deg, #1E3A8A, #2563EB); border-radius: 20px; padding: 40px; text-align: center; color: white; }
+.hub-cta h2 { font-size: 22px; font-weight: 800; margin-bottom: 10px; }
+.hub-cta p { font-size: 15px; color: #BFDBFE; margin-bottom: 24px; }
+.hub-cta-btn {
+  display: inline-block; background: white; color: #1E3A8A;
+  font-size: 15px; font-weight: 700; padding: 14px 32px;
+  border-radius: 100px; text-decoration: none;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+.hub-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.25); }
+
+@media (max-width: 640px) {
+  .hub-article { padding: 24px 20px; }
+  .hub-stat-row { gap: 16px; }
+  .hub-stat-val { font-size: 22px; }
+  .hub-picks { grid-template-columns: repeat(2, 1fr); }
+  .hub-cta { padding: 28px 20px; }
+  .hub-hero { padding: 48px 20px 52px; }
+}
+@media (max-width: 420px) {
+  .hub-picks { grid-template-columns: 1fr; }
+  .hub-table th:nth-child(4), .hub-table td:nth-child(4) { display: none; }
+}
+</style>
+
+<div class="hub-page">
+
+  <section class="hub-hero">
+    <div class="hub-hero-inner">
+      <p class="hub-eyebrow">FIRE Calculator</p>
+      <h1>FIRE Number by Country:<br/>How Much to Retire Abroad?</h1>
+      <p class="hub-hero-sub">
+        Compare the investment portfolio you need to retire early in {total} countries.
+        Ranked by cost: from $255k in Georgia to $1.8M in Switzerland.
+      </p>
+      <div class="hub-stat-row">
+        <div class="hub-stat">
+          <div class="hub-stat-val">{total}</div>
+          <div class="hub-stat-label">Countries Compared</div>
+        </div>
+        <div class="hub-stat">
+          <div class="hub-stat-val">${(cheapest[0]?.fire / 1000).toFixed(0)}k</div>
+          <div class="hub-stat-label">Lowest FIRE Number</div>
+        </div>
+        <div class="hub-stat">
+          <div class="hub-stat-val">4%</div>
+          <div class="hub-stat-label">Withdrawal Rate Used</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cheapest picks -->
+  <div class="hub-section">
+    <h2>Cheapest Countries to Retire Early</h2>
+    <p class="hub-section-sub">
+      Countries where Americans can reach financial independence with the least capital.
+      Based on estimated single-person monthly expenses and the 4% withdrawal rule.
+    </p>
+    <div class="hub-picks">
+      {cheapest.map(r => (
+        <a href={`/fire/${r.slug}`} class="hub-pick">
+          <div class="hub-pick-flag">
+            <span class={`fi fi-${r.iso2}`} style="font-size:28px;border-radius:4px;"></span>
+          </div>
+          <div class="hub-pick-name">{r.name}</div>
+          <div class="hub-pick-fire">${(r.fire/1000).toFixed(0)}k</div>
+          <div class="hub-pick-monthly">~${r.monthly.toLocaleString()}/mo</div>
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <!-- Article -->
+  <div class="hub-section" style="padding-top:0">
+    <div class="hub-article">
+      <h2>What Is a FIRE Number and Why Does It Change by Country?</h2>
+      <p>
+        Your FIRE number (the investment portfolio that funds your retirement) is not a fixed figure.
+        It depends entirely on how much you spend each month. The 4% rule, drawn from decades of US
+        stock market data, says you can withdraw 4% of your portfolio annually without depleting it
+        over a 30-year retirement. That means your FIRE number is simply your annual expenses
+        divided by 0.04, or your monthly expenses multiplied by 300.
+      </p>
+      <p>
+        The math explains why retiring abroad is so powerful for early retirement.
+        In a median US city, Americans spend roughly $3,500 a month, which means they need
+        $1,050,000 to retire. In Lisbon on $2,000 a month, that number drops to $600,000.
+        In Chiang Mai on $1,100 a month, it falls to $330,000. The country you choose
+        does not just affect your quality of life. It changes how long you have to work
+        by hundreds of thousands of dollars.
+      </p>
+      <p>
+        The numbers on this page use verified monthly budget estimates for single Americans
+        living a comfortable (not budget backpacker) lifestyle in each country. Healthcare,
+        housing, food, and transportation are included. What they don't include: US tax
+        obligations, one-time relocation costs, or currency risk. Use these figures as a
+        starting framework, not a contract. Click any country to see the full breakdown
+        and calculate your personalized timeline.
+      </p>
+    </div>
+  </div>
+
+  <!-- Full table -->
+  <div class="hub-section" style="padding-top:0">
+    <h2>All {total} Countries: Sortable FIRE Table</h2>
+    <div class="hub-table-controls">
+      <input
+        type="text"
+        class="hub-search"
+        id="hub-search"
+        placeholder="Search country..."
+        autocomplete="off"
+      />
+    </div>
+    <div class="hub-table-wrap">
+      <table class="hub-table" id="hub-table">
+        <thead>
+          <tr>
+            <th class="sortable" data-col="name">Country</th>
+            <th class="sortable sort-asc" data-col="fire">FIRE Number</th>
+            <th class="sortable" data-col="monthly">Monthly Budget</th>
+            <th class="sortable" data-col="healthcare">Healthcare</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="hub-tbody">
+          {rows.map(r => (
+            <tr data-name={r.name.toLowerCase()} data-fire={r.fire} data-monthly={r.monthly} data-hc={r.healthcare}>
+              <td>
+                <div class="td-name">
+                  <span class={`fi fi-${r.iso2}`} style="font-size:20px;border-radius:3px;flex-shrink:0"></span>
+                  {r.name}
+                </div>
+              </td>
+              <td class="td-fire">${r.fire.toLocaleString()}</td>
+              <td class="td-monthly">~${r.monthly.toLocaleString()}/mo</td>
+              <td class="td-health" style={`color:${r.healthcare >= 8 ? '#16A34A' : r.healthcare >= 6 ? '#D97706' : '#DC2626'}`}>
+                {r.healthcare}/10
+              </td>
+              <td><a href={`/fire/${r.slug}`} class="td-cta">Calculate →</a></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <div class="hub-table-note">
+        FIRE numbers based on 4% withdrawal rule and estimated single-person monthly budgets.
+        Not financial advice. Individual costs vary.
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="hub-section" style="padding-top:0">
+    <div class="hub-cta">
+      <h2>Not sure which country fits your life?</h2>
+      <p>Answer 10 questions and get a personalized ranking based on your lifestyle, budget, and priorities.</p>
+      <a href="/country-match/quiz" class="hub-cta-btn">Take the Country Match Quiz →</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// Search
+const search = document.getElementById('hub-search') as HTMLInputElement;
+const tbody  = document.getElementById('hub-tbody');
+search?.addEventListener('input', () => {
+  const q = search.value.toLowerCase();
+  tbody?.querySelectorAll('tr').forEach(row => {
+    const name = (row as HTMLElement).dataset.name || '';
+    (row as HTMLElement).style.display = name.includes(q) ? '' : 'none';
+  });
+});
+
+// Sort
+let sortCol = 'fire';
+let sortDir = 1; // 1 = asc, -1 = desc
+document.querySelectorAll('.hub-table th.sortable').forEach(th => {
+  th.addEventListener('click', () => {
+    const col = (th as HTMLElement).dataset.col || '';
+    if (sortCol === col) sortDir *= -1; else { sortCol = col; sortDir = 1; }
+
+    document.querySelectorAll('.hub-table th').forEach(h => {
+      h.classList.remove('sort-asc','sort-desc');
+    });
+    th.classList.add(sortDir === 1 ? 'sort-asc' : 'sort-desc');
+
+    const rows = Array.from(tbody?.querySelectorAll('tr') || []);
+    rows.sort((a, b) => {
+      const av = (a as HTMLElement).dataset[col === 'name' ? 'name' : col] || '';
+      const bv = (b as HTMLElement).dataset[col === 'name' ? 'name' : col] || '';
+      if (col === 'name') return av.localeCompare(bv) * sortDir;
+      return (parseFloat(av) - parseFloat(bv)) * sortDir;
+    });
+    rows.forEach(r => tbody?.appendChild(r));
+  });
+});
+</script>
+
+</BaseLayout>

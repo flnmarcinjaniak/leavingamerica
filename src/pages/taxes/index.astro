@@ -1,0 +1,455 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import qualityScoresData from '../../data/quality-scores.json';
+
+const NAMES: Record<string,string> = {
+  'portugal':'Portugal','spain':'Spain','poland':'Poland','mexico':'Mexico',
+  'thailand':'Thailand','germany':'Germany','japan':'Japan','croatia':'Croatia',
+  'czech-republic':'Czech Republic','hungary':'Hungary','romania':'Romania',
+  'bulgaria':'Bulgaria','vietnam':'Vietnam','south-korea':'South Korea',
+  'australia':'Australia','new-zealand':'New Zealand','canada':'Canada',
+  'ireland':'Ireland','netherlands':'Netherlands','france':'France',
+  'argentina':'Argentina','ecuador':'Ecuador','morocco':'Morocco',
+  'switzerland':'Switzerland','norway':'Norway','denmark':'Denmark',
+  'sweden':'Sweden','belgium':'Belgium','austria':'Austria','finland':'Finland',
+  'united-kingdom':'United Kingdom','singapore':'Singapore',
+  'united-arab-emirates':'UAE','qatar':'Qatar','saudi-arabia':'Saudi Arabia',
+  'iceland':'Iceland','india':'India','philippines':'Philippines','china':'China',
+  'georgia':'Georgia','serbia':'Serbia','kenya':'Kenya','peru':'Peru',
+  'brazil':'Brazil','chile':'Chile','albania':'Albania','sri-lanka':'Sri Lanka',
+  'egypt':'Egypt','indonesia':'Indonesia','colombia':'Colombia',
+  'costa-rica':'Costa Rica','panama':'Panama','malaysia':'Malaysia',
+  'italy':'Italy','greece':'Greece','bahamas':'Bahamas','belize':'Belize',
+  'bolivia':'Bolivia','cambodia':'Cambodia','cyprus':'Cyprus',
+  'dominican-republic':'Dominican Republic','el-salvador':'El Salvador',
+  'estonia':'Estonia','ghana':'Ghana','honduras':'Honduras','jamaica':'Jamaica',
+  'kazakhstan':'Kazakhstan','latvia':'Latvia','lithuania':'Lithuania',
+  'malta':'Malta','montenegro':'Montenegro','nepal':'Nepal',
+  'nicaragua':'Nicaragua','north-macedonia':'North Macedonia','paraguay':'Paraguay',
+  'rwanda':'Rwanda','slovakia':'Slovakia','slovenia':'Slovenia',
+  'south-africa':'South Africa','taiwan':'Taiwan','turkey':'Turkey','uruguay':'Uruguay',
+};
+
+const countryList = Object.entries(qualityScoresData.countries)
+  .map(([slug, d]: [string, any]) => ({
+    slug, name: NAMES[slug] || slug, taxSystem: d.tax_system || 'worldwide'
+  }))
+  .sort((a, b) => a.name.localeCompare(b.name));
+
+const schemaFaq = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do Americans living abroad still have to pay US taxes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. US citizens and permanent residents must file a federal tax return every year regardless of where they live. The US taxes based on citizenship, not residency. It is one of only two countries in the world that does this. Living abroad does not eliminate your US tax filing obligation, though exclusions and credits may reduce what you owe."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the Foreign Earned Income Exclusion (FEIE)?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Foreign Earned Income Exclusion (FEIE) allows qualifying Americans living abroad to exclude up to $126,500 (2024 figure, adjusted annually) of foreign earned income from US federal income tax. To qualify, you must meet either the bona fide residence test or the physical presence test (330 days outside the US in a 12-month period). FEIE applies to earned income only, not investment income, pensions, or Social Security."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is FBAR and who needs to file it?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "FBAR (FinCEN Form 114) must be filed by any US person who has a financial interest in or signature authority over foreign bank accounts with an aggregate value exceeding $10,000 at any point during the year. The deadline is April 15, with an automatic extension to October 15. Penalties for non-filing can be severe."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between worldwide, territorial, and zero tax countries?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A worldwide tax country (like the US and UK) taxes residents on all income regardless of where it's earned. A territorial tax country only taxes income earned within its borders; foreign income may not be locally taxed. A zero-tax country (like the UAE and Qatar) has no personal income tax at all. As a US citizen, you still owe US federal taxes regardless of which type of country you live in."
+      }
+    }
+  ]
+});
+---
+
+<BaseLayout
+  title="US Taxes When Living Abroad: Complete Guide for American Expats (2026)"
+  description="Do Americans pay taxes when living abroad? Complete guide to FEIE, FBAR, worldwide vs territorial vs zero tax countries, and what you owe the IRS no matter where you live.">
+
+<script type="application/ld+json" set:html={schemaFaq} />
+
+<style is:global>
+* { box-sizing: border-box; }
+.tax-page { font-family: 'Manrope', sans-serif; background: #F8FAFC; }
+
+.tax-hero {
+  background: linear-gradient(135deg, #0F172A 0%, #1E293B 60%, #0F4C81 100%);
+  padding: 60px 24px 68px; color: white;
+}
+.tax-hero-inner { max-width: 880px; margin: 0 auto; }
+.tax-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #60A5FA; margin-bottom: 14px; }
+.tax-hero h1 { font-size: clamp(26px, 4vw, 40px); font-weight: 800; line-height: 1.15; letter-spacing: -0.5px; margin-bottom: 16px; }
+.tax-hero-sub { font-size: 16px; color: #94A3B8; line-height: 1.65; }
+
+.tax-wrap { max-width: 880px; margin: 0 auto; padding: 0 24px 80px; }
+
+/* Article */
+.tax-article { background: white; border-radius: 20px; padding: 40px 44px; border: 1px solid #E2E8F0; margin-top: 40px; }
+.tax-article h2 { font-size: 20px; font-weight: 800; color: #0F172A; margin: 32px 0 12px; }
+.tax-article h2:first-child { margin-top: 0; }
+.tax-article p { font-size: 16px; color: #334155; line-height: 1.78; margin-bottom: 16px; font-weight: 450; }
+.tax-article p:last-child { margin-bottom: 0; }
+.tax-highlight {
+  background: #EFF6FF; border-left: 3px solid #2563EB;
+  border-radius: 0 10px 10px 0; padding: 16px 20px; margin: 20px 0;
+  font-size: 15px; color: #1E3A8A; font-weight: 600;
+}
+.tax-states-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+.tax-state-badge {
+  background: #F0FDF4; border: 1px solid #BBF7D0; color: #16A34A;
+  font-size: 12px; font-weight: 700; padding: 5px 12px; border-radius: 100px;
+}
+.tax-disclaimer {
+  background: #FEF3C7; border: 1px solid #FDE68A; border-radius: 12px;
+  padding: 16px 20px; font-size: 13px; color: #92400E; line-height: 1.6; margin-top: 28px;
+}
+
+/* Widget */
+.tax-widget { background: white; border-radius: 20px; border: 1px solid #E2E8F0; padding: 36px 40px; margin-top: 32px; }
+.tax-widget h2 { font-size: 20px; font-weight: 800; color: #0F172A; margin-bottom: 24px; }
+.tax-form { display: grid; gap: 18px; }
+.tax-field label { display: block; font-size: 12px; font-weight: 700; color: #64748B; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 7px; }
+.tax-select, .tax-country-select {
+  width: 100%; padding: 12px 14px; border: 1.5px solid #E2E8F0;
+  border-radius: 10px; font-size: 15px; font-family: 'Manrope', sans-serif;
+  font-weight: 500; color: #0F172A; background: #F8FAFC;
+  outline: none; appearance: none; cursor: pointer;
+  transition: border-color 0.15s;
+}
+.tax-select:focus, .tax-country-select:focus { border-color: #2563EB; background: white; }
+.tax-checkbox-row { display: flex; align-items: flex-start; gap: 12px; }
+.tax-checkbox-row input[type="checkbox"] { width: 18px; height: 18px; accent-color: #2563EB; margin-top: 2px; flex-shrink: 0; cursor: pointer; }
+.tax-checkbox-row label { font-size: 14px; color: #374151; line-height: 1.5; cursor: pointer; font-weight: 500; }
+.tax-checkbox-row label span { font-size: 12px; color: #94A3B8; display: block; margin-top: 2px; }
+
+.tax-result-card {
+  margin-top: 24px; background: #EFF6FF; border: 1.5px solid #BFDBFE;
+  border-radius: 16px; padding: 24px 28px; display: none;
+}
+.tax-result-card.visible { display: block; }
+.tax-result-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #2563EB; margin-bottom: 16px; }
+.tax-result-row { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px; }
+.tax-result-row:last-child { margin-bottom: 0; }
+.tax-result-icon { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; flex-shrink: 0; margin-top: 1px; }
+.tax-result-icon.req { background: #FEE2E2; color: #DC2626; }
+.tax-result-icon.info { background: #FEF3C7; color: #D97706; }
+.tax-result-icon.ok { background: #DCFCE7; color: #16A34A; }
+.tax-result-text { font-size: 14px; color: #1E3A8A; line-height: 1.5; font-weight: 500; }
+.tax-result-note { font-size: 12px; color: #64748B; margin-top: 16px; line-height: 1.5; }
+
+.tax-cta-box {
+  background: #1E3A8A; border-radius: 14px; padding: 24px 28px;
+  color: white; margin-top: 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+}
+.tax-cta-box p { font-size: 14px; color: #BFDBFE; margin: 4px 0 0; }
+.tax-cta-box strong { font-size: 16px; color: white; }
+.tax-cta-btn {
+  display: inline-block; background: white; color: #1E3A8A;
+  font-size: 13px; font-weight: 700; padding: 11px 22px;
+  border-radius: 100px; text-decoration: none; white-space: nowrap;
+  transition: opacity 0.15s;
+}
+.tax-cta-btn:hover { opacity: 0.9; }
+
+/* FAQ */
+.tax-faq { margin-top: 40px; }
+.tax-faq h2 { font-size: 22px; font-weight: 800; color: #0F172A; margin-bottom: 16px; }
+.faq-item { border: 1px solid #E2E8F0; border-radius: 12px; margin-bottom: 10px; background: white; }
+.faq-item summary { padding: 18px 20px; font-weight: 700; font-size: 15px; color: #0F172A; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+.faq-item summary::after { content: '+'; font-size: 20px; color: #2563EB; font-weight: 400; flex-shrink: 0; margin-left: 12px; }
+.faq-item[open] summary::after { content: '−'; }
+.faq-item p { padding: 0 20px 18px; font-size: 14px; color: #475569; line-height: 1.7; margin: 0; }
+
+@media (max-width: 768px) {
+  .tax-hero { padding: 48px 20px 52px; text-align: center; }
+  .tax-hero h1 { font-size: 24px; }
+  .tax-hero-sub { font-size: 15px; }
+}
+@media (max-width: 600px) {
+  .tax-article, .tax-widget { padding: 24px 20px; }
+  .tax-cta-box { flex-direction: column; align-items: flex-start; }
+  .tax-cta-btn { width: 100%; text-align: center; }
+  .tax-wrap { padding: 0 16px 60px; }
+}
+</style>
+
+<div class="tax-page">
+
+  <section class="tax-hero">
+    <div class="tax-hero-inner">
+      <p class="tax-eyebrow">US Expat Tax Guide</p>
+      <h1>US Taxes When Living Abroad:<br/>What Americans Actually Need to Know</h1>
+      <p class="tax-hero-sub">Everything you need to file correctly as an American living abroad: FEIE, FBAR, worldwide vs. territorial tax systems, and what you still owe the IRS no matter where you move.</p>
+    </div>
+  </section>
+
+  <div class="tax-wrap">
+
+    <!-- Tax Reality Check Widget -->
+    <div class="tax-widget">
+      <h2>Tax Reality Check: Your Situation Snapshot</h2>
+      <div class="tax-form">
+        <div class="tax-field">
+          <label>Employment Type</label>
+          <select class="tax-select" id="tw-employment">
+            <option value="">Select your situation...</option>
+            <option value="w2">W-2 Employee (working for US or foreign employer)</option>
+            <option value="self">Self-Employed / Freelancer / 1099</option>
+            <option value="retired">Retired (Social Security / pension / investments)</option>
+          </select>
+        </div>
+        <div class="tax-field">
+          <label>Target Country</label>
+          <select class="tax-country-select" id="tw-country">
+            <option value="">Select country...</option>
+            {countryList.map(c => (
+              <option value={c.taxSystem}>{c.name}</option>
+            ))}
+          </select>
+        </div>
+        <div class="tax-field">
+          <div class="tax-checkbox-row">
+            <input type="checkbox" id="tw-notax" />
+            <label for="tw-notax">
+              I live in a state with no personal income tax
+              <span>Alaska, Florida, Nevada, South Dakota, Tennessee, Texas, Washington, Wyoming, New Hampshire</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="tax-result-card" id="tw-result">
+        <div class="tax-result-title">Your Tax Situation Summary</div>
+        <div id="tw-rows"></div>
+        <p class="tax-result-note">
+          This is a general overview based on your inputs, not personalized advice.
+          Actual obligations depend on your specific income, residency status, and tax treaties.
+          Consult an expat tax specialist for your situation.
+        </p>
+      </div>
+
+      <div class="tax-cta-box">
+        <div>
+          <strong>Need a personalized assessment?</strong>
+          <p>Greenback Tax Services specializes in expat returns: US and foreign filing combined.</p>
+        </div>
+        <a href="https://www.greenbacktaxservices.com/?partner=YOURCODE"
+           class="tax-cta-btn" target="_blank" rel="noopener sponsored">
+          Get a Free Consultation →
+        </a>
+      </div>
+    </div>
+
+    <!-- Article -->
+    <div class="tax-article">
+
+      <h2>The One Rule That Never Changes</h2>
+      <p>
+        If you are a US citizen or permanent resident, you must file a US federal tax return every year,
+        regardless of where you live, how long you have been gone, or whether you owe anything.
+        The United States taxes based on citizenship, not residency, putting it in rare company globally.
+        Moving to Portugal or Thailand does not remove your obligation to file. It changes what you might owe,
+        and sometimes dramatically so, but the filing requirement stays.
+      </p>
+      <p>
+        This surprises Americans who assume that leaving solves the tax problem. It doesn't.
+        What it can do is reduce your bill significantly, through the Foreign Earned Income Exclusion,
+        the Foreign Tax Credit, and by living in a country with a tax treaty or territorial tax system.
+        Understanding the difference between those tools is what expat tax planning actually means.
+      </p>
+
+      <h2>The Foreign Earned Income Exclusion (FEIE)</h2>
+      <p>
+        The FEIE is the main tool Americans use to reduce US taxes abroad. For 2024, it allows you
+        to exclude up to <strong>$126,500</strong> of foreign-earned income from US federal income tax, adjusted
+        annually for inflation. If you earn $80,000 working remotely abroad, you may owe nothing
+        to the IRS on that income.
+      </p>
+      <div class="tax-highlight">
+        To qualify for FEIE, you must meet either the <strong>Bona Fide Residence Test</strong>
+        (established residence in a foreign country for a full tax year) or the
+        <strong>Physical Presence Test</strong> (330 days outside the US in any 12-month period).
+      </div>
+      <p>
+        Critical limits: FEIE applies to <em>earned income only</em>: wages, self-employment income,
+        freelance revenue. It does not apply to investment income, dividends, capital gains, pensions,
+        or Social Security. And if you are self-employed, you still owe self-employment tax
+        (the 15.3% Social Security and Medicare tax) on excluded income. FEIE does not eliminate that.
+      </p>
+
+      <h2>FBAR: Reporting Foreign Accounts</h2>
+      <p>
+        If you have foreign bank accounts (including a local bank account abroad) and the combined
+        balance exceeds $10,000 at any point during the year, you must file an FBAR (FinCEN Form 114)
+        by April 15, with an automatic extension to October 15. It is filed separately from your tax
+        return, through FinCEN's BSA E-Filing System, not the IRS.
+      </p>
+      <p>
+        Non-filing penalties are severe: up to $10,000 per violation for non-willful failure,
+        and much higher for willful non-disclosure. Most expat tax professionals file FBAR
+        as a standard part of their annual process. If you are doing your own taxes, do not overlook it.
+      </p>
+
+      <h2>Worldwide, Territorial, and Zero-Tax Countries</h2>
+      <p>
+        Where you live determines whether you face a <em>second</em> tax obligation on top of your US filing.
+        Countries fall into three categories:
+      </p>
+      <p>
+        <strong>Worldwide tax</strong> (most European countries, Australia, Canada): you pay local tax
+        on all income, wherever earned. Combined with your US obligation, this creates dual-filing
+        complexity, though the Foreign Tax Credit usually prevents actual double taxation.
+      </p>
+      <p>
+        <strong>Territorial tax</strong> (Panama, Costa Rica, Malaysia, Georgia, Paraguay, Thailand):
+        the local government only taxes income earned <em>within</em> its borders. Foreign-sourced income,
+        like a US client or a remote job, is typically not locally taxed. This is a significant advantage
+        for freelancers and remote workers.
+      </p>
+      <p>
+        <strong>Zero personal income tax</strong> (UAE, Qatar, Saudi Arabia, Bahamas): no local income
+        tax at all. Your only obligation is to the US. Simple in theory, expensive in practice
+        due to cost of living.
+      </p>
+
+      <h2>Your US State Still Has a Say</h2>
+      <p>
+        Moving abroad does not automatically break your US state tax obligations.
+        Some states, especially California, New York, and Virginia, are aggressive
+        about claiming continued residency and will pursue state tax returns even after you leave.
+        The general rule is that you must establish "domicile" in another state (or abroad)
+        before your original state stops taxing you.
+      </p>
+      <p>
+        The simplest situation: if you already live in one of the <strong>nine states with no personal income tax</strong>,
+        this is a non-issue.
+      </p>
+      <div class="tax-states-list">
+        {['Alaska','Florida','Nevada','South Dakota','Tennessee','Texas','Washington','Wyoming','New Hampshire'].map(s => (
+          <span class="tax-state-badge">{s}</span>
+        ))}
+      </div>
+      <p>
+        If you are in any other state, research your state's "safe harbor" rules before leaving,
+        or consult a tax professional who specializes in state residency changes for expats.
+      </p>
+
+      <h2>Retired Americans Abroad</h2>
+      <p>
+        Social Security income remains taxable by the US regardless of where you live.
+        Pension income from US sources is also generally subject to US tax. The FEIE does not
+        apply to these. It is an earned income exclusion only. If your retirement income
+        comes entirely from investments, Social Security, or pensions, you face a relatively
+        straightforward US filing with no FEIE benefit, but also typically no double-taxation
+        issue in territorial or zero-tax countries.
+      </p>
+
+      <div class="tax-disclaimer">
+        <strong>Disclaimer:</strong> This is general information, not personalized tax advice.
+        Tax law changes frequently. Consult a qualified expat tax professional before making
+        decisions based on anything on this page. Errors or omissions may exist.
+      </div>
+    </div>
+
+    <div class="tax-faq">
+      <h2>Frequently Asked Questions</h2>
+      <details class="faq-item">
+        <summary>Do Americans living abroad still have to pay US taxes?</summary>
+        <p>Yes. US citizens must file a federal tax return every year regardless of where they live. The US is one of only two countries that taxes based on citizenship rather than residency. However, exclusions like the FEIE and the Foreign Tax Credit can significantly reduce what you actually owe.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What is the Foreign Earned Income Exclusion (FEIE)?</summary>
+        <p>The FEIE allows qualifying Americans living abroad to exclude up to $126,500 (2024, adjusted annually) of foreign earned income from US federal income tax. You must meet the bona fide residence test or the physical presence test (330 days outside the US). It covers earned income only, not investment income, pensions, or Social Security.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What is FBAR and who needs to file it?</summary>
+        <p>FBAR (FinCEN Form 114) is required if you have foreign financial accounts with a combined balance over $10,000 at any point during the year. Filed separately from your tax return by April 15 (auto-extended to October 15). Non-filing penalties can be significant.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What is the difference between worldwide, territorial, and zero-tax countries?</summary>
+        <p>Worldwide tax countries tax all income regardless of where earned (most of Europe). Territorial countries only tax locally-earned income; foreign income may not be taxed locally (Panama, Georgia, Thailand). Zero-tax countries have no personal income tax (UAE, Qatar). As a US citizen, you still owe US federal taxes regardless of which type you live in.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Do I still owe state taxes when I move abroad?</summary>
+        <p>Possibly. Some states (especially California, New York, Virginia) continue to assert tax residency after you leave unless you formally establish domicile elsewhere. If you already live in a no-income-tax state (FL, TX, NV, WA, WY, AK, SD, TN, NH), this is generally a non-issue. For others, consult a tax professional specializing in state residency changes before leaving.</p>
+      </details>
+    </div>
+
+  </div>
+</div>
+
+<script define:vars={{ countryOptions: countryList }}>
+function buildResult() {
+  const employment = document.getElementById('tw-employment').value;
+  const taxSystem  = document.getElementById('tw-country').value;
+  const noTax      = document.getElementById('tw-notax').checked;
+  const card       = document.getElementById('tw-result');
+  const rowsEl     = document.getElementById('tw-rows');
+
+  if (!employment || !taxSystem) { card.classList.remove('visible'); return; }
+
+  const items = [];
+
+  // Universal
+  items.push({ type: 'req', text: 'US federal tax return required every year, regardless of where you live.' });
+
+  // Country tax system
+  if (taxSystem === 'zero') {
+    items.push({ type: 'ok', text: 'This country has no personal income tax. Your only income tax obligation is to the US.' });
+  } else if (taxSystem === 'territorial') {
+    items.push({ type: 'ok', text: 'Territorial tax system: foreign-sourced income (remote work, US clients) is generally not taxed locally. Verify with a local accountant.' });
+  } else {
+    items.push({ type: 'info', text: 'Worldwide tax system: you may owe local income tax in addition to US obligations. The Foreign Tax Credit can prevent double taxation.' });
+  }
+
+  // Employment
+  if (employment === 'w2') {
+    items.push({ type: 'ok', text: 'FEIE may allow you to exclude up to $126,500 (2024) of earned income from US federal tax if you qualify by residency or physical presence.' });
+  } else if (employment === 'self') {
+    items.push({ type: 'info', text: 'FEIE can exclude earned income from federal income tax, but self-employment tax (15.3% for Social Security/Medicare) still applies to excluded income.' });
+    items.push({ type: 'req', text: 'Self-employed Americans with foreign accounts over $10,000 must file FBAR (FinCEN 114) separately from their tax return.' });
+  } else if (employment === 'retired') {
+    items.push({ type: 'info', text: 'Social Security and pension income remain taxable by the US regardless of where you live. FEIE does not apply to retirement income.' });
+    items.push({ type: 'ok', text: 'Investment income abroad is generally straightforward: report on Schedule B. No FEIE, but also no double-taxation if in a territorial/zero-tax country.' });
+  }
+
+  // State
+  if (noTax) {
+    items.push({ type: 'ok', text: 'Your US state has no personal income tax, which simplifies the process of changing residency.' });
+  } else {
+    items.push({ type: 'info', text: 'Check your state\'s exit rules before leaving. Some states (CA, NY, VA) are aggressive about maintaining residency claims.' });
+  }
+
+  // FBAR universal reminder
+  items.push({ type: 'req', text: 'If foreign account balances exceed $10,000 total at any point, file FBAR by April 15 (auto-extended to Oct 15).' });
+
+  rowsEl.innerHTML = items.map(item => `
+    <div class="tax-result-row">
+      <div class="tax-result-icon ${item.type}">${item.type === 'req' ? '!' : item.type === 'ok' ? '✓' : 'i'}</div>
+      <div class="tax-result-text">${item.text}</div>
+    </div>
+  `).join('');
+
+  card.classList.add('visible');
+}
+
+['tw-employment','tw-country','tw-notax'].forEach(id => {
+  document.getElementById(id)?.addEventListener('change', buildResult);
+});
+</script>
+
+</BaseLayout>

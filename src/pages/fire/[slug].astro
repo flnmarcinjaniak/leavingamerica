@@ -1,0 +1,478 @@
+---
+export const prerender = true;
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import qualityScoresData from '../../data/quality-scores.json';
+
+export async function getStaticPaths() {
+  return Object.entries(qualityScoresData.countries)
+    .filter(([, d]) => d.budget_single)
+    .map(([slug, data]) => ({
+      params: { slug },
+      props: { slug, data, allCountries: qualityScoresData.countries }
+    }));
+}
+
+const { slug, data, allCountries } = Astro.props;
+
+const NAMES: Record<string,string> = {
+  'portugal':'Portugal','spain':'Spain','poland':'Poland','mexico':'Mexico',
+  'thailand':'Thailand','germany':'Germany','japan':'Japan','croatia':'Croatia',
+  'czech-republic':'Czech Republic','hungary':'Hungary','romania':'Romania',
+  'bulgaria':'Bulgaria','vietnam':'Vietnam','south-korea':'South Korea',
+  'australia':'Australia','new-zealand':'New Zealand','canada':'Canada',
+  'ireland':'Ireland','netherlands':'Netherlands','france':'France',
+  'argentina':'Argentina','ecuador':'Ecuador','morocco':'Morocco',
+  'switzerland':'Switzerland','norway':'Norway','denmark':'Denmark',
+  'sweden':'Sweden','belgium':'Belgium','austria':'Austria','finland':'Finland',
+  'united-kingdom':'United Kingdom','singapore':'Singapore',
+  'united-arab-emirates':'UAE','qatar':'Qatar','saudi-arabia':'Saudi Arabia',
+  'iceland':'Iceland','india':'India','philippines':'Philippines','china':'China',
+  'georgia':'Georgia','serbia':'Serbia','kenya':'Kenya','peru':'Peru',
+  'brazil':'Brazil','chile':'Chile','albania':'Albania','sri-lanka':'Sri Lanka',
+  'egypt':'Egypt','indonesia':'Indonesia','colombia':'Colombia',
+  'costa-rica':'Costa Rica','panama':'Panama','malaysia':'Malaysia',
+  'italy':'Italy','greece':'Greece','bahamas':'Bahamas','belize':'Belize',
+  'bolivia':'Bolivia','cambodia':'Cambodia','cyprus':'Cyprus',
+  'dominican-republic':'Dominican Republic','el-salvador':'El Salvador',
+  'estonia':'Estonia','ghana':'Ghana','honduras':'Honduras','jamaica':'Jamaica',
+  'kazakhstan':'Kazakhstan','latvia':'Latvia','lithuania':'Lithuania',
+  'malta':'Malta','montenegro':'Montenegro','nepal':'Nepal',
+  'nicaragua':'Nicaragua','north-macedonia':'North Macedonia','paraguay':'Paraguay',
+  'rwanda':'Rwanda','slovakia':'Slovakia','slovenia':'Slovenia',
+  'south-africa':'South Africa','taiwan':'Taiwan','turkey':'Turkey','uruguay':'Uruguay',
+};
+
+const AFFILIATE_LINKS: Record<string,string> = {
+  'Wise':       'https://wise.com/invite/YOURCODE',
+  'NordVPN':    'https://nordvpn.com/?partner=YOURCODE',
+  'SafetyWing': 'https://safetywing.com/?referral=YOURCODE',
+  'Airalo':     'https://www.airalo.com?referral=YOURCODE',
+};
+
+function linkify(text: string): string {
+  let r = text;
+  for (const [brand, url] of Object.entries(AFFILIATE_LINKS)) {
+    r = r.replace(
+      new RegExp(`\\b${brand}\\b`, 'g'),
+      `<a href="${url}" class="aff-link" target="_blank" rel="noopener sponsored">${brand}</a>`
+    );
+  }
+  return r;
+}
+
+const countryName = NAMES[slug] || slug;
+
+// FIRE calculations
+const US_MONTHLY = 3500;
+const US_FIRE    = US_MONTHLY * 12 / 0.04;
+const WITHDRAWAL = 0.04;
+
+const monthly   = data.budget_single as number;
+const fireFull  = monthly * 12 / WITHDRAWAL;
+const fire      = Math.round(fireFull / 1000) * 1000;
+const usFire    = Math.round(US_FIRE / 1000) * 1000;
+const savings   = usFire - fire;
+
+// 3 countries closest by monthly budget
+const similar = Object.entries(allCountries)
+  .filter(([s, d]: [string, any]) => s !== slug && d.budget_single)
+  .sort(([,a]: [string,any], [,b]: [string,any]) =>
+    Math.abs(a.budget_single - monthly) - Math.abs(b.budget_single - monthly)
+  )
+  .slice(0, 3)
+  .map(([s, d]: [string, any]) => ({
+    slug: s,
+    name: NAMES[s] || s,
+    fire: Math.round(d.budget_single * 12 / 0.04 / 1000) * 1000,
+    monthly: d.budget_single,
+    label: d.grade_label || ''
+  }));
+
+// Article paragraphs
+const articleParas: string[] = data.fire_article
+  ? (data.fire_article as string).split('\n\n').map((p:string) => p.trim()).filter(Boolean)
+  : [];
+
+// FAQ (build-time, schema-ready)
+const nomadNote = data.nomad_visa
+  ? `A Digital Nomad Visa is available, giving longer-term legal stay options.`
+  : `Check current visa options. Most Americans start with a tourist visa.`;
+
+const faqs = [
+  {
+    q: `How much money do I need to retire in ${countryName}?`,
+    a: `Based on estimated monthly expenses of $${monthly.toLocaleString()}, you need approximately $${fire.toLocaleString()} to retire in ${countryName} using the 4% withdrawal rule. This assumes your investment portfolio covers all living expenses with a historically sustainable withdrawal rate. Individual costs vary by city and lifestyle.`
+  },
+  {
+    q: `Is ${countryName} a good place for Americans to retire early?`,
+    a: `${countryName} scores ${data.grade_label || 'well'} on quality of life indicators. ${data.us_comparison ? ('It is ' + data.us_comparison + '.') : ''} Healthcare rates ${data.healthcare || 'N/A'}/10. US citizens get ${data.visa_days || 0} days visa-free. ${nomadNote}`
+  },
+  {
+    q: `What is the FIRE number for ${countryName}?`,
+    a: `The FIRE number for ${countryName} is approximately $${fire.toLocaleString()}, based on estimated monthly expenses of $${monthly.toLocaleString()} and the 4% withdrawal rate. Compare this to the US median city FIRE number of approximately $1,050,000 (~$3,500/month).`
+  },
+  {
+    q: `Do Americans still pay US taxes when retired in ${countryName}?`,
+    a: `Yes, US citizens must file federal tax returns regardless of where they live. ${countryName} operates a ${data.tax_system || 'standard'} tax system. Social Security and pension income remain taxable by the US. The Foreign Earned Income Exclusion may apply to earned income. Consult an expat tax specialist for your situation.`
+  },
+  {
+    q: `What is the 4% withdrawal rule?`,
+    a: `The 4% rule states you can safely withdraw 4% of your investment portfolio each year in retirement without depleting it over a 30-year period, based on historical US stock market returns. Your FIRE number is annual expenses ÷ 0.04. It's a useful planning estimate, not a guarantee.`
+  }
+];
+
+const faqSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(f => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": { "@type": "Answer", "text": f.a }
+  }))
+});
+
+const fireK = Math.round(fire / 1000);
+const metaTitle = `Retire in ${countryName}: FIRE Number $${fireK}k & Early Retirement Guide (2026)`;
+const metaDesc = `Americans need $${fireK}k to retire in ${countryName} (~$${monthly.toLocaleString()}/month). Calculate your personal FIRE timeline and see how ${countryName} compares to staying in the US.`;
+---
+
+<BaseLayout title={metaTitle} description={metaDesc}>
+  <script type="application/ld+json" set:html={faqSchema} />
+
+<style is:global>
+* { box-sizing: border-box; }
+.fire-page { font-family: 'Manrope', sans-serif; background: #F8FAFC; }
+
+/* ── Hero ── */
+.fire-hero {
+  background: linear-gradient(135deg, #0F172A 0%, #1E293B 60%, #1E3A8A 100%);
+  padding: 64px 24px 72px;
+  color: white;
+}
+.fire-hero-inner { max-width: 880px; margin: 0 auto; }
+.fire-eyebrow {
+  font-size: 11px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: #60A5FA; margin-bottom: 14px;
+}
+.fire-hero h1 {
+  font-size: clamp(26px, 4vw, 42px); font-weight: 800;
+  line-height: 1.15; letter-spacing: -0.5px; margin-bottom: 32px;
+}
+.fire-numbers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px; margin-bottom: 20px;
+}
+.fire-num-box {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 14px; padding: 20px 24px;
+}
+.fire-num-box.primary { border-color: #60A5FA; background: rgba(96,165,250,0.12); }
+.fire-num-label { font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #94A3B8; margin-bottom: 8px; }
+.fire-num-value { font-size: 28px; font-weight: 800; color: white; line-height: 1; margin-bottom: 6px; }
+.fire-num-box.primary .fire-num-value { color: #60A5FA; }
+.fire-num-box.savings .fire-num-value { color: #4ADE80; }
+.fire-num-sub { font-size: 12px; color: #94A3B8; }
+.fire-disclaimer-xs { font-size: 11px; color: #64748B; }
+
+/* ── Sections ── */
+.fire-section { max-width: 880px; margin: 0 auto; padding: 48px 24px; }
+.fire-section h2 {
+  font-size: clamp(20px, 3vw, 28px); font-weight: 800;
+  color: #0F172A; margin-bottom: 24px; letter-spacing: -0.3px;
+}
+
+/* ── Article ── */
+.fire-article-wrap { background: white; border-radius: 20px; padding: 36px 40px; border: 1px solid #E2E8F0; }
+.fire-para { font-size: 17px; color: #334155; line-height: 1.78; font-weight: 450; margin-bottom: 20px; }
+.fire-para:last-child { margin-bottom: 0; }
+.fire-para-lead::first-letter {
+  font-size: 56px; font-weight: 800; color: #2563EB;
+  float: left; line-height: 1; margin-right: 8px; margin-top: 4px;
+  font-family: 'Manrope', sans-serif;
+}
+.aff-link { color: #2563EB; font-weight: 600; text-decoration: none; border-bottom: 1px solid rgba(37,99,235,0.3); }
+.aff-link:hover { border-bottom-color: #2563EB; }
+
+/* ── Calculator ── */
+.fire-calc-card {
+  background: white; border-radius: 20px; padding: 36px 40px;
+  border: 1px solid #E2E8F0; box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+}
+.fire-calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+.fire-field { margin-bottom: 18px; }
+.fire-field label { display: block; font-size: 12px; font-weight: 700; color: #64748B; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 7px; }
+.fire-field input[type="number"] {
+  width: 100%; padding: 12px 14px; border: 1.5px solid #E2E8F0;
+  border-radius: 10px; font-size: 16px; font-family: 'Manrope', sans-serif;
+  font-weight: 600; color: #0F172A; background: #F8FAFC;
+  outline: none; transition: border-color 0.15s;
+}
+.fire-field input:focus { border-color: #2563EB; background: white; }
+.fire-slider-wrap { display: flex; align-items: center; gap: 12px; }
+.fire-slider-wrap input[type="range"] { flex: 1; accent-color: #2563EB; }
+.fire-slider-val { font-size: 15px; font-weight: 700; color: #2563EB; min-width: 40px; text-align: right; }
+.fire-result-box {
+  background: linear-gradient(135deg, #EFF6FF, #F0FDF4);
+  border: 1.5px solid #BFDBFE; border-radius: 16px; padding: 28px;
+}
+.fire-result-row { display: flex; justify-content: space-between; align-items: baseline; padding: 10px 0; border-bottom: 1px solid rgba(37,99,235,0.1); }
+.fire-result-row:last-child { border-bottom: none; }
+.fire-result-label { font-size: 13px; color: #475569; font-weight: 500; }
+.fire-result-val { font-size: 22px; font-weight: 800; color: #0F172A; }
+.fire-result-val.highlight { color: #2563EB; font-size: 26px; }
+.fire-result-val.green { color: #16A34A; }
+.fire-result-note { font-size: 11px; color: #94A3B8; margin-top: 14px; }
+.fire-progress-wrap { margin-top: 16px; }
+.fire-progress-label { font-size: 11px; color: #64748B; font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 6px; display: flex; justify-content: space-between; }
+.fire-progress-bar { height: 8px; background: #E2E8F0; border-radius: 100px; overflow: hidden; }
+.fire-progress-fill { height: 100%; background: linear-gradient(90deg, #2563EB, #0EA5E9); border-radius: 100px; transition: width 0.6s ease; }
+.fire-calc-disclaimer { font-size: 11px; color: #94A3B8; margin-top: 12px; line-height: 1.5; }
+.fire-field-range { font-size: 11px; color: #94A3B8; font-weight: 400; margin-left: 4px; }
+.fire-field-error { display: block; font-size: 11px; color: #DC2626; margin-top: 4px; min-height: 16px; }
+input.fire-input-error { border-color: #FCA5A5 !important; background: #FEF2F2 !important; }
+.fire-result-box { position: relative; }
+.fire-result-overlay {
+  position: absolute; inset: 0;
+  background: rgba(248,250,252,0.88);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 2;
+  backdrop-filter: blur(2px);
+}
+.fire-result-overlay span {
+  font-size: 13px; font-weight: 600; color: #DC2626;
+  text-align: center; padding: 0 16px;
+}
+.fire-calc-hint { font-size: 13px; color: #92400E; background: #FEF3C7; border: 1px solid #FDE68A; border-radius: 8px; padding: 10px 14px; margin-top: 16px; line-height: 1.5; }
+
+/* ── Compare ── */
+.fire-compare-table { width: 100%; border-collapse: collapse; }
+.fire-compare-table th {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.8px; color: #64748B; padding: 10px 16px;
+  border-bottom: 2px solid #E2E8F0; text-align: left;
+}
+.fire-compare-table td { padding: 14px 16px; border-bottom: 1px solid #F1F5F9; font-size: 14px; }
+.fire-compare-table tr:last-child td { border-bottom: none; }
+.fire-compare-table tr:hover td { background: #F8FAFC; }
+.compare-fire { font-weight: 800; color: #0F172A; }
+.compare-monthly { color: #64748B; }
+.compare-link { color: #2563EB; font-weight: 600; text-decoration: none; font-size: 13px; }
+.compare-link:hover { text-decoration: underline; }
+.fire-table-wrap { background: white; border-radius: 16px; overflow: hidden; border: 1px solid #E2E8F0; }
+
+/* ── FAQ ── */
+.faq-item { border: 1px solid #E2E8F0; border-radius: 12px; margin-bottom: 10px; background: white; overflow: hidden; }
+.faq-item summary {
+  padding: 18px 20px; font-weight: 700; font-size: 15px; color: #0F172A;
+  cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center;
+}
+.faq-item summary::after { content: '+'; font-size: 20px; color: #2563EB; font-weight: 400; flex-shrink: 0; margin-left: 12px; }
+.faq-item[open] summary::after { content: '−'; }
+.faq-item p { padding: 0 20px 18px; font-size: 14px; color: #475569; line-height: 1.7; margin: 0; }
+
+/* ── Breadcrumb & back ── */
+.fire-breadcrumb { max-width: 880px; margin: 0 auto; padding: 20px 24px 0; font-size: 13px; color: #94A3B8; }
+.fire-breadcrumb a { color: #64748B; text-decoration: none; }
+.fire-breadcrumb a:hover { color: #2563EB; }
+.fire-back-row { max-width: 880px; margin: 0 auto; padding: 0 24px 48px; display: flex; gap: 16px; flex-wrap: wrap; }
+.fire-back-link {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 13px; font-weight: 700; color: #2563EB;
+  text-decoration: none; padding: 10px 18px;
+  background: #EFF6FF; border-radius: 100px; border: 1px solid #BFDBFE;
+  transition: background 0.15s;
+}
+.fire-back-link:hover { background: #DBEAFE; }
+
+@media (max-width: 640px) {
+  .fire-article-wrap, .fire-calc-card { padding: 24px 20px; }
+  .fire-calc-grid { grid-template-columns: 1fr; }
+  .fire-numbers { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 420px) {
+  .fire-numbers { grid-template-columns: 1fr; }
+}
+</style>
+
+<div class="fire-page">
+
+  <!-- Breadcrumb -->
+  <div class="fire-breadcrumb">
+    <a href="/fire">FIRE Calculator</a> / {countryName}
+  </div>
+
+  <!-- Hero -->
+  <section class="fire-hero">
+    <div class="fire-hero-inner">
+      <p class="fire-eyebrow">Early Retirement Calculator</p>
+      <h1>How Much Do You Need to<br/>Retire in {countryName}? (2026)</h1>
+
+      <div class="fire-numbers">
+        <div class="fire-num-box primary">
+          <div class="fire-num-label">Your FIRE Number</div>
+          <div class="fire-num-value">${fire.toLocaleString()}</div>
+          <div class="fire-num-sub">~${monthly.toLocaleString()}/month</div>
+        </div>
+        <div class="fire-num-box">
+          <div class="fire-num-label">US Median City</div>
+          <div class="fire-num-value">${usFire.toLocaleString()}</div>
+          <div class="fire-num-sub">~$3,500/month</div>
+        </div>
+        {savings > 0 && (
+          <div class="fire-num-box savings">
+            <div class="fire-num-label">You Need</div>
+            <div class="fire-num-value">${savings.toLocaleString()} less</div>
+            <div class="fire-num-sub">{data.us_comparison || `vs. median US city`}</div>
+          </div>
+        )}
+      </div>
+      <p class="fire-disclaimer-xs">Based on 4% withdrawal rule · Not financial advice · Estimates only</p>
+    </div>
+  </section>
+
+  <!-- Calculator -->
+  <div class="fire-section">
+    <h2>Calculate Your Personal FIRE Timeline</h2>
+    <div id="fire-config" data-country-fire={fire} data-us-fire={usFire} hidden></div>
+    <div class="fire-calc-card">
+      <div class="fire-calc-grid">
+        <div>
+          <div class="fire-field">
+            <label>Current Age <span class="fire-field-range">(18–60)</span></label>
+            <input type="number" id="fc-age" value="35" min="18" max="60" />
+            <span class="fire-field-error" id="fc-age-err"></span>
+          </div>
+          <div class="fire-field">
+            <label>Current Savings ($) <span class="fire-field-range">(0–$10M)</span></label>
+            <input type="number" id="fc-savings" value="50000" min="0" max="10000000" step="1000" />
+            <span class="fire-field-error" id="fc-savings-err"></span>
+          </div>
+          <div class="fire-field">
+            <label>Monthly Savings ($) <span class="fire-field-range">(0–$50,000)</span></label>
+            <input type="number" id="fc-monthly" value="1500" min="0" max="50000" step="100" />
+            <span class="fire-field-error" id="fc-monthly-err"></span>
+          </div>
+          <div class="fire-field">
+            <label>Assumed Annual Return <span class="fire-field-range">(3%–10%)</span></label>
+            <div class="fire-slider-wrap">
+              <input type="range" id="fc-return" min="3" max="10" step="0.5" value="7" />
+              <span class="fire-slider-val" id="fc-return-display">7.0%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="fire-result-box" id="fc-result-box">
+          <div class="fire-result-overlay" id="fc-overlay" style="display:none">
+            <span>Fix the errors above to see your results</span>
+          </div>
+          <div class="fire-result-row">
+            <span class="fire-result-label">Retire in {countryName}</span>
+            <span class="fire-result-val highlight" id="fc-age-country">—</span>
+          </div>
+          <div class="fire-result-row">
+            <span class="fire-result-label">Stay in US (median)</span>
+            <span class="fire-result-val" id="fc-age-us">—</span>
+          </div>
+          <div class="fire-result-row">
+            <span class="fire-result-label">Difference</span>
+            <span class="fire-result-val green" id="fc-diff">—</span>
+          </div>
+          <div class="fire-progress-wrap">
+            <div class="fire-progress-label">
+              <span>Progress toward {countryName} FIRE</span>
+              <span id="fc-pct">0%</span>
+            </div>
+            <div class="fire-progress-bar">
+              <div class="fire-progress-fill" id="fc-fill" style="width:0%"></div>
+            </div>
+          </div>
+          <p class="fire-result-note">
+            {countryName} FIRE target: ${fire.toLocaleString()} ·
+            US target: ${usFire.toLocaleString()}
+          </p>
+        </div>
+      </div>
+      <p id="fc-hint" class="fire-calc-hint" style="display:none"></p>
+      <p class="fire-calc-disclaimer">
+        Assumes {`{assumed return}%`} annual investment return and 4% withdrawal rate.
+        Actual returns vary. This is a planning illustration, not financial advice.
+        Consult a qualified financial planner before making relocation decisions.
+      </p>
+    </div>
+  </div>
+
+  <!-- Article -->
+  {articleParas.length > 0 && (
+    <div class="fire-section">
+      <h2>Retiring in {countryName}: What Americans Need to Know</h2>
+      <div class="fire-article-wrap">
+        {articleParas.map((para, i) => (
+          <p class={i === 0 ? 'fire-para fire-para-lead' : 'fire-para'} set:html={linkify(para)} />
+        ))}
+      </div>
+    </div>
+  )}
+
+  <!-- Compare -->
+  {similar.length > 0 && (
+    <div class="fire-section">
+      <h2>Similar Countries by Monthly Budget</h2>
+      <div class="fire-table-wrap">
+        <table class="fire-compare-table">
+          <thead>
+            <tr>
+              <th>Country</th>
+              <th>Monthly Budget</th>
+              <th>FIRE Number</th>
+              <th>Quality</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background:#EFF6FF">
+              <td><strong>{countryName}</strong> (current)</td>
+              <td class="compare-monthly">~${monthly.toLocaleString()}/mo</td>
+              <td class="compare-fire">${fire.toLocaleString()}</td>
+              <td style="font-size:12px;color:#64748B">{data.grade_label || '—'}</td>
+              <td></td>
+            </tr>
+            {similar.map(s => (
+              <tr>
+                <td>{s.name}</td>
+                <td class="compare-monthly">~${s.monthly.toLocaleString()}/mo</td>
+                <td class="compare-fire">${s.fire.toLocaleString()}</td>
+                <td style="font-size:12px;color:#64748B">{s.label || '—'}</td>
+                <td><a href={`/fire/${s.slug}`} class="compare-link">See →</a></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  )}
+
+  <!-- FAQ -->
+  <div class="fire-section">
+    <h2>Frequently Asked Questions</h2>
+    {faqs.map(faq => (
+      <details class="faq-item">
+        <summary>{faq.q}</summary>
+        <p>{faq.a}</p>
+      </details>
+    ))}
+  </div>
+
+  <!-- Back links -->
+  <div class="fire-back-row">
+    <a href="/fire" class="fire-back-link">← All 74 Countries</a>
+    <a href={`/countries/${slug}`} class="fire-back-link">Full Profile: {countryName} →</a>
+    <a href="/country-match/quiz" class="fire-back-link">Country Match Quiz →</a>
+  </div>
+
+</div>
+
+
+</BaseLayout>

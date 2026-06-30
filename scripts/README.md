@@ -138,6 +138,12 @@ python scripts/generate-quick-facts.py   # only for countries missing quick_fact
 python scripts/recompute-grades.py
 ```
 
+**Quarterly PPP refresh** (purchasing power values embedded in the calculator):
+```
+python scripts/fetch-ppp-embed.py
+```
+This updates the `STATIC_PPP` object in `src/pages/index.astro` directly. PPP values change slowly (World Bank updates annually), so quarterly is more than enough. Exchange rates are always live — only PPP needs this script.
+
 ---
 
 ## Fields written by each script

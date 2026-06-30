@@ -885,7 +885,7 @@ import qualityScores from '../../data/quality-scores.json';
             <span class="option-desc">Getting to the right doctor quickly matters most to me</span>
           </button>
           <button class="option-card" onclick="selectOption(4,'nothing')">
-            <span class="option-label">Not much — healthcare is not my main concern</span>
+            <span class="option-label">Not much: healthcare is not my main concern</span>
             <span class="option-desc">I have good coverage and am not worried about this</span>
           </button>
         </div>
@@ -971,7 +971,7 @@ import qualityScores from '../../data/quality-scores.json';
         <div class="question-text">How important is a clear path to<br/>long-term residency or a work permit?</div>
         <div class="options-grid single-col">
           <button class="option-card" onclick="selectOption(7,'critical')">
-            <span class="option-label">Essential — I need a legal path to stay long-term</span>
+            <span class="option-label">Essential: I need a legal path to stay long-term</span>
             <span class="option-desc">I want clear residency options or a digital nomad visa</span>
           </button>
           <button class="option-card" onclick="selectOption(7,'important')">
@@ -1027,28 +1027,28 @@ import qualityScores from '../../data/quality-scores.json';
         <div class="question-text">What kind of climate and lifestyle<br/>appeals to you most?</div>
         <div class="options-grid">
           <button class="option-card" onclick="selectOption(9,'mediterranean')">
-            <span class="option-label">Warm &amp; sunny — Mediterranean</span>
-            <span class="option-desc">Southern Europe, North Africa — beaches, olive oil, outdoor life year-round</span>
+            <span class="option-label">Warm &amp; sunny: Mediterranean</span>
+            <span class="option-desc">Southern Europe, North Africa. Beaches, olive oil, outdoor life year-round</span>
           </button>
           <button class="option-card" onclick="selectOption(9,'tropical')">
-            <span class="option-label">Hot year-round — Tropical</span>
-            <span class="option-desc">SE Asia, Latin America — lush, warm, beach and jungle</span>
+            <span class="option-label">Hot year-round: Tropical</span>
+            <span class="option-desc">SE Asia, Latin America. Lush, warm, beach and jungle</span>
           </button>
           <button class="option-card" onclick="selectOption(9,'temperate')">
-            <span class="option-label">Four seasons — Temperate</span>
-            <span class="option-desc">Central &amp; Northern Europe, East Asia — urban lifestyle, real winters</span>
+            <span class="option-label">Four seasons: Temperate</span>
+            <span class="option-desc">Central &amp; Northern Europe, East Asia. Urban lifestyle, real winters</span>
           </button>
           <button class="option-card" onclick="selectOption(9,'nordic')">
-            <span class="option-label">Cool &amp; wild — Nordic</span>
-            <span class="option-desc">Scandinavia — nature, silence, very high quality of life</span>
+            <span class="option-label">Cool &amp; wild: Nordic</span>
+            <span class="option-desc">Scandinavia. Nature, silence, very high quality of life</span>
           </button>
           <button class="option-card" onclick="selectOption(9,'desert')">
-            <span class="option-label">Hot &amp; dry — Desert</span>
-            <span class="option-desc">Gulf states — modern cities, tax-free income, zero humidity</span>
+            <span class="option-label">Hot &amp; dry: Desert</span>
+            <span class="option-desc">Gulf states. Modern cities, tax-free income, zero humidity</span>
           </button>
           <button class="option-card" onclick="selectOption(9,'open')">
             <span class="option-label">Climate doesn't matter to me</span>
-            <span class="option-desc">I'll adapt — other factors matter more than weather</span>
+            <span class="option-desc">I'll adapt. Other factors matter more than weather</span>
           </button>
         </div>
       </div>
@@ -1066,15 +1066,15 @@ import qualityScores from '../../data/quality-scores.json';
         <div class="options-grid single-col">
           <button class="option-card" onclick="selectOption(10,'tight')">
             <span class="option-label">Under $1,500 / month</span>
-            <span class="option-desc">I want my dollar to stretch as far as possible — Southeast Asia, Eastern Europe, Latin America</span>
+            <span class="option-desc">I want my dollar to stretch as far as possible. Think Southeast Asia, Eastern Europe, Latin America</span>
           </button>
           <button class="option-card" onclick="selectOption(10,'moderate')">
             <span class="option-label">$1,500 – $2,500 / month</span>
-            <span class="option-desc">Comfortable but value-conscious — Portugal, Thailand, Mexico, Colombia</span>
+            <span class="option-desc">Comfortable but value-conscious. Think Portugal, Thailand, Mexico, Colombia</span>
           </button>
           <button class="option-card" onclick="selectOption(10,'comfortable')">
             <span class="option-label">$2,500 – $4,000 / month</span>
-            <span class="option-desc">I can afford a good lifestyle — Spain, Japan, South Korea, UAE</span>
+            <span class="option-desc">I can afford a good lifestyle. Think Spain, Japan, South Korea, UAE</span>
           </button>
           <button class="option-card" onclick="selectOption(10,'flexible')">
             <span class="option-label">Budget is not a constraint</span>
@@ -1563,31 +1563,31 @@ window.calculateResults = function() {
 function generateReasons(slug, data, userAnswers) {
   var reasons = [];
   if (data.healthcare >= 9) {
-    reasons.push('Healthcare rated ' + data.healthcare + '/10 — high-quality care at a fraction of US costs');
+    reasons.push('Healthcare rated ' + data.healthcare + '/10 with high-quality care at a fraction of US costs');
   } else if (data.healthcare >= 7 &&
     (userAnswers[1] === 'healthcare' || userAnswers[4] !== 'nothing' || userAnswers[6] === 'healthcare')) {
     reasons.push('Solid healthcare infrastructure rated ' + data.healthcare + '/10');
   }
   if (data.safety >= 8) {
-    reasons.push('Ranked ' + data.safety + '/10 for personal safety — well above global average');
+    reasons.push('Ranked ' + data.safety + '/10 for personal safety, well above the global average');
   } else if (data.safety >= 7 && (userAnswers[1] === 'safety' || userAnswers[6] === 'safety')) {
     reasons.push('Safety rated ' + data.safety + '/10');
   }
   if (data.english >= 999) {
-    reasons.push('Native English-speaking country — no language barrier');
+    reasons.push('Native English-speaking country, so there is no language barrier');
   } else if (data.english >= 600) {
-    reasons.push('Very high English proficiency (' + data.english + ' EF EPI) — easy to navigate daily life');
+    reasons.push('Very high English proficiency (' + data.english + ' EF EPI), making daily life easy');
   } else if (data.english >= 500 && userAnswers[5] === 'mostly') {
     reasons.push('High English proficiency in major cities and business settings');
   }
   if (data.tax_system === 'zero') {
-    reasons.push('No personal income tax — keep significantly more of what you earn');
+    reasons.push('No personal income tax, which means you keep significantly more of what you earn');
   } else if (data.tax_system === 'territorial' && userAnswers[3] === 'taxes') {
-    reasons.push('Territorial tax system — foreign income generally not taxed locally');
+    reasons.push('Territorial tax system: your foreign income is generally not taxed locally');
   }
   if (data.nomad_visa &&
     (userAnswers[2] === 'remote' || userAnswers[2] === 'freelance' || userAnswers[7] === 'critical')) {
-    reasons.push('Digital Nomad Visa available — a clear legal path for remote workers');
+    reasons.push('Digital Nomad Visa available, giving remote workers a clear legal path to stay');
   }
   if (data.visa_days >= 180) {
     reasons.push(data.visa_days + ' days visa-free on a US passport');
@@ -1598,7 +1598,7 @@ function generateReasons(slug, data, userAnswers) {
     reasons.push('Consistently ranks among the happiest countries in the world');
   }
   if (data.internet >= 9 && (userAnswers[2] === 'remote' || userAnswers[6] === 'internet')) {
-    reasons.push('Fast internet infrastructure — ideal for remote work');
+    reasons.push('Fast internet infrastructure that works well for remote work');
   }
   if (data.pollution >= 8 && userAnswers[6] === 'nature') {
     reasons.push('Clean environment rated ' + data.pollution + '/10');
@@ -1639,10 +1639,10 @@ function getProfileSummary(userAnswers) {
     open: 'Climate is not a deciding factor for you'
   };
   var q10map = {
-    tight:       'You want your dollar to stretch — budget under $1,500/month',
+    tight:       'You want your dollar to stretch: budget under $1,500/month',
     moderate:    'You are planning $1,500–$2,500/month in living expenses',
     comfortable: 'You have a $2,500–$4,000/month lifestyle budget',
-    flexible:    'Budget is not a constraint — quality of life comes first'
+    flexible:    'Budget is not a constraint; quality of life comes first'
   };
   if (q1map[userAnswers[1]]) items.push(q1map[userAnswers[1]]);
   if (q2map[userAnswers[2]]) items.push(q2map[userAnswers[2]]);
@@ -1656,7 +1656,7 @@ function getProfileSummary(userAnswers) {
 var AFFILIATE_CATALOG = {
   wise: {
     name: 'Wise', icon: 'W',
-    desc: 'Multi-currency account — send money abroad at the real exchange rate with no hidden fees',
+    desc: 'Multi-currency account: send money abroad at the real exchange rate with no hidden fees',
     cta: 'Open free account', url: '#', enabled: true,
     whyFn: function() { return 'You\'ll need to move money internationally once you relocate'; }
   },
@@ -1668,11 +1668,11 @@ var AFFILIATE_CATALOG = {
   },
   safetywing: {
     name: 'SafetyWing', icon: 'S',
-    desc: 'Global health coverage from $45/month — designed for people living outside their home country',
+    desc: 'Global health coverage from $45/month, designed for people living outside their home country',
     cta: 'Get a quote', url: '#', enabled: true,
     whyFn: function(ans) {
       if (ans[2] === 'retired' || ans[2] === 'preretire')
-        return 'US health insurance typically won\'t cover you abroad — this fills that gap';
+        return 'US health insurance typically won\'t cover you abroad. This fills that gap.';
       return 'Health coverage abroad is essential and often overlooked until you need it';
     }
   },
@@ -1686,7 +1686,7 @@ var AFFILIATE_CATALOG = {
     name: 'iVisa', icon: 'V',
     desc: 'Simplify your visa applications with guided support and fast processing',
     cta: 'Check visa requirements', url: '#', enabled: true,
-    whyFn: function() { return 'You\'re planning to move soon — starting the visa process early matters'; }
+    whyFn: function() { return 'You\'re planning to move soon, so starting the visa process early matters'; }
   }
 };
 
@@ -1768,7 +1768,7 @@ function showResults(top3) {
         '<span>' + r + '</span></div>';
     }).join('') +
     '</div>' +
-    '<a href="/#calculator" class="btn-calculate" ' +
+    '<a href="/#salary-arbitrage" class="btn-calculate" ' +
     'onclick="prefillCalculator(\'' + topMatch.slug + '\')">' +
     'Compare My Salary in ' + countryName + ' →</a>' +
     '</div>';
@@ -1790,7 +1790,7 @@ function showResults(top3) {
     '<div class="next-steps-title">Recommended Next Steps</div>' +
     '<div class="next-steps-list">' +
     nextRow('/countries/' + topMatch.slug, 'View ' + countryName + ' Country Profile') +
-    nextRow('/#calculator', 'Compare Your Salary in ' + countryName,
+    nextRow('/#salary-arbitrage', 'Compare Your Salary in ' + countryName,
       'prefillCalculator(\'' + topMatch.slug + '\')') +
     nextRow('/tools/visa', 'Explore Visa Options for ' + countryName) +
     '</div></div>';
@@ -1825,7 +1825,7 @@ function showResults(top3) {
   var aff = getAffiliates(answers);
   document.getElementById('affiliateBlock').innerHTML =
     '<h3>Recommended Resources for Your Move</h3>' +
-    '<p>Selected based on your profile — only the tools most relevant to your situation.</p>' +
+    '<p>Selected based on your profile: only the tools most relevant to your situation.</p>' +
     '<div class="affiliate-cards">' +
     aff.map(function(a) {
       var why = a.whyFn ? a.whyFn(answers) : '';
@@ -1847,7 +1847,7 @@ function showResults(top3) {
 
 window.prefillCalculator = function(slug) {
   sessionStorage.setItem('quiz_country', slug);
-  window.location.href = '/#calculator';
+  window.location.href = '/#salary-arbitrage';
 };
 
 window.restartQuiz = function() {

@@ -6,10 +6,10 @@ WEIGHTS = {
     "safety": 0.25,
     "healthcare": 0.20,
     "happiness": 0.15,
-    "gdpGrowth": 0.05,
-    "pollution": 0.10,
-    "unemployment": 0.10,
-    "internet": 0.10,
+    "hdi": 0.15,
+    "pollution": 0.08,
+    "unemployment": 0.07,
+    "internet": 0.05,
     "traffic": 0.05,
 }
 

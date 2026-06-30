@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://leavingamerica.co/sitemap-index.xml

@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import goalArticlesData from '../../data/goal-articles.json';
+const cmArticle: string = (goalArticlesData as Record<string, string>)['country-match-hub'] || '';
 ---
 
 <BaseLayout
@@ -82,7 +84,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 }
 
 .cm-btn {
-  display: inline-block;
+  display: block;
+  width: 100%;
+  text-align: center;
   background: linear-gradient(135deg, #2563EB, #0EA5E9);
   color: white;
   font-size: 16px;
@@ -102,9 +106,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 .cm-note {
   display: block;
-  margin-top: 12px;
+  margin-top: 10px;
   font-size: 12px;
   color: #94A3B8;
+  text-align: center;
+  width: 100%;
 }
 
 /* ─── Right: preview card ─────────────────────── */
@@ -219,13 +225,37 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 }
 
 /* ─── Responsive ─────────────────────────────── */
+.cm-cta-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+}
+
 @media (max-width: 768px) {
   .cm-page { padding: 40px 20px 60px; }
   .cm-wrap {
     grid-template-columns: 1fr;
     gap: 36px;
   }
+  .cm-intro { text-align: center; }
   .cm-intro h1 { font-size: 28px; }
+  .cm-intro-desc { max-width: 100%; }
+  .cm-meta { justify-content: center; }
+  .cm-cta-wrap { align-items: center; width: 100%; }
+  .cm-btn { width: 100%; text-align: center; box-sizing: border-box; }
+  .cm-note { text-align: center; }
+}
+
+.cm-article {
+  max-width: 760px;
+  margin: 64px auto 0;
+  font-size: 16px;
+  line-height: 1.8;
+  color: #374151;
+}
+.cm-article p {
+  margin: 0 0 22px;
 }
 </style>
 
@@ -238,7 +268,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <h1>Find the country that<br/><em>fits your life</em></h1>
       <p class="cm-intro-desc">
         Answer 10 questions about your finances, lifestyle, and priorities.
-        We score 82 countries against your answers and explain exactly why each one fits — or doesn't.
+        We score 82 countries against your answers and explain exactly why each one fits and where it falls short.
       </p>
 
       <div class="cm-meta">
@@ -248,8 +278,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         <span class="cm-meta-item"><span class="cm-meta-dot"></span> No signup required</span>
       </div>
 
-      <a href="/country-match/quiz" class="cm-btn">Start Country Match →</a>
-      <span class="cm-note">Your answers are not stored or shared.</span>
+      <div class="cm-cta-wrap">
+        <a href="/country-match/quiz" class="cm-btn">Start Country Match →</a>
+        <span class="cm-note">Your answers are not stored or shared.</span>
+      </div>
     </div>
 
     <!-- Right: preview card -->
@@ -267,7 +299,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         <div class="cm-card-reasons">
           <div class="cm-card-reason">
             <span class="cm-card-check">✓</span>
-            Healthcare rated 9/10 — universal coverage
+            Healthcare rated 9/10: universal coverage
           </div>
           <div class="cm-card-reason">
             <span class="cm-card-check">✓</span>
@@ -287,10 +319,18 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           </div>
         </div>
       </div>
-      <p class="cm-card-caption">Sample result — yours will reflect your specific answers</p>
+      <p class="cm-card-caption">Sample result (yours will reflect your specific answers)</p>
     </div>
 
   </div>
+
+  {cmArticle && (
+    <div class="cm-article">
+      {cmArticle.split('\n\n').map((para: string) => (
+        <p>{para}</p>
+      ))}
+    </div>
+  )}
 </div>
 
 </BaseLayout>

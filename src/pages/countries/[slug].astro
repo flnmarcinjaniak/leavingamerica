@@ -177,18 +177,18 @@ const taxInfo = getTaxStatus(data.tax_system);
 // Why Americans Move Here — conditional reasons
 const moveReasons = [];
 if (data.tax_system === 'zero') {
-  moveReasons.push('No personal income tax — keep significantly more of every paycheck');
+  moveReasons.push('No personal income tax, which means you keep significantly more of every paycheck');
 } else if (data.tax_system === 'territorial') {
-  moveReasons.push('Territorial tax system — foreign-sourced income is generally not taxed locally');
+  moveReasons.push('Territorial tax system: your foreign-sourced income is generally not taxed locally');
 }
 if (data.healthcare >= 8) {
-  moveReasons.push(`Healthcare rated ${data.healthcare}/10 — quality care at a fraction of US costs`);
+  moveReasons.push(`Healthcare rated ${data.healthcare}/10 with quality care at a fraction of US costs`);
 }
 if (data.safety >= 8) {
-  moveReasons.push(`Ranked ${data.safety}/10 for safety — well above global average`);
+  moveReasons.push(`Ranked ${data.safety}/10 for safety, well above the global average`);
 }
 if (data.nomad_visa) {
-  moveReasons.push('Digital Nomad Visa available — a clear legal path for remote workers');
+  moveReasons.push('Digital Nomad Visa available, giving remote workers a clear legal path to stay long-term');
 }
 if (data.cost_index && data.cost_index < 60) {
   moveReasons.push(data.us_comparison
@@ -199,12 +199,12 @@ if (data.happiness >= 7) {
   moveReasons.push('Consistently ranks among the happiest countries in the world');
 }
 if (data.english >= 999) {
-  moveReasons.push('English is the primary language — no communication barrier');
+  moveReasons.push('English is the primary language, so daily life is easy without learning a new one');
 } else if (data.english >= 600) {
   moveReasons.push(`Very high English proficiency (${data.english} EF EPI) makes daily life easy`);
 }
 if (data.internet >= 9) {
-  moveReasons.push('Fast, reliable internet — ideal for remote work');
+  moveReasons.push('Fast, reliable internet that works well for remote work');
 }
 
 // Why It Might Not Be Right For You — conditional concerns
@@ -213,7 +213,7 @@ if (data.english !== null && data.english < 999 && data.english < 450) {
   concernReasons.push('Lower English proficiency may mean a real language barrier in daily life');
 }
 if (data.visa_days !== null && data.visa_days < 90) {
-  concernReasons.push('Limited visa-free stay — longer-term residency requires a separate visa application');
+  concernReasons.push('Limited visa-free stay; longer-term residency requires a separate visa application');
 }
 if (data.tax_system === 'worldwide') {
   concernReasons.push('Worldwide taxation means you may owe local tax in addition to US filing obligations');
@@ -222,13 +222,13 @@ if (data.unemployment !== null && data.unemployment < 6) {
   concernReasons.push('A more competitive local job market if you plan to seek local employment');
 }
 if (data.safety !== null && data.safety < 6) {
-  concernReasons.push('Safety varies by region — research specific neighborhoods before committing');
+  concernReasons.push('Safety varies quite a bit by region, so research specific neighborhoods before committing');
 }
 if (data.healthcare !== null && data.healthcare < 6) {
   concernReasons.push('Healthcare infrastructure may not match what you are used to in major US cities');
 }
 if (!data.nomad_visa) {
-  concernReasons.push('No dedicated digital nomad visa program — remote workers need to explore other residency options');
+  concernReasons.push('No dedicated digital nomad visa; remote workers need to look into standard residency or work visa options');
 }
 if (data.cost_index && data.cost_index > 80) {
   concernReasons.push(data.us_comparison
@@ -298,7 +298,7 @@ function interpretHdi(score) {
   if (score >= 8) return 'Very high human development';
   if (score >= 6) return 'High human development';
   if (score >= 4) return 'Medium human development';
-  return 'Lower human development — research carefully';
+  return 'Lower human development; research local conditions carefully';
 }
 
 const metricConfigs = [
@@ -350,7 +350,7 @@ const faqs = [
     a: data.safety >= 8
       ? `${countryName} ranks ${data.safety}/10 for safety on the Global Peace Index, well above the global average. Like anywhere, safety varies by neighborhood, so research specific areas before committing.`
       : data.safety >= 6
-      ? `${countryName} rates ${data.safety}/10 for safety — reasonable but with some regional variation. Standard travel precautions are recommended.`
+      ? `${countryName} rates ${data.safety}/10 for safety, which is reasonable, though conditions vary by region. Standard travel precautions are recommended.`
       : `${countryName} rates ${data.safety}/10 for safety. Research specific cities and neighborhoods carefully, and consider speaking with expats currently living there.`
   },
   {
@@ -914,10 +914,18 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
   .logistics-grid { grid-template-columns: 1fr 1fr; }
   .quality-grid { grid-template-columns: 1fr; }
   .similar-grid { grid-template-columns: 1fr; }
-  .country-hero h1 { font-size: 28px; }
-  .quick-facts-card { padding: 24px 24px; }
+  .country-hero { text-align: center; }
+  .country-hero h1 { font-size: 24px; }
+  .country-hero-sub { font-size: 15px; }
+  .quick-facts-card { padding: 24px 20px; }
   .quick-facts-text { font-size: 16px; }
   .quick-facts-dropcap { font-size: 38px; }
+  .breadcrumb { text-align: center; }
+}
+@media (max-width: 480px) {
+  .verdict-bar { grid-template-columns: 1fr; }
+  .logistics-grid { grid-template-columns: 1fr; }
+  .country-hero h1 { font-size: 22px; }
 }
 </style>
 
@@ -937,9 +945,8 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
     )}
     <h1>Moving to {countryName} from the US: Cost, Visa, and Healthcare Guide</h1>
     <p class="country-hero-sub">
-      Everything Americans need to know about relocating to {countryName} —
-      real cost of living data, visa requirements, healthcare, and taxes,
-      based on public economic data.
+      Real cost of living data, visa requirements, healthcare, and tax information
+      for Americans relocating to {countryName}. All figures from public economic data.
     </p>
   </div>
 
@@ -995,7 +1002,7 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
           : `See how ${countryName} compares to the US.`}
         {data.budget_single && ` A single person spends around $${data.budget_single}/month on average, excluding rent.`}
       </p>
-      <a href="/#calculator"
+      <a href="/#salary-arbitrage"
          class="preview-cta"
          onclick={`sessionStorage.setItem('quiz_country', '${slug}')`}>
         See exactly how far YOUR salary goes &rarr;
@@ -1149,12 +1156,12 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
       {data.healthcare != null
         ? `${countryName} rates ${data.healthcare}/10 for healthcare quality on the UHC Service Coverage Index.`
         : `Healthcare data for ${countryName} is not available from standard public data sources.`}
-      {' '}US health insurance typically does not cover care abroad — most expats and
-      digital nomads use international health insurance instead.
+      {' '}US health insurance typically does not cover care abroad. Most expats and
+      digital nomads get international health insurance instead.
     </p>
     <div class="affiliate-mini">
       <span class="affiliate-mini-text">
-        Global health coverage from $45/month — no US address required
+        Global health coverage from $45/month, no US address required
       </span>
       <a href="#" class="affiliate-mini-btn" rel="noopener sponsored">
         Get a SafetyWing quote &rarr;
@@ -1168,7 +1175,7 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
       US passport holders can enter {countryName} {visaInfo.text.toLowerCase()}.
       {data.nomad_visa
         ? ` A digital nomad visa is available for remote workers seeking longer-term residency.`
-        : ` There is no dedicated digital nomad visa — explore standard residency or work visa options for longer stays.`}
+        : ` There is no dedicated digital nomad visa. For longer stays, you would need to look into standard residency or work visa options.`}
     </p>
   </div>
 
@@ -1238,7 +1245,7 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
     <div class="final-cta">
       <h2>Ready to see your exact numbers?</h2>
       <p>Enter your US city and income to get a personalized comparison for {countryName}</p>
-      <a href="/#calculator"
+      <a href="/#salary-arbitrage"
          class="preview-cta"
          onclick={`sessionStorage.setItem('quiz_country', '${slug}')`}>
         Calculate My Savings in {countryName} &rarr;

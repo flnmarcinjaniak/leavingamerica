@@ -1749,6 +1749,7 @@ const qs = qualityScores.countries as Record<string, any>;
       loadingState.style.display  = 'none';
       resultsData.style.display   = 'block';
       document.getElementById('affiliate-block').style.display = 'block';
+      document.getElementById('how-it-works').style.display    = 'none';
 
       const cards = document.querySelectorAll('.animate-card');
       cards.forEach((card, i) => {
@@ -3640,6 +3641,8 @@ const qs = qualityScores.countries as Record<string, any>;
     .hero-visual { display: none; }
 
     .calc-grid { grid-template-columns: 1fr; gap: 40px; }
+    /* Fix: prevent translateX overflow on mobile that causes page to shift right */
+    .calc-form, .calc-results { transform: none !important; opacity: 1 !important; transition: none !important; }
     .quality-grid { grid-template-columns: 1fr; }
     .sources-grid { gap: 5px; }
     .section-h2 { font-size: 36px; }
@@ -3647,7 +3650,8 @@ const qs = qualityScores.countries as Record<string, any>;
     .affiliate-cards { grid-template-columns: 1fr; }
     .countries-grid { grid-template-columns: repeat(2, 1fr); }
     .financial-grid { flex-direction: column; }
-    .financial-divider { width: 100%; height: 1px; align-self: auto; }
+    .financial-col { padding: 0; }
+    .financial-divider { width: 100%; height: 1px; align-self: auto; margin: 20px 0; }
     .lifestyle-grid { grid-template-columns: 1fr; }
     .mobility-grid { grid-template-columns: 1fr; }
     .share-buttons { flex-direction: column; }

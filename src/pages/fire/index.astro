@@ -184,6 +184,8 @@ const schemaData = JSON.stringify({
 .hub-table tbody tr:hover td { background: #F8FAFC; }
 .hub-table tbody tr:last-child td { border-bottom: none; }
 .td-name { display: flex; align-items: center; gap: 10px; font-weight: 700; color: #0F172A; }
+.td-name-row { display: flex; align-items: center; gap: 10px; }
+.td-name-budget { display: none; }
 .td-fire { font-weight: 800; color: #0F172A; }
 .td-monthly { color: #64748B; }
 .td-health { font-weight: 700; }
@@ -211,16 +213,37 @@ const schemaData = JSON.stringify({
 .hub-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.25); }
 
 @media (max-width: 640px) {
-  .hub-article { padding: 24px 20px; }
+  .hub-article { padding: 24px 16px; }
+  .hub-section { padding: 32px 16px; }
   .hub-stat-row { gap: 16px; }
   .hub-stat-val { font-size: 22px; }
   .hub-picks { grid-template-columns: repeat(2, 1fr); }
   .hub-cta { padding: 28px 20px; }
   .hub-hero { padding: 48px 20px 52px; }
+
+  /* No horizontal scroll — 2-col: [country + sub-text] [Calculate] */
+  .hub-table-wrap { overflow-x: hidden; }
+  .hub-table thead { display: none; }
+  .hub-table tbody tr {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    padding: 10px 14px;
+    border-bottom: 1px solid #F1F5F9;
+  }
+  .hub-table tbody tr:last-child { border-bottom: none; }
+  .hub-table tbody tr:hover { background: #F8FAFC; }
+  .hub-table td { padding: 0; border-bottom: none; display: block; }
+  .hub-table td:nth-child(2),
+  .hub-table td:nth-child(3),
+  .hub-table td:nth-child(4) { display: none; }
+  .td-name { font-size: 13px; gap: 2px; flex-direction: column; align-items: flex-start; }
+  .td-name-row { display: flex; align-items: center; gap: 6px; }
+  .td-name-budget { display: block; font-size: 11px; font-weight: 500; color: #64748B; margin-top: 2px; }
+  .td-cta { font-size: 13px; white-space: nowrap; }
 }
 @media (max-width: 420px) {
   .hub-picks { grid-template-columns: 1fr; }
-  .hub-table th:nth-child(4), .hub-table td:nth-child(4) { display: none; }
 }
 </style>
 
@@ -272,36 +295,6 @@ const schemaData = JSON.stringify({
     </div>
   </div>
 
-  <!-- Article -->
-  <div class="hub-section" style="padding-top:0">
-    <div class="hub-article">
-      <h2>What Is a FIRE Number and Why Does It Change by Country?</h2>
-      <p>
-        Your FIRE number (the investment portfolio that funds your retirement) is not a fixed figure.
-        It depends entirely on how much you spend each month. The 4% rule, drawn from decades of US
-        stock market data, says you can withdraw 4% of your portfolio annually without depleting it
-        over a 30-year retirement. That means your FIRE number is simply your annual expenses
-        divided by 0.04, or your monthly expenses multiplied by 300.
-      </p>
-      <p>
-        The math explains why retiring abroad is so powerful for early retirement.
-        In a median US city, Americans spend roughly $3,500 a month, which means they need
-        $1,050,000 to retire. In Lisbon on $2,000 a month, that number drops to $600,000.
-        In Chiang Mai on $1,100 a month, it falls to $330,000. The country you choose
-        does not just affect your quality of life. It changes how long you have to work
-        by hundreds of thousands of dollars.
-      </p>
-      <p>
-        The numbers on this page use verified monthly budget estimates for single Americans
-        living a comfortable (not budget backpacker) lifestyle in each country. Healthcare,
-        housing, food, and transportation are included. What they don't include: US tax
-        obligations, one-time relocation costs, or currency risk. Use these figures as a
-        starting framework, not a contract. Click any country to see the full breakdown
-        and calculate your personalized timeline.
-      </p>
-    </div>
-  </div>
-
   <!-- Full table -->
   <div class="hub-section" style="padding-top:0">
     <h2>All {total} Countries: Sortable FIRE Table</h2>
@@ -330,8 +323,11 @@ const schemaData = JSON.stringify({
             <tr data-name={r.name.toLowerCase()} data-fire={r.fire} data-monthly={r.monthly} data-hc={r.healthcare}>
               <td>
                 <div class="td-name">
-                  <span class={`fi fi-${r.iso2}`} style="font-size:20px;border-radius:3px;flex-shrink:0"></span>
-                  {r.name}
+                  <div class="td-name-row">
+                    <span class={`fi fi-${r.iso2}`} style="font-size:20px;border-radius:3px;flex-shrink:0"></span>
+                    {r.name}
+                  </div>
+                  <span class="td-name-budget">~${r.monthly.toLocaleString()}/mo · FIRE: ${(r.fire/1000).toFixed(0)}k</span>
                 </div>
               </td>
               <td class="td-fire">${r.fire.toLocaleString()}</td>
@@ -348,6 +344,36 @@ const schemaData = JSON.stringify({
         FIRE numbers based on 4% withdrawal rule and estimated single-person monthly budgets.
         Not financial advice. Individual costs vary.
       </div>
+    </div>
+  </div>
+
+  <!-- Article -->
+  <div class="hub-section" style="padding-top:0">
+    <div class="hub-article">
+      <h2>What Is a FIRE Number and Why Does It Change by Country?</h2>
+      <p>
+        Your FIRE number (the investment portfolio that funds your retirement) is not a fixed figure.
+        It depends entirely on how much you spend each month. The 4% rule, drawn from decades of US
+        stock market data, says you can withdraw 4% of your portfolio annually without depleting it
+        over a 30-year retirement. That means your FIRE number is simply your annual expenses
+        divided by 0.04, or your monthly expenses multiplied by 300.
+      </p>
+      <p>
+        The math explains why retiring abroad is so powerful for early retirement.
+        In a median US city, Americans spend roughly $3,500 a month, which means they need
+        $1,050,000 to retire. In Lisbon on $2,000 a month, that number drops to $600,000.
+        In Chiang Mai on $1,100 a month, it falls to $330,000. The country you choose
+        does not just affect your quality of life. It changes how long you have to work
+        by hundreds of thousands of dollars.
+      </p>
+      <p>
+        The numbers on this page use verified monthly budget estimates for single Americans
+        living a comfortable (not budget backpacker) lifestyle in each country. Healthcare,
+        housing, food, and transportation are included. What they don't include: US tax
+        obligations, one-time relocation costs, or currency risk. Use these figures as a
+        starting framework, not a contract. Click any country to see the full breakdown
+        and calculate your personalized timeline.
+      </p>
     </div>
   </div>
 

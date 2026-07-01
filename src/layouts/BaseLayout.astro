@@ -157,11 +157,12 @@ const { title, description } = Astro.props;
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html {
+  html, body {
     font-family: 'Manrope', sans-serif;
     background: white;
     color: #0f172a;
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   .container { max-width: 1280px; margin: auto; padding: 0 40px; }

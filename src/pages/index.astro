@@ -3641,8 +3641,12 @@ const qs = qualityScores.countries as Record<string, any>;
     .hero-visual { display: none; }
 
     .calc-grid { grid-template-columns: 1fr; gap: 40px; }
-    /* Fix: prevent translateX overflow on mobile that causes page to shift right */
+    /* Prevent translateX overflow on mobile */
     .calc-form, .calc-results { transform: none !important; opacity: 1 !important; transition: none !important; }
+    /* Reduce card padding so content fits on narrow screens */
+    .result-card { padding: 20px 16px; }
+    /* Stack gauge + score details vertically on mobile */
+    .score-display { flex-direction: column; align-items: flex-start; gap: 8px; }
     .quality-grid { grid-template-columns: 1fr; }
     .sources-grid { gap: 5px; }
     .section-h2 { font-size: 36px; }

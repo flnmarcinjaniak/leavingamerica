@@ -75,7 +75,7 @@ const rows: CountryRow[] = Object.entries(qualityScoresData.countries)
   }))
   .sort((a, b) => a.name.localeCompare(b.name));
 
-const cheapest = rows.slice(0, 5);
+const cheapest = [...rows].sort((a, b) => a.fire - b.fire).slice(0, 6);
 const mid = rows.filter(r => r.fire >= 300000 && r.fire <= 700000).slice(0, 5);
 const total = rows.length;
 
@@ -148,7 +148,7 @@ const schemaData = JSON.stringify({
 .hub-section-sub { font-size: 14px; color: #64748B; margin-bottom: 24px; }
 
 /* Top picks grid */
-.hub-picks { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 14px; margin-bottom: 12px; }
+.hub-picks { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; margin-bottom: 12px; }
 .hub-pick {
   background: white; border-radius: 14px; padding: 20px 18px;
   border: 1.5px solid #E2E8F0; text-decoration: none; color: inherit;
@@ -160,6 +160,24 @@ const schemaData = JSON.stringify({
 .hub-pick-name { font-size: 14px; font-weight: 700; color: #0F172A; margin-bottom: 4px; }
 .hub-pick-fire { font-size: 18px; font-weight: 800; color: #2563EB; margin-bottom: 3px; }
 .hub-pick-monthly { font-size: 11px; color: #94A3B8; font-weight: 500; }
+
+@media (max-width: 640px) {
+  .hub-picks {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .hub-pick {
+    padding: 16px 12px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .hub-pick-flag { margin-bottom: 8px; }
+  .hub-pick-name { font-size: 13px; }
+  .hub-pick-fire { font-size: 16px; }
+  .hub-pick-monthly { font-size: 10px; }
+}
 
 /* Table */
 .hub-table-wrap { background: white; border-radius: 16px; overflow-x: auto; overflow-y: hidden; border: 1px solid #E2E8F0; -webkit-overflow-scrolling: touch; }
@@ -217,7 +235,6 @@ const schemaData = JSON.stringify({
   .hub-section { padding: 32px 16px; }
   .hub-stat-row { gap: 16px; }
   .hub-stat-val { font-size: 22px; }
-  .hub-picks { grid-template-columns: repeat(2, 1fr); }
   .hub-cta { padding: 28px 20px; }
   .hub-hero { padding: 48px 20px 52px; }
 
@@ -243,7 +260,7 @@ const schemaData = JSON.stringify({
   .td-cta { font-size: 13px; white-space: nowrap; }
 }
 @media (max-width: 420px) {
-  .hub-picks { grid-template-columns: 1fr; }
+  /* keep 2-col for picks even on very small screens */
 }
 </style>
 

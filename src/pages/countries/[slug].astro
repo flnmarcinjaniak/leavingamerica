@@ -940,6 +940,14 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
   /* SafetyWing affiliate box: center on mobile */
   .affiliate-mini { flex-direction: column; align-items: center; text-align: center; }
   .affiliate-mini-text { flex: none; }
+  /* Widget: break out of padded container to full viewport width */
+  .sw-widget-wrap {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+  }
 }
 </style>
 
@@ -1182,23 +1190,8 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
       </a>
     </div>
     <div class="sw-widget-wrap">
-      <div id="sw-widget-slot"></div>
-      <script is:inline>
-      (function() {
-        var slot = document.getElementById('sw-widget-slot');
-        if (!slot) return;
-        var scale = window.innerWidth < 480 ? '0.85' : '1.0';
-        var div = document.createElement('div');
-        div.className = 'safetywing-price-widget';
-        div.setAttribute('data-safetywingaffiliateid', '26555621');
-        div.setAttribute('data-scale', scale);
-        slot.appendChild(div);
-        var s = document.createElement('script');
-        s.type = 'text/javascript';
-        s.src = 'https://storage.googleapis.com/safetywing-static/widget/safetywing-price-widget.js';
-        document.body.appendChild(s);
-      })();
-      </script>
+      <div class="safetywing-price-widget" data-safetywingaffiliateid="26555621" data-scale="1.0"></div>
+      <script is:inline type="text/javascript" src="https://storage.googleapis.com/safetywing-static/widget/safetywing-price-widget.js"></script>
       <p class="sw-complete-hint">Planning to stay long-term? <a href="https://explore.safetywing.com/Nomad-insurance-complete/?referenceID=26555621&utm_source=26555621&utm_medium=Ambassador" target="_blank" rel="noopener sponsored">See Nomad Insurance Complete →</a></p>
     </div>
   </div>

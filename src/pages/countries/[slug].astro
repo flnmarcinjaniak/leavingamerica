@@ -940,16 +940,11 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
   /* SafetyWing affiliate box: center on mobile */
   .affiliate-mini { flex-direction: column; align-items: center; text-align: center; }
   .affiliate-mini-text { flex: none; }
-  /* SW JS: scale(0.7) + transform-origin:top left → visual: 315×352px, layout: 450×503px
-     100vw wrapper breaks out of section padding; 50vw centers on any screen width */
-  .sw-widget-wrap {
-    width: 100vw;
-    margin-left: -24px;
-    overflow: hidden;
-    max-height: 360px;
-    align-items: flex-start;
-  }
-  .safetywing-price-widget { margin-left: calc(50vw - 157.5px); }
+  /* SW JS: width:450px, scale(0.7) transform-origin:top left → visual 315×352px
+     align flex-start + margin-left centers the 315px visual within container
+     max-height clips the 151px empty layout space below the visual content */
+  .sw-widget-wrap { overflow: hidden; max-height: 360px; align-items: flex-start; }
+  .safetywing-price-widget { margin-left: calc(50% - 157.5px); }
 }
 </style>
 

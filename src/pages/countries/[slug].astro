@@ -940,10 +940,12 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
   /* SafetyWing affiliate box: center on mobile */
   .affiliate-mini { flex-direction: column; align-items: center; text-align: center; }
   .affiliate-mini-text { flex: none; }
-  /* SW JS sets transform-origin:top left + scale(0.7) — left-align to fix cutoff */
-  /* Empty space fix: 503px layout - 352px visual (503*0.7) = 151px */
-  .sw-widget-wrap { align-items: flex-start; overflow: hidden; }
-  .safetywing-price-widget { margin-bottom: -151px; }
+  /* SW JS: scale(0.7) + transform-origin:top left on ≤500px viewports
+     Visual size: 315×352px, layout: 450×503px
+     margin-left centers visual content dynamically on any screen width
+     max-height clips the 151px empty layout space below visual content */
+  .sw-widget-wrap { overflow: hidden; max-height: 360px; align-items: flex-start; }
+  .safetywing-price-widget { margin-left: calc(50% - 157.5px); }
 }
 </style>
 
@@ -1186,10 +1188,10 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
       </a>
     </div>
     <div class="sw-widget-wrap">
-      <div class="safetywing-price-widget" data-safetywingaffiliateid="26555621" data-scale="0.85"></div>
+      <div class="safetywing-price-widget" data-safetywingaffiliateid="26555621" data-scale="1.0"></div>
       <script is:inline type="text/javascript" src="https://storage.googleapis.com/safetywing-static/widget/safetywing-price-widget.js"></script>
-      <p class="sw-complete-hint">Planning to stay long-term? <a href="https://explore.safetywing.com/Nomad-insurance-complete/?referenceID=26555621&utm_source=26555621&utm_medium=Ambassador" target="_blank" rel="noopener sponsored">See Nomad Insurance Complete →</a></p>
     </div>
+    <p class="sw-complete-hint">Planning to stay long-term? <a href="https://explore.safetywing.com/Nomad-insurance-complete/?referenceID=26555621&utm_source=26555621&utm_medium=Ambassador" target="_blank" rel="noopener sponsored">See Nomad Insurance Complete →</a></p>
   </div>
 
   <div class="section">

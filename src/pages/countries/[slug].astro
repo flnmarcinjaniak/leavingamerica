@@ -89,7 +89,7 @@ const countryIso2 = ISO2[slug] || '';
 const AFFILIATE_LINKS: Record<string, string> = {
   'Wise':        'https://wise.com/invite/YOURCODE',
   'NordVPN':     'https://nordvpn.com/?partner=YOURCODE',
-  'SafetyWing':  'https://safetywing.com/?referral=YOURCODE',
+  'SafetyWing':  'https://safetywing.com/nomad-insurance/?referenceID=26555621&utm_source=26555621&utm_medium=Ambassador',
   'Airalo':      'https://www.airalo.com?referral=YOURCODE',
 };
 
@@ -758,6 +758,17 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
   white-space: nowrap;
 }
 
+.sw-widget-wrap {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.sw-complete-hint { font-size: 12px; color: #94A3B8; margin: 0; text-align: center; }
+.sw-complete-hint a { color: #64748B; text-decoration: underline; }
+.sw-mini-btn-img { height: 64px; width: auto; border-radius: 8px; display: block; flex-shrink: 0; }
+
 .adsense-block {
   max-width: 1100px;
   margin: 0 auto;
@@ -1161,11 +1172,16 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
     </p>
     <div class="affiliate-mini">
       <span class="affiliate-mini-text">
-        Global health coverage from $45/month, no US address required
+        Coverage in 180+ countries, cancel anytime — no US address required.
       </span>
-      <a href="#" class="affiliate-mini-btn" rel="noopener sponsored">
-        Get a SafetyWing quote &rarr;
+      <a href="https://safetywing.com/nomad-insurance/?referenceID=26555621&utm_source=26555621&utm_medium=Ambassador" target="_blank" rel="noopener sponsored">
+        <img src="/images/sw-banner.png.png" alt="SafetyWing – Let's get you insured" class="sw-mini-btn-img" />
       </a>
+    </div>
+    <div class="sw-widget-wrap">
+      <div class="safetywing-price-widget" data-safetywingaffiliateid="26555621" data-scale="1.0"></div>
+      <script is:inline type="text/javascript" src="https://storage.googleapis.com/safetywing-static/widget/safetywing-price-widget.js"></script>
+      <p class="sw-complete-hint">Planning to stay long-term? <a href="https://explore.safetywing.com/Nomad-insurance-complete/?referenceID=26555621&utm_source=26555621&utm_medium=Ambassador" target="_blank" rel="noopener sponsored">See Nomad Insurance Complete →</a></p>
     </div>
   </div>
 

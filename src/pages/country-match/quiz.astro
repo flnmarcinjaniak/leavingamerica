@@ -1669,12 +1669,14 @@ var AFFILIATE_CATALOG = {
   safetywing: {
     name: 'SafetyWing', icon: 'S',
     desc: 'Global health coverage from $45/month, designed for people living outside their home country',
-    cta: 'Get a quote', url: '#', enabled: true,
-    whyFn: function(ans) {
-      if (ans[2] === 'retired' || ans[2] === 'preretire')
-        return 'US health insurance typically won\'t cover you abroad. This fills that gap.';
-      return 'Health coverage abroad is essential and often overlooked until you need it';
-    }
+    cta: 'Get a quote', url: 'https://safetywing.com/nomad-insurance/?referenceID=26555621&utm_source=26555621&utm_medium=Ambassador', enabled: true,
+    whyFn: function() { return 'Health coverage abroad is essential and often overlooked until you need it'; }
+  },
+  safetywing_complete: {
+    name: 'SafetyWing Complete', icon: 'S',
+    desc: 'Comprehensive long-term health coverage for expats and retirees — hospital, specialist, and emergency care worldwide. US Medicare won\'t cover you overseas.',
+    cta: 'Explore Complete plan', url: 'https://explore.safetywing.com/Nomad-insurance-complete/?referenceID=26555621&utm_source=26555621&utm_medium=Ambassador', enabled: true,
+    whyFn: function() { return 'Retiring abroad means you need comprehensive coverage — US Medicare won\'t cover you overseas'; }
   },
   nordvpn: {
     name: 'NordVPN', icon: 'N',
@@ -1702,6 +1704,9 @@ function getAffiliates(userAnswers) {
   } else if (stage === 'remote' || stage === 'freelance') {
     keys = ['wise', 'safetywing', 'nordvpn'];
     if (showIvisa) keys.splice(2, 0, 'ivisa');
+  } else if (stage === 'retired' || stage === 'preretire') {
+    keys = ['wise', 'safetywing_complete'];
+    if (showIvisa) keys.push('ivisa');
   } else {
     keys = ['wise', 'safetywing'];
     if (showIvisa) keys.push('ivisa');

@@ -45,7 +45,7 @@ const NAMES: Record<string,string> = {
 const AFFILIATE_LINKS: Record<string,string> = {
   'Wise':       'https://wise.com/invite/YOURCODE',
   'NordVPN':    'https://nordvpn.com/?partner=YOURCODE',
-  'SafetyWing': 'https://safetywing.com/?referral=YOURCODE',
+  'SafetyWing': 'https://safetywing.com/nomad-insurance/?referenceID=26555621&utm_source=26555621&utm_medium=Ambassador',
   'Airalo':     'https://www.airalo.com?referral=YOURCODE',
 };
 
@@ -321,6 +321,30 @@ input.fire-input-error { border-color: #FCA5A5 !important; background: #FEF2F2 !
 @media (max-width: 420px) {
   .fire-numbers { grid-template-columns: 1fr; }
 }
+.fire-aff-mini {
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
+  border-radius: 14px;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.fire-aff-mini-text { font-size: 14px; color: #1E3A5F; flex: 1; line-height: 1.6; }
+.fire-aff-mini-btn {
+  background: #0F172A;
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.fire-aff-mini-btn:hover { background: #1E40AF; }
 </style>
 
 <div class="fire-page">
@@ -495,6 +519,18 @@ input.fire-input-error { border-color: #FCA5A5 !important; background: #FEF2F2 !
         <p>{faq.a}</p>
       </details>
     ))}
+  </div>
+
+  <!-- SafetyWing Complete CTA -->
+  <div class="fire-section" style="padding-top:0;padding-bottom:32px">
+    <div class="fire-aff-mini">
+      <span class="fire-aff-mini-text">
+        <strong>US Medicare doesn't cover you abroad.</strong> SafetyWing Nomad Insurance Complete offers comprehensive health coverage for long-term expats and retirees — hospital, specialist, and emergency care worldwide.
+      </span>
+      <a href="https://explore.safetywing.com/Nomad-insurance-complete/?referenceID=26555621&utm_source=26555621&utm_medium=Ambassador" class="fire-aff-mini-btn" rel="noopener sponsored" target="_blank">
+        Explore Complete Coverage →
+      </a>
+    </div>
   </div>
 
   <!-- Back links -->

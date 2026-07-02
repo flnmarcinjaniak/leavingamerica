@@ -940,11 +940,12 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
   /* SafetyWing affiliate box: center on mobile */
   .affiliate-mini { flex-direction: column; align-items: center; text-align: center; }
   .affiliate-mini-text { flex: none; }
-  /* SW JS: width:450px, scale(0.7) transform-origin:top left → visual 315×352px
-     align flex-start + margin-left centers the 315px visual within container
-     max-height clips the 151px empty layout space below the visual content */
-  .sw-widget-wrap { overflow: hidden; max-height: 360px; align-items: flex-start; }
-  .safetywing-price-widget { margin-left: calc(50% - 157.5px); }
+  /* SW JS: display:inline-block !important defeats margin-left on flex item.
+     Fix: inner wrapper exactly 315px (=450*0.7) centered by flex align-items:center.
+     Widget overflows right inside wrapper, clipped by overflow:hidden on outer wrap.
+     max-height:360px clips 151px empty layout space (503px - 352px visual) */
+  .sw-widget-wrap { overflow: hidden; max-height: 360px; align-items: center; }
+  .sw-widget-center { width: 315px; overflow: visible; }
 }
 </style>
 
@@ -1187,7 +1188,9 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
       </a>
     </div>
     <div class="sw-widget-wrap">
-      <div class="safetywing-price-widget" data-safetywingaffiliateid="26555621" data-scale="1.0"></div>
+      <div class="sw-widget-center">
+        <div class="safetywing-price-widget" data-safetywingaffiliateid="26555621" data-scale="1.0"></div>
+      </div>
       <script is:inline type="text/javascript" src="https://storage.googleapis.com/safetywing-static/widget/safetywing-price-widget.js"></script>
     </div>
     <p class="sw-complete-hint">Planning to stay long-term? <a href="https://explore.safetywing.com/Nomad-insurance-complete/?referenceID=26555621&utm_source=26555621&utm_medium=Ambassador" target="_blank" rel="noopener sponsored">See Nomad Insurance Complete →</a></p>

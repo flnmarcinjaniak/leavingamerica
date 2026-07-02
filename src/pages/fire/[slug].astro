@@ -262,6 +262,8 @@ input.fire-input-error { border-color: #FCA5A5 !important; background: #FEF2F2 !
 .compare-link { color: #2563EB; font-weight: 600; text-decoration: none; font-size: 13px; }
 .compare-link:hover { text-decoration: underline; }
 .fire-table-wrap { background: white; border-radius: 16px; overflow: hidden; border: 1px solid #E2E8F0; }
+.compare-name { display: block; }
+.compare-sub { display: none; font-size: 11px; color: #64748B; margin-top: 2px; }
 
 /* ── FAQ ── */
 .faq-item { border: 1px solid #E2E8F0; border-radius: 12px; margin-bottom: 10px; background: white; overflow: hidden; }
@@ -295,6 +297,26 @@ input.fire-input-error { border-color: #FCA5A5 !important; background: #FEF2F2 !
   .fire-result-row { flex-direction: column; align-items: flex-start; gap: 2px; }
   .fire-result-val { font-size: 20px; }
   .fire-result-val.highlight { font-size: 24px; }
+
+  /* Similar countries table — no horizontal scroll */
+  .fire-table-wrap { overflow: visible; border-radius: 12px; }
+  .fire-compare-table { display: block; }
+  .fire-compare-table thead { display: none; }
+  .fire-compare-table tbody { display: block; }
+  .fire-compare-table tbody tr {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    padding: 10px 14px;
+    border-bottom: 1px solid #F1F5F9;
+  }
+  .fire-compare-table tbody tr:last-child { border-bottom: none; }
+  .fire-compare-table td { padding: 0; border-bottom: none; display: block; }
+  .fire-compare-table td:nth-child(2),
+  .fire-compare-table td:nth-child(3),
+  .fire-compare-table td:nth-child(4) { display: none; }
+  .compare-sub { display: block; }
+  .compare-link { font-size: 13px; white-space: nowrap; }
 }
 @media (max-width: 420px) {
   .fire-numbers { grid-template-columns: 1fr; }
@@ -437,7 +459,10 @@ input.fire-input-error { border-color: #FCA5A5 !important; background: #FEF2F2 !
           </thead>
           <tbody>
             <tr style="background:#EFF6FF">
-              <td><strong>{countryName}</strong> (current)</td>
+              <td>
+                <span class="compare-name"><strong>{countryName}</strong> (current)</span>
+                <span class="compare-sub">~${monthly.toLocaleString()}/mo · FIRE: ${(fire/1000).toFixed(0)}k</span>
+              </td>
               <td class="compare-monthly">~${monthly.toLocaleString()}/mo</td>
               <td class="compare-fire">${fire.toLocaleString()}</td>
               <td style="font-size:12px;color:#64748B">{data.grade_label || '—'}</td>
@@ -445,7 +470,10 @@ input.fire-input-error { border-color: #FCA5A5 !important; background: #FEF2F2 !
             </tr>
             {similar.map(s => (
               <tr>
-                <td>{s.name}</td>
+                <td>
+                  <span class="compare-name">{s.name}</span>
+                  <span class="compare-sub">~${s.monthly.toLocaleString()}/mo · FIRE: ${(s.fire/1000).toFixed(0)}k</span>
+                </td>
                 <td class="compare-monthly">~${s.monthly.toLocaleString()}/mo</td>
                 <td class="compare-fire">${s.fire.toLocaleString()}</td>
                 <td style="font-size:12px;color:#64748B">{s.label || '—'}</td>

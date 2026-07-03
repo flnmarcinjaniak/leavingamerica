@@ -439,6 +439,7 @@ const qs = qualityScores.countries as Record<string, any>;
                       local costs. Shows cost-of-living advantage,
                       not after-tax savings.
                     </p>
+                    <a href="https://wise.prf.hn/click/camref:1110lHqXE" target="_blank" rel="noopener sponsored" class="wise-inline-cta">Ready to transfer? Use Wise &rarr;</a>
                   </div>
                   <div class="financial-divider"></div>
                   <div class="financial-col">
@@ -703,22 +704,22 @@ const qs = qualityScores.countries as Record<string, any>;
       <h3 class="affiliate-heading">Recommended Next Steps</h3>
       <div class="affiliate-cards">
         <div class="affiliate-card">
-          <div class="affiliate-icon"><img src="/images/icon-bank.webp" alt="Bank" width="48" height="48"/></div>
-          <div class="affiliate-title">Open an International Bank Account</div>
-          <p class="affiliate-desc">Transfer money internationally with zero fees</p>
-          <a href="https://wise.com" target="_blank" rel="noopener" class="affiliate-btn">Get Wise →</a>
+          <div class="affiliate-icon"><img src="/images/wise_logo.webp" alt="Wise" class="affiliate-logo"/></div>
+          <div class="affiliate-title">Transfer Money Abroad Without Fees</div>
+          <p class="affiliate-desc">Send USD to your foreign bank at the real exchange rate — no hidden markup</p>
+          <a href="https://wise.prf.hn/click/camref:1110lHqXE" target="_blank" rel="noopener sponsored" class="affiliate-btn">Get Wise →</a>
         </div>
         <div class="affiliate-card">
-          <div class="affiliate-icon"><img src="/images/icon-health.webp" alt="Health" width="48" height="48"/></div>
+          <div class="affiliate-icon"><img src="/images/safetywing_logo.png" alt="SafetyWing" class="affiliate-logo"/></div>
           <div class="affiliate-title">Get Expat Health Insurance</div>
           <p class="affiliate-desc">Coverage in 55+ countries from $45/month</p>
           <a href="https://safetywing.com/nomad-insurance/?referenceID=26555621&utm_source=26555621&utm_medium=Ambassador" target="_blank" rel="noopener sponsored" class="affiliate-btn">Get SafetyWing →</a>
         </div>
         <div class="affiliate-card">
-          <div class="affiliate-icon"><img src="/images/icon-vpn.webp" alt="VPN" width="48" height="48"/></div>
+          <div class="affiliate-icon"><img src="/images/NordVPN_logo.png" alt="NordVPN" class="affiliate-logo"/></div>
           <div class="affiliate-title">Protect Your Privacy Abroad</div>
           <p class="affiliate-desc">Access content from home, secure public WiFi</p>
-          <a href="https://nordvpn.com" target="_blank" rel="noopener" class="affiliate-btn">Get NordVPN →</a>
+          <a href="https://go.nordvpn.net/aff_c?offer_id=15&aff_id=151845&url_id=902" target="_blank" rel="noopener sponsored" class="affiliate-btn">Get NordVPN →</a>
         </div>
       </div>
       <p class="affiliate-disclaimer">Affiliate links. We may earn a commission at no extra cost to you.</p>
@@ -2755,6 +2756,18 @@ const qs = qualityScores.countries as Record<string, any>;
   .result-multiplier { font-size: 48px; font-weight: 800; color: #2563EB; letter-spacing: -2px; line-height: 1; }
 
   .result-card-savings { background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%); border-color: #BBF7D0; }
+  .wise-inline-cta {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #15803D;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-color: rgba(21,128,61,0.4);
+    transition: text-decoration-color 0.15s;
+  }
+  .wise-inline-cta:hover { text-decoration-color: #15803D; }
 
   .result-card-score {
     background: linear-gradient(135deg, #F8FAFF 0%, #EEF2FF 100%);
@@ -3153,6 +3166,9 @@ const qs = qualityScores.countries as Record<string, any>;
     padding: 28px 24px;
     text-align: center;
     transition: box-shadow 0.2s, transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .affiliate-card:hover {
@@ -3160,9 +3176,13 @@ const qs = qualityScores.countries as Record<string, any>;
     box-shadow: 0 8px 32px rgba(37, 99, 235, 0.1);
   }
 
-  .affiliate-icon { font-size: 32px; margin-bottom: 12px; }
+  .affiliate-icon { height: 100px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+  .affiliate-logo { height: 40px; width: auto; max-width: 160px; object-fit: contain; display: block; }
+  .affiliate-logo[alt="SafetyWing"] { height: 48px; max-width: 180px; }
+  .affiliate-logo[alt="NordVPN"] { height: 90px; max-width: 200px; }
   .affiliate-title { font-size: 16px; font-weight: 700; color: #0F172A; margin-bottom: 8px; }
-  .affiliate-desc { font-size: 14px; color: #64748B; margin-bottom: 20px; line-height: 1.5; }
+  .affiliate-desc { font-size: 14px; color: #64748B; margin-bottom: 0; line-height: 1.5; flex: 1; }
+  .affiliate-btn { margin-top: 20px; }
 
   .affiliate-btn {
     display: inline-flex;

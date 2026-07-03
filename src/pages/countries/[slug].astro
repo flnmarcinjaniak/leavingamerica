@@ -85,10 +85,38 @@ const ISO2 = {
 const countryName = NAMES[slug] || slug;
 const countryIso2 = ISO2[slug] || '';
 
-// Affiliate links — replace placeholder codes with your actual affiliate URLs
+// NordVPN geo-targeted offer IDs (higher conversion for specific regions)
+const VPN_CRITICAL = new Set([
+  'china','vietnam','turkey','russia','cambodia','indonesia','kazakhstan',
+  'united-arab-emirates','saudi-arabia','qatar','egypt'
+]);
+const VPN_USEFUL = new Set([
+  'thailand','georgia','philippines','malaysia','india','south-korea',
+  'morocco','kenya','ghana','sri-lanka','nepal','albania','rwanda'
+]);
+
+function getNordVPNLink(s: string): string {
+  if (s === 'china') return 'https://go.nordvpn.net/aff_c?offer_id=153&aff_id=151845&url_id=902';
+  if (['united-arab-emirates','saudi-arabia','qatar','egypt'].includes(s))
+    return 'https://go.nordvpn.net/aff_c?offer_id=226&aff_id=151845&url_id=902';
+  if (s === 'south-korea') return 'https://go.nordvpn.net/aff_c?offer_id=476&aff_id=151845&url_id=902';
+  return 'https://go.nordvpn.net/aff_c?offer_id=15&aff_id=151845&url_id=902';
+}
+
+const nordvpnLink = getNordVPNLink(slug);
+const vpnTier = VPN_CRITICAL.has(slug) ? 'critical' : VPN_USEFUL.has(slug) ? 'useful' : 'none';
+
+function getVpnMessage(s: string): string {
+  if (s === 'china') return 'The Great Firewall blocks Google, YouTube, WhatsApp, Instagram, and most Western apps. A VPN is not optional — it\'s day-one infrastructure for any American living in China.';
+  if (['united-arab-emirates','saudi-arabia','qatar'].includes(s)) return 'VoIP calls (WhatsApp, FaceTime, Skype) are blocked, and hundreds of websites are restricted. A VPN restores full internet access from day one.';
+  if (s === 'egypt') return 'VoIP services and many news sites are blocked or throttled. Americans living here rely on a VPN to maintain normal digital access.';
+  return 'Internet censorship blocks social media, VoIP, and news platforms. Americans living here use a VPN to maintain access to normal digital services.';
+}
+
+// Affiliate links
 const AFFILIATE_LINKS: Record<string, string> = {
-  'Wise':        'https://wise.com/invite/YOURCODE',
-  'NordVPN':     'https://nordvpn.com/?partner=YOURCODE',
+  'Wise':        'https://wise.prf.hn/click/camref:1110lHqXE',
+  'NordVPN':     nordvpnLink,
   'SafetyWing':  'https://safetywing.com/nomad-insurance/?referenceID=26555621&utm_source=26555621&utm_medium=Ambassador',
   'Airalo':      'https://www.airalo.com?referral=YOURCODE',
 };
@@ -590,6 +618,56 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
   margin-bottom: 24px;
 }
 
+.vpn-alert {
+  margin-top: 4px;
+  background: #FFF8F0;
+  border: 1px solid #FED7AA;
+  border-left: 4px solid #EA580C;
+  border-radius: 8px;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.vpn-alert-header {
+  font-size: 15px;
+  font-weight: 700;
+  color: #C2410C;
+}
+.vpn-alert-body {
+  font-size: 14px;
+  color: #57534E;
+  line-height: 1.55;
+  margin: 0;
+}
+.vpn-alert-btn {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #1E293B;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.vpn-alert-btn:hover { color: #EA580C; }
+
+.vpn-note {
+  margin-top: 4px;
+  padding: 12px 16px;
+  background: #F8FAFC;
+  border: 1px solid #CBD5E1;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #334155;
+  line-height: 1.55;
+}
+.vpn-note-link {
+  font-weight: 700;
+  color: #1E293B;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 .reasons-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -907,15 +985,18 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
 .quick-facts-extra {
   margin-top: 18px;
 }
-.aff-link {
+:global(.aff-link) {
   color: #2563EB;
-  font-weight: 600;
-  text-decoration: none;
-  border-bottom: 1px solid rgba(37, 99, 235, 0.3);
-  transition: border-color 0.15s;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1.5px;
+  text-decoration-color: rgba(37, 99, 235, 0.5);
+  transition: text-decoration-color 0.15s, color 0.15s;
 }
-.aff-link:hover {
-  border-bottom-color: #2563EB;
+:global(.aff-link:hover) {
+  color: #1D4ED8;
+  text-decoration-color: #1D4ED8;
 }
 
 @media (max-width: 768px) {
@@ -1234,6 +1315,23 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
       {data.raw?.pollution != null &&
         ` The Numbeo Pollution Index sits at ${data.raw.pollution}${data.pollution >= 7 ? ', among the cleaner readings globally.' : data.pollution >= 4 ? ', a moderate level by global standards.' : ', higher than average and worth researching by city.'}`}
     </p>
+
+    {vpnTier === 'critical' && (
+      <div class="vpn-alert">
+        <div class="vpn-alert-header">VPN is essential in {countryName}</div>
+        <p class="vpn-alert-body">{getVpnMessage(slug)}</p>
+        <a href={nordvpnLink} target="_blank" rel="noopener sponsored" class="vpn-alert-btn">
+          Get NordVPN — 75% off + 3 months free &rarr;
+        </a>
+      </div>
+    )}
+
+    {vpnTier === 'useful' && (
+      <p class="vpn-note">
+        Remote workers living in {countryName} typically use a VPN to keep secure on public WiFi and maintain access to US banking, streaming, and apps.
+        <a href={nordvpnLink} target="_blank" rel="noopener sponsored" class="vpn-note-link">NordVPN</a> is the most widely used option.
+      </p>
+    )}
   </div>
 
   <div class="adsense-block">

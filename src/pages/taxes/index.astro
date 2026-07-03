@@ -152,18 +152,45 @@ const schemaFaq = JSON.stringify({
 .tax-result-note { font-size: 12px; color: #64748B; margin-top: 16px; line-height: 1.5; }
 
 .tax-cta-box {
-  background: #1E3A8A; border-radius: 14px; padding: 24px 28px;
-  color: white; margin-top: 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+  background: linear-gradient(135deg, #0F172A 0%, #1E3A8A 60%, #1D4ED8 100%);
+  border-radius: 20px; padding: 36px 40px; color: white; margin-top: 28px;
+  position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.08);
 }
-.tax-cta-box p { font-size: 14px; color: #BFDBFE; margin: 4px 0 0; }
-.tax-cta-box strong { font-size: 16px; color: white; }
+.tax-cta-box::before {
+  content: ''; position: absolute; top: -60px; right: -60px;
+  width: 220px; height: 220px; border-radius: 50%;
+  background: rgba(99,179,237,0.08); pointer-events: none;
+}
+.tax-cta-badge {
+  display: inline-block; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
+  color: #93C5FD; font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; padding: 4px 12px; border-radius: 100px; margin-bottom: 14px;
+}
+.tax-cta-box strong {
+  display: block; font-size: 20px; font-weight: 800; color: white;
+  line-height: 1.25; margin-bottom: 8px; letter-spacing: -0.3px;
+}
+.tax-cta-box p { font-size: 14px; color: #BFDBFE; line-height: 1.65; margin: 0 0 20px; max-width: 520px; }
+.tax-cta-checklist {
+  list-style: none; padding: 0; margin: 0 0 24px; display: flex; flex-direction: column; gap: 7px;
+}
+.tax-cta-checklist li {
+  font-size: 13px; font-weight: 600; color: #E0F2FE;
+  display: flex; align-items: center; gap: 8px;
+}
+.tax-cta-checklist li::before {
+  content: '✓'; display: inline-flex; align-items: center; justify-content: center;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: rgba(34,197,94,0.2); color: #4ADE80; font-size: 10px; font-weight: 800; flex-shrink: 0;
+}
 .tax-cta-btn {
   display: inline-block; background: white; color: #1E3A8A;
-  font-size: 13px; font-weight: 700; padding: 11px 22px;
+  font-size: 13px; font-weight: 800; padding: 13px 26px;
   border-radius: 100px; text-decoration: none; white-space: nowrap;
-  transition: opacity 0.15s;
+  border: none; cursor: pointer; font-family: 'Manrope', sans-serif;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25); transition: transform 0.15s, box-shadow 0.15s;
 }
-.tax-cta-btn:hover { opacity: 0.9; }
+.tax-cta-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.35); }
 
 /* FAQ */
 .tax-faq { margin-top: 40px; }
@@ -243,15 +270,28 @@ const schemaFaq = JSON.stringify({
       </div>
 
       <div class="tax-cta-box">
-        <div>
-          <strong>Need a personalized assessment?</strong>
-          <p>Greenback Tax Services specializes in expat returns: US and foreign filing combined.</p>
+        <div class="tax-cta-badge">Expat Tax Specialists</div>
+        <strong>Get Your Taxes Done Right — The First Time</strong>
+        <p>US expat taxes are complex. The right specialist handles FEIE, FBAR, Foreign Tax Credits, and any required foreign filing — so you don't leave money on the table or face IRS penalties.</p>
+        <ul class="tax-cta-checklist">
+          <li>US federal return + foreign country filing</li>
+          <li>FEIE & Foreign Tax Credit optimization</li>
+          <li>FBAR & Form 8938 compliance</li>
+        </ul>
+        <div style="position:relative;display:inline-block;">
+          <button class="tax-cta-btn" id="tax-cta-soon" type="button">Talk to an Expat Tax Expert →</button>
+          <div id="tax-soon-tip" style="display:none;position:absolute;bottom:calc(100% + 10px);left:0;background:#0F172A;color:#E2E8F0;font-size:12px;font-weight:600;padding:8px 16px;border-radius:8px;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.1);">
+            Our recommended partner is coming soon
+          </div>
         </div>
-        <a href="https://www.greenbacktaxservices.com/?partner=YOURCODE"
-           class="tax-cta-btn" target="_blank" rel="noopener sponsored">
-          Get a Free Consultation →
-        </a>
       </div>
+      <script is:inline>
+        document.getElementById('tax-cta-soon').addEventListener('click', function() {
+          var tip = document.getElementById('tax-soon-tip');
+          tip.style.display = tip.style.display === 'none' ? 'block' : 'none';
+          setTimeout(function(){ tip.style.display = 'none'; }, 2500);
+        });
+      </script>
     </div>
 
     <!-- Article -->

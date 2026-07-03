@@ -836,15 +836,6 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
   white-space: nowrap;
 }
 
-.sw-widget-wrap {
-  margin-top: 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-.sw-complete-hint { font-size: 12px; color: #94A3B8; margin: 0; text-align: center; }
-.sw-complete-hint a { color: #64748B; text-decoration: underline; white-space: nowrap; }
 .sw-mini-btn-img { height: 64px; width: auto; border-radius: 8px; display: block; flex-shrink: 0; }
 
 .adsense-block {
@@ -855,22 +846,38 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
 }
 
 .faq-item {
-  background: white;
-  border-radius: 14px;
-  padding: 24px;
-  margin-bottom: 12px;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.04);
-}
-.faq-q {
-  font-size: 16px;
-  font-weight: 700;
-  color: #0F172A;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
   margin-bottom: 10px;
+  background: white;
 }
+.faq-item summary {
+  padding: 18px 20px;
+  font-weight: 700;
+  font-size: 15px;
+  color: #0F172A;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: '+';
+  font-size: 20px;
+  color: #2563EB;
+  font-weight: 400;
+  flex-shrink: 0;
+  margin-left: 12px;
+}
+.faq-item[open] summary::after { content: '−'; }
 .faq-a {
+  padding: 0 20px 18px;
   font-size: 14px;
-  color: #64748B;
+  color: #475569;
   line-height: 1.7;
+  margin: 0;
 }
 
 .similar-grid {
@@ -1018,15 +1025,8 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
   .verdict-bar { grid-template-columns: 1fr; }
   .logistics-grid { grid-template-columns: 1fr; }
   .country-hero h1 { font-size: 22px; }
-  /* SafetyWing affiliate box: center on mobile */
   .affiliate-mini { flex-direction: column; align-items: center; text-align: center; }
   .affiliate-mini-text { flex: none; }
-  /* SW JS: display:inline-block !important defeats margin-left on flex item.
-     Fix: inner wrapper exactly 315px (=450*0.7) centered by flex align-items:center.
-     Widget overflows right inside wrapper, clipped by overflow:hidden on outer wrap.
-     max-height:360px clips 151px empty layout space (503px - 352px visual) */
-  .sw-widget-wrap { overflow: hidden; max-height: 360px; align-items: center; }
-  .sw-widget-center { width: 315px; overflow: visible; }
 }
 </style>
 
@@ -1268,13 +1268,6 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
         <img src="/images/sw-banner.png.png" alt="SafetyWing – Let's get you insured" class="sw-mini-btn-img" />
       </a>
     </div>
-    <div class="sw-widget-wrap">
-      <div class="sw-widget-center">
-        <div class="safetywing-price-widget" data-safetywingaffiliateid="26555621" data-scale="1.0"></div>
-      </div>
-      <script is:inline type="text/javascript" src="https://storage.googleapis.com/safetywing-static/widget/safetywing-price-widget.js"></script>
-    </div>
-    <p class="sw-complete-hint">Planning to stay long-term? <a href="https://explore.safetywing.com/Nomad-insurance-complete/?referenceID=26555621&utm_source=26555621&utm_medium=Ambassador" target="_blank" rel="noopener sponsored">See Nomad Insurance Complete →</a></p>
   </div>
 
   <div class="section">
@@ -1341,10 +1334,10 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
   <div class="section">
     <h2 class="section-title">Frequently Asked Questions</h2>
     {faqs.map(faq => (
-      <div class="faq-item">
-        <div class="faq-q">{faq.q}</div>
-        <div class="faq-a">{faq.a}</div>
-      </div>
+      <details class="faq-item">
+        <summary>{faq.q}</summary>
+        <p class="faq-a">{faq.a}</p>
+      </details>
     ))}
   </div>
 

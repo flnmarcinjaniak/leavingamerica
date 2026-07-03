@@ -192,8 +192,8 @@ const metaDesc = `Americans need $${fireK}k to retire in ${countryName} (~$${mon
   float: left; line-height: 1; margin-right: 8px; margin-top: 4px;
   font-family: 'Manrope', sans-serif;
 }
-:global(.aff-link) { color: #2563EB; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1.5px; text-decoration-color: rgba(37,99,235,0.5); transition: text-decoration-color 0.15s, color 0.15s; }
-:global(.aff-link:hover) { color: #1D4ED8; text-decoration-color: #1D4ED8; }
+.aff-link { color: #2563EB; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1.5px; text-decoration-color: rgba(37,99,235,0.5); transition: text-decoration-color 0.15s, color 0.15s; }
+.aff-link:hover { color: #1D4ED8; text-decoration-color: #1D4ED8; }
 
 /* ── Calculator ── */
 .fire-calc-card {
@@ -279,7 +279,7 @@ input.fire-input-error { border-color: #FCA5A5 !important; background: #FEF2F2 !
 .fire-breadcrumb { max-width: 880px; margin: 0 auto; padding: 20px 24px 0; font-size: 13px; color: #94A3B8; }
 .fire-breadcrumb a { color: #64748B; text-decoration: none; }
 .fire-breadcrumb a:hover { color: #2563EB; }
-.fire-back-row { max-width: 880px; margin: 0 auto; padding: 0 24px 48px; display: flex; gap: 16px; flex-wrap: wrap; }
+.fire-back-row { max-width: 880px; margin: 0 auto; padding: 0 24px 48px; display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
 .fire-back-link {
   display: inline-flex; align-items: center; gap: 7px;
   font-size: 13px; font-weight: 700; color: #2563EB;
@@ -466,6 +466,18 @@ input.fire-input-error { border-color: #FCA5A5 !important; background: #FEF2F2 !
     </div>
   )}
 
+  <!-- SafetyWing Complete CTA -->
+  <div class="fire-section" style="padding-top:0;padding-bottom:32px">
+    <div class="fire-aff-mini">
+      <span class="fire-aff-mini-text">
+        <strong>US Medicare doesn't cover you abroad.</strong> SafetyWing Nomad Insurance Complete offers comprehensive health coverage for long-term expats and retirees — hospital, specialist, and emergency care worldwide.
+      </span>
+      <a href="https://explore.safetywing.com/Nomad-insurance-complete/?referenceID=26555621&utm_source=26555621&utm_medium=Ambassador" class="fire-aff-mini-btn" rel="noopener sponsored" target="_blank">
+        Explore Complete Coverage →
+      </a>
+    </div>
+  </div>
+
   <!-- Compare -->
   {similar.length > 0 && (
     <div class="fire-section">
@@ -519,18 +531,6 @@ input.fire-input-error { border-color: #FCA5A5 !important; background: #FEF2F2 !
         <p>{faq.a}</p>
       </details>
     ))}
-  </div>
-
-  <!-- SafetyWing Complete CTA -->
-  <div class="fire-section" style="padding-top:0;padding-bottom:32px">
-    <div class="fire-aff-mini">
-      <span class="fire-aff-mini-text">
-        <strong>US Medicare doesn't cover you abroad.</strong> SafetyWing Nomad Insurance Complete offers comprehensive health coverage for long-term expats and retirees — hospital, specialist, and emergency care worldwide.
-      </span>
-      <a href="https://explore.safetywing.com/Nomad-insurance-complete/?referenceID=26555621&utm_source=26555621&utm_medium=Ambassador" class="fire-aff-mini-btn" rel="noopener sponsored" target="_blank">
-        Explore Complete Coverage →
-      </a>
-    </div>
   </div>
 
   <!-- Back links -->

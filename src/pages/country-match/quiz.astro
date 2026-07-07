@@ -1684,6 +1684,12 @@ var AFFILIATE_CATALOG = {
     cta: 'Get 75% off + 3 months free', url: 'https://go.nordvpn.net/aff_c?offer_id=15&aff_id=151845&url_id=902', enabled: true,
     whyFn: function() { return 'Maintain access to US banking, streaming, and services from abroad'; }
   },
+  saily: {
+    name: 'Saily', icon: '📶',
+    desc: 'eSIM data in 150+ countries — activate before you land, no SIM swap needed. From NordVPN.',
+    cta: 'Get travel eSIM', url: 'https://go.saily.site/aff_c?offer_id=101&aff_id=15135', enabled: true,
+    whyFn: function() { return 'Getting a local eSIM is the cheapest way to stay connected abroad without swapping SIM cards'; }
+  },
   ivisa: {
     name: 'iVisa', icon: 'V',
     desc: 'Simplify your visa applications with guided support and fast processing',
@@ -1699,16 +1705,16 @@ function getAffiliates(userAnswers) {
     (timeline === 'oneyear' || timeline === 'soon');
   var keys = [];
   if (stage === 'business') {
-    keys = ['wise_business', 'nordvpn'];
+    keys = ['wise_business', 'nordvpn', 'saily'];
     if (showIvisa) keys.splice(1, 0, 'ivisa');
   } else if (stage === 'remote' || stage === 'freelance') {
-    keys = ['wise', 'safetywing', 'nordvpn'];
+    keys = ['wise', 'safetywing', 'nordvpn', 'saily'];
     if (showIvisa) keys.splice(2, 0, 'ivisa');
   } else if (stage === 'retired' || stage === 'preretire') {
-    keys = ['wise', 'safetywing_complete'];
+    keys = ['wise', 'safetywing_complete', 'saily'];
     if (showIvisa) keys.push('ivisa');
   } else {
-    keys = ['wise', 'safetywing'];
+    keys = ['wise', 'safetywing', 'saily'];
     if (showIvisa) keys.push('ivisa');
   }
   return keys

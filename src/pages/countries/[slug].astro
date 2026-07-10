@@ -121,6 +121,8 @@ const AFFILIATE_LINKS: Record<string, string> = {
   'Saily':       'https://go.saily.site/aff_c?offer_id=101&aff_id=15135',
 };
 
+const hasFirePage = Object.entries(allCountries).some(([s, d]: [string, any]) => s === slug && d.budget_single);
+
 function linkifyAffiliates(text: string): string {
   let result = text;
   for (const [brand, url] of Object.entries(AFFILIATE_LINKS)) {
@@ -841,8 +843,8 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
 .adsense-block {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 0 24px 56px;
-  min-height: 100px;
+  padding: 0;
+  min-height: 0;
 }
 
 .faq-item {
@@ -1299,6 +1301,19 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
       </a>
     </div>
   </div>
+
+  {hasFirePage && (
+    <div class="section">
+      <div class="affiliate-mini">
+        <span class="affiliate-mini-text">
+          Thinking about early retirement in {countryName}? See the full FIRE breakdown: costs, timeline, and visa options.
+        </span>
+        <a href={`/fire/${slug}`} class="affiliate-mini-btn">
+          FIRE in {countryName} &rarr;
+        </a>
+      </div>
+    </div>
+  )}
 
   <div class="section">
     <h2 class="section-title">Day to Day Life</h2>

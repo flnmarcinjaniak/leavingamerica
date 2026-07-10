@@ -278,20 +278,9 @@ const schemaFaq = JSON.stringify({
           <li>FEIE & Foreign Tax Credit optimization</li>
           <li>FBAR & Form 8938 compliance</li>
         </ul>
-        <div style="position:relative;display:inline-block;">
-          <button class="tax-cta-btn" id="tax-cta-soon" type="button">Talk to an Expat Tax Expert →</button>
-          <div id="tax-soon-tip" style="display:none;position:absolute;bottom:calc(100% + 10px);left:0;background:#0F172A;color:#E2E8F0;font-size:12px;font-weight:600;padding:8px 16px;border-radius:8px;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.1);">
-            Our recommended partner is coming soon
-          </div>
-        </div>
+        <!-- TEMPORARY: revert to MyExpatTaxes affiliate link once application is approved. Original CTA text: "Talk to an Expat Tax Expert" -->
+        <a class="tax-cta-btn" href="mailto:contact@leavingamerica.co?subject=Expat%20Tax%20Question">Have a tax question? Email us</a>
       </div>
-      <script is:inline>
-        document.getElementById('tax-cta-soon').addEventListener('click', function() {
-          var tip = document.getElementById('tax-soon-tip');
-          tip.style.display = tip.style.display === 'none' ? 'block' : 'none';
-          setTimeout(function(){ tip.style.display = 'none'; }, 2500);
-        });
-      </script>
     </div>
 
     <!-- Article -->

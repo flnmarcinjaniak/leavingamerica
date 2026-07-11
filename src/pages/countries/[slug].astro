@@ -1308,7 +1308,7 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
         <span class="affiliate-mini-text">
           Thinking about early retirement in {countryName}? See the full FIRE breakdown: costs, timeline, and visa options.
         </span>
-        <a href={`/fire/${slug}`} class="affiliate-mini-btn">
+        <a href={`/fire/${slug}/`} class="affiliate-mini-btn">
           FIRE in {countryName} &rarr;
         </a>
       </div>
@@ -1362,7 +1362,7 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
       <p class="section-sub">Countries with a comparable cost of living</p>
       <div class="similar-grid">
         {similarCountries.map(c => (
-          <a href={`/countries/${c.slug}`} class="similar-card">
+          <a href={`/countries/${c.slug}/`} class="similar-card">
             {ISO2[c.slug] && (
               <span class={`fi fi-${ISO2[c.slug]} similar-flag-icon`}></span>
             )}

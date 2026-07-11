@@ -300,7 +300,7 @@ const schemaData = JSON.stringify({
     </p>
     <div class="hub-picks">
       {cheapest.map(r => (
-        <a href={`/fire/${r.slug}`} class="hub-pick">
+        <a href={`/fire/${r.slug}/`} class="hub-pick">
           <div class="hub-pick-flag">
             <span class={`fi fi-${r.iso2}`} style="font-size:28px;border-radius:4px;"></span>
           </div>
@@ -352,7 +352,7 @@ const schemaData = JSON.stringify({
               <td class="td-health" style={`color:${r.healthcare >= 8 ? '#16A34A' : r.healthcare >= 6 ? '#D97706' : '#DC2626'}`}>
                 {r.healthcare}/10
               </td>
-              <td><a href={`/fire/${r.slug}`} class="td-cta">Calculate →</a></td>
+              <td><a href={`/fire/${r.slug}/`} class="td-cta">Calculate →</a></td>
             </tr>
           ))}
         </tbody>

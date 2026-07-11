@@ -328,7 +328,7 @@ const hubArticle: string = (goalArticlesData as Record<string, string>)['countri
     </p>
     <div class="goal-grid">
       {browseByGoal.map(goal => (
-        <a href={`/countries/goals/${goal.slug}`} class="goal-card">
+        <a href={`/countries/goals/${goal.slug}/`} class="goal-card">
           <div class="goal-card-title">{goal.title}</div>
           <div class="goal-card-desc">{goal.desc}</div>
         </a>
@@ -341,7 +341,7 @@ const hubArticle: string = (goalArticlesData as Record<string, string>)['countri
     <p class="section-sub">Sorted alphabetically</p>
     <div class="country-grid">
       {countryList.map(c => (
-        <a href={`/countries/${c.slug}`} class="country-card">
+        <a href={`/countries/${c.slug}/`} class="country-card">
           {c.iso2 && (
             <span class={`fi fi-${c.iso2} country-flag-icon`}></span>
           )}

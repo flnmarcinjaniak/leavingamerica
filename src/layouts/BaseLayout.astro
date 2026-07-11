@@ -5,6 +5,7 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname.replace(/\/?$/, '/'), Astro.site);
 ---
 
 <!DOCTYPE html>
@@ -14,6 +15,7 @@ const { title, description } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <title>{title}</title>
+    <link rel="canonical" href={canonicalURL.href} />
     <!-- Enzuzo Cookie Consent (must load before GTM) -->
     <script is:inline src="https://app.enzuzo.com/scripts/cookiebar/f047f71c-76e5-11f1-88d8-2b6663fe3088"></script>
     <!-- Google Tag Manager -->

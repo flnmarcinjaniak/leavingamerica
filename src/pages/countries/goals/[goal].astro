@@ -289,7 +289,7 @@ const pageDescription = goalDef
       </div>
       <div class="ranking-list">
         {rankedList.map((c, i) => (
-          <a href={`/countries/${c.slug}`} class="ranking-item">
+          <a href={`/countries/${c.slug}/`} class="ranking-item">
             <div class="ranking-position">#{i + 1}</div>
             {c.iso2 && (
               <span class={`fi fi-${c.iso2} ranking-flag`}></span>

@@ -4,6 +4,7 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   output: 'static',
   site: 'https://leavingamerica.co',
+  trailingSlash: 'always',
   integrations: [
     sitemap({
       changefreq: 'weekly',

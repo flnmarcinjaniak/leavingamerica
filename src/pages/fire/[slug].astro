@@ -513,7 +513,7 @@ input.fire-input-error { border-color: #FCA5A5 !important; background: #FEF2F2 !
                 <td class="compare-monthly">~${s.monthly.toLocaleString()}/mo</td>
                 <td class="compare-fire">${s.fire.toLocaleString()}</td>
                 <td style="font-size:12px;color:#64748B">{s.label || '—'}</td>
-                <td><a href={`/fire/${s.slug}`} class="compare-link">See →</a></td>
+                <td><a href={`/fire/${s.slug}/`} class="compare-link">See →</a></td>
               </tr>
             ))}
           </tbody>
@@ -528,7 +528,7 @@ input.fire-input-error { border-color: #FCA5A5 !important; background: #FEF2F2 !
       <span class="fire-aff-mini-text">
         Want the full country profile? Quality of life scores, safety, healthcare and visas for {countryName}.
       </span>
-      <a href={`/countries/${slug}`} class="fire-aff-mini-btn">
+      <a href={`/countries/${slug}/`} class="fire-aff-mini-btn">
         {countryName} Country Profile &rarr;
       </a>
     </div>
@@ -548,7 +548,7 @@ input.fire-input-error { border-color: #FCA5A5 !important; background: #FEF2F2 !
   <!-- Back links -->
   <div class="fire-back-row">
     <a href="/fire" class="fire-back-link">← All 74 Countries</a>
-    <a href={`/countries/${slug}`} class="fire-back-link">Full Profile: {countryName} →</a>
+    <a href={`/countries/${slug}/`} class="fire-back-link">Full Profile: {countryName} →</a>
     <a href="/country-match/quiz" class="fire-back-link">Country Match Quiz →</a>
   </div>
 

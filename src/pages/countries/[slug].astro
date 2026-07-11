@@ -448,6 +448,41 @@ const breadcrumbSchema = {
   ]
 };
 
+const COMPARE_PAIRS = [
+  'portugal-vs-spain','spain-vs-italy','portugal-vs-italy',
+  'greece-vs-spain','greece-vs-portugal','malta-vs-cyprus',
+  'croatia-vs-greece','croatia-vs-portugal',
+  'mexico-vs-costa-rica','mexico-vs-panama','costa-rica-vs-panama',
+  'mexico-vs-portugal','colombia-vs-mexico','ecuador-vs-colombia',
+  'argentina-vs-chile','argentina-vs-uruguay','belize-vs-costa-rica',
+  'nicaragua-vs-costa-rica','dominican-republic-vs-mexico',
+  'thailand-vs-vietnam','thailand-vs-malaysia','vietnam-vs-philippines',
+  'thailand-vs-philippines','malaysia-vs-indonesia','thailand-vs-portugal',
+  'cambodia-vs-thailand','cambodia-vs-vietnam',
+  'poland-vs-czech-republic','hungary-vs-poland','romania-vs-bulgaria',
+  'czech-republic-vs-hungary','croatia-vs-slovenia','estonia-vs-lithuania',
+  'latvia-vs-lithuania','albania-vs-montenegro','georgia-vs-turkey',
+  'france-vs-spain','france-vs-italy','netherlands-vs-germany',
+  'ireland-vs-united-kingdom','canada-vs-australia','australia-vs-new-zealand',
+  'portugal-vs-costa-rica','spain-vs-mexico','panama-vs-portugal',
+  'thailand-vs-mexico',
+  'georgia-vs-portugal','taiwan-vs-south-korea','japan-vs-south-korea',
+  'singapore-vs-malaysia','united-arab-emirates-vs-singapore',
+  'south-africa-vs-portugal','morocco-vs-spain','kenya-vs-south-africa',
+  'turkey-vs-greece',
+];
+
+const compareLinks = COMPARE_PAIRS
+  .filter(pair => {
+    const vi = pair.indexOf('-vs-');
+    return pair.slice(0, vi) === slug || pair.slice(vi + 4) === slug;
+  })
+  .map(pair => {
+    const vi = pair.indexOf('-vs-');
+    const other = pair.slice(0, vi) === slug ? pair.slice(vi + 4) : pair.slice(0, vi);
+    return { pair, other };
+  });
+
 const PAGE_META_OVERRIDES: Record<string, {title: string; description: string}> = {
   'qatar':      { title: 'Moving to Qatar from USA: Expat Guide for Americans (2026)', description: 'Qatar costs ~$2,200/month and is 27% cheaper than the US. Tax-free income, world-class healthcare, and strict visa rules. Full guide for Americans.' },
   'singapore':  { title: 'Singapore vs USA Cost of Living: What Americans Pay (2026)', description: 'Singapore costs ~$2,250/month, 26% cheaper than the US. Side-by-side breakdown of housing, food, taxes, and salaries for Americans considering the move.' },
@@ -938,6 +973,40 @@ const pageDescription = _metaOverride?.description ?? `See how far your salary g
 .similar-name { font-size: 16px; font-weight: 700; color: #0F172A; }
 .similar-index { font-size: 12px; color: #94A3B8; margin-top: 4px; }
 
+.compare-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.compare-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 16px;
+  border: 1px solid #E2E8F0;
+  border-radius: 100px;
+  background: white;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1D4ED8;
+  box-shadow: 0 1px 4px rgba(15,23,42,0.05);
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.12s;
+}
+.compare-chip:hover {
+  border-color: #93C5FD;
+  box-shadow: 0 4px 14px rgba(37,99,235,0.13);
+  transform: translateY(-1px);
+}
+.compare-chip-flag {
+  width: 20px !important;
+  height: 15px !important;
+  border-radius: 2px !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15) !important;
+  border: 1px solid rgba(0,0,0,0.08) !important;
+  flex-shrink: 0;
+}
+
 .final-cta {
   background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
   border-radius: 24px;
@@ -1390,6 +1459,23 @@ const pageDescription = _metaOverride?.description ?? `See how far your salary g
             )}
             <div class="similar-name">{NAMES[c.slug] || c.slug}</div>
             <div class="similar-index">Cost index: {c.data.cost_index}</div>
+          </a>
+        ))}
+      </div>
+    </div>
+  )}
+
+  {compareLinks.length > 0 && (
+    <div class="section">
+      <h2 class="section-title">Compare {countryName} with...</h2>
+      <p class="section-sub">Side-by-side data: costs, safety, healthcare and taxes</p>
+      <div class="compare-chips">
+        {compareLinks.map(({ pair, other }) => (
+          <a href={`/compare/${pair}/`} class="compare-chip">
+            {ISO2[other] && (
+              <span class={`fi fi-${ISO2[other]} compare-chip-flag`}></span>
+            )}
+            {NAMES[other] || other}
           </a>
         ))}
       </div>

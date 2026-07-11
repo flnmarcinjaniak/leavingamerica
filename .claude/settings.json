@@ -33,7 +33,8 @@
       "Bash(node gen-favicons-temp.mjs)",
       "Read(//c/Users/marci/.claude/projects/c--Users-marci-Desktop-moje-strony-leavingamerica/memory/**)",
       "PowerShell(node \"C:\\\\Users\\\\marci\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-marci-Desktop-moje-strony-leavingamerica\\\\93f2988c-ac38-433d-9ffe-97d6807211ac\\\\scratchpad\\\\test-linkify.js\")",
-      "Bash(git show *)"
+      "Bash(git show *)",
+      "PowerShell(node -e \"const a=require\\('./node_modules/astro/package.json'\\); console.log\\(a.version\\)\")"
     ],
     "additionalDirectories": [
       "c:\\Users\\marci\\Desktop\\moje strony\\leavingamerica",

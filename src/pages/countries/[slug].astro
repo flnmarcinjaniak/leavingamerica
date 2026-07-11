@@ -448,8 +448,21 @@ const breadcrumbSchema = {
   ]
 };
 
-const pageTitle = `Moving to ${countryName} from USA: Cost, Visa & Healthcare Guide (2026) | LeavingAmerica`;
-const pageDescription = `See how far your salary goes in ${countryName}. ${data.us_comparison ? 'Living costs are ' + data.us_comparison + '.' : ''} Compare visa requirements, healthcare, and taxes for Americans. Free calculator.`;
+const PAGE_META_OVERRIDES: Record<string, {title: string; description: string}> = {
+  'qatar':      { title: 'Moving to Qatar from USA: Expat Guide for Americans (2026)', description: 'Qatar costs ~$2,200/month and is 27% cheaper than the US. Tax-free income, world-class healthcare, and strict visa rules — full guide for Americans.' },
+  'singapore':  { title: 'Singapore vs USA Cost of Living: What Americans Pay (2026)', description: 'Singapore costs ~$2,250/month — 26% cheaper than the US. Side-by-side breakdown of housing, food, taxes, and salaries for Americans considering the move.' },
+  'malta':      { title: 'Moving to Malta from USA: American Expat Guide (2026)', description: 'Malta costs ~$2,050/month — 32% cheaper than the US. EU residency options, English-speaking island life, and visa paths for American expats.' },
+  'ireland':    { title: 'Americans Moving to Ireland: Visa, Costs & Residency (2026)', description: 'Ireland costs ~$3,350/month — 11% pricier than the US, but strong visa paths and EU access attract thousands of American expats each year.' },
+  'argentina':  { title: 'Moving to Argentina from USA: Costs, Visas & Life (2026)', description: 'Argentina costs ~$1,150/month — 61% cheaper than the US. No visa required for Americans. Full guide: residency, banking, and expat life in Buenos Aires.' },
+  'iceland':    { title: 'Can Americans Move to Iceland? Visa & Life Guide (2026)', description: 'Iceland costs ~$3,600/month — 21% pricier than the US. Residency options, visa routes, and what American expats actually experience in Reykjavik.' },
+  'belize':     { title: 'Moving to Belize from USA: Expat Guide for Americans (2026)', description: 'No visa required for Americans staying in Belize. English-speaking Caribbean lifestyle, affordable costs, and a clear path to residency. Full expat guide.' },
+  'sri-lanka':  { title: 'Moving to Sri Lanka from USA: Expat Guide (2026)', description: 'Sri Lanka costs ~$750/month — 74% cheaper than the US. Visa rules, digital nomad scene, and what American expats actually pay in Colombo and Galle.' },
+  'cambodia':   { title: 'Moving to Cambodia from USA: American Expat Guide (2026)', description: 'Cambodia costs ~$1,050/month — 65% cheaper than the US. Visa rules, expat life in Phnom Penh and Siem Reap, and everything Americans need to know.' },
+  'kenya':      { title: 'Relocating to Kenya from the US: Expat Guide (2026)', description: 'Kenya costs ~$1,100/month — 63% cheaper than the US. Nairobi expat life, work permits, visa options, and financial requirements for Americans relocating.' },
+};
+const _metaOverride = PAGE_META_OVERRIDES[slug];
+const pageTitle = _metaOverride?.title ?? `Moving to ${countryName} from USA: Cost, Visa & Healthcare Guide (2026) | LeavingAmerica`;
+const pageDescription = _metaOverride?.description ?? `See how far your salary goes in ${countryName}. ${data.us_comparison ? 'Living costs are ' + data.us_comparison + '.' : ''} Compare visa requirements, healthcare, and taxes for Americans. Free calculator.`;
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription}>
@@ -1095,6 +1108,15 @@ const pageDescription = `See how far your salary goes in ${countryName}. ${data.
       </div>
     );
   })()}
+
+  {slug === 'singapore' && (
+    <div class="section" style="padding-top:0;padding-bottom:16px">
+      <p style="font-size:14px;color:#475569;margin:0">
+        See exactly how your US salary compares to what you'd earn in Singapore →{' '}
+        <a href="/#salary-arbitrage" style="color:#2563EB;font-weight:700">Salary Arbitrage Calculator</a>
+      </p>
+    </div>
+  )}
 
   <div class="section">
     <div class="preview-card">

@@ -549,7 +549,7 @@
       }
     ],
     "popularAmericanCities": ["Miami", "New York", "Los Angeles"],
-    "description": "Colombia has transformed dramatically — cities like Medellín and Bogotá now attract thousands of American expats with spring-like climates, vibrant culture, and extremely low costs of living.",
+    "description": "Colombia has transformed dramatically. Cities like Medellín and Bogotá now attract thousands of American expats with spring-like climates, vibrant culture, and extremely low costs of living.",
     "pros": ["Eternal spring climate in Medellín", "Very affordable", "Improving safety in major cities", "Vibrant nightlife and food scene", "Large expat community"],
     "cons": ["Safety still a concern in some areas", "Language barrier", "Occasional political instability", "Healthcare quality varies by region", "Chaotic driving"]
   },
@@ -767,7 +767,7 @@
       }
     ],
     "popularAmericanCities": ["New York", "Chicago", "Los Angeles"],
-    "description": "Romania is Europe's best-kept secret for digital nomads — ultra-fast internet, very low costs, beautiful medieval towns, and a young English-speaking tech-savvy population.",
+    "description": "Romania is Europe's best-kept secret for digital nomads: ultra-fast internet, very low costs, beautiful medieval towns, and a young English-speaking tech-savvy population.",
     "pros": ["Among the fastest internet in the EU", "Very affordable", "Beautiful medieval towns like Cluj and Brasov", "Young tech-savvy population", "Rich natural landscapes including Carpathian Mountains"],
     "cons": ["Healthcare quality below EU average", "Infrastructure still developing outside cities", "Brain drain affecting services", "Cold winters", "Bureaucracy for residency permits"]
   },
@@ -1217,7 +1217,7 @@
       }
     ],
     "popularAmericanCities": ["New York", "Los Angeles", "San Francisco"],
-    "description": "France offers a uniquely high quality of life with world-renowned cuisine, fashion, art, stunning countryside from Provence to Alsace, and exceptional healthcare — though French language skills are essential.",
+    "description": "France offers a uniquely high quality of life with world-renowned cuisine, fashion, art, stunning countryside from Provence to Alsace, and exceptional healthcare, though French language skills are essential.",
     "pros": ["World-class healthcare", "Exceptional cuisine and wine", "Rich cultural and intellectual life", "Beautiful regions beyond Paris", "Strong workers' rights and benefits"],
     "cons": ["Language barrier is significant", "Challenging bureaucracy", "Paris is very expensive", "High taxes", "Strikes and social unrest can disrupt daily life"]
   },

@@ -107,7 +107,7 @@ const nordvpnLink = getNordVPNLink(slug);
 const vpnTier = VPN_CRITICAL.has(slug) ? 'critical' : VPN_USEFUL.has(slug) ? 'useful' : 'none';
 
 function getVpnMessage(s: string): string {
-  if (s === 'china') return 'The Great Firewall blocks Google, YouTube, WhatsApp, Instagram, and most Western apps. A VPN is not optional — it\'s day-one infrastructure for any American living in China.';
+  if (s === 'china') return 'The Great Firewall blocks Google, YouTube, WhatsApp, Instagram, and most Western apps. A VPN is not optional. It\'s day-one infrastructure for any American living in China.';
   if (['united-arab-emirates','saudi-arabia','qatar'].includes(s)) return 'VoIP calls (WhatsApp, FaceTime, Skype) are blocked, and hundreds of websites are restricted. A VPN restores full internet access from day one.';
   if (s === 'egypt') return 'VoIP services and many news sites are blocked or throttled. Americans living here rely on a VPN to maintain normal digital access.';
   return 'Internet censorship blocks social media, VoIP, and news platforms. Americans living here use a VPN to maintain access to normal digital services.';
@@ -449,16 +449,16 @@ const breadcrumbSchema = {
 };
 
 const PAGE_META_OVERRIDES: Record<string, {title: string; description: string}> = {
-  'qatar':      { title: 'Moving to Qatar from USA: Expat Guide for Americans (2026)', description: 'Qatar costs ~$2,200/month and is 27% cheaper than the US. Tax-free income, world-class healthcare, and strict visa rules — full guide for Americans.' },
-  'singapore':  { title: 'Singapore vs USA Cost of Living: What Americans Pay (2026)', description: 'Singapore costs ~$2,250/month — 26% cheaper than the US. Side-by-side breakdown of housing, food, taxes, and salaries for Americans considering the move.' },
-  'malta':      { title: 'Moving to Malta from USA: American Expat Guide (2026)', description: 'Malta costs ~$2,050/month — 32% cheaper than the US. EU residency options, English-speaking island life, and visa paths for American expats.' },
-  'ireland':    { title: 'Americans Moving to Ireland: Visa, Costs & Residency (2026)', description: 'Ireland costs ~$3,350/month — 11% pricier than the US, but strong visa paths and EU access attract thousands of American expats each year.' },
-  'argentina':  { title: 'Moving to Argentina from USA: Costs, Visas & Life (2026)', description: 'Argentina costs ~$1,150/month — 61% cheaper than the US. No visa required for Americans. Full guide: residency, banking, and expat life in Buenos Aires.' },
-  'iceland':    { title: 'Can Americans Move to Iceland? Visa & Life Guide (2026)', description: 'Iceland costs ~$3,600/month — 21% pricier than the US. Residency options, visa routes, and what American expats actually experience in Reykjavik.' },
+  'qatar':      { title: 'Moving to Qatar from USA: Expat Guide for Americans (2026)', description: 'Qatar costs ~$2,200/month and is 27% cheaper than the US. Tax-free income, world-class healthcare, and strict visa rules. Full guide for Americans.' },
+  'singapore':  { title: 'Singapore vs USA Cost of Living: What Americans Pay (2026)', description: 'Singapore costs ~$2,250/month, 26% cheaper than the US. Side-by-side breakdown of housing, food, taxes, and salaries for Americans considering the move.' },
+  'malta':      { title: 'Moving to Malta from USA: American Expat Guide (2026)', description: 'Malta costs ~$2,050/month, 32% cheaper than the US. EU residency options, English-speaking island life, and visa paths for American expats.' },
+  'ireland':    { title: 'Americans Moving to Ireland: Visa, Costs & Residency (2026)', description: 'Ireland costs ~$3,350/month, 11% pricier than the US, but strong visa paths and EU access attract thousands of American expats each year.' },
+  'argentina':  { title: 'Moving to Argentina from USA: Costs, Visas & Life (2026)', description: 'Argentina costs ~$1,150/month, 61% cheaper than the US. No visa required for Americans. Full guide: residency, banking, and expat life in Buenos Aires.' },
+  'iceland':    { title: 'Can Americans Move to Iceland? Visa & Life Guide (2026)', description: 'Iceland costs ~$3,600/month, 21% pricier than the US. Residency options, visa routes, and what American expats actually experience in Reykjavik.' },
   'belize':     { title: 'Moving to Belize from USA: Expat Guide for Americans (2026)', description: 'No visa required for Americans staying in Belize. English-speaking Caribbean lifestyle, affordable costs, and a clear path to residency. Full expat guide.' },
-  'sri-lanka':  { title: 'Moving to Sri Lanka from USA: Expat Guide (2026)', description: 'Sri Lanka costs ~$750/month — 74% cheaper than the US. Visa rules, digital nomad scene, and what American expats actually pay in Colombo and Galle.' },
-  'cambodia':   { title: 'Moving to Cambodia from USA: American Expat Guide (2026)', description: 'Cambodia costs ~$1,050/month — 65% cheaper than the US. Visa rules, expat life in Phnom Penh and Siem Reap, and everything Americans need to know.' },
-  'kenya':      { title: 'Relocating to Kenya from the US: Expat Guide (2026)', description: 'Kenya costs ~$1,100/month — 63% cheaper than the US. Nairobi expat life, work permits, visa options, and financial requirements for Americans relocating.' },
+  'sri-lanka':  { title: 'Moving to Sri Lanka from USA: Expat Guide (2026)', description: 'Sri Lanka costs ~$750/month, 74% cheaper than the US. Visa rules, digital nomad scene, and what American expats actually pay in Colombo and Galle.' },
+  'cambodia':   { title: 'Moving to Cambodia from USA: American Expat Guide (2026)', description: 'Cambodia costs ~$1,050/month, 65% cheaper than the US. Visa rules, expat life in Phnom Penh and Siem Reap, and everything Americans need to know.' },
+  'kenya':      { title: 'Relocating to Kenya from the US: Expat Guide (2026)', description: 'Kenya costs ~$1,100/month, 63% cheaper than the US. Nairobi expat life, work permits, visa options, and financial requirements for Americans relocating.' },
 };
 const _metaOverride = PAGE_META_OVERRIDES[slug];
 const pageTitle = _metaOverride?.title ?? `Moving to ${countryName} from USA: Cost, Visa & Healthcare Guide (2026) | LeavingAmerica`;
@@ -1286,7 +1286,7 @@ const pageDescription = _metaOverride?.description ?? `See how far your salary g
     </p>
     <div class="affiliate-mini">
       <span class="affiliate-mini-text">
-        Coverage in 180+ countries, cancel anytime — no US address required.
+        Coverage in 180+ countries, cancel anytime. No US address required.
       </span>
       <a href="https://safetywing.com/nomad-insurance/?referenceID=26555621&utm_source=26555621&utm_medium=Ambassador" target="_blank" rel="noopener sponsored">
         <img src="/images/sw-banner.png.png" alt="SafetyWing – Let's get you insured" class="sw-mini-btn-img" />
@@ -1351,7 +1351,7 @@ const pageDescription = _metaOverride?.description ?? `See how far your salary g
         <div class="vpn-alert-header">VPN is essential in {countryName}</div>
         <p class="vpn-alert-body">{getVpnMessage(slug)}</p>
         <a href={nordvpnLink} target="_blank" rel="noopener sponsored" class="vpn-alert-btn">
-          Get NordVPN — 75% off + 3 months free &rarr;
+          Get NordVPN (75% off + 3 months free) &rarr;
         </a>
       </div>
     )}

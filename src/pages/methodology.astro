@@ -50,28 +50,28 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <p>Each country receives a Quality of Life Score from 0 to 100%, based on eight metrics. Each metric is scored 1–10 from its raw source value, then weighted:</p>
 
 <ul>
-<li><strong>Safety — 25%</strong> (Global Peace Index)</li>
-<li><strong>Healthcare — 20%</strong> (UHC Service Coverage Index, WHO/World Bank)</li>
-<li><strong>Happiness — 15%</strong> (World Happiness Report via Our World in Data)</li>
-<li><strong>Human Development — 15%</strong> (HDI via UNDP/Our World in Data)</li>
-<li><strong>Pollution — 8%</strong> (Numbeo Pollution Index)</li>
-<li><strong>Unemployment — 7%</strong> (World Bank)</li>
-<li><strong>Internet Speed — 5%</strong> (Speedtest Global Index)</li>
-<li><strong>Traffic — 5%</strong> (Numbeo Traffic Index)</li>
+<li><strong>Safety: 25%</strong> (Global Peace Index)</li>
+<li><strong>Healthcare: 20%</strong> (UHC Service Coverage Index, WHO/World Bank)</li>
+<li><strong>Happiness: 15%</strong> (World Happiness Report via Our World in Data)</li>
+<li><strong>Human Development: 15%</strong> (HDI via UNDP/Our World in Data)</li>
+<li><strong>Pollution: 8%</strong> (Numbeo Pollution Index)</li>
+<li><strong>Unemployment: 7%</strong> (World Bank)</li>
+<li><strong>Internet Speed: 5%</strong> (Speedtest Global Index)</li>
+<li><strong>Traffic: 5%</strong> (Numbeo Traffic Index)</li>
 </ul>
 
 <p>The final score is a weighted average of all available metrics. If a metric is unavailable for a country, its weight is redistributed proportionally across the remaining metrics.</p>
 
 <h3>Score Labels</h3>
 <ul>
-<li><strong>Outstanding destination</strong> — 90% and above</li>
-<li><strong>Excellent destination</strong> — 80–89%</li>
-<li><strong>Very good destination</strong> — 70–79%</li>
-<li><strong>Good destination</strong> — 60–69%</li>
-<li><strong>Moderate destination</strong> — 50–59%</li>
-<li><strong>Mixed destination</strong> — 40–49%</li>
-<li><strong>Limited destination</strong> — 30–39%</li>
-<li><strong>Challenging destination</strong> — below 30%</li>
+<li><strong>Outstanding destination:</strong> 90% and above</li>
+<li><strong>Excellent destination:</strong> 80-89%</li>
+<li><strong>Very good destination:</strong> 70-79%</li>
+<li><strong>Good destination:</strong> 60-69%</li>
+<li><strong>Moderate destination:</strong> 50-59%</li>
+<li><strong>Mixed destination:</strong> 40-49%</li>
+<li><strong>Limited destination:</strong> 30-39%</li>
+<li><strong>Challenging destination:</strong> below 30%</li>
 </ul>
 
 <h2>Individual Metrics</h2>
@@ -105,7 +105,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <ul>
 <li><strong>Visa-free days:</strong> Number of days a US passport holder can stay without a visa or on visa-on-arrival, sourced from the Passport Index dataset on GitHub.</li>
 <li><strong>English Proficiency:</strong> EF English Proficiency Index score. Countries where English is the primary native language receive a "Native English" designation rather than an EF score.</li>
-<li><strong>Tax System:</strong> Whether the country uses worldwide taxation (taxes global income), territorial taxation (taxes local income only), or no personal income tax. Classified from public tax authority sources. This is a high-level comparison — individual tax obligations depend on residency status, treaties, and personal circumstances. Consult a qualified tax advisor.</li>
+<li><strong>Tax System:</strong> Whether the country uses worldwide taxation (taxes global income), territorial taxation (taxes local income only), or no personal income tax. Classified from public tax authority sources. This is a high-level comparison. Individual tax obligations depend on residency status, treaties, and personal circumstances. Consult a qualified tax advisor.</li>
 <li><strong>Digital Nomad Visa:</strong> Whether the country offers an official long-stay visa program for remote workers. Sourced from Citizen Remote and official government sources.</li>
 </ul>
 
@@ -145,7 +145,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <p>All quality of life and mobility data is updated quarterly. PPP values are refreshed from the World Bank API quarterly and embedded in the calculator. Exchange rates are fetched live and cached for 24 hours. Country facts (population, borders, etc.) are updated annually as they rarely change.</p>
 
 <h2>Missing Data</h2>
-<p>Some countries lack data for specific metrics due to source limitations — for example, small island nations not surveyed by the World Happiness Report, or countries excluded from World Bank databases for geopolitical reasons (Taiwan). Where a reliable alternative source exists using the same definition, that source is used. Otherwise the metric is displayed as "Not available from public data sources" and excluded from the weighted average calculation.</p>
+<p>Some countries lack data for specific metrics due to source limitations. For example, small island nations not surveyed by the World Happiness Report, or countries excluded from World Bank databases for geopolitical reasons (Taiwan). Where a reliable alternative source exists using the same definition, that source is used. Otherwise the metric is displayed as "Not available from public data sources" and excluded from the weighted average calculation.</p>
 
 <h2>Contact</h2>
 <p>Questions, corrections, or spotted an error?<br><br>

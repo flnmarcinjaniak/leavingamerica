@@ -2,30 +2,6 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import qualityScoresData from '../../data/quality-scores.json';
 
-const _PAIRS = [
-  'portugal-vs-spain','spain-vs-italy','portugal-vs-italy',
-  'greece-vs-spain','greece-vs-portugal','malta-vs-cyprus',
-  'croatia-vs-greece','croatia-vs-portugal',
-  'mexico-vs-costa-rica','mexico-vs-panama','costa-rica-vs-panama',
-  'mexico-vs-portugal','colombia-vs-mexico','ecuador-vs-colombia',
-  'argentina-vs-chile','argentina-vs-uruguay','belize-vs-costa-rica',
-  'nicaragua-vs-costa-rica','dominican-republic-vs-mexico',
-  'thailand-vs-vietnam','thailand-vs-malaysia','vietnam-vs-philippines',
-  'thailand-vs-philippines','malaysia-vs-indonesia','thailand-vs-portugal',
-  'cambodia-vs-thailand','cambodia-vs-vietnam',
-  'poland-vs-czech-republic','hungary-vs-poland','romania-vs-bulgaria',
-  'czech-republic-vs-hungary','croatia-vs-slovenia','estonia-vs-lithuania',
-  'latvia-vs-lithuania','albania-vs-montenegro','georgia-vs-turkey',
-  'france-vs-spain','france-vs-italy','netherlands-vs-germany',
-  'ireland-vs-united-kingdom','canada-vs-australia','australia-vs-new-zealand',
-  'portugal-vs-costa-rica','spain-vs-mexico','panama-vs-portugal',
-  'thailand-vs-mexico','greece-vs-croatia',
-  'georgia-vs-portugal','taiwan-vs-south-korea','japan-vs-south-korea',
-  'singapore-vs-malaysia','united-arab-emirates-vs-singapore',
-  'south-africa-vs-portugal','morocco-vs-spain','kenya-vs-south-africa',
-  'turkey-vs-greece',
-];
-
 const NAMES: Record<string,string> = {
   'portugal':'Portugal','spain':'Spain','poland':'Poland',
   'mexico':'Mexico','thailand':'Thailand','germany':'Germany',
@@ -78,6 +54,7 @@ const ISO2: Record<string,string> = {
 };
 
 export async function getStaticPaths() {
+  // 55 canonical pairs (greece-vs-croatia removed — duplicate of croatia-vs-greece)
   const PAIRS = [
     'portugal-vs-spain','spain-vs-italy','portugal-vs-italy',
     'greece-vs-spain','greece-vs-portugal','malta-vs-cyprus',
@@ -95,16 +72,25 @@ export async function getStaticPaths() {
     'france-vs-spain','france-vs-italy','netherlands-vs-germany',
     'ireland-vs-united-kingdom','canada-vs-australia','australia-vs-new-zealand',
     'portugal-vs-costa-rica','spain-vs-mexico','panama-vs-portugal',
-    'thailand-vs-mexico','greece-vs-croatia',
+    'thailand-vs-mexico',
     'georgia-vs-portugal','taiwan-vs-south-korea','japan-vs-south-korea',
     'singapore-vs-malaysia','united-arab-emirates-vs-singapore',
     'south-africa-vs-portugal','morocco-vs-spain','kenya-vs-south-africa',
     'turkey-vs-greece',
   ];
-  return PAIRS.map(pair => ({ params: { pair } }));
+  // For each canonical pair, also generate the reversed slug as a redirect
+  const paths: Array<{params: {pair: string}; props: {isRedirect: boolean; canonicalPair?: string}}> = [];
+  for (const pair of PAIRS) {
+    const i = pair.indexOf('-vs-');
+    const a = pair.slice(0, i), b = pair.slice(i + 4);
+    paths.push({ params: { pair }, props: { isRedirect: false } });
+    paths.push({ params: { pair: `${b}-vs-${a}` }, props: { isRedirect: true, canonicalPair: pair } });
+  }
+  return paths;
 }
 
 const { pair } = Astro.params;
+const { isRedirect, canonicalPair } = Astro.props as { isRedirect: boolean; canonicalPair?: string };
 const vsIdx = pair.indexOf('-vs-');
 const slugA = pair.slice(0, vsIdx);
 const slugB = pair.slice(vsIdx + 4);
@@ -236,6 +222,22 @@ const pageDesc = (() => {
 })();
 ---
 
+{isRedirect && (
+  <html lang="en">
+    <head>
+      <meta charset="utf-8" />
+      <title>Redirecting...</title>
+      <link rel="canonical" href={`https://leavingamerica.co/compare/${canonicalPair}/`} />
+      <meta http-equiv="refresh" content={`0; url=/compare/${canonicalPair}/`} />
+    </head>
+    <body>
+      <p style="font-family:sans-serif;padding:40px;color:#64748b">
+        Redirecting... <a href={`/compare/${canonicalPair}/`}>Click here if not redirected automatically.</a>
+      </p>
+    </body>
+  </html>
+)}
+{!isRedirect && (
 <BaseLayout title={pageTitle} description={pageDesc}>
 <script type="application/ld+json" set:html={faqSchema} />
 
@@ -489,3 +491,4 @@ const pageDesc = (() => {
 </div>
 
 </BaseLayout>
+)}

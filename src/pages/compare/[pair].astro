@@ -239,188 +239,202 @@ const pageDesc = (() => {
 
 <style>
 * { box-sizing: border-box; }
-.cmp-page { font-family: 'Manrope', sans-serif; background: #F1F5F9; }
+.cmp-page { font-family: 'Manrope', sans-serif; background: #fff; }
 
 /* ── HERO ─────────────────────────────────────────────────── */
 .cmp-hero {
-  background: linear-gradient(155deg, #020617 0%, #0F172A 45%, #1e1b4b 100%);
-  padding: 72px 24px 60px;
+  background: linear-gradient(135deg, #0F172A 0%, #1E3A8A 100%);
+  padding: 80px 24px 64px;
   text-align: center;
   position: relative;
   overflow: hidden;
 }
+/* Left glow orb */
 .cmp-hero::before {
   content: '';
   position: absolute;
-  inset: 0;
-  background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.04) 1px, transparent 0);
-  background-size: 28px 28px;
+  top: -60px; left: -80px;
+  width: 420px; height: 420px;
+  background: radial-gradient(circle, rgba(99,102,241,0.28) 0%, transparent 65%);
+  pointer-events: none;
+}
+/* Right glow orb */
+.cmp-hero::after {
+  content: '';
+  position: absolute;
+  bottom: -60px; right: -80px;
+  width: 380px; height: 380px;
+  background: radial-gradient(circle, rgba(37,99,235,0.22) 0%, transparent 65%);
   pointer-events: none;
 }
 .cmp-hero-flags {
-  display: flex; align-items: center; justify-content: center; gap: 32px;
-  margin-bottom: 32px; position: relative;
+  display: flex; align-items: flex-start; justify-content: center; gap: 36px;
+  margin-bottom: 36px; position: relative; z-index: 1;
 }
 .cmp-flag-wrap {
-  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
 }
 .cmp-flag {
-  width: 80px; height: 60px;
-  border-radius: 8px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08);
+  width: 88px; height: 66px;
+  border-radius: 10px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.12);
   display: block;
 }
 .cmp-flag-name {
-  font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.75);
-  letter-spacing: 0.04em;
+  font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.8);
+  letter-spacing: 0.02em;
 }
 .cmp-vs {
-  font-size: 11px; font-weight: 800; letter-spacing: 0.12em;
-  color: rgba(255,255,255,0.45);
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.1);
+  font-size: 11px; font-weight: 800; letter-spacing: 0.14em;
+  color: rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
   border-radius: 100px;
-  padding: 7px 16px;
-  margin-bottom: 24px;
+  padding: 8px 18px;
   align-self: center;
+  position: relative; z-index: 1;
 }
 .cmp-hero h1 {
-  font-size: 28px; font-weight: 800; color: white;
-  max-width: 680px; margin: 0 auto 14px; line-height: 1.25;
-  position: relative;
+  font-size: 30px; font-weight: 800; color: #fff;
+  max-width: 700px; margin: 0 auto 16px; line-height: 1.25;
+  position: relative; z-index: 1;
 }
 .cmp-hero-sub {
-  font-size: 12px; color: rgba(255,255,255,0.35);
-  letter-spacing: 0.06em; text-transform: uppercase;
-  position: relative;
+  font-size: 13px; color: rgba(255,255,255,0.4);
+  letter-spacing: 0.05em; text-transform: uppercase;
+  position: relative; z-index: 1;
 }
 
 /* ── LAYOUT ───────────────────────────────────────────────── */
-.cmp-wrap { max-width: 900px; margin: 0 auto; padding: 0 20px 64px; }
-.cmp-section { padding: 40px 0 0; }
+.cmp-body {
+  background: #F8FAFC;
+  border-top: 1px solid #E2E8F0;
+  padding-bottom: 72px;
+}
+.cmp-wrap {
+  max-width: 860px; margin: 0 auto; padding: 0 24px;
+}
+.cmp-section { padding: 44px 0 0; }
 .cmp-section h2 {
-  font-size: 18px; font-weight: 800; color: #0F172A;
-  margin-bottom: 16px; letter-spacing: -0.01em;
+  font-size: 19px; font-weight: 800; color: #0F172A;
+  margin-bottom: 18px; letter-spacing: -0.01em;
 }
 
 /* ── TABLE ────────────────────────────────────────────────── */
 .cmp-table-wrap {
-  background: white;
-  border: 1px solid #E2E8F0;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
-  margin-bottom: 8px;
+  box-shadow: 0 4px 24px rgba(15,23,42,0.1), 0 0 0 1px rgba(15,23,42,0.06);
+  margin-bottom: 10px;
 }
-.cmp-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.cmp-table { width: 100%; border-collapse: collapse; font-size: 14px; background: white; }
 .cmp-table thead th {
   background: #0F172A; color: white;
-  padding: 14px 20px;
+  padding: 15px 22px;
   text-align: center; font-weight: 700; font-size: 13px;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
 }
-.cmp-table thead th:first-child { text-align: left; width: 36%; }
-.cmp-table thead .th-country {
+.cmp-table thead th:first-child { text-align: left; width: 34%; }
+.cmp-th-country {
   display: flex; align-items: center; justify-content: center; gap: 8px;
 }
-.cmp-th-flag { width: 22px; height: 16px; border-radius: 2px; flex-shrink: 0; }
+.cmp-th-flag { width: 22px; height: 16px; border-radius: 3px; flex-shrink: 0; }
 .cmp-table td {
-  padding: 13px 20px;
+  padding: 14px 22px;
   border-bottom: 1px solid #F1F5F9;
   text-align: center; color: #1E293B; background: white;
   font-size: 14px; font-weight: 500;
-  transition: background 0.1s;
 }
 .cmp-table td:first-child {
   text-align: left; color: #64748B;
   font-weight: 600; font-size: 13px;
 }
 .cmp-table tbody tr:last-child td { border-bottom: none; }
-.cmp-table tbody tr:hover td:not(:first-child) { background: #FAFBFD; }
+.cmp-table tbody tr:hover td { background: #FAFBFE; }
+.cmp-table tbody tr:hover td.cmp-win { background: #D1FAE5 !important; }
 .cmp-win {
   background: #DCFCE7 !important;
   color: #15803D !important;
   font-weight: 700 !important;
 }
 .cmp-nodata { color: #CBD5E1; font-style: italic; font-size: 12px; }
-.cmp-table-note {
-  font-size: 11px; color: #94A3B8; margin: 10px 0 0; padding: 0 4px;
-}
+.cmp-table-note { font-size: 11px; color: #94A3B8; margin: 10px 0 0; padding: 0 2px; }
 
 /* ── VERDICT CARDS ────────────────────────────────────────── */
 .cmp-verdict {
-  background: white; border: 1px solid #E8EDF4; border-radius: 14px;
-  padding: 20px 24px; margin-bottom: 12px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  background: white; border: 1px solid #E2E8F0; border-radius: 14px;
+  padding: 20px 24px; margin-bottom: 10px;
+  box-shadow: 0 1px 6px rgba(15,23,42,0.05);
 }
 .cmp-verdict-label {
-  font-size: 10px; font-weight: 800; letter-spacing: 0.08em;
-  color: #2563EB; text-transform: uppercase; margin-bottom: 8px;
+  font-size: 10px; font-weight: 800; letter-spacing: 0.1em;
+  color: #2563EB; text-transform: uppercase; margin-bottom: 9px;
 }
-.cmp-verdict p { font-size: 14px; color: #475569; line-height: 1.75; margin: 0; }
+.cmp-verdict p { font-size: 14px; color: #334155; line-height: 1.75; margin: 0; }
 
 /* ── COUNTRY LINK CARDS ───────────────────────────────────── */
 .cmp-links { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px; }
 .cmp-link-card {
-  display: block; padding: 14px 18px;
-  border: 1px solid #E8EDF4; border-radius: 12px;
+  display: block; padding: 16px 20px;
+  border: 1px solid #E2E8F0; border-radius: 12px;
   background: white; text-decoration: none;
-  font-size: 13px; font-weight: 700; color: #2563EB;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+  font-size: 13px; font-weight: 700; color: #1D4ED8;
+  box-shadow: 0 1px 6px rgba(15,23,42,0.05);
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.12s;
 }
 .cmp-link-card:hover {
   border-color: #93C5FD;
-  box-shadow: 0 4px 16px rgba(37,99,235,0.1);
-  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(37,99,235,0.12);
+  transform: translateY(-2px);
 }
 .cmp-link-label {
   font-size: 10px; font-weight: 700; color: #94A3B8;
-  text-transform: uppercase; letter-spacing: 0.06em;
-  display: block; margin-bottom: 4px;
+  text-transform: uppercase; letter-spacing: 0.07em;
+  display: block; margin-bottom: 5px;
 }
 
 /* ── AFFILIATE ────────────────────────────────────────────── */
 .affiliate-mini {
-  background: white; border: 1px solid #E8EDF4; border-radius: 16px;
-  padding: 20px 24px; display: flex; align-items: center; gap: 20px;
-  flex-wrap: wrap; margin-top: 36px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  background: white; border: 1px solid #E2E8F0; border-radius: 16px;
+  padding: 22px 26px; display: flex; align-items: center; gap: 20px;
+  flex-wrap: wrap; margin-top: 40px;
+  box-shadow: 0 2px 12px rgba(15,23,42,0.07);
 }
-.affiliate-mini-text { font-size: 14px; color: #475569; flex: 1; line-height: 1.6; }
+.affiliate-mini-text { font-size: 14px; color: #475569; flex: 1; line-height: 1.65; }
 .affiliate-mini-btn {
   background: #0F172A; color: white; font-size: 13px; font-weight: 700;
-  padding: 11px 22px; border-radius: 100px; text-decoration: none;
-  white-space: nowrap; transition: background 0.15s, transform 0.15s;
+  padding: 12px 24px; border-radius: 100px; text-decoration: none;
+  white-space: nowrap; transition: background 0.15s, transform 0.12s;
 }
 .affiliate-mini-btn:hover { background: #1E3A8A; transform: translateY(-1px); }
 
 /* ── FAQ ──────────────────────────────────────────────────── */
 .faq-item {
-  border: 1px solid #E8EDF4; border-radius: 14px; margin-bottom: 8px;
+  border: 1px solid #E2E8F0; border-radius: 14px; margin-bottom: 8px;
   background: white; overflow: hidden;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  box-shadow: 0 1px 6px rgba(15,23,42,0.05);
 }
 .faq-item summary {
-  padding: 16px 20px; font-size: 15px; font-weight: 700; color: #0F172A;
+  padding: 17px 22px; font-size: 15px; font-weight: 700; color: #0F172A;
   cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center;
 }
 .faq-item summary::-webkit-details-marker { display: none; }
 .faq-item summary::after {
   content: '+'; font-size: 22px; color: #94A3B8;
-  font-weight: 300; flex-shrink: 0; margin-left: 12px;
+  font-weight: 300; flex-shrink: 0; margin-left: 12px; line-height: 1;
 }
 .faq-item[open] summary::after { content: '-'; }
 .faq-item[open] summary { color: #2563EB; }
-.faq-item p { padding: 0 20px 18px; font-size: 14px; color: #475569; line-height: 1.75; margin: 0; }
+.faq-item p { padding: 0 22px 18px; font-size: 14px; color: #475569; line-height: 1.75; margin: 0; }
 
 @media (max-width: 640px) {
-  .cmp-hero { padding: 56px 20px 48px; }
-  .cmp-hero h1 { font-size: 20px; }
-  .cmp-flag { width: 60px; height: 45px; }
+  .cmp-hero { padding: 60px 20px 52px; }
+  .cmp-hero h1 { font-size: 21px; }
+  .cmp-flag { width: 64px; height: 48px; }
+  .cmp-hero-flags { gap: 24px; }
   .cmp-links { grid-template-columns: 1fr; }
   .affiliate-mini { flex-direction: column; }
-  .cmp-table thead th, .cmp-table td { padding: 11px 12px; font-size: 13px; }
+  .cmp-table thead th, .cmp-table td { padding: 11px 14px; font-size: 13px; }
 }
 </style>
 
@@ -442,6 +456,7 @@ const pageDesc = (() => {
     <p class="cmp-hero-sub">Data-driven comparison. Every metric sourced from public indices.</p>
   </div>
 
+  <div class="cmp-body">
   <div class="cmp-wrap">
 
     <!-- Comparison table -->
@@ -453,13 +468,13 @@ const pageDesc = (() => {
           <tr>
             <th>Metric</th>
             <th>
-              <div class="th-country">
+              <div class="cmp-th-country">
                 {ISO2[slugA] && <span class={`fi fi-${ISO2[slugA]} cmp-th-flag`}></span>}
                 {nameA}
               </div>
             </th>
             <th>
-              <div class="th-country">
+              <div class="cmp-th-country">
                 {ISO2[slugB] && <span class={`fi fi-${ISO2[slugB]} cmp-th-flag`}></span>}
                 {nameB}
               </div>
@@ -513,7 +528,6 @@ const pageDesc = (() => {
             <td>{dB.nomad_visa ? '✓ Available' : '✗ Not available'}</td>
           </tr>
         </tbody>
-      </table>
       </table>
       </div>
       <p class="cmp-table-note">Green highlight = better value on that metric. Tax system: no winner declared. It depends on your income structure.</p>
@@ -593,6 +607,7 @@ const pageDesc = (() => {
       ))}
     </div>
 
+  </div>
   </div>
 </div>
 

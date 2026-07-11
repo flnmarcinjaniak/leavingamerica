@@ -54,7 +54,7 @@ const ISO2: Record<string,string> = {
 };
 
 export async function getStaticPaths() {
-  // 55 canonical pairs (greece-vs-croatia removed — duplicate of croatia-vs-greece)
+  // 55 canonical pairs (greece-vs-croatia removed, duplicate of croatia-vs-greece)
   const PAIRS = [
     'portugal-vs-spain','spain-vs-italy','portugal-vs-italy',
     'greece-vs-spain','greece-vs-portugal','malta-vs-cyprus',
@@ -110,10 +110,6 @@ function winner(a: number | null, b: number | null, higherBetter: boolean): [str
   return (higherBetter ? a > b : a < b) ? ['cmp-win', ''] : ['', 'cmp-win'];
 }
 
-function fmt(v: number | null | undefined, prefix = '', suffix = ''): string {
-  if (v == null) return '—';
-  return prefix + v.toLocaleString() + suffix;
-}
 
 const [wSingleA, wSingleB] = winner(dA.budget_single, dB.budget_single, false);
 const [wCoupleA, wCoupleB] = winner(dA.budget_couple, dB.budget_couple, false);
@@ -132,7 +128,7 @@ function costVerdict(): string {
   const usLine = (dA.us_comparison && dB.us_comparison)
     ? ` Both undercut the US: ${nameA} is ${dA.us_comparison.replace('approximately ','')} while ${nameB} is ${dB.us_comparison.replace('approximately ','')}.`
     : '';
-  return `${cheaper} is the more affordable option at $${Math.min(a,b).toLocaleString()}/month for a single person vs ${dearer}'s $${Math.max(a,b).toLocaleString()}/month — a ${pct}% gap.${usLine}`;
+  return `${cheaper} is the more affordable option at $${Math.min(a,b).toLocaleString()}/month for a single person vs ${dearer}'s $${Math.max(a,b).toLocaleString()}/month, a ${pct}% difference.${usLine}`;
 }
 
 function safetyVerdict(): string {
@@ -147,7 +143,7 @@ function safetyVerdict(): string {
 function taxVerdict(): string {
   const describe = (name: string, sys: string) => {
     if (!sys) return '';
-    if (sys === 'territorial') return `${name} uses a territorial tax system — only locally-earned income is taxed, which can meaningfully reduce your overall burden as a US expat.`;
+    if (sys === 'territorial') return `${name} uses a territorial tax system, so only locally-earned income is taxed. That can meaningfully reduce your overall burden as a US expat.`;
     if (sys === 'worldwide')   return `${name} taxes worldwide income, so you may owe taxes both locally and to the US depending on your income.`;
     if (sys === 'no tax' || sys === 'none') return `${name} levies no personal income tax, making it highly attractive for American retirees and remote workers.`;
     return `${name} operates a ${sys} tax system.`;
@@ -165,7 +161,7 @@ const faqs = [
       if (!a || !b) return `Both countries have different cost profiles. Check the full data table above for available figures.`;
       const cheaper = a < b ? nameA : nameB;
       const pct = Math.round((Math.abs(a - b) / Math.max(a, b)) * 100);
-      return `${cheaper} is cheaper for a single person. ${nameA} runs ~$${a.toLocaleString()}/month vs ${nameB}'s ~$${b.toLocaleString()}/month — a ${pct}% difference in monthly living costs.`;
+      return `${cheaper} is cheaper for a single person. ${nameA} runs ~$${a.toLocaleString()}/month vs ${nameB}'s ~$${b.toLocaleString()}/month, a ${pct}% difference in monthly living costs.`;
     })(),
   },
   {
@@ -179,7 +175,7 @@ const faqs = [
     })(),
   },
   {
-    q: `Which is better for American retirees — ${nameA} or ${nameB}?`,
+    q: `Which is better for American retirees: ${nameA} or ${nameB}?`,
     a: (() => {
       const parts: string[] = [];
       if (dA.budget_single && dB.budget_single)
@@ -346,7 +342,7 @@ const pageDesc = (() => {
       {ISO2[slugB] && <span class={`fi fi-${ISO2[slugB]} cmp-flag`}></span>}
     </div>
     <h1>{nameA} vs {nameB}: Cost of Living, Safety & Quality of Life for Americans (2026)</h1>
-    <p class="cmp-hero-sub">Data-driven comparison — every metric sourced from public indices</p>
+    <p class="cmp-hero-sub">Data-driven comparison. Every metric sourced from public indices.</p>
   </div>
 
   <div class="cmp-wrap">
@@ -410,7 +406,7 @@ const pageDesc = (() => {
           </tr>
         </tbody>
       </table>
-      <p style="font-size:12px;color:#94A3B8;margin:0">Blue highlight = better value on that metric. Tax system: no winner declared — depends on your income structure.</p>
+      <p style="font-size:12px;color:#94A3B8;margin:0">Blue highlight = better value on that metric. Tax system: no winner declared. It depends on your income structure.</p>
     </div>
 
     <!-- Verdicts -->
@@ -469,7 +465,7 @@ const pageDesc = (() => {
     <!-- SafetyWing affiliate -->
     <div class="affiliate-mini">
       <span class="affiliate-mini-text">
-        <strong>Moving abroad means your US health insurance stops working.</strong> SafetyWing covers you in both {nameA} and {nameB} from $45/month — cancel anytime.
+        <strong>Moving abroad means your US health insurance stops working.</strong> SafetyWing covers you in both {nameA} and {nameB} from $45/month. Cancel anytime.
       </span>
       <a href="https://safetywing.com/nomad-insurance/?referenceID=26555621&utm_source=26555621&utm_medium=Ambassador" class="affiliate-mini-btn" target="_blank" rel="noopener sponsored">
         Get a quote →

@@ -1,0 +1,491 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import qualityScoresData from '../../data/quality-scores.json';
+
+const _PAIRS = [
+  'portugal-vs-spain','spain-vs-italy','portugal-vs-italy',
+  'greece-vs-spain','greece-vs-portugal','malta-vs-cyprus',
+  'croatia-vs-greece','croatia-vs-portugal',
+  'mexico-vs-costa-rica','mexico-vs-panama','costa-rica-vs-panama',
+  'mexico-vs-portugal','colombia-vs-mexico','ecuador-vs-colombia',
+  'argentina-vs-chile','argentina-vs-uruguay','belize-vs-costa-rica',
+  'nicaragua-vs-costa-rica','dominican-republic-vs-mexico',
+  'thailand-vs-vietnam','thailand-vs-malaysia','vietnam-vs-philippines',
+  'thailand-vs-philippines','malaysia-vs-indonesia','thailand-vs-portugal',
+  'cambodia-vs-thailand','cambodia-vs-vietnam',
+  'poland-vs-czech-republic','hungary-vs-poland','romania-vs-bulgaria',
+  'czech-republic-vs-hungary','croatia-vs-slovenia','estonia-vs-lithuania',
+  'latvia-vs-lithuania','albania-vs-montenegro','georgia-vs-turkey',
+  'france-vs-spain','france-vs-italy','netherlands-vs-germany',
+  'ireland-vs-united-kingdom','canada-vs-australia','australia-vs-new-zealand',
+  'portugal-vs-costa-rica','spain-vs-mexico','panama-vs-portugal',
+  'thailand-vs-mexico','greece-vs-croatia',
+  'georgia-vs-portugal','taiwan-vs-south-korea','japan-vs-south-korea',
+  'singapore-vs-malaysia','united-arab-emirates-vs-singapore',
+  'south-africa-vs-portugal','morocco-vs-spain','kenya-vs-south-africa',
+  'turkey-vs-greece',
+];
+
+const NAMES: Record<string,string> = {
+  'portugal':'Portugal','spain':'Spain','poland':'Poland',
+  'mexico':'Mexico','thailand':'Thailand','germany':'Germany',
+  'japan':'Japan','croatia':'Croatia','czech-republic':'Czech Republic',
+  'hungary':'Hungary','romania':'Romania','bulgaria':'Bulgaria',
+  'vietnam':'Vietnam','south-korea':'South Korea','australia':'Australia',
+  'new-zealand':'New Zealand','canada':'Canada','ireland':'Ireland',
+  'netherlands':'Netherlands','france':'France','argentina':'Argentina',
+  'ecuador':'Ecuador','morocco':'Morocco','switzerland':'Switzerland',
+  'norway':'Norway','denmark':'Denmark','sweden':'Sweden','belgium':'Belgium',
+  'austria':'Austria','finland':'Finland','united-kingdom':'United Kingdom',
+  'singapore':'Singapore','united-arab-emirates':'UAE','qatar':'Qatar',
+  'saudi-arabia':'Saudi Arabia','iceland':'Iceland','india':'India',
+  'philippines':'Philippines','china':'China','georgia':'Georgia',
+  'serbia':'Serbia','kenya':'Kenya','peru':'Peru','brazil':'Brazil',
+  'chile':'Chile','albania':'Albania','sri-lanka':'Sri Lanka','egypt':'Egypt',
+  'indonesia':'Indonesia','colombia':'Colombia','costa-rica':'Costa Rica',
+  'panama':'Panama','malaysia':'Malaysia','italy':'Italy','greece':'Greece',
+  'bahamas':'Bahamas','belize':'Belize','bolivia':'Bolivia','cambodia':'Cambodia',
+  'cyprus':'Cyprus','dominican-republic':'Dominican Republic',
+  'el-salvador':'El Salvador','estonia':'Estonia','ghana':'Ghana',
+  'honduras':'Honduras','jamaica':'Jamaica','kazakhstan':'Kazakhstan',
+  'latvia':'Latvia','lithuania':'Lithuania','malta':'Malta',
+  'montenegro':'Montenegro','nepal':'Nepal','nicaragua':'Nicaragua',
+  'north-macedonia':'North Macedonia','paraguay':'Paraguay','rwanda':'Rwanda',
+  'slovakia':'Slovakia','slovenia':'Slovenia','south-africa':'South Africa',
+  'taiwan':'Taiwan','turkey':'Turkey','uruguay':'Uruguay',
+};
+
+const ISO2: Record<string,string> = {
+  'portugal':'pt','spain':'es','poland':'pl','mexico':'mx','thailand':'th',
+  'germany':'de','japan':'jp','croatia':'hr','czech-republic':'cz',
+  'hungary':'hu','romania':'ro','bulgaria':'bg','vietnam':'vn',
+  'south-korea':'kr','australia':'au','new-zealand':'nz','canada':'ca',
+  'ireland':'ie','netherlands':'nl','france':'fr','argentina':'ar',
+  'ecuador':'ec','morocco':'ma','switzerland':'ch','norway':'no',
+  'denmark':'dk','sweden':'se','belgium':'be','austria':'at','finland':'fi',
+  'united-kingdom':'gb','singapore':'sg','united-arab-emirates':'ae',
+  'qatar':'qa','saudi-arabia':'sa','iceland':'is','india':'in',
+  'philippines':'ph','china':'cn','georgia':'ge','serbia':'rs','kenya':'ke',
+  'peru':'pe','brazil':'br','chile':'cl','albania':'al','sri-lanka':'lk',
+  'egypt':'eg','indonesia':'id','colombia':'co','costa-rica':'cr','panama':'pa',
+  'malaysia':'my','italy':'it','greece':'gr','bahamas':'bs','belize':'bz',
+  'bolivia':'bo','cambodia':'kh','cyprus':'cy','dominican-republic':'do',
+  'el-salvador':'sv','estonia':'ee','ghana':'gh','honduras':'hn','jamaica':'jm',
+  'kazakhstan':'kz','latvia':'lv','lithuania':'lt','malta':'mt','montenegro':'me',
+  'nepal':'np','nicaragua':'ni','north-macedonia':'mk','paraguay':'py',
+  'rwanda':'rw','slovakia':'sk','slovenia':'si','south-africa':'za','taiwan':'tw',
+  'turkey':'tr','uruguay':'uy',
+};
+
+export async function getStaticPaths() {
+  const PAIRS = [
+    'portugal-vs-spain','spain-vs-italy','portugal-vs-italy',
+    'greece-vs-spain','greece-vs-portugal','malta-vs-cyprus',
+    'croatia-vs-greece','croatia-vs-portugal',
+    'mexico-vs-costa-rica','mexico-vs-panama','costa-rica-vs-panama',
+    'mexico-vs-portugal','colombia-vs-mexico','ecuador-vs-colombia',
+    'argentina-vs-chile','argentina-vs-uruguay','belize-vs-costa-rica',
+    'nicaragua-vs-costa-rica','dominican-republic-vs-mexico',
+    'thailand-vs-vietnam','thailand-vs-malaysia','vietnam-vs-philippines',
+    'thailand-vs-philippines','malaysia-vs-indonesia','thailand-vs-portugal',
+    'cambodia-vs-thailand','cambodia-vs-vietnam',
+    'poland-vs-czech-republic','hungary-vs-poland','romania-vs-bulgaria',
+    'czech-republic-vs-hungary','croatia-vs-slovenia','estonia-vs-lithuania',
+    'latvia-vs-lithuania','albania-vs-montenegro','georgia-vs-turkey',
+    'france-vs-spain','france-vs-italy','netherlands-vs-germany',
+    'ireland-vs-united-kingdom','canada-vs-australia','australia-vs-new-zealand',
+    'portugal-vs-costa-rica','spain-vs-mexico','panama-vs-portugal',
+    'thailand-vs-mexico','greece-vs-croatia',
+    'georgia-vs-portugal','taiwan-vs-south-korea','japan-vs-south-korea',
+    'singapore-vs-malaysia','united-arab-emirates-vs-singapore',
+    'south-africa-vs-portugal','morocco-vs-spain','kenya-vs-south-africa',
+    'turkey-vs-greece',
+  ];
+  return PAIRS.map(pair => ({ params: { pair } }));
+}
+
+const { pair } = Astro.params;
+const vsIdx = pair.indexOf('-vs-');
+const slugA = pair.slice(0, vsIdx);
+const slugB = pair.slice(vsIdx + 4);
+
+const nameA = NAMES[slugA] || slugA;
+const nameB = NAMES[slugB] || slugB;
+const allCountries = qualityScoresData.countries as Record<string, any>;
+const dA = allCountries[slugA];
+const dB = allCountries[slugB];
+
+const fireSlugs = Object.entries(allCountries).filter(([,d]) => d.budget_single).map(([s]) => s);
+const aHasFire = fireSlugs.includes(slugA);
+const bHasFire = fireSlugs.includes(slugB);
+
+function winner(a: number | null, b: number | null, higherBetter: boolean): [string, string] {
+  if (a == null || b == null || a === b) return ['', ''];
+  return (higherBetter ? a > b : a < b) ? ['cmp-win', ''] : ['', 'cmp-win'];
+}
+
+function fmt(v: number | null | undefined, prefix = '', suffix = ''): string {
+  if (v == null) return '—';
+  return prefix + v.toLocaleString() + suffix;
+}
+
+const [wSingleA, wSingleB] = winner(dA.budget_single, dB.budget_single, false);
+const [wCoupleA, wCoupleB] = winner(dA.budget_couple, dB.budget_couple, false);
+const [wSafetyA, wSafetyB] = winner(dA.safety, dB.safety, true);
+const [wHealthA, wHealthB] = winner(dA.healthcare, dB.healthcare, true);
+const [wNetA, wNetB]       = winner(dA.internet, dB.internet, true);
+const [wEngA, wEngB]       = winner(dA.english, dB.english, true);
+const [wGradeA, wGradeB]  = winner(dA.grade_percent, dB.grade_percent, true);
+
+function costVerdict(): string {
+  const a = dA.budget_single, b = dB.budget_single;
+  if (!a || !b) return '';
+  const cheaper = a < b ? nameA : nameB;
+  const dearer  = a < b ? nameB : nameA;
+  const pct = Math.round((Math.abs(a - b) / Math.max(a, b)) * 100);
+  const usLine = (dA.us_comparison && dB.us_comparison)
+    ? ` Both undercut the US: ${nameA} is ${dA.us_comparison.replace('approximately ','')} while ${nameB} is ${dB.us_comparison.replace('approximately ','')}.`
+    : '';
+  return `${cheaper} is the more affordable option at $${Math.min(a,b).toLocaleString()}/month for a single person vs ${dearer}'s $${Math.max(a,b).toLocaleString()}/month — a ${pct}% gap.${usLine}`;
+}
+
+function safetyVerdict(): string {
+  const a = dA.safety, b = dB.safety;
+  if (a == null || b == null) return '';
+  if (a === b) return `${nameA} and ${nameB} score equally on safety at ${a}/10. Both are reasonable choices for most Americans.`;
+  const safer = a > b ? nameA : nameB;
+  const other = a > b ? nameB : nameA;
+  return `${safer} scores higher on safety (${Math.max(a,b)}/10 vs ${Math.min(a,b)}/10). ${Math.min(a,b) >= 7 ? 'Both countries are considered safe for expats, though safety varies by city and neighborhood.' : 'Research specific cities before committing, as national averages can mask local variation.'}`;
+}
+
+function taxVerdict(): string {
+  const describe = (name: string, sys: string) => {
+    if (!sys) return '';
+    if (sys === 'territorial') return `${name} uses a territorial tax system — only locally-earned income is taxed, which can meaningfully reduce your overall burden as a US expat.`;
+    if (sys === 'worldwide')   return `${name} taxes worldwide income, so you may owe taxes both locally and to the US depending on your income.`;
+    if (sys === 'no tax' || sys === 'none') return `${name} levies no personal income tax, making it highly attractive for American retirees and remote workers.`;
+    return `${name} operates a ${sys} tax system.`;
+  };
+  const a = describe(nameA, dA.tax_system);
+  const b = describe(nameB, dB.tax_system);
+  return [a, b].filter(Boolean).join(' ');
+}
+
+const faqs = [
+  {
+    q: `Is ${nameA} cheaper than ${nameB}?`,
+    a: (() => {
+      const a = dA.budget_single, b = dB.budget_single;
+      if (!a || !b) return `Both countries have different cost profiles. Check the full data table above for available figures.`;
+      const cheaper = a < b ? nameA : nameB;
+      const pct = Math.round((Math.abs(a - b) / Math.max(a, b)) * 100);
+      return `${cheaper} is cheaper for a single person. ${nameA} runs ~$${a.toLocaleString()}/month vs ${nameB}'s ~$${b.toLocaleString()}/month — a ${pct}% difference in monthly living costs.`;
+    })(),
+  },
+  {
+    q: `Is ${nameA} safer than ${nameB}?`,
+    a: (() => {
+      const a = dA.safety, b = dB.safety;
+      if (a == null || b == null) return `Complete safety data is not available for both countries. Visit the individual country pages for detailed safety information.`;
+      if (a === b) return `${nameA} and ${nameB} score equally on safety at ${a}/10 on our index. Research specific cities for more granular detail.`;
+      const safer = a > b ? nameA : nameB;
+      return `${safer} scores higher on safety (${Math.max(a,b)}/10 vs ${Math.min(a,b)}/10). Both countries' safety levels vary significantly by city, so research your target destination specifically.`;
+    })(),
+  },
+  {
+    q: `Which is better for American retirees — ${nameA} or ${nameB}?`,
+    a: (() => {
+      const parts: string[] = [];
+      if (dA.budget_single && dB.budget_single)
+        parts.push(`${dA.budget_single < dB.budget_single ? nameA : nameB} offers lower monthly costs ($${Math.min(dA.budget_single, dB.budget_single).toLocaleString()}/month)`);
+      if (dA.safety != null && dB.safety != null && dA.safety !== dB.safety)
+        parts.push(`${dA.safety > dB.safety ? nameA : nameB} scores higher on safety`);
+      if (dA.healthcare != null && dB.healthcare != null && dA.healthcare !== dB.healthcare)
+        parts.push(`${dA.healthcare > dB.healthcare ? nameA : nameB} has better-rated healthcare`);
+      if (!parts.length) return `Both ${nameA} and ${nameB} have genuine appeal for American retirees. Use the FIRE pages linked on this page to compare your specific retirement number in each country.`;
+      return `It depends on your priorities: ${parts.join('; ')}. Use the FIRE pages linked below to calculate your exact retirement number in each country.`;
+    })(),
+  },
+  {
+    q: `Do ${nameA} or ${nameB} offer digital nomad visas for Americans?`,
+    a: (() => {
+      const aV = dA.nomad_visa, bV = dB.nomad_visa;
+      if (aV && bV)   return `Both ${nameA} and ${nameB} offer digital nomad or remote worker visas that Americans can apply for. Check the individual country pages for current income requirements and processing times.`;
+      if (aV && !bV)  return `${nameA} offers a digital nomad visa for Americans. ${nameB} does not currently have a dedicated program, though standard long-stay or residency options may be available.`;
+      if (!aV && bV)  return `${nameB} offers a digital nomad visa for Americans. ${nameA} does not currently have a dedicated program, though standard long-stay or residency options may be available.`;
+      return `Neither ${nameA} nor ${nameB} currently has a dedicated digital nomad visa. Americans can typically enter both countries visa-free for short stays but will need to explore standard residency routes for longer-term living.`;
+    })(),
+  },
+];
+
+const faqSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(f => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+});
+
+const pageTitle = `${nameA} vs ${nameB}: Cost of Living Comparison (2026)`;
+const pageDesc = (() => {
+  const a = dA.budget_single, b = dB.budget_single;
+  if (a && b) return `${nameA} costs ~$${a.toLocaleString()}/month vs ${nameB}'s ~$${b.toLocaleString()}/month. Side-by-side: safety, healthcare, taxes & nomad visas for Americans.`;
+  return `Side-by-side comparison of ${nameA} vs ${nameB}: cost of living, safety, healthcare, taxes, and nomad visa options for Americans moving abroad.`;
+})();
+---
+
+<BaseLayout title={pageTitle} description={pageDesc}>
+<script type="application/ld+json" set:html={faqSchema} />
+
+<style>
+* { box-sizing: border-box; }
+.cmp-page { font-family: 'Manrope', sans-serif; background: #F8FAFC; }
+
+.cmp-hero {
+  background: linear-gradient(135deg, #0F172A 0%, #1E3A8A 100%);
+  padding: 48px 24px 40px;
+  text-align: center;
+}
+.cmp-hero-flags {
+  display: flex; align-items: center; justify-content: center; gap: 16px;
+  margin-bottom: 20px;
+}
+.cmp-flag { font-size: 48px; line-height: 1; }
+.cmp-vs { font-size: 18px; font-weight: 800; color: rgba(255,255,255,0.5); }
+.cmp-hero h1 {
+  font-size: 24px; font-weight: 800; color: white;
+  max-width: 700px; margin: 0 auto 12px; line-height: 1.3;
+}
+.cmp-hero-sub { font-size: 14px; color: rgba(255,255,255,0.65); }
+
+.cmp-wrap { max-width: 900px; margin: 0 auto; padding: 0 24px 60px; }
+
+.cmp-section { padding: 40px 0 0; }
+.cmp-section h2 { font-size: 20px; font-weight: 800; color: #0F172A; margin-bottom: 16px; }
+
+/* Comparison table */
+.cmp-table { width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 20px; }
+.cmp-table th {
+  background: #0F172A; color: white; padding: 12px 16px;
+  text-align: center; font-weight: 700; font-size: 13px;
+}
+.cmp-table th:first-child { text-align: left; }
+.cmp-table td {
+  padding: 12px 16px; border-bottom: 1px solid #E2E8F0;
+  text-align: center; color: #0F172A; background: white;
+}
+.cmp-table td:first-child { text-align: left; color: #475569; font-weight: 600; }
+.cmp-table tr:last-child td { border-bottom: none; }
+.cmp-win { background: #EFF6FF !important; font-weight: 700; color: #1D4ED8 !important; }
+.cmp-nodata { color: #94A3B8; font-style: italic; }
+
+/* Verdict cards */
+.cmp-verdict {
+  background: white; border: 1px solid #E2E8F0; border-radius: 12px;
+  padding: 20px 24px; margin-bottom: 16px;
+}
+.cmp-verdict-label {
+  font-size: 11px; font-weight: 800; letter-spacing: 0.06em;
+  color: #2563EB; text-transform: uppercase; margin-bottom: 8px;
+}
+.cmp-verdict p { font-size: 14px; color: #475569; line-height: 1.7; margin: 0; }
+
+/* Links */
+.cmp-links { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 8px; }
+.cmp-link-card {
+  display: block; padding: 14px 18px; border: 1px solid #E2E8F0;
+  border-radius: 10px; background: white; text-decoration: none;
+  font-size: 13px; font-weight: 700; color: #2563EB;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.cmp-link-card:hover { border-color: #2563EB; box-shadow: 0 2px 8px rgba(37,99,235,0.12); }
+.cmp-link-label { font-size: 11px; font-weight: 600; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 4px; }
+
+/* Affiliate */
+.affiliate-mini {
+  background: white; border: 1px solid #E2E8F0; border-radius: 14px;
+  padding: 18px 22px; display: flex; align-items: center; gap: 16px;
+  flex-wrap: wrap; margin-top: 32px;
+}
+.affiliate-mini-text { font-size: 14px; color: #475569; flex: 1; }
+.affiliate-mini-btn {
+  background: #0F172A; color: white; font-size: 13px; font-weight: 700;
+  padding: 10px 20px; border-radius: 100px; text-decoration: none;
+  white-space: nowrap; transition: background 0.15s;
+}
+.affiliate-mini-btn:hover { background: #1E3A8A; }
+
+/* FAQ */
+.faq-item { border: 1px solid #E2E8F0; border-radius: 12px; margin-bottom: 10px; background: white; overflow: hidden; }
+.faq-item summary {
+  padding: 16px 20px; font-size: 15px; font-weight: 700; color: #0F172A;
+  cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after { content: '+'; font-size: 20px; color: #2563EB; font-weight: 400; flex-shrink: 0; margin-left: 12px; }
+.faq-item[open] summary::after { content: '−'; }
+.faq-item p { padding: 0 20px 18px; font-size: 14px; color: #475569; line-height: 1.7; margin: 0; }
+
+@media (max-width: 600px) {
+  .cmp-hero h1 { font-size: 19px; }
+  .cmp-links { grid-template-columns: 1fr; }
+  .affiliate-mini { flex-direction: column; }
+}
+</style>
+
+<div class="cmp-page">
+
+  <div class="cmp-hero">
+    <div class="cmp-hero-flags">
+      {ISO2[slugA] && <span class={`fi fi-${ISO2[slugA]} cmp-flag`}></span>}
+      <span class="cmp-vs">VS</span>
+      {ISO2[slugB] && <span class={`fi fi-${ISO2[slugB]} cmp-flag`}></span>}
+    </div>
+    <h1>{nameA} vs {nameB}: Cost of Living, Safety & Quality of Life for Americans (2026)</h1>
+    <p class="cmp-hero-sub">Data-driven comparison — every metric sourced from public indices</p>
+  </div>
+
+  <div class="cmp-wrap">
+
+    <!-- Comparison table -->
+    <div class="cmp-section">
+      <h2>Side-by-Side Comparison</h2>
+      <table class="cmp-table">
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>{nameA}</th>
+            <th>{nameB}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Overall Grade</td>
+            <td class={wGradeA}>{dA.grade_percent != null ? `${dA.grade_percent}/100 · ${dA.grade_label}` : <span class="cmp-nodata">No data</span>}</td>
+            <td class={wGradeB}>{dB.grade_percent != null ? `${dB.grade_percent}/100 · ${dB.grade_label}` : <span class="cmp-nodata">No data</span>}</td>
+          </tr>
+          <tr>
+            <td>Monthly Budget (single)</td>
+            <td class={wSingleA}>{dA.budget_single != null ? `$${dA.budget_single.toLocaleString()}/mo` : <span class="cmp-nodata">No data</span>}</td>
+            <td class={wSingleB}>{dB.budget_single != null ? `$${dB.budget_single.toLocaleString()}/mo` : <span class="cmp-nodata">No data</span>}</td>
+          </tr>
+          <tr>
+            <td>Monthly Budget (couple)</td>
+            <td class={wCoupleA}>{dA.budget_couple != null ? `$${dA.budget_couple.toLocaleString()}/mo` : <span class="cmp-nodata">No data</span>}</td>
+            <td class={wCoupleB}>{dB.budget_couple != null ? `$${dB.budget_couple.toLocaleString()}/mo` : <span class="cmp-nodata">No data</span>}</td>
+          </tr>
+          <tr>
+            <td>Safety Score</td>
+            <td class={wSafetyA}>{dA.safety != null ? `${dA.safety}/10` : <span class="cmp-nodata">No data</span>}</td>
+            <td class={wSafetyB}>{dB.safety != null ? `${dB.safety}/10` : <span class="cmp-nodata">No data</span>}</td>
+          </tr>
+          <tr>
+            <td>Healthcare Score</td>
+            <td class={wHealthA}>{dA.healthcare != null ? `${dA.healthcare}/10` : <span class="cmp-nodata">No data</span>}</td>
+            <td class={wHealthB}>{dB.healthcare != null ? `${dB.healthcare}/10` : <span class="cmp-nodata">No data</span>}</td>
+          </tr>
+          <tr>
+            <td>Internet Score</td>
+            <td class={wNetA}>{dA.internet != null ? `${dA.internet}/10` : <span class="cmp-nodata">No data</span>}</td>
+            <td class={wNetB}>{dB.internet != null ? `${dB.internet}/10` : <span class="cmp-nodata">No data</span>}</td>
+          </tr>
+          <tr>
+            <td>English Proficiency</td>
+            <td class={wEngA}>{dA.english != null ? `${dA.english} EF EPI` : <span class="cmp-nodata">No data</span>}</td>
+            <td class={wEngB}>{dB.english != null ? `${dB.english} EF EPI` : <span class="cmp-nodata">No data</span>}</td>
+          </tr>
+          <tr>
+            <td>Tax System</td>
+            <td>{dA.tax_system || <span class="cmp-nodata">No data</span>}</td>
+            <td>{dB.tax_system || <span class="cmp-nodata">No data</span>}</td>
+          </tr>
+          <tr>
+            <td>Digital Nomad Visa</td>
+            <td>{dA.nomad_visa ? '✓ Available' : '✗ Not available'}</td>
+            <td>{dB.nomad_visa ? '✓ Available' : '✗ Not available'}</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:#94A3B8;margin:0">Blue highlight = better value on that metric. Tax system: no winner declared — depends on your income structure.</p>
+    </div>
+
+    <!-- Verdicts -->
+    <div class="cmp-section">
+      <h2>Breakdown by Category</h2>
+
+      {costVerdict() && (
+        <div class="cmp-verdict">
+          <div class="cmp-verdict-label">Cost of Living</div>
+          <p>{costVerdict()}</p>
+        </div>
+      )}
+
+      {safetyVerdict() && (
+        <div class="cmp-verdict">
+          <div class="cmp-verdict-label">Safety</div>
+          <p>{safetyVerdict()}</p>
+        </div>
+      )}
+
+      {taxVerdict() && (
+        <div class="cmp-verdict">
+          <div class="cmp-verdict-label">Taxes for US Expats</div>
+          <p>{taxVerdict()}</p>
+        </div>
+      )}
+    </div>
+
+    <!-- Country & FIRE links -->
+    <div class="cmp-section">
+      <h2>Full Country Profiles</h2>
+      <div class="cmp-links">
+        <a href={`/countries/${slugA}/`} class="cmp-link-card">
+          <span class="cmp-link-label">Country Profile</span>
+          {nameA}: Visas, healthcare & full data →
+        </a>
+        <a href={`/countries/${slugB}/`} class="cmp-link-card">
+          <span class="cmp-link-label">Country Profile</span>
+          {nameB}: Visas, healthcare & full data →
+        </a>
+        {aHasFire && (
+          <a href={`/fire/${slugA}/`} class="cmp-link-card">
+            <span class="cmp-link-label">FIRE Calculator</span>
+            Retire in {nameA}: your FIRE number →
+          </a>
+        )}
+        {bHasFire && (
+          <a href={`/fire/${slugB}/`} class="cmp-link-card">
+            <span class="cmp-link-label">FIRE Calculator</span>
+            Retire in {nameB}: your FIRE number →
+          </a>
+        )}
+      </div>
+    </div>
+
+    <!-- SafetyWing affiliate -->
+    <div class="affiliate-mini">
+      <span class="affiliate-mini-text">
+        <strong>Moving abroad means your US health insurance stops working.</strong> SafetyWing covers you in both {nameA} and {nameB} from $45/month — cancel anytime.
+      </span>
+      <a href="https://safetywing.com/nomad-insurance/?referenceID=26555621&utm_source=26555621&utm_medium=Ambassador" class="affiliate-mini-btn" target="_blank" rel="noopener sponsored">
+        Get a quote →
+      </a>
+    </div>
+
+    <!-- FAQ -->
+    <div class="cmp-section">
+      <h2>Frequently Asked Questions</h2>
+      {faqs.map(faq => (
+        <details class="faq-item">
+          <summary>{faq.q}</summary>
+          <p>{faq.a}</p>
+        </details>
+      ))}
+    </div>
+
+  </div>
+</div>
+
+</BaseLayout>

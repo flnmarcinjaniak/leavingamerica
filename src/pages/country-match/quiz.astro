@@ -5,7 +5,10 @@ import qualityScores from '../../data/quality-scores.json';
 
 <BaseLayout
   title="Country Match Quiz | LeavingAmerica.co"
-  description="Answer 10 questions and discover which country best fits your goals, lifestyle, and finances. 82 countries analyzed.">
+  description="Answer 10 questions and discover which country best fits your goals, lifestyle, and finances. 82 countries analyzed."
+  ogTitle="I found my top 3 countries to move to — find yours"
+  ogDescription="Take the free 10-question Country Match Quiz and discover which country best fits your goals, lifestyle, and finances. Data on 82 countries."
+  ogImage="/images/hero-bg.webp">
 
 <style is:global>
 * { box-sizing: border-box; }
@@ -719,6 +722,64 @@ import qualityScores from '../../data/quality-scores.json';
   text-decoration: underline;
 }
 
+.quiz-share {
+  text-align: center;
+  margin-top: 16px;
+  margin-bottom: 4px;
+}
+
+.btn-share {
+  background: linear-gradient(135deg, #2563EB, #0EA5E9);
+  border: none;
+  border-radius: 10px;
+  padding: 13px 32px;
+  font-size: 14px;
+  font-weight: 700;
+  color: white;
+  cursor: pointer;
+  font-family: 'Manrope', sans-serif;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  box-shadow: 0 4px 14px rgba(37,99,235,0.25);
+}
+
+.btn-share:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(37,99,235,0.35);
+}
+
+.shared-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
+  border-radius: 12px;
+  padding: 14px 20px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #1E40AF;
+  font-weight: 500;
+}
+
+.btn-take-quiz {
+  background: #1E40AF;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 9px 18px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Manrope', sans-serif;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+
+.btn-take-quiz:hover { background: #1D4ED8; }
+
 .quiz-disclaimer {
   font-size: 11px;
   color: #94A3B8;
@@ -1090,6 +1151,10 @@ import qualityScores from '../../data/quality-scores.json';
 
     <!-- RESULTS -->
     <div class="results-screen" id="resultsScreen">
+      <div class="shared-banner" id="sharedBanner" style="display:none">
+        <span>You're viewing someone else's quiz results</span>
+        <button class="btn-take-quiz" onclick="startFreshQuiz()">Take the quiz yourself →</button>
+      </div>
       <div class="results-header">
         <h2>Your Country Matches</h2>
         <p>Based on your answers, these countries align most closely with your goals, lifestyle, and priorities.</p>
@@ -1098,6 +1163,9 @@ import qualityScores from '../../data/quality-scores.json';
       <div id="nextStepsContainer"></div>
       <div class="alt-matches" id="altMatchesContainer"></div>
       <div class="affiliate-block" id="affiliateBlock"></div>
+      <div class="quiz-share" id="shareButtonContainer">
+        <button class="btn-share" id="btnShare" onclick="shareResults()">Share my results</button>
+      </div>
       <div class="quiz-restart">
         <button onclick="restartQuiz()">Retake the quiz</button>
       </div>
@@ -1123,6 +1191,7 @@ import qualityScores from '../../data/quality-scores.json';
 const answers = {};
 let currentQ = 0;
 const TOTAL = 10;
+var isSharedView = false;
 
 const NAMES = {
   'portugal':'Portugal','spain':'Spain',
@@ -1725,6 +1794,9 @@ function getAffiliates(userAnswers) {
 
 // ── Show Results ───────────────────────────────
 function showResults(top3) {
+  var slugParam = top3.map(function(m) { return m.slug; }).join(',');
+  history.replaceState(null, '', '/country-match/quiz/?r=' + slugParam);
+
   document.querySelectorAll('.question-screen').forEach(function(s) {
     s.classList.remove('active');
   });
@@ -1853,6 +1925,10 @@ function showResults(top3) {
     '</div>';
 
   document.getElementById('resultsScreen').classList.add('active');
+  var sharedBanner = document.getElementById('sharedBanner');
+  if (sharedBanner) sharedBanner.style.display = isSharedView ? 'flex' : 'none';
+  var shareBtn = document.getElementById('shareButtonContainer');
+  if (shareBtn) shareBtn.style.display = isSharedView ? 'none' : 'block';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -1862,6 +1938,8 @@ window.prefillCalculator = function(slug) {
 };
 
 window.restartQuiz = function() {
+  isSharedView = false;
+  history.replaceState(null, '', '/country-match/quiz/');
   Object.keys(answers).forEach(function(k) { delete answers[k]; });
   document.querySelectorAll('.option-card').forEach(function(c) {
     c.classList.remove('selected');
@@ -1873,9 +1951,68 @@ window.restartQuiz = function() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
-// Auto-start Q1 on page load
+// ── Share ──────────────────────────────────────
+window.shareResults = function() {
+  var url = window.location.href;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(url).then(showCopied, function() { fallbackCopy(url); });
+  } else {
+    fallbackCopy(url);
+  }
+};
+
+function showCopied() {
+  var btn = document.getElementById('btnShare');
+  if (!btn) return;
+  var orig = btn.textContent;
+  btn.textContent = 'Copied!';
+  btn.style.background = 'linear-gradient(135deg, #16A34A, #22C55E)';
+  setTimeout(function() {
+    btn.textContent = orig;
+    btn.style.background = '';
+  }, 2000);
+}
+
+function fallbackCopy(url) {
+  var ta = document.createElement('textarea');
+  ta.value = url;
+  ta.style.position = 'fixed';
+  ta.style.left = '-9999px';
+  document.body.appendChild(ta);
+  ta.focus();
+  ta.select();
+  try { document.execCommand('copy'); showCopied(); } catch(e) {}
+  document.body.removeChild(ta);
+}
+
+window.startFreshQuiz = function() { restartQuiz(); };
+
+// ── Init: URL param or Q1 ──────────────────────
 buildProgressSteps();
-showQuestion(1);
+var _rParam = new URLSearchParams(window.location.search).get('r');
+console.log('[quiz] location.search:', window.location.search);
+console.log('[quiz] r param:', _rParam);
+if (_rParam) {
+  var _slugs = _rParam.split(',').map(function(s) { return s.trim(); });
+  var _valid = _slugs.filter(function(s) {
+    var inNames = NAMES.hasOwnProperty(s);
+    var inQuality = !!QUALITY[s];
+    console.log('[quiz] slug "' + s + '": NAMES=' + inNames + ' QUALITY=' + inQuality);
+    return inNames && inQuality;
+  });
+  console.log('[quiz] valid slugs (' + _valid.length + '/3):', _valid);
+  if (_valid.length === 3) {
+    isSharedView = true;
+    var _sharedTop3 = _valid.map(function(slug, i) {
+      return { slug: slug, score: [97, 88, 82][i], data: QUALITY[slug] };
+    });
+    showResults(_sharedTop3);
+  } else {
+    showQuestion(1);
+  }
+} else {
+  showQuestion(1);
+}
 
 })();
 </script>

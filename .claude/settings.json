@@ -35,7 +35,9 @@
       "PowerShell(node \"C:\\\\Users\\\\marci\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-marci-Desktop-moje-strony-leavingamerica\\\\93f2988c-ac38-433d-9ffe-97d6807211ac\\\\scratchpad\\\\test-linkify.js\")",
       "Bash(git show *)",
       "PowerShell(node -e \"const a=require\\('./node_modules/astro/package.json'\\); console.log\\(a.version\\)\")",
-      "PowerShell($html = Get-Content \"c:\\\\Users\\\\marci\\\\Desktop\\\\moje strony\\\\leavingamerica\\\\dist\\\\countries\\\\portugal\\\\index.html\" -Raw; $matches = [regex]::Matches\\($html, 'href=\"/compare/[^\"]+/\"'\\); $matches | ForEach-Object { $_.Value })"
+      "PowerShell($html = Get-Content \"c:\\\\Users\\\\marci\\\\Desktop\\\\moje strony\\\\leavingamerica\\\\dist\\\\countries\\\\portugal\\\\index.html\" -Raw; $matches = [regex]::Matches\\($html, 'href=\"/compare/[^\"]+/\"'\\); $matches | ForEach-Object { $_.Value })",
+      "PowerShell(Get-Command python3, py, python -ErrorAction SilentlyContinue)",
+      "Bash(npm run *)"
     ],
     "additionalDirectories": [
       "c:\\Users\\marci\\Desktop\\moje strony\\leavingamerica",

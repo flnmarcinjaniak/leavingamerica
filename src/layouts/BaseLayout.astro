@@ -2,10 +2,16 @@
 interface Props {
   title: string;
   description: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, ogTitle, ogDescription, ogImage } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname.replace(/\/?$/, '/'), Astro.site);
+const resolvedOgTitle = ogTitle || title;
+const resolvedOgDescription = ogDescription || description;
+const ogImageAbsolute = ogImage ? new URL(ogImage, Astro.site).href : undefined;
 ---
 
 <!DOCTYPE html>
@@ -16,6 +22,15 @@ const canonicalURL = new URL(Astro.url.pathname.replace(/\/?$/, '/'), Astro.site
     <meta name="description" content={description} />
     <title>{title}</title>
     <link rel="canonical" href={canonicalURL.href} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL.href} />
+    <meta property="og:title" content={resolvedOgTitle} />
+    <meta property="og:description" content={resolvedOgDescription} />
+    {ogImageAbsolute && <meta property="og:image" content={ogImageAbsolute} />}
+    <meta name="twitter:card" content={ogImageAbsolute ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={resolvedOgTitle} />
+    <meta name="twitter:description" content={resolvedOgDescription} />
+    {ogImageAbsolute && <meta name="twitter:image" content={ogImageAbsolute} />}
     <!-- Enzuzo Cookie Consent (must load before GTM) -->
     <script is:inline src="https://app.enzuzo.com/scripts/cookiebar/f047f71c-76e5-11f1-88d8-2b6663fe3088"></script>
     <!-- Google Tag Manager -->

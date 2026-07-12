@@ -1,0 +1,34 @@
+HARMONOGRAM ODŚWIEŻANIA DANYCH — LeavingAmerica.co
+CO MIESIĄC:
+py scripts/fetch-quality-scores.py
+py scripts/recompute-grades.py
+Odświeża: safety, healthcare, happiness, HDI, pollution, unemployment, internet, traffic dla wszystkich 82 krajów (źródła: Numbeo, World Bank, Wikipedia, Our World in Data). Bez limitu requestów, bezpieczne do uruchamiania co miesiąc.
+CO KWARTAŁ (raz na 3 miesiące):
+py scripts/fetch-monthly-budget.py
+py scripts/fetch-country-facts.py
+py scripts/generate-compare-content.py
+fetch-monthly-budget.py — koszty życia (WhereNext 
+  API), bez limitu requestów
+
+fetch-country-facts.py — dane geograficzne (REST 
+  Countries API) — LIMIT 500 requestów/miesiąc, 
+  odnawia się 20-go dnia każdego miesiąca. Sprawdź 
+  datę przed uruchomieniem.
+
+generate-compare-content.py — tekst porównawczy na 
+  55 stronach /compare/ — kosztuje kredyty Anthropic 
+  API. Uruchamiaj TYLKO jeśli dane bazowe (koszt, 
+  bezpieczeństwo, podatki) faktycznie się zmieniły 
+  od ostatniego uruchomienia — nie odświeżaj 
+  bezmyślnie co kwartał jeśli nic się nie zmieniło.
+RZADKO, WEDŁUG POTRZEBY:
+py scripts/generate-quick-facts.py
+Tylko przy dodawaniu nowych krajów, albo świadomej decyzji o odświeżeniu stylu tekstu. Kosztuje kredyty API.
+WYJĄTEK OD HARMONOGRAMU:
+Jeśli zmieni się tax_system dla dowolnego kraju (np. nowa ustawa podatkowa) — uruchom generate-compare-content.py od razu, poza normalnym cyklem kwartalnym. Nieaktualna informacja podatkowa w tekście jest bardziej myląca niż nieaktualna cena o $50.
+PO KAŻDYM FETCHU (zawsze, niezależnie od tego co odświeżałeś):
+git add .
+git commit -m "opis co zostało odświeżone"
+git push origin main
+npm run build
+py scripts/ping-indexnow.py

@@ -108,6 +108,76 @@ or was skipped due to a Wikipedia 403 on the English proficiency page.
 EF EPI typically happen when the same IP has already hit 2+ Wikipedia pages
 in the same session (GPI + Internet Speeds in step #1).
 
+### 7. `generate-compare-content.py` — run quarterly or on tax change, costs API credits
+Generates 450-550 word comparative editorial prose for each of the 55 /compare/ pairs
+by calling the Claude API. Stores results in `quality-scores.json` under the top-level
+`compare_pairs` object (keyed by canonical pair slug, e.g. `"portugal-vs-spain"`).
+
+**Requires `ANTHROPIC_API_KEY` in `.env`.** Run only when underlying cost, safety,
+or tax data has actually changed since the last run — not blindly every quarter.
+Estimated API cost: ~$1-2 for all 55 pairs with Sonnet.
+
+**Tax exception:** if `tax_system` changes for any country (new legislation), run
+this immediately outside the normal quarterly cycle — stale tax information in
+comparison text is more misleading than a cost figure that's $50 off.
+
+Usage:
+```
+py scripts/generate-compare-content.py                    # skip already generated
+py scripts/generate-compare-content.py --force            # regenerate all 55
+py scripts/generate-compare-content.py portugal-vs-spain  # one pair only
+```
+
+---
+
+## Refresh schedule
+
+### Monthly
+```
+py scripts/fetch-quality-scores.py
+py scripts/recompute-grades.py
+```
+Refreshes: safety, healthcare, happiness, HDI, pollution, unemployment, internet,
+traffic for all 82 countries. Sources: Numbeo, World Bank, Wikipedia, Our World
+in Data. No request limits to worry about. Safe to run any time.
+
+### Quarterly (once every 3 months)
+```
+py scripts/fetch-monthly-budget.py
+py scripts/fetch-country-facts.py        # CHECK RATE LIMIT FIRST (see note below)
+py scripts/generate-compare-content.py  # ONLY if base data actually changed
+```
+
+**fetch-country-facts.py rate limit:** REST Countries free tier = 500 requests/month,
+resets on the 20th of each month. Fetching all 82 countries uses ~82 requests. Check
+your usage at restcountries.com before running.
+
+**generate-compare-content.py:** run only when `budget_single`, `safety`, or
+`tax_system` values have actually changed since the last run. If the quarterly
+fetch-monthly-budget and fetch-quality-scores runs produced no meaningful changes,
+skip this script and save the API credits.
+
+### Rarely — only when adding new countries or conscious style decision
+```
+py scripts/generate-quick-facts.py   # only for slugs missing quick_facts_paragraph
+```
+
+### Exception: immediate run outside normal schedule
+If `tax_system` changes for any country (new legislation, country changes to
+territorial/worldwide/zero), run `generate-compare-content.py` immediately for
+all pairs containing that country. Use the `portugal-vs-spain`-style argument
+to target only affected pairs. Stale tax info in compare text is more misleading
+than a stale cost figure.
+
+### After every fetch — always, regardless of what you ran
+```
+git add .
+git commit -m "Data refresh: describe what was updated"
+git push origin main
+npm run build
+py scripts/ping-indexnow.py
+```
+
 ---
 
 ## Typical refresh workflow
@@ -158,6 +228,7 @@ This updates the `STATIC_PPP` object in `src/pages/index.astro` directly. PPP va
 | `area_km2`, `population`, `capital`, `languages`, `currencies`, `demonym` | #4 fetch-country-facts.py |
 | `driving_side`, `borders`, `timezones`, `landlocked`, `gini`, `memberships`, `government_type`, `continents` | #4 fetch-country-facts.py |
 | `quick_facts_paragraph` | #5 generate-quick-facts.py |
+| `compare_pairs` (top-level object, keyed by pair slug) | #7 generate-compare-content.py |
 
 Fields not in this table (e.g. `grade` from old A/B/C system) are legacy and
 can be ignored — they may exist in the JSON from older runs but are not read

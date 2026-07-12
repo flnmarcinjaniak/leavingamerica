@@ -100,6 +100,11 @@ const nameB = NAMES[slugB] || slugB;
 const allCountries = qualityScoresData.countries as Record<string, any>;
 const dA = allCountries[slugA];
 const dB = allCountries[slugB];
+const comparePairs = (qualityScoresData as any).compare_pairs ?? {};
+const editorialText: string = comparePairs[pair] ?? '';
+const editorialParas: string[] = editorialText
+  ? editorialText.split('\n\n').map((p: string) => p.trim()).filter(Boolean)
+  : [];
 
 const fireSlugs = Object.entries(allCountries).filter(([,d]) => d.budget_single).map(([s]) => s);
 const aHasFire = fireSlugs.includes(slugA);
@@ -360,6 +365,28 @@ const pageDesc = (() => {
 .cmp-nodata { color: #CBD5E1; font-style: italic; font-size: 12px; }
 .cmp-table-note { font-size: 11px; color: #94A3B8; margin: 10px 0 0; padding: 0 2px; }
 
+/* ── EDITORIAL PROSE ──────────────────────────────────────── */
+.cmp-editorial {
+  background: white;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  padding: 32px 36px;
+  box-shadow: 0 1px 6px rgba(15,23,42,0.05);
+}
+.cmp-editorial-label {
+  font-size: 10px; font-weight: 800; letter-spacing: 0.1em;
+  color: #64748B; text-transform: uppercase; margin-bottom: 18px;
+}
+.cmp-editorial p {
+  font-size: 15px; line-height: 1.8; color: #334155;
+  margin: 0 0 18px;
+}
+.cmp-editorial p:last-child { margin-bottom: 0; }
+.cmp-editorial p:first-of-type::first-letter {
+  font-size: 2.6em; font-weight: 800; float: left;
+  line-height: 0.82; margin: 4px 8px 0 0; color: #0F172A;
+}
+
 /* ── VERDICT CARDS ────────────────────────────────────────── */
 .cmp-verdict {
   background: white; border: 1px solid #E2E8F0; border-radius: 14px;
@@ -435,6 +462,8 @@ const pageDesc = (() => {
   .cmp-links { grid-template-columns: 1fr; }
   .affiliate-mini { flex-direction: column; }
   .cmp-table thead th, .cmp-table td { padding: 11px 14px; font-size: 13px; }
+  .cmp-editorial { padding: 22px 20px; }
+  .cmp-editorial p { font-size: 14px; }
 }
 </style>
 
@@ -458,6 +487,18 @@ const pageDesc = (() => {
 
   <div class="cmp-body">
   <div class="cmp-wrap">
+
+    <!-- Editorial analysis -->
+    {editorialParas.length > 0 && (
+      <div class="cmp-section">
+        <div class="cmp-editorial">
+          <div class="cmp-editorial-label">{nameA} vs {nameB}: Analysis for Americans</div>
+          {editorialParas.map((para: string) => (
+            <p>{para}</p>
+          ))}
+        </div>
+      </div>
+    )}
 
     <!-- Comparison table -->
     <div class="cmp-section">

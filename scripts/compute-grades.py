@@ -23,7 +23,7 @@ def compute_raw_score(data):
             weight_sum += weight
     return (total / weight_sum) if weight_sum > 0 else 0.0
 
-with open(DATA_PATH, 'r', encoding='utf-8') as f:
+with open(DATA_PATH, 'r', encoding='utf-8-sig') as f:
     data = json.load(f)
 
 countries = data['countries']

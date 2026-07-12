@@ -281,7 +281,7 @@ def main():
     force = "--force" in args
     target_slug = next((a for a in args if a != "--force"), None)
 
-    with open(DATA_PATH, 'r', encoding='utf-8') as f:
+    with open(DATA_PATH, 'r', encoding='utf-8-sig') as f:
         full_data = json.load(f)
 
     countries = full_data.get('countries', {})

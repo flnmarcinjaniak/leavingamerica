@@ -1260,7 +1260,7 @@ for numbeo_name, slug in COUNTRIES.items():
 existing_data = {}
 existing_path = "src/data/quality-scores.json"
 if os.path.exists(existing_path):
-    with open(existing_path, 'r', encoding='utf-8') as f:
+    with open(existing_path, 'r', encoding='utf-8-sig') as f:
         existing_json = json.load(f)
         existing_data = existing_json.get('countries', {})
 

@@ -52,7 +52,7 @@ def calculate_grade(metrics):
 
 
 def main():
-    with open(DATA_PATH, 'r', encoding='utf-8') as f:
+    with open(DATA_PATH, 'r', encoding='utf-8-sig') as f:
         data = json.load(f)
 
     countries = data.get('countries', {})

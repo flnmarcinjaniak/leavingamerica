@@ -144,7 +144,7 @@ def merge_into_json(budget_data):
     """Merge WhereNext budget data into
     existing quality-scores.json without
     touching any other fields"""
-    with open(DATA_PATH, 'r', encoding='utf-8') as f:
+    with open(DATA_PATH, 'r', encoding='utf-8-sig') as f:
         data = json.load(f)
 
     countries_data = data.get('countries', {})

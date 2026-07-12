@@ -260,7 +260,7 @@ def fetch_english_proficiency():
 
 
 def merge_into_json(english_data):
-    with open(DATA_PATH, 'r', encoding='utf-8') as f:
+    with open(DATA_PATH, 'r', encoding='utf-8-sig') as f:
         data = json.load(f)
     countries_data = data.get('countries', {})
     updated = 0

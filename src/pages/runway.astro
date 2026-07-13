@@ -78,10 +78,10 @@ const faqSchema = JSON.stringify({
     },
     {
       '@type': 'Question',
-      'name': 'Why does a country show "Indefinite"?',
+      'name': 'What does the "Financially independent" section mean?',
       'acceptedAnswer': {
         '@type': 'Answer',
-        'text': 'Indefinite means your monthly income equals or exceeds the cost of living in that country at your chosen lifestyle and household setting. Your savings are not touched at all. That is financial independence in that location.'
+        'text': 'Countries in the green section are ones where your monthly income covers or exceeds the full cost of living at your chosen settings. Your savings are not touched at all there. That is location-independent financial independence, and it is more achievable than it sounds for anyone with even a modest remote income.'
       }
     },
     {
@@ -133,12 +133,12 @@ const faqSchema = JSON.stringify({
 .rw-orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(72px);
+  filter: blur(70px);
   pointer-events: none;
-  opacity: 0.28;
 }
-.rw-orb-1 { width: 500px; height: 500px; background: #1e40af; top: -160px; left: -120px; }
-.rw-orb-2 { width: 380px; height: 380px; background: #0e7490; bottom: -120px; right: -80px; }
+.rw-orb-1 { width: 600px; height: 600px; background: #2563eb; opacity: 0.5; top: -180px; left: -100px; }
+.rw-orb-2 { width: 480px; height: 480px; background: #0891b2; opacity: 0.38; bottom: -140px; right: -100px; }
+.rw-orb-3 { width: 320px; height: 320px; background: #4f46e5; opacity: 0.22; top: 0; right: 15%; }
 .rw-hero-dots {
   position: absolute;
   inset: 0;
@@ -525,10 +525,11 @@ const faqSchema = JSON.stringify({
   border-radius: 8px;
   text-decoration: none;
   transition: background 0.15s;
-  align-self: flex-start;
+  align-self: center;
 }
 .rw-aff-btn:hover { background: #1e293b; }
-.rw-sw-img { display: block; max-width: 196px; height: auto; margin-top: 2px; }
+.rw-sw-img { display: block; max-width: 196px; height: auto; margin: 2px auto 0; }
+.rw-grid > .rw-card { max-width: 195px; width: 100%; }
 .rw-aff-shared-note {
   font-size: 12px;
   color: #94a3b8;
@@ -618,6 +619,7 @@ const faqSchema = JSON.stringify({
 <section class="rw-hero">
   <div class="rw-orb rw-orb-1"></div>
   <div class="rw-orb rw-orb-2"></div>
+  <div class="rw-orb rw-orb-3"></div>
   <div class="rw-hero-dots"></div>
   <div class="container" style="position:relative;z-index:1;">
     <p class="rw-breadcrumb"><a href="/">Home</a> / Runway Calculator</p>
@@ -798,11 +800,11 @@ const faqSchema = JSON.stringify({
 
         <div class="rw-faq-item">
           <button class="rw-faq-trigger" type="button" aria-expanded="false">
-            <span>Why does a country show "Indefinite"?</span>
+            <span>What does the green "Financially independent" section mean?</span>
             <span class="rw-faq-icon">+</span>
           </button>
           <div class="rw-faq-body" hidden>
-            <p class="rw-faq-a">Indefinite means your monthly income equals or exceeds the cost of living in that country at your chosen settings. Your savings are not touched at all. That is financial independence in that location, and it's more achievable than it sounds for anyone with even a modest remote income.</p>
+            <p class="rw-faq-a">Countries in the green section are ones where your monthly income equals or exceeds the cost of living at your chosen settings. Your savings are not touched at all there. That is financial independence in that location. These countries are better than any runway number below them, because your savings grow or stay flat rather than depleting.</p>
           </div>
         </div>
 
@@ -943,8 +945,9 @@ function compute() {
     var top3 = finite.slice(0, 3);
     var rest = finite.slice(3);
 
+    var showMedals = indefinite.length === 0;
     document.getElementById('rw-top3').innerHTML = top3.map(function(c: any, i: number) {
-      return makeCard(c, i, true);
+      return makeCard(c, i, showMedals);
     }).join('');
 
     var gridEl = document.getElementById('rw-grid');

@@ -38,7 +38,9 @@
       "PowerShell($html = Get-Content \"c:\\\\Users\\\\marci\\\\Desktop\\\\moje strony\\\\leavingamerica\\\\dist\\\\countries\\\\portugal\\\\index.html\" -Raw; $matches = [regex]::Matches\\($html, 'href=\"/compare/[^\"]+/\"'\\); $matches | ForEach-Object { $_.Value })",
       "PowerShell(Get-Command python3, py, python -ErrorAction SilentlyContinue)",
       "Bash(npm run *)",
-      "Bash(py -c ' *)"
+      "Bash(py -c ' *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)"
     ],
     "additionalDirectories": [
       "c:\\Users\\marci\\Desktop\\moje strony\\leavingamerica",

@@ -1046,7 +1046,9 @@ document.getElementById('btn-share-runway').addEventListener('click', function()
   var inp = getInputs();
   var lKey = inp.mult <= 0.76 ? 'lean' : inp.mult >= 1.34 ? 'comfortable' : 'normal';
   var url = window.location.origin + '/runway/?s=' + inp.savings + '&i=' + inp.income + '&h=' + household + '&l=' + lKey;
-  if (navigator.clipboard && navigator.clipboard.writeText) {
+  if (navigator.share) {
+    navigator.share({ title: 'My Savings Runway Abroad', text: 'See how long my savings would last in 74 countries — LeavingAmerica.co', url: url }).catch(function() {});
+  } else if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(url).then(showCopied).catch(function() { fallbackCopy(url); });
   } else {
     fallbackCopy(url);

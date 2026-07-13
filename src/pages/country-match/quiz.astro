@@ -1954,7 +1954,9 @@ window.restartQuiz = function() {
 // ── Share ──────────────────────────────────────
 window.shareResults = function() {
   var url = window.location.href;
-  if (navigator.clipboard && navigator.clipboard.writeText) {
+  if (navigator.share) {
+    navigator.share({ title: 'My Country Match Results', text: 'See which countries matched my lifestyle — LeavingAmerica.co', url: url }).catch(function() {});
+  } else if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(url).then(showCopied, function() { fallbackCopy(url); });
   } else {
     fallbackCopy(url);

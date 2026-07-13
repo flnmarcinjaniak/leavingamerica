@@ -70,42 +70,42 @@ const faqSchema = JSON.stringify({
   'mainEntity': [
     {
       '@type': 'Question',
-      'name': 'How is my monthly runway calculated?',
+      'name': 'How does the calculation work?',
       'acceptedAnswer': {
         '@type': 'Answer',
-        'text': 'We multiply the country\'s average monthly cost of living by your lifestyle factor (Lean 0.75x, Normal 1.0x, Comfortable 1.35x), then subtract your monthly income to get your net monthly burn rate. Dividing your total savings by that burn rate gives your runway in months.'
+        'text': 'The calculator multiplies a country\'s baseline monthly cost by your lifestyle factor (Lean 0.75x, Normal 1.0x, Comfortable 1.35x), then subtracts your monthly income. That gives your net monthly burn rate. Dividing your savings by that number gives your runway in months.'
       }
     },
     {
       '@type': 'Question',
-      'name': 'What does Indefinite mean in the results?',
+      'name': 'Why does a country show "Indefinite"?',
       'acceptedAnswer': {
         '@type': 'Answer',
-        'text': 'Indefinite means your monthly income covers or exceeds the cost of living in that country at your chosen lifestyle level. Your savings remain intact indefinitely, which is the threshold for location-independent financial independence.'
+        'text': 'Indefinite means your monthly income equals or exceeds the cost of living in that country at your chosen lifestyle and household setting. Your savings are not touched at all. That is financial independence in that location.'
       }
     },
     {
       '@type': 'Question',
-      'name': 'Do these monthly costs include rent?',
+      'name': 'Do these costs include rent?',
       'acceptedAnswer': {
         '@type': 'Answer',
-        'text': 'Yes. The figures represent a realistic all-in monthly budget including rent, food, transport, utilities, and basic everyday spending. They reflect mid-range living rather than backpacker minimums or luxury expat lifestyles.'
+        'text': 'Yes. The figures are all-in monthly estimates covering rent, food, transport, utilities, and everyday spending. They reflect a realistic mid-range lifestyle, not a backpacker budget or a luxury expat setup.'
       }
     },
     {
       '@type': 'Question',
-      'name': 'Should I choose Lean, Normal, or Comfortable?',
+      'name': 'Which lifestyle setting should I pick?',
       'acceptedAnswer': {
         '@type': 'Answer',
-        'text': 'Lean (0.75x) works for shared housing, cooking most meals at home, and minimal extras. Normal (1.0x) is a realistic mid-range baseline. Comfortable (1.35x) covers a private apartment in a good neighborhood, dining out regularly, and occasional local travel. Most people moving abroad for the first time land between Normal and Comfortable.'
+        'text': 'Lean (0.75x) is shared housing plus home cooking. Normal (1.0x) is a realistic mid-range baseline that matches how most first-year expats actually live. Comfortable (1.35x) is a private apartment, dining out several times a week, and not watching daily costs closely. If unsure, start with Normal.'
       }
     },
     {
       '@type': 'Question',
-      'name': 'Can I include remote work or freelance income?',
+      'name': 'Can I count freelance or remote work income?',
       'acceptedAnswer': {
         '@type': 'Answer',
-        'text': 'Yes. The Monthly income field accepts any recurring income including remote salary, freelance revenue, Social Security, pension payments, or investment distributions. The calculator subtracts this from monthly costs before computing your runway.'
+        'text': 'Yes. The monthly income field accepts any recurring income: remote salary, freelance revenue, Social Security, pension, or investment distributions. Even a modest $1,000 a month dramatically extends your runway in cheaper countries.'
       }
     }
   ]
@@ -121,65 +121,122 @@ const faqSchema = JSON.stringify({
   <script type="application/ld+json" set:html={faqSchema} />
 
 <style is:global>
-/* HERO */
+/* ═══ HERO ═══ */
 .rw-hero {
+  position: relative;
+  overflow: hidden;
   background: linear-gradient(135deg, #0b1526 0%, #172b50 50%, #0d1e3a 100%);
   color: #fff;
-  padding: 72px 0 56px;
+  padding: 80px 0 64px;
   text-align: center;
+}
+.rw-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(72px);
+  pointer-events: none;
+  opacity: 0.28;
+}
+.rw-orb-1 { width: 500px; height: 500px; background: #1e40af; top: -160px; left: -120px; }
+.rw-orb-2 { width: 380px; height: 380px; background: #0e7490; bottom: -120px; right: -80px; }
+.rw-hero-dots {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
 }
 .rw-breadcrumb {
   font-size: 13px;
-  color: rgba(255,255,255,0.48);
+  color: rgba(255,255,255,0.45);
   margin-bottom: 20px;
 }
-.rw-breadcrumb a { color: rgba(255,255,255,0.48); text-decoration: none; }
-.rw-breadcrumb a:hover { color: rgba(255,255,255,0.85); }
+.rw-breadcrumb a { color: rgba(255,255,255,0.45); text-decoration: none; }
+.rw-breadcrumb a:hover { color: rgba(255,255,255,0.8); }
+.rw-hero-pill {
+  display: inline-block;
+  padding: 5px 16px;
+  background: rgba(59,130,246,0.18);
+  border: 1px solid rgba(96,165,250,0.35);
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #93c5fd;
+  margin-bottom: 22px;
+}
 .rw-hero h1 {
-  font-size: clamp(26px, 5vw, 44px);
+  font-size: clamp(28px, 5vw, 46px);
   font-weight: 800;
-  letter-spacing: -0.02em;
-  margin: 0 0 16px;
-  line-height: 1.15;
+  letter-spacing: -0.025em;
+  line-height: 1.13;
+  margin: 0 0 18px;
 }
 .rw-hero-sub {
-  font-size: clamp(15px, 2.5vw, 18px);
-  color: rgba(255,255,255,0.7);
-  max-width: 520px;
+  font-size: clamp(15px, 2.2vw, 18px);
+  color: rgba(255,255,255,0.68);
+  max-width: 500px;
   margin: 0 auto;
   line-height: 1.6;
 }
+.rw-hero-stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 36px;
+  flex-wrap: wrap;
+}
+.rw-hero-stat {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.55);
+}
+.rw-hero-stat-num {
+  font-size: 20px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+}
+.rw-hero-stat-div { color: rgba(255,255,255,0.25); font-size: 18px; }
 
-/* CALC SECTION */
+/* ═══ CALCULATOR SECTION ═══ */
 .rw-section {
-  background: #F8FAFC;
+  background: #f8fafc;
   padding: 52px 0 64px;
 }
-
-/* INPUTS PANEL */
 .rw-panel {
   background: #fff;
-  border: 1px solid #E2E8F0;
-  border-radius: 18px;
-  padding: 32px 36px;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 36px 40px 32px;
   margin-bottom: 36px;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
 }
-.rw-panel-title {
+.rw-panel-eyebrow {
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #94A3B8;
-  margin-bottom: 24px;
+  color: #94a3b8;
+  margin-bottom: 28px;
 }
 .rw-inputs {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px 28px;
+  gap: 24px 32px;
 }
 .rw-input-group { display: flex; flex-direction: column; gap: 8px; }
-.rw-label { font-size: 13px; font-weight: 600; color: #475569; }
+.rw-label { font-size: 13px; font-weight: 700; color: #334155; }
+.rw-hint {
+  font-size: 12px;
+  color: #94a3b8;
+  line-height: 1.55;
+  margin: 0;
+}
 .rw-number-wrap { position: relative; }
 .rw-number-prefix {
   position: absolute;
@@ -188,68 +245,131 @@ const faqSchema = JSON.stringify({
   transform: translateY(-50%);
   font-size: 15px;
   font-weight: 600;
-  color: #64748B;
+  color: #64748b;
   pointer-events: none;
   user-select: none;
 }
 .rw-number-input {
   width: 100%;
-  padding: 12px 14px 12px 28px;
+  padding: 13px 14px 13px 28px;
   font-size: 16px;
   font-weight: 600;
-  color: #0F172A;
-  border: 1.5px solid #CBD5E1;
+  color: #0f172a;
+  border: 1.5px solid #cbd5e1;
   border-radius: 10px;
   outline: none;
-  transition: border-color 0.15s;
+  transition: border-color 0.15s, box-shadow 0.15s;
   box-sizing: border-box;
   font-family: inherit;
   -moz-appearance: textfield;
+  background: #fff;
 }
 .rw-number-input::-webkit-outer-spin-button,
 .rw-number-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-.rw-number-input:focus { border-color: #3B82F6; }
-
+.rw-number-input:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,0.12); }
 .rw-toggle {
   display: flex;
-  border: 1.5px solid #CBD5E1;
+  border: 1.5px solid #cbd5e1;
   border-radius: 10px;
   overflow: hidden;
 }
 .rw-toggle-btn {
   flex: 1;
-  padding: 12px 8px;
+  padding: 13px 8px;
   font-size: 14px;
   font-weight: 600;
-  color: #64748B;
+  color: #64748b;
   background: none;
   border: none;
   cursor: pointer;
   transition: background 0.15s, color 0.15s;
   font-family: inherit;
 }
-.rw-toggle-btn.active { background: #0F172A; color: #fff; }
-.rw-toggle-btn:not(.active):hover { background: #F1F5F9; }
-
+.rw-toggle-btn.active { background: #0f172a; color: #fff; }
+.rw-toggle-btn:not(.active):hover { background: #f1f5f9; }
 .rw-select {
-  padding: 12px 36px 12px 14px;
+  padding: 13px 36px 13px 14px;
   font-size: 14px;
   font-weight: 600;
-  color: #0F172A;
-  border: 1.5px solid #CBD5E1;
+  color: #0f172a;
+  border: 1.5px solid #cbd5e1;
   border-radius: 10px;
   outline: none;
   background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2364748B' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 14px center;
   cursor: pointer;
-  transition: border-color 0.15s;
   font-family: inherit;
   width: 100%;
   -webkit-appearance: none;
   appearance: none;
+  transition: border-color 0.15s;
 }
-.rw-select:focus { border-color: #3B82F6; }
+.rw-select:focus { border-color: #3b82f6; }
 
-/* RESULTS */
+/* ═══ INDEFINITE SECTION ═══ */
+.rw-indep-section {
+  background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 100%);
+  border: 1.5px solid #6ee7b7;
+  border-radius: 18px;
+  padding: 28px 32px;
+  margin-bottom: 32px;
+}
+.rw-indep-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 20px;
+}
+.rw-indep-icon {
+  font-size: 26px;
+  font-weight: 900;
+  color: #059669;
+  background: rgba(16,185,129,0.14);
+  border: 1px solid rgba(16,185,129,0.25);
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.rw-indep-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: #064e3b;
+  margin: 0 0 4px;
+}
+.rw-indep-sub {
+  font-size: 13px;
+  color: #047857;
+  margin: 0;
+  line-height: 1.5;
+}
+.rw-indep-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.rw-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 13px;
+  background: #fff;
+  border: 1px solid #a7f3d0;
+  border-radius: 22px;
+  text-decoration: none;
+  font-size: 13px;
+  color: #065f46;
+  font-weight: 600;
+  transition: background 0.12s, border-color 0.12s;
+}
+.rw-chip:hover { background: #d1fae5; border-color: #34d399; }
+.rw-chip .fi { width: 18px; height: 14px; border-radius: 2px; flex-shrink: 0; }
+.rw-chip-cost { color: #10b981; font-size: 11px; font-weight: 500; }
+
+/* ═══ FINITE RESULTS ═══ */
 .rw-results-header {
   display: flex;
   align-items: baseline;
@@ -258,24 +378,39 @@ const faqSchema = JSON.stringify({
   flex-wrap: wrap;
   gap: 8px;
 }
-.rw-results-title { font-size: 18px; font-weight: 700; color: #0F172A; margin: 0; }
-.rw-results-count { font-size: 13px; color: #94A3B8; font-weight: 500; }
+.rw-results-title { font-size: 17px; font-weight: 700; color: #0f172a; margin: 0; }
+.rw-results-count { font-size: 13px; color: #94a3b8; font-weight: 500; }
 
+/* Top 3 featured row */
+.rw-top3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.rw-top3 .rw-card { padding: 28px 16px 22px; }
+.rw-top3 .rw-card-runway { font-size: 21px; }
+.rw-top3 .rw-card-name { font-size: 13px; }
+.rw-top3 .rw-card-flag .fi { width: 34px; height: 26px; }
+
+/* Rest grid */
 .rw-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+  gap: 12px;
   margin-bottom: 36px;
 }
+
+/* Shared card styles */
 .rw-card {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 22px 14px 18px;
+  padding: 20px 12px 16px;
   background: #fff;
-  border: 1.5px solid #E2E8F0;
+  border: 1.5px solid #e2e8f0;
   border-radius: 14px;
   text-decoration: none;
   color: inherit;
@@ -285,14 +420,13 @@ const faqSchema = JSON.stringify({
 .rw-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(0,0,0,0.09);
-  border-color: #CBD5E1;
+  border-color: #cbd5e1;
 }
 .rw-card-top {
-  border-color: #10B981;
-  background: linear-gradient(160deg, #F0FDF4 0%, #ffffff 55%);
+  border-color: #10b981;
+  background: linear-gradient(160deg, #f0fdf4 0%, #fff 50%);
 }
-.rw-card-top:hover { border-color: #059669; box-shadow: 0 8px 24px rgba(16,185,129,0.15); }
-
+.rw-card-top:hover { border-color: #059669; box-shadow: 0 8px 24px rgba(16,185,129,0.14); }
 .rw-badge {
   position: absolute;
   top: -10px;
@@ -300,35 +434,31 @@ const faqSchema = JSON.stringify({
   transform: translateX(-50%);
   font-size: 10px;
   font-weight: 800;
-  padding: 3px 10px;
+  padding: 3px 11px;
   border-radius: 20px;
   white-space: nowrap;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
   color: #fff;
 }
-.rw-badge-1 { background: #F59E0B; }
-.rw-badge-2 { background: #94A3B8; }
-.rw-badge-3 { background: #B87333; }
-
+.rw-badge-1 { background: #f59e0b; }
+.rw-badge-2 { background: #94a3b8; }
+.rw-badge-3 { background: #b87333; }
 .rw-card-flag { margin-bottom: 4px; }
-.rw-card-flag .fi { width: 30px; height: 22px; border-radius: 3px; display: inline-block; }
-
-.rw-card-name { font-size: 12px; font-weight: 700; color: #1E293B; line-height: 1.3; }
-
-.rw-card-runway { font-size: 17px; font-weight: 800; color: #0F172A; line-height: 1.2; }
+.rw-card-flag .fi { width: 28px; height: 21px; border-radius: 3px; display: inline-block; }
+.rw-card-name { font-size: 12px; font-weight: 700; color: #1e293b; line-height: 1.3; }
+.rw-card-runway { font-size: 16px; font-weight: 800; color: #0f172a; line-height: 1.2; }
 .rw-card-top .rw-card-runway { color: #059669; }
 .rw-indefinite { color: #059669; }
+.rw-card-cost { font-size: 11px; color: #94a3b8; font-weight: 500; margin-top: 1px; }
 
-.rw-card-cost { font-size: 11px; color: #94A3B8; font-weight: 500; margin-top: 2px; }
-
-/* SHARE */
-.rw-share-row { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+/* ═══ SHARE ═══ */
+.rw-share-row { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-top: 4px; }
 .rw-share-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   padding: 12px 24px;
-  background: #0F172A;
+  background: #0f172a;
   color: #fff;
   font-size: 14px;
   font-weight: 700;
@@ -338,25 +468,25 @@ const faqSchema = JSON.stringify({
   font-family: inherit;
   transition: background 0.15s;
 }
-.rw-share-btn:hover { background: #1E293B; }
-.rw-share-copied { font-size: 12px; color: #10B981; font-weight: 600; height: 16px; margin: 0; }
+.rw-share-btn:hover { background: #1e293b; }
+.rw-share-copied { font-size: 12px; color: #10b981; font-weight: 600; height: 16px; margin: 0; }
 
-/* AFFILIATES */
+/* ═══ AFFILIATES ═══ */
 .rw-affiliates {
   background: #fff;
-  padding: 56px 0;
-  border-top: 1px solid #E2E8F0;
+  padding: 60px 0 52px;
+  border-top: 1px solid #e2e8f0;
 }
 .rw-affiliates-heading {
   font-size: 22px;
   font-weight: 800;
-  color: #0F172A;
+  color: #0f172a;
   margin: 0 0 8px;
   text-align: center;
 }
 .rw-affiliates-sub {
   font-size: 15px;
-  color: #64748B;
+  color: #64748b;
   text-align: center;
   margin: 0 0 36px;
 }
@@ -365,11 +495,11 @@ const faqSchema = JSON.stringify({
   grid-template-columns: 1fr 1fr;
   gap: 20px;
   max-width: 840px;
-  margin: 0 auto;
+  margin: 0 auto 20px;
 }
 .rw-aff-card {
-  background: #F8FAFC;
-  border: 1px solid #E2E8F0;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
   border-radius: 16px;
   padding: 28px 28px 24px;
   display: flex;
@@ -380,15 +510,15 @@ const faqSchema = JSON.stringify({
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #94A3B8;
+  color: #94a3b8;
   margin-bottom: 6px;
 }
-.rw-aff-title { font-size: 17px; font-weight: 800; color: #0F172A; margin-bottom: 8px; }
+.rw-aff-title { font-size: 17px; font-weight: 800; color: #0f172a; margin-bottom: 8px; }
 .rw-aff-desc { font-size: 14px; color: #475569; line-height: 1.65; margin-bottom: 20px; flex: 1; }
 .rw-aff-btn {
   display: inline-block;
   padding: 11px 22px;
-  background: #0F172A;
+  background: #0f172a;
   color: #fff;
   font-size: 13px;
   font-weight: 700;
@@ -397,54 +527,119 @@ const faqSchema = JSON.stringify({
   transition: background 0.15s;
   align-self: flex-start;
 }
-.rw-aff-btn:hover { background: #1E293B; }
-.rw-aff-note { font-size: 11px; color: #94A3B8; margin-top: 10px; }
+.rw-aff-btn:hover { background: #1e293b; }
 .rw-sw-img { display: block; max-width: 196px; height: auto; margin-top: 2px; }
+.rw-aff-shared-note {
+  font-size: 12px;
+  color: #94a3b8;
+  text-align: center;
+  max-width: 840px;
+  margin: 0 auto;
+}
+.rw-aff-shared-note a { color: #94a3b8; }
 
-/* SEO CONTENT */
+/* ═══ SEO CONTENT ═══ */
 .rw-content {
-  background: #F8FAFC;
+  background: #f8fafc;
   padding: 72px 0 80px;
-  border-top: 1px solid #E2E8F0;
+  border-top: 1px solid #e2e8f0;
 }
 .rw-content-inner { max-width: 720px; margin: 0 auto; }
 .rw-content h2 {
   font-size: clamp(22px, 3.5vw, 30px);
   font-weight: 800;
-  color: #0F172A;
+  color: #0f172a;
   margin-bottom: 16px;
   letter-spacing: -0.02em;
   line-height: 1.25;
 }
-.rw-content h3 { font-size: 18px; font-weight: 700; color: #0F172A; margin: 36px 0 10px; }
-.rw-content p { font-size: 16px; color: #475569; line-height: 1.75; margin-bottom: 16px; }
-.rw-content a { color: #2563EB; text-decoration: underline; }
-.rw-content a:hover { color: #1D4ED8; }
-.rw-faq { margin-top: 56px; }
-.rw-faq-item { border-top: 1px solid #E2E8F0; padding: 22px 0; }
-.rw-faq-item:last-child { border-bottom: 1px solid #E2E8F0; }
-.rw-faq-q { font-size: 15px; font-weight: 700; color: #0F172A; margin-bottom: 8px; }
-.rw-faq-a { font-size: 14px; color: #475569; line-height: 1.7; margin: 0; }
+.rw-content h3 { font-size: 17px; font-weight: 700; color: #0f172a; margin: 36px 0 10px; }
+.rw-content p { font-size: 16px; color: #475569; line-height: 1.78; margin-bottom: 16px; }
+.rw-content a { color: #2563eb; text-decoration: underline; }
+.rw-content a:hover { color: #1d4ed8; }
 
-/* RESPONSIVE */
+/* ═══ FAQ ACCORDION ═══ */
+.rw-faq { margin-top: 56px; }
+.rw-faq > h2 { margin-bottom: 4px; }
+.rw-faq-item { border-top: 1px solid #e2e8f0; }
+.rw-faq-item:last-child { border-bottom: 1px solid #e2e8f0; }
+.rw-faq-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 20px 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f172a;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  gap: 20px;
+}
+.rw-faq-trigger:hover { color: #2563eb; }
+.rw-faq-icon {
+  font-size: 24px;
+  color: #94a3b8;
+  flex-shrink: 0;
+  line-height: 1;
+  font-weight: 400;
+  transition: transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+}
+.rw-faq-trigger[aria-expanded="true"] .rw-faq-icon { transform: rotate(45deg); color: #64748b; }
+.rw-faq-body { padding-bottom: 20px; }
+.rw-faq-a { font-size: 14px; color: #475569; line-height: 1.72; margin: 0; }
+
+/* ═══ RESPONSIVE ═══ */
 @media (max-width: 640px) {
-  .rw-hero { padding: 52px 0 40px; }
-  .rw-panel { padding: 24px 20px; }
-  .rw-inputs { grid-template-columns: 1fr; }
+  .rw-hero { padding: 56px 0 44px; }
+  .rw-panel { padding: 24px 20px 20px; }
+  .rw-inputs { grid-template-columns: 1fr; gap: 20px; }
+  .rw-top3 { grid-template-columns: 1fr 1fr; }
+  .rw-top3 .rw-card-runway { font-size: 17px; }
   .rw-aff-grid { grid-template-columns: 1fr; }
-  .rw-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+  .rw-indep-section { padding: 22px 20px; }
+  .rw-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
 }
 @media (max-width: 380px) {
+  .rw-top3 { grid-template-columns: 1fr; }
   .rw-grid { grid-template-columns: 1fr 1fr; }
 }
 </style>
 
 <!-- HERO -->
 <section class="rw-hero">
-  <div class="container">
+  <div class="rw-orb rw-orb-1"></div>
+  <div class="rw-orb rw-orb-2"></div>
+  <div class="rw-hero-dots"></div>
+  <div class="container" style="position:relative;z-index:1;">
     <p class="rw-breadcrumb"><a href="/">Home</a> / Runway Calculator</p>
+    <span class="rw-hero-pill">Free calculator</span>
     <h1>How Long Can Your Savings Last Abroad?</h1>
-    <p class="rw-hero-sub">Enter your savings, income, and lifestyle. See your runway in {countryCount} countries instantly.</p>
+    <p class="rw-hero-sub">Enter your savings, income, and lifestyle. See your exact runway in {countryCount} countries instantly, no account needed.</p>
+    <div class="rw-hero-stats">
+      <div class="rw-hero-stat">
+        <span class="rw-hero-stat-num">{countryCount}</span>
+        countries
+      </div>
+      <span class="rw-hero-stat-div">·</span>
+      <div class="rw-hero-stat">
+        <span class="rw-hero-stat-num">3</span>
+        lifestyle tiers
+      </div>
+      <span class="rw-hero-stat-div">·</span>
+      <div class="rw-hero-stat">
+        <span class="rw-hero-stat-num">0</span>
+        signup required
+      </div>
+    </div>
   </div>
 </section>
 
@@ -453,8 +648,9 @@ const faqSchema = JSON.stringify({
   <div class="container">
 
     <div class="rw-panel">
-      <p class="rw-panel-title">Your finances</p>
+      <p class="rw-panel-eyebrow">Your finances</p>
       <div class="rw-inputs">
+
         <div class="rw-input-group">
           <label class="rw-label" for="inp-savings">Total savings</label>
           <div class="rw-number-wrap">
@@ -462,36 +658,59 @@ const faqSchema = JSON.stringify({
             <input type="number" id="inp-savings" class="rw-number-input" value="50000" min="0" step="1000" />
           </div>
         </div>
+
         <div class="rw-input-group">
           <label class="rw-label" for="inp-income">Monthly income (after tax)</label>
           <div class="rw-number-wrap">
             <span class="rw-number-prefix">$</span>
             <input type="number" id="inp-income" class="rw-number-input" value="0" min="0" step="100" />
           </div>
+          <p class="rw-hint">Remote salary, freelance, Social Security, pension — any recurring income. When it covers a country's full cost, that country shows "Indefinite" meaning your savings don't decrease at all.</p>
         </div>
+
         <div class="rw-input-group">
           <label class="rw-label">Household size</label>
           <div class="rw-toggle">
             <button id="btn-single" class="rw-toggle-btn active" type="button">Single</button>
             <button id="btn-couple" class="rw-toggle-btn" type="button">Couple</button>
           </div>
+          <p class="rw-hint">Two people sharing rent and utilities don't pay double. A couple in most countries spends about 50% more than one person, not 100% more.</p>
         </div>
+
         <div class="rw-input-group">
           <label class="rw-label" for="sel-lifestyle">Lifestyle</label>
           <select id="sel-lifestyle" class="rw-select">
-            <option value="0.75">Lean (×0.75)</option>
-            <option value="1" selected>Normal (×1.0)</option>
-            <option value="1.35">Comfortable (×1.35)</option>
+            <option value="0.75">Lean (×0.75) — shared housing, home cooking</option>
+            <option value="1" selected>Normal (×1.0) — mid-range baseline</option>
+            <option value="1.35">Comfortable (×1.35) — private apt, dining out</option>
           </select>
+          <p class="rw-hint">Multiplies the baseline monthly cost. If you're not sure, start with Normal. Most first-year expats land between Normal and Comfortable.</p>
         </div>
+
       </div>
     </div>
 
-    <div class="rw-results-header">
-      <h2 class="rw-results-title">Your runway by country</h2>
-      <span class="rw-results-count" id="rw-count"></span>
+    <!-- Indefinite countries -->
+    <div id="rw-indep" class="rw-indep-section" style="display:none">
+      <div class="rw-indep-header">
+        <span class="rw-indep-icon">∞</span>
+        <div>
+          <p class="rw-indep-title">Financially independent in <span id="rw-indep-count">0</span> countries</p>
+          <p class="rw-indep-sub">Your monthly income covers full costs here. Savings stay intact forever.</p>
+        </div>
+      </div>
+      <div id="rw-indep-chips" class="rw-indep-chips"></div>
     </div>
-    <div class="rw-grid" id="rw-grid"></div>
+
+    <!-- Finite results -->
+    <div id="rw-finite">
+      <div class="rw-results-header">
+        <h2 class="rw-results-title" id="rw-finite-header">Your runway by country</h2>
+        <span class="rw-results-count" id="rw-count"></span>
+      </div>
+      <div class="rw-top3" id="rw-top3"></div>
+      <div class="rw-grid" id="rw-grid"></div>
+    </div>
 
     <div class="rw-share-row">
       <button class="rw-share-btn" id="btn-share-runway" type="button">
@@ -514,25 +733,24 @@ const faqSchema = JSON.stringify({
 <section class="rw-affiliates">
   <div class="container">
     <h2 class="rw-affiliates-heading">Two Things to Set Up Before You Go</h2>
-    <p class="rw-affiliates-sub">Every person moving abroad needs an international bank account and health coverage.</p>
+    <p class="rw-affiliates-sub">An international bank account and health coverage. Every person moving abroad needs both.</p>
     <div class="rw-aff-grid">
       <div class="rw-aff-card">
         <p class="rw-aff-eyebrow">International banking</p>
         <h3 class="rw-aff-title">Open a multi-currency account</h3>
-        <p class="rw-aff-desc">Send and receive money in 40+ currencies at real exchange rates with no hidden fees. Essential for receiving remote income abroad or transferring your savings before the move.</p>
+        <p class="rw-aff-desc">Send and receive money in 40+ currencies at real exchange rates with no hidden fees. Essential for receiving remote income abroad or transferring savings before the move.</p>
         <a href="https://wise.prf.hn/click/camref:1110lHqXE" target="_blank" rel="noopener sponsored" class="rw-aff-btn">Open a Wise account</a>
-        <p class="rw-aff-note">Affiliate link. We earn a small commission at no extra cost to you.</p>
       </div>
       <div class="rw-aff-card">
         <p class="rw-aff-eyebrow">Health insurance</p>
         <h3 class="rw-aff-title">Get covered in 180+ countries</h3>
-        <p class="rw-aff-desc">US health insurance does not work abroad. SafetyWing's Nomad Insurance starts at $45/month, covers medical expenses worldwide, and you can cancel anytime with no penalty.</p>
+        <p class="rw-aff-desc">US health insurance stops at the border. SafetyWing's Nomad Insurance starts at $45/month, covers medical expenses worldwide, and you can cancel anytime with no penalty.</p>
         <a href="https://safetywing.com/nomad-insurance/?referenceID=26555621&utm_source=26555621&utm_medium=Ambassador" target="_blank" rel="noopener sponsored">
           <img src="/images/sw-banner.png.png" alt="SafetyWing – Let's get you insured" class="rw-sw-img" />
         </a>
-        <p class="rw-aff-note">Affiliate link. We earn a small commission at no extra cost to you.</p>
       </div>
     </div>
+    <p class="rw-aff-shared-note">Some links earn us a small commission at no extra cost to you. <a href="/affiliate-disclosure/">Disclosure →</a></p>
   </div>
 </section>
 
@@ -541,49 +759,84 @@ const faqSchema = JSON.stringify({
   <div class="container">
     <div class="rw-content-inner">
 
-      <h2>Planning a Move Abroad? Your Savings Go Further Than You Think</h2>
-      <p>The question most Americans ask when considering a move abroad is not whether they can afford it. It is whether their savings and income will last long enough to make the change stick. The answer depends almost entirely on where you go.</p>
-      <p>In Vietnam or Egypt, a single person can live comfortably on $900 to $1,100 a month. In Portugal or Mexico, the same lifestyle runs $1,800 to $2,200. In Western Europe or Singapore, costs reach $3,000 or more. The spread is dramatic, and a modest savings account becomes a multi-year runway in the right country.</p>
+      <h2>Living Abroad on Savings: What the Numbers Actually Show</h2>
 
-      <h3>How the Calculator Works</h3>
-      <p>The Runway Calculator takes your total savings, subtracts any monthly income you already have coming in, and divides the difference by the monthly cost of living in each country. That gives you a runway in months, adjusted for your lifestyle choice.</p>
-      <p>The Lean setting (0.75x) reflects shared housing, mostly cooking at home, and minimal discretionary spending. Normal (1.0x) is a realistic mid-range budget that matches how most first-year expats actually spend. Comfortable (1.35x) covers a private apartment in a good neighborhood, regular dining out, and some local travel.</p>
-      <p>When your monthly income covers your costs entirely, the calculator shows Indefinite because your savings will not decrease over time. That is the threshold for location-independent financial independence.</p>
+      <p>Moving abroad on savings alone is math, not guesswork. A $50,000 nest egg runs roughly 70 months in Egypt, 42 months in Vietnam, or 25 months in Portugal at a normal lifestyle. In the average US city, the same amount covers about 14 months of rent. That gap is the whole point.</p>
 
-      <h3>The Single vs. Couple Budget Gap</h3>
-      <p>The couple budget is not double the single budget. Shared rent is the biggest factor, but internet, utilities, and some food costs also scale less than linearly. If you are moving with a partner, the per-person cost is noticeably lower than for a solo move, particularly in countries with high housing costs relative to other expenses.</p>
+      <p>Thousands of Americans are quietly making this calculation in their 30s and 40s, not waiting for retirement age. The countries that give you a 3 to 5 year runway at $50k savings are countries where the local middle class also lives well. This isn't a budget-travel strategy. It's a relocation strategy.</p>
 
-      <h3>What These Costs Do Not Include</h3>
-      <p>The monthly figures cover rent, food, transport, utilities, and basic everyday spending. They do not include one-time relocation costs: flights, visa fees, international shipping, or a security deposit on a new apartment. Budget an additional $2,000 to $5,000 for those depending on your destination before your first full month abroad begins.</p>
-      <p>Health insurance is also separate from these figures. US coverage does not apply internationally, so most expats add a SafetyWing or similar international policy for $45 to $150 per month depending on age and coverage tier.</p>
+      <h3>What Each Input Changes</h3>
 
-      <h3>Using This With the Country Match Quiz</h3>
-      <p>The runway number tells you how long your savings last. The <a href="/country-match/quiz/">Country Match Quiz</a> tells you which countries actually fit your lifestyle, language preferences, climate, and visa situation. Running both tools together gives you a complete picture: which countries you can afford and which ones you will actually want to live in.</p>
+      <p>Your savings sets the starting capital. Monthly income reduces how fast you burn through it. Remote workers earning even $1,000 a month can stretch a $30,000 savings account into indefinite financial independence in the cheapest 10 to 15 countries. When the calculator shows "Indefinite" for a country, your income covers its full cost of living at that lifestyle setting, so savings never decrease. That is not a glitch. It is the goal.</p>
+
+      <p>Household size matters because two people sharing rent don't pay double. A couple in Vietnam spends about 50% more than one person, not 100% more. Shared internet, utilities, and often shared transport drop the per-person cost significantly.</p>
+
+      <p>The lifestyle multiplier adjusts the baseline monthly cost. Lean (0.75x) means shared accommodation and mostly cooking at home. Normal (1.0x) is the mid-range baseline: a decent apartment, eating out a few times a week, some local travel. Comfortable (1.35x) is a private apartment in a good part of town, regular restaurant meals, and not watching the daily budget closely. Most people moving abroad for the first time land between Normal and Comfortable in the first year.</p>
+
+      <h3>What These Costs Leave Out</h3>
+
+      <p>The monthly figures cover rent, food, transport, utilities, and everyday spending. They do not include one-time relocation costs. Expect to spend $2,000 to $5,000 before your first full month begins: flights, a security deposit, visa fees, and any international shipping.</p>
+
+      <p>Health insurance is also separate. US coverage does not apply outside the country. Most expats pick up a SafetyWing or similar international policy for $45 to $150 a month depending on age and coverage level. Factor it into your real monthly cost.</p>
+
+      <h3>Finding the Right Country, Not Just the Cheapest One</h3>
+
+      <p>A country that gives you 5 years of runway on paper might be wrong for other reasons: climate, language barrier, slow internet, or a lifestyle that doesn't match what you're looking for. The <a href="/country-match/quiz/">Country Match Quiz</a> pairs you with countries based on safety, healthcare, English proficiency, and personal lifestyle fit. Running both tools gives you a complete picture: which countries you can afford, and which ones you'll actually want to live in.</p>
 
       <div class="rw-faq">
         <h2>Frequently Asked Questions</h2>
-        <div class="rw-faq-item">
-          <p class="rw-faq-q">How is my monthly runway calculated?</p>
-          <p class="rw-faq-a">We multiply the country's average monthly cost of living by your lifestyle factor (Lean 0.75x, Normal 1.0x, Comfortable 1.35x), then subtract your monthly income to get your net monthly burn rate. Dividing your total savings by that burn rate gives your runway in months.</p>
-        </div>
-        <div class="rw-faq-item">
-          <p class="rw-faq-q">What does "Indefinite" mean in the results?</p>
-          <p class="rw-faq-a">Indefinite means your monthly income covers or exceeds the cost of living in that country at your chosen lifestyle level. Your savings remain intact indefinitely, which is the threshold for location-independent financial independence.</p>
-        </div>
-        <div class="rw-faq-item">
-          <p class="rw-faq-q">Do these monthly costs include rent?</p>
-          <p class="rw-faq-a">Yes. The figures represent a realistic all-in monthly budget including rent, food, transport, utilities, and basic everyday spending. They reflect mid-range living rather than backpacker minimums or luxury expat lifestyles.</p>
-        </div>
-        <div class="rw-faq-item">
-          <p class="rw-faq-q">Should I choose Lean, Normal, or Comfortable?</p>
-          <p class="rw-faq-a">Lean (0.75x) works for shared housing, cooking most meals at home, and minimal extras. Normal (1.0x) is a realistic mid-range baseline. Comfortable (1.35x) covers a private apartment in a good neighborhood, dining out regularly, and occasional local travel. Most people moving abroad for the first time land between Normal and Comfortable.</p>
-        </div>
-        <div class="rw-faq-item">
-          <p class="rw-faq-q">Can I include remote work or freelance income?</p>
-          <p class="rw-faq-a">Yes. The Monthly income field accepts any recurring income including remote salary, freelance revenue, Social Security, pension payments, or investment distributions. The calculator subtracts this from monthly costs before computing your runway.</p>
-        </div>
-      </div>
 
+        <div class="rw-faq-item">
+          <button class="rw-faq-trigger" type="button" aria-expanded="false">
+            <span>How does the calculation work?</span>
+            <span class="rw-faq-icon">+</span>
+          </button>
+          <div class="rw-faq-body" hidden>
+            <p class="rw-faq-a">The calculator multiplies a country's baseline monthly cost by your lifestyle factor (Lean 0.75x, Normal 1.0x, Comfortable 1.35x), then subtracts your monthly income. That gives your net monthly burn rate. Dividing your savings by that number gives your runway in months.</p>
+          </div>
+        </div>
+
+        <div class="rw-faq-item">
+          <button class="rw-faq-trigger" type="button" aria-expanded="false">
+            <span>Why does a country show "Indefinite"?</span>
+            <span class="rw-faq-icon">+</span>
+          </button>
+          <div class="rw-faq-body" hidden>
+            <p class="rw-faq-a">Indefinite means your monthly income equals or exceeds the cost of living in that country at your chosen settings. Your savings are not touched at all. That is financial independence in that location, and it's more achievable than it sounds for anyone with even a modest remote income.</p>
+          </div>
+        </div>
+
+        <div class="rw-faq-item">
+          <button class="rw-faq-trigger" type="button" aria-expanded="false">
+            <span>Do these costs include rent?</span>
+            <span class="rw-faq-icon">+</span>
+          </button>
+          <div class="rw-faq-body" hidden>
+            <p class="rw-faq-a">Yes. The figures are all-in monthly estimates covering rent, food, transport, utilities, and everyday spending. They reflect a realistic mid-range lifestyle, not a backpacker budget or a luxury expat setup.</p>
+          </div>
+        </div>
+
+        <div class="rw-faq-item">
+          <button class="rw-faq-trigger" type="button" aria-expanded="false">
+            <span>Which lifestyle setting should I pick?</span>
+            <span class="rw-faq-icon">+</span>
+          </button>
+          <div class="rw-faq-body" hidden>
+            <p class="rw-faq-a">Lean (0.75x) is shared housing plus home cooking. Normal (1.0x) is a realistic mid-range baseline that matches how most first-year expats actually live. Comfortable (1.35x) is a private apartment, dining out several times a week, and not watching daily costs closely. If unsure, start with Normal and adjust from there.</p>
+          </div>
+        </div>
+
+        <div class="rw-faq-item">
+          <button class="rw-faq-trigger" type="button" aria-expanded="false">
+            <span>Can I count freelance or remote work income?</span>
+            <span class="rw-faq-icon">+</span>
+          </button>
+          <div class="rw-faq-body" hidden>
+            <p class="rw-faq-a">Yes. The monthly income field accepts any recurring income: remote salary, freelance revenue, Social Security, pension, or investment distributions. Even a modest $1,000 a month dramatically extends your runway in cheaper countries, often pushing them into "Indefinite" territory.</p>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 </section>
@@ -615,7 +868,7 @@ function getInputs() {
   var savings = parseFloat((document.getElementById('inp-savings') as HTMLInputElement).value) || 0;
   var income = parseFloat((document.getElementById('inp-income') as HTMLInputElement).value) || 0;
   var mult = parseFloat((document.getElementById('sel-lifestyle') as HTMLSelectElement).value) || 1;
-  return { savings, income, mult };
+  return { savings: savings, income: income, mult: mult };
 }
 
 function fmtRunway(months: number): string {
@@ -629,14 +882,27 @@ function fmtRunway(months: number): string {
   return yrs + 'y ' + rem + 'mo';
 }
 
+function makeCard(c: any, i: number, isTop: boolean): string {
+  var badgeCls = ['rw-badge rw-badge-1', 'rw-badge rw-badge-2', 'rw-badge rw-badge-3'];
+  var badgeLabels = ['1st', '2nd', '3rd'];
+  var badge = isTop ? '<span class="' + badgeCls[i] + '">' + badgeLabels[i] + '</span>' : '';
+  return '<a href="/countries/' + c.slug + '/" class="rw-card' + (isTop ? ' rw-card-top' : '') + '">' +
+    badge +
+    '<div class="rw-card-flag"><span class="fi fi-' + c.iso2 + '"></span></div>' +
+    '<div class="rw-card-name">' + c.name + '</div>' +
+    '<div class="rw-card-runway">' + fmtRunway(c.runway) + '</div>' +
+    '<div class="rw-card-cost">$' + c.cost.toLocaleString() + '/mo</div>' +
+    '</a>';
+}
+
 function compute() {
   var inp = getInputs();
-  var results = BUDGET.map(function(c: any) {
+  var results = (BUDGET as any[]).map(function(c) {
     var budget = household === 'single' ? c.bs : c.bc;
     var cost = Math.round(budget * inp.mult);
     var burn = cost - inp.income;
     var runway = burn <= 0 ? Infinity : inp.savings / burn;
-    return { slug: c.slug, name: c.name, iso2: c.iso2, cost, runway };
+    return { slug: c.slug, name: c.name, iso2: c.iso2, cost: cost, runway: runway };
   });
 
   results.sort(function(a: any, b: any) {
@@ -647,24 +913,53 @@ function compute() {
     return a.cost - b.cost;
   });
 
-  document.getElementById('rw-count').textContent = results.length + ' countries';
+  var indefinite = results.filter(function(r: any) { return r.runway === Infinity; });
+  var finite = results.filter(function(r: any) { return r.runway !== Infinity; });
 
-  var badgeCls = ['rw-badge rw-badge-1', 'rw-badge rw-badge-2', 'rw-badge rw-badge-3'];
-  var badgeLabels = ['1st', '2nd', '3rd'];
+  /* --- Indefinite section --- */
+  var indepEl = document.getElementById('rw-indep');
+  if (indefinite.length > 0) {
+    indepEl.style.display = 'block';
+    document.getElementById('rw-indep-count').textContent = String(indefinite.length);
+    document.getElementById('rw-indep-chips').innerHTML = indefinite.map(function(c: any) {
+      return '<a href="/countries/' + c.slug + '/" class="rw-chip">' +
+        '<span class="fi fi-' + c.iso2 + '"></span>' +
+        '<span>' + c.name + '</span>' +
+        '<span class="rw-chip-cost">$' + c.cost.toLocaleString() + '/mo</span>' +
+        '</a>';
+    }).join('');
+  } else {
+    indepEl.style.display = 'none';
+  }
 
-  document.getElementById('rw-grid').innerHTML = results.map(function(c: any, i: number) {
-    var top = i < 3;
-    var badge = top ? '<span class="' + badgeCls[i] + '">' + badgeLabels[i] + '</span>' : '';
-    return '<a href="/countries/' + c.slug + '/" class="rw-card' + (top ? ' rw-card-top' : '') + '">' +
-      badge +
-      '<div class="rw-card-flag"><span class="fi fi-' + c.iso2 + '"></span></div>' +
-      '<div class="rw-card-name">' + c.name + '</div>' +
-      '<div class="rw-card-runway">' + fmtRunway(c.runway) + '</div>' +
-      '<div class="rw-card-cost">$' + c.cost.toLocaleString() + '/mo</div>' +
-      '</a>';
-  }).join('');
+  /* --- Finite section --- */
+  var finiteEl = document.getElementById('rw-finite');
+  if (finite.length > 0) {
+    finiteEl.style.display = 'block';
+    document.getElementById('rw-finite-header').textContent =
+      indefinite.length > 0 ? 'Where your savings give you a runway' : 'Your runway by country';
+    document.getElementById('rw-count').textContent = finite.length + ' countries';
+
+    var top3 = finite.slice(0, 3);
+    var rest = finite.slice(3);
+
+    document.getElementById('rw-top3').innerHTML = top3.map(function(c: any, i: number) {
+      return makeCard(c, i, true);
+    }).join('');
+
+    var gridEl = document.getElementById('rw-grid');
+    if (rest.length > 0) {
+      gridEl.style.display = 'grid';
+      gridEl.innerHTML = rest.map(function(c: any) { return makeCard(c, -1, false); }).join('');
+    } else {
+      gridEl.style.display = 'none';
+    }
+  } else {
+    finiteEl.style.display = 'none';
+  }
 }
 
+/* --- Input handlers --- */
 document.getElementById('btn-single').addEventListener('click', function() {
   household = 'single';
   this.classList.add('active');
@@ -681,6 +976,7 @@ document.getElementById('btn-couple').addEventListener('click', function() {
   document.getElementById(id).addEventListener('input', compute);
 });
 
+/* --- Share --- */
 document.getElementById('btn-share-runway').addEventListener('click', function() {
   var inp = getInputs();
   var lKey = inp.mult <= 0.76 ? 'lean' : inp.mult >= 1.34 ? 'comfortable' : 'normal';
@@ -707,6 +1003,17 @@ function fallbackCopy(url: string) {
   document.body.removeChild(ta);
   showCopied();
 }
+
+/* --- FAQ accordion --- */
+document.querySelectorAll('.rw-faq-trigger').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!expanded));
+    var body = btn.nextElementSibling as HTMLElement;
+    body.hidden = expanded;
+    (btn.querySelector('.rw-faq-icon') as HTMLElement).textContent = expanded ? '+' : '×';
+  });
+});
 
 compute();
 </script>

@@ -530,6 +530,30 @@ const faqSchema = JSON.stringify({
 .rw-aff-btn:hover { background: #1e293b; }
 .rw-sw-img { display: block; max-width: 196px; height: auto; margin: 2px auto 0; }
 .rw-grid > .rw-card { max-width: 195px; width: 100%; }
+
+/* ═══ EMPTY STATE + SAVINGS HINT ═══ */
+.rw-empty-state {
+  text-align: center;
+  padding: 56px 24px;
+  color: #94a3b8;
+}
+.rw-empty-state-icon {
+  font-size: 40px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+.rw-empty-state p { font-size: 16px; color: #94a3b8; margin: 0; }
+.rw-savings-note {
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px 22px;
+  font-size: 14px;
+  color: #475569;
+  line-height: 1.6;
+  margin-bottom: 36px;
+}
+.rw-savings-note strong { color: #0f172a; }
 .rw-aff-shared-note {
   font-size: 12px;
   color: #94a3b8;
@@ -692,6 +716,12 @@ const faqSchema = JSON.stringify({
       </div>
     </div>
 
+    <!-- Empty state: nothing entered yet -->
+    <div id="rw-empty" class="rw-empty-state" style="display:none">
+      <div class="rw-empty-state-icon">🌍</div>
+      <p>Enter your savings or monthly income above to see results across {countryCount} countries.</p>
+    </div>
+
     <!-- Indefinite countries -->
     <div id="rw-indep" class="rw-indep-section" style="display:none">
       <div class="rw-indep-header">
@@ -703,6 +733,9 @@ const faqSchema = JSON.stringify({
       </div>
       <div id="rw-indep-chips" class="rw-indep-chips"></div>
     </div>
+
+    <!-- Note shown when savings=0 and some countries need savings -->
+    <p id="rw-savings-note" class="rw-savings-note" style="display:none"></p>
 
     <!-- Finite results -->
     <div id="rw-finite">
@@ -899,6 +932,22 @@ function makeCard(c: any, i: number, isTop: boolean): string {
 
 function compute() {
   var inp = getInputs();
+
+  var emptyEl = document.getElementById('rw-empty');
+  var indepEl = document.getElementById('rw-indep');
+  var noteEl = document.getElementById('rw-savings-note');
+  var finiteEl = document.getElementById('rw-finite');
+
+  /* --- Nothing entered yet --- */
+  if (inp.savings === 0 && inp.income === 0) {
+    emptyEl.style.display = 'block';
+    indepEl.style.display = 'none';
+    noteEl.style.display = 'none';
+    finiteEl.style.display = 'none';
+    return;
+  }
+  emptyEl.style.display = 'none';
+
   var results = (BUDGET as any[]).map(function(c) {
     var budget = household === 'single' ? c.bs : c.bc;
     var cost = Math.round(budget * inp.mult);
@@ -919,7 +968,6 @@ function compute() {
   var finite = results.filter(function(r: any) { return r.runway !== Infinity; });
 
   /* --- Indefinite section --- */
-  var indepEl = document.getElementById('rw-indep');
   if (indefinite.length > 0) {
     indepEl.style.display = 'block';
     document.getElementById('rw-indep-count').textContent = String(indefinite.length);
@@ -934,8 +982,21 @@ function compute() {
     indepEl.style.display = 'none';
   }
 
-  /* --- Finite section --- */
-  var finiteEl = document.getElementById('rw-finite');
+  /* --- Savings = 0: don't show < 1 month cards, show a note instead --- */
+  if (inp.savings === 0 && finite.length > 0) {
+    noteEl.style.display = 'block';
+    var cheapest = finite[0];
+    if (indefinite.length > 0) {
+      noteEl.innerHTML = '<strong>' + finite.length + ' more ' + (finite.length === 1 ? 'country' : 'countries') + '</strong> have costs your income doesn\'t fully cover. Add savings to see how long you\'d last there. The closest starts at <strong>$' + cheapest.cost.toLocaleString() + '/mo</strong>.';
+    } else {
+      noteEl.innerHTML = 'Your income doesn\'t cover costs in any of the ' + finite.length + ' countries at this lifestyle. The cheapest starts at <strong>$' + cheapest.cost.toLocaleString() + '/mo</strong>. Try switching to Lean lifestyle or adding savings.';
+    }
+    finiteEl.style.display = 'none';
+    return;
+  }
+  noteEl.style.display = 'none';
+
+  /* --- Finite section with actual runway --- */
   if (finite.length > 0) {
     finiteEl.style.display = 'block';
     document.getElementById('rw-finite-header').textContent =

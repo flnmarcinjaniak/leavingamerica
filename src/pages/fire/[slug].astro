@@ -92,6 +92,7 @@ const similar = Object.entries(allCountries)
 const articleParas: string[] = data.fire_article
   ? (data.fire_article as string).split('\n\n').map((p:string) => p.trim()).filter(Boolean)
   : [];
+const hasSailyInArticle = (data.fire_article as string || '').toLowerCase().includes('saily');
 
 // FAQ (build-time, schema-ready)
 const nomadNote = data.nomad_visa
@@ -468,6 +469,15 @@ input.fire-input-error { border-color: #FCA5A5 !important; background: #FEF2F2 !
           <p class={i === 0 ? 'fire-para fire-para-lead' : 'fire-para'} set:html={linkify(para)} />
         ))}
       </div>
+    </div>
+  )}
+
+  <!-- Saily eSIM note — shown on pages where the article doesn't already mention Saily -->
+  {!hasSailyInArticle && (
+    <div class="fire-section" style="padding-top:0;padding-bottom:16px">
+      <p class="fire-para" style="font-size:14px;color:#475569;margin:0">
+        Before your flight, pick up a local eSIM through <a href="https://go.saily.site/aff_c?offer_id=101&aff_id=15135" class="aff-link" target="_blank" rel="noopener sponsored">Saily</a> so you land connected and skip the airport SIM card stand. It works in 150+ countries and activates on your phone before you board.
+      </p>
     </div>
   )}
 

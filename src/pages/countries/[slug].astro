@@ -122,6 +122,7 @@ const AFFILIATE_LINKS: Record<string, string> = {
 };
 
 const hasFirePage = Object.entries(allCountries).some(([s, d]: [string, any]) => s === slug && d.budget_single);
+const hasSailyInQuickFacts = (data.quick_facts_paragraph || '').toLowerCase().includes('saily');
 
 function linkifyAffiliates(text: string): string {
   let result = text;
@@ -1429,6 +1430,12 @@ const pageDescription = _metaOverride?.description ?? `See how far your salary g
       <p class="vpn-note">
         Remote workers living in {countryName} typically use a VPN to keep secure on public WiFi and maintain access to US banking, streaming, and apps.
         <a href={nordvpnLink} target="_blank" rel="noopener sponsored" class="vpn-note-link">NordVPN</a> is the most widely used option.
+      </p>
+    )}
+
+    {!hasSailyInQuickFacts && (
+      <p class="vpn-note" style="margin-top:8px">
+        A local eSIM from <a href="https://go.saily.site/aff_c?offer_id=101&aff_id=15135" target="_blank" rel="noopener sponsored" class="vpn-note-link">Saily</a> means you land connected and skip the airport SIM card stand. Works in 150+ countries, 10% off for new users.
       </p>
     )}
   </div>

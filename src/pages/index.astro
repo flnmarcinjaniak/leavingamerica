@@ -4437,7 +4437,7 @@ const qs = qualityScores.countries as Record<string, any>;
   }
   .th-cards {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     background: rgba(255,255,255,0.06);
     border: 1px solid rgba(255,255,255,0.08);
     border-radius: 20px;
@@ -4554,10 +4554,12 @@ const qs = qualityScores.countries as Record<string, any>;
 
   @media (max-width: 960px) {
     .th-cards { grid-template-columns: repeat(2, 1fr); }
+    .th-card:last-child { grid-column: span 2; }
     .tools-hub { padding: 72px 0; }
   }
   @media (max-width: 540px) {
     .th-cards { grid-template-columns: 1fr; }
+    .th-card:last-child { grid-column: span 1; }
     .tools-hub { padding: 56px 0; }
     .th-card { padding: 32px 24px; }
     .th-header { margin-bottom: 44px; }

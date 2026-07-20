@@ -269,7 +269,25 @@ const faqSchema = JSON.stringify({
 .stx-search input:focus { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,0.12); }
 .stx-search svg { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); color: #94a3b8; }
 .stx-search-count { font-size: 13px; color: #94a3b8; white-space: nowrap; }
-.stx-table-scroll { overflow-x: auto; border: 1px solid #e6ebf2; border-radius: 14px; background: #fff; }
+.stx-scroll-hint {
+  display: none; align-items: center; gap: 6px;
+  font-size: 12.5px; font-weight: 700; color: #2563eb;
+  margin: 0 0 10px;
+}
+.stx-scroll-hint.show { display: inline-flex; }
+.stx-scroll-hint svg { animation: stx-swipe 1.5s ease-in-out infinite; }
+@keyframes stx-swipe {
+  0%, 100% { transform: translateX(0); opacity: 0.55; }
+  50% { transform: translateX(4px); opacity: 1; }
+}
+.stx-table-scroll { position: relative; overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid #e6ebf2; border-radius: 14px; background: #fff; }
+.stx-table-fade {
+  position: absolute; top: 0; right: 0; bottom: 0; width: 40px;
+  background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.97));
+  pointer-events: none; border-radius: 0 14px 14px 0;
+  opacity: 0; transition: opacity 0.25s ease;
+}
+.stx-table-fade.show { opacity: 1; }
 table.stx-table { width: 100%; border-collapse: collapse; font-size: 13.5px; min-width: 560px; }
 .stx-table thead th { position: sticky; top: 0; background: #0f1e38; color: #cbd9f0; font-weight: 700; text-align: left; padding: 13px 16px; font-size: 12px; letter-spacing: 0.02em; white-space: nowrap; }
 .stx-table thead th.num { text-align: right; }
@@ -479,7 +497,11 @@ table.stx-table { width: 100%; border-collapse: collapse; font-size: 13.5px; min
         </div>
         <span class="stx-search-count" id="stx-tbl-count">{budgetCount} countries</span>
       </div>
-      <div class="stx-table-scroll stx-reveal">
+      <p class="stx-scroll-hint" id="stx-scroll-hint">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2 7.5h11M9 4l4 3.5-4 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Swipe to see all columns
+      </p>
+      <div class="stx-table-scroll stx-reveal" id="stx-table-scroll">
         <table class="stx-table">
           <thead>
             <tr>
@@ -503,6 +525,7 @@ table.stx-table { width: 100%; border-collapse: collapse; font-size: 13.5px; min
           </tbody>
         </table>
         <div class="stx-noresults" id="stx-tbl-none">No country matches that search.</div>
+        <div class="stx-table-fade" id="stx-table-fade" aria-hidden="true"></div>
       </div>
       <p class="stx-chart-note" style="margin-top:14px">FIRE number = monthly cost × 12 ÷ 0.04 (the 4% rule). Costs exclude one-time relocation expenses and health insurance.</p>
     </div>
@@ -612,6 +635,22 @@ table.stx-table { width: 100%; border-collapse: collapse; font-size: 13.5px; min
       countEl.textContent = shown + (shown === 1 ? ' country' : ' countries');
       noneEl.style.display = shown === 0 ? 'block' : 'none';
     });
+  }
+
+  // ── table scroll affordance (hint + fade edge) ──
+  var tblScroll = document.getElementById('stx-table-scroll');
+  var tblFade = document.getElementById('stx-table-fade');
+  var tblHint = document.getElementById('stx-scroll-hint');
+  if (tblScroll && tblFade && tblHint) {
+    function updateScrollState() {
+      var hasOverflow = tblScroll.scrollWidth > tblScroll.clientWidth + 2;
+      var atEnd = tblScroll.scrollLeft + tblScroll.clientWidth >= tblScroll.scrollWidth - 4;
+      tblFade.classList.toggle('show', hasOverflow && !atEnd);
+      tblHint.classList.toggle('show', hasOverflow);
+    }
+    updateScrollState();
+    tblScroll.addEventListener('scroll', updateScrollState, { passive: true });
+    window.addEventListener('resize', updateScrollState);
   }
 
   // ── FAQ accordion ──

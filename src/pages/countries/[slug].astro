@@ -84,6 +84,9 @@ const ISO2 = {
 
 const countryName = NAMES[slug] || slug;
 const countryIso2 = ISO2[slug] || '';
+const lastUpdatedLabel = qualityScoresData.lastUpdated
+  ? new Date(qualityScoresData.lastUpdated).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
+  : 'recently';
 
 // NordVPN geo-targeted offer IDs (higher conversion for specific regions)
 const VPN_CRITICAL = new Set([
@@ -1123,7 +1126,7 @@ const pageDescription = _metaOverride?.description ?? `See how far your salary g
     <a href="/">Home</a> / <a href="/countries">Countries</a> / {countryName}
   </div>
   <div class="data-freshness">
-    Data updated {qualityScoresData.lastUpdated || 'recently'}
+    Data updated {lastUpdatedLabel}
     · Sources: World Bank, Numbeo, WhereNext, EF EPI
     · <a href="/methodology">How we calculate this →</a>
   </div>

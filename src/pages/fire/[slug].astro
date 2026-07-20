@@ -61,6 +61,9 @@ function linkify(text: string): string {
 }
 
 const countryName = NAMES[slug] || slug;
+const lastUpdatedLabel = (qualityScoresData as any).lastUpdated
+  ? new Date((qualityScoresData as any).lastUpdated).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
+  : 'recently';
 
 // FIRE calculations
 const US_MONTHLY = 3500;
@@ -363,7 +366,7 @@ input.fire-input-error { border-color: #FCA5A5 !important; background: #FEF2F2 !
     <a href="/fire">FIRE Calculator</a> / {countryName}
   </div>
   <div class="fire-data-freshness">
-    Data updated {(qualityScoresData as any).lastUpdated || 'recently'}
+    Data updated {lastUpdatedLabel}
     · Sources: World Bank, Numbeo, WhereNext
     · <a href="/methodology">How we calculate this →</a>
   </div>

@@ -1,0 +1,458 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import qualityScoresData from '../../data/quality-scores.json';
+
+const qs = qualityScoresData.countries as Record<string, any>;
+const all = Object.entries(qs);
+const totalCountries = all.length;
+
+const withBudget = all.filter(([, d]) => d.budget_single && d.budget_couple);
+const budgetCount = withBudget.length;
+const singles = withBudget
+  .map(([slug, d]) => ({ slug, v: d.budget_single as number }))
+  .sort((a, b) => a.v - b.v);
+
+const cheapest = singles[0];
+const priciest = singles[singles.length - 1];
+const median = singles[Math.floor(singles.length / 2)].v;
+const under1500 = singles.filter(x => x.v < 1500).length;
+const under1000 = singles.filter(x => x.v < 1000).length;
+const coupleRatioPct = Math.round(
+  (withBudget.reduce((sum, [, d]) => sum + d.budget_couple / d.budget_single, 0) / budgetCount - 1) * 100
+);
+
+const mo = (savings: number, budget: number) => Math.floor(savings / budget);
+const yr = (savings: number, budget: number) => (savings / budget / 12).toFixed(1);
+
+const fire = (budget: number) => budget * 12 / 0.04;
+const fireUnder500k = singles.filter(x => fire(x.v) < 500000).length;
+const usFire = 3500 * 12 / 0.04;
+
+const taxCounts: Record<string, number> = {};
+all.forEach(([, d]) => { if (d.tax_system) taxCounts[d.tax_system] = (taxCounts[d.tax_system] || 0) + 1; });
+const nomadVisaCount = all.filter(([, d]) => d.nomad_visa).length;
+
+const pb = (slug: string) => qs[slug]?.budget_single as number;
+
+const updated = 'July 2026';
+
+const faqSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': [
+    {
+      '@type': 'Question',
+      'name': 'How many Americans live abroad?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Estimates range from 5 to 9 million US citizens living outside the United States. A 2026 US Census Bureau analysis estimated that around 180,000 Americans moved abroad in the past year alone.'
+      }
+    },
+    {
+      '@type': 'Question',
+      'name': 'What is the cheapest country for Americans to live in?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': `Among the ${budgetCount} countries tracked by LeavingAmerica.co, Egypt has the lowest baseline cost at about $700 per month for a single person, excluding rent extremes. India, Vietnam, and Sri Lanka also come in under $1,000 per month.`
+      }
+    },
+    {
+      '@type': 'Question',
+      'name': 'How much money do you need to retire abroad?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': `Using the 4% withdrawal rule, retiring in the cheapest tracked countries requires a portfolio of about $210,000, compared with roughly $1.05 million for a typical $3,500-per-month lifestyle in the United States. In ${fireUnder500k} of ${budgetCount} tracked countries, the required portfolio is below $500,000.`
+      }
+    },
+    {
+      '@type': 'Question',
+      'name': 'Do Americans abroad still pay US taxes?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Yes. The United States taxes citizens on worldwide income regardless of where they live, one of only two countries to do so. The Foreign Earned Income Exclusion can shield up to $130,000 of foreign-earned income (2025 tax year), and foreign accounts over $10,000 combined must be reported via FBAR.'
+      }
+    },
+    {
+      '@type': 'Question',
+      'name': 'Where do most Americans move when they leave the US?',
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': 'Mexico hosts the largest American community abroad at roughly 1.2 million people, followed by Canada with more than 250,000. Portugal has seen the fastest recent growth, with American relocations nearly tripling since 2024.'
+      }
+    }
+  ]
+});
+---
+
+<BaseLayout
+  title="Americans Moving Abroad: Statistics & Data (2026)"
+  description="How many Americans are moving abroad, what it costs to live in 74 countries, retirement math, and tax facts. Sourced, citable statistics updated July 2026."
+  ogTitle="Americans Moving Abroad: 30+ Statistics for 2026"
+>
+  <script type="application/ld+json" set:html={faqSchema} />
+
+<style is:global>
+.stx-hero {
+  background: linear-gradient(135deg, #0b1526 0%, #172b50 100%);
+  color: #fff;
+  padding: 72px 0 56px;
+  text-align: center;
+}
+.stx-hero h1 {
+  font-size: clamp(26px, 4.5vw, 42px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 14px;
+  line-height: 1.15;
+}
+.stx-hero-sub {
+  font-size: 16px;
+  color: rgba(255,255,255,0.65);
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+.stx-meta {
+  font-size: 13px;
+  color: rgba(255,255,255,0.45);
+  margin-top: 18px;
+}
+.stx-section {
+  padding: 48px 0 8px;
+}
+.stx-section:last-of-type { padding-bottom: 64px; }
+.stx-wrap { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+.stx-section h2 {
+  font-size: clamp(20px, 3vw, 27px);
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.015em;
+  margin: 0 0 6px;
+}
+.stx-section-sub { font-size: 14px; color: #64748b; margin: 0 0 24px; }
+.stx-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 8px;
+}
+.stx-card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 22px 24px 20px;
+}
+.stx-num {
+  font-size: 28px;
+  font-weight: 800;
+  color: #1d4ed8;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+.stx-card p { font-size: 14px; color: #334155; line-height: 1.65; margin: 0; }
+.stx-src { display: block; font-size: 12px; color: #94a3b8; margin-top: 10px; }
+.stx-src a { color: #94a3b8; }
+.stx-body { background: #f8fafc; }
+.stx-cta {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 20px 24px;
+  margin: 28px 0 8px;
+  font-size: 14px;
+  color: #475569;
+  line-height: 1.65;
+}
+.stx-cta a { color: #2563eb; font-weight: 700; text-decoration: none; }
+.stx-cta a:hover { text-decoration: underline; }
+.stx-cite {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 14px;
+  padding: 20px 24px;
+  font-size: 14px;
+  color: #1e3a5f;
+  line-height: 1.65;
+  margin-top: 36px;
+}
+.stx-faq { margin-top: 12px; }
+.stx-faq details {
+  border-top: 1px solid #e2e8f0;
+  padding: 4px 0;
+}
+.stx-faq details:last-child { border-bottom: 1px solid #e2e8f0; }
+.stx-faq summary {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f172a;
+  padding: 16px 0;
+  cursor: pointer;
+}
+.stx-faq summary:hover { color: #2563eb; }
+.stx-faq p { font-size: 14px; color: #475569; line-height: 1.7; margin: 0 0 16px; }
+.stx-sources { font-size: 13px; color: #64748b; line-height: 1.9; }
+.stx-sources a { color: #2563eb; }
+@media (max-width: 640px) {
+  .stx-grid { grid-template-columns: 1fr; }
+  .stx-hero { padding: 52px 0 40px; }
+}
+</style>
+
+<section class="stx-hero">
+  <div class="stx-wrap">
+    <h1>Americans Moving Abroad: The Numbers</h1>
+    <p class="stx-hero-sub">Every statistic on this page is either computed from our dataset of {totalCountries} countries or linked to its original source. Free to cite with attribution.</p>
+    <p class="stx-meta">Data: World Bank ICP, Numbeo, US Census, LeavingAmerica.co analysis · Updated {updated} · <a href="/methodology/" style="color:rgba(255,255,255,0.55)">Methodology</a></p>
+  </div>
+</section>
+
+<div class="stx-body">
+
+  <section class="stx-section">
+    <div class="stx-wrap">
+      <h2>How Many Americans Are Leaving</h2>
+      <p class="stx-section-sub">The scale of the current emigration wave</p>
+      <div class="stx-grid">
+        <div class="stx-card">
+          <div class="stx-num">~180,000</div>
+          <p>US citizens moved abroad in the past year, according to a 2026 US Census Bureau analysis.</p>
+          <span class="stx-src">Source: US Census Bureau, 2026</span>
+        </div>
+        <div class="stx-card">
+          <div class="stx-num">5–9 million</div>
+          <p>Americans are estimated to live outside the United States. No agency keeps an exact count, which is why estimates vary this widely.</p>
+          <span class="stx-src">Source: State Department and AARO estimates</span>
+        </div>
+        <div class="stx-card">
+          <div class="stx-num">+1,514%</div>
+          <p>Spike in Google searches related to moving abroad in the days after the November 2024 US election.</p>
+          <span class="stx-src">Source: VisaGuide.World</span>
+        </div>
+        <div class="stx-card">
+          <div class="stx-num">+80%</div>
+          <p>Year-over-year growth in new account registrations reported by expat tax provider MyExpatTaxes during the 2026 tax season.</p>
+          <span class="stx-src">Source: <a href="https://www.globenewswire.com/news-release/2026/06/24/3317095/0/en/New-MyExpatTaxes-Data-Confirms-Trend-of-More-Americans-Moving-Abroad-Amid-Trump-Wave-Relocations.html" target="_blank" rel="noopener">MyExpatTaxes, June 2026</a></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stx-section">
+    <div class="stx-wrap">
+      <h2>How Many Want to Leave</h2>
+      <p class="stx-section-sub">Survey data on emigration intent</p>
+      <div class="stx-grid">
+        <div class="stx-card">
+          <div class="stx-num">20%</div>
+          <p>Of Americans say they would like to leave the US permanently. Among women aged 15 to 44 the figure rises to 40%.</p>
+          <span class="stx-src">Source: Gallup, 2025</span>
+        </div>
+        <div class="stx-card">
+          <div class="stx-num">42%</div>
+          <p>Of Americans have considered or plan to relocate abroad. Among Gen Z it is 63%, and among Millennials 52%.</p>
+          <span class="stx-src">Source: The Harris Poll</span>
+        </div>
+        <div class="stx-card">
+          <div class="stx-num">~70%</div>
+          <p>Of people considering a move cite remote work as an enabling or primary factor.</p>
+          <span class="stx-src">Source: The Harris Poll, 2025</span>
+        </div>
+        <div class="stx-card">
+          <div class="stx-num">2025–2026</div>
+          <p>Researchers describe the current period as the largest American emigration shift in decades.</p>
+          <span class="stx-src">Source: <a href="https://www.clickorlando.com/news/2026/07/09/americans-are-leaving-the-us-in-record-numbers-heres-why/" target="_blank" rel="noopener">ClickOrlando, July 2026</a></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stx-section">
+    <div class="stx-wrap">
+      <h2>What It Costs to Live Abroad</h2>
+      <p class="stx-section-sub">From our dataset of {budgetCount} countries with verified monthly budgets</p>
+      <div class="stx-grid">
+        <div class="stx-card">
+          <div class="stx-num">$700–$4,000</div>
+          <p>The monthly cost range for a single person across {budgetCount} countries, from Egypt at the low end to Switzerland at the top. The median is ${median.toLocaleString()} per month.</p>
+          <span class="stx-src">Source: LeavingAmerica.co analysis, {updated}</span>
+        </div>
+        <div class="stx-card">
+          <div class="stx-num">{under1500} of {budgetCount}</div>
+          <p>Countries cost a single person less than $1,500 per month. {under1000} of them, including Egypt ($700), India ($750), and Vietnam ($900), come in under $1,000.</p>
+          <span class="stx-src">Source: LeavingAmerica.co analysis, {updated}</span>
+        </div>
+        <div class="stx-card">
+          <div class="stx-num">+{coupleRatioPct}%</div>
+          <p>Is how much more a couple spends compared with a single person on average, not double. Shared rent and utilities do most of the work.</p>
+          <span class="stx-src">Source: LeavingAmerica.co analysis, {updated}</span>
+        </div>
+        <div class="stx-card">
+          <div class="stx-num">$1,000–$2,000</div>
+          <p>Monthly budget covering the most popular expat picks: Thailand (${pb('thailand').toLocaleString()}), Mexico (${pb('mexico').toLocaleString()}), and Portugal (${pb('portugal').toLocaleString()}).</p>
+          <span class="stx-src">Source: LeavingAmerica.co analysis, {updated}</span>
+        </div>
+      </div>
+      <div class="stx-cta">
+        Want these numbers for your own budget? The <a href="/runway/">Runway Calculator</a> shows how long your savings last in all {budgetCount} countries, instantly and free.
+      </div>
+    </div>
+  </section>
+
+  <section class="stx-section">
+    <div class="stx-wrap">
+      <h2>How Long American Savings Last</h2>
+      <p class="stx-section-sub">Savings runway at baseline monthly costs, single person, no income</p>
+      <div class="stx-grid">
+        <div class="stx-card">
+          <div class="stx-num">{mo(50000, cheapest.v)} months</div>
+          <p>Is how long $50,000 lasts in Egypt, the cheapest tracked country. The same amount covers about {mo(50000, priciest.v)} months in Switzerland.</p>
+          <span class="stx-src">Source: LeavingAmerica.co analysis, {updated}</span>
+        </div>
+        <div class="stx-card">
+          <div class="stx-num">{yr(100000, cheapest.v)} years</div>
+          <p>Is the runway $100,000 buys in Egypt. In Switzerland the same savings last about {yr(100000, priciest.v)} years.</p>
+          <span class="stx-src">Source: LeavingAmerica.co analysis, {updated}</span>
+        </div>
+        <div class="stx-card">
+          <div class="stx-num">~{mo(50000, median)} months</div>
+          <p>Is the $50,000 runway in the median tracked country at ${median.toLocaleString()} per month. That is over two and a half years without earning a dollar.</p>
+          <span class="stx-src">Source: LeavingAmerica.co analysis, {updated}</span>
+        </div>
+        <div class="stx-card">
+          <div class="stx-num">{mo(50000, pb('thailand'))} months</div>
+          <p>Is how long $50,000 lasts in Thailand. Mexico gives {mo(50000, pb('mexico'))} months and Portugal {mo(50000, pb('portugal'))} months on the same savings.</p>
+          <span class="stx-src">Source: LeavingAmerica.co analysis, {updated}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stx-section">
+    <div class="stx-wrap">
+      <h2>Retiring Abroad: The FIRE Math</h2>
+      <p class="stx-section-sub">Required portfolio at a 4% annual withdrawal rate</p>
+      <div class="stx-grid">
+        <div class="stx-card">
+          <div class="stx-num">${(fire(cheapest.v)/1000).toFixed(0)}k vs ${(usFire/1000000).toFixed(2)}M</div>
+          <p>The portfolio needed to retire in the cheapest tracked country versus a typical $3,500-per-month lifestyle in the US. The difference is 80%.</p>
+          <span class="stx-src">Source: LeavingAmerica.co analysis, {updated}</span>
+        </div>
+        <div class="stx-card">
+          <div class="stx-num">{fireUnder500k} of {budgetCount}</div>
+          <p>Countries require a portfolio below $500,000 to retire on the 4% rule. In the US, half a million dollars covers less than half the typical requirement.</p>
+          <span class="stx-src">Source: LeavingAmerica.co analysis, {updated}</span>
+        </div>
+        <div class="stx-card">
+          <div class="stx-num">${(fire(pb('thailand'))/1000).toFixed(0)}k</div>
+          <p>Is the FIRE number for Thailand. Mexico requires about ${(fire(pb('mexico'))/1000).toFixed(0)}k and Portugal about ${(fire(pb('portugal'))/1000).toFixed(0)}k.</p>
+          <span class="stx-src">Source: LeavingAmerica.co analysis, {updated}</span>
+        </div>
+        <div class="stx-card">
+          <div class="stx-num">{nomadVisaCount} of {totalCountries}</div>
+          <p>Tracked countries now offer a digital nomad visa, giving remote workers a legal medium-term path without employer sponsorship.</p>
+          <span class="stx-src">Source: LeavingAmerica.co analysis, {updated}</span>
+        </div>
+      </div>
+      <div class="stx-cta">
+        See the full country-by-country breakdown in our <a href="/fire/">Retire Abroad Calculator</a>, or find your personal fit with the <a href="/country-match/quiz/">Country Match Quiz</a>.
+      </div>
+    </div>
+  </section>
+
+  <section class="stx-section">
+    <div class="stx-wrap">
+      <h2>Taxes: What Americans Abroad Still Owe</h2>
+      <p class="stx-section-sub">The rules that follow US citizens across borders</p>
+      <div class="stx-grid">
+        <div class="stx-card">
+          <div class="stx-num">1 of 2</div>
+          <p>The US is one of only two countries that tax citizens on worldwide income regardless of where they live. The other is Eritrea.</p>
+          <span class="stx-src">Source: IRS; widely documented</span>
+        </div>
+        <div class="stx-card">
+          <div class="stx-num">$130,000</div>
+          <p>Of foreign-earned income can be excluded from US tax via the Foreign Earned Income Exclusion (2025 tax year figure).</p>
+          <span class="stx-src">Source: IRS</span>
+        </div>
+        <div class="stx-card">
+          <div class="stx-num">$10,000</div>
+          <p>Is the combined foreign-account threshold that triggers mandatory FBAR reporting for Americans abroad.</p>
+          <span class="stx-src">Source: FinCEN</span>
+        </div>
+        <div class="stx-card">
+          <div class="stx-num">{taxCounts['territorial'] + taxCounts['zero']} of {totalCountries}</div>
+          <p>Countries we track use territorial taxation ({taxCounts['territorial']}) or levy no personal income tax at all ({taxCounts['zero']}), which can dramatically lower an expat's total tax burden.</p>
+          <span class="stx-src">Source: LeavingAmerica.co analysis, {updated}</span>
+        </div>
+      </div>
+      <div class="stx-cta">
+        The full picture, including FEIE mechanics and state taxes, is in our <a href="/taxes/">US Expat Tax Guide</a>.
+      </div>
+    </div>
+  </section>
+
+  <section class="stx-section">
+    <div class="stx-wrap">
+      <h2>Where Americans Go</h2>
+      <p class="stx-section-sub">The destinations absorbing the wave</p>
+      <div class="stx-grid">
+        <div class="stx-card">
+          <div class="stx-num">~1.2 million</div>
+          <p>Americans live in Mexico, by far the largest US community abroad.</p>
+          <span class="stx-src">Source: <a href="https://www.globalcitizensolutions.com/where-are-americans-moving-to/" target="_blank" rel="noopener">Global Citizen Solutions</a></span>
+        </div>
+        <div class="stx-card">
+          <div class="stx-num">250,000+</div>
+          <p>Americans live in Canada, one of the largest and longest-established communities.</p>
+          <span class="stx-src">Source: Global Citizen Solutions</span>
+        </div>
+        <div class="stx-card">
+          <div class="stx-num">~3×</div>
+          <p>American relocations to Portugal have nearly tripled since 2024, the fastest growth of any destination.</p>
+          <span class="stx-src">Source: <a href="https://www.forbes.com/sites/meggenharris/2026/03/12/where-americans-are-moving-right-now/" target="_blank" rel="noopener">Forbes, March 2026</a></span>
+        </div>
+        <div class="stx-card">
+          <div class="stx-num">{totalCountries}</div>
+          <p>Countries are tracked by LeavingAmerica.co across cost of living, safety, healthcare, taxes, and visa access, with data refreshed monthly.</p>
+          <span class="stx-src">Source: LeavingAmerica.co, <a href="/methodology/">methodology</a></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stx-section">
+    <div class="stx-wrap">
+      <h2>Frequently Asked Questions</h2>
+      <div class="stx-faq">
+        <details>
+          <summary>How many Americans live abroad?</summary>
+          <p>Estimates range from 5 to 9 million US citizens living outside the United States. No agency keeps an exact count. A 2026 US Census Bureau analysis estimated that around 180,000 Americans moved abroad in the past year alone.</p>
+        </details>
+        <details>
+          <summary>What is the cheapest country for Americans to live in?</summary>
+          <p>Among the {budgetCount} countries we track, Egypt has the lowest baseline cost at about $700 per month for a single person. India, Vietnam, and Sri Lanka also come in under $1,000 per month at a normal lifestyle.</p>
+        </details>
+        <details>
+          <summary>How much money do you need to retire abroad?</summary>
+          <p>Using the 4% withdrawal rule, the cheapest tracked countries require a portfolio of about $210,000, versus roughly $1.05 million for a typical $3,500-per-month lifestyle in the US. In {fireUnder500k} of {budgetCount} tracked countries the requirement is below $500,000.</p>
+        </details>
+        <details>
+          <summary>Do Americans abroad still pay US taxes?</summary>
+          <p>Yes. The US taxes citizens on worldwide income wherever they live. The Foreign Earned Income Exclusion can shield up to $130,000 of foreign-earned income (2025 tax year), and foreign accounts over $10,000 combined must be reported via FBAR. See our <a href="/taxes/">Expat Tax Guide</a> for details.</p>
+        </details>
+        <details>
+          <summary>Where do most Americans move when they leave the US?</summary>
+          <p>Mexico hosts the largest American community at roughly 1.2 million people, followed by Canada with over 250,000. Portugal has shown the fastest recent growth, with relocations nearly tripling since 2024.</p>
+        </details>
+      </div>
+
+      <div class="stx-cite">
+        <strong>Citing these statistics:</strong> all figures marked "LeavingAmerica.co analysis" are free to use in articles, newsletters, and research with attribution and a link to this page. Journalists: we can pull custom numbers for any country or savings level, contact us at contact@leavingamerica.co.
+      </div>
+    </div>
+  </section>
+
+</div>
+
+</BaseLayout>

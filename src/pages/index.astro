@@ -949,6 +949,29 @@ const qs = qualityScores.countries as Record<string, any>;
     </div>
   </section>
 
+  <!-- STATS / DATA BAND -->
+  <section class="sd-band">
+    <div class="container">
+      <div class="sd-card">
+        <div class="sd-left">
+          <p class="sd-eyebrow">Free Data &amp; Research</p>
+          <h2>Americans Moving Abroad, by the Numbers</h2>
+          <p>Cost of living across 74 countries, retirement math, no-tax destinations, and the data behind the biggest US emigration wave in decades. Sourced and free to cite.</p>
+          <a href="/statistics/americans-moving-abroad/" class="sd-cta">
+            Explore the statistics
+            <svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2.5 7h9M8 3.5L11.5 7 8 10.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+        <div class="sd-stats">
+          <div class="sd-tile"><div class="sd-tile-num">180K+</div><div class="sd-tile-label">left the US last year</div></div>
+          <div class="sd-tile"><div class="sd-tile-num grad">42%</div><div class="sd-tile-label">have considered it</div></div>
+          <div class="sd-tile"><div class="sd-tile-num grad">$700</div><div class="sd-tile-label">cheapest monthly cost</div></div>
+          <div class="sd-tile"><div class="sd-tile-num">74</div><div class="sd-tile-label">countries compared</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- TRUST DATA STRIP -->
   <div class="trust-data-strip">
     <div class="container">
@@ -4565,6 +4588,45 @@ const qs = qualityScores.countries as Record<string, any>;
     .th-card { padding: 32px 24px; }
     .th-header { margin-bottom: 44px; }
     .th-title { letter-spacing: -0.025em; }
+  }
+
+  /* ─── STATS / DATA BAND ─── */
+  .sd-band { background: #F8FAFC; padding: 64px 0; }
+  .sd-card {
+    position: relative; overflow: hidden;
+    display: grid; grid-template-columns: 1.15fr 1fr; align-items: center; gap: 40px;
+    background: linear-gradient(135deg, #0a1120 0%, #10203f 55%, #0b1830 100%);
+    border-radius: 24px; padding: 44px 48px; color: #fff;
+  }
+  .sd-card::before {
+    content: ''; position: absolute; width: 380px; height: 380px; border-radius: 50%;
+    background: #2563eb; opacity: 0.28; filter: blur(90px); top: -140px; right: -60px; pointer-events: none;
+  }
+  .sd-left { position: relative; z-index: 1; }
+  .sd-eyebrow { font-size: 11px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: #7dd3fc; margin: 0 0 12px; }
+  .sd-card h2 { font-size: clamp(22px, 3vw, 32px); font-weight: 800; letter-spacing: -0.025em; line-height: 1.14; margin: 0 0 14px; color: #fff; }
+  .sd-card p { font-size: 15px; color: rgba(255,255,255,0.68); line-height: 1.6; margin: 0 0 24px; max-width: 440px; }
+  .sd-cta {
+    display: inline-flex; align-items: center; gap: 8px; padding: 13px 24px;
+    background: #fff; color: #0f172a; font-size: 14px; font-weight: 700; border-radius: 10px;
+    text-decoration: none; transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .sd-cta:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,0,0,0.28); }
+  .sd-cta svg { transition: transform 0.15s ease; }
+  .sd-cta:hover svg { transform: translateX(3px); }
+  .sd-stats { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .sd-tile { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 14px; padding: 20px 18px; text-align: center; }
+  .sd-tile-num { font-size: clamp(22px, 3vw, 30px); font-weight: 800; letter-spacing: -0.02em; line-height: 1; color: #fff; }
+  .sd-tile-num.grad { background: linear-gradient(120deg, #60a5fa, #22d3ee); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .sd-tile-label { font-size: 11.5px; color: rgba(255,255,255,0.55); margin-top: 8px; line-height: 1.3; }
+  @media (max-width: 860px) {
+    .sd-card { grid-template-columns: 1fr; gap: 30px; padding: 38px 30px; }
+    .sd-card p { max-width: none; }
+  }
+  @media (max-width: 460px) {
+    .sd-band { padding: 44px 0; }
+    .sd-stats { grid-template-columns: 1fr 1fr; }
+    .sd-card { padding: 32px 22px; }
   }
 
   /* ─── TRUST DATA STRIP ─── */

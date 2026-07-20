@@ -2,457 +2,628 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import qualityScoresData from '../../data/quality-scores.json';
 
+const NAMES: Record<string,string> = {
+  'portugal':'Portugal','spain':'Spain','poland':'Poland','mexico':'Mexico',
+  'thailand':'Thailand','germany':'Germany','japan':'Japan','croatia':'Croatia',
+  'czech-republic':'Czech Republic','hungary':'Hungary','romania':'Romania',
+  'bulgaria':'Bulgaria','vietnam':'Vietnam','south-korea':'South Korea',
+  'australia':'Australia','new-zealand':'New Zealand','canada':'Canada',
+  'ireland':'Ireland','netherlands':'Netherlands','france':'France',
+  'argentina':'Argentina','ecuador':'Ecuador','morocco':'Morocco',
+  'switzerland':'Switzerland','norway':'Norway','denmark':'Denmark',
+  'sweden':'Sweden','belgium':'Belgium','austria':'Austria','finland':'Finland',
+  'united-kingdom':'United Kingdom','singapore':'Singapore',
+  'united-arab-emirates':'UAE','qatar':'Qatar','saudi-arabia':'Saudi Arabia',
+  'iceland':'Iceland','india':'India','philippines':'Philippines','china':'China',
+  'georgia':'Georgia','serbia':'Serbia','kenya':'Kenya','peru':'Peru',
+  'brazil':'Brazil','chile':'Chile','albania':'Albania','sri-lanka':'Sri Lanka',
+  'egypt':'Egypt','indonesia':'Indonesia','colombia':'Colombia',
+  'costa-rica':'Costa Rica','panama':'Panama','malaysia':'Malaysia',
+  'italy':'Italy','greece':'Greece','bahamas':'Bahamas','belize':'Belize',
+  'bolivia':'Bolivia','cambodia':'Cambodia','cyprus':'Cyprus',
+  'dominican-republic':'Dominican Republic','el-salvador':'El Salvador',
+  'estonia':'Estonia','ghana':'Ghana','honduras':'Honduras','jamaica':'Jamaica',
+  'kazakhstan':'Kazakhstan','latvia':'Latvia','lithuania':'Lithuania',
+  'malta':'Malta','montenegro':'Montenegro','nepal':'Nepal',
+  'nicaragua':'Nicaragua','north-macedonia':'North Macedonia','paraguay':'Paraguay',
+  'rwanda':'Rwanda','slovakia':'Slovakia','slovenia':'Slovenia',
+  'south-africa':'South Africa','taiwan':'Taiwan','turkey':'Turkey','uruguay':'Uruguay',
+};
+const ISO2: Record<string,string> = {
+  'portugal':'pt','spain':'es','poland':'pl','mexico':'mx','thailand':'th',
+  'germany':'de','japan':'jp','croatia':'hr','czech-republic':'cz','hungary':'hu',
+  'romania':'ro','bulgaria':'bg','vietnam':'vn','south-korea':'kr','australia':'au',
+  'new-zealand':'nz','canada':'ca','ireland':'ie','netherlands':'nl','france':'fr',
+  'argentina':'ar','ecuador':'ec','morocco':'ma','switzerland':'ch','norway':'no',
+  'denmark':'dk','sweden':'se','belgium':'be','austria':'at','finland':'fi',
+  'united-kingdom':'gb','singapore':'sg','united-arab-emirates':'ae','qatar':'qa',
+  'saudi-arabia':'sa','iceland':'is','india':'in','philippines':'ph','china':'cn',
+  'georgia':'ge','serbia':'rs','kenya':'ke','peru':'pe','brazil':'br','chile':'cl',
+  'albania':'al','sri-lanka':'lk','egypt':'eg','indonesia':'id','colombia':'co',
+  'costa-rica':'cr','panama':'pa','malaysia':'my','italy':'it','greece':'gr',
+  'bahamas':'bs','belize':'bz','bolivia':'bo','cambodia':'kh','cyprus':'cy',
+  'dominican-republic':'do','el-salvador':'sv','estonia':'ee','ghana':'gh',
+  'honduras':'hn','jamaica':'jm','kazakhstan':'kz','latvia':'lv','lithuania':'lt',
+  'malta':'mt','montenegro':'me','nepal':'np','nicaragua':'ni',
+  'north-macedonia':'mk','paraguay':'py','rwanda':'rw','slovakia':'sk',
+  'slovenia':'si','south-africa':'za','taiwan':'tw','turkey':'tr','uruguay':'uy',
+};
+
 const qs = qualityScoresData.countries as Record<string, any>;
 const all = Object.entries(qs);
 const totalCountries = all.length;
 
-const withBudget = all.filter(([, d]) => d.budget_single && d.budget_couple);
-const budgetCount = withBudget.length;
-const singles = withBudget
-  .map(([slug, d]) => ({ slug, v: d.budget_single as number }))
-  .sort((a, b) => a.v - b.v);
-
-const cheapest = singles[0];
-const priciest = singles[singles.length - 1];
-const median = singles[Math.floor(singles.length / 2)].v;
-const under1500 = singles.filter(x => x.v < 1500).length;
-const under1000 = singles.filter(x => x.v < 1000).length;
-const coupleRatioPct = Math.round(
-  (withBudget.reduce((sum, [, d]) => sum + d.budget_couple / d.budget_single, 0) / budgetCount - 1) * 100
-);
-
-const mo = (savings: number, budget: number) => Math.floor(savings / budget);
-const yr = (savings: number, budget: number) => (savings / budget / 12).toFixed(1);
-
 const fire = (budget: number) => budget * 12 / 0.04;
-const fireUnder500k = singles.filter(x => fire(x.v) < 500000).length;
+
+type Row = { slug: string; name: string; iso2: string; single: number; couple: number; fireNum: number; tax: string; nomad: boolean };
+const ranked: Row[] = all
+  .filter(([slug, d]) => d.budget_single && d.budget_couple && NAMES[slug] && ISO2[slug])
+  .map(([slug, d]) => ({
+    slug, name: NAMES[slug], iso2: ISO2[slug],
+    single: d.budget_single as number, couple: d.budget_couple as number,
+    fireNum: Math.round(fire(d.budget_single as number)), tax: d.tax_system || 'unknown',
+    nomad: !!d.nomad_visa,
+  }))
+  .sort((a, b) => a.single - b.single);
+
+const budgetCount = ranked.length;
+const cheapest = ranked[0];
+const priciest = ranked[ranked.length - 1];
+const median = ranked[Math.floor(ranked.length / 2)].single;
+const under1500 = ranked.filter(r => r.single < 1500).length;
+const under1000 = ranked.filter(r => r.single < 1000).length;
+const coupleRatioPct = Math.round(
+  (ranked.reduce((s, r) => s + r.couple / r.single, 0) / budgetCount - 1) * 100
+);
+const fireUnder500k = ranked.filter(r => r.fireNum < 500000).length;
 const usFire = 3500 * 12 / 0.04;
 
 const taxCounts: Record<string, number> = {};
-all.forEach(([, d]) => { if (d.tax_system) taxCounts[d.tax_system] = (taxCounts[d.tax_system] || 0) + 1; });
+ranked.forEach(r => { taxCounts[r.tax] = (taxCounts[r.tax] || 0) + 1; });
+const worldwideN = taxCounts['worldwide'] || 0;
+const territorialN = taxCounts['territorial'] || 0;
+const zeroN = taxCounts['zero'] || 0;
+const taxTotal = worldwideN + territorialN + zeroN;
+const zeroTaxCountries = ranked.filter(r => r.tax === 'zero').map(r => r);
 const nomadVisaCount = all.filter(([, d]) => d.nomad_visa).length;
 
-const pb = (slug: string) => qs[slug]?.budget_single as number;
+// leaderboard: cheapest 12
+const leaderboard = ranked.slice(0, 12);
+const lbMax = leaderboard[leaderboard.length - 1].single;
 
+// runway on $100k for a spread of countries
+const runwaySlugs = ['egypt','vietnam','thailand','mexico','portugal','spain','switzerland'];
+const runwayBars = runwaySlugs
+  .map(s => ranked.find(r => r.slug === s))
+  .filter((r): r is Row => !!r)
+  .map(r => ({ ...r, years: +(100000 / r.single / 12).toFixed(1) }));
+const runwayMax = Math.max(...runwayBars.map(r => r.years));
+
+// FIRE comparison bars (cheapest first, US last/tallest)
+const fireSlugs = ['egypt','thailand','mexico','portugal'];
+const fireBars = [
+  ...fireSlugs.map(s => ranked.find(r => r.slug === s)).filter((r): r is Row => !!r)
+    .map(r => ({ name: r.name, iso2: r.iso2, value: r.fireNum, isUs: false })),
+  { name: 'United States', iso2: 'us', value: usFire, isUs: true },
+];
+const fireMax = usFire;
+
+const pb = (slug: string) => qs[slug]?.budget_single as number;
 const updated = 'July 2026';
 
 const faqSchema = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   'mainEntity': [
-    {
-      '@type': 'Question',
-      'name': 'How many Americans live abroad?',
-      'acceptedAnswer': {
-        '@type': 'Answer',
-        'text': 'Estimates range from 5 to 9 million US citizens living outside the United States. A 2026 US Census Bureau analysis estimated that around 180,000 Americans moved abroad in the past year alone.'
-      }
-    },
-    {
-      '@type': 'Question',
-      'name': 'What is the cheapest country for Americans to live in?',
-      'acceptedAnswer': {
-        '@type': 'Answer',
-        'text': `Among the ${budgetCount} countries tracked by LeavingAmerica.co, Egypt has the lowest baseline cost at about $700 per month for a single person, excluding rent extremes. India, Vietnam, and Sri Lanka also come in under $1,000 per month.`
-      }
-    },
-    {
-      '@type': 'Question',
-      'name': 'How much money do you need to retire abroad?',
-      'acceptedAnswer': {
-        '@type': 'Answer',
-        'text': `Using the 4% withdrawal rule, retiring in the cheapest tracked countries requires a portfolio of about $210,000, compared with roughly $1.05 million for a typical $3,500-per-month lifestyle in the United States. In ${fireUnder500k} of ${budgetCount} tracked countries, the required portfolio is below $500,000.`
-      }
-    },
-    {
-      '@type': 'Question',
-      'name': 'Do Americans abroad still pay US taxes?',
-      'acceptedAnswer': {
-        '@type': 'Answer',
-        'text': 'Yes. The United States taxes citizens on worldwide income regardless of where they live, one of only two countries to do so. The Foreign Earned Income Exclusion can shield up to $130,000 of foreign-earned income (2025 tax year), and foreign accounts over $10,000 combined must be reported via FBAR.'
-      }
-    },
-    {
-      '@type': 'Question',
-      'name': 'Where do most Americans move when they leave the US?',
-      'acceptedAnswer': {
-        '@type': 'Answer',
-        'text': 'Mexico hosts the largest American community abroad at roughly 1.2 million people, followed by Canada with more than 250,000. Portugal has seen the fastest recent growth, with American relocations nearly tripling since 2024.'
-      }
-    }
-  ]
+    { '@type': 'Question', 'name': 'How many Americans live abroad?', 'acceptedAnswer': { '@type': 'Answer', 'text': 'Estimates range from 5 to 9 million US citizens living outside the United States. A 2026 US Census Bureau analysis estimated that around 180,000 Americans moved abroad in the past year alone.' } },
+    { '@type': 'Question', 'name': 'What is the cheapest country for Americans to live in?', 'acceptedAnswer': { '@type': 'Answer', 'text': `Among the ${budgetCount} countries tracked by LeavingAmerica.co, Egypt has the lowest baseline cost at about $700 per month for a single person. India, Vietnam, and Sri Lanka also come in under $1,000 per month.` } },
+    { '@type': 'Question', 'name': 'How much money do you need to retire abroad?', 'acceptedAnswer': { '@type': 'Answer', 'text': `Using the 4% withdrawal rule, retiring in the cheapest tracked countries requires a portfolio of about $210,000, compared with roughly $1.05 million for a typical $3,500-per-month lifestyle in the United States. In ${fireUnder500k} of ${budgetCount} tracked countries, the required portfolio is below $500,000.` } },
+    { '@type': 'Question', 'name': 'Which countries have no income tax for Americans?', 'acceptedAnswer': { '@type': 'Answer', 'text': `Of the countries tracked, ${zeroN} levy no personal income tax at all: ${zeroTaxCountries.map(c => c.name).join(', ')}. US citizens still owe US federal tax on worldwide income regardless of where they live.` } },
+    { '@type': 'Question', 'name': 'Do Americans abroad still pay US taxes?', 'acceptedAnswer': { '@type': 'Answer', 'text': 'Yes. The United States taxes citizens on worldwide income regardless of where they live. The Foreign Earned Income Exclusion can shield up to $130,000 of foreign-earned income (2025 tax year), and foreign accounts over $10,000 combined must be reported via FBAR.' } },
+    { '@type': 'Question', 'name': 'Where do most Americans move when they leave the US?', 'acceptedAnswer': { '@type': 'Answer', 'text': 'Mexico hosts the largest American community abroad at roughly 1.2 million people, followed by Canada with more than 250,000. Portugal has seen the fastest recent growth, with American relocations nearly tripling since 2024.' } },
+    { '@type': 'Question', 'name': 'How many countries offer a digital nomad visa?', 'acceptedAnswer': { '@type': 'Answer', 'text': `${nomadVisaCount} of the ${totalCountries} countries tracked by LeavingAmerica.co offer an official digital nomad visa, giving remote workers a legal medium-term path to live there without employer sponsorship.` } },
+  ],
 });
 ---
 
 <BaseLayout
   title="Americans Moving Abroad: Statistics & Data (2026)"
-  description="How many Americans are moving abroad, what it costs to live in 74 countries, retirement math, and tax facts. Sourced, citable statistics updated July 2026."
+  description="How many Americans are moving abroad, what it costs to live in 74 countries, retirement math, no-tax countries, and digital nomad visas. Sourced, citable data, updated 2026."
   ogTitle="Americans Moving Abroad: 30+ Statistics for 2026"
 >
   <script type="application/ld+json" set:html={faqSchema} />
 
 <style is:global>
+:root { --stx-ease: cubic-bezier(0.22, 1, 0.36, 1); }
+
+/* ═══ HERO ═══ */
 .stx-hero {
-  background: linear-gradient(135deg, #0b1526 0%, #172b50 100%);
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #0a1120 0%, #10203f 48%, #0b1830 100%);
   color: #fff;
-  padding: 72px 0 56px;
+  padding: 92px 0 78px;
   text-align: center;
 }
+.stx-orb { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; }
+.stx-orb-1 { width: 640px; height: 640px; background: #2563eb; opacity: 0.42; top: -220px; left: -120px; }
+.stx-orb-2 { width: 520px; height: 520px; background: #0891b2; opacity: 0.34; bottom: -180px; right: -120px; }
+.stx-orb-3 { width: 340px; height: 340px; background: #6366f1; opacity: 0.28; top: -40px; right: 16%; }
+.stx-dots {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 30px 30px; pointer-events: none;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 40%, transparent 100%);
+}
+.stx-hero-inner { max-width: 900px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+.stx-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 16px; background: rgba(59,130,246,0.16);
+  border: 1px solid rgba(96,165,250,0.35); border-radius: 30px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  color: #93c5fd; margin-bottom: 24px;
+}
+.stx-pill-dot { width: 7px; height: 7px; border-radius: 50%; background: #34d399; box-shadow: 0 0 0 0 rgba(52,211,153,0.7); animation: stx-pulse 2s infinite; }
+@keyframes stx-pulse { 0% { box-shadow: 0 0 0 0 rgba(52,211,153,0.6); } 70% { box-shadow: 0 0 0 8px rgba(52,211,153,0); } 100% { box-shadow: 0 0 0 0 rgba(52,211,153,0); } }
 .stx-hero h1 {
-  font-size: clamp(26px, 4.5vw, 42px);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  margin: 0 0 14px;
-  line-height: 1.15;
+  font-size: clamp(30px, 5.4vw, 54px); font-weight: 800; letter-spacing: -0.03em;
+  line-height: 1.08; margin: 0 0 18px;
+  background: linear-gradient(180deg, #ffffff 0%, #bcd2f5 100%);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
 }
-.stx-hero-sub {
-  font-size: 16px;
-  color: rgba(255,255,255,0.65);
-  max-width: 560px;
-  margin: 0 auto;
-  line-height: 1.6;
+.stx-hero-sub { font-size: clamp(15px, 2.1vw, 18px); color: rgba(255,255,255,0.66); max-width: 620px; margin: 0 auto; line-height: 1.6; }
+.stx-hero-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 46px; }
+.stx-hs {
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px; padding: 22px 14px 18px; backdrop-filter: blur(8px);
 }
-.stx-meta {
-  font-size: 13px;
-  color: rgba(255,255,255,0.45);
-  margin-top: 18px;
-}
-.stx-section {
-  padding: 48px 0 8px;
-}
-.stx-section:last-of-type { padding-bottom: 64px; }
-.stx-wrap { max-width: 860px; margin: 0 auto; padding: 0 24px; }
-.stx-section h2 {
-  font-size: clamp(20px, 3vw, 27px);
-  font-weight: 800;
-  color: #0f172a;
-  letter-spacing: -0.015em;
-  margin: 0 0 6px;
-}
-.stx-section-sub { font-size: 14px; color: #64748b; margin: 0 0 24px; }
-.stx-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-  margin-bottom: 8px;
-}
-.stx-card {
-  background: #fff;
-  border: 1px solid #e2e8f0;
-  border-radius: 14px;
-  padding: 22px 24px 20px;
-}
-.stx-num {
-  font-size: 28px;
-  font-weight: 800;
-  color: #1d4ed8;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
-  margin-bottom: 8px;
-}
-.stx-card p { font-size: 14px; color: #334155; line-height: 1.65; margin: 0; }
-.stx-src { display: block; font-size: 12px; color: #94a3b8; margin-top: 10px; }
-.stx-src a { color: #94a3b8; }
+.stx-hs-num { font-size: clamp(24px, 3.4vw, 36px); font-weight: 800; letter-spacing: -0.02em; line-height: 1; color: #fff; }
+.stx-hs-num.grad { background: linear-gradient(120deg, #60a5fa, #22d3ee); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.stx-hs-label { font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 8px; line-height: 1.35; }
+.stx-meta { font-size: 13px; color: rgba(255,255,255,0.4); margin-top: 36px; }
+.stx-meta a { color: rgba(255,255,255,0.55); }
+
+/* ═══ BODY ═══ */
 .stx-body { background: #f8fafc; }
-.stx-cta {
-  background: #fff;
-  border: 1px solid #e2e8f0;
-  border-radius: 14px;
-  padding: 20px 24px;
-  margin: 28px 0 8px;
-  font-size: 14px;
-  color: #475569;
-  line-height: 1.65;
+.stx-section { padding: 60px 0 12px; }
+.stx-section:last-of-type { padding-bottom: 72px; }
+.stx-wrap { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+.stx-eyebrow { font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #2563eb; margin: 0 0 8px; }
+.stx-section h2 { font-size: clamp(21px, 3.2vw, 30px); font-weight: 800; color: #0f172a; letter-spacing: -0.02em; margin: 0 0 6px; line-height: 1.2; }
+.stx-section-sub { font-size: 14px; color: #64748b; margin: 0 0 28px; max-width: 620px; }
+
+/* reveal */
+.stx-reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s var(--stx-ease), transform 0.7s var(--stx-ease); }
+.stx-reveal.in { opacity: 1; transform: none; }
+
+/* stat cards grid */
+.stx-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.stx-card {
+  position: relative; background: #fff; border: 1px solid #e6ebf2; border-radius: 16px;
+  padding: 24px 24px 20px; overflow: hidden;
+  transition: transform 0.25s var(--stx-ease), box-shadow 0.25s var(--stx-ease), border-color 0.25s;
 }
+.stx-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #2563eb, #22d3ee); transform: scaleX(0); transform-origin: left; transition: transform 0.5s var(--stx-ease); }
+.stx-card.in::before { transform: scaleX(1); }
+.stx-card:hover { transform: translateY(-3px); box-shadow: 0 14px 34px rgba(15,23,42,0.09); border-color: #cbd8e8; }
+.stx-num { font-size: 30px; font-weight: 800; color: #0f172a; letter-spacing: -0.02em; line-height: 1.05; margin-bottom: 8px; }
+.stx-num.blue { color: #1d4ed8; }
+.stx-num.green { color: #059669; }
+.stx-num.amber { color: #b45309; }
+.stx-card p { font-size: 14px; color: #334155; line-height: 1.62; margin: 0; }
+.stx-src { display: block; font-size: 12px; color: #94a3b8; margin-top: 12px; }
+.stx-src a { color: #94a3b8; }
+
+/* CTA / cite bands */
+.stx-cta { background: linear-gradient(135deg, #eff6ff, #eef2ff); border: 1px solid #dbe4fb; border-radius: 16px; padding: 20px 24px; margin-top: 30px; font-size: 14px; color: #334155; line-height: 1.6; }
 .stx-cta a { color: #2563eb; font-weight: 700; text-decoration: none; }
 .stx-cta a:hover { text-decoration: underline; }
-.stx-cite {
-  background: #eff6ff;
-  border: 1px solid #bfdbfe;
-  border-radius: 14px;
-  padding: 20px 24px;
-  font-size: 14px;
-  color: #1e3a5f;
-  line-height: 1.65;
-  margin-top: 36px;
+.stx-cite { background: #0f1e38; color: #cbd9f0; border-radius: 16px; padding: 24px 26px; font-size: 14px; line-height: 1.65; margin-top: 40px; }
+.stx-cite strong { color: #fff; }
+.stx-cite a { color: #7dd3fc; }
+
+/* ═══ BAR CHART (leaderboard / runway) ═══ */
+.stx-chart { background: #fff; border: 1px solid #e6ebf2; border-radius: 18px; padding: 26px 26px 22px; }
+.stx-bar-row { display: grid; grid-template-columns: 148px 1fr auto; align-items: center; gap: 14px; padding: 9px 0; }
+.stx-bar-label { display: flex; align-items: center; gap: 9px; font-size: 13.5px; font-weight: 600; color: #1e293b; min-width: 0; }
+.stx-bar-label .fi { width: 22px; height: 16px; border-radius: 3px; flex-shrink: 0; box-shadow: 0 0 0 1px rgba(0,0,0,0.12); }
+.stx-bar-label span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.stx-bar-track { height: 26px; background: #f1f5f9; border-radius: 8px; overflow: hidden; }
+.stx-bar-fill { height: 100%; width: 0; border-radius: 8px; transition: width 1.1s var(--stx-ease); }
+.stx-bar-fill.green { background: linear-gradient(90deg, #10b981, #34d399); }
+.stx-bar-fill.blue { background: linear-gradient(90deg, #2563eb, #22d3ee); }
+.stx-bar-fill.us { background: linear-gradient(90deg, #e11d48, #fb7185); }
+.stx-bar-val { font-size: 13.5px; font-weight: 800; color: #0f172a; white-space: nowrap; }
+.stx-chart-note { font-size: 12.5px; color: #94a3b8; margin: 16px 0 0; }
+
+/* ═══ TAX STACKED BAR ═══ */
+.stx-tax-bar { display: flex; height: 42px; border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; background: #f1f5f9; }
+.stx-tax-seg { height: 100%; width: 0; transition: width 1.1s var(--stx-ease); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 12px; font-weight: 800; }
+.stx-tax-seg.world { background: linear-gradient(90deg, #475569, #64748b); }
+.stx-tax-seg.terr { background: linear-gradient(90deg, #0891b2, #22d3ee); }
+.stx-tax-seg.zero { background: linear-gradient(90deg, #059669, #34d399); }
+.stx-tax-legend { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 16px; }
+.stx-tl { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #334155; }
+.stx-tl-dot { width: 12px; height: 12px; border-radius: 4px; }
+.stx-tl-dot.world { background: #64748b; } .stx-tl-dot.terr { background: #22d3ee; } .stx-tl-dot.zero { background: #34d399; }
+.stx-zero-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.stx-zchip { display: inline-flex; align-items: center; gap: 7px; padding: 7px 13px; background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 22px; font-size: 13px; color: #065f46; font-weight: 600; text-decoration: none; }
+.stx-zchip:hover { background: #d1fae5; }
+.stx-zchip .fi { width: 18px; height: 13px; border-radius: 2px; box-shadow: 0 0 0 1px rgba(0,0,0,0.1); }
+
+/* ═══ NOMAD CHIPS ═══ */
+.stx-nomad-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.stx-nchip { display: inline-flex; align-items: center; gap: 7px; padding: 7px 13px; background: #fff; border: 1px solid #e2e8f0; border-radius: 22px; font-size: 13px; color: #334155; font-weight: 600; text-decoration: none; }
+.stx-nchip:hover { border-color: #93c5fd; background: #eff6ff; }
+.stx-nchip .fi { width: 18px; height: 13px; border-radius: 2px; box-shadow: 0 0 0 1px rgba(0,0,0,0.1); }
+
+/* ═══ FULL TABLE ═══ */
+.stx-table-tools { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; flex-wrap: wrap; }
+.stx-search { position: relative; flex: 1; min-width: 220px; }
+.stx-search input {
+  width: 100%; padding: 11px 14px 11px 38px; font-size: 14px; font-family: inherit;
+  border: 1.5px solid #cbd5e1; border-radius: 10px; outline: none; box-sizing: border-box; color: #0f172a;
+  transition: border-color 0.15s, box-shadow 0.15s; background: #fff;
 }
-.stx-faq { margin-top: 12px; }
-.stx-faq details {
-  border-top: 1px solid #e2e8f0;
-  padding: 4px 0;
-}
-.stx-faq details:last-child { border-bottom: 1px solid #e2e8f0; }
-.stx-faq summary {
-  font-size: 15px;
-  font-weight: 700;
-  color: #0f172a;
-  padding: 16px 0;
-  cursor: pointer;
-}
-.stx-faq summary:hover { color: #2563eb; }
-.stx-faq p { font-size: 14px; color: #475569; line-height: 1.7; margin: 0 0 16px; }
-.stx-sources { font-size: 13px; color: #64748b; line-height: 1.9; }
-.stx-sources a { color: #2563eb; }
-@media (max-width: 640px) {
+.stx-search input:focus { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,0.12); }
+.stx-search svg { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); color: #94a3b8; }
+.stx-search-count { font-size: 13px; color: #94a3b8; white-space: nowrap; }
+.stx-table-scroll { overflow-x: auto; border: 1px solid #e6ebf2; border-radius: 14px; background: #fff; }
+table.stx-table { width: 100%; border-collapse: collapse; font-size: 13.5px; min-width: 560px; }
+.stx-table thead th { position: sticky; top: 0; background: #0f1e38; color: #cbd9f0; font-weight: 700; text-align: left; padding: 13px 16px; font-size: 12px; letter-spacing: 0.02em; white-space: nowrap; }
+.stx-table thead th.num { text-align: right; }
+.stx-table tbody td { padding: 11px 16px; border-top: 1px solid #eef2f7; color: #334155; }
+.stx-table tbody td.num { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; color: #0f172a; }
+.stx-table tbody tr:hover { background: #f8fafc; }
+.stx-table tbody tr:nth-child(even) { background: #fcfdff; }
+.stx-table tbody tr:nth-child(even):hover { background: #f8fafc; }
+.stx-tc-name { display: flex; align-items: center; gap: 10px; }
+.stx-tc-name a { color: #1e293b; text-decoration: none; font-weight: 600; }
+.stx-tc-name a:hover { color: #2563eb; }
+.stx-tc-name .fi { width: 22px; height: 16px; border-radius: 3px; flex-shrink: 0; box-shadow: 0 0 0 1px rgba(0,0,0,0.12); }
+.stx-tax-tag { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 20px; white-space: nowrap; }
+.stx-tax-tag.worldwide { background: #f1f5f9; color: #475569; }
+.stx-tax-tag.territorial { background: #ecfeff; color: #0e7490; }
+.stx-tax-tag.zero { background: #ecfdf5; color: #047857; }
+.stx-tax-tag.unknown { background: #f1f5f9; color: #94a3b8; }
+.stx-noresults { display: none; text-align: center; padding: 32px; color: #94a3b8; font-size: 14px; }
+
+/* ═══ FAQ ═══ */
+.stx-faq { margin-top: 14px; }
+.stx-faq-item { border-top: 1px solid #e2e8f0; }
+.stx-faq-item:last-child { border-bottom: 1px solid #e2e8f0; }
+.stx-faq-q { display: flex; align-items: center; justify-content: space-between; gap: 18px; width: 100%; background: none; border: none; padding: 18px 0; font-size: 15px; font-weight: 700; color: #0f172a; cursor: pointer; text-align: left; font-family: inherit; }
+.stx-faq-q:hover { color: #2563eb; }
+.stx-faq-ic { font-size: 22px; font-weight: 400; color: #94a3b8; flex-shrink: 0; transition: transform 0.2s; width: 24px; text-align: center; }
+.stx-faq-q[aria-expanded="true"] .stx-faq-ic { transform: rotate(45deg); }
+.stx-faq-a { padding-bottom: 18px; }
+.stx-faq-a p { font-size: 14px; color: #475569; line-height: 1.72; margin: 0; }
+
+@media (max-width: 720px) {
+  .stx-hero-stats { grid-template-columns: 1fr 1fr; }
   .stx-grid { grid-template-columns: 1fr; }
-  .stx-hero { padding: 52px 0 40px; }
+  .stx-bar-row { grid-template-columns: 118px 1fr auto; gap: 10px; }
+  .stx-bar-label { font-size: 12.5px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stx-reveal { opacity: 1; transform: none; transition: none; }
+  .stx-bar-fill, .stx-tax-seg { transition: none; }
+  .stx-pill-dot { animation: none; }
 }
 </style>
 
+<!-- HERO -->
 <section class="stx-hero">
-  <div class="stx-wrap">
-    <h1>Americans Moving Abroad: The Numbers</h1>
-    <p class="stx-hero-sub">Every statistic on this page is either computed from our dataset of {totalCountries} countries or linked to its original source. Free to cite with attribution.</p>
-    <p class="stx-meta">Data: World Bank ICP, Numbeo, US Census, LeavingAmerica.co analysis · Updated {updated} · <a href="/methodology/" style="color:rgba(255,255,255,0.55)">Methodology</a></p>
+  <div class="stx-orb stx-orb-1"></div>
+  <div class="stx-orb stx-orb-2"></div>
+  <div class="stx-orb stx-orb-3"></div>
+  <div class="stx-dots"></div>
+  <div class="stx-hero-inner">
+    <span class="stx-pill"><span class="stx-pill-dot"></span>Live data · {budgetCount} countries</span>
+    <h1>Americans Moving Abroad:<br/>The Numbers Behind the Wave</h1>
+    <p class="stx-hero-sub">The largest US emigration shift in decades, measured. Every figure below is either computed live from our dataset or linked to its original source, and free to cite.</p>
+    <div class="stx-hero-stats">
+      <div class="stx-hs"><div class="stx-hs-num" data-count="180000" data-suffix="+">0</div><div class="stx-hs-label">Americans moved abroad last year</div></div>
+      <div class="stx-hs"><div class="stx-hs-num grad" data-count="42" data-suffix="%">0</div><div class="stx-hs-label">have considered relocating</div></div>
+      <div class="stx-hs"><div class="stx-hs-num" data-count="700" data-prefix="$">0</div><div class="stx-hs-label">cheapest monthly cost of living</div></div>
+      <div class="stx-hs"><div class="stx-hs-num grad" data-count={budgetCount}>0</div><div class="stx-hs-label">countries with full cost data</div></div>
+    </div>
+    <p class="stx-meta">Sources: US Census, Gallup, Harris Poll, World Bank, Numbeo · LeavingAmerica.co analysis · Updated {updated} · <a href="/methodology/">Methodology</a></p>
   </div>
 </section>
 
 <div class="stx-body">
 
+  <!-- THE EXODUS -->
   <section class="stx-section">
     <div class="stx-wrap">
-      <h2>How Many Americans Are Leaving</h2>
-      <p class="stx-section-sub">The scale of the current emigration wave</p>
+      <p class="stx-eyebrow stx-reveal">The Exodus</p>
+      <h2 class="stx-reveal">How Many Americans Are Leaving</h2>
+      <p class="stx-section-sub stx-reveal">The scale of the current emigration wave.</p>
       <div class="stx-grid">
-        <div class="stx-card">
-          <div class="stx-num">~180,000</div>
-          <p>US citizens moved abroad in the past year, according to a 2026 US Census Bureau analysis.</p>
-          <span class="stx-src">Source: US Census Bureau, 2026</span>
-        </div>
-        <div class="stx-card">
-          <div class="stx-num">5–9 million</div>
-          <p>Americans are estimated to live outside the United States. No agency keeps an exact count, which is why estimates vary this widely.</p>
-          <span class="stx-src">Source: State Department and AARO estimates</span>
-        </div>
-        <div class="stx-card">
-          <div class="stx-num">+1,514%</div>
-          <p>Spike in Google searches related to moving abroad in the days after the November 2024 US election.</p>
-          <span class="stx-src">Source: VisaGuide.World</span>
-        </div>
-        <div class="stx-card">
-          <div class="stx-num">+80%</div>
-          <p>Year-over-year growth in new account registrations reported by expat tax provider MyExpatTaxes during the 2026 tax season.</p>
-          <span class="stx-src">Source: <a href="https://www.globenewswire.com/news-release/2026/06/24/3317095/0/en/New-MyExpatTaxes-Data-Confirms-Trend-of-More-Americans-Moving-Abroad-Amid-Trump-Wave-Relocations.html" target="_blank" rel="noopener">MyExpatTaxes, June 2026</a></span>
-        </div>
+        <div class="stx-card stx-reveal"><div class="stx-num blue" data-count="180000" data-suffix="+">0</div><p>US citizens moved abroad in the past year, per a 2026 US Census Bureau analysis.</p><span class="stx-src">Source: US Census Bureau, 2026</span></div>
+        <div class="stx-card stx-reveal"><div class="stx-num">5–9M</div><p>Americans are estimated to live outside the United States. No agency keeps an exact count, which is why estimates vary this widely.</p><span class="stx-src">Source: State Department & AARO estimates</span></div>
+        <div class="stx-card stx-reveal"><div class="stx-num amber" data-count="1514" data-prefix="+" data-suffix="%">0</div><p>Spike in Google searches related to moving abroad in the days after the November 2024 US election.</p><span class="stx-src">Source: VisaGuide.World</span></div>
+        <div class="stx-card stx-reveal"><div class="stx-num green" data-count="80" data-prefix="+" data-suffix="%">0</div><p>Year-over-year growth in new registrations reported by expat tax provider MyExpatTaxes for the 2026 season.</p><span class="stx-src">Source: <a href="https://www.globenewswire.com/news-release/2026/06/24/3317095/0/en/New-MyExpatTaxes-Data-Confirms-Trend-of-More-Americans-Moving-Abroad-Amid-Trump-Wave-Relocations.html" target="_blank" rel="noopener">MyExpatTaxes, 2026</a></span></div>
       </div>
     </div>
   </section>
 
+  <!-- INTENT -->
   <section class="stx-section">
     <div class="stx-wrap">
-      <h2>How Many Want to Leave</h2>
-      <p class="stx-section-sub">Survey data on emigration intent</p>
+      <p class="stx-eyebrow stx-reveal">Intent</p>
+      <h2 class="stx-reveal">How Many Want to Go</h2>
+      <p class="stx-section-sub stx-reveal">Survey data on emigration intent, by group.</p>
       <div class="stx-grid">
-        <div class="stx-card">
-          <div class="stx-num">20%</div>
-          <p>Of Americans say they would like to leave the US permanently. Among women aged 15 to 44 the figure rises to 40%.</p>
-          <span class="stx-src">Source: Gallup, 2025</span>
-        </div>
-        <div class="stx-card">
-          <div class="stx-num">42%</div>
-          <p>Of Americans have considered or plan to relocate abroad. Among Gen Z it is 63%, and among Millennials 52%.</p>
-          <span class="stx-src">Source: The Harris Poll</span>
-        </div>
-        <div class="stx-card">
-          <div class="stx-num">~70%</div>
-          <p>Of people considering a move cite remote work as an enabling or primary factor.</p>
-          <span class="stx-src">Source: The Harris Poll, 2025</span>
-        </div>
-        <div class="stx-card">
-          <div class="stx-num">2025–2026</div>
-          <p>Researchers describe the current period as the largest American emigration shift in decades.</p>
-          <span class="stx-src">Source: <a href="https://www.clickorlando.com/news/2026/07/09/americans-are-leaving-the-us-in-record-numbers-heres-why/" target="_blank" rel="noopener">ClickOrlando, July 2026</a></span>
-        </div>
+        <div class="stx-card stx-reveal"><div class="stx-num" data-count="20" data-suffix="%">0</div><p>Of Americans say they'd like to leave the US permanently. Among women aged 15–44 it rises to 40%.</p><span class="stx-src">Source: Gallup, 2025</span></div>
+        <div class="stx-card stx-reveal"><div class="stx-num blue" data-count="42" data-suffix="%">0</div><p>Have considered or plan to relocate abroad — 63% among Gen Z, 52% among Millennials.</p><span class="stx-src">Source: The Harris Poll</span></div>
+        <div class="stx-card stx-reveal"><div class="stx-num" data-count="70" data-suffix="%">0</div><p>Of people considering a move cite remote work as an enabling or primary factor.</p><span class="stx-src">Source: The Harris Poll, 2025</span></div>
+        <div class="stx-card stx-reveal"><div class="stx-num green" data-count="63" data-suffix="%">0</div><p>Of Gen Z respondents have considered leaving — the highest of any generation surveyed.</p><span class="stx-src">Source: The Harris Poll</span></div>
       </div>
     </div>
   </section>
 
+  <!-- COST LEADERBOARD -->
   <section class="stx-section">
     <div class="stx-wrap">
-      <h2>What It Costs to Live Abroad</h2>
-      <p class="stx-section-sub">From our dataset of {budgetCount} countries with verified monthly budgets</p>
-      <div class="stx-grid">
-        <div class="stx-card">
-          <div class="stx-num">$700–$4,000</div>
-          <p>The monthly cost range for a single person across {budgetCount} countries, from Egypt at the low end to Switzerland at the top. The median is ${median.toLocaleString()} per month.</p>
-          <span class="stx-src">Source: LeavingAmerica.co analysis, {updated}</span>
-        </div>
-        <div class="stx-card">
-          <div class="stx-num">{under1500} of {budgetCount}</div>
-          <p>Countries cost a single person less than $1,500 per month. {under1000} of them, including Egypt ($700), India ($750), and Vietnam ($900), come in under $1,000.</p>
-          <span class="stx-src">Source: LeavingAmerica.co analysis, {updated}</span>
-        </div>
-        <div class="stx-card">
-          <div class="stx-num">+{coupleRatioPct}%</div>
-          <p>Is how much more a couple spends compared with a single person on average, not double. Shared rent and utilities do most of the work.</p>
-          <span class="stx-src">Source: LeavingAmerica.co analysis, {updated}</span>
-        </div>
-        <div class="stx-card">
-          <div class="stx-num">$1,000–$2,000</div>
-          <p>Monthly budget covering the most popular expat picks: Thailand (${pb('thailand').toLocaleString()}), Mexico (${pb('mexico').toLocaleString()}), and Portugal (${pb('portugal').toLocaleString()}).</p>
-          <span class="stx-src">Source: LeavingAmerica.co analysis, {updated}</span>
-        </div>
+      <p class="stx-eyebrow stx-reveal">Cost of Living</p>
+      <h2 class="stx-reveal">The Cheapest Countries to Live In</h2>
+      <p class="stx-section-sub stx-reveal">Baseline monthly cost for one person, {budgetCount} countries ranked. These are the 12 lowest.</p>
+      <div class="stx-chart stx-reveal">
+        {leaderboard.map(r => (
+          <div class="stx-bar-row">
+            <div class="stx-bar-label"><span class={`fi fi-${r.iso2}`}></span><span>{r.name}</span></div>
+            <div class="stx-bar-track"><div class="stx-bar-fill green" data-bar={Math.round((r.single / lbMax) * 100)}></div></div>
+            <div class="stx-bar-val">${r.single.toLocaleString()}/mo</div>
+          </div>
+        ))}
+        <p class="stx-chart-note">The median across all {budgetCount} countries is ${median.toLocaleString()}/mo. {under1000} countries cost under $1,000/mo, and {under1500} cost under $1,500/mo. Figures exclude one-time relocation costs.</p>
       </div>
-      <div class="stx-cta">
-        Want these numbers for your own budget? The <a href="/runway/">Runway Calculator</a> shows how long your savings last in all {budgetCount} countries, instantly and free.
+      <div class="stx-cta stx-reveal">Run these numbers for your own budget: the <a href="/runway/">Runway Calculator</a> shows how long your savings last in every country, instantly.</div>
+    </div>
+  </section>
+
+  <!-- RUNWAY -->
+  <section class="stx-section">
+    <div class="stx-wrap">
+      <p class="stx-eyebrow stx-reveal">Savings Runway</p>
+      <h2 class="stx-reveal">How Long $100,000 Lasts Abroad</h2>
+      <p class="stx-section-sub stx-reveal">Years of living costs $100K covers for a single person, no additional income.</p>
+      <div class="stx-chart stx-reveal">
+        {runwayBars.map(r => (
+          <div class="stx-bar-row">
+            <div class="stx-bar-label"><span class={`fi fi-${r.iso2}`}></span><span>{r.name}</span></div>
+            <div class="stx-bar-track"><div class="stx-bar-fill blue" data-bar={Math.round((r.years / runwayMax) * 100)}></div></div>
+            <div class="stx-bar-val">{r.years} yrs</div>
+          </div>
+        ))}
+        <p class="stx-chart-note">For comparison, $100K covers roughly 2 years of rent-plus-basics in the average US city. The same sum stretches to over a decade in the cheapest destinations.</p>
       </div>
     </div>
   </section>
 
+  <!-- FIRE -->
   <section class="stx-section">
     <div class="stx-wrap">
-      <h2>How Long American Savings Last</h2>
-      <p class="stx-section-sub">Savings runway at baseline monthly costs, single person, no income</p>
-      <div class="stx-grid">
-        <div class="stx-card">
-          <div class="stx-num">{mo(50000, cheapest.v)} months</div>
-          <p>Is how long $50,000 lasts in Egypt, the cheapest tracked country. The same amount covers about {mo(50000, priciest.v)} months in Switzerland.</p>
-          <span class="stx-src">Source: LeavingAmerica.co analysis, {updated}</span>
+      <p class="stx-eyebrow stx-reveal">Early Retirement</p>
+      <h2 class="stx-reveal">The Portfolio You Need to Retire</h2>
+      <p class="stx-section-sub stx-reveal">Savings required at a 4% withdrawal rate to cover local costs indefinitely. The US bar towers over every destination.</p>
+      <div class="stx-chart stx-reveal">
+        {fireBars.map(r => (
+          <div class="stx-bar-row">
+            <div class="stx-bar-label"><span class={`fi fi-${r.iso2}`}></span><span>{r.name}</span></div>
+            <div class="stx-bar-track"><div class={`stx-bar-fill ${r.isUs ? 'us' : 'green'}`} data-bar={Math.round((r.value / fireMax) * 100)}></div></div>
+            <div class="stx-bar-val">${(r.value/1000).toFixed(0)}K</div>
+          </div>
+        ))}
+        <p class="stx-chart-note">In {fireUnder500k} of {budgetCount} tracked countries, the required portfolio is below $500,000 — less than half the ~$1.05M needed for a typical $3,500/mo US lifestyle.</p>
+      </div>
+      <div class="stx-cta stx-reveal">See your own FIRE number country by country in the <a href="/fire/">Retire Abroad Calculator</a>.</div>
+    </div>
+  </section>
+
+  <!-- TAXES -->
+  <section class="stx-section">
+    <div class="stx-wrap">
+      <p class="stx-eyebrow stx-reveal">Taxes</p>
+      <h2 class="stx-reveal">How the World Taxes Income</h2>
+      <p class="stx-section-sub stx-reveal">Tax system of every tracked country. US citizens owe US federal tax on worldwide income regardless of where they live.</p>
+      <div class="stx-chart stx-reveal">
+        <div class="stx-tax-bar">
+          <div class="stx-tax-seg world" data-bar={Math.round((worldwideN/taxTotal)*100)}>{worldwideN}</div>
+          <div class="stx-tax-seg terr" data-bar={Math.round((territorialN/taxTotal)*100)}>{territorialN}</div>
+          <div class="stx-tax-seg zero" data-bar={Math.round((zeroN/taxTotal)*100)}>{zeroN}</div>
         </div>
-        <div class="stx-card">
-          <div class="stx-num">{yr(100000, cheapest.v)} years</div>
-          <p>Is the runway $100,000 buys in Egypt. In Switzerland the same savings last about {yr(100000, priciest.v)} years.</p>
-          <span class="stx-src">Source: LeavingAmerica.co analysis, {updated}</span>
+        <div class="stx-tax-legend">
+          <div class="stx-tl"><span class="stx-tl-dot world"></span>Worldwide taxation ({worldwideN})</div>
+          <div class="stx-tl"><span class="stx-tl-dot terr"></span>Territorial ({territorialN})</div>
+          <div class="stx-tl"><span class="stx-tl-dot zero"></span>No income tax ({zeroN})</div>
         </div>
-        <div class="stx-card">
-          <div class="stx-num">~{mo(50000, median)} months</div>
-          <p>Is the $50,000 runway in the median tracked country at ${median.toLocaleString()} per month. That is over two and a half years without earning a dollar.</p>
-          <span class="stx-src">Source: LeavingAmerica.co analysis, {updated}</span>
+        <p class="stx-chart-note" style="margin-top:20px">Countries with <strong>no personal income tax</strong> at all:</p>
+        <div class="stx-zero-chips">
+          {zeroTaxCountries.map(r => (
+            <a href={`/countries/${r.slug}/`} class="stx-zchip"><span class={`fi fi-${r.iso2}`}></span>{r.name}</a>
+          ))}
         </div>
-        <div class="stx-card">
-          <div class="stx-num">{mo(50000, pb('thailand'))} months</div>
-          <p>Is how long $50,000 lasts in Thailand. Mexico gives {mo(50000, pb('mexico'))} months and Portugal {mo(50000, pb('portugal'))} months on the same savings.</p>
-          <span class="stx-src">Source: LeavingAmerica.co analysis, {updated}</span>
-        </div>
+      </div>
+      <div class="stx-cta stx-reveal">The full breakdown — FEIE, FBAR, state taxes — is in the <a href="/taxes/">US Expat Tax Guide</a>.</div>
+    </div>
+  </section>
+
+  <!-- NOMAD VISAS -->
+  <section class="stx-section">
+    <div class="stx-wrap">
+      <p class="stx-eyebrow stx-reveal">Legal Pathways</p>
+      <h2 class="stx-reveal">Digital Nomad Visas</h2>
+      <p class="stx-section-sub stx-reveal"><strong>{nomadVisaCount} of {totalCountries}</strong> tracked countries now offer an official digital nomad visa — a legal medium-term path for remote workers, no employer sponsorship needed.</p>
+      <div class="stx-nomad-chips stx-reveal">
+        {ranked.filter(r => r.nomad).map(r => (
+          <a href={`/countries/${r.slug}/`} class="stx-nchip"><span class={`fi fi-${r.iso2}`}></span>{r.name}</a>
+        ))}
       </div>
     </div>
   </section>
 
+  <!-- FULL TABLE -->
   <section class="stx-section">
     <div class="stx-wrap">
-      <h2>Retiring Abroad: The FIRE Math</h2>
-      <p class="stx-section-sub">Required portfolio at a 4% annual withdrawal rate</p>
-      <div class="stx-grid">
-        <div class="stx-card">
-          <div class="stx-num">${(fire(cheapest.v)/1000).toFixed(0)}k vs ${(usFire/1000000).toFixed(2)}M</div>
-          <p>The portfolio needed to retire in the cheapest tracked country versus a typical $3,500-per-month lifestyle in the US. The difference is 80%.</p>
-          <span class="stx-src">Source: LeavingAmerica.co analysis, {updated}</span>
+      <p class="stx-eyebrow stx-reveal">The Full Dataset</p>
+      <h2 class="stx-reveal">Cost of Living & Retirement, Every Country</h2>
+      <p class="stx-section-sub stx-reveal">Monthly cost, the FIRE portfolio it implies, and tax system for all {budgetCount} countries. Sorted cheapest first. Search to jump to any country.</p>
+      <div class="stx-table-tools stx-reveal">
+        <div class="stx-search">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.6"/><path d="M11 11l3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <input type="text" id="stx-tbl-search" placeholder="Search a country…" aria-label="Search countries" />
         </div>
-        <div class="stx-card">
-          <div class="stx-num">{fireUnder500k} of {budgetCount}</div>
-          <p>Countries require a portfolio below $500,000 to retire on the 4% rule. In the US, half a million dollars covers less than half the typical requirement.</p>
-          <span class="stx-src">Source: LeavingAmerica.co analysis, {updated}</span>
-        </div>
-        <div class="stx-card">
-          <div class="stx-num">${(fire(pb('thailand'))/1000).toFixed(0)}k</div>
-          <p>Is the FIRE number for Thailand. Mexico requires about ${(fire(pb('mexico'))/1000).toFixed(0)}k and Portugal about ${(fire(pb('portugal'))/1000).toFixed(0)}k.</p>
-          <span class="stx-src">Source: LeavingAmerica.co analysis, {updated}</span>
-        </div>
-        <div class="stx-card">
-          <div class="stx-num">{nomadVisaCount} of {totalCountries}</div>
-          <p>Tracked countries now offer a digital nomad visa, giving remote workers a legal medium-term path without employer sponsorship.</p>
-          <span class="stx-src">Source: LeavingAmerica.co analysis, {updated}</span>
-        </div>
+        <span class="stx-search-count" id="stx-tbl-count">{budgetCount} countries</span>
       </div>
-      <div class="stx-cta">
-        See the full country-by-country breakdown in our <a href="/fire/">Retire Abroad Calculator</a>, or find your personal fit with the <a href="/country-match/quiz/">Country Match Quiz</a>.
+      <div class="stx-table-scroll stx-reveal">
+        <table class="stx-table">
+          <thead>
+            <tr>
+              <th>Country</th>
+              <th class="num">Single /mo</th>
+              <th class="num">Couple /mo</th>
+              <th class="num">FIRE number</th>
+              <th>Tax system</th>
+            </tr>
+          </thead>
+          <tbody id="stx-tbl-body">
+            {ranked.map(r => (
+              <tr data-name={r.name.toLowerCase()}>
+                <td><span class="stx-tc-name"><span class={`fi fi-${r.iso2}`}></span><a href={`/countries/${r.slug}/`}>{r.name}</a></span></td>
+                <td class="num">${r.single.toLocaleString()}</td>
+                <td class="num">${r.couple.toLocaleString()}</td>
+                <td class="num">${(r.fireNum/1000).toFixed(0)}K</td>
+                <td><span class={`stx-tax-tag ${r.tax}`}>{r.tax === 'zero' ? 'No income tax' : r.tax.charAt(0).toUpperCase() + r.tax.slice(1)}</span></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div class="stx-noresults" id="stx-tbl-none">No country matches that search.</div>
+      </div>
+      <p class="stx-chart-note" style="margin-top:14px">FIRE number = monthly cost × 12 ÷ 0.04 (the 4% rule). Costs exclude one-time relocation expenses and health insurance.</p>
+    </div>
+  </section>
+
+  <!-- WHERE THEY GO -->
+  <section class="stx-section">
+    <div class="stx-wrap">
+      <p class="stx-eyebrow stx-reveal">Destinations</p>
+      <h2 class="stx-reveal">Where Americans Actually Go</h2>
+      <p class="stx-section-sub stx-reveal">The countries absorbing the wave.</p>
+      <div class="stx-grid">
+        <div class="stx-card stx-reveal"><div class="stx-num blue" data-count="1200000" data-suffix="+">0</div><p>Americans live in Mexico — by far the largest US community abroad.</p><span class="stx-src">Source: <a href="https://www.globalcitizensolutions.com/where-are-americans-moving-to/" target="_blank" rel="noopener">Global Citizen Solutions</a></span></div>
+        <div class="stx-card stx-reveal"><div class="stx-num" data-count="250000" data-suffix="+">0</div><p>Americans live in Canada, one of the largest and longest-established communities.</p><span class="stx-src">Source: Global Citizen Solutions</span></div>
+        <div class="stx-card stx-reveal"><div class="stx-num green">~3×</div><p>American relocations to Portugal have nearly tripled since 2024 — the fastest growth of any destination.</p><span class="stx-src">Source: <a href="https://www.forbes.com/sites/meggenharris/2026/03/12/where-americans-are-moving-right-now/" target="_blank" rel="noopener">Forbes, 2026</a></span></div>
+        <div class="stx-card stx-reveal"><div class="stx-num" data-count={totalCountries}>0</div><p>Countries tracked here across cost, safety, healthcare, taxes and visas — refreshed monthly.</p><span class="stx-src">Source: LeavingAmerica.co, <a href="/methodology/">methodology</a></span></div>
       </div>
     </div>
   </section>
 
+  <!-- FAQ -->
   <section class="stx-section">
     <div class="stx-wrap">
-      <h2>Taxes: What Americans Abroad Still Owe</h2>
-      <p class="stx-section-sub">The rules that follow US citizens across borders</p>
-      <div class="stx-grid">
-        <div class="stx-card">
-          <div class="stx-num">1 of 2</div>
-          <p>The US is one of only two countries that tax citizens on worldwide income regardless of where they live. The other is Eritrea.</p>
-          <span class="stx-src">Source: IRS; widely documented</span>
-        </div>
-        <div class="stx-card">
-          <div class="stx-num">$130,000</div>
-          <p>Of foreign-earned income can be excluded from US tax via the Foreign Earned Income Exclusion (2025 tax year figure).</p>
-          <span class="stx-src">Source: IRS</span>
-        </div>
-        <div class="stx-card">
-          <div class="stx-num">$10,000</div>
-          <p>Is the combined foreign-account threshold that triggers mandatory FBAR reporting for Americans abroad.</p>
-          <span class="stx-src">Source: FinCEN</span>
-        </div>
-        <div class="stx-card">
-          <div class="stx-num">{taxCounts['territorial'] + taxCounts['zero']} of {totalCountries}</div>
-          <p>Countries we track use territorial taxation ({taxCounts['territorial']}) or levy no personal income tax at all ({taxCounts['zero']}), which can dramatically lower an expat's total tax burden.</p>
-          <span class="stx-src">Source: LeavingAmerica.co analysis, {updated}</span>
-        </div>
-      </div>
-      <div class="stx-cta">
-        The full picture, including FEIE mechanics and state taxes, is in our <a href="/taxes/">US Expat Tax Guide</a>.
-      </div>
-    </div>
-  </section>
-
-  <section class="stx-section">
-    <div class="stx-wrap">
-      <h2>Where Americans Go</h2>
-      <p class="stx-section-sub">The destinations absorbing the wave</p>
-      <div class="stx-grid">
-        <div class="stx-card">
-          <div class="stx-num">~1.2 million</div>
-          <p>Americans live in Mexico, by far the largest US community abroad.</p>
-          <span class="stx-src">Source: <a href="https://www.globalcitizensolutions.com/where-are-americans-moving-to/" target="_blank" rel="noopener">Global Citizen Solutions</a></span>
-        </div>
-        <div class="stx-card">
-          <div class="stx-num">250,000+</div>
-          <p>Americans live in Canada, one of the largest and longest-established communities.</p>
-          <span class="stx-src">Source: Global Citizen Solutions</span>
-        </div>
-        <div class="stx-card">
-          <div class="stx-num">~3×</div>
-          <p>American relocations to Portugal have nearly tripled since 2024, the fastest growth of any destination.</p>
-          <span class="stx-src">Source: <a href="https://www.forbes.com/sites/meggenharris/2026/03/12/where-americans-are-moving-right-now/" target="_blank" rel="noopener">Forbes, March 2026</a></span>
-        </div>
-        <div class="stx-card">
-          <div class="stx-num">{totalCountries}</div>
-          <p>Countries are tracked by LeavingAmerica.co across cost of living, safety, healthcare, taxes, and visa access, with data refreshed monthly.</p>
-          <span class="stx-src">Source: LeavingAmerica.co, <a href="/methodology/">methodology</a></span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="stx-section">
-    <div class="stx-wrap">
-      <h2>Frequently Asked Questions</h2>
-      <div class="stx-faq">
-        <details>
-          <summary>How many Americans live abroad?</summary>
-          <p>Estimates range from 5 to 9 million US citizens living outside the United States. No agency keeps an exact count. A 2026 US Census Bureau analysis estimated that around 180,000 Americans moved abroad in the past year alone.</p>
-        </details>
-        <details>
-          <summary>What is the cheapest country for Americans to live in?</summary>
-          <p>Among the {budgetCount} countries we track, Egypt has the lowest baseline cost at about $700 per month for a single person. India, Vietnam, and Sri Lanka also come in under $1,000 per month at a normal lifestyle.</p>
-        </details>
-        <details>
-          <summary>How much money do you need to retire abroad?</summary>
-          <p>Using the 4% withdrawal rule, the cheapest tracked countries require a portfolio of about $210,000, versus roughly $1.05 million for a typical $3,500-per-month lifestyle in the US. In {fireUnder500k} of {budgetCount} tracked countries the requirement is below $500,000.</p>
-        </details>
-        <details>
-          <summary>Do Americans abroad still pay US taxes?</summary>
-          <p>Yes. The US taxes citizens on worldwide income wherever they live. The Foreign Earned Income Exclusion can shield up to $130,000 of foreign-earned income (2025 tax year), and foreign accounts over $10,000 combined must be reported via FBAR. See our <a href="/taxes/">Expat Tax Guide</a> for details.</p>
-        </details>
-        <details>
-          <summary>Where do most Americans move when they leave the US?</summary>
-          <p>Mexico hosts the largest American community at roughly 1.2 million people, followed by Canada with over 250,000. Portugal has shown the fastest recent growth, with relocations nearly tripling since 2024.</p>
-        </details>
+      <p class="stx-eyebrow stx-reveal">FAQ</p>
+      <h2 class="stx-reveal">Frequently Asked Questions</h2>
+      <div class="stx-faq stx-reveal">
+        <div class="stx-faq-item"><button class="stx-faq-q" type="button" aria-expanded="false"><span>How many Americans live abroad?</span><span class="stx-faq-ic">+</span></button><div class="stx-faq-a" hidden><p>Estimates range from 5 to 9 million US citizens living outside the United States. No agency keeps an exact count. A 2026 US Census Bureau analysis estimated around 180,000 Americans moved abroad in the past year alone.</p></div></div>
+        <div class="stx-faq-item"><button class="stx-faq-q" type="button" aria-expanded="false"><span>What is the cheapest country for Americans to live in?</span><span class="stx-faq-ic">+</span></button><div class="stx-faq-a" hidden><p>Among the {budgetCount} countries tracked here, Egypt has the lowest baseline cost at about $700/month for a single person. India, Vietnam, and Sri Lanka also come in under $1,000/month at a normal lifestyle.</p></div></div>
+        <div class="stx-faq-item"><button class="stx-faq-q" type="button" aria-expanded="false"><span>How much money do you need to retire abroad?</span><span class="stx-faq-ic">+</span></button><div class="stx-faq-a" hidden><p>Using the 4% rule, the cheapest tracked countries require a portfolio of about $210,000, versus roughly $1.05 million for a typical $3,500/month US lifestyle. In {fireUnder500k} of {budgetCount} tracked countries the requirement is below $500,000.</p></div></div>
+        <div class="stx-faq-item"><button class="stx-faq-q" type="button" aria-expanded="false"><span>Which countries have no income tax?</span><span class="stx-faq-ic">+</span></button><div class="stx-faq-a" hidden><p>Of the countries tracked, {zeroN} levy no personal income tax at all: {zeroTaxCountries.map(c => c.name).join(', ')}. US citizens still owe US federal tax on worldwide income regardless of where they live.</p></div></div>
+        <div class="stx-faq-item"><button class="stx-faq-q" type="button" aria-expanded="false"><span>Do Americans abroad still pay US taxes?</span><span class="stx-faq-ic">+</span></button><div class="stx-faq-a" hidden><p>Yes. The US taxes citizens on worldwide income wherever they live. The Foreign Earned Income Exclusion can shield up to $130,000 of foreign-earned income (2025 tax year), and foreign accounts over $10,000 combined must be reported via FBAR. See the <a href="/taxes/">Expat Tax Guide</a>.</p></div></div>
+        <div class="stx-faq-item"><button class="stx-faq-q" type="button" aria-expanded="false"><span>How many countries offer a digital nomad visa?</span><span class="stx-faq-ic">+</span></button><div class="stx-faq-a" hidden><p>{nomadVisaCount} of the {totalCountries} countries tracked here offer an official digital nomad visa, giving remote workers a legal medium-term path to live there without employer sponsorship.</p></div></div>
       </div>
 
-      <div class="stx-cite">
-        <strong>Citing these statistics:</strong> all figures marked "LeavingAmerica.co analysis" are free to use in articles, newsletters, and research with attribution and a link to this page. Journalists: we can pull custom numbers for any country or savings level, contact us at contact@leavingamerica.co.
+      <div class="stx-cite stx-reveal">
+        <strong>Citing this data:</strong> every figure marked "LeavingAmerica.co analysis" is free to use in articles, newsletters, and research with attribution and a link to this page. Journalists — I can pull custom numbers for any country or savings level: <a href="mailto:contact@leavingamerica.co">contact@leavingamerica.co</a>.
       </div>
     </div>
   </section>
 
 </div>
+
+<script>
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ── reveal on scroll ──
+  var revEls = Array.prototype.slice.call(document.querySelectorAll('.stx-reveal'));
+  if (reduce) {
+    revEls.forEach(function (el) { el.classList.add('in'); });
+  } else {
+    var revObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); revObs.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    revEls.forEach(function (el) { revObs.observe(el); });
+  }
+
+  // ── count-up ──
+  function fmt(n) { return Math.round(n).toLocaleString('en-US'); }
+  function animateCount(el) {
+    var target = parseFloat(el.getAttribute('data-count')) || 0;
+    var prefix = el.getAttribute('data-prefix') || '';
+    var suffix = el.getAttribute('data-suffix') || '';
+    if (reduce) { el.textContent = prefix + fmt(target) + suffix; return; }
+    var dur = 1300, start = null;
+    function step(ts) {
+      if (!start) start = ts;
+      var p = Math.min((ts - start) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = prefix + fmt(target * eased) + suffix;
+      if (p < 1) requestAnimationFrame(step);
+      else el.textContent = prefix + fmt(target) + suffix;
+    }
+    requestAnimationFrame(step);
+  }
+  var countEls = Array.prototype.slice.call(document.querySelectorAll('[data-count]'));
+  var countObs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) { animateCount(e.target); countObs.unobserve(e.target); } });
+  }, { threshold: 0.6 });
+  countEls.forEach(function (el) { countObs.observe(el); });
+
+  // ── bar fills (leaderboard, runway, fire, tax) ──
+  var barEls = Array.prototype.slice.call(document.querySelectorAll('[data-bar]'));
+  function fillBar(el) {
+    var w = el.getAttribute('data-bar') + '%';
+    if (reduce) { el.style.width = w; return; }
+    requestAnimationFrame(function () { el.style.width = w; });
+  }
+  var barObs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) { fillBar(e.target); barObs.unobserve(e.target); } });
+  }, { threshold: 0.4 });
+  barEls.forEach(function (el) { barObs.observe(el); });
+
+  // ── table search ──
+  var search = document.getElementById('stx-tbl-search');
+  var rows = Array.prototype.slice.call(document.querySelectorAll('#stx-tbl-body tr'));
+  var countEl = document.getElementById('stx-tbl-count');
+  var noneEl = document.getElementById('stx-tbl-none');
+  if (search) {
+    search.addEventListener('input', function () {
+      var q = search.value.trim().toLowerCase();
+      var shown = 0;
+      rows.forEach(function (tr) {
+        var match = tr.getAttribute('data-name').indexOf(q) !== -1;
+        tr.style.display = match ? '' : 'none';
+        if (match) shown++;
+      });
+      countEl.textContent = shown + (shown === 1 ? ' country' : ' countries');
+      noneEl.style.display = shown === 0 ? 'block' : 'none';
+    });
+  }
+
+  // ── FAQ accordion ──
+  Array.prototype.slice.call(document.querySelectorAll('.stx-faq-q')).forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!open));
+      var body = btn.nextElementSibling;
+      body.hidden = open;
+      btn.querySelector('.stx-faq-ic').textContent = open ? '+' : '×';
+    });
+  });
+</script>
 
 </BaseLayout>

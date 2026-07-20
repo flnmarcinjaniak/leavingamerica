@@ -12,6 +12,20 @@ const canonicalURL = new URL(Astro.url.pathname.replace(/\/?$/, '/'), Astro.site
 const resolvedOgTitle = ogTitle || title;
 const resolvedOgDescription = ogDescription || description;
 const ogImageAbsolute = ogImage ? new URL(ogImage, Astro.site).href : undefined;
+
+const organizationSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  'name': 'LeavingAmerica.co',
+  'url': 'https://leavingamerica.co',
+  'logo': 'https://leavingamerica.co/images/logo.webp',
+  'founder': {
+    '@type': 'Person',
+    'name': 'Marcin Janiak',
+    'jobTitle': 'Founder',
+    'sameAs': ['https://www.linkedin.com/in/YOUR-LINKEDIN-SLUG']
+  }
+});
 ---
 
 <!DOCTYPE html>
@@ -49,6 +63,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons@7.2.3/css/flag-icons.min.css"/>
+    <script type="application/ld+json" set:html={organizationSchema} />
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->
@@ -121,6 +136,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="footer-col">
             <h4 class="footer-heading">Resources</h4>
             <ul class="footer-links">
+              <li><a href="/statistics/americans-moving-abroad/">Statistics & Data</a></li>
               <li><a href="/methodology">Methodology</a></li>
               <li><a href="/about">About</a></li>
               <li><a href="/contact">Contact</a></li>

@@ -285,6 +285,9 @@ input.fire-input-error { border-color: #FCA5A5 !important; background: #FEF2F2 !
 .fire-breadcrumb { max-width: 880px; margin: 0 auto; padding: 20px 24px 0; font-size: 13px; color: #94A3B8; }
 .fire-breadcrumb a { color: #64748B; text-decoration: none; }
 .fire-breadcrumb a:hover { color: #2563EB; }
+.fire-data-freshness { max-width: 880px; margin: 0 auto; padding: 6px 24px 0; font-size: 12px; color: #94A3B8; }
+.fire-data-freshness a { color: #94A3B8; text-decoration: underline; text-underline-offset: 2px; }
+.fire-data-freshness a:hover { color: #64748B; }
 .fire-back-row { max-width: 880px; margin: 0 auto; padding: 0 24px 48px; display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
 .fire-back-link {
   display: inline-flex; align-items: center; gap: 7px;
@@ -358,6 +361,11 @@ input.fire-input-error { border-color: #FCA5A5 !important; background: #FEF2F2 !
   <!-- Breadcrumb -->
   <div class="fire-breadcrumb">
     <a href="/fire">FIRE Calculator</a> / {countryName}
+  </div>
+  <div class="fire-data-freshness">
+    Data updated {(qualityScoresData as any).lastUpdated || 'recently'}
+    · Sources: World Bank, Numbeo, WhereNext
+    · <a href="/methodology">How we calculate this →</a>
   </div>
 
   <!-- Hero -->

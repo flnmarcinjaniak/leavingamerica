@@ -534,6 +534,8 @@ const pageDescription = _metaOverride?.description ?? `See how far your salary g
   font-size: 12px;
   color: #94A3B8;
 }
+.data-freshness a { color: #94A3B8; text-decoration: underline; text-underline-offset: 2px; }
+.data-freshness a:hover { color: #64748B; }
 
 .country-hero {
   max-width: 1100px;
@@ -1123,6 +1125,7 @@ const pageDescription = _metaOverride?.description ?? `See how far your salary g
   <div class="data-freshness">
     Data updated {qualityScoresData.lastUpdated || 'recently'}
     · Sources: World Bank, Numbeo, WhereNext, EF EPI
+    · <a href="/methodology">How we calculate this →</a>
   </div>
 
   <div class="country-hero">

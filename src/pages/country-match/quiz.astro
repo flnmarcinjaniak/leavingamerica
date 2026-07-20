@@ -6,7 +6,7 @@ import qualityScores from '../../data/quality-scores.json';
 <BaseLayout
   title="Country Match Quiz | LeavingAmerica.co"
   description="Answer 10 questions and discover which country best fits your goals, lifestyle, and finances. 82 countries analyzed."
-  ogTitle="I found my top 3 countries to move to — find yours"
+  ogTitle="I found my top 3 countries to move to: find yours"
   ogDescription="Take the free 10-question Country Match Quiz and discover which country best fits your goals, lifestyle, and finances. Data on 82 countries."
   ogImage="/images/hero-bg.webp">
 
@@ -1956,7 +1956,7 @@ window.restartQuiz = function() {
 window.shareResults = function() {
   var url = window.location.href;
   if (navigator.share) {
-    navigator.share({ title: 'My Country Match Results', text: 'See which countries matched my lifestyle — LeavingAmerica.co', url: url }).catch(function() {});
+    navigator.share({ title: 'My Country Match Results', text: 'See which countries matched my lifestyle, from LeavingAmerica.co', url: url }).catch(function() {});
   } else if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(url).then(showCopied, function() { fallbackCopy(url); });
   } else {

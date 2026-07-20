@@ -358,9 +358,9 @@ table.stx-table { width: 100%; border-collapse: collapse; font-size: 13.5px; min
       <p class="stx-section-sub stx-reveal">Survey data on emigration intent, by group.</p>
       <div class="stx-grid">
         <div class="stx-card stx-reveal"><div class="stx-num" data-count="20" data-suffix="%">0</div><p>Of Americans say they'd like to leave the US permanently. Among women aged 15–44 it rises to 40%.</p><span class="stx-src">Source: Gallup, 2025</span></div>
-        <div class="stx-card stx-reveal"><div class="stx-num blue" data-count="42" data-suffix="%">0</div><p>Have considered or plan to relocate abroad — 63% among Gen Z, 52% among Millennials.</p><span class="stx-src">Source: The Harris Poll</span></div>
+        <div class="stx-card stx-reveal"><div class="stx-num blue" data-count="42" data-suffix="%">0</div><p>Have considered or plan to relocate abroad, including 63% of Gen Z and 52% of Millennials.</p><span class="stx-src">Source: The Harris Poll</span></div>
         <div class="stx-card stx-reveal"><div class="stx-num" data-count="70" data-suffix="%">0</div><p>Of people considering a move cite remote work as an enabling or primary factor.</p><span class="stx-src">Source: The Harris Poll, 2025</span></div>
-        <div class="stx-card stx-reveal"><div class="stx-num green" data-count="63" data-suffix="%">0</div><p>Of Gen Z respondents have considered leaving — the highest of any generation surveyed.</p><span class="stx-src">Source: The Harris Poll</span></div>
+        <div class="stx-card stx-reveal"><div class="stx-num green" data-count="63" data-suffix="%">0</div><p>Of Gen Z respondents have considered leaving, the highest share of any generation surveyed.</p><span class="stx-src">Source: The Harris Poll</span></div>
       </div>
     </div>
   </section>
@@ -418,7 +418,7 @@ table.stx-table { width: 100%; border-collapse: collapse; font-size: 13.5px; min
             <div class="stx-bar-val">${(r.value/1000).toFixed(0)}K</div>
           </div>
         ))}
-        <p class="stx-chart-note">In {fireUnder500k} of {budgetCount} tracked countries, the required portfolio is below $500,000 — less than half the ~$1.05M needed for a typical $3,500/mo US lifestyle.</p>
+        <p class="stx-chart-note">In {fireUnder500k} of {budgetCount} tracked countries, the required portfolio is below $500,000, less than half the ~$1.05M needed for a typical $3,500/mo US lifestyle.</p>
       </div>
       <div class="stx-cta stx-reveal">See your own FIRE number country by country in the <a href="/fire/">Retire Abroad Calculator</a>.</div>
     </div>
@@ -448,7 +448,7 @@ table.stx-table { width: 100%; border-collapse: collapse; font-size: 13.5px; min
           ))}
         </div>
       </div>
-      <div class="stx-cta stx-reveal">The full breakdown — FEIE, FBAR, state taxes — is in the <a href="/taxes/">US Expat Tax Guide</a>.</div>
+      <div class="stx-cta stx-reveal">The full breakdown (FEIE, FBAR, state taxes) is in the <a href="/taxes/">US Expat Tax Guide</a>.</div>
     </div>
   </section>
 
@@ -457,7 +457,7 @@ table.stx-table { width: 100%; border-collapse: collapse; font-size: 13.5px; min
     <div class="stx-wrap">
       <p class="stx-eyebrow stx-reveal">Legal Pathways</p>
       <h2 class="stx-reveal">Digital Nomad Visas</h2>
-      <p class="stx-section-sub stx-reveal"><strong>{nomadVisaCount} of {totalCountries}</strong> tracked countries now offer an official digital nomad visa — a legal medium-term path for remote workers, no employer sponsorship needed.</p>
+      <p class="stx-section-sub stx-reveal"><strong>{nomadVisaCount} of {totalCountries}</strong> tracked countries now offer an official digital nomad visa: a legal medium-term path for remote workers, no employer sponsorship needed.</p>
       <div class="stx-nomad-chips stx-reveal">
         {ranked.filter(r => r.nomad).map(r => (
           <a href={`/countries/${r.slug}/`} class="stx-nchip"><span class={`fi fi-${r.iso2}`}></span>{r.name}</a>
@@ -515,10 +515,10 @@ table.stx-table { width: 100%; border-collapse: collapse; font-size: 13.5px; min
       <h2 class="stx-reveal">Where Americans Actually Go</h2>
       <p class="stx-section-sub stx-reveal">The countries absorbing the wave.</p>
       <div class="stx-grid">
-        <div class="stx-card stx-reveal"><div class="stx-num blue" data-count="1200000" data-suffix="+">0</div><p>Americans live in Mexico — by far the largest US community abroad.</p><span class="stx-src">Source: <a href="https://www.globalcitizensolutions.com/where-are-americans-moving-to/" target="_blank" rel="noopener">Global Citizen Solutions</a></span></div>
+        <div class="stx-card stx-reveal"><div class="stx-num blue" data-count="1200000" data-suffix="+">0</div><p>Americans live in Mexico, by far the largest US community abroad.</p><span class="stx-src">Source: <a href="https://www.globalcitizensolutions.com/where-are-americans-moving-to/" target="_blank" rel="noopener">Global Citizen Solutions</a></span></div>
         <div class="stx-card stx-reveal"><div class="stx-num" data-count="250000" data-suffix="+">0</div><p>Americans live in Canada, one of the largest and longest-established communities.</p><span class="stx-src">Source: Global Citizen Solutions</span></div>
-        <div class="stx-card stx-reveal"><div class="stx-num green">~3×</div><p>American relocations to Portugal have nearly tripled since 2024 — the fastest growth of any destination.</p><span class="stx-src">Source: <a href="https://www.forbes.com/sites/meggenharris/2026/03/12/where-americans-are-moving-right-now/" target="_blank" rel="noopener">Forbes, 2026</a></span></div>
-        <div class="stx-card stx-reveal"><div class="stx-num" data-count={totalCountries}>0</div><p>Countries tracked here across cost, safety, healthcare, taxes and visas — refreshed monthly.</p><span class="stx-src">Source: LeavingAmerica.co, <a href="/methodology/">methodology</a></span></div>
+        <div class="stx-card stx-reveal"><div class="stx-num green">~3×</div><p>American relocations to Portugal have nearly tripled since 2024, the fastest growth of any destination.</p><span class="stx-src">Source: <a href="https://www.forbes.com/sites/meggenharris/2026/03/12/where-americans-are-moving-right-now/" target="_blank" rel="noopener">Forbes, 2026</a></span></div>
+        <div class="stx-card stx-reveal"><div class="stx-num" data-count={totalCountries}>0</div><p>Countries tracked here across cost, safety, healthcare, taxes and visas, refreshed monthly.</p><span class="stx-src">Source: LeavingAmerica.co, <a href="/methodology/">methodology</a></span></div>
       </div>
     </div>
   </section>
@@ -538,7 +538,7 @@ table.stx-table { width: 100%; border-collapse: collapse; font-size: 13.5px; min
       </div>
 
       <div class="stx-cite stx-reveal">
-        <strong>Citing this data:</strong> every figure marked "LeavingAmerica.co analysis" is free to use in articles, newsletters, and research with attribution and a link to this page. Journalists — I can pull custom numbers for any country or savings level: <a href="mailto:contact@leavingamerica.co">contact@leavingamerica.co</a>.
+        <strong>Citing this data:</strong> every figure marked "LeavingAmerica.co analysis" is free to use in articles, newsletters, and research with attribution and a link to this page. Journalists can reach me for custom numbers on any country or savings level: <a href="mailto:contact@leavingamerica.co">contact@leavingamerica.co</a>.
       </div>
     </div>
   </section>

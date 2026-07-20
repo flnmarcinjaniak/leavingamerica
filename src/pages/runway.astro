@@ -688,7 +688,7 @@ const faqSchema = JSON.stringify({
             <span class="rw-number-prefix">$</span>
             <input type="number" id="inp-income" class="rw-number-input" value="0" min="0" step="100" />
           </div>
-          <p class="rw-hint">Remote salary, freelance, Social Security, pension — any recurring income. When it covers a country's full cost, that country shows "Indefinite" meaning your savings don't decrease at all.</p>
+          <p class="rw-hint">Remote salary, freelance, Social Security, pension: any recurring income. When it covers a country's full cost, that country shows "Indefinite" meaning your savings don't decrease at all.</p>
         </div>
 
         <div class="rw-input-group">
@@ -703,9 +703,9 @@ const faqSchema = JSON.stringify({
         <div class="rw-input-group">
           <label class="rw-label" for="sel-lifestyle">Lifestyle</label>
           <select id="sel-lifestyle" class="rw-select">
-            <option value="0.75">Lean (×0.75) — shared housing, home cooking</option>
-            <option value="1" selected>Normal (×1.0) — mid-range baseline</option>
-            <option value="1.35">Comfortable (×1.35) — private apt, dining out</option>
+            <option value="0.75">Lean (×0.75): shared housing, home cooking</option>
+            <option value="1" selected>Normal (×1.0): mid-range baseline</option>
+            <option value="1.35">Comfortable (×1.35): private apt, dining out</option>
           </select>
           <p class="rw-hint">Multiplies the baseline monthly cost. If you're not sure, start with Normal. Most first-year expats land between Normal and Comfortable.</p>
         </div>
@@ -1043,7 +1043,7 @@ document.getElementById('btn-share-runway').addEventListener('click', function()
   var lKey = inp.mult <= 0.76 ? 'lean' : inp.mult >= 1.34 ? 'comfortable' : 'normal';
   var url = window.location.origin + '/runway/?s=' + inp.savings + '&i=' + inp.income + '&h=' + household + '&l=' + lKey;
   if (navigator.share) {
-    navigator.share({ title: 'My Savings Runway Abroad', text: 'See how long my savings would last in 74 countries — LeavingAmerica.co', url: url }).catch(function() {});
+    navigator.share({ title: 'My Savings Runway Abroad', text: 'See how long my savings would last in 74 countries, from LeavingAmerica.co', url: url }).catch(function() {});
   } else if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(url).then(showCopied).catch(function() { fallbackCopy(url); });
   } else {

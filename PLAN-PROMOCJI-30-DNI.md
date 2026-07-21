@@ -23,7 +23,7 @@ Załóż arkusz Google Sheets z 3 zakładkami:
 - **Dziennikarze**: imię / outlet / email / tytuł artykułu / data pitchu / wynik
 - **Linki**: data / skąd / URL
 
-## ☐ KROK 1 — Wiarygodność (E-E-A-T) · [TY 30 min + CLAUDE]
+## ☑ KROK 1 — Wiarygodność (E-E-A-T) · ZROBIONE
 
 Nie podpisujemy wszystkiego Twoim nazwiskiem (wyglądałoby sztucznie). Autorytet = dane
 i źródła, Ty występujesz jako founder-analityk. Wzór: Numbeo.
@@ -36,7 +36,7 @@ i źródła, Ty występujesz jako founder-analityk. Wzór: Numbeo.
    advisor"), rozbudowa /methodology + linki ze stron danych, linijki źródłowe zamiast
    nazwisk na stronach danych, byline tylko na /taxes, schema Person+Organization.
 
-## ☐ KROK 2 — Strona ze statystykami (pod cytowania AI) · [CLAUDE + TY]
+## ☑ KROK 2 — Strona ze statystykami (pod cytowania AI) · ZROBIONE + dodatkowo rozbudowane
 
 1. **[CLAUDE]** "zrób krok 2" → buduję `/statistics/americans-moving-abroad/`:
    25–30 cytowalnych statystyk z naszych danych + źródła zewnętrzne (Census, Gallup).

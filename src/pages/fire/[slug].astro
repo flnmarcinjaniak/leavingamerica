@@ -145,7 +145,7 @@ const metaTitle = _fireOverride?.title ?? `Retire in ${countryName}: FIRE Number
 const metaDesc = _fireOverride?.description ?? `Americans need $${fireK}k to retire in ${countryName} (~$${monthly.toLocaleString()}/month). Calculate your personal FIRE timeline and see how ${countryName} compares to staying in the US.`;
 ---
 
-<BaseLayout title={metaTitle} description={metaDesc} ctaHref="#fc-age" ctaLabel="Calculate Your FIRE Number">
+<BaseLayout title={metaTitle} description={metaDesc} ctaHref="#fc-age">
   <script type="application/ld+json" set:html={faqSchema} />
 
 <style is:global>

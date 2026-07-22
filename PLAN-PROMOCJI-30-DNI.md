@@ -42,14 +42,29 @@ i źródła, Ty występujesz jako founder-analityk. Wzór: Numbeo.
    25–30 cytowalnych statystyk z naszych danych + źródła zewnętrzne (Census, Gallup).
 2. **[TY]** Przeczytaj, zaakceptuj → deploy.
 
-## ☐ KROK 3 — Start na Reddicie · [TY] · 40 min (potem rutyna 15 min/dz.)
+## ☑ KROK 3 — Start na Reddicie · konto: u/HuckleberryBest5773 (1 rok, dołączono do 6 subów)
 
-1. Użyj starego konta Reddit jeśli masz (lepsze!), albo załóż OSOBISTE (nie firmowe).
-2. Dołącz do: r/AmerExit, r/ExpatFIRE, r/expats, r/digitalnomad, r/Fire, r/expatfinance.
-3. W każdym przeczytaj zasady (sidebar → Rules) — zanotuj gdzie wolno się promować.
-4. Przeczytaj top 10 wątków tygodnia z r/AmerExit.
-5. Od dziś: codzienna rutyna (patrz ramka na górze). Cel przed krokiem 14:
+1. ✅ Konto: stare, rok istnieje, ale niska karma (1) — trzeba budować od zera.
+2. ✅ Dołączono: r/AmerExit, r/ExpatFIRE, r/expats, r/digitalnomad, r/Fire, r/ExpatFinance, r/IWantOut (dodatkowy, znaleziony samodzielnie).
+3. ✅ Zasady self-promo sprawdzone — patrz tabela niżej.
+4. ☐ Przeczytać top 10 wątków tygodnia z r/AmerExit (jeszcze do zrobienia).
+5. ☐ Od teraz: codzienna rutyna (patrz ramka na górze). Cel przed krokiem 14:
    10+ komentarzy, 50+ karmy, min. 3 tygodnie historii.
+
+**Zasady self-promo per subreddit (sprawdzone 2026-07-21):**
+
+| Subreddit | Zasada | Co to znaczy dla nas |
+|---|---|---|
+| r/AmerExit | Brak jawnej reguły self-promo. Posty moderowane ręcznie (spam/trolling), komentarze nie. Enforcement łagodny dla "productive members". | Komentarze bezpieczne, ostrożnie przy ew. linku w kroku 14. |
+| r/expats | "No blog/vlog/article links in **posts**" — linki w **komentarzach jawnie dozwolone**. | Najbardziej przyjazny sub z listy. Link w komentarzu OK. |
+| r/ExpatFIRE | "No spam or self-promotion" ale: "if extremely relevant in response to a question, ok to link yourself... sparingly." | Link dozwolony, ale TYLKO gdy naprawdę trafny i rzadko. |
+| r/Fire | Zakaz ABSOLUTNY, zero wyjątków. Zabrania linkowania własnych treści, polecania czegokolwiek w co jesteś zaangażowany, linków afiliacyjnych — "whether monetized or not". | **NIGDY nie linkować tutaj.** Tylko czytanie/research, na stałe, nie tylko do kroku 14. |
+| r/digitalnomad | "No self-promotion or blog spam" — linki do blogów, "product launches", YouTube itd. usuwane. "No exceptions - many posts are removed daily." | **NIGDY nie linkować tutaj.** Zero furtki, aktywne, codzienne usuwanie. Tylko czytanie/research. |
+| r/ExpatFinance | POTWIERDZONE: panel reguł faktycznie pusty (sub istnieje od 2014, 6.8k odwiedzin/tydz., mods nigdy nie spisali zasad). | Brak formalnych zasad — standardowa ostrożność (90/10), decyzje po stronie mod discretion. |
+| r/IWantOut (dodatkowy, znaleziony poza pierwotną listą) | "No Spam or Advertising. Recommendations are OK; spam/advertising is not. If you're not sure, ask the mod team before posting." | Podobnie jak ExpatFIRE — "polecenie" w kontekście OK, spam nie. Można zapytać mod team wprost przed linkowaniem, jeśli niepewny. Szerszy sub niż AmerExit (międzynarodowy, nie tylko USA), ale relevantny. |
+
+**Podsumowanie — gdzie WOLNO linkować w kroku 14:** r/expats (najłatwiej), r/ExpatFIRE (oszczędnie, tylko b. trafne), r/IWantOut (oszczędnie, "recommendation" nie "advertising", można zapytać modów), r/AmerExit (ostrożnie, bez jawnego zakazu), r/ExpatFinance (brak zasad, standardowa ostrożność).
+**Gdzie NIGDY nie linkować:** r/Fire, r/digitalnomad — zakazy absolutne, bez wyjątków, aktywnie i codziennie egzekwowane.
 
 ## ☐ KROK 4 — Zapisy na platformy dziennikarskie · [TY] · 45 min
 
@@ -233,3 +248,26 @@ the list. Either way, thanks for maintaining the page!
 4. Nie kupuj niczego. "Gwarantowane backlinki" = pułapka.
 5. Zapytania dziennikarskie: odpowiedź w ciągu GODZINY albo wcale.
 6. Follow-up do dziennikarza: maksymalnie JEDEN.
+
+---
+
+# POMYSŁY NA PÓŹNIEJ (nie zaczynać przed zamknięciem planu 30-dniowego)
+
+> Zasada: każdy nowy dobry pomysł ląduje tutaj, nie przerywa aktualnego planu.
+> Wracamy do tej listy dopiero po kroku 15.
+
+### Przewodnik: Wynajem mieszkania/domu za granicą
+- **Co:** temat kaucji, umów najmu, ryzyka oszustw, najlepszych lokalizacji, Airbnb vs. długoterminowy najem
+- **Dlaczego dobry pomysł:** jeden z 3 najważniejszych praktycznych tematów przy wyprowadzce (obok wizy i kosztów życia), obecnie zupełna luka na stronie
+- **Afiliacja:** realna, niewykorzystana szansa — platformy typu Spotahome, HousingAnywhere mają programy partnerskie, żadna z obecnych 5 afiliacji (Wise, SafetyWing, NordVPN, Saily, MyExpatTaxes) tego nie pokrywa
+- **Rekomendowana forma:** JEDNA uniwersalna strona-przewodnik (wzór: `/taxes/`), NIE 82 osobne strony per kraj — brak czystego publicznego źródła danych o czynszach/kaucjach per kraj, więc pełny per-country data project to zbyt duży projekt na start
+- **Ryzyko:** średnie — wymaga nowego źródła danych, którego jeszcze nie mamy
+
+### Przewodnik: Uznawalność dyplomów i kwalifikacji zawodowych za granicą
+- **Co:** czy dyplom/licencja zawodowa (lekarz, prawnik, nauczyciel, inżynier) wymaga tłumaczenia/certyfikacji/apostille za granicą
+- **Dlaczego dobry pomysł:** realny, częsty niepokój Amerykanów planujących wyprowadzkę, zwłaszcza w zawodach licencjonowanych
+- **WAŻNE — to NIE powinien być "kalkulator".** W przeciwieństwie do reszty narzędzi (czysta matematyka na czystych danych), uznawalność dyplomów zależy jednocześnie od kraju, zawodu, celu (wiza vs. licencja) i dwustronnych umów — brak jednego czystego publicznego źródła danych, ogromna liczba kombinacji kraj×zawód
+- **Wyższe ryzyko (YMYL) niż reszta strony:** błędna informacja o uznawalności licencji zawodowej może kogoś kosztować lata i pieniądze — dużo poważniejsza konsekwencja niż błąd w koszcie życia o $100
+- **Rekomendowana forma:** przewodnik edukacyjny (wzór: `/taxes/`) tłumaczący uniwersalne pojęcia (apostille, WES, sieć NARIC/ENIC w Europie, różnica między "dyplom uznany" a "mogę wykonywać zawód") + kierowanie do właściwych autorytatywnych źródeł, BEZ udawania że dajemy ostateczną odpowiedź per kraj/zawód
+- **Afiliacja:** niepotwierdzona, wymaga researchu (możliwe: serwisy do tłumaczeń/apostille, WES)
+- **Ryzyko:** wyższe niż wynajem — z powodu YMYL, wymaga większej ostrożności redakcyjnej

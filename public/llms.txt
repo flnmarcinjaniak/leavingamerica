@@ -1,0 +1,22 @@
+# LeavingAmerica.co
+
+> Free tools and data for Americans considering a move abroad: salary arbitrage, cost of living, retirement (FIRE) numbers, expat taxes, and country comparisons across 74+ countries. Built on public datasets (World Bank, BEA, Global Peace Index, UNDP, OWID, EF EPI, Numbeo) plus original calculators.
+
+## Tools
+
+- [Salary Arbitrage Calculator](https://leavingamerica.co/#salary-arbitrage): compares a US salary's purchasing power against cost of living abroad.
+- [Country Match Quiz](https://leavingamerica.co/country-match/): matches users to countries based on budget, climate, and priorities.
+- [Runway Calculator](https://leavingamerica.co/runway/): estimates how long savings last living abroad.
+- [Retire Abroad / FIRE Calculator](https://leavingamerica.co/fire/): calculates the FIRE number needed to retire in a given country.
+- [Compare Countries](https://leavingamerica.co/countries/): side-by-side cost, tax, and quality-of-life data by country.
+- [US Expat Taxes Guide](https://leavingamerica.co/taxes/): explains US tax obligations (including FATCA) for Americans living abroad.
+
+## Data
+
+- [Statistics: Americans Moving Abroad](https://leavingamerica.co/statistics/americans-moving-abroad/): dataset and charts on emigration trends, cost of living, and FIRE numbers across countries. Citable with attribution.
+- [Methodology](https://leavingamerica.co/methodology/): data sources and how figures are calculated.
+
+## About
+
+- [About](https://leavingamerica.co/about/): who built this site and why.
+- [Contact](https://leavingamerica.co/contact/): how to reach the founder.

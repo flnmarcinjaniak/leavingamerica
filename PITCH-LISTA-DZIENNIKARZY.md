@@ -163,50 +163,75 @@ Zasady wspólne dla wszystkich trzech:
 
 ## SZABLON A-MH — gotowy do wysłania, Meggen Harris (Forbes)
 
-Nic tu nie uzupełniasz poza swoim imieniem. Zbudowany pod jej tekst z 21 lipca.
+Zbudowany pod jej tekst z 21 lipca. Wysyłaj plain textem, bez HTML, bez pogrubień.
 Jeśli używasz formularza na meggenharris.com, temat wklej w pole „subject" albo
 w pierwszą linię wiadomości.
 
-**Temat:** `The map has a second layer: 11.9 years of runway, 30 days of visa`
+**Temat:** `Egypt: 11.9 years of savings runway, 30-day visa`
 
 ```
 Hi Meggen,
 
-"Where Americans Are Moving Abroad In 2026 — And Why The Map Is Changing" stuck with
-me, because I've been building the same map from the money side and it doesn't line
-up with the legal one.
+I read your July piece on where Americans are moving in 2026. I run
+LeavingAmerica.co, a small data site, and the thing my numbers keep showing is
+that the affordability map and the legal-access map are two different maps.
 
-I track cost of living, visa rules and quality-of-life scores across 74 countries.
-Put runway and visa length in one table and they contradict each other:
+Egypt is the extreme case. $100,000 lasts 11.9 years there on local living costs,
+but the tourist visa runs 30 days. India is close behind at 11.1 years, with no
+digital nomad visa at all. Of the 74 countries I track, 10 give Americans just
+30 days, and only 35 have any nomad visa.
 
-- Egypt: $100,000 covers 11.9 years of living costs. The tourist visa runs 30 days.
-- India: 11.1 years of runway, 90 days visa-free, no digital nomad visa.
-- 10 of the 74 countries admit Americans for 30 days.
-- Only 35 of 74 offer a digital nomad visa as a longer-term route.
-
-There's a second layer under that: of the countries cheap enough to give five-plus
-years of runway, only 13 also score 7+ on both healthcare and safety. The ones cost
-rankings usually lead with are the ones that fail hardest — India at 4/10 on safety,
-Turkey at 3/10.
-
-Everything is free to cite, no signup, methodology and sources on the page:
+The full table is here, free to use with a link:
 https://leavingamerica.co/statistics/2026-runway-report/
 
-If a specific country or savings figure would be more useful than what's published,
-tell me and I'll run it for you.
+If you ever need a number I haven't published (a specific country, a different
+savings amount), ask and I'll pull it.
 
-[Twoje imię i nazwisko]
-leavingamerica.co
+Marcin Janiak
+LeavingAmerica.co
 ```
 
-**Dlaczego ten mail jest skonstruowany tak, a nie inaczej:**
-- Pierwsze zdanie cytuje jej tytuł dosłownie i od razu mówi, że masz kontrę do jej tezy.
-  „Mapa się zmienia" → „mapa ma drugą warstwę". To jest kąt na kolejny tekst, nie komplement.
-- Cztery liczby, każda sprawdzalna, żadnej wody.
-- Drugi finding jako bonus, bo daje jej materiał na osobny artykuł.
-- Ostatnie zdanie to oferta pracy za nią — dla współpracownika rozliczanego z publikacji
-  to realna wartość.
-- Zero „I'd love to", zero prośby o publikację.
+**FOLLOW-UP (5 dni roboczych później, odpowiedź w tym samym wątku, tylko jeśli brak reakcji):**
+
+```
+Hi Meggen,
+
+One more number from the same dataset, in case the first mail got buried. Of the
+74 countries, only 13 combine five-plus years of runway with healthcare and safety
+scores of 7 or better. Vietnam leads. India and Turkey, which top most
+cheap-living lists, score 4/10 and 3/10 on safety.
+
+Same page as before. Either way, this is my last email, promise.
+
+Marcin
+```
+
+**Dlaczego ta wersja, a nie poprzednia (analiza sygnałów AI):**
+- Poprzednia miała em-dash w treści, cztery bullety o identycznym rytmie,
+  eseistyczne przejście („There's a second layer under that") i marketingową
+  formułę („free to cite, no signup"). Każde z tych czterech to rozpoznawalny
+  wzorzec generatora.
+- Parafraza tytułu („your July piece on where Americans are moving") zamiast
+  przeklejonego pełnego nagłówka. Nikt nie przepisuje cudzego tytułu z myślnikiem
+  co do znaku; parafraza dowodzi, że tekst był czytany, nie zescrapowany.
+- Proza zamiast bulletów. Krótkie akapity są skanowalne, a brak listy punktowanej
+  to najprostszy sygnał „pisał człowiek w 10 minut".
+- „a small data site" — tożsamość nadawcy w trzech słowach plus sygnał szczerości.
+  Dziennikarz nie cytuje danych od anonima; „small" rozbraja, bo nikt się tak
+  nie reklamuje.
+- Jeden finding na mail. Drugi finding przeniesiony do follow-upu, dzięki czemu
+  follow-up wnosi nową wartość zamiast pustego „just bumping this".
+- „this is my last email, promise" — zamyka wątek po ludzku i zdejmuje presję.
+
+**Zasady zaufania do linku (dotyczą wszystkich pitchy):**
+- Wysyłaj z adresu w domenie: `marcin@leavingamerica.co` lub
+  `contact@leavingamerica.co` (masz ZOHO). NIGDY z Gmaila. Mail z Gmaila
+  z linkiem do „raportu" to wzorzec spamu; mail z domeny, o której piszesz,
+  to wzorzec źródła.
+- Jeden link w całym mailu, wklejony jako pełny goły URL z widoczną domeną.
+  Żadnych skracaczy, żadnych UTM-ów, żadnego linkowanego tekstu typu „see here".
+- Zero załączników, zero grafik, zero podpisu HTML z logo.
+- Wysyłka wtorek-czwartek, rano czasu wschodniego USA (15:00-17:00 u Ciebie).
 
 ---
 

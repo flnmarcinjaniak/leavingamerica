@@ -132,6 +132,7 @@ const datasetSchema = JSON.stringify({
   description: `How long $100,000 in savings lasts across ${countryCount} countries and ${cityCount} cities, cross-referenced against visa-free stay limits, healthcare and safety scores, and the monthly income needed to make savings last indefinitely.`,
   url: 'https://leavingamerica.co/statistics/2026-runway-report/',
   creator: { '@type': 'Organization', name: 'LeavingAmerica.co', url: 'https://leavingamerica.co' },
+  author: { '@type': 'Person', name: 'Marcin Janiak', url: 'https://leavingamerica.co/about/' },
   dateModified: qualityScoresData.lastUpdated,
   license: 'https://leavingamerica.co/methodology/',
   variableMeasured: [
@@ -334,7 +335,7 @@ table.rwr-table { width: 100%; border-collapse: collapse; font-size: 13.5px; min
       <div class="rwr-hs"><div class="rwr-hs-num grad" data-count={cheapLivable.length} data-suffix={`/${countryCount}`}>0</div><div class="rwr-hs-label">combine 5+ yr runway with good healthcare and safety</div></div>
       <div class="rwr-hs"><div class="rwr-hs-num" data-count={cheapestCity.cost} data-prefix="$">0</div><div class="rwr-hs-label">cheapest tracked city ({cheapestCity.city})</div></div>
     </div>
-    <p class="rwr-meta">Computed live from the LeavingAmerica.co dataset · Updated {updated} · <a href="/methodology/">Methodology</a></p>
+    <p class="rwr-meta">By <a href="/about/">Marcin Janiak</a> · Computed live from the LeavingAmerica.co dataset · Updated {updated} · <a href="/methodology/">Methodology</a></p>
   </div>
 </section>
 
@@ -548,7 +549,7 @@ table.rwr-table { width: 100%; border-collapse: collapse; font-size: 13.5px; min
       </div>
 
       <div class="rwr-cite rwr-reveal">
-        <strong>Citing this report:</strong> every figure here is free to use in articles, newsletters, and research with attribution and a link to this page. Journalists can reach me for custom numbers on any country or savings amount: <a href="mailto:contact@leavingamerica.co">contact@leavingamerica.co</a>.
+        <strong>Citing this report:</strong> every figure here is free to use in articles, newsletters, and research with attribution and a link to this page. I'm <a href="/about/">Marcin Janiak</a>, I built this site and maintain the dataset behind it. Journalists can reach me for custom numbers on any country or savings amount: <a href="mailto:contact@leavingamerica.co">contact@leavingamerica.co</a>. I typically reply within a day.
       </div>
     </div>
   </section>

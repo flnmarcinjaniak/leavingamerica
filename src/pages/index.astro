@@ -998,10 +998,18 @@ const qs = qualityScores.countries as Record<string, any>;
           <p class="sd-eyebrow">Free Data &amp; Research</p>
           <h2>Americans Moving Abroad, by the Numbers</h2>
           <p>Cost of living across 74 countries, retirement math, no-tax destinations, and the data behind the biggest US emigration wave in decades. Sourced and free to cite.</p>
-          <a href="/statistics/americans-moving-abroad/" class="sd-cta">
-            Explore the statistics
-            <svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2.5 7h9M8 3.5L11.5 7 8 10.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
+          <div class="sd-actions">
+            <a href="/statistics/americans-moving-abroad/" class="sd-cta">
+              Explore the statistics
+              <svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2.5 7h9M8 3.5L11.5 7 8 10.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="/statistics/2026-runway-report/" class="sd-cta sd-cta-ghost">
+              <span class="sd-badge">New</span>
+              2026 Runway Report
+              <svg width="15" height="15" viewBox="0 0 14 14" fill="none"><path d="M2.5 7h9M8 3.5L11.5 7 8 10.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+          <p class="sd-hook">In Egypt, $100,000 covers 11.9 years of living costs and the visa expires after 30 days. The report cross-references what Americans can afford against how long they may legally stay.</p>
         </div>
         <div class="sd-stats">
           <div class="sd-tile"><div class="sd-tile-num">180K+</div><div class="sd-tile-label">left the US last year</div></div>
@@ -4666,6 +4674,21 @@ const qs = qualityScores.countries as Record<string, any>;
   .sd-cta:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,0,0,0.28); }
   .sd-cta svg { transition: transform 0.15s ease; }
   .sd-cta:hover svg { transform: translateX(3px); }
+  .sd-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .sd-cta-ghost {
+    background: transparent; color: #fff;
+    border: 1.5px solid rgba(255,255,255,0.32);
+  }
+  .sd-cta-ghost:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.55); }
+  .sd-badge {
+    display: inline-block; padding: 2px 8px; border-radius: 20px;
+    background: linear-gradient(120deg, #60a5fa, #22d3ee); color: #06263d;
+    font-size: 10px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .sd-hook {
+    font-size: 13.5px; color: rgba(255,255,255,0.6); line-height: 1.6;
+    margin: 18px 0 0; max-width: 470px;
+  }
   .sd-stats { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .sd-tile { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 14px; padding: 20px 18px; text-align: center; }
   .sd-tile-num { font-size: clamp(22px, 3vw, 30px); font-weight: 800; letter-spacing: -0.02em; line-height: 1; color: #fff; }

@@ -28,16 +28,44 @@ Lepiej wysłać 12 maili do zweryfikowanych osób niż 30 w próżnię.
 Priorytet najwyższy: te osoby udowodniły, że temat je interesuje, publikując o nim więcej
 niż raz w 2026.
 
-### 1. Meggen Harris — Forbes
-**Najlepszy pojedynczy cel na całej liście.** Trzy artykuły w 2026 dokładnie w Twojej niszy:
-- „Where Americans Are Moving Abroad In 2026" (12 marca 2026)
-- „Where Americans Are Moving Abroad In 2026 — And Why The Map Is Changing" (21 lipca 2026)
-- „10 Countries Offering Digital Nomad Visas In 2026 — And How They Work" (15 marca 2026)
+### 1. Meggen Harris — Forbes ⭐ CEL NUMER JEDEN
+**Zweryfikowane 30 lipca 2026 na jej stronie autorskiej na Forbes.com.**
 
-**Dlaczego trafi:** pisze i o kierunkach migracji, i o wizach nomadzkich — czyli o obu
-połówkach Twojego głównego findingu. Lipcowy artykuł o „zmieniającej się mapie" wręcz prosi
-się o dane, które pokazują, że mapa finansowa i mapa wizowa to dwie różne mapy.
-**Szablon:** A (pułapka wizowa)
+Ostatnie pięć tekstów (publikuje ~2x w tygodniu):
+| Data | Tytuł |
+|---|---|
+| 23 lip 2026 | Why Aging Feels Different For Men And Women |
+| **21 lip 2026** | **Where Americans Are Moving Abroad In 2026 — And Why The Map Is Changing** |
+| 19 lip 2026 | Food Recalls Are Rising |
+| **15 lip 2026** | **More Americans Are Designing Their Careers Around The Lives They Want** |
+| **12 lip 2026** | **7 American Cities Remote Workers Are Choosing In 2026** |
+
+Wcześniej także: „10 Countries Offering Digital Nomad Visas In 2026" (15 marca 2026),
+„Where Americans Are Moving Abroad In 2026" (12 marca 2026).
+
+**Dlaczego to najlepszy cel na liście:**
+- Trzy z pięciu ostatnich tekstów dotyczą relokacji / pracy zdalnej. To aktywnie drążony beat,
+  nie jednorazowy strzał.
+- Tempo ~2 teksty tygodniowo = stały głód świeżych kątów.
+- Jest **Forbes Contributor, nie etatowa reporterka.** Współpracownicy sami szukają tematów
+  i są znacznie bardziej otwarci na gotowe dane niż etatowcy zasypywani pitchami.
+- Jej bio: „beauty, fashion, travel, and wellbeing" — generalistka lifestyle'owa, czyli
+  potrzebuje danych od kogoś, kto siedzi w liczbach. Ty nimi jesteś.
+
+**Kontakt — ścieżki wiarygodne, w tej kolejności:**
+1. **meggenharris.com → zakładka Contact** (własny formularz, jej kanał)
+2. **LinkedIn → „Wyślij wiadomość"** — linkedin.com/in/meggen-harris
+3. **Muck Rack** — profil dziennikarski
+
+**❌ CZEGO NIE UŻYWAĆ:**
+- `meggenharris@gmail.com` — pochodzi z Przeglądu od AI Google, **niezweryfikowany**.
+  Jej oficjalna strona na Forbesie podaje LinkedIn, Instagram i stronę własną, ale
+  **żadnego maila.** Skoro ona sama go nie publikuje, adres z AI jest najpewniej zgadnięty
+  ze schematu imię+nazwisko.
+- `meggen@participantcapital.com` — to firma inwestycyjna z nieruchomości w Miami, czyli
+  jej inna rola zawodowa. Pitch dziennikarski tam = spam z bazy.
+
+**Szablon:** A-MH (gotowy, poniżej — napisany konkretnie pod jej lipcowy tekst)
 
 ### 2. Laura Begley Bloom — Forbes
 - „The Best Countries To Live In The World In 2026 — Rated By Expats In InterNations Report"
@@ -130,6 +158,55 @@ Zasady wspólne dla wszystkich trzech:
 - Temat maila krótki, z liczbą.
 - Nie proś o publikację. Daj dane i zejdź z drogi.
 - Podpisuj się imieniem i nazwiskiem + linkiem. Bez „Best regards, The LeavingAmerica Team".
+
+---
+
+## SZABLON A-MH — gotowy do wysłania, Meggen Harris (Forbes)
+
+Nic tu nie uzupełniasz poza swoim imieniem. Zbudowany pod jej tekst z 21 lipca.
+Jeśli używasz formularza na meggenharris.com, temat wklej w pole „subject" albo
+w pierwszą linię wiadomości.
+
+**Temat:** `The map has a second layer: 11.9 years of runway, 30 days of visa`
+
+```
+Hi Meggen,
+
+"Where Americans Are Moving Abroad In 2026 — And Why The Map Is Changing" stuck with
+me, because I've been building the same map from the money side and it doesn't line
+up with the legal one.
+
+I track cost of living, visa rules and quality-of-life scores across 74 countries.
+Put runway and visa length in one table and they contradict each other:
+
+- Egypt: $100,000 covers 11.9 years of living costs. The tourist visa runs 30 days.
+- India: 11.1 years of runway, 90 days visa-free, no digital nomad visa.
+- 10 of the 74 countries admit Americans for 30 days.
+- Only 35 of 74 offer a digital nomad visa as a longer-term route.
+
+There's a second layer under that: of the countries cheap enough to give five-plus
+years of runway, only 13 also score 7+ on both healthcare and safety. The ones cost
+rankings usually lead with are the ones that fail hardest — India at 4/10 on safety,
+Turkey at 3/10.
+
+Everything is free to cite, no signup, methodology and sources on the page:
+https://leavingamerica.co/statistics/2026-runway-report/
+
+If a specific country or savings figure would be more useful than what's published,
+tell me and I'll run it for you.
+
+[Twoje imię i nazwisko]
+leavingamerica.co
+```
+
+**Dlaczego ten mail jest skonstruowany tak, a nie inaczej:**
+- Pierwsze zdanie cytuje jej tytuł dosłownie i od razu mówi, że masz kontrę do jej tezy.
+  „Mapa się zmienia" → „mapa ma drugą warstwę". To jest kąt na kolejny tekst, nie komplement.
+- Cztery liczby, każda sprawdzalna, żadnej wody.
+- Drugi finding jako bonus, bo daje jej materiał na osobny artykuł.
+- Ostatnie zdanie to oferta pracy za nią — dla współpracownika rozliczanego z publikacji
+  to realna wartość.
+- Zero „I'd love to", zero prośby o publikację.
 
 ---
 
@@ -233,7 +310,7 @@ Skopiuj do Arkuszy Google. Kolumna „Data follow-up" = data wysyłki + 5 dni ro
 
 | # | Osoba | Outlet | Tier | Ich artykuł (tytuł) | E-mail | Szablon | Wysłano | Follow-up | Odpowiedź | Link zdobyty |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 1 | Meggen Harris | Forbes | 1 | Where Americans Are Moving Abroad In 2026 — And Why The Map Is Changing | | A | | | | |
+| 1 | Meggen Harris | Forbes | 1 | Where Americans Are Moving Abroad In 2026 — And Why The Map Is Changing | meggenharris.com/contact lub LinkedIn DM | **A-MH gotowy** | | | | |
 | 2 | Laura Begley Bloom | Forbes | 1 | The Best Countries To Live In The World In 2026 | | C | | | | |
 | 3 | Brittany Chang | Condé Nast Traveler | 1 | (Taiwan digital nomad visa, lipiec 2026) | | A | | | | |
 | 4 | ? | Wall Street Journal | 2 | (analiza 180K, ustal byline) | | A | | | | |

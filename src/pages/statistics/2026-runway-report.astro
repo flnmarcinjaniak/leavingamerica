@@ -52,81 +52,105 @@ const ISO2: Record<string,string> = {
 const qs = qualityScoresData.countries as Record<string, any>;
 const all = Object.entries(qs);
 
-type Row = { slug: string; name: string; iso2: string; single: number; couple: number; tax: string };
+type Row = {
+  slug: string; name: string; iso2: string;
+  single: number; couple: number; tax: string;
+  visa: number | null; nomad: boolean; health: number; safety: number;
+  y100: number;
+};
 const rows: Row[] = all
   .filter(([slug, d]) => d.budget_single && d.budget_couple && NAMES[slug] && ISO2[slug])
   .map(([slug, d]) => ({
     slug, name: NAMES[slug], iso2: ISO2[slug],
     single: d.budget_single as number, couple: d.budget_couple as number,
     tax: d.tax_system || 'unknown',
+    visa: typeof d.visa_days === 'number' ? d.visa_days : null,
+    nomad: !!d.nomad_visa,
+    health: d.healthcare as number, safety: d.safety as number,
+    y100: +(100000 / (d.budget_single as number) / 12).toFixed(1),
   }));
 
 const countryCount = rows.length;
 const US_MONTHLY = 3500;
-const yrs = (amount: number, monthly: number) => amount / monthly / 12;
+const usYears100k = +(100000 / US_MONTHLY / 12).toFixed(1);
 
-function tierData(amount: number) {
-  const withYears = rows
-    .map(r => ({ ...r, years: +(yrs(amount, r.single)).toFixed(1) }))
-    .sort((a, b) => b.years - a.years);
-  const avg = withYears.reduce((s, r) => s + r.years, 0) / withYears.length;
-  return {
-    amount,
-    all: withYears,
-    top12: withYears.slice(0, 12),
-    longest: withYears[0],
-    shortest: withYears[withYears.length - 1],
-    avg: +avg.toFixed(1),
-    usYears: +(yrs(amount, US_MONTHLY)).toFixed(1),
-    over10: withYears.filter(r => r.years > 10).length,
-  };
-}
+/* ── 1. VISA TRAP: money outlasts legal welcome ── */
+const visaTrap = rows
+  .filter(r => r.visa !== null && r.visa <= 90 && !r.nomad && r.y100 >= 4)
+  .sort((a, b) => b.y100 - a.y100);
+const trapMax = visaTrap.length ? visaTrap[0].y100 : 0;
+const thirtyDayCount = rows.filter(r => r.visa === 30).length;
+const nomadCount = rows.filter(r => r.nomad).length;
 
-const t50 = tierData(50000);
-const t100 = tierData(100000);
-const t250 = tierData(250000);
+/* ── 2. INCOME THRESHOLD: how little earned makes it permanent ── */
+const THRESHOLDS = [750, 1000, 1250, 1500, 2000, 2500, 3000, 3500];
+const incomeCurve = THRESHOLDS.map(t => {
+  const n = rows.filter(r => r.single <= t).length;
+  return { amount: t, count: n, pct: Math.round((n / countryCount) * 100) };
+});
+const at1000 = incomeCurve.find(x => x.amount === 1000)!;
+const at2000 = incomeCurve.find(x => x.amount === 2000)!;
+const at3000 = incomeCurve.find(x => x.amount === 3000)!;
+const curveMax = Math.max(...incomeCurve.map(x => x.count));
 
-const decadeAt100k = t100.all.filter(r => r.years > 10).map(r => r.name);
-const tableRows = rows
-  .map(r => ({
-    ...r,
-    y50: +(yrs(50000, r.single)).toFixed(1),
-    y100: +(yrs(100000, r.single)).toFixed(1),
-    y250: +(yrs(250000, r.single)).toFixed(1),
-  }))
+/* ── 3. CHEAP AND LIVABLE: runway that survives a quality filter ── */
+const RUNWAY_MIN = 5, QUALITY_MIN = 7;
+const cheapLivable = rows
+  .filter(r => r.y100 >= RUNWAY_MIN && r.health >= QUALITY_MIN && r.safety >= QUALITY_MIN)
+  .sort((a, b) => b.y100 - a.y100);
+const clMax = cheapLivable.length ? cheapLivable[0].y100 : 0;
+const failsQuality = rows
+  .filter(r => r.y100 >= 7 && (r.safety <= 4 || r.health <= 5))
   .sort((a, b) => b.y100 - a.y100);
 
-const coupleRatioPct = Math.round(
-  (rows.reduce((s, r) => s + r.couple / r.single, 0) / countryCount - 1) * 100
-);
+/* ── 4. CITY-LEVEL DATA ── */
+type City = { city: string; country: string; iso2: string; slug: string; cost: number; years: number };
+const cities: City[] = [];
+for (const [slug, d] of all) {
+  if (!NAMES[slug] || !ISO2[slug] || !Array.isArray(d.affordable_cities)) continue;
+  for (const c of d.affordable_cities) {
+    if (!c || typeof c.monthly_usd !== 'number') continue;
+    cities.push({
+      city: c.name, country: NAMES[slug], iso2: ISO2[slug], slug,
+      cost: c.monthly_usd, years: +(100000 / c.monthly_usd / 12).toFixed(1),
+    });
+  }
+}
+cities.sort((a, b) => a.cost - b.cost);
+const cityCount = cities.length;
+const cheapestCity = cities[0];
+
+/* ── 5. FULL DATASET TABLE ── */
+const tableRows = [...rows].sort((a, b) => b.y100 - a.y100);
 
 const updated = 'July 2026';
-const t100Max = t100.top12[0].years;
-const t50Max = t50.top12[0].years;
-const t250Max = t250.top12[0].years;
 
 const datasetSchema = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'Dataset',
-  name: '2026 Runway Report: Savings Runway by Country',
-  description: `How long $50,000, $100,000, and $250,000 in savings lasts across ${countryCount} countries, based on baseline single-person monthly cost of living.`,
+  name: '2026 Runway Report: Savings Runway, Visa Limits and Livability by Country',
+  description: `How long $100,000 in savings lasts across ${countryCount} countries and ${cityCount} cities, cross-referenced against visa-free stay limits, healthcare and safety scores, and the monthly income needed to make savings last indefinitely.`,
   url: 'https://leavingamerica.co/statistics/2026-runway-report/',
   creator: { '@type': 'Organization', name: 'LeavingAmerica.co', url: 'https://leavingamerica.co' },
   dateModified: qualityScoresData.lastUpdated,
   license: 'https://leavingamerica.co/methodology/',
   variableMeasured: [
     'Monthly cost of living (USD, single person)',
-    'Savings runway in years at $50,000',
+    'Monthly cost of living by city (USD)',
     'Savings runway in years at $100,000',
-    'Savings runway in years at $250,000',
+    'Visa-free stay length (days)',
+    'Digital nomad visa availability',
+    'Healthcare quality score (0-10)',
+    'Safety score (0-10)',
+    'Monthly income required to cover full local cost of living',
   ],
 });
 ---
 
 <BaseLayout
-  title="2026 Runway Report: How Long $50K–$250K Lasts Abroad"
-  description={`How long $50,000, $100,000, and $250,000 in savings lasts across ${countryCount} countries, versus a typical US city. Sourced, citable data for journalists and researchers.`}
-  ogTitle="2026 Runway Report: How Long American Savings Last Abroad"
+  title="2026 Runway Report: Savings, Visa Limits & Livability Abroad"
+  description={`How long $100,000 lasts across ${countryCount} countries and ${cityCount} cities, cross-referenced against visa-free stay limits, healthcare and safety scores, and the income that makes savings permanent. Citable data for journalists.`}
+  ogTitle="2026 Runway Report: What Americans Can Afford, and Where They Can Stay"
 >
   <script type="application/ld+json" set:html={datasetSchema} />
 
@@ -223,6 +247,22 @@ const datasetSchema = JSON.stringify({
 .rwr-bar-val { font-size: 13.5px; font-weight: 800; color: #0f172a; white-space: nowrap; }
 .rwr-chart-note { font-size: 12.5px; color: #94a3b8; margin: 16px 0 0; }
 
+/* ═══ QUALITY BADGE / WARN ═══ */
+.rwr-qbadge {
+  display: inline-block; margin-left: 6px; padding: 2px 7px;
+  background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 20px;
+  font-size: 11px; font-weight: 700; color: #047857; letter-spacing: 0.02em;
+}
+.rwr-table .rwr-warn { color: #b91c1c; font-weight: 800; }
+.rwr-warnbox {
+  background: #fff7ed; border: 1px solid #fed7aa; border-radius: 16px;
+  padding: 20px 24px; margin-top: 24px; font-size: 14px; color: #7c2d12; line-height: 1.65;
+}
+.rwr-warnbox strong { display: block; color: #7c2d12; margin-bottom: 10px; }
+.rwr-warnbox ul { margin: 0; padding-left: 20px; }
+.rwr-warnbox li { margin-bottom: 5px; }
+.rwr-tall { max-height: 520px; overflow-y: auto; }
+
 /* ═══ METHODOLOGY ═══ */
 .rwr-meth { background: #fff; border: 1px solid #e6ebf2; border-radius: 16px; padding: 24px 26px; }
 .rwr-meth p { font-size: 14px; color: #334155; line-height: 1.75; margin: 0 0 14px; }
@@ -284,16 +324,16 @@ table.rwr-table { width: 100%; border-collapse: collapse; font-size: 13.5px; min
   <div class="rwr-orb rwr-orb-2"></div>
   <div class="rwr-dots"></div>
   <div class="rwr-hero-inner">
-    <span class="rwr-pill"><span class="rwr-pill-dot"></span>Live data · {countryCount} countries · Free to cite</span>
-    <h1>2026 Runway Report:<br/>How Long American Savings Last Abroad</h1>
-    <p class="rwr-hero-sub">How many years $50,000, $100,000, and $250,000 in savings actually buys, country by country, compared with a typical US city. Every number below is computed live from LeavingAmerica.co's dataset.</p>
+    <span class="rwr-pill"><span class="rwr-pill-dot"></span>Live data · {countryCount} countries · {cityCount} cities · Free to cite</span>
+    <h1>2026 Runway Report:<br/>What Americans Can Afford, and Where They Can Actually Stay</h1>
+    <p class="rwr-hero-sub">Cost of living is the easy half. This report cross-references how long savings last against how long you may legally remain, how little income makes the math permanent, and which cheap countries survive a healthcare and safety filter.</p>
     <div class="rwr-hero-stats">
-      <div class="rwr-hs"><div class="rwr-hs-num grad" data-count={t100.avg} data-suffix=" yrs">0</div><div class="rwr-hs-label">avg. runway on $100K, across {countryCount} countries</div></div>
-      <div class="rwr-hs"><div class="rwr-hs-num" data-count={t100.usYears} data-suffix=" yrs">0</div><div class="rwr-hs-label">what $100K buys in a typical $3,500/mo US city</div></div>
-      <div class="rwr-hs"><div class="rwr-hs-num grad" data-count={t100.longest.years} data-suffix=" yrs">0</div><div class="rwr-hs-label">longest $100K runway ({t100.longest.name})</div></div>
-      <div class="rwr-hs"><div class="rwr-hs-num" data-count={countryCount}>0</div><div class="rwr-hs-label">countries with full cost data</div></div>
+      <div class="rwr-hs"><div class="rwr-hs-num grad" data-count={trapMax} data-suffix=" yrs">0</div><div class="rwr-hs-label">runway in {visaTrap.length ? visaTrap[0].name : ''} on $100K, against {visaTrap.length ? visaTrap[0].visa : 0} days of legal stay</div></div>
+      <div class="rwr-hs"><div class="rwr-hs-num" data-count={at2000.count} data-suffix={`/${countryCount}`}>0</div><div class="rwr-hs-label">countries fully covered by $2,000/mo of income</div></div>
+      <div class="rwr-hs"><div class="rwr-hs-num grad" data-count={cheapLivable.length} data-suffix={`/${countryCount}`}>0</div><div class="rwr-hs-label">combine 5+ yr runway with good healthcare and safety</div></div>
+      <div class="rwr-hs"><div class="rwr-hs-num" data-count={cheapestCity.cost} data-prefix="$">0</div><div class="rwr-hs-label">cheapest tracked city ({cheapestCity.city})</div></div>
     </div>
-    <p class="rwr-meta">Sourced from LeavingAmerica.co's cost-of-living dataset · Updated {updated} · <a href="/methodology/">Methodology</a></p>
+    <p class="rwr-meta">Computed live from the LeavingAmerica.co dataset · Updated {updated} · <a href="/methodology/">Methodology</a></p>
   </div>
 </section>
 
@@ -303,73 +343,135 @@ table.rwr-table { width: 100%; border-collapse: collapse; font-size: 13.5px; min
   <section class="rwr-section">
     <div class="rwr-wrap">
       <p class="rwr-eyebrow rwr-reveal">Key Findings</p>
-      <h2 class="rwr-reveal">The Numbers, In Plain English</h2>
+      <h2 class="rwr-reveal">Six Numbers Worth Quoting</h2>
       <p class="rwr-section-sub rwr-reveal">Free to cite in articles, newsletters, and research with attribution and a link to this page.</p>
       <ol class="rwr-kf-list rwr-reveal">
-        <li class="rwr-kf-item"><strong>$100,000 in savings lasts an average of {t100.avg} years</strong> across the {countryCount} countries tracked here, more than double the {t100.usYears} years the same amount lasts in a typical $3,500/month US city.</li>
-        <li class="rwr-kf-item"><strong>{t100.longest.name} offers the longest runway at every savings level tracked:</strong> $50,000 lasts {t50.longest.years} years, $100,000 lasts {t100.longest.years} years, and $250,000 lasts nearly {Math.floor(t250.longest.years)} years ({t250.longest.years}).</li>
-        <li class="rwr-kf-item"><strong>{t250.shortest.name} offers the shortest runway tracked:</strong> even $250,000 lasts just {t250.shortest.years} years, about a sixth of what the same sum buys in {t250.longest.name}.</li>
-        <li class="rwr-kf-item"><strong>At $100,000, savings last more than a decade in {t100.over10} of {countryCount} tracked countries:</strong> {decadeAt100k.join(', ')}.</li>
-        <li class="rwr-kf-item"><strong>At $250,000, that jumps to {t250.over10} of {countryCount} countries</strong> lasting more than ten years, versus {t250.usYears} years for the same amount in a typical US city.</li>
-        <li class="rwr-kf-item"><strong>Couples spend {coupleRatioPct}% more than singles on average</strong> across the same countries, meaningfully shortening runway for two-person households versus solo movers.</li>
+        <li class="rwr-kf-item"><strong>In {visaTrap[0].name}, $100,000 covers {visaTrap[0].y100} years of living costs and the visa runs out after {visaTrap[0].visa} days.</strong> Affordability and legal access are separate problems, and almost nobody publishes them side by side.</li>
+        <li class="rwr-kf-item"><strong>{thirtyDayCount} of {countryCount} tracked countries admit Americans for just 30 days visa-free,</strong> and only {nomadCount} offer a digital nomad visa as a longer-term route. For the remaining {countryCount - nomadCount}, staying means employment, investment, ancestry, or repeated border runs.</li>
+        <li class="rwr-kf-item"><strong>$2,000 a month in remote income fully covers local costs in {at2000.count} of {countryCount} countries ({at2000.pct}%).</strong> At $1,000 the number is {at1000.count}; at $3,000 it reaches {at3000.count}. Framed this way, the question stops being how much you saved and becomes how little you need to earn.</li>
+        <li class="rwr-kf-item"><strong>Only {cheapLivable.length} of {countryCount} countries combine five or more years of runway with healthcare and safety scores of 7 or better.</strong> {cheapLivable[0].name} leads at {cheapLivable[0].y100} years, followed by {cheapLivable[1].name} and {cheapLivable[2].name}. Cheap and livable overlap far less than cost tables suggest.</li>
+        <li class="rwr-kf-item"><strong>The longest runways often fail that filter.</strong> {failsQuality[0].name} offers {failsQuality[0].y100} years but scores {failsQuality[0].safety} of 10 on safety; {failsQuality[1].name} offers {failsQuality[1].y100} years at a safety score of {failsQuality[1].safety}.</li>
+        <li class="rwr-kf-item"><strong>{cheapestCity.city}, {cheapestCity.country} is the cheapest of {cityCount} tracked cities at ${cheapestCity.cost} a month,</strong> which turns $100,000 into {cheapestCity.years} years. City-level figures diverge sharply from national averages, and the averages are what most coverage uses.</li>
       </ol>
     </div>
   </section>
 
-  <!-- $50K -->
+  <!-- VISA TRAP -->
   <section class="rwr-section">
     <div class="rwr-wrap">
-      <p class="rwr-eyebrow rwr-reveal">Tier 1</p>
-      <h2 class="rwr-reveal">How Long $50,000 Lasts</h2>
-      <p class="rwr-section-sub rwr-reveal">Ranked by years of runway for a single person at a normal lifestyle, no other income. Top 12 of {countryCount} shown.</p>
+      <p class="rwr-eyebrow rwr-reveal">Finding 1</p>
+      <h2 class="rwr-reveal">Where Your Money Outlasts Your Welcome</h2>
+      <p class="rwr-section-sub rwr-reveal">Countries offering at least four years of runway on $100,000, no digital nomad visa, and 90 or fewer visa-free days. The gap between the two columns is the part cost-of-living rankings never show.</p>
+      <div class="rwr-table-scroll rwr-reveal" id="rwr-trap-scroll">
+        <table class="rwr-table">
+          <thead>
+            <tr>
+              <th>Country</th>
+              <th class="num">Runway on $100K</th>
+              <th class="num">Visa-free stay</th>
+              <th class="num">Monthly cost</th>
+            </tr>
+          </thead>
+          <tbody>
+            {visaTrap.map(r => (
+              <tr>
+                <td><span class="rwr-tc-name"><span class={`fi fi-${r.iso2}`}></span><a href={`/countries/${r.slug}/`}>{r.name}</a></span></td>
+                <td class="num">{r.y100} yrs</td>
+                <td class="num rwr-warn">{r.visa} days</td>
+                <td class="num">${r.single.toLocaleString()}/mo</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div class="rwr-table-fade" id="rwr-trap-fade" aria-hidden="true"></div>
+      </div>
+      <p class="rwr-chart-note">Visa-free entry is not residency. Extensions, border runs, and long-stay permits exist in most of these countries, but each carries its own income thresholds, paperwork, and refusal risk. Anyone budgeting a multi-year stay should treat the legal pathway as the binding constraint, not the money.</p>
+    </div>
+  </section>
+
+  <!-- INCOME THRESHOLD -->
+  <section class="rwr-section">
+    <div class="rwr-wrap">
+      <p class="rwr-eyebrow rwr-reveal">Finding 2</p>
+      <h2 class="rwr-reveal">How Little Income Makes Savings Permanent</h2>
+      <p class="rwr-section-sub rwr-reveal">Savings only deplete when spending exceeds income. This chart counts how many of the {countryCount} tracked countries a given monthly income covers outright, at which point the runway stops being finite.</p>
       <div class="rwr-chart rwr-reveal">
-        {t50.top12.map(r => (
+        {incomeCurve.map(x => (
           <div class="rwr-bar-row">
-            <div class="rwr-bar-label"><span class={`fi fi-${r.iso2}`}></span><span>{r.name}</span></div>
-            <div class="rwr-bar-track"><div class="rwr-bar-fill green" data-bar={Math.round((r.years / t50Max) * 100)}></div></div>
-            <div class="rwr-bar-val">{r.years} yrs</div>
+            <div class="rwr-bar-label"><span>${x.amount.toLocaleString()}/mo</span></div>
+            <div class="rwr-bar-track"><div class="rwr-bar-fill blue" data-bar={Math.round((x.count / curveMax) * 100)}></div></div>
+            <div class="rwr-bar-val">{x.count} countries</div>
           </div>
         ))}
-        <p class="rwr-chart-note">{t50.shortest.name} sits at the other end at {t50.shortest.years} years. The {countryCount}-country average is {t50.avg} years, versus {t50.usYears} years for the same amount in a typical $3,500/month US city.</p>
+        <p class="rwr-chart-note">A part-time remote income of $1,000 a month, roughly one freelance client, covers full local costs in {at1000.count} countries outright. The same figure buys about a third of average rent in a mid-cost US city.</p>
+      </div>
+      <div class="rwr-cta rwr-reveal">Model your own income and lifestyle level against every country in the <a href="/runway/">Runway Calculator</a>.</div>
+    </div>
+  </section>
+
+  <!-- CHEAP AND LIVABLE -->
+  <section class="rwr-section">
+    <div class="rwr-wrap">
+      <p class="rwr-eyebrow rwr-reveal">Finding 3</p>
+      <h2 class="rwr-reveal">Cheap That Survives a Quality Filter</h2>
+      <p class="rwr-section-sub rwr-reveal">The {cheapLivable.length} countries clearing five or more years of runway on $100,000 while also scoring 7 or better on both healthcare and safety. This ranking differs substantially from a pure cost ranking.</p>
+      <div class="rwr-chart rwr-reveal">
+        {cheapLivable.map(r => (
+          <div class="rwr-bar-row">
+            <div class="rwr-bar-label"><span class={`fi fi-${r.iso2}`}></span><span>{r.name}</span></div>
+            <div class="rwr-bar-track"><div class="rwr-bar-fill green" data-bar={Math.round((r.y100 / clMax) * 100)}></div></div>
+            <div class="rwr-bar-val">{r.y100} yrs <span class="rwr-qbadge">H{r.health} S{r.safety}</span></div>
+          </div>
+        ))}
+        <p class="rwr-chart-note">H = healthcare quality, S = safety, each scored 0 to 10. Sources for both are listed on the <a href="/methodology/">methodology page</a>.</p>
+      </div>
+      <div class="rwr-warnbox rwr-reveal">
+        <strong>The countries that fail this filter are the ones cost rankings put first.</strong>
+        <ul>
+          {failsQuality.map(r => (
+            <li>{r.name}: {r.y100} years of runway, healthcare {r.health}/10, safety {r.safety}/10</li>
+          ))}
+        </ul>
       </div>
     </div>
   </section>
 
-  <!-- $100K -->
+  <!-- CITIES -->
   <section class="rwr-section">
     <div class="rwr-wrap">
-      <p class="rwr-eyebrow rwr-reveal">Tier 2</p>
-      <h2 class="rwr-reveal">How Long $100,000 Lasts</h2>
-      <p class="rwr-section-sub rwr-reveal">Same method, double the savings. Single person, normal lifestyle, no other income. These 12 stretch it furthest.</p>
-      <div class="rwr-chart rwr-reveal">
-        {t100.top12.map(r => (
-          <div class="rwr-bar-row">
-            <div class="rwr-bar-label"><span class={`fi fi-${r.iso2}`}></span><span>{r.name}</span></div>
-            <div class="rwr-bar-track"><div class="rwr-bar-fill blue" data-bar={Math.round((r.years / t100Max) * 100)}></div></div>
-            <div class="rwr-bar-val">{r.years} yrs</div>
-          </div>
-        ))}
-        <p class="rwr-chart-note">The {countryCount}-country average is {t100.avg} years. {t100.shortest.name}, the priciest country tracked, turns the same $100,000 into just {t100.shortest.years} years, close to the {t100.usYears} years it buys in a typical US city.</p>
+      <p class="rwr-eyebrow rwr-reveal">Finding 4</p>
+      <h2 class="rwr-reveal">National Averages Hide the Real Numbers</h2>
+      <p class="rwr-section-sub rwr-reveal">Monthly cost and $100,000 runway for {cityCount} cities across {countryCount} countries, cheapest first. Most coverage of this topic quotes country averages, which sit well above what specific cities actually cost.</p>
+      <div class="rwr-table-tools rwr-reveal">
+        <div class="rwr-search">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.6"/><path d="M11 11l3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <input type="text" id="rwr-city-search" placeholder="Search a city or country…" aria-label="Search cities" />
+        </div>
+        <span class="rwr-search-count" id="rwr-city-count">{cityCount} cities</span>
       </div>
-      <div class="rwr-cta rwr-reveal">Run these numbers for your own savings and lifestyle: the <a href="/runway/">Runway Calculator</a> shows your exact number in every country, instantly.</div>
-    </div>
-  </section>
-
-  <!-- $250K -->
-  <section class="rwr-section">
-    <div class="rwr-wrap">
-      <p class="rwr-eyebrow rwr-reveal">Tier 3</p>
-      <h2 class="rwr-reveal">How Long $250,000 Lasts</h2>
-      <p class="rwr-section-sub rwr-reveal">The same calculation at a quarter-million in savings. Single person, normal lifestyle, no other income.</p>
-      <div class="rwr-chart rwr-reveal">
-        {t250.top12.map(r => (
-          <div class="rwr-bar-row">
-            <div class="rwr-bar-label"><span class={`fi fi-${r.iso2}`}></span><span>{r.name}</span></div>
-            <div class="rwr-bar-track"><div class="rwr-bar-fill amber" data-bar={Math.round((r.years / t250Max) * 100)}></div></div>
-            <div class="rwr-bar-val">{r.years} yrs</div>
-          </div>
-        ))}
-        <p class="rwr-chart-note">At this level, {t250.over10} of {countryCount} countries pass the ten-year mark. {t250.shortest.name} is the outlier at just {t250.shortest.years} years, versus {t250.usYears} in a typical US city.</p>
+      <div class="rwr-table-scroll rwr-reveal rwr-tall" id="rwr-city-scroll">
+        <table class="rwr-table">
+          <thead>
+            <tr>
+              <th>City</th>
+              <th>Country</th>
+              <th class="num">Monthly cost</th>
+              <th class="num">Runway on $100K</th>
+            </tr>
+          </thead>
+          <tbody id="rwr-city-body">
+            {cities.map(c => (
+              <tr data-name={`${c.city} ${c.country}`.toLowerCase()}>
+                <td>{c.city}</td>
+                <td><span class="rwr-tc-name"><span class={`fi fi-${c.iso2}`}></span><a href={`/countries/${c.slug}/`}>{c.country}</a></span></td>
+                <td class="num">${c.cost.toLocaleString()}/mo</td>
+                <td class="num">{c.years} yrs</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div class="rwr-noresults" id="rwr-city-none">No city matches that search.</div>
+        <div class="rwr-table-fade" id="rwr-city-fade" aria-hidden="true"></div>
       </div>
     </div>
   </section>
@@ -378,8 +480,8 @@ table.rwr-table { width: 100%; border-collapse: collapse; font-size: 13.5px; min
   <section class="rwr-section">
     <div class="rwr-wrap">
       <p class="rwr-eyebrow rwr-reveal">The Full Dataset</p>
-      <h2 class="rwr-reveal">Runway at Every Savings Tier, All {countryCount} Countries</h2>
-      <p class="rwr-section-sub rwr-reveal">Monthly baseline cost and years of runway at $50K / $100K / $250K, single person, no additional income. Sorted by $100K runway, longest first.</p>
+      <h2 class="rwr-reveal">Every Tracked Country, All Four Variables</h2>
+      <p class="rwr-section-sub rwr-reveal">Monthly cost, runway on $100,000, visa-free days, nomad visa availability, and healthcare and safety scores for all {countryCount} countries. Sorted by runway, longest first.</p>
       <div class="rwr-table-tools rwr-reveal">
         <div class="rwr-search">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.6"/><path d="M11 11l3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
@@ -397,9 +499,11 @@ table.rwr-table { width: 100%; border-collapse: collapse; font-size: 13.5px; min
             <tr>
               <th>Country</th>
               <th class="num">Monthly cost</th>
-              <th class="num">$50K</th>
-              <th class="num">$100K</th>
-              <th class="num">$250K</th>
+              <th class="num">Runway $100K</th>
+              <th class="num">Visa-free</th>
+              <th class="num">Nomad visa</th>
+              <th class="num">Health</th>
+              <th class="num">Safety</th>
             </tr>
           </thead>
           <tbody id="rwr-tbl-body">
@@ -407,9 +511,11 @@ table.rwr-table { width: 100%; border-collapse: collapse; font-size: 13.5px; min
               <tr data-name={r.name.toLowerCase()}>
                 <td><span class="rwr-tc-name"><span class={`fi fi-${r.iso2}`}></span><a href={`/countries/${r.slug}/`}>{r.name}</a></span></td>
                 <td class="num">${r.single.toLocaleString()}/mo</td>
-                <td class="num">{r.y50} yrs</td>
                 <td class="num">{r.y100} yrs</td>
-                <td class="num">{r.y250} yrs</td>
+                <td class="num">{r.visa === null ? 'n/a' : `${r.visa} d`}</td>
+                <td class="num">{r.nomad ? 'yes' : 'no'}</td>
+                <td class="num">{r.health}/10</td>
+                <td class="num">{r.safety}/10</td>
               </tr>
             ))}
           </tbody>
@@ -426,10 +532,10 @@ table.rwr-table { width: 100%; border-collapse: collapse; font-size: 13.5px; min
       <p class="rwr-eyebrow rwr-reveal">Methodology</p>
       <h2 class="rwr-reveal">How This Was Calculated</h2>
       <div class="rwr-meth rwr-reveal">
-        <p>Runway in years is calculated as <code>savings ÷ monthly cost of living ÷ 12</code>, using each country's baseline single-person monthly cost as tracked by LeavingAmerica.co, sourced from the WhereNext open data API (getwherenext.com) and updated quarterly.</p>
-        <p>This assumes no additional income during the period (no remote salary, Social Security, or investment distributions) and a constant cost of living, at a "normal" (non-lean, non-luxury) lifestyle. The interactive <a href="/runway/">Runway Calculator</a> lets you factor in income and adjust lifestyle level for your own numbers.</p>
-        <p>The US comparison figure uses $3,500/month as a typical mid-cost US city baseline, the same figure used elsewhere on LeavingAmerica.co's <a href="/statistics/americans-moving-abroad/">statistics page</a>.</p>
-        <p>Figures do not account for one-time relocation costs, visa or legal residency limits on how long you may stay, healthcare costs, currency risk, or US tax obligations (which apply to citizens regardless of where they live). This report reflects data current as of {updated}. Full methodology: <a href="/methodology/">leavingamerica.co/methodology</a>.</p>
+        <p>Runway in years is calculated as <code>savings ÷ monthly cost of living ÷ 12</code>, using each country's baseline single-person monthly cost, and the same formula against city-level costs where available. Cost figures come from a public open-data cost-of-living API and are refreshed quarterly. The income threshold in Finding 2 is simply that monthly cost figure read the other way: income at or above it covers spending outright, so savings stop depleting.</p>
+        <p>Healthcare and safety scores run 0 to 10, derived from the UHC Service Coverage Index and the Global Peace Index respectively. Visa-free stay lengths reflect standard tourist entry for US passport holders and exclude extensions, border runs, and long-stay permits. Digital nomad visa availability is a yes/no flag for whether a formal remote-worker route exists, not a judgment on how accessible it is. Every source is named in full on the <a href="/methodology/">methodology page</a>.</p>
+        <p>Runway figures assume no additional income and a constant cost of living at a normal (non-lean, non-luxury) standard. The interactive <a href="/runway/">Runway Calculator</a> lets you set your own income and lifestyle level.</p>
+        <p>Figures exclude one-time relocation costs, healthcare premiums, currency risk, and US tax obligations, which apply to citizens regardless of residence. Visa rules change frequently and should be verified against the relevant consulate before any decision. This report reflects data current as of {updated}.</p>
       </div>
 
       <div class="rwr-cite rwr-reveal">
@@ -489,38 +595,46 @@ table.rwr-table { width: 100%; border-collapse: collapse; font-size: 13.5px; min
   }, { threshold: 0.4 });
   barEls.forEach(function (el) { barObs.observe(el); });
 
-  var search = document.getElementById('rwr-tbl-search');
-  var rowsEl = Array.prototype.slice.call(document.querySelectorAll('#rwr-tbl-body tr'));
-  var countEl = document.getElementById('rwr-tbl-count');
-  var noneEl = document.getElementById('rwr-tbl-none');
-  if (search) {
-    search.addEventListener('input', function () {
-      var q = search.value.trim().toLowerCase();
+  function wireSearch(inputId, bodyId, countId, noneId, singular, plural) {
+    var input = document.getElementById(inputId);
+    var body = document.getElementById(bodyId);
+    if (!input || !body) return;
+    var trs = Array.prototype.slice.call(body.querySelectorAll('tr'));
+    var countEl2 = document.getElementById(countId);
+    var noneEl2 = document.getElementById(noneId);
+    input.addEventListener('input', function () {
+      var q = input.value.trim().toLowerCase();
       var shown = 0;
-      rowsEl.forEach(function (tr) {
-        var match = tr.getAttribute('data-name').indexOf(q) !== -1;
+      trs.forEach(function (tr) {
+        var match = (tr.getAttribute('data-name') || '').indexOf(q) !== -1;
         tr.style.display = match ? '' : 'none';
         if (match) shown++;
       });
-      countEl.textContent = shown + (shown === 1 ? ' country' : ' countries');
-      noneEl.style.display = shown === 0 ? 'block' : 'none';
+      if (countEl2) countEl2.textContent = shown + ' ' + (shown === 1 ? singular : plural);
+      if (noneEl2) noneEl2.style.display = shown === 0 ? 'block' : 'none';
     });
   }
+  wireSearch('rwr-tbl-search', 'rwr-tbl-body', 'rwr-tbl-count', 'rwr-tbl-none', 'country', 'countries');
+  wireSearch('rwr-city-search', 'rwr-city-body', 'rwr-city-count', 'rwr-city-none', 'city', 'cities');
 
-  var tblScroll = document.getElementById('rwr-table-scroll');
-  var tblFade = document.getElementById('rwr-table-fade');
-  var tblHint = document.getElementById('rwr-scroll-hint');
-  if (tblScroll && tblFade && tblHint) {
-    function updateScrollState() {
-      var hasOverflow = tblScroll.scrollWidth > tblScroll.clientWidth + 2;
-      var atEnd = tblScroll.scrollLeft + tblScroll.clientWidth >= tblScroll.scrollWidth - 4;
-      tblFade.classList.toggle('show', hasOverflow && !atEnd);
-      tblHint.classList.toggle('show', hasOverflow);
+  function wireScroll(scrollId, fadeId, hintId) {
+    var sc = document.getElementById(scrollId);
+    var fade = document.getElementById(fadeId);
+    if (!sc || !fade) return;
+    var hint = hintId ? document.getElementById(hintId) : null;
+    function update() {
+      var hasOverflow = sc.scrollWidth > sc.clientWidth + 2;
+      var atEnd = sc.scrollLeft + sc.clientWidth >= sc.scrollWidth - 4;
+      fade.classList.toggle('show', hasOverflow && !atEnd);
+      if (hint) hint.classList.toggle('show', hasOverflow);
     }
-    updateScrollState();
-    tblScroll.addEventListener('scroll', updateScrollState, { passive: true });
-    window.addEventListener('resize', updateScrollState);
+    update();
+    sc.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
   }
+  wireScroll('rwr-table-scroll', 'rwr-table-fade', 'rwr-scroll-hint');
+  wireScroll('rwr-trap-scroll', 'rwr-trap-fade', null);
+  wireScroll('rwr-city-scroll', 'rwr-city-fade', null);
 </script>
 
 </BaseLayout>

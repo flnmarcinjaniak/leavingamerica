@@ -292,7 +292,8 @@ const datasetSchema = JSON.stringify({
 }
 .rwr-table-fade.show { opacity: 1; }
 table.rwr-table { width: 100%; border-collapse: collapse; font-size: 13.5px; min-width: 560px; }
-.rwr-table thead th { position: sticky; top: 0; background: #0f1e38; color: #cbd9f0; font-weight: 700; text-align: left; padding: 13px 16px; font-size: 12px; letter-spacing: 0.02em; white-space: nowrap; }
+.rwr-table thead th { position: sticky; top: 0; z-index: 3; background: #0f1e38; color: #cbd9f0; font-weight: 700; text-align: left; padding: 13px 16px; font-size: 12px; letter-spacing: 0.02em; white-space: nowrap; }
+.rwr-table tbody td { position: relative; z-index: 0; }
 .rwr-table thead th.num { text-align: right; }
 .rwr-table tbody td { padding: 11px 16px; border-top: 1px solid #eef2f7; color: #334155; }
 .rwr-table tbody td.num { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; color: #0f172a; }
@@ -362,6 +363,10 @@ table.rwr-table { width: 100%; border-collapse: collapse; font-size: 13.5px; min
       <p class="rwr-eyebrow rwr-reveal">Finding 1</p>
       <h2 class="rwr-reveal">Where Your Money Outlasts Your Welcome</h2>
       <p class="rwr-section-sub rwr-reveal">Countries offering at least four years of runway on $100,000, no digital nomad visa, and 90 or fewer visa-free days. The gap between the two columns is the part cost-of-living rankings never show.</p>
+      <p class="rwr-scroll-hint" id="rwr-trap-hint">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2 7.5h11M9 4l4 3.5-4 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Swipe to see all columns
+      </p>
       <div class="rwr-table-scroll rwr-reveal" id="rwr-trap-scroll">
         <table class="rwr-table">
           <thead>
@@ -449,6 +454,10 @@ table.rwr-table { width: 100%; border-collapse: collapse; font-size: 13.5px; min
         </div>
         <span class="rwr-search-count" id="rwr-city-count">{cityCount} cities</span>
       </div>
+      <p class="rwr-scroll-hint" id="rwr-city-hint">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2 7.5h11M9 4l4 3.5-4 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Swipe to see all columns
+      </p>
       <div class="rwr-table-scroll rwr-reveal rwr-tall" id="rwr-city-scroll">
         <table class="rwr-table">
           <thead>
@@ -633,8 +642,8 @@ table.rwr-table { width: 100%; border-collapse: collapse; font-size: 13.5px; min
     window.addEventListener('resize', update);
   }
   wireScroll('rwr-table-scroll', 'rwr-table-fade', 'rwr-scroll-hint');
-  wireScroll('rwr-trap-scroll', 'rwr-trap-fade', null);
-  wireScroll('rwr-city-scroll', 'rwr-city-fade', null);
+  wireScroll('rwr-trap-scroll', 'rwr-trap-fade', 'rwr-trap-hint');
+  wireScroll('rwr-city-scroll', 'rwr-city-fade', 'rwr-city-hint');
 </script>
 
 </BaseLayout>

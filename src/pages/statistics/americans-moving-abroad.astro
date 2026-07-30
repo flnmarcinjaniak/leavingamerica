@@ -289,7 +289,8 @@ const faqSchema = JSON.stringify({
 }
 .stx-table-fade.show { opacity: 1; }
 table.stx-table { width: 100%; border-collapse: collapse; font-size: 13.5px; min-width: 560px; }
-.stx-table thead th { position: sticky; top: 0; background: #0f1e38; color: #cbd9f0; font-weight: 700; text-align: left; padding: 13px 16px; font-size: 12px; letter-spacing: 0.02em; white-space: nowrap; }
+.stx-table thead th { position: sticky; top: 0; z-index: 3; background: #0f1e38; color: #cbd9f0; font-weight: 700; text-align: left; padding: 13px 16px; font-size: 12px; letter-spacing: 0.02em; white-space: nowrap; }
+.stx-table tbody td { position: relative; z-index: 0; }
 .stx-table thead th.num { text-align: right; }
 .stx-table tbody td { padding: 11px 16px; border-top: 1px solid #eef2f7; color: #334155; }
 .stx-table tbody td.num { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; color: #0f172a; }
@@ -419,7 +420,7 @@ table.stx-table { width: 100%; border-collapse: collapse; font-size: 13.5px; min
         ))}
         <p class="stx-chart-note">For comparison, $100K covers roughly 2 years of rent-plus-basics in the average US city. The same sum stretches to over a decade in the cheapest destinations.</p>
       </div>
-      <div class="stx-cta stx-reveal">Full breakdown at $50K, $100K, and $250K for all {budgetCount} countries: the <a href="/statistics/2026-runway-report/">2026 Runway Report</a>.</div>
+      <div class="stx-cta stx-reveal">Runway is only half the question. The <a href="/statistics/2026-runway-report/">2026 Runway Report</a> sets these figures against visa-free stay limits, healthcare and safety scores, and city-level costs for 222 cities.</div>
     </div>
   </section>
 

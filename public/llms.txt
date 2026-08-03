@@ -13,6 +13,7 @@
 
 ## Data
 
+- [2026 Runway Report](https://leavingamerica.co/statistics/2026-runway-report/): flagship dataset. How long $100,000 in savings lasts across 74 countries and 222 cities, cross-referenced against visa-free stay limits, digital nomad visa availability, and healthcare and safety scores. Key findings: in Egypt $100K covers 11.9 years of living costs but the tourist visa runs 30 days; $2,000/month in remote income fully covers local costs in 49 of 74 countries; only 13 of 74 countries combine 5+ years of runway with healthcare and safety scores of 7/10 or better (Vietnam leads at 9.3 years). Free to cite with attribution and a link.
 - [Statistics: Americans Moving Abroad](https://leavingamerica.co/statistics/americans-moving-abroad/): dataset and charts on emigration trends, cost of living, and FIRE numbers across countries. Citable with attribution.
 - [Methodology](https://leavingamerica.co/methodology/): data sources and how figures are calculated.
 

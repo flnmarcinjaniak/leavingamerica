@@ -52,10 +52,27 @@ Wcześniej także: „10 Countries Offering Digital Nomad Visas In 2026" (15 mar
 - Jej bio: „beauty, fashion, travel, and wellbeing" — generalistka lifestyle'owa, czyli
   potrzebuje danych od kogoś, kto siedzi w liczbach. Ty nimi jesteś.
 
-**Kontakt — ścieżki wiarygodne, w tej kolejności:**
-1. **meggenharris.com → zakładka Contact** (własny formularz, jej kanał)
-2. **LinkedIn → „Wyślij wiadomość"** — linkedin.com/in/meggen-harris
-3. **Muck Rack** — profil dziennikarski
+**Kontakt — DECYZJA (30 lip 2026): formularz na meggenharris.com/contact/**
+
+Dlaczego formularz, nie LinkedIn:
+- Omija problem dostarczalności: Twoja domena mailowa ma miesiąc i zero reputacji
+  nadawcy; zimny mail może wylądować w spamie bez śladu. Formularz dostarcza jej
+  systemem, nie Twoim.
+- Nagłówek formularza mówi wprost „Collaborations, **Media**, And Meaningful Work"
+  — media to Twoja kategoria.
+- LinkedIn od nieznajomego ląduje w „Innych" albo wymaga InMaila; zaproszenie ma
+  limit 300 znaków, pitch się nie mieści.
+
+Jak wypełnić:
+| Pole | Wartość |
+|---|---|
+| Your Name | Marcin Janiak |
+| Email | contact@leavingamerica.co (domena MUSI zgadzać się z linkiem w treści) |
+| Phone | puste |
+| Tell me about... | treść A-MH bez linijki tematu |
+
+**LinkedIn (linkedin.com/in/meggen-harris) rezerwujesz na follow-up** — drugi kanał
+zamiast powtórki w tym samym wygląda naturalnie. Muck Rack: tylko do researchu.
 
 **❌ CZEGO NIE UŻYWAĆ:**
 - `meggenharris@gmail.com` — pochodzi z Przeglądu od AI Google, **niezweryfikowany**.
@@ -132,6 +149,57 @@ z Substacka są indeksowane i realnie budują profil linków.
 
 ---
 
+## 🎯 ANALIZA LINKÓW KONKURENCJI (Bing Webmaster Tools, 3 sie 2026)
+
+### Stan wyjściowy
+| Domena | Domeny linkujące |
+|---|---|
+| **leavingamerica.co** | **0** (brak danych w indeksie Bing) |
+| getwherenext.com | **52** |
+| internationalliving.com | 5 300 |
+
+InternationalLiving to 20-letni gigant, ignorujemy. **Realny cel to 52 domeny
+getwherenext** — to jest do dogonienia, nie forteca.
+
+### Jak getwherenext zdobył te linki (kluczowe odkrycie)
+
+**Nie przez PR. Przez bycie ŹRÓDŁEM DANYCH, które inni cytują.**
+
+Ich największe źródło linków to `workfromanywhere.io` — **127 linków**. Sprawdziłem tę
+stronę: **używa danych getwherenext na licencji CC BY 4.0 i kredytuje ich na każdej
+podstronie.** To nie są zdobyte linki, to automatyczna atrybucja wynikająca z licencji.
+
+Drugi wzorzec: `earlyretireabroad.com` (12 linków) to bezpośredni konkurent —
+kalkulatory FIRE, przewodniki krajowe, geoarbitraż — który mimo to linkuje do
+getwherenext, bo korzysta z ich danych.
+
+Potwierdzenie w anchor textach getwherenext: obok brandowych („WhereNext" 133x)
+są **cytowania konkretnych danych**: „Inheritance data" (5), „WhereNext tax data" (4),
+„legally mandated" (4), „the B211A" (3). Ludzie linkują do konkretnych liczb.
+
+### Ciepłe cele — strony, które JUŻ linkują do konkurenta
+
+Każda z nich udowodniła, że linkuje do stron z danymi o życiu za granicą:
+
+| Domena | Linków do getwherenext | Co to jest |
+|---|---|---|
+| workfromanywhere.io | 127 | planer pracy zdalnej, używa cudzych danych z atrybucją |
+| havenscout.net | 15 | serwis relokacyjny |
+| earlyretireabroad.com | 12 | FIRE + przewodniki krajowe (bezpośredni konkurent) |
+| settleradar.com | 7 | serwis relokacyjny |
+| msn.com | 5 | syndykacja treści |
+| settleinpanama.com | 4 | nisza krajowa |
+| fundyourexit.com | 4 | finanse + wyjazd |
+| movetoparaguay.com | 4 | nisza krajowa |
+| beehiiv.com | 3 | platforma newsletterowa (ktoś ich cytował w newsletterze) |
+| blogspot.com | 4 | blogi |
+
+**Jak z nich korzystać:** to nie są cele na pitch dziennikarski. To strony, które
+budują narzędzia i potrzebują danych. Podejście: „mam dataset, którego nie masz,
+możesz go użyć za atrybucją".
+
+---
+
 ## 🔍 Intel konkurencyjny (znalezione przy okazji)
 
 **getwherenext.com rankuje na Twoje kluczowe frazy.** W wynikach wyszukiwania wychodzą
@@ -191,7 +259,9 @@ Marcin Janiak
 LeavingAmerica.co
 ```
 
-**FOLLOW-UP (5 dni roboczych później, odpowiedź w tym samym wątku, tylko jeśli brak reakcji):**
+**FOLLOW-UP (5 dni roboczych później, tylko jeśli brak reakcji):**
+Jeśli odpowiedziała mailem → odpisz w tym wątku. Jeśli cisza → wyślij poniższe
+przez LinkedIn (zmiana kanału wygląda naturalnie, powtórka w formularzu nachalnie):
 
 ```
 Hi Meggen,

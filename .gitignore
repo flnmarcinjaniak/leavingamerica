@@ -27,3 +27,4 @@ AKTUALIZACJA-DANYCH.txt
 
 # Generated video frames (regenerate with scripts/generate-shorts.mjs)
 shorts-output/
+shorts-output-overlay/

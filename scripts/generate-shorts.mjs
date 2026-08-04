@@ -12,7 +12,6 @@ import { mkdirSync, writeFileSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import qs from '../src/data/quality-scores.json' with { type: 'json' };
 
-const OUT = 'shorts-output';
 const W = 1080, H = 1920;
 
 /* ── brand ── */
@@ -86,7 +85,22 @@ const badge = () =>
   `<rect x="330" y="1735" width="420" height="76" rx="38" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.18)" stroke-width="2"/>` +
   txt(1787, 'leavingamerica.co', { size: 40, color: C.gray });
 
-const frame = body => `<svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg">
+// OVERLAY mode drops the background so frames can sit on top of stock footage in CapCut.
+// A soft top/bottom scrim keeps text readable over busy video.
+const OVERLAY = process.argv.includes('--overlay');
+const OUT = OVERLAY ? 'shorts-output-overlay' : 'shorts-output';
+
+const frame = body => OVERLAY
+  ? `<svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="scrim" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0%" stop-color="#000" stop-opacity="0.72"/>
+<stop offset="45%" stop-color="#000" stop-opacity="0.42"/>
+<stop offset="100%" stop-color="#000" stop-opacity="0.78"/></linearGradient></defs>
+<rect width="${W}" height="${H}" fill="url(#scrim)"/>
+${body}
+${badge()}
+</svg>`
+  : `<svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg">
 <defs><linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
 <stop offset="0%" stop-color="${C.bg1}"/><stop offset="100%" stop-color="${C.bg2}"/></linearGradient></defs>
 <rect width="${W}" height="${H}" fill="url(#bg)"/>
@@ -125,6 +139,23 @@ const L = {
   ),
 };
 
+/* ── count-up animation: renders a number ticking from 0 to its value ──
+   Import the resulting PNG sequence into CapCut at ~25fps for real motion. */
+const COUNT_FRAMES = 25;
+const countUp = (top, target, bottom, color = C.cyan) => {
+  const num = parseFloat(String(target).replace(/[^0-9.]/g, ''));
+  const decimals = String(target).includes('.') ? 1 : 0;
+  const prefix = String(target).startsWith('$') ? '$' : '';
+  const out = [];
+  for (let i = 1; i <= COUNT_FRAMES; i++) {
+    // ease-out so it decelerates into the final value
+    const t = 1 - Math.pow(1 - i / COUNT_FRAMES, 3);
+    const val = prefix + (num * t).toFixed(decimals);
+    out.push(frame(head(700, top) + big(1000, val, { color }) + label(1120, bottom)));
+  }
+  return out;
+};
+
 /* ── video definitions ── */
 const eg = byName('egypt'), ind = byName('india'), tur = byName('turkey'),
       vnm = byName('vietnam'), col = byName('colombia');
@@ -133,10 +164,17 @@ const cheapest = allCities[0];
 const VIDEOS = [
   {
     slug: 'egypt-visa-trap',
+    footage: [
+      'Cairo street aerial / Egypt pyramids drone',
+      'Egyptian market Khan el Khalili walking',
+      'passport stamp close up / airport immigration desk',
+      'world map spinning / airport departure board',
+      'laptop on cafe table abroad',
+    ],
     caption: `You can afford 12 years in Egypt. Your visa lasts 30 days. #movingabroad #expat #digitalnomad #fire`,
     frames: [
       ['hook', L.hook('Your money lasts 12 years here.', 'Your visa lasts 30 days.')],
-      ['reveal', L.bigNumber('EGYPT', eg.y100, `YEARS ON $100,000`)],
+      ['reveal', countUp('EGYPT', eg.y100, `YEARS ON $100,000`)],
       ['twist', L.contrast('THE CATCH', `${eg.y100}`, 'YEARS YOU CAN AFFORD', `${eg.visa}`, 'DAYS YOU CAN STAY')],
       ['context', L.bigNumber('AND IT IS NOT ALONE', `${thirtyDay}`, `OF ${total} COUNTRIES GIVE 30 DAYS`, C.red)],
       ['cta', L.cta('I tracked all 74. Link in bio.')],
@@ -151,10 +189,17 @@ const VIDEOS = [
   },
   {
     slug: 'income-threshold',
+    footage: [
+      'person working laptop beach cafe',
+      'money counting close up / bank notes',
+      'city skyline timelapse cheap asia',
+      'sunset relaxing hammock tropical',
+      'laptop on cafe table abroad',
+    ],
     caption: `You don't need a million saved. You need $2,000 a month. #fire #geoarbitrage #remotework #expat`,
     frames: [
       ['hook', L.hook('Stop asking how much you need saved.')],
-      ['reveal', L.bigNumber('$2,000 / MONTH', `${under(2000)}`, `OF ${total} COUNTRIES COVERED`)],
+      ['reveal', countUp('$2,000 / MONTH', `${under(2000)}`, `OF ${total} COUNTRIES COVERED`)],
       ['scale', L.list('WHAT INCOME UNLOCKS', [
         { left: '$1,000/mo', right: `${under(1000)} countries` },
         { left: '$1,500/mo', right: `${under(1500)} countries` },
@@ -174,10 +219,17 @@ const VIDEOS = [
   },
   {
     slug: 'cheap-not-livable',
+    footage: [
+      'busy chaotic street traffic asia',
+      'modern hospital corridor clean',
+      'Vietnam Da Nang beach drone / Malaysia Kuala Lumpur skyline',
+      'crowded street night market busy',
+      'laptop on cafe table abroad',
+    ],
     caption: `Only 13 of 74 cheap countries pass a healthcare and safety check. #expat #retireabroad #movingabroad`,
     frames: [
       ['hook', L.hook('Cheap countries are easy to find. Cheap AND safe is not.')],
-      ['reveal', L.bigNumber('PASS THE FILTER', `${quality.length}`, `OF ${total} COUNTRIES`, C.green)],
+      ['reveal', countUp('PASS THE FILTER', `${quality.length}`, `OF ${total} COUNTRIES`, C.green)],
       ['winners', L.list('CHEAP AND LIVABLE', quality.slice(0, 5).map(r => ({
         left: r.name, right: `${r.y100} yrs`,
       })), C.green)],
@@ -198,10 +250,17 @@ const VIDEOS = [
   },
   {
     slug: 'cheapest-city',
+    footage: [
+      'world map close up / globe spinning',
+      'Batumi Georgia seaside drone / Black Sea promenade',
+      'small european old town street walking',
+      'coins stacking / savings jar',
+      'laptop on cafe table abroad',
+    ],
     caption: `The cheapest city I tracked costs $350 a month. #costofliving #digitalnomad #expat #budgettravel`,
     frames: [
       ['hook', L.hook('Country averages lie. Look at cities.')],
-      ['reveal', L.bigNumber(cheapest.name.toUpperCase(), `$${cheapest.monthly_usd}`, 'PER MONTH')],
+      ['reveal', countUp(cheapest.name.toUpperCase(), `$${cheapest.monthly_usd}`, 'PER MONTH')],
       ['list', L.list('CHEAPEST TRACKED CITIES', allCities.slice(0, 5).map(c => ({
         left: c.name, right: `$${c.monthly_usd}/mo`,
       })))],
@@ -218,10 +277,17 @@ const VIDEOS = [
   },
   {
     slug: 'nomad-visa-gap',
+    footage: [
+      'digital nomad working laptop poolside',
+      'passport visa pages flipping',
+      'airport queue immigration line',
+      'stressed person paperwork desk',
+      'laptop on cafe table abroad',
+    ],
     caption: `Only 35 of 74 countries have a digital nomad visa. #digitalnomad #remotework #visa #expat`,
     frames: [
       ['hook', L.hook('Everyone talks about nomad visas. Most countries do not have one.')],
-      ['reveal', L.bigNumber('HAVE A NOMAD VISA', `${nomadCount}`, `OF ${total} COUNTRIES`)],
+      ['reveal', countUp('HAVE A NOMAD VISA', `${nomadCount}`, `OF ${total} COUNTRIES`)],
       ['gap', L.bigNumber('DO NOT', `${total - nomadCount}`, 'NO FORMAL REMOTE ROUTE', C.red)],
       ['point', L.hook('For those, staying means work, investment, ancestry or border runs.')],
       ['cta', L.cta('Check yours before you book. Link in bio.')],
@@ -236,10 +302,17 @@ const VIDEOS = [
   },
   {
     slug: 'vietnam-winner',
+    footage: [
+      'Vietnam Hanoi street food scooters',
+      'Da Nang beach aerial drone Vietnam',
+      'Vietnamese hospital or pharmacy modern',
+      'India crowded street contrast',
+      'laptop on cafe table abroad',
+    ],
     caption: `The best value country I found is not the cheapest. #expat #retireabroad #vietnam #fire`,
     frames: [
       ['hook', L.hook('The best value country is not the cheapest one.')],
-      ['reveal', L.bigNumber(vnm.name.toUpperCase(), `${vnm.y100}`, 'YEARS ON $100,000', C.green)],
+      ['reveal', countUp(vnm.name.toUpperCase(), `${vnm.y100}`, 'YEARS ON $100,000', C.green)],
       ['scores', L.list('WHY IT WINS', [
         { left: 'Runway', right: `${vnm.y100} yrs` },
         { left: 'Healthcare', right: `${vnm.health}/10` },
@@ -269,9 +342,28 @@ for (const [i, v] of VIDEOS.entries()) {
   mkdirSync(dir, { recursive: true });
 
   for (const [n, [name, svg]] of v.frames.entries()) {
-    const file = join(dir, `${n + 1}-${name}.png`);
-    await sharp(Buffer.from(svg)).png().toFile(file);
-    count++;
+    if (Array.isArray(svg)) {
+      // count-up sequence -> its own subfolder, import into CapCut as an image sequence
+      const seq = join(dir, `${n + 1}-${name}-seq`);
+      mkdirSync(seq, { recursive: true });
+      for (const [k, s] of svg.entries()) {
+        await sharp(Buffer.from(s)).png()
+          .toFile(join(seq, `${String(k + 1).padStart(3, '0')}.png`));
+        count++;
+      }
+    } else {
+      await sharp(Buffer.from(svg)).png().toFile(join(dir, `${n + 1}-${name}.png`));
+      count++;
+    }
+  }
+
+  if (v.footage) {
+    writeFileSync(join(dir, 'footage.txt'), [
+      'FREE STOCK FOOTAGE TO LAYER UNDER THESE FRAMES',
+      'Sources: pexels.com/videos · pixabay.com/videos · coverr.co  (all free, no attribution)',
+      'Download vertical or crop to 9:16. Put video on the bottom layer, PNG frames on top.',
+      '', ...v.footage.map((f, i) => `frame ${i + 1}:  ${f}`),
+    ].join('\n'), 'utf8');
   }
 
   const lines = [

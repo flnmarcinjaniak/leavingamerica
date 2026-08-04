@@ -24,3 +24,6 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 AKTUALIZACJA-DANYCH.txt
+
+# Generated video frames (regenerate with scripts/generate-shorts.mjs)
+shorts-output/

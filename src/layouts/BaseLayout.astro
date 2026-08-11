@@ -40,6 +40,8 @@ const organizationSchema = JSON.stringify({
     <meta name="description" content={description} />
     <title>{title}</title>
     <link rel="canonical" href={canonicalURL.href} />
+    {/* Pinterest domain verification — enables analytics and attribution on pins */}
+    <meta name="p:domain_verify" content="5fe592adcbac83bea44ba837a94945d7" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL.href} />
     <meta property="og:title" content={resolvedOgTitle} />
